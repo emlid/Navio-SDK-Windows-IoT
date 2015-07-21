@@ -17,14 +17,12 @@ namespace Emlid.WindowsIoT.Samples.NavioLed
             // Initialize PWM device at servo frequency (50Hz) with output disabled
             var pwm = NavioPca9685Device.Initialize(NavioPca9685Device.ServoFrequencyDefault);
 
-            // Start with yellow LED
-            var maximum = NxpPca9685ChannelValue.Maximum;
-
             // Enable oscillator and output
             pwm.Wake();
             pwm.OutputEnabled = true;
 
             // Fade LEDs to blue
+            var maximum = NxpPca9685ChannelValue.Maximum;
             bool fade;
             do
             {
