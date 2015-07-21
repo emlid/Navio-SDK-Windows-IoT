@@ -9,7 +9,6 @@ We encourage users to play with the samples and test programs. Developers can al
 
 
 # Milestone 1: "Core SDK"
-*Target date: July 19th 2015*
 
 Mission statement: "Full hardware support for Navio on Windows IoT."
 
@@ -23,7 +22,6 @@ Mission statement: "Full hardware support for Navio on Windows IoT."
  
 
 # Milestone 2: "Windows Drone PoC"
-*Target date: July 29th 2015 (same as Windows 10 release)*
 
 Mission statement: "Answer the question; can you really fly a drone with Windows IoT?"
 
