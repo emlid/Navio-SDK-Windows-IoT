@@ -49,7 +49,8 @@ Mission statement: "Expand support and add new devices."
 
 # Change Log
 
-2015.07.31
+*2015.07.31*
+
 1. Updated solution to Visual Studio 2015.
 2. Hardware Test App - Fixed theme/resource errors and applied "Emlid green" instead of default "IoT pink".
 3. SetLED - Fixed error in buffer write routine.
