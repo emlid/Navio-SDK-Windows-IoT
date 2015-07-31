@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -21,7 +21,12 @@
         </StackPanel>
 
         <!-- Main Panel -->
-        <Grid Grid.Row="1" Background="{StaticResource StartBackground}">
+        <Grid Grid.Row="1">
+            <Grid.Background>
+                <ImageBrush ImageSource="{StaticResource NavioResearchBackground}" 
+                    Stretch="UniformToFill" AlignmentX="Left" AlignmentY="Bottom">
+                </ImageBrush>
+            </Grid.Background>
 
             <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,200,100">
 

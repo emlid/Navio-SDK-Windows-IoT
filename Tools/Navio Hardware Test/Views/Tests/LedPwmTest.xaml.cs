@@ -1,5 +1,6 @@
-﻿using Emlid.WindowsIoT.Tests.HarwdareTestApp.Models;
+﻿using Emlid.WindowsIoT.Tests.HardwareTestApp.Models;
 using System;
+using System.Globalization;
 using System.Threading.Tasks;
 using Windows.System;
 using Windows.UI.Xaml;
@@ -156,7 +157,7 @@ namespace Emlid.WindowsIoT.Tests.NavioHardwareTestApp.Views.Tests
         private void SetFrequency()
         {
             var textBox = FrequencyTextBox;
-            var frequency = Convert.ToSingle(textBox.Text);
+            var frequency = Convert.ToSingle(textBox.Text, CultureInfo.CurrentCulture);
             if (Model.Device.Frequency != frequency)
                 Model.Device.WriteFrequency(frequency);
         }

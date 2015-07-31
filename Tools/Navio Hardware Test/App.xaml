@@ -5,6 +5,20 @@
     xmlns:local="using:Emlid.WindowsIoT.Tests.NavioHardwareTestApp"
     RequestedTheme="Light">
     <Application.Resources>
+        <!-- Brand -->
+        <Color x:Key="EmlidGreen">#FF44D62C</Color>
+        <Color x:Key="EmlidDarkGreen">#77226315</Color>
+        <BitmapImage x:Key="EmlidLogo" UriSource="Assets\emlid_logo_no_text.png" />
+        <BitmapImage x:Key="NavioResearchBackground" UriSource="Assets\Navio-Research.jpg" />
+        <!-- Primitives -->
+        <SolidColorBrush x:Key="EmlidGreenBrush" Color="{StaticResource EmlidGreen}" />
+        <SolidColorBrush x:Key="SystemControlForegroundAccentBrush" Color="{StaticResource EmlidGreen}" />
+        <SolidColorBrush x:Key="SystemControlHighlightAccentBrush" Color="{StaticResource EmlidGreen}" />
+        <SolidColorBrush x:Key="SystemControlBackgroundBaseLowBrush" Color="{StaticResource EmlidGreen}"/>
+        <SolidColorBrush x:Key="SystemControlForegroundTransparentBrush" Color="{StaticResource EmlidDarkGreen}" />
+        <SolidColorBrush x:Key="SystemControlForegroundBaseMediumLowBrush" Color="{StaticResource EmlidDarkGreen}" />
+        <SolidColorBrush x:Key="SystemControlHighlightListAccentHighBrush" Color="Black" />
+        <!-- Control Style -->
         <Style TargetType="Page">
             <Setter Property="Background" Value="{ThemeResource ApplicationPageBackgroundThemeBrush}" />
         </Style>
@@ -20,57 +34,6 @@
             <Setter Property="VerticalAlignment" Value="Stretch" />
             <Setter Property="HorizontalAlignment" Value="Stretch" />
         </Style>
-        <Style TargetType="Button">
-            <Setter Property="Margin" Value="5" />
-            <Setter Property="Padding" Value="5" />
-            <Setter Property="HorizontalAlignment" Value="Stretch" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="Background" Value="{ThemeResource ButtonBackgroundThemeBrush}" />
-        </Style>
-        <Style TargetType="ToggleSwitch">
-            <Setter Property="Margin" Value="5" />
-            <Setter Property="Padding" Value="5" />
-            <Setter Property="HorizontalAlignment" Value="Stretch" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-        </Style>
-        <Style x:Name="PanelGrid" TargetType="Grid">
-            <Setter Property="Margin" Value="5" />
-            <Setter Property="Padding" Value="5" />
-            <Setter Property="BorderBrush" Value="Black" />
-            <Setter Property="BorderThickness" Value="1" />
-        </Style>
-        <Style x:Name="PanelStack" TargetType="StackPanel">
-            <Setter Property="Margin" Value="5" />
-            <Setter Property="Padding" Value="5" />
-            <Setter Property="BorderBrush" Value="Black" />
-            <Setter Property="BorderThickness" Value="1" />
-        </Style>
-        <Style x:Name="LabelText" TargetType="TextBlock">
-            <Setter Property="Margin" Value="5" />
-            <Setter Property="Padding" Value="5" />
-            <Setter Property="HorizontalAlignment" Value="Stretch" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="TextAlignment" Value="Left" />
-        </Style>
-        <Style x:Name="LabelTextTop" TargetType="TextBlock">
-            <Setter Property="Margin" Value="5" />
-            <Setter Property="Padding" Value="5" />
-            <Setter Property="HorizontalAlignment" Value="Stretch" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="TextAlignment" Value="Center" />
-        </Style>
-        <Style x:Name="PanelTitleText" TargetType="TextBlock">
-            <Setter Property="Margin" Value="5" />
-            <Setter Property="Padding" Value="5" />
-            <Setter Property="HorizontalAlignment" Value="Center" />
-            <Setter Property="FontSize" Value="24" />
-        </Style>
-        <Style x:Name="TitleText" TargetType="TextBlock">
-            <Setter Property="Margin" Value="5" />
-            <Setter Property="Padding" Value="5" />
-            <Setter Property="HorizontalAlignment" Value="Center" />
-            <Setter Property="FontSize" Value="32" />
-        </Style>
         <Style TargetType="TextBox">
             <Setter Property="Margin" Value="5" />
             <Setter Property="Padding" Value="5" />
@@ -78,22 +41,60 @@
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="TextAlignment" Value="Left" />
         </Style>
-        <Style x:Name="PwmSlider" TargetType="Slider">
-            <Setter Property="Orientation" Value="Vertical" />
-            <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="5" />
             <Setter Property="Padding" Value="5" />
-            <Setter Property="Minimum" Value="0" />
-            <Setter Property="Maximum" Value="4095" />
-            <Setter Property="SmallChange" Value="1" />
-            <Setter Property="LargeChange" Value="16" />
-            <Setter Property="TickFrequency" Value="64" />
-            <Setter Property="TickPlacement" Value="Outside" />
-            <Setter Property="Foreground" Value="{StaticResource EmlidGreen}" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
-        <SolidColorBrush x:Key="EmlidGreen" Color="#FF44D62C" />
-        <BitmapImage x:Key="EmlidLogo" UriSource="Assets\emlid_logo_no_text.png" />
-        <ImageBrush x:Key="StartBackground" ImageSource="Assets\Navio-Research.jpg" 
-                    Stretch="UniformToFill" AlignmentX="Left" AlignmentY="Bottom">
-        </ImageBrush>
+        <Style TargetType="ToggleSwitch">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Padding" Value="5" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style TargetType="Slider">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Padding" Value="5" />
+            <Setter Property="TickPlacement" Value="Outside" />
+        </Style>
+        <Style x:Key="PanelGrid" TargetType="Grid">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Padding" Value="5" />
+            <Setter Property="BorderBrush" Value="Black" />
+            <Setter Property="BorderThickness" Value="1" />
+        </Style>
+        <Style x:Key="PanelStack" TargetType="StackPanel">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Padding" Value="5" />
+            <Setter Property="BorderBrush" Value="Black" />
+            <Setter Property="BorderThickness" Value="1" />
+        </Style>
+        <Style x:Key="LabelText" TargetType="TextBlock">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Padding" Value="5" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="TextAlignment" Value="Left" />
+        </Style>
+        <Style x:Key="LabelTextTop" TargetType="TextBlock">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Padding" Value="5" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="TextAlignment" Value="Center" />
+        </Style>
+        <Style x:Key="PanelTitleText" TargetType="TextBlock">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Padding" Value="5" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="24" />
+        </Style>
+        <Style x:Key="TitleText" TargetType="TextBlock">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Padding" Value="5" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="32" />
+        </Style>
     </Application.Resources>
 </Application>

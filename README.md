@@ -45,3 +45,11 @@ Mission statement: "Expand support and add new devices."
 7. Expand the Windows drone sample, possibly spinning-off a new autopilot (includes support for other vehicle types, e.g. planes and rovers).
 8. Experiment with Windows HAL for APM (requires a good Linux code bridge like Cygwin, but for IoT).
 9. Expand samples for other (than drone) projects, e.g. general robotics, trackers and DIY solutions.
+
+
+# Change Log
+
+2015.07.31
+1. Updated solution to Visual Studio 2015.
+2. Hardware Test App - Fixed theme/resource errors and applied "Emlid green" instead of default "IoT pink".
+3. SetLED - Fixed error in buffer write routine.

@@ -404,7 +404,7 @@ namespace Emlid.WindowsIoT.Hardware
             Array.ConstrainedCopy(redBytes, 0, data, 1 + ChannelSize * 2, ChannelSize);
 
             // Set new value
-            Hardware.WriteBytes(ChannelStartAddress, data);
+            Hardware.Write(data);
 
             // Update properties
             ReadLed();

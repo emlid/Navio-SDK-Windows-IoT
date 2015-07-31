@@ -74,7 +74,7 @@ namespace Emlid.WindowsIoT.Tests.NavioHardwareTestApp
         /// <param name="arguments">Details about the navigation failure</param>
         void OnNavigationFailed(object sender, NavigationFailedEventArgs arguments)
         {
-            throw new Exception("Failed to load Page " + arguments.SourcePageType.FullName);
+            throw new InvalidOperationException("Failed to load Page " + arguments.SourcePageType.FullName);
         }
 
         /// <summary>

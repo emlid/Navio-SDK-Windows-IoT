@@ -8,6 +8,20 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     DataContext="{Binding Path=Model}">
+    <Page.Resources>
+        <Style x:Key="PwmSlider" TargetType="Slider">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Padding" Value="5" />
+            <Setter Property="TickPlacement" Value="Outside" />
+            <Setter Property="Orientation" Value="Vertical" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="Minimum" Value="0" />
+            <Setter Property="Maximum" Value="4095" />
+            <Setter Property="SmallChange" Value="1" />
+            <Setter Property="LargeChange" Value="16" />
+            <Setter Property="TickFrequency" Value="64" />
+        </Style>
+    </Page.Resources>
 
     <!-- Page Layout -->
     <Grid>
@@ -18,7 +32,10 @@
         </Grid.RowDefinitions>
 
         <!-- Title -->
-        <TextBlock Grid.Row="0" Text="Navio LED &amp; PWM Test (PCA9685)" Style="{StaticResource TitleText}" />
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Image Source="{StaticResource EmlidLogo}" Width="48" Margin="10" />
+            <TextBlock Text="Navio LED &amp; PWM Test (PCA9685)" Style="{StaticResource TitleText}" />
+        </StackPanel>
 
         <!-- Top Row -->
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">

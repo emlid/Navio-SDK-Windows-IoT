@@ -10,12 +10,12 @@
     <RootNamespace>Emlid.WindowsIoT.Hardware</RootNamespace>
     <AssemblyName>Emlid.WindowsIoT.Hardware</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
-    <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
+    <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.10166.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10166.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
@@ -55,6 +55,10 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <None Include="project.json" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="..\..\Common\AssemblyInfoGlobal.cs">
       <Link>Properties\AssemblyInfoGlobal.cs</Link>
     </Compile>
@@ -73,11 +77,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.tt</DependentUpon>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <SDKReference Include="WindowsIoT, Version=10.0.10069.0">
-      <Name>Windows IoT Extension SDK</Name>
-    </SDKReference>
   </ItemGroup>
   <ItemGroup>
     <PRIResource Include="Strings\en-US\Strings.resw">
@@ -99,6 +98,11 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="TemporaryKey.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="WindowsIoT, Version=10.0.10240.0">
+      <Name>Windows IoT Extensions for the UWP</Name>
+    </SDKReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
