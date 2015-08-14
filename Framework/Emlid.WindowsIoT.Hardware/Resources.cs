@@ -3,9 +3,9 @@
 
 namespace Emlid.WindowsIoT.Hardware.Resources  {
 		
-    /// <summary>
-    /// Strings.
-    /// </summary>
+	/// <summary>
+	/// Strings.
+	/// </summary>
 	public class Strings {
 		
 		private static Windows.ApplicationModel.Resources.ResourceLoader resourceLoader;
@@ -23,19 +23,19 @@ namespace Emlid.WindowsIoT.Hardware.Resources  {
 		}
 			
 		///<summary>
-        ///0 = address, 1 = controller.
+		///0 = address, 1 = controller.
 		///</summary>
 		public string I2cErrorDeviceCannotOpen 
 		{ 
 			get { return ResourceLoader.GetString("I2cErrorDeviceCannotOpen"); }
 		}
- 	
+	
 		///<summary>
-        ///0 = selector.
+		///0 = selector.
 		///</summary>
 		public string I2cErrorDeviceNotFound 
 		{ 
 			get { return ResourceLoader.GetString("I2cErrorDeviceNotFound"); }
 		}
- 	}
+	}
 }

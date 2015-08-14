@@ -7,8 +7,8 @@
     <ProjectGuid>{B3E2E3DD-67EE-49D6-A31B-4B6A19B0F640}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Emlid.WindowsIoT.Tests.HardwareTestApp</RootNamespace>
-    <AssemblyName>Emlid.WindowsIoT.Tests.HardwareTestApp</AssemblyName>
+    <RootNamespace>Emlid.WindowsIoT.Tests.NavioHardwareTestApp</RootNamespace>
+    <AssemblyName>Emlid.WindowsIoT.Tests.NavioHardwareTestApp</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
@@ -38,7 +38,7 @@
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <DocumentationFile>bin\ARM\Debug\Emlid.WindowsIoT.Tests.HardwareTestApp.XML</DocumentationFile>
+    <DocumentationFile>bin\ARM\Debug\Emlid.WindowsIoT.Tests.NavioHardwareTestApp.xml</DocumentationFile>
     <UseDotNetNativeToolchain>false</UseDotNetNativeToolchain>
     <SuppressXamlWarnings>3270</SuppressXamlWarnings>
   </PropertyGroup>
@@ -56,7 +56,7 @@
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <DocumentationFile>bin\ARM\Release\Emlid.WindowsIoT.Tests.HardwareTestApp.XML</DocumentationFile>
+    <DocumentationFile>bin\ARM\Release\Emlid.WindowsIoT.Tests.NavioHardwareTestApp.xml</DocumentationFile>
     <SuppressXamlWarnings>3270</SuppressXamlWarnings>
   </PropertyGroup>
   <ItemGroup>
@@ -67,6 +67,8 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Models\RCInputTestUIModel.cs" />
+    <Compile Include="Models\TestUIModel.cs" />
     <Compile Include="Views\Tests\LedPwmTest.xaml.cs">
       <DependentUpon>LedPwmTest.xaml</DependentUpon>
     </Compile>
@@ -74,6 +76,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\Start.xaml.cs">
       <DependentUpon>Start.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tests\RCInputTest.xaml.cs">
+      <DependentUpon>RCInputTest.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -104,13 +109,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Views\Tests\RCInputTest.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\Tests\LedPwmTest.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Start.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -148,7 +157,7 @@
     <Prefer32Bit>true</Prefer32Bit>
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <DocumentationFile>bin\Debug\Emlid.WindowsIoT.Tests.HardwareTestApp.XML</DocumentationFile>
+    <DocumentationFile>bin\Debug\Emlid.WindowsIoT.Tests.NavioHardwareTestApp.xml</DocumentationFile>
     <UseDotNetNativeToolchain>false</UseDotNetNativeToolchain>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
@@ -165,7 +174,7 @@
     <Prefer32Bit>true</Prefer32Bit>
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <DocumentationFile>bin\Release\Emlid.WindowsIoT.Tests.HardwareTestApp.XML</DocumentationFile>
+    <DocumentationFile>bin\Release\Emlid.WindowsIoT.Tests.NavioHardwareTestApp.xml</DocumentationFile>
     <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
   </PropertyGroup>
   <PropertyGroup>

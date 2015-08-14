@@ -65,6 +65,9 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="I2cExtensions.cs" />
     <Compile Include="NavioPca9685Device.cs" />
+    <Compile Include="NavioRCInputDevice.cs" />
+    <Compile Include="NavioRCInputMode.cs" />
+    <Compile Include="NavioRCInputChannel.cs" />
     <Compile Include="NxpPca9685Channel.cs" />
     <Compile Include="NxpPca9685ChannelValue.cs" />
     <Compile Include="NxpPca9685Device.cs" />
@@ -96,7 +99,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
     <None Include="TemporaryKey.snk" />
   </ItemGroup>
   <ItemGroup>

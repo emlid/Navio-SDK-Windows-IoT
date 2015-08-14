@@ -32,6 +32,14 @@ namespace Emlid.WindowsIoT.Tests.NavioHardwareTestApp.Views
         }
 
         /// <summary>
+        /// Navigates to the <see cref="RCInputTestPage"/> when the corresponding button is clicked.
+        /// </summary>
+        private void OnRCInputTestButtonClick(object sender, RoutedEventArgs arguments)
+        {
+            Frame.Navigate(typeof(LedPwmTestPage));
+        }
+
+        /// <summary>
         /// Exits the application when the corresponding button is clicked.
         /// </summary>
         private void OnExitButtonClick(object sender, RoutedEventArgs arguments)

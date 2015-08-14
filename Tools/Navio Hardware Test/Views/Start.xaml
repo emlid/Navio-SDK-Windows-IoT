@@ -31,12 +31,12 @@
             <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,200,100">
 
                 <Button Name="LedPwmTestButton" Content="LED &amp; PWM" Click="OnLedPwmTestButtonClick" />
-                <Button Name="RcInputTestButton" Content="RC Input" />
-                <Button Name="ImuTestButton" Content="IMU" />
-                <Button Name="BarometerTestButton" Content="Barometer" />
-                <Button Name="GpsTestButton" Content="GPS" />
-                <Button Name="AdcTestButton" Content="ADC" />
-                <Button Name="FramTestButton" Content="FRAM" />
+                <Button Name="RcInputTestButton" Content="RC Input" Click="OnRCInputTestButtonClick" IsEnabled="False" />
+                <Button Name="ImuTestButton" Content="IMU" IsEnabled="False" />
+                <Button Name="BarometerTestButton" Content="Barometer" IsEnabled="False" />
+                <Button Name="GpsTestButton" Content="GPS" IsEnabled="False" />
+                <Button Name="AdcTestButton" Content="ADC" IsEnabled="False" />
+                <Button Name="FramTestButton" Content="FRAM" IsEnabled="False" />
 
             </StackPanel>
         </Grid>

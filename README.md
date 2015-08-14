@@ -13,7 +13,7 @@ We encourage users to play with the samples and test programs. Developers can al
 Mission statement: "Full hardware support for Navio on Windows IoT."
 
 1. LED & PWM (PCA9685) device, sample and test app (100% complete).
-2. RC Input (PPM over GPIO) device, sample and test app.
+2. RC Input (PPM over GPIO) device, sample and test app (50% complete).
 3. IMU (MPU9250) device, sample and test app.
 4. Barometer (MS5611) device, sample and test app.
 5. GPS (U-Blox NEO-MN8, possibly NEO7M, NEO-6T too) device, sample and test app.

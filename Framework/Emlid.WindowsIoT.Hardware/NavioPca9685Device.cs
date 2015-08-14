@@ -469,7 +469,7 @@ namespace Emlid.WindowsIoT.Hardware
         /// <summary>
         /// Updates the <see cref="LedRed"/> property when the related channel changed.
         /// </summary>
-        private void OnLedRedChannelChanged(object sender, EventArgs e)
+        private void OnLedRedChannelChanged(object sender, EventArgs arguments)
         {
             var value = Channels[LedRedChannelIndex].Value;
             _ledRed = ~value.Length & 0xfff;
@@ -478,7 +478,7 @@ namespace Emlid.WindowsIoT.Hardware
         /// <summary>
         /// Updates the <see cref="LedGreen"/> property when the related channel changed.
         /// </summary>
-        private void OnLedGreenChannelChanged(object sender, EventArgs e)
+        private void OnLedGreenChannelChanged(object sender, EventArgs arguments)
         {
             var value = Channels[LedGreenChannelIndex].Value;
             _ledGreen = ~value.Length & 0xfff;
@@ -487,7 +487,7 @@ namespace Emlid.WindowsIoT.Hardware
         /// <summary>
         /// Updates the <see cref="LedBlue"/> property when the related channel changed.
         /// </summary>
-        private void OnLedBlueChannelChanged(object sender, EventArgs e)
+        private void OnLedBlueChannelChanged(object sender, EventArgs arguments)
         {
             var value = Channels[LedBlueChannelIndex].Value;
             _ledBlue = ~value.Length & 0xfff;
