@@ -7,7 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    DataContext="{Binding Path=Model}">
+    DataContext="{Binding Model, RelativeSource={RelativeSource Mode=Self}}">
     <Page.Resources>
         <Style x:Key="ChannelSlider" TargetType="Slider">
             <Setter Property="Margin" Value="5" />
@@ -20,7 +20,7 @@
             <Setter Property="SmallChange" Value="0.01" />
             <Setter Property="LargeChange" Value="0.1" />
             <Setter Property="TickFrequency" Value="0.1" />
-            <Setter Property="IsEnabled" Value="False" />
+            <Setter Property="IsEnabled" Value="True" />
         </Style>
     </Page.Resources>
     
@@ -59,52 +59,48 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
-                <Grid.Resources>
-                    <CollectionViewSource x:Name="Channels" IsSourceGrouped="False" />
-                </Grid.Resources>
-
                 <!-- Title -->
-                <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="13" Text="Channel" Style="{StaticResource PanelTitleText}" />
+                <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="13" Text="Input Channels" Style="{StaticResource PanelTitleText}" />
 
                 <!-- Channel 1 -->
                 <TextBlock Grid.Row="1" Grid.Column="0" Text="1" Style="{StaticResource LabelTextTop}" />
                 <Slider Name="Channel1Slider" Grid.Row="2" Grid.Column="0" Style="{StaticResource ChannelSlider}" 
-                        Value="{Binding Path=Device.Channel[0].Value.Length, Mode=TwoWay}" />
+                        Value="{Binding Path=Device.Channels[0], Mode=TwoWay}" />
 
                 <!-- Channel 2 -->
                 <TextBlock Grid.Row="1" Grid.Column="1" Text="2" Style="{StaticResource LabelTextTop}" />
                 <Slider Name="Channel2Slider" Grid.Row="2" Grid.Column="1" Style="{StaticResource ChannelSlider}" 
-                        Value="{Binding Path=Device.Channel[1].Value.Length, Mode=TwoWay}" />
+                        Value="{Binding Path=Device.Channels[1], Mode=OneWay}" />
 
                 <!-- Channel 3 -->
                 <TextBlock Grid.Row="1" Grid.Column="2" Text="3" Style="{StaticResource LabelTextTop}" />
                 <Slider Name="Channel3Slider" Grid.Row="2" Grid.Column="2" Style="{StaticResource ChannelSlider}" 
-                        Value="{Binding Path=Device.Channel[2].Value.Length, Mode=TwoWay}" />
+                        Value="{Binding Path=Device.Channels[2], Mode=OneWay}" />
 
                 <!-- Channel 4 -->
                 <TextBlock Grid.Row="1" Grid.Column="3" Text="4" Style="{StaticResource LabelTextTop}" />
                 <Slider Name="Channel4Slider" Grid.Row="2" Grid.Column="3" Style="{StaticResource ChannelSlider}" 
-                        Value="{Binding Path=Device.Channel[3].Value.Length, Mode=TwoWay}" />
+                        Value="{Binding Path=Device.Channels[3], Mode=OneWay}" />
 
                 <!-- Channel 5 -->
                 <TextBlock Grid.Row="1" Grid.Column="4" Text="5" Style="{StaticResource LabelTextTop}" />
                 <Slider Name="Channel5Slider" Grid.Row="2" Grid.Column="4" Style="{StaticResource ChannelSlider}" 
-                        Value="{Binding Path=Device.Channel[4].Value.Length, Mode=TwoWay}" />
+                        Value="{Binding Path=Device.Channels[4], Mode=OneWay}" />
 
                 <!-- Channel 6 -->
                 <TextBlock Grid.Row="1" Grid.Column="5" Text="6" Style="{StaticResource LabelTextTop}" />
                 <Slider Name="Channel6Slider" Grid.Row="2" Grid.Column="5" Style="{StaticResource ChannelSlider}" 
-                        Value="{Binding Path=Device.Channel[5].Value.Length, Mode=TwoWay}" />
+                        Value="{Binding Path=Device.Channels[5], Mode=OneWay}" />
 
                 <!-- Channel 7 -->
                 <TextBlock Grid.Row="1" Grid.Column="6" Text="7" Style="{StaticResource LabelTextTop}" />
                 <Slider Name="Channel7Slider" Grid.Row="2" Grid.Column="6" Style="{StaticResource ChannelSlider}" 
-                        Value="{Binding Path=Device.Channel[6].Value.Length, Mode=TwoWay}" />
+                        Value="{Binding Path=Device.Channels[6], Mode=OneWay}" />
 
                 <!-- Channel 8 -->
                 <TextBlock Grid.Row="1" Grid.Column="7" Text="8" Style="{StaticResource LabelTextTop}" />
                 <Slider Name="Channel8Slider" Grid.Row="2" Grid.Column="7" Style="{StaticResource ChannelSlider}" 
-                        Value="{Binding Path=Device.Channel[7].Value.Length, Mode=TwoWay}" />
+                        Value="{Binding Path=Device.Channels[7], Mode=OneWay}" />
             </Grid>
 
         </StackPanel>

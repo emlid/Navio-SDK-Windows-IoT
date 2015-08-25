@@ -67,7 +67,6 @@
     <Compile Include="NavioPca9685Device.cs" />
     <Compile Include="NavioRCInputDevice.cs" />
     <Compile Include="NavioRCInputMode.cs" />
-    <Compile Include="NavioRCInputChannel.cs" />
     <Compile Include="NxpPca9685Channel.cs" />
     <Compile Include="NxpPca9685ChannelValue.cs" />
     <Compile Include="NxpPca9685Device.cs" />

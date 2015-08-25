@@ -36,7 +36,7 @@ namespace Emlid.WindowsIoT.Tests.NavioHardwareTestApp.Views
         /// </summary>
         private void OnRCInputTestButtonClick(object sender, RoutedEventArgs arguments)
         {
-            Frame.Navigate(typeof(LedPwmTestPage));
+            Frame.Navigate(typeof(RCInputTestPage));
         }
 
         /// <summary>

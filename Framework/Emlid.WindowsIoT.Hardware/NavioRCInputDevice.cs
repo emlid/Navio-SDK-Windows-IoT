@@ -66,13 +66,11 @@ namespace Emlid.WindowsIoT.Hardware
             _timer = new Stopwatch();
             _inputPin = GpioController.GetDefault().OpenPin(InputGpioPin);
             _ppmFrame = new double[8];
-            _channels = new Collection<NavioRCInputChannel>();
-            Channels = new ReadOnlyCollection<NavioRCInputChannel>(_channels);
+            _channels = new double[8];
+            Channels = new ReadOnlyCollection<double>(_channels);
 
             // PPM only in current implementation
             Mode = NavioRCInputMode.PPM;
-            for (var index = 0; index < PpmChannelCount; index++)
-                _channels.Add(new NavioRCInputChannel(index));
 
             // Configure GPIO
             if (_inputPin.GetDriveMode() != GpioPinDriveMode.Input)
@@ -179,10 +177,10 @@ namespace Emlid.WindowsIoT.Hardware
         public NavioRCInputMode Mode { get; protected set; }
 
         /// <summary>
-        /// Channels and their values (also settable).
+        /// Channel values in fractions of a millisecond, rounded to <see cref="PwmChannelAccuracy"/>
         /// </summary>
-        public ReadOnlyCollection<NavioRCInputChannel> Channels { get; private set; }
-        private Collection<NavioRCInputChannel> _channels;
+        public ReadOnlyCollection<double> Channels { get; private set; }
+        private double[] _channels;
 
         #endregion
 
@@ -259,13 +257,15 @@ namespace Emlid.WindowsIoT.Hardware
                     var roundValue = Math.Round(rawValue, PwmChannelAccuracy);
 
                     // Write value (detecting any change in setter)
-                    _channels[index].Value = roundValue;
+                    _channels[index] = roundValue;
+                    Debug.Write(String.Format("RC{0}={1} ", index + 1, roundValue));
                 }
+                Debug.WriteLine("");
             }
             else
             {
                 // Detect lost signal or invalid frame
-                if (duty.Milliseconds >= PpmLowLimit)
+                if (duty.TotalMilliseconds >= PpmLowLimit)
                 {
                     // Discard frame and stop decoding (until next valid start)
                     _decodeChannel = null;

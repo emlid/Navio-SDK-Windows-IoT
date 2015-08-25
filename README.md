@@ -13,7 +13,7 @@ We encourage users to play with the samples and test programs. Developers can al
 Mission statement: "Full hardware support for Navio on Windows IoT."
 
 1. LED & PWM (PCA9685) device, sample and test app (100% complete).
-2. RC Input (PPM over GPIO) device, sample and test app (50% complete).
+2. RC Input (PPM over GPIO) device, sample and test app (60% complete).
 3. IMU (MPU9250) device, sample and test app.
 4. Barometer (MS5611) device, sample and test app.
 5. GPS (U-Blox NEO-MN8, possibly NEO7M, NEO-6T too) device, sample and test app.
@@ -34,6 +34,7 @@ Mission statement: "Answer the question; can you really fly a drone with Windows
 
 
 # Future Milestones:
+
 Mission statement: "Expand support and add new devices."
 
 1. Support other multirotor types in the PoC application.
@@ -48,6 +49,18 @@ Mission statement: "Expand support and add new devices."
 
 
 # Change Log
+
+*2015.08.25*
+
+1. RC input progress. Test app enables use of RC Input, but no GUI interaction yet. For now use the Output window of Visual Studio to see debug messages repoting decoded PPM values. They appear to be correct, but some tuning of rounding and frame error detection is required.
+
+
+*2015.08.14*
+
+1. RC Input hardware classes done in their first untested form.
+2. RC Input model and preliminary view added to hardware test app, but not enabled yet.
+3. Minor clean-up and coding standards in other classes and projects.
+
 
 *2015.07.31*
 

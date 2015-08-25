@@ -31,7 +31,7 @@
             <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,200,100">
 
                 <Button Name="LedPwmTestButton" Content="LED &amp; PWM" Click="OnLedPwmTestButtonClick" />
-                <Button Name="RcInputTestButton" Content="RC Input" Click="OnRCInputTestButtonClick" IsEnabled="False" />
+                <Button Name="RcInputTestButton" Content="RC Input" Click="OnRCInputTestButtonClick" />
                 <Button Name="ImuTestButton" Content="IMU" IsEnabled="False" />
                 <Button Name="BarometerTestButton" Content="Barometer" IsEnabled="False" />
                 <Button Name="GpsTestButton" Content="GPS" IsEnabled="False" />

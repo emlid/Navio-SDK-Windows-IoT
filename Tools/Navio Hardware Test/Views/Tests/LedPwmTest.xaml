@@ -96,10 +96,6 @@
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                
-                <Grid.Resources>
-                    <CollectionViewSource x:Name="PwmChannels" IsSourceGrouped="False" />
-                </Grid.Resources>
 
                 <!-- Title -->
                 <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="13" Text="PWM" Style="{StaticResource PanelTitleText}" />
