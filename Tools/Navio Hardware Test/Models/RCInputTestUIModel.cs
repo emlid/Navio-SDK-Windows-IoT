@@ -1,6 +1,5 @@
 ﻿using Emlid.WindowsIoT.Hardware;
 using System;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 namespace Emlid.WindowsIoT.Tests.HardwareTestApp.Models
@@ -19,6 +18,7 @@ namespace Emlid.WindowsIoT.Tests.HardwareTestApp.Models
         {
             // Initialize device
             Device = new NavioRCInputDevice();
+            Device.ChannelsChanged += OnChannelsChanged;
         }
 
         #region IDisposable
@@ -39,9 +39,7 @@ namespace Emlid.WindowsIoT.Tests.HardwareTestApp.Models
             {
                 // Free managed resources
                 if (disposing)
-                {
                     Device.Dispose();
-                }
             }
             finally
             {
@@ -63,19 +61,17 @@ namespace Emlid.WindowsIoT.Tests.HardwareTestApp.Models
 
         #endregion
 
-        #region Protected Methods
+        #region Events
 
         /// <summary>
-        /// Runs a test method with status and error output.
+        /// Updates the display when the <see cref="Device"/> channels change.
         /// </summary>
-        /// <param name="test">Test delegate to run.</param>
-        /// <param name="name">Name to use in the output.</param>
-        protected override void RunTest(Action test, [CallerMemberName] string name = "")
+        private void OnChannelsChanged(object sender, PwmFrame frame)
         {
-            // Call base class to run test
-            base.RunTest(test, name);
+            // Dump statistics to output
+            WriteOutput(frame.ToString());
 
-            // Update properties
+            // Update display
             DoPropertyChanged(nameof(Device));
         }
 

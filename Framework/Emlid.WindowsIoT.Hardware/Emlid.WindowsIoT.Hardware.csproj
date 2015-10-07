@@ -56,17 +56,28 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <None Include="Emlid.WindowsIoT.Hardware.nuspec" />
+    <None Include="Package.cmd" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\Common\AssemblyInfoGlobal.cs">
       <Link>Properties\AssemblyInfoGlobal.cs</Link>
     </Compile>
+    <Compile Include="..\..\Common\I2cExtensions.cs">
+      <Link>I2cExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\StopwatchExtensions.cs">
+      <Link>StopwatchExtensions.cs</Link>
+    </Compile>
+    <Compile Include="CppmDecoder.cs" />
+    <Compile Include="PwmValue.cs" />
+    <Compile Include="PwmCycle.cs" />
+    <Compile Include="PwmFrame.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="I2cExtensions.cs" />
     <Compile Include="NavioPca9685Device.cs" />
+    <Compile Include="IPwmDecoder.cs" />
     <Compile Include="NavioRCInputDevice.cs" />
-    <Compile Include="NavioRCInputMode.cs" />
     <Compile Include="NxpPca9685Channel.cs" />
     <Compile Include="NxpPca9685ChannelValue.cs" />
     <Compile Include="NxpPca9685Device.cs" />

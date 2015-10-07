@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
+using System.Globalization;
+using System.Threading;
+using System.Threading.Tasks;
 using Windows.Devices.Gpio;
 
 namespace Emlid.WindowsIoT.Hardware
 {
+
     /// <summary>
     /// Navio Remote Control input hardware device.
     /// </summary>
@@ -21,37 +25,7 @@ namespace Emlid.WindowsIoT.Hardware
         /// <summary>
         /// GPIO pin number which is mapped to the RC input connector.
         /// </summary>
-        public const int InputGpioPin = 4;
-
-        /// <summary>
-        /// Number of decimal places to which raw PWM values (fractions of a millisecond) are rounded
-        /// before storing as channel values.
-        /// </summary>
-        /// <remarks>
-        /// The default value of 3 rounds to the nearest microsecond.
-        /// </remarks>
-        public const int PwmChannelAccuracy = 3;
-
-        /// <summary>
-        /// Number of channels in a PPM frame.
-        /// </summary>
-        public const int PpmChannelCount = 8;
-
-        /// <summary>
-        /// PPM frame start delay in milliseconds.
-        /// </summary>
-        /// <remarks>
-        /// Actual value is 2ms but we add some time for inaccuracy and differences between manufacturers.
-        /// </remarks>
-        public const double PpmStartLength = 2.5;
-
-        /// <summary>
-        /// Maximum time in milliseconds which a PPM signal may be low before it is considered invalid.
-        /// </summary>
-        /// <remarks>
-        /// Actual specification is 0.3ms but we add some time for inaccuracy and differences between manufacturers.
-        /// </remarks>
-        public const double PpmLowLimit = 0.5;
+        public const int InputPinNumber = 4;
 
         #endregion
 
@@ -62,20 +36,28 @@ namespace Emlid.WindowsIoT.Hardware
         /// </summary>
         public NavioRCInputDevice()
         {
-            // Initialize
-            _timer = new Stopwatch();
-            _inputPin = GpioController.GetDefault().OpenPin(InputGpioPin);
-            _ppmFrame = new double[8];
-            _channels = new double[8];
-            Channels = new ReadOnlyCollection<double>(_channels);
-
-            // PPM only in current implementation
-            Mode = NavioRCInputMode.PPM;
+            // Initialize buffers and events
+            _valueBuffer = new ConcurrentQueue<PwmValue>();
+            _valueTrigger = new AutoResetEvent(false);
+            _frameBuffer = new ConcurrentQueue<PwmFrame>();
+            _frameTrigger = new AutoResetEvent(false);
 
             // Configure GPIO
+            _inputPin = GpioController.GetDefault().OpenPin(InputPinNumber);
             if (_inputPin.GetDriveMode() != GpioPinDriveMode.Input)
                 _inputPin.SetDriveMode(GpioPinDriveMode.Input);
+            _inputPin.DebounceTimeout = TimeSpan.Zero;
             _inputPin.ValueChanged += OnInputPinValueChanged;
+
+            // Create decoder thread (CPPM only to start with, SBus desired)
+            _decoder = new CppmDecoder();
+            _stop = new CancellationTokenSource();
+            _channels = new int[_decoder.MaximumChannels];
+            Channels = new ReadOnlyCollection<int>(_channels);
+            _decoderTask = Task.Factory.StartNew(() => { _decoder.Decode(_valueBuffer, _valueTrigger, _frameBuffer, _frameTrigger, _stop.Token); });
+
+            // Create receiver thread
+            _receiverTask = Task.Factory.StartNew(() => { Receiver(); });
         }
 
         #region IDisposable
@@ -102,8 +84,18 @@ namespace Emlid.WindowsIoT.Hardware
                 // Dispose managed resource during dispose
                 if (disposing)
                 {
-                    _inputPin.Dispose();
-                    _timer.Stop();
+                    if (_stop != null)
+                        _stop.Cancel();
+                    if (_receiverTask != null)
+                        _receiverTask.Wait();
+                    if (_decoderTask != null)
+                        _decoderTask.Wait();
+                    if (_inputPin != null)
+                        _inputPin.Dispose();
+                    if (_valueTrigger != null)
+                        _valueTrigger.Dispose();
+                    if (_frameTrigger != null)
+                        _frameTrigger.Dispose();
                 }
             }
             finally
@@ -152,162 +144,122 @@ namespace Emlid.WindowsIoT.Hardware
         private GpioPin _inputPin;
 
         /// <summary>
-        /// High resolution timer used to measure PWM duty cycle.
+        /// Decoder called when each PWM cycle is detected.
         /// </summary>
-        private Stopwatch _timer;
+        private IPwmDecoder _decoder;
 
         /// <summary>
-        /// Indicates the decoder is currently processing a channel (when not null)
-        /// and the index of the channel.
+        /// Background decoder task.
         /// </summary>
-        private int? _decodeChannel;
+        private Task _decoderTask;
 
         /// <summary>
-        /// Current PPM frame.
+        /// Background receiver task.
         /// </summary>
-        private double[] _ppmFrame;
+        private Task _receiverTask;
+
+        /// <summary>
+        /// Cancellation token used to signal worker threads to stop.
+        /// </summary>
+        private CancellationTokenSource _stop;
+
+        /// <summary>
+        /// Buffer containing raw PWM values.
+        /// </summary>
+        private ConcurrentQueue<PwmValue> _valueBuffer;
+
+        /// <summary>
+        /// Event used to signal the decoder that new captured PWM values are waiting to decode.
+        /// </summary>
+        private AutoResetEvent _valueTrigger;
+
+        /// <summary>
+        /// Buffer containing decoded PWM frames.
+        /// </summary>
+        private ConcurrentQueue<PwmFrame> _frameBuffer;
+
+        /// <summary>
+        /// Event used to signal the consumer that new decoded PWM frames are ready to use.
+        /// </summary>
+        private AutoResetEvent _frameTrigger;
 
         #endregion
 
         #region Properties
 
         /// <summary>
-        /// Input mode detected by the decoder.
+        /// Channel values in microseconds.
         /// </summary>
-        public NavioRCInputMode Mode { get; protected set; }
+        public ReadOnlyCollection<int> Channels { get; private set; }
+        private int[] _channels;
 
         /// <summary>
-        /// Channel values in fractions of a millisecond, rounded to <see cref="PwmChannelAccuracy"/>
+        /// Used to wait until the device is stopped.
         /// </summary>
-        public ReadOnlyCollection<double> Channels { get; private set; }
-        private double[] _channels;
-
-        #endregion
-
-        #region Protected Methods
-
-        /// <summary>
-        /// Decodes the incoming PWM signal and updates properties.
-        /// </summary>
-        /// <param name="value">PWM value. True when high, false when low.</param>
-        /// <param name="duty">PWM duty, the time since last transition.</param>
-        protected virtual void Decode(bool value, TimeSpan duty)
-        {
-            // TODO: Automatic mode detection.
-            // TODO: Extract decoders into external classes and add generic interface
-            switch (Mode)
-            {
-                case NavioRCInputMode.PPM:
-                    DecodePpm(value, duty);
-                    break;
-
-                case NavioRCInputMode.SBUS:
-                    DecodeSbus(value, duty);
-                    break;
-            }
-        }
-
-        /// <summary>
-        /// Decodes the incoming PWM signal using the PPM protocol.
-        /// </summary>
-        /// <param name="value">PWM value. True when high, false when low.</param>
-        /// <param name="duty">PWM duty, the time since last transition.</param>
-        protected virtual void DecodePpm(bool value, TimeSpan duty)
-        {
-            if (value)
-            {
-                // Detect start frame
-                if (duty.TotalMilliseconds >= PpmStartLength)
-                {
-                    // Start decoding from channel 0 at next pulse
-                    _decodeChannel = 0;
-                    return;
-                }
-
-                // Do nothing when not decoding
-                if (!_decodeChannel.HasValue)
-                    return;
-                var decodeIndex = _decodeChannel.Value;
-
-                // Store channel value whilst decoding
-                if (decodeIndex < PpmChannelCount - 1)
-                {
-                    // Store channel value
-                    _ppmFrame[decodeIndex] = duty.TotalMilliseconds;
-
-                    // Wait for next channel...
-                    _decodeChannel = decodeIndex + 1;
-                    return;
-                }
-
-                // Complete frame when all channels decoded...
-
-                // Copy frame to stack (in case we take too long to update)
-                var frame = new double[PpmChannelCount];
-                Array.Copy(_ppmFrame, frame, PpmChannelCount);
-
-                // Stop decoding (until next valid start)
-                _decodeChannel = null;
-
-                // Update values (with automatic change detection)
-                for (var index = 0; index < _ppmFrame.Length; index++)
-                {
-                    // Round value to prevent unwanted change detection
-                    var rawValue = _ppmFrame[index];
-                    var roundValue = Math.Round(rawValue, PwmChannelAccuracy);
-
-                    // Write value (detecting any change in setter)
-                    _channels[index] = roundValue;
-                    Debug.Write(String.Format("RC{0}={1} ", index + 1, roundValue));
-                }
-                Debug.WriteLine("");
-            }
-            else
-            {
-                // Detect lost signal or invalid frame
-                if (duty.TotalMilliseconds >= PpmLowLimit)
-                {
-                    // Discard frame and stop decoding (until next valid start)
-                    _decodeChannel = null;
-                    return;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Decodes the incoming PWM signal using the SBUS protocol.
-        /// </summary>
-        /// <param name="value">PWM value. True when high, false when low.</param>
-        /// <param name="duty">PWM duty, the time since last transition.</param>
-        protected virtual void DecodeSbus(bool value, TimeSpan duty)
-        {
-            // TODO: Implement SBUS protocol decoder
-            throw new NotImplementedException();
-        }
+        public WaitHandle Stopped { get { return _stop.Token.WaitHandle; } }
 
         #endregion
 
         #region Events
 
         /// <summary>
-        /// Handles GPIO changes (rising and falling PWM signal), calculates duty cycle (time between change).
-        /// Main hardware routine which triggers the input translation process.
+        /// Handles GPIO changes (rising and falling PWM signal), recording them to the decoder queue.
         /// </summary>
+        /// <remarks>
+        /// Main hardware routine which triggers the input translation process.
+        /// This code must run as quickly as possible else we could miss the next event!
+        /// </remarks>
         private void OnInputPinValueChanged(GpioPin sender, GpioPinValueChangedEventArgs arguments)
         {
-            // Get PWM duty and restart timer as quickly as possible (to be accurate)
-            var duty = _timer.Elapsed;
-            _timer.Restart();
+            // Get PWM value
+            var time = StopwatchExtensions.GetTimestampInMicroseconds();
+            var level = arguments.Edge == GpioPinEdge.RisingEdge;
+            var value = new PwmValue(time, level);
 
-            // Do nothing at first start
-            if (duty == TimeSpan.Zero)
-                return;
+            // Queue for processing
+            _valueBuffer.Enqueue(value);
+            _valueTrigger.Set();
+        }
 
-            // Get PWM value before transition (high means we have low time, and vice versa)
-            var value = arguments.Edge != GpioPinEdge.RisingEdge;
+        /// <summary>
+        /// Fired after a new frame of data has been received and decoded into <see cref="Channels"/>.
+        /// </summary>
+        public EventHandler<PwmFrame> ChannelsChanged;
 
-            // Call decoder
-            Decode(value, duty);
+        #endregion
+
+        #region Private Methods
+
+        /// <summary>
+        /// Waits for decoded frames, updates the <see cref="Channels"/> property and fires
+        /// the <see cref="ChannelsChanged"/> event on a separate thread.
+        /// </summary>
+        private void Receiver()
+        {
+            // Run until stopped...
+            while (!_stop.IsCancellationRequested)
+            {
+                // Wait for frame
+                PwmFrame frame;
+                if (!_frameBuffer.TryDequeue(out frame))
+                {
+                    _frameTrigger.WaitOne(1000);
+                    continue;
+                }
+
+                // Validate
+                var channelCount = frame.Channels.Length;
+                if (channelCount > _channels.Length)
+                    throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture,
+                        new Resources.Strings().RCInputDecoderChannelOverflow, channelCount, _channels.Length));
+
+                // Copy new channel data
+                Array.Copy(frame.Channels, _channels, channelCount);
+
+                // Fire event
+                if (ChannelsChanged != null)
+                    ChannelsChanged(this, frame);
+            }
         }
 
         #endregion

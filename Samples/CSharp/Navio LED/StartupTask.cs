@@ -1,5 +1,4 @@
 ﻿using Emlid.WindowsIoT.Hardware;
-using System;
 using Windows.ApplicationModel.Background;
 
 namespace Emlid.WindowsIoT.Samples.NavioLed

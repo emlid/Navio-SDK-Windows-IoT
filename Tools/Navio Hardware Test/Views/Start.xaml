@@ -44,7 +44,7 @@
         <!-- Application Buttons  -->
         <StackPanel Grid.Row="2">
 
-            <Button Name="ExitButton" Content="Exit" HorizontalAlignment="Right" Click="OnExitButtonClick" />
+            <Button Name="ExitButton" Content="Exit" HorizontalAlignment="Right" Width="100" Click="OnExitButtonClick" />
 
         </StackPanel>
 

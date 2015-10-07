@@ -17,13 +17,14 @@
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <PackageCertificateKeyFile>TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>..\..\Common\TemporaryKey.pfx</PackageCertificateKeyFile>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
+    <PackageCertificateThumbprint>C2D99DE81D7FBCF0343E062F656EE86C0B5273AA</PackageCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
     <DebugSymbols>true</DebugSymbols>
@@ -38,7 +39,7 @@
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <DocumentationFile>bin\ARM\Debug\Emlid.WindowsIoT.Tests.NavioHardwareTestApp.xml</DocumentationFile>
+    <DocumentationFile>bin\ARM\Debug\Emlid.WindowsIoT.Tests.NavioHardwareTestApp.XML</DocumentationFile>
     <UseDotNetNativeToolchain>false</UseDotNetNativeToolchain>
     <SuppressXamlWarnings>3270</SuppressXamlWarnings>
   </PropertyGroup>
@@ -56,7 +57,7 @@
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <DocumentationFile>bin\ARM\Release\Emlid.WindowsIoT.Tests.NavioHardwareTestApp.xml</DocumentationFile>
+    <DocumentationFile>bin\ARM\Release\Emlid.WindowsIoT.Tests.NavioHardwareTestApp.XML</DocumentationFile>
     <SuppressXamlWarnings>3270</SuppressXamlWarnings>
   </PropertyGroup>
   <ItemGroup>
@@ -85,7 +86,6 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\..\CustomDictionary.xml">
@@ -98,11 +98,9 @@
       <Link>Assets\Navio-Research.jpg</Link>
     </Content>
     <Content Include="Properties\Default.rd.xml" />
-    <Content Include="Assets\Logo.scale-100.png" />
     <Content Include="Assets\SmallLogo.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
     <Content Include="Assets\StoreLogo.scale-100.png" />
-    <Content Include="Assets\WideLogo.scale-100.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -130,6 +128,9 @@
   </ItemGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <None Include="..\..\Common\TemporaryKey.pfx">
+      <Link>TemporaryKey.pfx</Link>
+    </None>
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
@@ -157,7 +158,7 @@
     <Prefer32Bit>true</Prefer32Bit>
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <DocumentationFile>bin\Debug\Emlid.WindowsIoT.Tests.NavioHardwareTestApp.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\Emlid.WindowsIoT.Tests.NavioHardwareTestApp.XML</DocumentationFile>
     <UseDotNetNativeToolchain>false</UseDotNetNativeToolchain>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
@@ -174,11 +175,11 @@
     <Prefer32Bit>true</Prefer32Bit>
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <DocumentationFile>bin\Release\Emlid.WindowsIoT.Tests.NavioHardwareTestApp.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\Emlid.WindowsIoT.Tests.NavioHardwareTestApp.XML</DocumentationFile>
     <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>TemporaryKey.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>..\..\Common\TemporaryKey.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
 </Project>

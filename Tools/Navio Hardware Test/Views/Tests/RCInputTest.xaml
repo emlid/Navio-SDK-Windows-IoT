@@ -16,10 +16,12 @@
             <Setter Property="Orientation" Value="Vertical" />
             <Setter Property="HorizontalAlignment" Value="Stretch" />
             <Setter Property="Minimum" Value="0" />
-            <Setter Property="Maximum" Value="2" />
-            <Setter Property="SmallChange" Value="0.01" />
-            <Setter Property="LargeChange" Value="0.1" />
-            <Setter Property="TickFrequency" Value="0.1" />
+            <Setter Property="Maximum" Value="2000" />
+            <Setter Property="StepFrequency" Value="1" />
+            <Setter Property="SnapsTo" Value="StepValues" />
+            <Setter Property="SmallChange" Value="1" />
+            <Setter Property="LargeChange" Value="10" />
+            <Setter Property="TickFrequency" Value="100" />
             <Setter Property="IsEnabled" Value="True" />
         </Style>
     </Page.Resources>
@@ -65,7 +67,7 @@
                 <!-- Channel 1 -->
                 <TextBlock Grid.Row="1" Grid.Column="0" Text="1" Style="{StaticResource LabelTextTop}" />
                 <Slider Name="Channel1Slider" Grid.Row="2" Grid.Column="0" Style="{StaticResource ChannelSlider}" 
-                        Value="{Binding Path=Device.Channels[0], Mode=TwoWay}" />
+                        Value="{Binding Path=Device.Channels[0], Mode=OneWay}" />
 
                 <!-- Channel 2 -->
                 <TextBlock Grid.Row="1" Grid.Column="1" Text="2" Style="{StaticResource LabelTextTop}" />
