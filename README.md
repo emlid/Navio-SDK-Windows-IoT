@@ -11,10 +11,25 @@ We encourage users to play with the samples and test programs. Developers can al
 
 # Usage
 
-1. Install Visual Studio 2015 Community edition or greater (not Express).
-2. Install the IoT tools for Visual Studio.
-3. Create a Universal Windows Platform project and add the NuGet package "Emlid.WindowsIoT.Hardware" (https://www.nuget.org/packages/Emlid.WindowsIoT.Hardware).
-4. Add a reference to the "Emlid.WindowsIoT.Hardware" namespace and start using the framework!
+Normal "consumer" (developer) use is made easy via the standard NuGet packages, publically hosted and distributed by nuget.org. You do not need GitHub or any of the source code to just use the libraries. So if you just want to run the samples it may be easier to use the ZIP download option on GitHub.com.
+
+1. Install Visual Studio 2015 Community edition or greater (but not Express) with developer tools (required for IoT). https://go.microsoft.com/fwlink/p/?LinkId=534599
+2. Create your preferred Universal Windows Platform project (various languages and program/component types).
+3. On the project(s) directly using the Emlid hardwre, right click then "Manage NuGet Packages", select "All" and enable "pre-release", then search for "Emlid.WindowsIoT.Hardware" (https://www.nuget.org/packages/Emlid.WindowsIoT.Hardware).
+4. Enter some code which uses the hardware classes (see samples for ideas).
+5. On the toolbar select "Debug" build configuration and "ARM" processor architecture, then click "Remote Machine..." to build, deploy and run on your IoT device. See the Microsoft IoT samples for instructions how to connect.
+
+
+# Building
+
+Developers interested in how the whole SDK and Framework works itself need to install the GitHub Visual Studio extension and clone the repository.
+
+1. Install Visual Studio 2015 Community edition or greater (but not Express) with developer tools (required for IoT). https://go.microsoft.com/fwlink/p/?LinkId=534599
+2. Add/Update GitHub extension in Visual Studio. https://visualstudio.github.com
+3. Connect to source control and download (select Team Explorer, click manage connections icon/green plug, under "Local Git Repositories" click "Clone", enter the URL for this repository, choose your working folder then "Clone").
+4. On the project(s) directly using the Emlid hardwre, right click then "Manage NuGet Packages", select "All" and enable "pre-release", then search for "Emlid.WindowsIoT.Hardware" (https://www.nuget.org/packages/Emlid.WindowsIoT.Hardware).
+5. Run the "\Common\TemporaryKey Setup.cmd" (from file explorer or command prompt) and enter a blank password as instructed.
+6. On the toolbar select "Debug" build configuration and "ARM" processor architecture, then click "Remote Machine..." to build, deploy and run on your IoT device. See the Microsoft IoT samples for instructions how to connect.
 
 
 # Roadmap

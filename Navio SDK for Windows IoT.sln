@@ -37,6 +37,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{E2AC6B
 		Common\AssemblyInfoGlobal.cs = Common\AssemblyInfoGlobal.cs
 		Common\I2cExtensions.cs = Common\I2cExtensions.cs
 		Common\StopwatchExtensions.cs = Common\StopwatchExtensions.cs
+		Common\TemporaryKey Setup.cmd = Common\TemporaryKey Setup.cmd
 		Common\TemporaryKey.pfx = Common\TemporaryKey.pfx
 	EndProjectSection
 EndProject
