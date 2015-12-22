@@ -1,4 +1,4 @@
-﻿namespace Emlid.WindowsIoT.Hardware
+﻿namespace Emlid.WindowsIot.Hardware
 {
     /// <summary>
     /// Defines the I2C registers of the <see cref="NxpPca9685Device"/>.

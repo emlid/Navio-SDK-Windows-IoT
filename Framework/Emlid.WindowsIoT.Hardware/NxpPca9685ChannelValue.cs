@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Emlid.WindowsIoT.Hardware
+namespace Emlid.WindowsIot.Hardware
 {
     /// <summary>
     /// <see cref="NxpPca9685Device"/> channel value.

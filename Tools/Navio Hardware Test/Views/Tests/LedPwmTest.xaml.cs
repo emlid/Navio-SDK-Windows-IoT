@@ -1,4 +1,4 @@
-﻿using Emlid.WindowsIoT.Tests.HardwareTestApp.Models;
+﻿using Emlid.WindowsIot.Tests.HardwareTestApp.Models;
 using System;
 using System.Globalization;
 using System.Threading.Tasks;
@@ -8,7 +8,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 
-namespace Emlid.WindowsIoT.Tests.NavioHardwareTestApp.Views.Tests
+namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
 {
     /// <summary>
     /// Main page.

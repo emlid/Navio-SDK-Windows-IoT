@@ -1,0 +1,70 @@
+; -----------------------------------------------------------------------------
+; Navio RC Input Driver Setup Installation File (INF)
+; -----------------------------------------------------------------------------
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=%ClassName%
+ClassGuid={4d36e97d-e325-11ce-bfc1-08002be10318}
+Provider=%ManufacturerName%
+CatalogFile=NavioRCInput.cat
+DriverVer= ; Set by StampInf
+
+[DestinationDirs]
+DefaultDestDir = 12
+
+
+; -----------------------------------------------------------------------------
+; Class
+; -----------------------------------------------------------------------------
+
+[SourceDisksNames]
+1 = %DiskName%,,,""
+
+[SourceDisksFiles]
+NavioRCInput.sys = 1,,
+
+
+; -----------------------------------------------------------------------------
+; Driver
+; -----------------------------------------------------------------------------
+
+[Manufacturer]
+%ManufacturerName%=Emlid,NT$ARCH$
+
+[Emlid.NT$ARCH$]
+%DisplayName%=NavioRCInput_Device, ACPI\NAVI0001
+
+[NavioRCInput_Device.NT]
+CopyFiles=DriverFiles
+
+[DriverFiles]
+NavioRCInput.sys
+
+
+; -----------------------------------------------------------------------------
+; Service
+; -----------------------------------------------------------------------------
+
+[NavioRCInput_Device.NT.Services]
+AddService = NavioRCInput,%SPSVCINST_ASSOCSERVICE%, NavioRCInput_Service
+
+[NavioRCInput_Service]
+DisplayName    = %DisplayName%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\NavioRCInput.sys
+
+
+; -----------------------------------------------------------------------------
+; Strings
+; -----------------------------------------------------------------------------
+
+[Strings]
+SPSVCINST_ASSOCSERVICE= 0x00000002
+ManufacturerName="Emlid"
+ClassName="System"
+DiskName="Navio RC Input Install Package"
+DisplayName = "Navio RC Input"
+

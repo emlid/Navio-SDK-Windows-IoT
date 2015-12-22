@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="Emlid.WindowsIoT.Tests.NavioHardwareTestApp" Publisher="CN=Emlid" Version="1.0.4.0" />
+  <Identity Name="Emlid.WindowsIot.Tests.NavioHardwareTestApp" Publisher="CN=Emlid" Version="1.0.4.0" />
   <mp:PhoneIdentity PhoneProductId="5fcb9ddf-c1f1-477e-ba13-2b21c9cef3f1" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Navio Hardware Test</DisplayName>
@@ -14,7 +14,7 @@
     <Resource Language="x-generate" />
   </Resources>
   <Applications>
-    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Emlid.WindowsIoT.Tests.NavioHardwareTestApp.App">
+    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Emlid.WindowsIot.Tests.NavioHardwareTestApp.App">
       <uap:VisualElements DisplayName="Navio Hardware Tests" Square150x150Logo="Assets\Logo.png" Square44x44Logo="Assets\SmallLogo.png" Description="Navio Hardware Test" BackgroundColor="#464646">
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>

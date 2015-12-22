@@ -1,8 +1,8 @@
-﻿using Emlid.WindowsIoT.Tests.NavioHardwareTestApp.Views.Tests;
+﻿using Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Emlid.WindowsIoT.Tests.NavioHardwareTestApp.Views
+namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views
 {
     /// <summary>
     /// Start page of the application.

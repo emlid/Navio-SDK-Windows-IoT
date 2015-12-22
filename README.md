@@ -15,7 +15,7 @@ Normal "consumer" (developer) use is made easy via the standard NuGet packages, 
 
 1. Install Visual Studio 2015 Community edition or greater (but not Express) with developer tools (required for IoT). https://go.microsoft.com/fwlink/p/?LinkId=534599
 2. Create your preferred Universal Windows Platform project (various languages and program/component types).
-3. On the project(s) directly using the Emlid hardwre, right click then "Manage NuGet Packages", select "All" and enable "pre-release", then search for "Emlid.WindowsIoT.Hardware" (https://www.nuget.org/packages/Emlid.WindowsIoT.Hardware).
+3. On the project(s) directly using the Emlid hardwre, right click then "Manage NuGet Packages", select "All" and enable "pre-release", then search for "Emlid.WindowsIot.Hardware" (https://www.nuget.org/packages/Emlid.WindowsIot.Hardware).
 4. Enter some code which uses the hardware classes (see samples for ideas).
 5. On the toolbar select "Debug" build configuration and "ARM" processor architecture, then click "Remote Machine..." to build, deploy and run on your IoT device. See the Microsoft IoT samples for instructions how to connect.
 
@@ -27,7 +27,7 @@ Developers interested in how the whole SDK and Framework works itself need to in
 1. Install Visual Studio 2015 Community edition or greater (but not Express) with developer tools (required for IoT). https://go.microsoft.com/fwlink/p/?LinkId=534599
 2. Add/Update GitHub extension in Visual Studio. https://visualstudio.github.com
 3. Connect to source control and download (select Team Explorer, click manage connections icon/green plug, under "Local Git Repositories" click "Clone", enter the URL for this repository, choose your working folder then "Clone").
-4. On the project(s) directly using the Emlid hardwre, right click then "Manage NuGet Packages", select "All" and enable "pre-release", then search for "Emlid.WindowsIoT.Hardware" (https://www.nuget.org/packages/Emlid.WindowsIoT.Hardware).
+4. On the project(s) directly using the Emlid hardwre, right click then "Manage NuGet Packages", select "All" and enable "pre-release", then search for "Emlid.WindowsIot.Hardware" (https://www.nuget.org/packages/Emlid.WindowsIot.Hardware).
 5. Run the "\Common\TemporaryKey Setup.cmd" (from file explorer or command prompt) and enter a blank password as instructed.
 6. On the toolbar select "Debug" build configuration and "ARM" processor architecture, then click "Remote Machine..." to build, deploy and run on your IoT device. See the Microsoft IoT samples for instructions how to connect.
 
@@ -76,11 +76,23 @@ Mission statement: "Expand support and add new devices."
 
 # Change Log
 
+*2015.12.22*
+ 
+1. Device driver "capability" proof of concept. Working skeleton RC input kernel mode WDF driver which successfully deploys and can be communicated with from a user mode Universal application.
+2. Various patches and documentation updates to existing source code and samples.
+3. Updated solution to work with latest IoT December 2015 OS build 10586, SDK/WDK 1511, Visual Studio 2015 Update 1.
+ 
+This is an interim check-in which does not add any end-user (consumer developer) functionality, but solves the technical requirement to be able to write a kernel mode driver and communicate from user mode.
+Because of the difficulties with the VS2015 tools and lack of improvement in update 1 (which actually got worse in some aspects) focus will temporarily shift back to the user mode framework for all other features than RC Input.
+Also with the release of Navio 2 which has RC Input hardware, the device driver can wait a little while, so we can first gain the full chipset functionality in user mode and maybe see if a simple quadcopter can hover with it (and a joystick instead of RC input).
+Commitment is still there to produce high performance (real-time) and robust drivers shortly after a successful user mode PoC.
+
+
 *2015.10.06*
 
 1. RC input C# proof of concept complete (so far as worthwhile). Only accurate to ~1 second due to "floating GPIO" limitation (see notes below). 
 2. Completed RC Input in hardware test app and added new RC Input C# sample.
-2. Added NuGet package. No need to download source and compile to use the hardware from now on! The package URL is: https://www.nuget.org/packages/Emlid.WindowsIoT.Hardware
+2. Added NuGet package. No need to download source and compile to use the hardware from now on! The package URL is: https://www.nuget.org/packages/Emlid.WindowsIot.Hardware
 
 Due to a Microsoft IoT image limitation, specifically with the GPIO #4 pin hard-wired to RC Input on the Navio, we cannot achieve any kind of acceptable performance in "user mode" code.
 Furthermore, the current UWP API has a lack of support for time critical threads in "user mode". It is necessary to bring forwards the conversion to C++ and device drivers.

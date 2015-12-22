@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Emlid.WindowsIoT.Hardware</id>
-    <version>1.0.4-Alpha</version>
+    <id>Emlid.WindowsIot.Hardware</id>
+    <version>1.0.5-Alpha</version>
     <title>Emlid Windows IoT Hardware</title>
     <authors>Emlid</authors>
     <owners>Emlid</owners>
@@ -24,7 +24,7 @@
       <dependency id="Microsoft.NETCore.UniversalWindowsPlatform" version="5.0.0" />
     </dependencies>
     <references>
-      <reference file="Emlid.WindowsIoT.Hardware.dll" />
+      <reference file="Emlid.WindowsIot.Hardware.dll" />
     </references>
   </metadata>
 </package>

@@ -6,7 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Windows.Devices.Gpio;
 
-namespace Emlid.WindowsIoT.Hardware
+namespace Emlid.WindowsIot.Hardware
 {
 
     /// <summary>

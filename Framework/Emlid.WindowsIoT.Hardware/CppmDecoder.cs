@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Threading;
 
-namespace Emlid.WindowsIoT.Hardware
+namespace Emlid.WindowsIot.Hardware
 {
     /// <summary>
     /// PWM decoder for the CPPM protocol.

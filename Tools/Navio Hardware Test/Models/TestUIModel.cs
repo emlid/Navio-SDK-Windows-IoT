@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Emlid.WindowsIoT.Tests.HardwareTestApp.Models
+namespace Emlid.WindowsIot.Tests.HardwareTestApp.Models
 {
     /// <summary>
     /// Base class for all test UI models.

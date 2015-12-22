@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Emlid.WindowsIoT.Hardware
+namespace Emlid.WindowsIot.Hardware
 {
     /// <summary>
     /// Bitmask for the <see cref="NxpPca9685Register.Mode1"/> register.

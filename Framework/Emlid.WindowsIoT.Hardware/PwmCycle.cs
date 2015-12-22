@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace Emlid.WindowsIoT.Hardware
+namespace Emlid.WindowsIot.Hardware
 {
     /// <summary>
     /// Contains information about a PWM cycle (low-high cycle)

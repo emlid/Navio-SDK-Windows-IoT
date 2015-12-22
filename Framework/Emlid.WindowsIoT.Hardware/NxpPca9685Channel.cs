@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Emlid.WindowsIoT.Hardware
+namespace Emlid.WindowsIot.Hardware
 {
     /// <summary>
     /// References an <seealso cref="NxpPca9685ChannelValue"/> by index and provides change notification.

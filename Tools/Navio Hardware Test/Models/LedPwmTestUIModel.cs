@@ -1,9 +1,9 @@
-﻿using Emlid.WindowsIoT.Hardware;
+﻿using Emlid.WindowsIot.Hardware;
 using System;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
-namespace Emlid.WindowsIoT.Tests.HardwareTestApp.Models
+namespace Emlid.WindowsIot.Tests.HardwareTestApp.Models
 {
     /// <summary>
     /// UI model for testing the <see cref="NavioPca9685Device"/>.

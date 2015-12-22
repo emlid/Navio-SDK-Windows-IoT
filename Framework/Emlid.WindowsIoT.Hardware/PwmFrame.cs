@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Text;
 
-namespace Emlid.WindowsIoT.Hardware
+namespace Emlid.WindowsIot.Hardware
 {
     /// <summary>
     /// Contains data and definitions of an RC input PWM frame.

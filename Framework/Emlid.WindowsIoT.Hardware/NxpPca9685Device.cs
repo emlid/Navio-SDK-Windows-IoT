@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Threading.Tasks;
 using Windows.Devices.I2c;
 
-namespace Emlid.WindowsIoT.Hardware
+namespace Emlid.WindowsIot.Hardware
 {
     /// <summary>
     /// PCA9685 hardware device.

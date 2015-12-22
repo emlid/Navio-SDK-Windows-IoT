@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="urn:Microsoft.WindowsPhone/PackageSchema.v8.00"
+  Owner="Emlid"
+  OwnerType="OEM"
+  Platform=""
+  Component="Navio"
+  SubComponent="RCInput"
+  ReleaseType="Test" >
+
+  <Components>
+    <Driver InfSource="$(_RELEASEDIR)$(TARGETNAME).inf">
+      <Reference Source="$(_RELEASEDIR)$(TARGETNAME)$(TARGETEXT)" />
+      <Files>
+        <!-- For kernel mode drivers, $(DRIVER_DEST) evaluates to "drivers" by default -->
+        <!-- For user mode drivers, $(DRIVER_DEST) evaluates to "drivers\umdf" by default -->
+        <File Source="$(_RELEASEDIR)$(TARGETNAME)$(TARGETEXT)" DestinationDir="$(runtime.system32)\$(DRIVER_DEST)" />
+        <File Source="$(_RELEASEDIR)$(TARGETNAME).cer" DestinationDir="$(runtime.system32)\$(DRIVER_DEST)" />
+        <File Source="$(_RELEASEDIR)ACPITABL.DAT" DestinationDir="$(runtime.system32)" />
+      </Files>
+    </Driver>
+
+  </Components>
+</Package>

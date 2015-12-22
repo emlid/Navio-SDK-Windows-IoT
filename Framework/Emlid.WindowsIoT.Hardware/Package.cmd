@@ -6,12 +6,12 @@ rem Remember to update the version number and release notes in the "nuspec" file
 
 echo.
 echo Creating Release build
-msbuild "%~dp0Emlid.WindowsIoT.Hardware.csproj" /p:Configuration=Release
+msbuild "%~dp0Emlid.WindowsIot.Hardware.csproj" /p:Configuration=Release
 if %errorlevel% neq 0 goto error
 
 echo.
 echo Creating NuGet Package
-"%~dp0nuget.exe" pack "%~dp0Emlid.WindowsIoT.Hardware.csproj" -Prop Configuration=Release -OutputDirectory "%~dp0bin\ARM\Release"
+"%~dp0..\..\Tools\NuGet\nuget.exe" pack "%~dp0Emlid.WindowsIot.Hardware.csproj" -Prop Configuration=Release -OutputDirectory "%~dp0bin\ARM\Release"
 if %errorlevel% neq 0 goto error
 
 echo.

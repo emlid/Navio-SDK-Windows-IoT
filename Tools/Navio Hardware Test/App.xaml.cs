@@ -1,4 +1,5 @@
-﻿using Emlid.WindowsIoT.Tests.NavioHardwareTestApp.Views;
+﻿using Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views;
+using Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Shared;
 using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -6,7 +7,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-namespace Emlid.WindowsIoT.Tests.NavioHardwareTestApp
+namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp
 {
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
@@ -21,6 +22,7 @@ namespace Emlid.WindowsIoT.Tests.NavioHardwareTestApp
         {
             InitializeComponent();
             Suspending += OnSuspending;
+            UnhandledException += OnError;
         }
 
         /// <summary>
@@ -74,7 +76,9 @@ namespace Emlid.WindowsIoT.Tests.NavioHardwareTestApp
         /// <param name="arguments">Details about the navigation failure</param>
         void OnNavigationFailed(object sender, NavigationFailedEventArgs arguments)
         {
-            throw new InvalidOperationException("Failed to load Page " + arguments.SourcePageType.FullName);
+            arguments.Handled = true;
+            throw new InvalidOperationException("Failed to load Page " + arguments.SourcePageType.FullName +
+                "\n" + arguments.Exception.Message);
         }
 
         /// <summary>
@@ -89,6 +93,16 @@ namespace Emlid.WindowsIoT.Tests.NavioHardwareTestApp
             var deferral = arguments.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
             deferral.Complete();
+        }
+
+        /// <summary>
+        /// Error handler.
+        /// </summary>
+        private void OnError(object sender, UnhandledExceptionEventArgs error)
+        {
+            error.Handled = true;
+            var dialog = new MessageDialog("Error", error.Message);
+            dialog.ShowAsync().AsTask().Wait();
         }
     }
 }
