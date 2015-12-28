@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace Emlid.WindowsIot.Hardware
+namespace Emlid.WindowsIot.Common
 {
     /// <summary>
     /// Extensions to the <see cref="Stopwatch"/> class.

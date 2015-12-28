@@ -41,7 +41,7 @@ Mission statement: "Full hardware support for Navio on Windows IoT."
 1. LED & PWM (PCA9685) device, sample and test app (100% complete).
 2. RC Input (PPM over GPIO) device, sample and test app (60% complete).
 3. IMU (MPU9250) device, sample and test app.
-4. Barometer (MS5611) device, sample and test app.
+4. Barometer (MS5611) device, sample and test app (100% complete).
 5. GPS (U-Blox NEO-MN8, possibly NEO7M, NEO-6T too) device, sample and test app.
 6. ADC (ADS1115) device, sample and test app.
 7. FRAM (MB85RC04) device, sample and test app.
@@ -75,6 +75,14 @@ Mission statement: "Expand support and add new devices."
 
 
 # Change Log
+
+*2015.12.28* v1.0.6
+
+1. Barometer (pressure and temperature sensor) implemented.
+2. LED cycle feature added to LED & PWM test app.
+
+Continued development of the existing C# sensor library. Note the barometer temperature is always about hotter that then environment because of heating by surrounding components, e.g. the Raspberry Pi processor is sitting underneath it. For that reason you will also see the temperature rise in the hardware test app, because the processor is being taxed with the GUI functionality.
+
 
 *2015.12.22*
  

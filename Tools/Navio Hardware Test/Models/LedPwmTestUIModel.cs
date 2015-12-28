@@ -1,15 +1,26 @@
 ﻿using Emlid.WindowsIot.Hardware;
 using System;
+using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using System.Threading.Tasks;
 
-namespace Emlid.WindowsIot.Tests.HardwareTestApp.Models
+namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Models
 {
     /// <summary>
-    /// UI model for testing the <see cref="NavioPca9685Device"/>.
+    /// UI model for testing the <see cref="NavioLedPwmDevice"/>.
     /// </summary>
-    public class LedPwmTestUIModel : TestUIModel
+    public sealed class LedPwmTestUIModel : TestUIModel
     {
+        #region Constants
+
+        /// <summary>
+        /// Steps in which to cycle the LED.
+        /// </summary>
+        public const int LedCycleStep = 16;
+
+        #endregion
+
         #region Lifetime
 
         /// <summary>
@@ -18,7 +29,7 @@ namespace Emlid.WindowsIot.Tests.HardwareTestApp.Models
         public LedPwmTestUIModel(TaskFactory uiThread) : base(uiThread)
         {
             // Initialize device
-            Device = NavioPca9685Device.Initialize(NavioPca9685Device.ServoFrequencyDefault);
+            Device = NavioLedPwmDevice.Initialize(NavioLedPwmDevice.ServoFrequencyDefault);
         }
 
         #region IDisposable
@@ -40,7 +51,9 @@ namespace Emlid.WindowsIot.Tests.HardwareTestApp.Models
                 // Free managed resources
                 if (disposing)
                 {
-                    Device.Dispose();
+                    StopLedCycleTask();
+                    if (Device != null)
+                        Device.Dispose();
                 }
             }
             finally
@@ -54,21 +67,75 @@ namespace Emlid.WindowsIot.Tests.HardwareTestApp.Models
 
         #endregion
 
+        #region Fields
+
+        /// <summary>
+        /// LED cycle background task.
+        /// </summary>
+        Task _ledCycleTask;
+
+        /// <summary>
+        /// Cancellation source for the <see cref="_ledCycleTask"/>;
+        /// </summary>
+        /// <remarks>
+        /// Used to stop the task.
+        /// </remarks>
+        CancellationTokenSource _ledCycleCancel;
+
+        #endregion
+
         #region Properties
 
         /// <summary>
         /// Device.
         /// </summary>
-        public NavioPca9685Device Device { get; private set; }
+        public NavioLedPwmDevice Device { get; private set; }
+
+        /// <summary>
+        /// Starts or stops the automatic-update background task.
+        /// </summary>
+        public bool LedCycle
+        {
+            get
+            {
+                // Return true when running
+                lock (Device)
+                {
+                    return _ledCycleTask != null && _ledCycleTask.Status == TaskStatus.Running;
+                }
+            }
+            set
+            {
+                // Start or stop task
+                lock (Device)
+                {
+                    var running = (_ledCycleTask != null && _ledCycleTask.Status == TaskStatus.Running);
+                    if (value && !running)
+                    {
+                        // Create new task
+                        _ledCycleCancel = new CancellationTokenSource();
+                        _ledCycleTask = Task.Factory.StartNew(() => LedCycleTask(_ledCycleCancel.Token));
+                    }
+                    else if (!value && running)
+                    {
+                        // Stop existing task
+                        StopLedCycleTask();
+                    }
+                }
+
+                // Fire event
+                DoPropertyChanged(nameof(LedCycle));
+            }
+        }
 
         #endregion
 
         #region Public Methods
 
         /// <summary>
-        /// Tests the <see cref="NavioPca9685Device.ReadAll"/> function.
+        /// Tests the <see cref="NavioLedPwmDevice.ReadAll"/> function.
         /// </summary>
-        public void ReadAll()
+        public void Update()
         {
             RunTest(delegate { Device.ReadAll(); });
         }
@@ -90,7 +157,7 @@ namespace Emlid.WindowsIot.Tests.HardwareTestApp.Models
         }
 
         /// <summary>
-        /// Tests the <see cref="NavioPca9685Device.Restart"/> function.
+        /// Tests the <see cref="NavioLedPwmDevice.Restart"/> function.
         /// </summary>
         public void Restart()
         {
@@ -98,84 +165,20 @@ namespace Emlid.WindowsIot.Tests.HardwareTestApp.Models
         }
 
         /// <summary>
-        /// Tests the <see cref="NavioPca9685Device.SetLed(int, int, int)"/> function.
+        /// Clears any existing output then tests the <see cref="NxpPca9685Device.Clear"/> function.
         /// </summary>
-        public void SetLed(int red, int green, int blue)
+        public override void Clear()
         {
-            RunTest(delegate { Device.SetLed(red, green, blue); });
-        }
+            // Call base class to clear output
+            base.Clear();
 
-        /// <summary>
-        /// Tests the <see cref="NxpPca9685Device.Clear"/> function.
-        /// </summary>
-        public void Clear()
-        {
+            // Run device clear test
             RunTest(delegate { Device.Clear(); });
-        }
-
-        /// <summary>
-        /// Cycles the LEDs.
-        /// </summary>
-        public void LedCycle()
-        {
-            Task.Factory.StartNew(() =>
-            {
-                WriteOutput("LED cycle starting on background thread...");
-
-                ushort red = 0, green = 0, blue = 0;
-                WriteOutput("LED cycle setting red {0} green {1} blue {2}...", red, green, blue);
-                Device.SetLed(red, green, blue);
-                DoPropertyChanged(nameof(Device));
-
-                WriteOutput("Cycling red up...");
-                for (red = 0; red < 4095; red++)
-                {
-                    Device.SetLed(red, green, blue);
-                    DoPropertyChanged(nameof(Device));
-                }
-
-                WriteOutput("Cycling green up...");
-                for (green = 0; green < 4095; green++)
-                {
-                    Device.SetLed(red, green, blue);
-                    DoPropertyChanged(nameof(Device));
-                }
-
-                WriteOutput("Cycling blue up...");
-                for (blue = 0; blue < 4095; blue++)
-                {
-                    Device.SetLed(red, green, blue);
-                    DoPropertyChanged(nameof(Device));
-                }
-
-                WriteOutput("Cycling red down...");
-                for (red = 4095; red > 0; red--)
-                {
-                    Device.SetLed(red, green, blue);
-                    DoPropertyChanged(nameof(Device));
-                }
-
-                WriteOutput("Cycling green down...");
-                for (green = 4095; green > 0; green--)
-                {
-                    Device.SetLed(red, green, blue);
-                    DoPropertyChanged(nameof(Device));
-                }
-
-                WriteOutput("Cycling blue down...");
-                for (blue = 4095; blue > 0; blue--)
-                {
-                    Device.SetLed(red, green, blue);
-                    DoPropertyChanged(nameof(Device));
-                }
-
-                WriteOutput("LED cycle complete.");
-            });
         }
 
         #endregion
 
-        #region Protected Methods
+        #region Non-Public Methods
 
         /// <summary>
         /// Runs a test method with status and error output.
@@ -189,6 +192,150 @@ namespace Emlid.WindowsIot.Tests.HardwareTestApp.Models
 
             // Update properties
             DoPropertyChanged(nameof(Device));
+        }
+
+        /// <summary>
+        /// Enables output if necessary.
+        /// </summary>
+        private void EnsureOutputEnabled()
+        {
+            if (!Device.OutputEnabled)
+            {
+                WriteOutput("Enabling output.");
+                Device.OutputEnabled = true;
+                DoPropertyChanged(nameof(Device));
+            }
+        }
+
+        /// <summary>
+        /// Background task delegate which executes the LED Cycle.
+        /// </summary>
+        /// <param name="cancel">Cancellation token.</param>
+        private void LedCycleTask(CancellationToken cancel)
+        {
+            try
+            {
+                // Initialize
+                WriteOutput("LED cycle starting on background thread...");
+                const int maximum = NxpPca9685ChannelValue.Maximum;
+                var red = Device.LedRed;
+                var green = Device.LedGreen;
+                var blue = Device.LedBlue;
+                Func<int, int> increment = (int value) => { value += LedCycleStep; return value < maximum ? value : maximum; };
+                Func<int, int> decrement = (int value) => { value -= LedCycleStep; return value > 0 ? value : 0; };
+
+                // Ensure output is enabled
+                EnsureOutputEnabled();
+
+                // Cycle red LED component down...
+                WriteOutput("Cycling red down...");
+                while (red > 0)
+                {
+                    red = decrement(red);
+                    Device.SetLed(red, green, blue);
+                    DoPropertyChanged(nameof(Device));
+
+                    // Check for cancellation
+                    cancel.ThrowIfCancellationRequested();
+                }
+
+                // Cycle green LED component down...
+                WriteOutput("Cycling green down...");
+                while (green > 0)
+                {
+                    green = decrement(green);
+                    Device.SetLed(red, green, blue);
+                    DoPropertyChanged(nameof(Device));
+
+                    // Check for cancellation
+                    cancel.ThrowIfCancellationRequested();
+                }
+
+                // Cycle blue LED component down...
+                WriteOutput("Cycling blue down...");
+                while (blue > 0)
+                {
+                    blue = decrement(blue);
+                    Device.SetLed(red, green, blue);
+                    DoPropertyChanged(nameof(Device));
+
+                    // Check for cancellation
+                    cancel.ThrowIfCancellationRequested();
+                }
+
+                // Cycle red LED component up...
+                WriteOutput("Cycling red up...");
+                while (red < maximum)
+                {
+                    red = increment(red);
+                    Device.SetLed(red, green, blue);
+                    DoPropertyChanged(nameof(Device));
+
+                    // Check for cancellation
+                    cancel.ThrowIfCancellationRequested();
+                }
+
+                // Cycle greed LED component up...
+                WriteOutput("Cycling green up...");
+                while (green < maximum)
+                {
+                    green = increment(green);
+                    Device.SetLed(red, green, blue);
+                    DoPropertyChanged(nameof(Device));
+
+                    // Check for cancellation
+                    cancel.ThrowIfCancellationRequested();
+                }
+
+                // Cycle blue LED component up...
+                WriteOutput("Cycling blue up...");
+                while (blue < maximum)
+                {
+                    blue = increment(blue);
+                    Device.SetLed(red, green, blue);
+                    DoPropertyChanged(nameof(Device));
+
+                    // Check for cancellation
+                    cancel.ThrowIfCancellationRequested();
+                }
+
+                // Report success
+                WriteOutput("LED cycle complete.");
+            }
+            catch (OperationCanceledException)
+            {
+                // Report cancellation
+                WriteOutput("LED cycle cancelled.");
+            }
+        }
+
+        /// <summary>
+        /// Stops the LED cycle task if running and frees related resources.
+        /// </summary>
+        private void StopLedCycleTask()
+        {
+            lock(this)
+            {
+                if (_ledCycleCancel != null)
+                {
+                    if (_ledCycleTask != null)
+                    {
+                        if (_ledCycleTask.Status == TaskStatus.Running)
+                        {
+                            // Stop task when running
+                            _ledCycleCancel.Cancel();
+                            _ledCycleTask.Wait();
+                        }
+
+                        // Clean-up task
+                        _ledCycleTask = null;
+                    }
+
+                    // Clear-up cancellation token
+                    _ledCycleCancel.Dispose();
+                    _ledCycleCancel = null;
+                }
+            }
         }
 
         #endregion

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Concurrent;
-using System.Diagnostics;
 using System.Threading;
 
 namespace Emlid.WindowsIot.Hardware

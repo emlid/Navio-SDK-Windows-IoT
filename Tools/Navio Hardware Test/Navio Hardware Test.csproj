@@ -7,8 +7,8 @@
     <ProjectGuid>{B3E2E3DD-67EE-49D6-A31B-4B6A19B0F640}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Emlid.WindowsIoT.Tests.NavioHardwareTestApp</RootNamespace>
-    <AssemblyName>Emlid.WindowsIoT.Tests.NavioHardwareTestApp</AssemblyName>
+    <RootNamespace>Emlid.WindowsIot.Tests.NavioHardwareTestApp</RootNamespace>
+    <AssemblyName>Emlid.WindowsIot.Tests.NavioHardwareTestApp</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.10586.0</TargetPlatformVersion>
@@ -39,7 +39,7 @@
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <DocumentationFile>bin\ARM\Debug\Emlid.WindowsIoT.Tests.NavioHardwareTestApp.XML</DocumentationFile>
+    <DocumentationFile>bin\ARM\Debug\Emlid.WindowsIot.Tests.NavioHardwareTestApp.xml</DocumentationFile>
     <UseDotNetNativeToolchain>false</UseDotNetNativeToolchain>
     <SuppressXamlWarnings>3270</SuppressXamlWarnings>
   </PropertyGroup>
@@ -57,17 +57,21 @@
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <DocumentationFile>bin\ARM\Release\Emlid.WindowsIoT.Tests.NavioHardwareTestApp.XML</DocumentationFile>
+    <DocumentationFile>bin\ARM\Release\Emlid.WindowsIot.Tests.NavioHardwareTestApp.xml</DocumentationFile>
     <SuppressXamlWarnings>3270</SuppressXamlWarnings>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\..\Common\AssemblyInfoGlobal.cs">
       <Link>Properties\AssemblyInfoGlobal.cs</Link>
     </Compile>
+    <Compile Include="..\..\Common\EnumValueConverter.cs">
+      <Link>Models\EnumValueConverter.cs</Link>
+    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Models\BarometerTestUIModel.cs" />
     <Compile Include="Views\Shared\MessageDialog.xaml.cs">
       <DependentUpon>MessageDialog.xaml</DependentUpon>
     </Compile>
@@ -81,6 +85,9 @@
     <Compile Include="Views\Start.xaml.cs">
       <DependentUpon>Start.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Tests\BarometerTest.xaml.cs">
+      <DependentUpon>BarometerTest.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Tests\RCInputTest.xaml.cs">
       <DependentUpon>RCInputTest.xaml</DependentUpon>
     </Compile>
@@ -91,7 +98,7 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <CodeAnalysisDictionary Include="..\..\CustomDictionary.xml">
+    <CodeAnalysisDictionary Include="..\..\Common\CustomDictionary.xml">
       <Link>CustomDictionary.xml</Link>
     </CodeAnalysisDictionary>
     <Content Include="..\..\Media\Images\Emlid\emlid_logo_no_text.png">
@@ -113,6 +120,10 @@
     <Page Include="Views\Shared\MessageDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tests\BarometerTest.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Tests\RCInputTest.xaml">
       <Generator>MSBuild:Compile</Generator>

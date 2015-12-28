@@ -19,6 +19,7 @@
 <#@ import namespace="System.Text.RegularExpressions" #>
 // PublicReswFileCodeGenerator for Windows 8.1 1.0.0
 // (c) Sébastien Ollivier - https://github.com/sebastieno/PublicResWFileCodeGenerator/
+// Updated by Tony Wall for Windows 10/IoT usage.
 
 <# 
 	var dteHelper = new DteHelper(this.Host);
@@ -62,7 +63,7 @@ namespace <#= resourcesNamespace #>  {
 			{
 				if(resourceLoader == null)
 				{
-					resourceLoader = Windows.ApplicationModel.Resources.ResourceLoader.GetForCurrentView("<#= item.Key #>");
+					resourceLoader = Windows.ApplicationModel.Resources.ResourceLoader.GetForViewIndependentUse("<#= rootNameSpace #>\\\\<#= item.Key #>");
 				}
 
 				return resourceLoader;

@@ -72,7 +72,7 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <CodeAnalysisDictionary Include="..\..\..\CustomDictionary.xml">
+    <CodeAnalysisDictionary Include="..\..\..\Common\CustomDictionary.xml">
       <Link>CustomDictionary.xml</Link>
     </CodeAnalysisDictionary>
     <Content Include="Assets\SmallLogo.scale-100.png" />

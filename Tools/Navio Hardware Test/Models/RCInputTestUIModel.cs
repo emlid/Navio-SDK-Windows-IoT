@@ -2,7 +2,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace Emlid.WindowsIot.Tests.HardwareTestApp.Models
+namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Models
 {
     /// <summary>
     /// UI model for testing the <see cref="NavioRCInputDevice"/>.

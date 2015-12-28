@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Emlid.WindowsIot.Tests.HardwareTestApp.Models
+namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Models
 {
     /// <summary>
     /// Base class for all test UI models.
@@ -96,7 +96,35 @@ namespace Emlid.WindowsIot.Tests.HardwareTestApp.Models
 
         #endregion
 
+        #region Public Methods
+
+        /// <summary>
+        /// Clears all content.
+        /// </summary>
+        /// <remarks>
+        /// Should be overridden to clear any other generated content.
+        /// </remarks>
+        public virtual void Clear()
+        {
+            ClearOutput();
+        }
+
+        #endregion
+
         #region Protected Methods
+
+        /// <summary>
+        /// Clears all content from <see cref="Output"/>.
+        /// </summary>
+        protected void ClearOutput()
+        {
+            // Clear content
+            lock(_output)
+               _output.Length = 0;
+
+            // Update view
+            DoPropertyChanged(nameof(Output));
+        }
 
         /// <summary>
         /// Writes text to the output.

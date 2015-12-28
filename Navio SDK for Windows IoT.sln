@@ -6,7 +6,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{101AF3F7-293E-46CF-8C37-EAA61DFDF0A5}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
-		CustomDictionary.xml = CustomDictionary.xml
 		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection
@@ -35,10 +34,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{E2AC6BB4-4B51-4E37-8401-DBE2EB7D8116}"
 	ProjectSection(SolutionItems) = preProject
 		Common\AssemblyInfoGlobal.cs = Common\AssemblyInfoGlobal.cs
-		Common\I2cExtensions.cs = Common\I2cExtensions.cs
+		Common\CustomDictionary.xml = Common\CustomDictionary.xml
+		Common\EnumValueConverter.cs = Common\EnumValueConverter.cs
 		Common\StopwatchExtensions.cs = Common\StopwatchExtensions.cs
 		Common\TemporaryKey Setup.cmd = Common\TemporaryKey Setup.cmd
 		Common\TemporaryKey.pfx = Common\TemporaryKey.pfx
+		Common\TimeSpanExtensions.cs = Common\TimeSpanExtensions.cs
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CS", "CS", "{7E41DA83-4FEE-4D23-9172-12D93906F9DF}"
@@ -78,6 +79,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{6637C7B9
 		Tools\NuGet\nuget.exe = Tools\NuGet\nuget.exe
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Navio Barometer CS Sample", "Samples\CS\Navio Barometer\Navio Barometer CS Sample.csproj", "{ABE84FDC-D12F-40E9-8F2A-CB10245C4A26}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM = Debug|ARM
@@ -93,27 +96,37 @@ Global
 		{B3E2E3DD-67EE-49D6-A31B-4B6A19B0F640}.Debug|ARM.Deploy.0 = Debug|ARM
 		{B3E2E3DD-67EE-49D6-A31B-4B6A19B0F640}.Release|ARM.ActiveCfg = Release|ARM
 		{B3E2E3DD-67EE-49D6-A31B-4B6A19B0F640}.Release|ARM.Build.0 = Release|ARM
+		{B3E2E3DD-67EE-49D6-A31B-4B6A19B0F640}.Release|ARM.Deploy.0 = Release|ARM
 		{E9209EF7-004A-477E-8A23-B99436F27264}.Debug|ARM.ActiveCfg = Debug|ARM
 		{E9209EF7-004A-477E-8A23-B99436F27264}.Debug|ARM.Build.0 = Debug|ARM
 		{E9209EF7-004A-477E-8A23-B99436F27264}.Debug|ARM.Deploy.0 = Debug|ARM
 		{E9209EF7-004A-477E-8A23-B99436F27264}.Release|ARM.ActiveCfg = Release|ARM
 		{E9209EF7-004A-477E-8A23-B99436F27264}.Release|ARM.Build.0 = Release|ARM
+		{E9209EF7-004A-477E-8A23-B99436F27264}.Release|ARM.Deploy.0 = Release|ARM
 		{DDEAAFA9-024A-4AB3-B8BB-14D93AB59641}.Debug|ARM.ActiveCfg = Debug|ARM
 		{DDEAAFA9-024A-4AB3-B8BB-14D93AB59641}.Debug|ARM.Build.0 = Debug|ARM
 		{DDEAAFA9-024A-4AB3-B8BB-14D93AB59641}.Debug|ARM.Deploy.0 = Debug|ARM
 		{DDEAAFA9-024A-4AB3-B8BB-14D93AB59641}.Release|ARM.ActiveCfg = Release|ARM
 		{DDEAAFA9-024A-4AB3-B8BB-14D93AB59641}.Release|ARM.Build.0 = Release|ARM
+		{DDEAAFA9-024A-4AB3-B8BB-14D93AB59641}.Release|ARM.Deploy.0 = Release|ARM
 		{243E8ED0-58CF-4322-BB7D-D52E70352608}.Debug|ARM.ActiveCfg = Debug|ARM
 		{243E8ED0-58CF-4322-BB7D-D52E70352608}.Debug|ARM.Build.0 = Debug|ARM
 		{243E8ED0-58CF-4322-BB7D-D52E70352608}.Debug|ARM.Deploy.0 = Debug|ARM
 		{243E8ED0-58CF-4322-BB7D-D52E70352608}.Release|ARM.ActiveCfg = Release|ARM
 		{243E8ED0-58CF-4322-BB7D-D52E70352608}.Release|ARM.Build.0 = Release|ARM
+		{243E8ED0-58CF-4322-BB7D-D52E70352608}.Release|ARM.Deploy.0 = Release|ARM
 		{116C1C54-44B7-4C82-87CC-489B5ED85975}.Debug|ARM.ActiveCfg = Debug|ARM
 		{116C1C54-44B7-4C82-87CC-489B5ED85975}.Debug|ARM.Build.0 = Debug|ARM
 		{116C1C54-44B7-4C82-87CC-489B5ED85975}.Debug|ARM.Deploy.0 = Debug|ARM
 		{116C1C54-44B7-4C82-87CC-489B5ED85975}.Release|ARM.ActiveCfg = Release|ARM
 		{116C1C54-44B7-4C82-87CC-489B5ED85975}.Release|ARM.Build.0 = Release|ARM
 		{116C1C54-44B7-4C82-87CC-489B5ED85975}.Release|ARM.Deploy.0 = Release|ARM
+		{ABE84FDC-D12F-40E9-8F2A-CB10245C4A26}.Debug|ARM.ActiveCfg = Debug|ARM
+		{ABE84FDC-D12F-40E9-8F2A-CB10245C4A26}.Debug|ARM.Build.0 = Debug|ARM
+		{ABE84FDC-D12F-40E9-8F2A-CB10245C4A26}.Debug|ARM.Deploy.0 = Debug|ARM
+		{ABE84FDC-D12F-40E9-8F2A-CB10245C4A26}.Release|ARM.ActiveCfg = Release|ARM
+		{ABE84FDC-D12F-40E9-8F2A-CB10245C4A26}.Release|ARM.Build.0 = Release|ARM
+		{ABE84FDC-D12F-40E9-8F2A-CB10245C4A26}.Release|ARM.Deploy.0 = Release|ARM
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -133,5 +146,6 @@ Global
 		{703F0B97-99AB-4EEE-B9BD-D9C86883CB8C} = {C1B9EF36-2E1E-4BCB-A85F-E85DF75F737A}
 		{116C1C54-44B7-4C82-87CC-489B5ED85975} = {CDC2AC5F-B61D-4271-8721-83D9B0703F51}
 		{6637C7B9-0DFD-410A-89F1-C1DD8E2D01EC} = {C1B9EF36-2E1E-4BCB-A85F-E85DF75F737A}
+		{ABE84FDC-D12F-40E9-8F2A-CB10245C4A26} = {7E41DA83-4FEE-4D23-9172-12D93906F9DF}
 	EndGlobalSection
 EndGlobal

@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Globalization;
 using System.Threading.Tasks;
 using Windows.Devices.I2c;
 
 namespace Emlid.WindowsIot.Hardware
 {
     /// <summary>
-    /// PCA9685 hardware device.
+    /// PCA9685 PWM LED driver (hardware device), connected via I2C.
     /// </summary>
     /// <remarks>
     /// The PCA9685 is a 16 channel, 12-bit PWM LED controller with I2C bus connection.
@@ -18,7 +17,7 @@ namespace Emlid.WindowsIot.Hardware
     /// See http://www.nxp.com/documents/data_sheet/PCA9685.pdf for more information.
     /// </para>
     /// </remarks>
-    public class NxpPca9685Device : IDisposable
+    public class NxpPca9685Device : I2cConnectedDevice
     {
         #region Constants
 
@@ -74,9 +73,6 @@ namespace Emlid.WindowsIot.Hardware
         /// <summary>
         /// Creates an instance at the specified I2C <paramref name="address"/> with custom settings.
         /// </summary>
-        /// <param name="deviceId">
-        /// Device ID of the I2C master.
-        /// </param>
         /// <param name="address">
         /// I2C slave address of the chip.
         /// This is a physical property, not a software option.
@@ -91,7 +87,8 @@ namespace Emlid.WindowsIot.Hardware
         /// <param name="exclusive">
         /// Set true for I2C <see cref="I2cSharingMode.Exclusive"/> or false for <see cref="I2cSharingMode.Shared"/>.
         /// </param>
-        public NxpPca9685Device(string deviceId, int address, int? clockSpeed, bool fast, bool exclusive)
+        public NxpPca9685Device(int address, int? clockSpeed, bool fast, bool exclusive)
+            : base(address, fast, exclusive)
         {
             // Validate
             if (clockSpeed.HasValue && (clockSpeed == 0 || clockSpeed.Value > ClockSpeedMaximum))
@@ -108,10 +105,6 @@ namespace Emlid.WindowsIot.Hardware
             for (var index = 0; index < ChannelCount; index++)
                 _channels.Add(new NxpPca9685Channel(index));
 
-            // Initialize hardware
-            Hardware = Connect(deviceId, address, fast, exclusive);
-            Id = Hardware.DeviceId;
-
             // Read current values
             ReadAll();
 
@@ -119,79 +112,6 @@ namespace Emlid.WindowsIot.Hardware
             foreach (var channel in Channels)
                 channel.ValueChanged += OnChannelChanged;
         }
-
-        #region IDisposable
-
-        /// <summary>
-        /// Indicates this instance has been disposed.
-        /// </summary>
-        public bool IsDisposed { get; private set; }
-
-        /// <summary>
-        /// Frees resources owned by this instance.
-        /// </summary>
-        /// <param name="disposing">
-        /// True when called via <see cref="Dispose()"/>, false when called from the finalizer.
-        /// </param>
-        protected virtual void Dispose(bool disposing)
-        {
-            // Do nothing when already disposed
-            if (IsDisposed) return;
-
-            // Dispose
-            try
-            {
-                // Dispose managed resource during dispose
-                if (disposing)
-                {
-                    Hardware.Dispose();
-                }
-            }
-            finally
-            {
-                // Flag disposed
-                IsDisposed = true;
-            }
-        }
-
-        /// <summary>
-        /// Finalizer which calls <see cref="Dispose(bool)"/> with false when it has not been disabled
-        /// by a proactive call to <see cref="Dispose()"/>.
-        /// </summary>
-        ~NxpPca9685Device()
-        {
-            // Partial dispose
-            Dispose(false);
-        }
-
-        /// <summary>
-        /// Proactively frees resources owned by this instance.
-        /// </summary>
-        public void Dispose()
-        {
-            try
-            {
-                // Full managed dispose
-                Dispose(true);
-            }
-            finally
-            {
-                // Suppress finalizer (we already cleaned-up)
-                GC.SuppressFinalize(this);
-            }
-        }
-
-        #endregion
-
-        #endregion
-
-        #region Protected Properties
-
-        /// <summary>
-        /// I2C device and connection indicator. Set during the first call to <see cref="Connect"/>.
-        /// </summary>
-        [CLSCompliant(false)]
-        protected I2cDevice Hardware { get; private set; }
 
         #endregion
 
@@ -232,11 +152,6 @@ namespace Emlid.WindowsIot.Hardware
         /// Maximum frequency based on <see cref="ClockSpeed"/> and <see cref="PreScaleMinimum"/> (inverse relation).
         /// </summary>
         public float FrequencyMaximum { get; private set; }
-
-        /// <summary>
-        /// Device ID.
-        /// </summary>
-        public string Id { get; private set; }
 
         /// <summary>
         /// Last known mode 1 register bits.
@@ -765,44 +680,6 @@ namespace Emlid.WindowsIot.Hardware
         }
 
         #endregion
-
-        #endregion
-
-        #region Protected Methods
-
-        /// <summary>
-        /// Creates an I2C conection to the chip.
-        /// </summary>
-        /// <param name="deviceId">I2C master device ID.</param>
-        /// <param name="address">I2C slave address of the chip.</param>
-        /// <param name="fast">
-        /// Set true for I2C <see cref="I2cBusSpeed.FastMode"/> or false for <see cref="I2cBusSpeed.StandardMode"/>.
-        /// </param>
-        /// <param name="exclusive">
-        /// Set true for I2C <see cref="I2cSharingMode.Exclusive"/> or false for <see cref="I2cSharingMode.Shared"/>.
-        /// </param>
-        /// <returns>True when initialized, false when already initialized (but no error).</returns>
-        /// <exception cref="Exception">Thrown when initialization failed.</exception>
-        [CLSCompliant(false)]
-        protected static I2cDevice Connect(string deviceId, int address, bool fast, bool exclusive)
-        {
-            // Connect to device
-            var settings = new I2cConnectionSettings(address)
-            {
-                BusSpeed = fast ? I2cBusSpeed.FastMode : I2cBusSpeed.StandardMode,
-                SharingMode = exclusive ? I2cSharingMode.Exclusive : I2cSharingMode.Shared
-            };
-            var device = I2cDevice.FromIdAsync(deviceId, settings).AsTask().GetAwaiter().GetResult();
-            if (device == null)
-            {
-                // Initialization error
-                throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture,
-                    new Resources.Strings().I2cErrorDeviceCannotOpen, settings.SlaveAddress, deviceId));
-            }
-
-            // Return result
-            return device;
-        }
 
         #endregion
 

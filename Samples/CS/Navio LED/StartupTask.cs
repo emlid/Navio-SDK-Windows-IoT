@@ -14,7 +14,7 @@ namespace Emlid.WindowsIot.Samples.NavioLed
         public void Run(IBackgroundTaskInstance taskInstance)
         {
             // Initialize PWM device at servo frequency (50Hz) with output disabled
-            var pwm = NavioPca9685Device.Initialize(NavioPca9685Device.ServoFrequencyDefault);
+            var pwm = NavioLedPwmDevice.Initialize(NavioLedPwmDevice.ServoFrequencyDefault);
 
             // Enable oscillator and output
             pwm.Wake();

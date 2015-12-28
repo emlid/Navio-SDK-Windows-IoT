@@ -1,19 +1,18 @@
 using System.Resources;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System;
 
 // Information
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Emlid")]
-[assembly: AssemblyProduct("Windows IoT SDK")]
+[assembly: AssemblyProduct("Navio SDK for Windows IoT")]
 [assembly: AssemblyCopyright("Open Source Apache 2.0")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
 // Version
-[assembly: AssemblyVersion("1.0.5.0")]
-[assembly: AssemblyFileVersion("1.0.5.0")]
+[assembly: AssemblyVersion("1.0.6.0")]
+[assembly: AssemblyFileVersion("1.0.6.0")]
 
 // COM Interop
 [assembly: ComVisible(false)]

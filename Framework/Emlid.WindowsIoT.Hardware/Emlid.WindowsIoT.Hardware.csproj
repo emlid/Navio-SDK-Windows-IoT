@@ -64,18 +64,26 @@
     <Compile Include="..\..\Common\AssemblyInfoGlobal.cs">
       <Link>Properties\AssemblyInfoGlobal.cs</Link>
     </Compile>
-    <Compile Include="..\..\Common\I2cExtensions.cs">
-      <Link>I2cExtensions.cs</Link>
-    </Compile>
     <Compile Include="..\..\Common\StopwatchExtensions.cs">
       <Link>StopwatchExtensions.cs</Link>
     </Compile>
+    <Compile Include="..\..\Common\TimeSpanExtensions.cs">
+      <Link>TimeSpanExtensions.cs</Link>
+    </Compile>
     <Compile Include="CppmDecoder.cs" />
+    <Compile Include="I2cConnectedDevice.cs" />
+    <Compile Include="I2cExtensions.cs" />
+    <Compile Include="MS5611Device.cs" />
+    <Compile Include="MS5611Command.cs" />
+    <Compile Include="MS5611Measurement.cs" />
+    <Compile Include="MS5611Osr.cs" />
+    <Compile Include="MS5611PromData.cs" />
+    <Compile Include="NavioBarometerDevice.cs" />
     <Compile Include="PwmValue.cs" />
     <Compile Include="PwmCycle.cs" />
     <Compile Include="PwmFrame.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="NavioPca9685Device.cs" />
+    <Compile Include="NavioLedPwmDevice.cs" />
     <Compile Include="IPwmDecoder.cs" />
     <Compile Include="NavioRCInputDevice.cs" />
     <Compile Include="NxpPca9685Channel.cs" />
@@ -85,22 +93,22 @@
     <Compile Include="NxpPca9685Mode1Bits.cs" />
     <Compile Include="NxpPca9685Mode2Bits.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resources.cs">
+    <Compile Include="Resources\Resources.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <PRIResource Include="Strings\en-US\Strings.resw">
+    <PRIResource Include="Resources\en-US\Strings.resw">
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </PRIResource>
   </ItemGroup>
   <ItemGroup>
-    <CodeAnalysisDictionary Include="..\..\CustomDictionary.xml">
+    <Content Include="..\..\Common\CustomDictionary.xml">
       <Link>CustomDictionary.xml</Link>
-    </CodeAnalysisDictionary>
-    <Content Include="Resources.tt">
+    </Content>
+    <Content Include="Resources\Resources.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Resources.cs</LastGenOutput>
     </Content>

@@ -1,5 +1,6 @@
-﻿using Emlid.WindowsIot.Tests.HardwareTestApp.Models;
+﻿using Emlid.WindowsIot.Tests.NavioHardwareTestApp.Models;
 using System;
+using System.ComponentModel;
 using System.Globalization;
 using System.Threading.Tasks;
 using Windows.System;
@@ -64,7 +65,9 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
         {
             // Initialize model and bind
             DataContext = Model = new LedPwmTestUIModel(_uiFactory);
+            Model.PropertyChanged += OnModelChanged;
 
+            // Initial layout
             UpdateLayout();
 
             // Call base class method
@@ -84,15 +87,46 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
         }
 
         /// <summary>
-        /// Updates device properties when the related button is clicked.
+        /// Updates view elements when the model changes and no automatic
+        /// method is currently available.
         /// </summary>
-        private void OnUpdateButtonClick(object sender, RoutedEventArgs arguments)
+        private void OnModelChanged(object sender, PropertyChangedEventArgs arguments)
         {
-            Model.ReadAll();
+            switch (arguments.PropertyName)
+            {
+                case nameof(Model.Output):
+                    OutputScroller.UpdateLayout();
+                    OutputScroller.ScrollToVerticalOffset(OutputScroller.ScrollableHeight);
+                    break;
+            }
         }
 
         /// <summary>
-        /// Restarts the device when the related button is clicked.
+        /// Executes the <see cref="LedPwmTestUIModel.Update"/> action when the related button is clicked.
+        /// </summary>
+        private void OnUpdateButtonClick(object sender, RoutedEventArgs arguments)
+        {
+            Model.Update();
+        }
+
+        /// <summary>
+        /// Executes the <see cref="LedPwmTestUIModel.Sleep"/> action when the related button is clicked.
+        /// </summary>
+        private void OnSleepButtonClick(object sender, RoutedEventArgs arguments)
+        {
+            Model.Sleep();
+        }
+
+        /// <summary>
+        /// Executes the <see cref="LedPwmTestUIModel.Wake"/> action when the related button is clicked.
+        /// </summary>
+        private void OnWakeButtonClick(object sender, RoutedEventArgs arguments)
+        {
+            Model.Wake();
+        }
+
+        /// <summary>
+        /// Executes the <see cref="LedPwmTestUIModel.Restart"/> action when the related button is clicked.
         /// </summary>
         private void OnRestartButtonClick(object sender, RoutedEventArgs arguments)
         {
@@ -100,11 +134,11 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
         }
 
         /// <summary>
-        /// Starts the LED cycle test when the related button is clicked.
+        /// Executes the <see cref="LedPwmTestUIModel.Clear"/> action when the related button is clicked.
         /// </summary>
-        private void OnLedCycleButtonClick(object sender, RoutedEventArgs arguments)
+        private void OnClearButtonClick(object sender, RoutedEventArgs arguments)
         {
-            Model.LedCycle();
+            Model.Clear();
         }
 
         /// <summary>
@@ -130,21 +164,6 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
         private void OnFrequencyLostFocus(object sender, RoutedEventArgs arguments)
         {
             SetFrequency();
-        }
-
-        private void OnSleepButtonClick(object sender, RoutedEventArgs arguments)
-        {
-            Model.Sleep();
-        }
-
-        private void OnWakeButtonClick(object sender, RoutedEventArgs arguments)
-        {
-            Model.Wake();
-        }
-
-        private void OnClearButtonClick(object sender, RoutedEventArgs arguments)
-        {
-            Model.Clear();
         }
 
         #endregion

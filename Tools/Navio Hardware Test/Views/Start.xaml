@@ -33,7 +33,7 @@
                 <Button Name="LedPwmTestButton" Content="LED &amp; PWM" Click="OnLedPwmTestButtonClick" />
                 <Button Name="RcInputTestButton" Content="RC Input" Click="OnRCInputTestButtonClick" />
                 <Button Name="ImuTestButton" Content="IMU" IsEnabled="False" />
-                <Button Name="BarometerTestButton" Content="Barometer" IsEnabled="False" />
+                <Button Name="BarometerTestButton" Content="Barometer" Click="OnBarometerTestButtonClick" />
                 <Button Name="GpsTestButton" Content="GPS" IsEnabled="False" />
                 <Button Name="AdcTestButton" Content="ADC" IsEnabled="False" />
                 <Button Name="FramTestButton" Content="FRAM" IsEnabled="False" />

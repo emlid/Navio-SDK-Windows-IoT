@@ -125,6 +125,10 @@
     <value>I2C device not found. The device selector used was "{0}".</value>
     <comment>0 = selector.</comment>
   </data>
+  <data name="MS5611MeasurementStringFormat" xml:space="preserve">
+    <value>Pressure: {0}mbar Temperature: {1}°c</value>
+    <comment>0 = pressure, 1 = temperature.</comment>
+  </data>
   <data name="RCInputDecoderChannelOverflow" xml:space="preserve">
     <value>Decoder produced too many channels ({0} instead of {1})!</value>
     <comment>0 = # channels, 1 = maximum channels.</comment>

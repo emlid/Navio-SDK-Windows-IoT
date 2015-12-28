@@ -1,4 +1,5 @@
-﻿using Emlid.WindowsIot.Tests.HardwareTestApp.Models;
+﻿using Emlid.WindowsIot.Tests.NavioHardwareTestApp.Models;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -60,7 +61,9 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
         {
             // Initialize model and bind
             DataContext = Model = new RCInputTestUIModel(_uiFactory);
+            Model.PropertyChanged += OnModelChanged;
 
+            // Initial layout
             UpdateLayout();
 
             // Call base class method
@@ -77,6 +80,29 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
 
             // Call base class method
             base.OnNavigatedFrom(arguments);
+        }
+
+        /// <summary>
+        /// Updates view elements when the model changes and no automatic
+        /// method is currently available.
+        /// </summary>
+        private void OnModelChanged(object sender, PropertyChangedEventArgs arguments)
+        {
+            switch (arguments.PropertyName)
+            {
+                case nameof(Model.Output):
+                    OutputScroller.UpdateLayout();
+                    OutputScroller.ScrollToVerticalOffset(OutputScroller.ScrollableHeight);
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Executes the <see cref="TestUIModel.Clear"/> when the releated button is clicked.
+        /// </summary>
+        private void OnClearButtonClick(object sender, RoutedEventArgs arguments)
+        {
+            Model.Clear();
         }
 
         /// <summary>
