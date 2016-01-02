@@ -33,10 +33,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Emlid", "Emlid", "{C5BE4849
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{E2AC6BB4-4B51-4E37-8401-DBE2EB7D8116}"
 	ProjectSection(SolutionItems) = preProject
+		Common\ArrayExtensions.cs = Common\ArrayExtensions.cs
 		Common\AssemblyInfoGlobal.cs = Common\AssemblyInfoGlobal.cs
+		Common\ConvertibleValueConverter.cs = Common\ConvertibleValueConverter.cs
 		Common\CustomDictionary.xml = Common\CustomDictionary.xml
+		Common\DisposableObject.cs = Common\DisposableObject.cs
 		Common\EnumValueConverter.cs = Common\EnumValueConverter.cs
+		Common\HexByteValueConverter.cs = Common\HexByteValueConverter.cs
 		Common\StopwatchExtensions.cs = Common\StopwatchExtensions.cs
+		Common\StringExtensions.cs = Common\StringExtensions.cs
 		Common\TemporaryKey Setup.cmd = Common\TemporaryKey Setup.cmd
 		Common\TemporaryKey.pfx = Common\TemporaryKey.pfx
 		Common\TimeSpanExtensions.cs = Common\TimeSpanExtensions.cs
@@ -68,8 +73,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Navio RC Input Console CPP 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{703F0B97-99AB-4EEE-B9BD-D9C86883CB8C}"
 	ProjectSection(SolutionItems) = preProject
-		Tools\Scripts\Manual Deploy.ps1 = Tools\Scripts\Manual Deploy.ps1
 		Tools\Scripts\Serial Debug.cmd = Tools\Scripts\Serial Debug.cmd
+		Tools\Scripts\Setup Local.ps1 = Tools\Scripts\Setup Local.ps1
+		Tools\Scripts\Setup Remote.ps1 = Tools\Scripts\Setup Remote.ps1
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Navio RC Input Driver", "Drivers\Navio RC Input\Navio RC Input Driver.vcxproj", "{116C1C54-44B7-4C82-87CC-489B5ED85975}"
@@ -80,6 +86,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{6637C7B9
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Navio Barometer CS Sample", "Samples\CS\Navio Barometer\Navio Barometer CS Sample.csproj", "{ABE84FDC-D12F-40E9-8F2A-CB10245C4A26}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Navio FRAM CS Sample", "Samples\CS\Navio FRAM\Navio FRAM CS Sample.csproj", "{6C7E0CAD-E4A0-4B2E-A723-5AE1EB019932}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{0BBA5CC3-BF97-43C8-AD5A-1DC8F968031F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Emlid", "Emlid", "{ABA42A63-65A8-424C-A138-8DFD5A56047F}"
+	ProjectSection(SolutionItems) = preProject
+		Documentation\Emlid\Windows-IoT.md = Documentation\Emlid\Windows-IoT.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -127,6 +142,12 @@ Global
 		{ABE84FDC-D12F-40E9-8F2A-CB10245C4A26}.Release|ARM.ActiveCfg = Release|ARM
 		{ABE84FDC-D12F-40E9-8F2A-CB10245C4A26}.Release|ARM.Build.0 = Release|ARM
 		{ABE84FDC-D12F-40E9-8F2A-CB10245C4A26}.Release|ARM.Deploy.0 = Release|ARM
+		{6C7E0CAD-E4A0-4B2E-A723-5AE1EB019932}.Debug|ARM.ActiveCfg = Debug|ARM
+		{6C7E0CAD-E4A0-4B2E-A723-5AE1EB019932}.Debug|ARM.Build.0 = Debug|ARM
+		{6C7E0CAD-E4A0-4B2E-A723-5AE1EB019932}.Debug|ARM.Deploy.0 = Debug|ARM
+		{6C7E0CAD-E4A0-4B2E-A723-5AE1EB019932}.Release|ARM.ActiveCfg = Release|ARM
+		{6C7E0CAD-E4A0-4B2E-A723-5AE1EB019932}.Release|ARM.Build.0 = Release|ARM
+		{6C7E0CAD-E4A0-4B2E-A723-5AE1EB019932}.Release|ARM.Deploy.0 = Release|ARM
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -147,5 +168,7 @@ Global
 		{116C1C54-44B7-4C82-87CC-489B5ED85975} = {CDC2AC5F-B61D-4271-8721-83D9B0703F51}
 		{6637C7B9-0DFD-410A-89F1-C1DD8E2D01EC} = {C1B9EF36-2E1E-4BCB-A85F-E85DF75F737A}
 		{ABE84FDC-D12F-40E9-8F2A-CB10245C4A26} = {7E41DA83-4FEE-4D23-9172-12D93906F9DF}
+		{6C7E0CAD-E4A0-4B2E-A723-5AE1EB019932} = {7E41DA83-4FEE-4D23-9172-12D93906F9DF}
+		{ABA42A63-65A8-424C-A138-8DFD5A56047F} = {0BBA5CC3-BF97-43C8-AD5A-1DC8F968031F}
 	EndGlobalSection
 EndGlobal

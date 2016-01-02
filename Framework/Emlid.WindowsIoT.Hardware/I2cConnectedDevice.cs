@@ -81,7 +81,7 @@ namespace Emlid.WindowsIot.Hardware
         }
 
         /// <summary>
-        /// Proactively frees resources owned by this instance.
+        /// Pro-actively frees resources owned by this instance.
         /// </summary>
         public void Dispose()
         {
@@ -96,6 +96,8 @@ namespace Emlid.WindowsIot.Hardware
                 GC.SuppressFinalize(this);
             }
         }
+
+        #endregion
 
         #endregion
 
@@ -202,8 +204,6 @@ namespace Emlid.WindowsIot.Hardware
             // Cache and return result
             return _i2cMasterId = device.Id;
         }
-
-        #endregion
 
         #endregion
     }

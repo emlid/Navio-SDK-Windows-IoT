@@ -64,19 +64,32 @@
     <Compile Include="..\..\Common\AssemblyInfoGlobal.cs">
       <Link>Properties\AssemblyInfoGlobal.cs</Link>
     </Compile>
+    <Compile Include="..\..\Common\ConvertibleValueConverter.cs">
+      <Link>Models\ConvertibleValueConverter.cs</Link>
+    </Compile>
     <Compile Include="..\..\Common\EnumValueConverter.cs">
       <Link>Models\EnumValueConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\HexByteValueConverter.cs">
+      <Link>Models\HexByteValueConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\StringExtensions.cs">
+      <Link>Models\StringExtensions.cs</Link>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Models\FramTestUIModel.cs" />
     <Compile Include="Models\BarometerTestUIModel.cs" />
     <Compile Include="Views\Shared\MessageDialog.xaml.cs">
       <DependentUpon>MessageDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\RCInputTestUIModel.cs" />
     <Compile Include="Models\TestUIModel.cs" />
+    <Compile Include="Views\Tests\FramTest.xaml.cs">
+      <DependentUpon>FramTest.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Tests\LedPwmTest.xaml.cs">
       <DependentUpon>LedPwmTest.xaml</DependentUpon>
     </Compile>
@@ -120,6 +133,10 @@
     <Page Include="Views\Shared\MessageDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tests\FramTest.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Tests\BarometerTest.xaml">
       <Generator>MSBuild:Compile</Generator>

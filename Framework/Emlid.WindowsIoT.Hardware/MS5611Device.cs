@@ -8,7 +8,7 @@ namespace Emlid.WindowsIot.Hardware
     /// <summary>
     /// MS5611 barometric pressure and temperature sensor (hardware device), connected via I2C.
     /// </summary>
-    public class MS5611Device : I2cConnectedDevice
+    public class Ms5611Device : I2cConnectedDevice
     {
         #region Constants
 
@@ -60,11 +60,11 @@ namespace Emlid.WindowsIot.Hardware
         /// Set true for I2C <see cref="I2cSharingMode.Exclusive"/> or false for <see cref="I2cSharingMode.Shared"/>.
         /// </param>
         /// <param name="rate">Sampling rate.</param>
-        public MS5611Device(int address, bool fast, bool exclusive, MS5611Osr rate)
+        public Ms5611Device(int address, bool fast, bool exclusive, Ms5611Osr rate)
             : base(address, fast, exclusive)
         {
             // Initialize members
-            Prom = new MS5611PromData();
+            Prom = new Ms5611PromData();
             Osr = rate;
 
             // Read current calibration data (potentially not stable until next reset)
@@ -82,7 +82,7 @@ namespace Emlid.WindowsIot.Hardware
         /// <remarks>
         /// Populated during <see cref="Reset"/>.
         /// </remarks>
-        public MS5611PromData Prom { get; protected set; }
+        public Ms5611PromData Prom { get; protected set; }
 
         /// <summary>
         /// Over-Sampling Rate to use for measurement.
@@ -91,12 +91,12 @@ namespace Emlid.WindowsIot.Hardware
         /// Default is set during construction, but can be overridden.
         /// Then call <see cref="Update"/> to re-calculate.
         /// </remarks>
-        public MS5611Osr Osr { get; set; }
+        public Ms5611Osr Osr { get; set; }
 
         /// <summary>
         /// Result of the last <see cref="Update"/>.
         /// </summary>
-        public MS5611Measurement Measurement { get; protected set; }
+        public Ms5611Measurement Measurement { get; protected set; }
 
         #endregion
 
@@ -108,7 +108,7 @@ namespace Emlid.WindowsIot.Hardware
         public virtual void Reset()
         {
             // Send reset command
-            Hardware.WriteByte((byte)MS5611Command.Reset, 0);
+            Hardware.WriteJoinByte((byte)Ms5611Command.Reset, 0);
 
             // Wait for completion
             Task.Delay(TimeSpanExtensions.FromMicroseconds(ResetTime)).Wait();
@@ -117,7 +117,7 @@ namespace Emlid.WindowsIot.Hardware
             ReadProm();
 
             // Clear measurement
-            Measurement = MS5611Measurement.Zero;
+            Measurement = Ms5611Measurement.Zero;
         }
 
         /// <summary>
@@ -149,9 +149,9 @@ namespace Emlid.WindowsIot.Hardware
         protected virtual bool ReadProm()
         {
             // Read from hardware
-            var buffer = new byte[MS5611PromData.MemorySize];
-            for (var coefficient = 0; coefficient < MS5611PromData.CoefficientCount; coefficient++)
-                ReadPromCoefficient(coefficient, buffer, MS5611PromData.CoefficientSize * coefficient);
+            var buffer = new byte[Ms5611PromData.MemorySize];
+            for (var coefficient = 0; coefficient < Ms5611PromData.CoefficientCount; coefficient++)
+                ReadPromCoefficient(coefficient, buffer, Ms5611PromData.CoefficientSize * coefficient);
 
             // Validate and update properties
             return Prom.Read(buffer);
@@ -164,46 +164,46 @@ namespace Emlid.WindowsIot.Hardware
         /// <param name="buffer">Target buffer.</param>
         /// <param name="offset">Target offset.</param>
         /// <remarks>
-        /// Reads <see cref="MS5611PromData.CoefficientSize"/> bytes into the target buffer at the specified offset.
+        /// Reads <see cref="Ms5611PromData.CoefficientSize"/> bytes into the target buffer at the specified offset.
         /// </remarks>
         protected virtual void ReadPromCoefficient(int index, byte[] buffer, int offset)
         {
-            var coefficientOffset = (byte)(index * MS5611PromData.CoefficientSize);
-            var address = (byte)(MS5611Command.PromRead + coefficientOffset);
-            Hardware.ReadBytes(address, MS5611PromData.CoefficientSize, buffer, offset);
+            var coefficientOffset = (byte)(index * Ms5611PromData.CoefficientSize);
+            var address = (byte)(Ms5611Command.PromRead + coefficientOffset);
+            Hardware.WriteReadBytes(address, Ms5611PromData.CoefficientSize, buffer, offset);
         }
 
         /// <summary>
-        /// Executes the <see cref="MS5611Command.ConvertD1Pressure"/> command to measure
+        /// Executes the <see cref="Ms5611Command.ConvertD1Pressure"/> command to measure
         /// pressure at the specified OSR, waits then returns the result.
         /// </summary>
-        protected virtual int ConvertPressure(MS5611Osr rate)
+        protected virtual int ConvertPressure(Ms5611Osr rate)
         {
             // Send command to hardware
-            Hardware.WriteByte((byte)(MS5611Command.ConvertD1Pressure + (byte)rate), 0);
+            Hardware.WriteJoinByte((byte)(Ms5611Command.ConvertD1Pressure + (byte)rate), 0);
 
             // Wait for completion
             WaitForConversion(rate);
 
             // Return result
-            var result = Hardware.ReadBytes((byte)MS5611Command.AdcRead, 3);
+            var result = Hardware.WriteReadBytes((byte)Ms5611Command.AdcRead, 3);
             return result[0] << 16 | result[1] << 8 | result[2];
         }
 
         /// <summary>
-        /// Executes the <see cref="MS5611Command.ConvertD2Temperature"/> command to measure
+        /// Executes the <see cref="Ms5611Command.ConvertD2Temperature"/> command to measure
         /// pressure at the specified OSR, waits then returns the result.
         /// </summary>
-        protected virtual int ConvertTemperature(MS5611Osr rate)
+        protected virtual int ConvertTemperature(Ms5611Osr rate)
         {
             // Send command to hardware
-            Hardware.WriteByte((byte)(MS5611Command.ConvertD2Temperature + (byte)rate), 0);
+            Hardware.WriteJoinByte((byte)(Ms5611Command.ConvertD2Temperature + (byte)rate), 0);
 
             // Wait for completion
             WaitForConversion(rate);
 
             // Return result
-            var result = Hardware.ReadBytes((byte)MS5611Command.AdcRead, 3);
+            var result = Hardware.WriteReadBytes((byte)Ms5611Command.AdcRead, 3);
             return result[0] << 16 | result[1] << 8 | result[2];
         }
 
@@ -211,7 +211,7 @@ namespace Emlid.WindowsIot.Hardware
         /// Waits for conversion at the specified OSR.
         /// </summary>
         /// <param name="rate">Over-Sampling Rate to wait for.</param>
-        protected virtual void WaitForConversion(MS5611Osr rate)
+        protected virtual void WaitForConversion(Ms5611Osr rate)
         {
             var delay = TimeSpanExtensions.FromMicroseconds(GetConvertDelay(rate));
             Task.Delay(delay).Wait();
@@ -220,25 +220,25 @@ namespace Emlid.WindowsIot.Hardware
         /// <summary>
         /// Gets the time to wait in milliseconds for conversion with the specified OSR.
         /// </summary>
-        /// <param name="rate">Over-Sampling Rate for whcih to return the delay.</param>
+        /// <param name="rate">Over-Sampling Rate for which to return the delay.</param>
         /// <returns>Delay in milliseconds.</returns>
-        protected virtual int GetConvertDelay(MS5611Osr rate)
+        protected virtual int GetConvertDelay(Ms5611Osr rate)
         {
             switch (rate)
             {
-                case MS5611Osr.Osr256:
+                case Ms5611Osr.Osr256:
                     return ConvertOsr256Time;
 
-                case MS5611Osr.Osr512:
+                case Ms5611Osr.Osr512:
                     return ConvertOsr512Time;
 
-                case MS5611Osr.Osr1024:
+                case Ms5611Osr.Osr1024:
                     return ConvertOsr1024Time;
 
-                case MS5611Osr.Osr2048:
+                case Ms5611Osr.Osr2048:
                     return ConvertOsr2048Time;
 
-                case MS5611Osr.Osr4096:
+                case Ms5611Osr.Osr4096:
                     return ConvertOsr4096Time;
 
                 default:    // Future proof
@@ -309,7 +309,7 @@ namespace Emlid.WindowsIot.Hardware
             var pressure = (rawPressure * sensitivity / scale2Power21 - offset) / scale2Power15;
 
             // Correct floating point to whole values and save in properties
-            Measurement = new MS5611Measurement(pressure / 100, temperature / 100);
+            Measurement = new Ms5611Measurement(pressure / 100, temperature / 100);
         }
 
         #endregion

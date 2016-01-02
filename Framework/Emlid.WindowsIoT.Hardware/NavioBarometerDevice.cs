@@ -5,7 +5,7 @@ namespace Emlid.WindowsIot.Hardware
     /// <summary>
     /// Navio barometric pressure and temperature sensor (MS5611 hardware device), connected via I2C.
     /// </summary>
-    public class NavioBarometerDevice : MS5611Device
+    public class NavioBarometerDevice : Ms5611Device
     {
         #region Constants
 
@@ -17,7 +17,7 @@ namespace Emlid.WindowsIot.Hardware
         /// <summary>
         /// Over-Sampling Rate to use by default (maximum of 4096).
         /// </summary>
-        public const MS5611Osr DefaultOsr = MS5611Osr.Osr4096;
+        public const Ms5611Osr DefaultOsr = Ms5611Osr.Osr4096;
 
         #endregion
 
@@ -27,7 +27,7 @@ namespace Emlid.WindowsIot.Hardware
         /// Creates an instance without any initialization.
         /// </summary>
         /// <remarks>
-        /// It is necessary to call the <see cref="MS5611Device.Reset"/> and <see cref="MS5611Device.Update"/>
+        /// It is necessary to call the <see cref="Ms5611Device.Reset"/> and <see cref="Ms5611Device.Update"/>
         /// before any pressure or temperature data can be read.
         /// </remarks>
         public NavioBarometerDevice()
@@ -59,7 +59,7 @@ namespace Emlid.WindowsIot.Hardware
         /// <summary>
         /// Fired when a new measurement is calculated.
         /// </summary>
-        public EventHandler<MS5611Measurement> MeasurementUpdated;
+        public EventHandler<Ms5611Measurement> MeasurementUpdated;
 
         #endregion
     }

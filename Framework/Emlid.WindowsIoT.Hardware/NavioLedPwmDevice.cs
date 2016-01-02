@@ -104,10 +104,10 @@ namespace Emlid.WindowsIot.Hardware
                 _outputEnablePin.SetDriveMode(GpioPinDriveMode.Output);
 
             // Enable auto-increment and "all call"
-            Hardware.WriteBit((byte)NxpPca9685Register.Mode1, (byte)(NxpPca9685Mode1Bits.AutoIncrement | NxpPca9685Mode1Bits.AllCall), true);
+            Hardware.WriteReadWriteBit((byte)NxpPca9685Register.Mode1, (byte)(NxpPca9685Mode1Bits.AutoIncrement | NxpPca9685Mode1Bits.AllCall), true);
 
             // Set "all call" address
-            Hardware.WriteByte((byte)NxpPca9685Register.AllCall, (byte)I2cAllCallAddress);
+            Hardware.WriteJoinByte((byte)NxpPca9685Register.AllCall, (byte)I2cAllCallAddress);
 
             // Update property
             ReadMode1();
@@ -414,7 +414,7 @@ namespace Emlid.WindowsIot.Hardware
         private void ReadLed()
         {
             // Read channels together (BGR ordered)
-            var data = Hardware.ReadBytes(ChannelStartAddress, ChannelSize * 3);
+            var data = Hardware.WriteReadBytes(ChannelStartAddress, ChannelSize * 3);
 
             // Update channel properties
 

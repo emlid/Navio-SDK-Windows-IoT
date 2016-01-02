@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Emlid.WindowsIot.Common;
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
@@ -11,7 +12,7 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Models
     /// <summary>
     /// Base class for all test UI models.
     /// </summary>
-    public abstract class TestUIModel : INotifyPropertyChanged, IDisposable
+    public abstract class TestUIModel : DisposableObject, INotifyPropertyChanged
     {
         #region Lifetime
 
@@ -22,58 +23,9 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Models
         {
             // Initialize members
             UIThread = uiThread;
+            InputEnabled = true;
             _output = new StringBuilder();
         }
-
-        #region IDisposable
-
-        /// <summary>
-        /// Prevents duplicate calls to <see cref="Dispose()"/>.
-        /// </summary>
-        public bool IsDisposed { get; private set; }
-
-        /// <summary>
-        /// Frees resources owned by this instance.
-        /// </summary>
-        /// <param name="disposing">
-        /// True when called via <see cref="Dispose()"/>, false when called during finalization.
-        /// </param>
-        protected virtual void Dispose(bool disposing)
-        {
-            // Dispose only once
-            if (IsDisposed) return;
-
-            // Flag disposed
-            IsDisposed = true;
-        }
-
-        /// <summary>
-        /// Calls <see cref="Dispose(bool)"/> during finalization, when not proactively disposed.
-        /// </summary>
-        ~TestUIModel()
-        {
-            // Partial dispose
-            Dispose(false);
-        }
-
-        /// <summary>
-        /// Proactively frees resources owned by this object.
-        /// </summary>
-        public void Dispose()
-        {
-            try
-            {
-                // Full dispose
-                Dispose(true);
-            }
-            finally
-            {
-                // Suppress finalizer
-                GC.SuppressFinalize(this);
-            }
-        }
-
-        #endregion
 
         #endregion
 
@@ -87,6 +39,11 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Models
         #endregion
 
         #region Properties
+
+        /// <summary>
+        /// Indicates whether new user input is enabled.
+        /// </summary>
+        public bool InputEnabled { get; private set; }
 
         /// <summary>
         /// Output text.
@@ -157,22 +114,40 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Models
         /// <param name="name">Name to use in the output.</param>
         protected virtual void RunTest(Action test, [CallerMemberName] string name = "")
         {
-            try
-            {
-                // Output start message
-                WriteOutput("Starting {0}...", name);
+            // Do nothing when input is disabled
+            if (!InputEnabled)
+                return;
 
-                // Run test
-                test();
-
-                // Output successful end messsage
-                WriteOutput("Finished {0}.", name);
-            }
-            catch (Exception error)
+            // Run test on background thread...
+            Task.Factory.StartNew(() =>
             {
-                // Output error message
-                WriteOutput(error.ToString());
-            }
+                try
+                {
+                    // Disable tests
+                    InputEnabled = false;
+                    DoPropertyChanged(nameof(InputEnabled));
+
+                    // Output start message
+                    WriteOutput("Starting {0}...", name);
+
+                    // Run test
+                    test();
+
+                    // Output successful end message
+                    WriteOutput("Finished {0}.", name);
+                }
+                catch (Exception error)
+                {
+                    // Output error message
+                    WriteOutput(error.ToString());
+                }
+                finally
+                {
+                    // Re-enable tests
+                    InputEnabled = true;
+                    DoPropertyChanged(nameof(InputEnabled));
+                }
+            });
         }
 
         #endregion

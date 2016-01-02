@@ -129,7 +129,7 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
         }
 
         /// <summary>
-        /// Updates the device when the related button is clicked.
+        /// Executes the <see cref="BarometerTestUIModel.Update"/> when the related button is clicked.
         /// </summary>
         private void OnUpdateButtonClick(object sender, RoutedEventArgs arguments)
         {
@@ -137,7 +137,7 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
         }
 
         /// <summary>
-        /// Executes the <see cref="TestUIModel.Clear"/> when the releated button is clicked.
+        /// Executes the <see cref="TestUIModel.Clear"/> when the related button is clicked.
         /// </summary>
         private void OnClearButtonClick(object sender, RoutedEventArgs arguments)
         {

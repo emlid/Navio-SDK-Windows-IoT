@@ -6,8 +6,7 @@
     xmlns:local="using:Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    DataContext="{Binding Model, RelativeSource={RelativeSource Mode=Self}}">
+    mc:Ignorable="d">
     <Page.Resources>
         <Style x:Key="ChannelSlider" TargetType="Slider">
             <Setter Property="Margin" Value="5" />
@@ -37,7 +36,7 @@
         <!-- Title -->
         <StackPanel Grid.Row="0" Orientation="Horizontal">
             <Image Source="{StaticResource EmlidLogo}" Width="48" Margin="10" />
-            <TextBlock Text="Navio RC Input Test" Style="{StaticResource TitleText}" />
+            <TextBlock Text="Navio RC Input Test (GPIO)" Style="{StaticResource TitleText}" />
         </StackPanel>
 
         <!-- Top Row -->
@@ -67,42 +66,42 @@
                 <!-- Channel 1 -->
                 <TextBlock Grid.Row="1" Grid.Column="0" Text="1" Style="{StaticResource LabelTextTop}" />
                 <Slider Name="Channel1Slider" Grid.Row="2" Grid.Column="0" Style="{StaticResource ChannelSlider}" 
-                        Value="{Binding Path=Device.Channels[0], Mode=OneWay}" />
+                        Value="{x:Bind Path=Model.Device.Channels[0], Mode=OneWay}" />
 
                 <!-- Channel 2 -->
                 <TextBlock Grid.Row="1" Grid.Column="1" Text="2" Style="{StaticResource LabelTextTop}" />
                 <Slider Name="Channel2Slider" Grid.Row="2" Grid.Column="1" Style="{StaticResource ChannelSlider}" 
-                        Value="{Binding Path=Device.Channels[1], Mode=OneWay}" />
+                        Value="{x:Bind Path=Model.Device.Channels[1], Mode=OneWay}" />
 
                 <!-- Channel 3 -->
                 <TextBlock Grid.Row="1" Grid.Column="2" Text="3" Style="{StaticResource LabelTextTop}" />
                 <Slider Name="Channel3Slider" Grid.Row="2" Grid.Column="2" Style="{StaticResource ChannelSlider}" 
-                        Value="{Binding Path=Device.Channels[2], Mode=OneWay}" />
+                        Value="{x:Bind Path=Model.Device.Channels[2], Mode=OneWay}" />
 
                 <!-- Channel 4 -->
                 <TextBlock Grid.Row="1" Grid.Column="3" Text="4" Style="{StaticResource LabelTextTop}" />
                 <Slider Name="Channel4Slider" Grid.Row="2" Grid.Column="3" Style="{StaticResource ChannelSlider}" 
-                        Value="{Binding Path=Device.Channels[3], Mode=OneWay}" />
+                        Value="{x:Bind Path=Model.Device.Channels[3], Mode=OneWay}" />
 
                 <!-- Channel 5 -->
                 <TextBlock Grid.Row="1" Grid.Column="4" Text="5" Style="{StaticResource LabelTextTop}" />
                 <Slider Name="Channel5Slider" Grid.Row="2" Grid.Column="4" Style="{StaticResource ChannelSlider}" 
-                        Value="{Binding Path=Device.Channels[4], Mode=OneWay}" />
+                        Value="{x:Bind Path=Model.Device.Channels[4], Mode=OneWay}" />
 
                 <!-- Channel 6 -->
                 <TextBlock Grid.Row="1" Grid.Column="5" Text="6" Style="{StaticResource LabelTextTop}" />
                 <Slider Name="Channel6Slider" Grid.Row="2" Grid.Column="5" Style="{StaticResource ChannelSlider}" 
-                        Value="{Binding Path=Device.Channels[5], Mode=OneWay}" />
+                        Value="{x:Bind Path=Model.Device.Channels[5], Mode=OneWay}" />
 
                 <!-- Channel 7 -->
                 <TextBlock Grid.Row="1" Grid.Column="6" Text="7" Style="{StaticResource LabelTextTop}" />
                 <Slider Name="Channel7Slider" Grid.Row="2" Grid.Column="6" Style="{StaticResource ChannelSlider}" 
-                        Value="{Binding Path=Device.Channels[6], Mode=OneWay}" />
+                        Value="{x:Bind Path=Model.Device.Channels[6], Mode=OneWay}" />
 
                 <!-- Channel 8 -->
                 <TextBlock Grid.Row="1" Grid.Column="7" Text="8" Style="{StaticResource LabelTextTop}" />
                 <Slider Name="Channel8Slider" Grid.Row="2" Grid.Column="7" Style="{StaticResource ChannelSlider}" 
-                        Value="{Binding Path=Device.Channels[7], Mode=OneWay}" />
+                        Value="{x:Bind Path=Model.Device.Channels[7], Mode=OneWay}" />
             </Grid>
 
         </StackPanel>
@@ -125,7 +124,7 @@
                 <TextBlock Grid.Row="0" Text="Output" Style="{StaticResource PanelTitleText}"/>
                 <ScrollViewer Name="OutputScroller" Grid.Row="1" Margin="5"
                               IsDeferredScrollingEnabled="False" BorderThickness="1" BorderBrush="Black">
-                    <TextBlock Name="ResultTextBox" Text="{Binding Path=Output}"
+                    <TextBlock Name="ResultTextBox" Text="{x:Bind Path=Model.Output, Mode=OneWay}"
                            ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" />
                 </ScrollViewer>
 
@@ -136,8 +135,10 @@
 
                 <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Commands" Style="{StaticResource PanelTitleText}" />
 
-                <Button x:Name="ClearButton" Content="Clear" Margin="5" HorizontalAlignment="Stretch" Click="OnClearButtonClick" />
-                <Button x:Name="CloseButton" Content="Close" Margin="5" HorizontalAlignment="Stretch" Click="OnCloseButtonClick" />
+                <Button x:Name="ClearButton" Content="Clear" Margin="5" HorizontalAlignment="Stretch" 
+                        IsEnabled="{x:Bind Path=Model.InputEnabled, Mode=OneWay}" Click="OnClearButtonClick" />
+                <Button x:Name="CloseButton" Content="Close" Margin="5" HorizontalAlignment="Stretch" 
+                        IsEnabled="{x:Bind Path=Model.InputEnabled, Mode=OneWay}" Click="OnCloseButtonClick" />
 
             </StackPanel>
         </Grid>

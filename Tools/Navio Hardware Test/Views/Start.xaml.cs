@@ -48,6 +48,14 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views
         }
 
         /// <summary>
+        /// Navigates to the <see cref="FramTestPage"/> when the corresponding button is clicked.
+        /// </summary>
+        private void OnFramTestButtonClick(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(FramTestPage));
+        }
+
+        /// <summary>
         /// Exits the application when the corresponding button is clicked.
         /// </summary>
         private void OnExitButtonClick(object sender, RoutedEventArgs arguments)

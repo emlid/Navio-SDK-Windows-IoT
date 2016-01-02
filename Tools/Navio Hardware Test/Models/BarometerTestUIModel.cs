@@ -21,8 +21,8 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Models
         public BarometerTestUIModel(TaskFactory uiThread) : base(uiThread)
         {
             // Initialize members
-            OsrList = new List<int>(Enum.GetValues(typeof(MS5611Osr)).Cast<int>());
-            Graph = new List<MS5611Measurement>();
+            OsrList = new List<int>(Enum.GetValues(typeof(Ms5611Osr)).Cast<int>());
+            Graph = new List<Ms5611Measurement>();
 
             // Initialize device
             Device = new NavioBarometerDevice();
@@ -46,9 +46,12 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Models
             try
             {
                 // Free managed resources
-                StopAutoUpdateTask();
                 if (disposing)
-                    Device.Dispose();
+                {
+                    StopAutoUpdateTask();
+                    if (Device != null)
+                        Device.Dispose();
+                }
              }
             finally
             {
@@ -97,7 +100,7 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Models
         /// For performance new entries are added to the end of the list, to avoid having to insert.
         /// When rendering the graph iterate backwards from <see cref="ICollection{T}.Count"/> to display the newest items first.
         /// </remarks>
-        public List<MS5611Measurement> Graph { get; private set; }
+        public List<Ms5611Measurement> Graph { get; private set; }
 
         /// <summary>
         /// Starts or stops the automatic-update background task.
@@ -141,7 +144,7 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Models
         #region Public Methods
 
         /// <summary>
-        /// Tests the <see cref="MS5611Device.Reset"/> function.
+        /// Tests the <see cref="Ms5611Device.Reset"/> function.
         /// </summary>
         public void Reset()
         {
@@ -149,7 +152,7 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Models
         }
 
         /// <summary>
-        /// Tests the <see cref="MS5611Device.Update"/> function.
+        /// Tests the <see cref="Ms5611Device.Update"/> function.
         /// </summary>
         public void Update()
         {
@@ -178,7 +181,7 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Models
         /// <summary>
         /// Updates the display when the <see cref="Device"/> channels change.
         /// </summary>
-        private void OnMeasurementUpdated(object sender, MS5611Measurement measurement)
+        private void OnMeasurementUpdated(object sender, Ms5611Measurement measurement)
         {
             // Dump statistics to output
             WriteOutput(measurement.ToString());
@@ -220,7 +223,7 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Models
                 // Initialize
                 WriteOutput("Auto-update starting on background thread...");
 
-                // Run until cancelled
+                // Run until canceled
                 while (!cancel.IsCancellationRequested)
                 {
                     // Request hardware update

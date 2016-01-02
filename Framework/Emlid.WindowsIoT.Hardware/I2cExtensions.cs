@@ -9,68 +9,120 @@ namespace Emlid.WindowsIot.Hardware
     [CLSCompliant(false)]
     public static class I2cExtensions
     {
-        #region Device Extensions
-
         #region Read
 
         /// <summary>
-        /// Reads a byte value.
+        /// Writes data then reads a single byte result.
         /// </summary>
         /// <param name="device">Device to use.</param>
-        /// <param name="address">Address from which to read.</param>
-        /// <returns>Data byte.</returns>
-        public static byte ReadByte(this I2cDevice device, byte address)
+        /// <param name="writeData">Data to write.</param>
+        /// <returns>Read data byte.</returns>
+        public static byte WriteReadByte(this I2cDevice device, byte writeData)
         {
             // Call overloaded method
-            return ReadBytes(device, address, 1)[0];
+            return WriteReadBytes(device, new[] { writeData }, 1)[0];
         }
 
         /// <summary>
-        /// Reads one or more bytes.
+        /// Writes data then reads a single byte result.
         /// </summary>
         /// <param name="device">Device to use.</param>
-        /// <param name="address">Address from whcih to read.</param>
+        /// <param name="writeData">Data to write.</param>
+        /// <returns>Read data byte.</returns>
+        public static byte WriteReadByte(this I2cDevice device, byte[] writeData)
+        {
+            // Call overloaded method
+            return WriteReadBytes(device, writeData, 1)[0];
+        }
+
+        /// <summary>
+        /// Writes data then reads a single byte result.
+        /// </summary>
+        /// <param name="device">Device to use.</param>
+        /// <param name="writeData">Data to write.</param>
         /// <param name="size">Amount of data to read.</param>
-        /// <returns>Data byte(s).</returns>
-        public static byte[] ReadBytes(this I2cDevice device, byte address, int size)
+        /// <returns>Read data bytes.</returns>
+        public static byte[] WriteReadBytes(this I2cDevice device, byte writeData, int size)
+        {
+            // Call overloaded method
+            return WriteReadBytes(device, new[] { writeData }, size);
+        }
+
+        /// <summary>
+        /// Writes data then reads one or more bytes.
+        /// </summary>
+        /// <param name="device">Device to use.</param>
+        /// <param name="writeData">Data to write.</param>
+        /// <param name="size">Amount of data to read.</param>
+        /// <returns>Read data bytes.</returns>
+        public static byte[] WriteReadBytes(this I2cDevice device, byte[] writeData, int size)
         {
             var buffer = new byte[size];
-            device.WriteRead(new[] { address }, buffer);
+            device.WriteRead(writeData, buffer);
             return buffer;
         }
 
         /// <summary>
-        /// Reads one or more bytes into an existing buffer.
+        /// Writes data then reads one or more bytes into an existing buffer.
         /// </summary>
         /// <param name="device">Device to use.</param>
-        /// <param name="address">Address from whcih to read.</param>
+        /// <param name="writeData">Data to write.</param>
         /// <param name="size">Amount of data to read.</param>
         /// <param name="buffer">Target buffer.</param>
         /// <param name="offset">Target buffer offset.</param>
-        /// <returns>Data byte(s).</returns>
-        public static void ReadBytes(this I2cDevice device, byte address, int size, byte[] buffer, int offset)
+        public static void WriteReadBytes(this I2cDevice device, byte writeData, int size, byte[] buffer, int offset)
         {
             // Call overloaded method
-            var data = ReadBytes(device, address, size);
+            WriteReadBytes(device, new[] { writeData }, size, buffer, offset);
+        }
+
+        /// <summary>
+        /// Writes data then reads one or more bytes into an existing buffer.
+        /// </summary>
+        /// <param name="device">Device to use.</param>
+        /// <param name="writeData">Data to write.</param>
+        /// <param name="size">Amount of data to read.</param>
+        /// <param name="buffer">Target buffer.</param>
+        /// <param name="offset">Target buffer offset.</param>
+        public static void WriteReadBytes(this I2cDevice device, byte[] writeData, int size, byte[] buffer, int offset)
+        {
+            // Call overloaded method
+            var data = WriteReadBytes(device, writeData, size);
 
             // Copy data to target buffer
             Array.ConstrainedCopy(data, 0, buffer, offset, size);
         }
 
         /// <summary>
-        /// Tests one or more bits by reading the byte value then masking the result.
+        /// Writes data, reads a byte result then tests on or more bits.
         /// </summary>
         /// <remarks>
         /// Commonly used to test register flags.
         /// </remarks>
         /// <param name="device">Device to use.</param>
-        /// <param name="address">Address from which to read.</param>
+        /// <param name="writeData">Data to write.</param>
         /// <param name="mask">Index of the bit to read, zero based.</param>
         /// <returns>True when the result was positive (any bits in the mask were set).</returns>
-        public static bool ReadBit(this I2cDevice device, byte address, byte mask)
+        public static bool WriteReadBit(this I2cDevice device, byte writeData, byte mask)
+        {
+            // Call overloaded method
+            return WriteReadBit(device, new[] { writeData }, mask);
+        }
+
+        /// <summary>
+        /// Writes data, reads a byte result then tests on or more bits.
+        /// </summary>
+        /// <remarks>
+        /// Commonly used to test register flags.
+        /// </remarks>
+        /// <param name="device">Device to use.</param>
+        /// <param name="writeData">Data to write.</param>
+        /// <param name="mask">Index of the bit to read, zero based.</param>
+        /// <returns>True when the result was positive (any bits in the mask were set).</returns>
+        public static bool WriteReadBit(this I2cDevice device, byte[] writeData, byte mask)
         {
             // Read byte
-            var value = ReadByte(device, address);
+            var value = WriteReadByte(device, writeData);
 
             // Apply mask and return true when set
             return (value & mask) != 0;
@@ -81,27 +133,53 @@ namespace Emlid.WindowsIot.Hardware
         #region Write
 
         /// <summary>
-        /// Writes a byte value.
+        /// Joins two byte values then writes them.
         /// </summary>
         /// <param name="device">Device to use.</param>
-        /// <param name="address">Address at which to write.</param>
-        /// <param name="value">Value to write.</param>
-        public static void WriteByte(this I2cDevice device, byte address, byte value)
+        /// <param name="data1">First part of data to write.</param>
+        /// <param name="data2">Second part of data to write.</param>
+        public static void WriteJoinByte(this I2cDevice device, byte data1, byte data2)
         {
-            device.Write(new[] { address, value });
+            device.Write(new[] { data1, data2 });
         }
 
         /// <summary>
-        /// Writes one or more bytes.
+        /// Joins two byte values then writes them.
         /// </summary>
         /// <param name="device">Device to use.</param>
-        /// <param name="address">Address at which to write.</param>
-        /// <param name="data">Data to write.</param>
-        public static void WriteBytes(this I2cDevice device, byte address, byte[] data)
+        /// <param name="data1">First part of data to write.</param>
+        /// <param name="data2">Second part of data to write.</param>
+        public static void WriteJoinByte(this I2cDevice device, byte[] data1, byte data2)
         {
-            var buffer = new byte[data.Length + 1];
-            buffer[0] = address;
-            Array.ConstrainedCopy(data, 0, buffer, 1, data.Length);
+            // Call overloaded method
+            WriteJoinBytes(device, data1, new[] { data2 });
+        }
+
+        /// <summary>
+        /// Joins two byte values then writes them.
+        /// </summary>
+        /// <param name="device">Device to use.</param>
+        /// <param name="data1">First part of data to write.</param>
+        /// <param name="data2">Second part of data to write.</param>
+        public static void WriteJoinBytes(this I2cDevice device, byte data1, byte[] data2)
+        {
+            // Call overloaded method
+            WriteJoinBytes(device, new[] { data1 }, data2);
+        }
+
+        /// <summary>
+        /// Joins two byte values then writes them.
+        /// </summary>
+        /// <param name="device">Device to use.</param>
+        /// <param name="data1">First part of data to write.</param>
+        /// <param name="data2">Second part of data to write.</param>
+        public static void WriteJoinBytes(this I2cDevice device, byte[] data1, byte[] data2)
+        {
+            var addressLength = data1.Length;
+            var dataLength = data2.Length;
+            var buffer = new byte[addressLength + dataLength];
+            Array.Copy(data1, buffer, addressLength);
+            Array.ConstrainedCopy(data2, 0, buffer, addressLength, dataLength);
             device.Write(buffer);
         }
 
@@ -109,7 +187,7 @@ namespace Emlid.WindowsIot.Hardware
         /// Sets or clears one or more bits.
         /// </summary>
         /// <param name="device">Device to use.</param>
-        /// <param name="address">Address at which to write.</param>
+        /// <param name="writeData">Data to write.</param>
         /// <param name="mask">
         /// Mask of the bit to set or clear according to value.
         /// Supports setting or clearing multiple bits.
@@ -119,41 +197,22 @@ namespace Emlid.WindowsIot.Hardware
         /// <remarks>
         /// Commonly used to set register flags.
         /// Reads the current byte value, merges the positive or negative bit mask according to value,
-        /// then writes the modifed byte back.
+        /// then writes the modified byte back.
         /// </remarks>
-        public static byte WriteBit(this I2cDevice device, byte address, byte mask, bool value)
+        public static byte WriteReadWriteBit(this I2cDevice device, byte writeData, byte mask, bool value)
         {
             // Read existing byte
-            var oldByte = ReadByte(device, address);
+            var oldByte = WriteReadByte(device, writeData);
 
             // Merge bit (set or clear bit accordingly)
             var newByte = value ? (byte)(oldByte | mask) : (byte)(oldByte & ~mask);
 
             // Write new byte
-            WriteByte(device, address, newByte);
+            WriteJoinByte(device, writeData, newByte);
 
             // Return the value written.
             return newByte;
         }
-
-        #endregion
-
-        #region Read Types
-
-        /// <summary>
-        /// <see cref="ReadBytes(I2cDevice, byte, int)"/> then converts to a <see cref="UInt16"/>.
-        /// </summary>
-        /// <param name="device">Device to use.</param>
-        /// <param name="address">Address from which to read.</param>
-        /// <returns>Converted data bytes.</returns>
-        public static ushort ReadUInt16(this I2cDevice device, byte address)
-        {
-            // Call overloaded method
-            var data = ReadBytes(device, address, sizeof(UInt16));
-            return (ushort)(data[0] << 8 | data[1]);
-        }
-
-        #endregion
 
         #endregion
     }

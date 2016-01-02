@@ -4,9 +4,9 @@ using System.Globalization;
 namespace Emlid.WindowsIot.Hardware
 {
     /// <summary>
-    /// Contains a (pressure and temperature) measurement of the <see cref="MS5611Device"/> barometer.
+    /// Contains a (pressure and temperature) measurement of the <see cref="Ms5611Device"/> barometer.
     /// </summary>
-    public struct MS5611Measurement
+    public struct Ms5611Measurement
     {
         #region Constants
 
@@ -38,7 +38,7 @@ namespace Emlid.WindowsIot.Hardware
         /// <summary>
         /// Empty value.
         /// </summary>
-        public static readonly MS5611Measurement Zero = new MS5611Measurement(0, 0);
+        public static readonly Ms5611Measurement Zero = new Ms5611Measurement(0, 0);
 
         #endregion
 
@@ -47,7 +47,7 @@ namespace Emlid.WindowsIot.Hardware
         /// <summary>
         /// Creates an instance with the specified values.
         /// </summary>
-        public MS5611Measurement(double pressure, double temperature)
+        public Ms5611Measurement(double pressure, double temperature)
         {
             Pressure = pressure;
             Temperature = temperature;

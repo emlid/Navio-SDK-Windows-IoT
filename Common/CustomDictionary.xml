@@ -2,7 +2,9 @@
 <Dictionary>
   <Words>
     <Recognized>
+      <Word>ASCII</Word>
       <Word>Emlid</Word>
+      <Word>FRAM</Word>
       <Word>GPIO</Word>
       <Word>I2C</Word>
       <Word>IoT</Word>

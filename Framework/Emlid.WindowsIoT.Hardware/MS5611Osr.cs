@@ -1,14 +1,14 @@
 ﻿namespace Emlid.WindowsIot.Hardware
 {
     /// <summary>
-    /// <see cref="MS5611Device"/> conversion Over-Sampling Rate (OSR).
+    /// <see cref="Ms5611Device"/> conversion Over-Sampling Rate (OSR).
     /// </summary>
     /// <remarks>
-    /// These offsets are added to either the <see cref="MS5611Command.ConvertD1Pressure"/> or
-    /// <see cref="MS5611Command.ConvertD2Temperature"/> commands to specify the sample rate
+    /// These offsets are added to either the <see cref="Ms5611Command.ConvertD1Pressure"/> or
+    /// <see cref="Ms5611Command.ConvertD2Temperature"/> commands to specify the sample rate
     /// at which to perform the calculation.
     /// </remarks>
-    public enum MS5611Osr
+    public enum Ms5611Osr
     {
         /// <summary>
         /// 256 times.

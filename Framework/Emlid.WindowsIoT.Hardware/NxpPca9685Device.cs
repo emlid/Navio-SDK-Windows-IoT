@@ -201,7 +201,7 @@ namespace Emlid.WindowsIot.Hardware
         public NxpPca9685Mode1Bits ReadMode1()
         {
             // Read register
-            var value = (NxpPca9685Mode1Bits)Hardware.ReadByte((byte)NxpPca9685Register.Mode1);
+            var value = (NxpPca9685Mode1Bits)Hardware.WriteReadByte((byte)NxpPca9685Register.Mode1);
 
             // Update property
             Mode1Register = value;
@@ -217,7 +217,7 @@ namespace Emlid.WindowsIot.Hardware
         public NxpPca9685Mode2Bits ReadMode2()
         {
             // Read register
-            var value = (NxpPca9685Mode2Bits)Hardware.ReadByte((byte)NxpPca9685Register.Mode2);
+            var value = (NxpPca9685Mode2Bits)Hardware.WriteReadByte((byte)NxpPca9685Register.Mode2);
 
             // Update property
             Mode2Register = value;
@@ -243,12 +243,12 @@ namespace Emlid.WindowsIot.Hardware
         public virtual bool Sleep()
         {
             // Read sleep bit (do nothing when already sleeping)
-            var sleeping = Hardware.ReadBit((byte)NxpPca9685Register.Mode1, (byte)NxpPca9685Mode1Bits.Sleep);
+            var sleeping = Hardware.WriteReadBit((byte)NxpPca9685Register.Mode1, (byte)NxpPca9685Mode1Bits.Sleep);
             if (sleeping)
                 return false;
 
             // Set sleep bit
-            Hardware.WriteBit((byte)NxpPca9685Register.Mode1, (byte)NxpPca9685Mode1Bits.Sleep, true);
+            Hardware.WriteReadWriteBit((byte)NxpPca9685Register.Mode1, (byte)NxpPca9685Mode1Bits.Sleep, true);
 
             // Wait for completion
             Task.Delay(ModeSwitchDelay).Wait();
@@ -270,12 +270,12 @@ namespace Emlid.WindowsIot.Hardware
         public virtual bool Wake()
         {
             // Read sleep bit (do nothing when already sleeping)
-            var sleeping = Hardware.ReadBit((byte)NxpPca9685Register.Mode1, (byte)NxpPca9685Mode1Bits.Sleep);
+            var sleeping = Hardware.WriteReadBit((byte)NxpPca9685Register.Mode1, (byte)NxpPca9685Mode1Bits.Sleep);
             if (!sleeping)
                 return false;
 
             // Clear sleep bit
-            Hardware.WriteBit((byte)NxpPca9685Register.Mode1, (byte)NxpPca9685Mode1Bits.Sleep, false);
+            Hardware.WriteReadWriteBit((byte)NxpPca9685Register.Mode1, (byte)NxpPca9685Mode1Bits.Sleep, false);
 
             // Wait for completion
             Task.Delay(ModeSwitchDelay).Wait();
@@ -315,13 +315,13 @@ namespace Emlid.WindowsIot.Hardware
 
             // Write first sleep
             var sleep = (byte)NxpPca9685Mode1Bits.Sleep;
-            Hardware.WriteByte((byte)NxpPca9685Register.Mode1, sleep);
+            Hardware.WriteJoinByte((byte)NxpPca9685Register.Mode1, sleep);
 
             // Write sleep again with external clock option (when present)
             if (externalClock)
             {
                 sleep |= (byte)(NxpPca9685Mode1Bits.ExternalClock);
-                Hardware.WriteByte((byte)NxpPca9685Register.Mode1, sleep);
+                Hardware.WriteJoinByte((byte)NxpPca9685Register.Mode1, sleep);
             }
             else
             {
@@ -334,7 +334,7 @@ namespace Emlid.WindowsIot.Hardware
             if (externalClock)
                 restart |= (byte)NxpPca9685Mode1Bits.ExternalClock;
             restart |= (byte)options;
-            Hardware.WriteByte((byte)NxpPca9685Register.Mode1, restart);
+            Hardware.WriteJoinByte((byte)NxpPca9685Register.Mode1, restart);
 
             // At least 500 nanoseconds delay to allow oscillator to start
             Task.Delay(delay).Wait();
@@ -390,7 +390,7 @@ namespace Emlid.WindowsIot.Hardware
         public float ReadFrequency()
         {
             // Read pre-scale register
-            var preScale = Hardware.ReadByte((byte)NxpPca9685Register.PreScale);
+            var preScale = Hardware.WriteReadByte((byte)NxpPca9685Register.PreScale);
 
             // Calculate frequency
             var frequency = CalculateFrequency(preScale, ClockSpeed);
@@ -437,7 +437,7 @@ namespace Emlid.WindowsIot.Hardware
             var wasAwake = Sleep();
 
             // Write pre-scale
-            Hardware.WriteByte((byte)NxpPca9685Register.PreScale, preScale);
+            Hardware.WriteJoinByte((byte)NxpPca9685Register.PreScale, preScale);
 
             // Read result
             var actual = ReadFrequency();
@@ -479,13 +479,13 @@ namespace Emlid.WindowsIot.Hardware
         public virtual void Clear()
         {
             // Enable all channels
-            Hardware.WriteByte((byte)NxpPca9685Register.AllChannelsOffHigh, 0x00);
+            Hardware.WriteJoinByte((byte)NxpPca9685Register.AllChannelsOffHigh, 0x00);
 
             // Zero all channels
-            Hardware.WriteBytes((byte)NxpPca9685Register.AllChannelsOnLow, new byte[] { 0x00, 0x00, 0x00, 0x00 });
+            Hardware.WriteJoinBytes((byte)NxpPca9685Register.AllChannelsOnLow, new byte[] { 0x00, 0x00, 0x00, 0x00 });
 
             // Disable all channels
-            Hardware.WriteByte((byte)NxpPca9685Register.AllChannelsOffHigh, 0x10);
+            Hardware.WriteJoinByte((byte)NxpPca9685Register.AllChannelsOffHigh, 0x10);
 
             // Update channels
             ReadAllChannels();
@@ -505,7 +505,7 @@ namespace Emlid.WindowsIot.Hardware
             var register = GetChannelAddress(index);
 
             // Read value
-            var bytes = Hardware.ReadBytes(register, sizeof(ushort) * 2);
+            var bytes = Hardware.WriteReadBytes(register, sizeof(ushort) * 2);
 
             // Update channel property and return result
             var channel = _channels[index];
@@ -527,7 +527,7 @@ namespace Emlid.WindowsIot.Hardware
             var register = GetChannelAddress(index);
 
             // Read and convert value
-            var bytes = Hardware.ReadBytes(register, sizeof(ushort));
+            var bytes = Hardware.WriteReadBytes(register, sizeof(ushort));
             var value = BitConverter.ToUInt16(bytes, 0);
 
             // Update channel property and return result
@@ -550,7 +550,7 @@ namespace Emlid.WindowsIot.Hardware
             var register = (byte)(GetChannelAddress(index) + sizeof(ushort));
 
             // Read and convert value
-            var bytes = Hardware.ReadBytes(register, sizeof(ushort));
+            var bytes = Hardware.WriteReadBytes(register, sizeof(ushort));
             var value = BitConverter.ToUInt16(bytes, 0);
 
             // Update channel property and return result
@@ -619,7 +619,7 @@ namespace Emlid.WindowsIot.Hardware
 
             // Convert and write value
             var bytes = value.ToByteArray();
-            Hardware.WriteBytes(register, bytes);
+            Hardware.WriteJoinBytes(register, bytes);
 
             // Read and return result
             if (index < ChannelCount)
@@ -644,7 +644,7 @@ namespace Emlid.WindowsIot.Hardware
 
             // Convert and write value
             var bytes = BitConverter.GetBytes(value);
-            Hardware.WriteBytes(register, bytes);
+            Hardware.WriteJoinBytes(register, bytes);
         }
 
         /// <summary>
@@ -663,7 +663,7 @@ namespace Emlid.WindowsIot.Hardware
 
             // Convert and write value
             var bytes = BitConverter.GetBytes(value);
-            Hardware.WriteBytes(register, bytes);
+            Hardware.WriteJoinBytes(register, bytes);
         }
 
         /// <summary>
@@ -672,7 +672,7 @@ namespace Emlid.WindowsIot.Hardware
         protected virtual void ReadAllChannels()
         {
             // Read all channels as one block of data
-            var data = Hardware.ReadBytes(ChannelStartAddress, ChannelSize * ChannelCount);
+            var data = Hardware.WriteReadBytes(ChannelStartAddress, ChannelSize * ChannelCount);
 
             // Update properties
             for (var index = 0; index < ChannelCount; index++)

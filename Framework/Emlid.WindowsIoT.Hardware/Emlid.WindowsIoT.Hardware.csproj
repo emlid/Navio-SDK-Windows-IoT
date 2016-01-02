@@ -61,8 +61,14 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\Common\ArrayExtensions.cs">
+      <Link>ArrayExtensions.cs</Link>
+    </Compile>
     <Compile Include="..\..\Common\AssemblyInfoGlobal.cs">
       <Link>Properties\AssemblyInfoGlobal.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\DisposableObject.cs">
+      <Link>DisposableObject.cs</Link>
     </Compile>
     <Compile Include="..\..\Common\StopwatchExtensions.cs">
       <Link>StopwatchExtensions.cs</Link>
@@ -73,12 +79,17 @@
     <Compile Include="CppmDecoder.cs" />
     <Compile Include="I2cConnectedDevice.cs" />
     <Compile Include="I2cExtensions.cs" />
-    <Compile Include="MS5611Device.cs" />
-    <Compile Include="MS5611Command.cs" />
-    <Compile Include="MS5611Measurement.cs" />
-    <Compile Include="MS5611Osr.cs" />
-    <Compile Include="MS5611PromData.cs" />
+    <Compile Include="Mb85rc04vDevice.cs" />
+    <Compile Include="Mb85rcvDevice.cs" />
+    <Compile Include="Mb85rc256vDevice.cs" />
+    <Compile Include="Ms5611Device.cs" />
+    <Compile Include="Ms5611Command.cs" />
+    <Compile Include="Ms5611Measurement.cs" />
+    <Compile Include="Ms5611Osr.cs" />
+    <Compile Include="Ms5611PromData.cs" />
     <Compile Include="NavioBarometerDevice.cs" />
+    <Compile Include="NavioFramDevice.cs" />
+    <Compile Include="NavioHardwareModel.cs" />
     <Compile Include="PwmValue.cs" />
     <Compile Include="PwmCycle.cs" />
     <Compile Include="PwmFrame.cs" />

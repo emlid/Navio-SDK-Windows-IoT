@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Emlid.WindowsIot.Hardware</id>
-    <version>1.0.6-Alpha</version>
+    <version>1.0.7-Alpha</version>
     <title>Emlid Windows IoT Hardware</title>
     <authors>Emlid</authors>
     <owners>Emlid</owners>
@@ -14,7 +14,7 @@
     <copyright>Copyright Emlid, All Rights Reserved.</copyright>
     <summary>Provides access to Emlid hardware on the Windows IoT platform.</summary>
     <description>
-      Supports the Navio+ autopilot shield for Raspberry Pi 2 running the standard Microsoft Windows 10 IoT Core image.
+      Supports the Navio autopilot shield for Raspberry Pi 2 running the Microsoft Windows 10 IoT OS.
     </description>
     <tags>Emlid Hardware SDK IoT Navio Autopilot UAV</tags>
     <releaseNotes>

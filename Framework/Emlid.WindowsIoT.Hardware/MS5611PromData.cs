@@ -3,9 +3,9 @@
 namespace Emlid.WindowsIot.Hardware
 {
     /// <summary>
-    /// Defines the PROM of the <see cref="MS5611Device"/>.
+    /// Defines the PROM of the <see cref="Ms5611Device"/>.
     /// </summary>
-    public class MS5611PromData
+    public class Ms5611PromData
     {
         #region Constants
 

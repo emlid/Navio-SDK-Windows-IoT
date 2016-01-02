@@ -5,7 +5,7 @@ using Windows.UI.Xaml.Data;
 namespace Emlid.WindowsIot.Common
 {
     /// <summary>
-    /// Enumeration value converter enables enumeration valies to be used in data binding.
+    /// Enumeration value converter enables enumeration values to be used in data binding.
     /// </summary>
     public class EnumValueConverter : IValueConverter
     {
@@ -16,9 +16,9 @@ namespace Emlid.WindowsIot.Common
         {
             // Validate
             if (ReferenceEquals(value, null))
-                throw new ArgumentNullException("value");
+                throw new ArgumentNullException(nameof(value));
 
-            // Convert to underlying enumeraiton value type
+            // Convert to underlying enumeration value type
             var valueType = Enum.GetUnderlyingType(value.GetType());
             return System.Convert.ChangeType(value, valueType, CultureInfo.CurrentCulture);
         }
@@ -30,7 +30,7 @@ namespace Emlid.WindowsIot.Common
         {
             // Validate
             if (ReferenceEquals(value, null))
-                throw new ArgumentNullException("value");
+                throw new ArgumentNullException(nameof(value));
             if (!Enum.IsDefined(targetType, value))
                 throw new ArgumentOutOfRangeException(value.ToString());
 

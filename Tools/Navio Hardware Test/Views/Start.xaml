@@ -36,7 +36,7 @@
                 <Button Name="BarometerTestButton" Content="Barometer" Click="OnBarometerTestButtonClick" />
                 <Button Name="GpsTestButton" Content="GPS" IsEnabled="False" />
                 <Button Name="AdcTestButton" Content="ADC" IsEnabled="False" />
-                <Button Name="FramTestButton" Content="FRAM" IsEnabled="False" />
+                <Button Name="FramTestButton" Content="FRAM" Click="OnFramTestButtonClick"/>
 
             </StackPanel>
         </Grid>

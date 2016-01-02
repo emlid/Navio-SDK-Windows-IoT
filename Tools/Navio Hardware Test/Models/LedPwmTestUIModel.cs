@@ -305,7 +305,7 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Models
             catch (OperationCanceledException)
             {
                 // Report cancellation
-                WriteOutput("LED cycle cancelled.");
+                WriteOutput("LED cycle canceled.");
             }
         }
 

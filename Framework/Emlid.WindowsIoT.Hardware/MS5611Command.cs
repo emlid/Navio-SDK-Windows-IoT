@@ -1,14 +1,14 @@
 ﻿namespace Emlid.WindowsIot.Hardware
 {
     /// <summary>
-    /// Defines the I2C commands of the <see cref="MS5611Device"/>.
+    /// Defines the I2C commands of the <see cref="Ms5611Device"/>.
     /// </summary>
     /// <remarks>
     /// Instead of registers data is exchanged by means of writing a command byte
     /// then reading a variable number of data bytes returned by that command.
     /// Some commands must be executed in sequence.
     /// </remarks>
-    public enum MS5611Command : byte
+    public enum Ms5611Command : byte
     {
         #region Commands
 
@@ -35,7 +35,7 @@
         /// <remarks>
         /// Only called once after the <see cref="Reset"/> command.
         /// A sequence of 8 reads must be made to read all coefficient values and checksum.
-        /// Each read returns a 2 byte (16 bit) result. See <see cref="MS5611PromData.Read(byte[])"/>.
+        /// Each read returns a 2 byte (16 bit) result. See <see cref="Ms5611PromData.Read(byte[])"/>.
         /// </remarks>
         PromRead = 0xa0,
 
@@ -44,7 +44,7 @@
         /// </summary>
         /// <remarks>
         /// Returns a 4 byte (32 bit) unsigned result.
-        /// Over-Sampling Rate (OSR) option is specified by adding the <see cref="MS5611Osr"/> to this address.
+        /// Over-Sampling Rate (OSR) option is specified by adding the <see cref="Ms5611Osr"/> to this address.
         /// </remarks>
         ConvertD1Pressure = 0x40,
 
@@ -53,7 +53,7 @@
         /// </summary>
         /// <remarks>
         /// Returns a 4 byte (32 bit) unsigned result.
-        /// Over-Sampling Rate (OSR) option is specified by adding the <see cref="MS5611Osr"/> to this address.
+        /// Over-Sampling Rate (OSR) option is specified by adding the <see cref="Ms5611Osr"/> to this address.
         /// </remarks>
         ConvertD2Temperature = 0x50,
 
