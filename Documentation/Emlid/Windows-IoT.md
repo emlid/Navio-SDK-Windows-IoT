@@ -1,4 +1,4 @@
-#Windows IoT
+# Windows IoT
 
 ----------
 
@@ -15,7 +15,7 @@ All following text is provided by the project author.
 ----------
 
 
-##Project
+## Project
 
 In 2015 Microsoft announced official support for the Raspberry Pi 2 running Windows 10 on their new "IoT" (Internet of Things) platform. Soon after work started on an open source SDK for Navio with the following goals:
 
