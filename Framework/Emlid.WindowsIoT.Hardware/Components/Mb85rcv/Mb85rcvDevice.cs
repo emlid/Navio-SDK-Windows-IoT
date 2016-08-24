@@ -51,10 +51,10 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
         public const int DeviceTypeMask = 0xf0 >> 1;
 
         /// <summary>
-        /// Observed maximum transfer size for I2C requests on Windows IoT or Raspberry Pi 2 (not confirmed).
-        /// See: https://social.msdn.microsoft.com/Forums/en-US/e938900f-b732-41dc-95f6-058a39dac31d/i2c-transfer-limit-of-16384-bytes-on-raspberry-pi-2?forum=WindowsIoT
+        /// Maximum amount of data which can be transferred in one operation.
         /// </summary>
-        public const int MaximumTransferSize = 16384;
+        /// <seealso cref="I2cExtensions.MaximumTransferSize"/>
+        public const int MaximumTransferSize = I2cExtensions.MaximumTransferSize;
 
         #endregion
 
