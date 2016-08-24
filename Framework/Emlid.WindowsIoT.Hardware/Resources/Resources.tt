@@ -76,7 +76,7 @@ namespace <#= resourcesNamespace #>  {
 		///<summary>
         ///<#= resource.Comment.Replace("\r", "").Replace("\n", " ")#>
 		///</summary>
-		public string <#= resource.Key #> 
+		public static string <#= resource.Key #> 
 		{ 
 			get { return ResourceLoader.GetString("<#=resource.Key#>"); }
 		}

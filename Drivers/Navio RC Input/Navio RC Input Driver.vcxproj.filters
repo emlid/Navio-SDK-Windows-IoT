@@ -50,11 +50,11 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <PkgGen Include="Package.pkg.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <Inf Include="NavioRCInput.inf">
       <Filter>Driver Files</Filter>
     </Inf>
+  </ItemGroup>
+  <ItemGroup>
+    <PkgGen Include="Package.pkg.xml" />
   </ItemGroup>
 </Project>

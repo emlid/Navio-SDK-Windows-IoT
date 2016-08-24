@@ -1,6 +1,7 @@
 ﻿using Emlid.WindowsIot.Hardware;
+using Emlid.WindowsIot.Hardware.Boards.Navio;
+using Emlid.WindowsIot.Hardware.Components.NxpPca9685;
 using System;
-using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
@@ -42,25 +43,15 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Models
         /// </param>
         protected override void Dispose(bool disposing)
         {
-            // Dispose only once
-            if (IsDisposed) return;
+            // Only managed resources to dispose
+            if (!disposing)
+                return;
 
-            // Dispose
-            try
-            {
-                // Free managed resources
-                if (disposing)
-                {
-                    StopLedCycleTask();
-                    if (Device != null)
-                        Device.Dispose();
-                }
-            }
-            finally
-            {
-                // Dispose base class
-                base.Dispose(disposing);
-            }
+            // Stop updates
+            StopLedCycleTask();
+
+            // Close device
+            Device?.Dispose();
         }
 
         #endregion
@@ -307,6 +298,11 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Models
                 // Report cancellation
                 WriteOutput("LED cycle canceled.");
             }
+            finally
+            {
+                // Update LED cycle button
+                DoPropertyChanged(nameof(LedCycle));
+            }
         }
 
         /// <summary>
@@ -320,18 +316,15 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Models
                 {
                     if (_ledCycleTask != null)
                     {
+                        // Stop task when running
                         if (_ledCycleTask.Status == TaskStatus.Running)
-                        {
-                            // Stop task when running
                             _ledCycleCancel.Cancel();
-                            _ledCycleTask.Wait();
-                        }
 
                         // Clean-up task
                         _ledCycleTask = null;
                     }
 
-                    // Clear-up cancellation token
+                    // Clean-up cancellation token
                     _ledCycleCancel.Dispose();
                     _ledCycleCancel = null;
                 }

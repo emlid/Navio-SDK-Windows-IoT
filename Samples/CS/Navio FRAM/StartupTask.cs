@@ -1,4 +1,4 @@
-﻿using Emlid.WindowsIot.Hardware;
+﻿using Emlid.WindowsIot.Hardware.Boards.Navio;
 using System;
 using System.Diagnostics;
 using System.Globalization;
@@ -20,7 +20,7 @@ namespace Emlid.WindowsIot.Samples.NavioFram
             using (var fram = new NavioFramDevice(NavioHardwareModel.NavioPlus))
             {
                 // Log start
-                Debug.WriteLine("Navio FRAM memory tests start.");
+                Debug.WriteLine("Navio FRAM memory test start.");
 
                 // Write single bytes
                 Debug.WriteLine("Writing single bytes (all 1s)...");

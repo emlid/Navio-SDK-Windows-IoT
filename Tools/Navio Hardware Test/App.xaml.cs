@@ -1,6 +1,8 @@
-﻿using Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views;
+﻿using Emlid.WindowsIot.Hardware.Boards.Navio;
+using Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views;
 using Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Shared;
 using System;
+using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
@@ -23,6 +25,7 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp
             InitializeComponent();
             Suspending += OnSuspending;
             UnhandledException += OnError;
+            NavioHardwareProvider.Initialize();
         }
 
         /// <summary>
@@ -34,9 +37,7 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp
         {
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
-            {
                 DebugSettings.EnableFrameRateCounter = true;
-            }
 #endif
             Frame rootFrame = Window.Current.Content as Frame;
 
@@ -78,7 +79,7 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp
         {
             arguments.Handled = true;
             throw new InvalidOperationException("Failed to load Page " + arguments.SourcePageType.FullName +
-                "\n" + arguments.Exception.Message);
+                Environment.NewLine + arguments.Exception.Message);
         }
 
         /// <summary>
@@ -100,9 +101,17 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp
         /// </summary>
         private void OnError(object sender, UnhandledExceptionEventArgs error)
         {
+            // Flag handled so app can continue
             error.Handled = true;
+
+            // Create error dialog
             var dialog = new MessageDialog("Error", error.Message);
-            dialog.ShowAsync().AsTask().Wait();
+
+            // Show dialog
+            // TODO: Get this working
+            var uiScheduler = TaskScheduler.FromCurrentSynchronizationContext();
+            var uiFactory = new TaskFactory(uiScheduler);
+            uiFactory.StartNew(() => { dialog.ShowAsync().AsTask().Wait(); }).Wait();
         }
     }
 }

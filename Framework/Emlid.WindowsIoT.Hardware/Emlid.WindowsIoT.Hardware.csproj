@@ -14,8 +14,8 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.10586.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10586.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.14393.0</TargetPlatformMinVersion>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
@@ -76,33 +76,33 @@
     <Compile Include="..\..\Common\TimeSpanExtensions.cs">
       <Link>TimeSpanExtensions.cs</Link>
     </Compile>
-    <Compile Include="CppmDecoder.cs" />
-    <Compile Include="I2cConnectedDevice.cs" />
-    <Compile Include="I2cExtensions.cs" />
-    <Compile Include="Mb85rc04vDevice.cs" />
-    <Compile Include="Mb85rcvDevice.cs" />
-    <Compile Include="Mb85rc256vDevice.cs" />
-    <Compile Include="Ms5611Device.cs" />
-    <Compile Include="Ms5611Command.cs" />
-    <Compile Include="Ms5611Measurement.cs" />
-    <Compile Include="Ms5611Osr.cs" />
-    <Compile Include="Ms5611PromData.cs" />
-    <Compile Include="NavioBarometerDevice.cs" />
-    <Compile Include="NavioFramDevice.cs" />
-    <Compile Include="NavioHardwareModel.cs" />
-    <Compile Include="PwmValue.cs" />
-    <Compile Include="PwmCycle.cs" />
-    <Compile Include="PwmFrame.cs" />
+    <Compile Include="Protocols\Pwm\CppmDecoder.cs" />
+    <Compile Include="Components\I2cExtensions.cs" />
+    <Compile Include="Boards\Navio\NavioHardwareProvider.cs" />
+    <Compile Include="Components\Mb85rcv\Mb85rc04vDevice.cs" />
+    <Compile Include="Components\Mb85rcv\Mb85rcvDevice.cs" />
+    <Compile Include="Components\Mb85rcv\Mb85rc256vDevice.cs" />
+    <Compile Include="Components\Ms5611\Ms5611Device.cs" />
+    <Compile Include="Components\Ms5611\Ms5611Command.cs" />
+    <Compile Include="Components\Ms5611\Ms5611Measurement.cs" />
+    <Compile Include="Components\Ms5611\Ms5611Osr.cs" />
+    <Compile Include="Components\Ms5611\Ms5611PromData.cs" />
+    <Compile Include="Boards\Navio\NavioBarometerDevice.cs" />
+    <Compile Include="Boards\Navio\NavioFramDevice.cs" />
+    <Compile Include="Boards\Navio\NavioHardwareModel.cs" />
+    <Compile Include="Protocols\Pwm\PwmValue.cs" />
+    <Compile Include="Protocols\Pwm\PwmCycle.cs" />
+    <Compile Include="Protocols\Pwm\PwmFrame.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="NavioLedPwmDevice.cs" />
-    <Compile Include="IPwmDecoder.cs" />
-    <Compile Include="NavioRCInputDevice.cs" />
-    <Compile Include="NxpPca9685Channel.cs" />
-    <Compile Include="NxpPca9685ChannelValue.cs" />
-    <Compile Include="NxpPca9685Device.cs" />
-    <Compile Include="NxpPca9685Register.cs" />
-    <Compile Include="NxpPca9685Mode1Bits.cs" />
-    <Compile Include="NxpPca9685Mode2Bits.cs" />
+    <Compile Include="Boards\Navio\NavioLedPwmDevice.cs" />
+    <Compile Include="Protocols\Pwm\IPwmDecoder.cs" />
+    <Compile Include="Boards\Navio\NavioRCInputDevice.cs" />
+    <Compile Include="Components\NxpPca9685\NxpPca9685Channel.cs" />
+    <Compile Include="Components\NxpPca9685\NxpPca9685ChannelValue.cs" />
+    <Compile Include="Components\NxpPca9685\NxpPca9685Device.cs" />
+    <Compile Include="Components\NxpPca9685\NxpPca9685Register.cs" />
+    <Compile Include="Components\NxpPca9685\NxpPca9685Mode1Bits.cs" />
+    <Compile Include="Components\NxpPca9685\NxpPca9685Mode2Bits.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Resources.cs">
       <AutoGen>True</AutoGen>
@@ -131,10 +131,11 @@
     <None Include="TemporaryKey.snk" />
   </ItemGroup>
   <ItemGroup>
-    <SDKReference Include="WindowsIoT, Version=10.0.10240.0">
+    <SDKReference Include="WindowsIoT, Version=10.0.14393.0">
       <Name>Windows IoT Extensions for the UWP</Name>
     </SDKReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

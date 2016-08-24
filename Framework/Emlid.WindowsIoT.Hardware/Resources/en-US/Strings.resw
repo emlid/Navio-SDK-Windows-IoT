@@ -117,20 +117,42 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="I2cErrorDeviceCannotOpen" xml:space="preserve">
-    <value>I2C slave address {0:X2} on controller "{1}" failed to initialize or is exclusively locked by another application.</value>
-    <comment>0 = address, 1 = controller.</comment>
+  <data name="GpioErrorDeviceNotFound" xml:space="preserve">
+    <value>GPIO pin {0} on controller {1} does not exist.</value>
+    <comment>0 = pin, 1 = controller index.</comment>
   </data>
   <data name="I2cErrorDeviceNotFound" xml:space="preserve">
-    <value>I2C device not found. The device selector used was "{0}".</value>
-    <comment>0 = selector.</comment>
+    <value>I2C slave address {0:X2} on controller {1} was not found.</value>
+    <comment>0 = address, 1 = controller index.</comment>
+  </data>
+  <data name="Mb85rc04vLowerAddressInvalidHasUpperBits" xml:space="preserve">
+    <value>The MB85RC04V lower I2C device address must not have the memory upper address bit set.</value>
+  </data>
+  <data name="Mb85rc04vUpperAddressInvalidNoMatchLower" xml:space="preserve">
+    <value>The MB85RC04V upper I2C device address does not match the the lower address.</value>
   </data>
   <data name="MS5611MeasurementStringFormat" xml:space="preserve">
     <value>Pressure: {0}mbar Temperature: {1}°c</value>
     <comment>0 = pressure, 1 = temperature.</comment>
   </data>
-  <data name="RCInputDecoderChannelOverflow" xml:space="preserve">
+  <data name="NavioRCInputDecoderChannelOverflow" xml:space="preserve">
     <value>Decoder produced too many channels ({0} instead of {1})!</value>
     <comment>0 = # channels, 1 = maximum channels.</comment>
+  </data>
+  <data name="PwmCycleStringFormat" xml:space="preserve">
+    <value>PWM low@{0}({1}) high@{2}({3}) = {4}</value>
+    <comment>0 = low time, 1 = low length, 2 = high time, 3 = high length, 4 = total length.</comment>
+  </data>
+  <data name="PwmFrameStringFormatChannel" xml:space="preserve">
+    <value> #{0}={1}</value>
+    <comment>0 = channel, 1 = value.</comment>
+  </data>
+  <data name="PwmFrameStringFormatStart" xml:space="preserve">
+    <value>PWM Frame @{0}</value>
+    <comment>0 = time.</comment>
+  </data>
+  <data name="PwmValueStringFormat" xml:space="preserve">
+    <value>PWM {0}@{1}</value>
+    <comment>0 = level, 1 = time.</comment>
   </data>
 </root>

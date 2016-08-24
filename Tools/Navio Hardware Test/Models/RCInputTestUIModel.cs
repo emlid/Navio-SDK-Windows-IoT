@@ -1,4 +1,5 @@
-﻿using Emlid.WindowsIot.Hardware;
+﻿using Emlid.WindowsIot.Hardware.Boards.Navio;
+using Emlid.WindowsIot.Hardware.Protocols.Pwm;
 using System;
 using System.Threading.Tasks;
 
@@ -31,21 +32,15 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Models
         /// </param>
         protected override void Dispose(bool disposing)
         {
-            // Dispose only once
-            if (IsDisposed) return;
+            // Only managed resources to dispose
+            if (!disposing)
+                return;
 
-            // Dispose
-            try
-            {
-                // Free managed resources
-                if (disposing)
-                    Device.Dispose();
-            }
-            finally
-            {
-                // Dispose base class
-                base.Dispose(disposing);
-            }
+            // Un-hook events
+            Device.ChannelsChanged -= OnChannelsChanged;
+
+            // Close device
+            Device?.Dispose();
         }
 
         #endregion

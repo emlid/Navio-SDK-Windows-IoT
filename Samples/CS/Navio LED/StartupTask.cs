@@ -1,4 +1,6 @@
-﻿using Emlid.WindowsIot.Hardware;
+﻿using Emlid.WindowsIot.Hardware.Boards.Navio;
+using Emlid.WindowsIot.Hardware.Components.NxpPca9685;
+using System.Diagnostics;
 using Windows.ApplicationModel.Background;
 
 namespace Emlid.WindowsIot.Samples.NavioLed
@@ -16,11 +18,15 @@ namespace Emlid.WindowsIot.Samples.NavioLed
             // Initialize PWM device at servo frequency (50Hz) with output disabled
             var pwm = NavioLedPwmDevice.Initialize(NavioLedPwmDevice.ServoFrequencyDefault);
 
+            // Log start
+            Debug.WriteLine("Navio LED test start.");
+
             // Enable oscillator and output
             pwm.Wake();
             pwm.OutputEnabled = true;
 
             // Fade LEDs to blue
+            Debug.WriteLine("Fading to blue.");
             var maximum = NxpPca9685ChannelValue.Maximum;
             bool fade;
             do
@@ -45,30 +51,37 @@ namespace Emlid.WindowsIot.Samples.NavioLed
             while (fade);
 
             // Cycle LED in infinite loop...
+            Debug.WriteLine("Cycling in infinite loop...");
             while (true)
             {
-                // Red up...
+                // Red up via property...
+                Debug.WriteLine("Red up via property...");
                 while (pwm.LedRed < maximum)
                     pwm.LedRed++;
 
-                // Blue down...
+                // Blue down via property...
+                Debug.WriteLine("Blue down via property...");
                 while (pwm.LedBlue > 0)
                     pwm.LedBlue--;
 
-                // Green up..
+                // Green up via propety..
+                Debug.WriteLine("Green up via property...");
                 while (pwm.LedGreen < maximum)
                     pwm.LedGreen++;
 
-                // Red down (test via RGB)...
+                // Red down via set RGB method...
+                Debug.WriteLine("Red down via set RGB method...");
                 int red = maximum, green = maximum, blue = 0;
                 for (red = maximum; red > 0; red--)
                     pwm.SetLed(red, green, blue);
 
-                // Blue up...
+                // Blue upvia set RGB method...
+                Debug.WriteLine("Blue up via set RGB method...");
                 for (blue = 0; blue < maximum; blue++)
                     pwm.SetLed(red, green, blue);
 
-                // Green down...
+                // Green downvia set RGB method...
+                Debug.WriteLine("Green down via set RGB method...");
                 for (green = maximum; green > 0; green--)
                     pwm.SetLed(red, green, blue);
             }

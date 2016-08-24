@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{101AF3F7-293E-46CF-8C37-EAA61DFDF0A5}"
 	ProjectSection(SolutionItems) = preProject
@@ -42,7 +42,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{E2AC6B
 		Common\HexByteValueConverter.cs = Common\HexByteValueConverter.cs
 		Common\StopwatchExtensions.cs = Common\StopwatchExtensions.cs
 		Common\StringExtensions.cs = Common\StringExtensions.cs
-		Common\TemporaryKey Setup.cmd = Common\TemporaryKey Setup.cmd
+		Common\TemporaryKey Install.cmd = Common\TemporaryKey Install.cmd
+		Common\TemporaryKey Remove.cmd = Common\TemporaryKey Remove.cmd
 		Common\TemporaryKey.pfx = Common\TemporaryKey.pfx
 		Common\TimeSpanExtensions.cs = Common\TimeSpanExtensions.cs
 	EndProjectSection
@@ -74,7 +75,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{703F0B97-99AB-4EEE-B9BD-D9C86883CB8C}"
 	ProjectSection(SolutionItems) = preProject
 		Tools\Scripts\Serial Debug.cmd = Tools\Scripts\Serial Debug.cmd
+		Tools\Scripts\Setup Local.cmd = Tools\Scripts\Setup Local.cmd
 		Tools\Scripts\Setup Local.ps1 = Tools\Scripts\Setup Local.ps1
+		Tools\Scripts\Setup Remote.cmd = Tools\Scripts\Setup Remote.cmd
 		Tools\Scripts\Setup Remote.ps1 = Tools\Scripts\Setup Remote.ps1
 	EndProjectSection
 EndProject

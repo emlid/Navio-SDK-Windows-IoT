@@ -1,4 +1,5 @@
 ﻿using Emlid.WindowsIot.Hardware;
+using Emlid.WindowsIot.Hardware.Boards.Navio;
 using System.Diagnostics;
 using Windows.ApplicationModel.Background;
 

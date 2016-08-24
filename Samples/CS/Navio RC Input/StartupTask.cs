@@ -1,7 +1,6 @@
-﻿using Emlid.WindowsIot.Hardware;
-using System;
+﻿using Emlid.WindowsIot.Hardware.Boards.Navio;
+using Emlid.WindowsIot.Hardware.Protocols.Pwm;
 using System.Diagnostics;
-using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
 
 namespace Emlid.WindowsIot.Samples.NavioRCInput
@@ -19,7 +18,11 @@ namespace Emlid.WindowsIot.Samples.NavioRCInput
             // Create the RC input device
             using (var rcInput = new NavioRCInputDevice())
             {
-                // Receive notifcations when frames arrive
+                // Log start
+                Debug.WriteLine("Navio RC input test start.");
+
+                // Start receiving frames
+                Debug.WriteLine("Waiting for valid PWM frames...");
                 rcInput.ChannelsChanged += OnChannelsChanged;
 
                 // Wait forever (this background task has no GUI)

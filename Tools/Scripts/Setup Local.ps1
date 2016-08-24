@@ -4,5 +4,5 @@
 # Install test signing certificate and key
 $wpdkPath = "C:\Program Files (x86)\Windows Kits\10\"
 [Environment]::SetEnvironmentVariable("WPDKContentRoot", $wpdkPath, "Machine")
-$command = "`"" + $wpdkPath + "InstallOEMCerts.cmd`""
+$command = "`"" + $wpdkPath + "Tools\Bin\I386\InstallOEMCerts.cmd`""
 Invoke-Expression -Command:$command

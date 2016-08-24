@@ -76,7 +76,7 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
         protected override void OnNavigatedFrom(NavigationEventArgs arguments)
         {
             // Dispose model
-            Model.Dispose();
+            Model?.Dispose();
 
             // Call base class method
             base.OnNavigatedFrom(arguments);
@@ -92,7 +92,7 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
             {
                 case nameof(Model.Output):
                     OutputScroller.UpdateLayout();
-                    OutputScroller.ScrollToVerticalOffset(OutputScroller.ScrollableHeight);
+                    OutputScroller.ChangeView(null, OutputScroller.ScrollableHeight, null);
                     break;
             }
         }

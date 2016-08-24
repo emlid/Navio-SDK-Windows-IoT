@@ -27,6 +27,7 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Shared
         /// <param name="cancelButton">Set false to hide the cancel button. Default is true.</param>
         /// <param name="cancelButtonText">Optional cancel button text override. Leave null or empty for the default "Cancel".</param>
         public MessageDialog(string title, string message, string confirmButtonText = null, bool cancelButton = true, string cancelButtonText = null)
+            : this()
         {
             // Initialize properties
             Title = title;
@@ -36,9 +37,6 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Shared
                 SecondaryButtonText = !string.IsNullOrWhiteSpace(cancelButtonText) ? confirmButtonText : "Cancel";
             else
                 IsSecondaryButtonEnabled = false;
-
-            // Initialize view
-            InitializeComponent();
         }
 
         #endregion

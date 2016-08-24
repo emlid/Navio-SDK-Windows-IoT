@@ -1,10 +1,11 @@
-﻿using Emlid.WindowsIot.Hardware;
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Collections.Generic;
 using System.Threading;
 using System.Runtime.CompilerServices;
+using Emlid.WindowsIot.Hardware.Boards.Navio;
+using Emlid.WindowsIot.Hardware.Components.Ms5611;
 
 namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Models
 {
@@ -39,25 +40,15 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Models
         /// </param>
         protected override void Dispose(bool disposing)
         {
-            // Dispose only once
-            if (IsDisposed) return;
+            // Only managed resources to dispose
+            if (!disposing)
+                return;
 
-            // Dispose
-            try
-            {
-                // Free managed resources
-                if (disposing)
-                {
-                    StopAutoUpdateTask();
-                    if (Device != null)
-                        Device.Dispose();
-                }
-             }
-            finally
-            {
-                // Dispose base class
-                base.Dispose(disposing);
-            }
+            // Stop updates
+            StopAutoUpdateTask();
+
+            // Close device
+            Device?.Dispose();
         }
 
         #endregion
@@ -263,8 +254,8 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Models
                     _autoUpdateTask = null;
                 }
 
-                // Clear-up cancellation token
-                _autoUpdateCancel.Dispose();
+                // Clean-up cancellation token
+                _autoUpdateCancel?.Dispose();
                 _autoUpdateCancel = null;
             }
         }

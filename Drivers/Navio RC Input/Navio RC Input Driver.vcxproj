@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|ARM">
       <Configuration>Debug</Configuration>
@@ -18,26 +18,34 @@
     <Configuration>Debug</Configuration>
     <Platform Condition="'$(Platform)' == ''">Win32</Platform>
     <RootNamespace>Navio_RC_Input_Driver</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.10586.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="Configuration">
-    <TargetVersion>Windows10</TargetVersion>
+    <TargetVersion>
+    </TargetVersion>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>WindowsKernelModeDriver10.0</PlatformToolset>
     <ConfigurationType>Driver</ConfigurationType>
     <DriverType>KMDF</DriverType>
     <DriverTargetPlatform>Universal</DriverTargetPlatform>
     <SupportsPackaging>true</SupportsPackaging>
+    <KMDF_VERSION_MAJOR>1</KMDF_VERSION_MAJOR>
+    <KMDF_VERSION_MINOR>19</KMDF_VERSION_MINOR>
+    <ALLOW_DATE_TIME>1</ALLOW_DATE_TIME>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="Configuration">
-    <TargetVersion>Windows10</TargetVersion>
+    <TargetVersion>
+    </TargetVersion>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>WindowsKernelModeDriver10.0</PlatformToolset>
     <ConfigurationType>Driver</ConfigurationType>
     <DriverType>KMDF</DriverType>
     <DriverTargetPlatform>Universal</DriverTargetPlatform>
     <SupportsPackaging>true</SupportsPackaging>
+    <KMDF_VERSION_MAJOR>1</KMDF_VERSION_MAJOR>
+    <KMDF_VERSION_MINOR>19</KMDF_VERSION_MINOR>
+    <ALLOW_DATE_TIME>1</ALLOW_DATE_TIME>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -53,16 +61,18 @@
     <CodeAnalysisRuleSet>C:\Program Files (x86)\Windows Kits\10\CodeAnalysis\DriverMinimumRules.ruleset</CodeAnalysisRuleSet>
     <OutDir>$(ProjectDir)$(Platform)\$(ConfigurationName)\</OutDir>
     <TargetName>NavioRCInput</TargetName>
+    <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <DebuggerFlavor>DbgengKernelDebugger</DebuggerFlavor>
     <IntDir>$(ProjectDir)$(Platform)\$(ConfigurationName)\</IntDir>
     <OutDir>$(ProjectDir)$(Platform)\$(ConfigurationName)\</OutDir>
     <TargetName>NavioRCInput</TargetName>
+    <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <PkgGen>
-      <Version>1.0.0.1</Version>
+      <Version>1.0.0.8</Version>
     </PkgGen>
     <ClCompile>
       <WppEnabled>true</WppEnabled>
@@ -83,7 +93,7 @@
       <Command>xcopy "$(ProjectDir)Public.h" "$(SolutionDir)Drivers\Include\NavioRCInputDriver.h" /d /y</Command>
     </PostBuildEvent>
     <PkgGen>
-      <Version>1.0.0.1</Version>
+      <Version>1.0.0.8</Version>
     </PkgGen>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -91,7 +101,15 @@
       <PackageRelativeDirectory>
       </PackageRelativeDirectory>
     </FilesToPackage>
+    <FilesToPackage Include="$(SolutionDir)Drivers\ACPI\ACPITABL.DAT" Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+      <PackageRelativeDirectory>
+      </PackageRelativeDirectory>
+    </FilesToPackage>
     <FilesToPackage Include="$(TargetDir)NavioRCInput.cer" Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+      <PackageRelativeDirectory>
+      </PackageRelativeDirectory>
+    </FilesToPackage>
+    <FilesToPackage Include="$(TargetDir)NavioRCInput.cer" Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
       <PackageRelativeDirectory>
       </PackageRelativeDirectory>
     </FilesToPackage>

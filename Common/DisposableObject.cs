@@ -18,11 +18,7 @@ namespace Emlid.WindowsIot.Common
         /// <param name="disposing">
         /// True when called via <see cref="Dispose()"/>, false when called from the finalizer.
         /// </param>
-        protected virtual void Dispose(bool disposing)
-        {
-            // Flag disposed
-            IsDisposed = true;
-        }
+        protected abstract void Dispose(bool disposing);
 
         /// <summary>
         /// Finalizer which calls <see cref="Dispose(bool)"/> with false when it has not been disabled
@@ -30,6 +26,10 @@ namespace Emlid.WindowsIot.Common
         /// </summary>
         ~DisposableObject()
         {
+            // Dispose once only
+            if (IsDisposed)
+                return;
+
             // Partial dispose
             Dispose(false);
         }
@@ -39,6 +39,14 @@ namespace Emlid.WindowsIot.Common
         /// </summary>
         public void Dispose()
         {
+            // Dispose once only
+            if (IsDisposed)
+                return;
+
+            // Flag disposed first to help prevent external access during dispose
+            IsDisposed = true;
+
+            // Dispose
             try
             {
                 // Full managed dispose

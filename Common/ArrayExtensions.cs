@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Emlid.WindowsIot.Hardware
+namespace Emlid.WindowsIot.Common
 {
     /// <summary>
     /// Provides helper methods and extensions for working with arrays and collections.
@@ -65,11 +65,23 @@ namespace Emlid.WindowsIot.Hardware
             // Compare values
             var enumerator1 = enumeration1.GetEnumerator();
             var enumerator2 = enumeration2.GetEnumerator();
-            bool enumeration1HasMore;
-            var enumeration2HasMore = false;
-            while ((enumeration1HasMore = enumerator1.MoveNext()) &&
-                (enumeration2HasMore = enumerator2.MoveNext()))
+            do
             {
+                // Get next item and check length
+                var more1 = enumerator1.MoveNext();
+                var more2 = enumerator2.MoveNext();
+                if (more1 != more2)
+                {
+                    // Different lengths
+                    return false;
+                }
+                if (!more1)
+                {
+                    // End with no differences
+                    return true;
+                }
+
+                // Compare current values
                 var value1 = enumerator1.Current;
                 var value2 = enumerator2.Current;
                 if (!ReferenceEquals(value1, null))
@@ -85,10 +97,9 @@ namespace Emlid.WindowsIot.Hardware
                 }
                 else if (!ReferenceEquals(value2, null))
                     return false;
-            }
 
-            // Compare length
-            return !enumeration1HasMore && !enumeration2HasMore;
+                // Next...
+            } while (true);
         }
 
         /// <summary>
