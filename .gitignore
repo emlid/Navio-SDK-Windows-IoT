@@ -195,3 +195,4 @@ FakesAssemblies/
 /Framework/Emlid.WindowsIot.Hardware/project.lock.json
 /Samples/CSharp/Navio LED/project.lock.json
 /Tools/Navio Hardware Test/project.lock.json
+*.db
