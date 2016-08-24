@@ -192,8 +192,8 @@ FakesAssemblies/
 
 # Visual Studio 6 workspace options file
 *.opt
-/Framework/Emlid.WindowsIot.Hardware/project.lock.json
-/Samples/CSharp/Navio LED/project.lock.json
-/Tools/Navio Hardware Test/project.lock.json
+
+# Visual Studio 2015
+project.lock.json
 *.db
 *.opendb
