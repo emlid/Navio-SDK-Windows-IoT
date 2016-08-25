@@ -38,7 +38,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         /// </remarks>
         [CLSCompliant(false)]
         public NavioBarometerDevice()
-            : base(NavioHardwareProvider.ConnectI2c(I2cControllerIndex, I2cAddress, true, true), DefaultOsr)
+            : base(NavioHardwareProvider.ConnectI2c(I2cControllerIndex, I2cAddress), DefaultOsr)
         {
         }
 

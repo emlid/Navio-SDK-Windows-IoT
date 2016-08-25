@@ -51,7 +51,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
             _frameTrigger = new AutoResetEvent(false);
 
             // Configure GPIO
-            _inputPin = NavioHardwareProvider.ConnectGpio(0, GpioInputPinNumber, GpioPinDriveMode.Input, exclusive: true);
+            _inputPin = NavioHardwareProvider.ConnectGpio(0, GpioInputPinNumber);
             if (_inputPin == null)
             {
                 // Initialization error

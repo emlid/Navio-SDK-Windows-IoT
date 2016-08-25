@@ -160,7 +160,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
             bool clear = true, bool restart = true, bool enable = false)
         {
             // Connect to I2C device
-            var device = NavioHardwareProvider.ConnectI2c(I2cControllerIndex, I2cAddress, true, true);
+            var device = NavioHardwareProvider.ConnectI2c(I2cControllerIndex, I2cAddress);
             if (device == null)
             {
                 // Initialization error

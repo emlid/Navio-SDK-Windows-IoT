@@ -101,21 +101,48 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         }
 
         /// <summary>
+        /// Connects to a GPIO pin if it exists.
+        /// </summary>
+        /// <param name="controllerIndex">Controller index.</param>
+        /// <param name="pinNumber">Pin number.</param>
+        /// <param name="driveMode">Drive mode.</param>
+        /// <param name="sharingMode">Sharing mode.</param>
+        /// <returns>Pin when controller and device exist, otherwise null.</returns>
+        public static GpioPin ConnectGpio(int controllerIndex, int pinNumber, 
+            GpioPinDriveMode driveMode = GpioPinDriveMode.Input, GpioSharingMode sharingMode = GpioSharingMode.Exclusive)
+        {
+            // Validate
+            if (controllerIndex < 0) throw new ArgumentOutOfRangeException(nameof(controllerIndex));
+
+            // Initialize
+            Initialize();
+
+            // Get controller (return null when doesn't exist)
+            if (Gpio.Count < controllerIndex + 1)
+                return null;
+            var controller = Gpio[controllerIndex];
+
+            // Connect to device (return null when doesn't exist)
+            var pin = controller.OpenPin(pinNumber, sharingMode);
+            if (pin == null)
+                return null;
+
+            // Configure and return pin
+            if (pin.GetDriveMode() != driveMode)
+                pin.SetDriveMode(driveMode);
+            return pin;
+        }
+
+        /// <summary>
         /// Connects to an I2C device if it exists.
         /// </summary>
         /// <param name="controllerIndex">Controller index.</param>
-        /// <param name="address">
-        /// I2C slave address of the chip.
-        /// This is a physical property, not a software option.
-        /// </param>
-        /// <param name="fast">
-        /// Set true for I2C <see cref="I2cBusSpeed.FastMode"/> or false for <see cref="I2cBusSpeed.StandardMode"/>.
-        /// </param>
-        /// <param name="exclusive">
-        /// Set true for I2C <see cref="I2cSharingMode.Exclusive"/> or false for <see cref="I2cSharingMode.Shared"/>.
-        /// </param>
+        /// <param name="address">Slave address.</param>
+        /// <param name="speed">Bus speed.</param>
+        /// <param name="sharingMode">Sharing mode.</param>
         /// <returns>Device when controller and device exist, otherwise null.</returns>
-        public static I2cDevice ConnectI2c(int controllerIndex, int address, bool fast = true, bool exclusive = true)
+        public static I2cDevice ConnectI2c(int controllerIndex, int address, 
+            I2cBusSpeed speed = I2cBusSpeed.FastMode, I2cSharingMode sharingMode = I2cSharingMode.Exclusive)
         {
             // Validate
             if (controllerIndex < 0) throw new ArgumentOutOfRangeException(nameof(controllerIndex));
@@ -131,23 +158,24 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
             // Connect to device and return (if exists)
             var settings = new I2cConnectionSettings(address)
             {
-                BusSpeed = fast ? I2cBusSpeed.FastMode : I2cBusSpeed.StandardMode,
-                SharingMode = exclusive ? I2cSharingMode.Exclusive : I2cSharingMode.Shared
+                BusSpeed = speed,
+                SharingMode = sharingMode
             };
             return controller.GetDevice(settings);
         }
 
         /// <summary>
-        /// Connects to a GPIO pin if it exists.
+        /// Connects to an SPI device if it exists.
         /// </summary>
         /// <param name="controllerIndex">Controller index.</param>
-        /// <param name="pinNumber">Pin number.</param>
-        /// <param name="driveMode">Drive mode.</param>
-        /// <param name="exclusive">
-        /// Set true for I2C <see cref="GpioSharingMode.Exclusive"/> or false for <see cref="GpioSharingMode.SharedReadOnly"/>.
-        /// </param>
-        /// <returns>Pin when controller and device exist, otherwise null.</returns>
-        public static GpioPin ConnectGpio(int controllerIndex, int pinNumber, GpioPinDriveMode driveMode, bool exclusive)
+        /// <param name="chipSelectLine">Slave Chip Select Line.</param>
+        /// <param name="bits">Data length in bits.</param>
+        /// <param name="frequency">Frequency in Hz.</param>
+        /// <param name="mode">Communication mode, i.e. clock polarity.</param>
+        /// <param name="sharingMode">Sharing mode.</param>
+        /// <returns>Device when controller and device exist, otherwise null.</returns>
+        public static SpiDevice ConnectSpi(int controllerIndex, int chipSelectLine, int frequency, int bits, 
+            SpiMode mode, SpiSharingMode sharingMode = SpiSharingMode.Exclusive)
         {
             // Validate
             if (controllerIndex < 0) throw new ArgumentOutOfRangeException(nameof(controllerIndex));
@@ -156,19 +184,19 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
             Initialize();
 
             // Get controller (return null when doesn't exist)
-            if (Gpio.Count < controllerIndex + 1)
+            if (Spi.Count < controllerIndex + 1)
                 return null;
-            var controller = Gpio[controllerIndex];
+            var controller = Spi[controllerIndex];
 
-            // Connect to device (return null when doesn't exist)
-            var pin = controller.OpenPin(pinNumber, exclusive ? GpioSharingMode.Exclusive : GpioSharingMode.SharedReadOnly);
-            if (pin == null)
-                return null;
-
-            // Configure and return pin
-            if (pin.GetDriveMode() != driveMode)
-                pin.SetDriveMode(driveMode);
-            return pin;
+            // Connect to device and return (if exists)
+            var settings = new SpiConnectionSettings(chipSelectLine)
+            {
+                ClockFrequency = frequency,
+                DataBitLength = bits,
+                Mode = mode,
+                SharingMode = sharingMode
+            };
+            return controller.GetDevice(settings);
         }
 
         #endregion

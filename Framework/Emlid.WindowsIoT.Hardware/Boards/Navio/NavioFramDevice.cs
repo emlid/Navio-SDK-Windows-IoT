@@ -32,7 +32,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         public NavioFramDevice(NavioHardwareModel model)
         {
             // Connect to I2C device
-            var device = NavioHardwareProvider.ConnectI2c(I2cControllerIndex, I2cAddress, true, true);
+            var device = NavioHardwareProvider.ConnectI2c(I2cControllerIndex, I2cAddress);
             if (device == null)
             {
                 // Initialization error
@@ -47,7 +47,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
                     
                     // Connect to upper I2C device
                     var upperAddress = Mb85rc04vDevice.GetUpperI2cAddress(I2cAddress);
-                    var upperDevice = NavioHardwareProvider.ConnectI2c(I2cControllerIndex, upperAddress, true, true);
+                    var upperDevice = NavioHardwareProvider.ConnectI2c(I2cControllerIndex, upperAddress);
                     if (device == null)
                     {
                         // Initialization error
