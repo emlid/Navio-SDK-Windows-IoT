@@ -140,7 +140,7 @@ Mission statement: "Full hardware support for Navio on Windows IoT."
 5. GPS (U-Blox NEO-MN8, possibly NEO7M, NEO-6T too) device, sample and test app.
 6. ADC (ADS1115) device, sample and test app.
 7. FRAM (MB85RC04) device, sample and test app (100% complete).
- 
+
 
 ### Milestone 2: "Windows Drone PoC"
 
@@ -180,7 +180,7 @@ Mission statement: "Expand support and add new devices."
 5. Addressed some minor bugs in the GUI.
 6. General refactoring and tidy-up.
 7. Improved setup scripts and instructions.
-8. 
+
 
 *2016.01.02* v1.0.7
 
