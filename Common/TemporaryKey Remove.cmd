@@ -36,7 +36,7 @@ endlocal
 exit /b %result%
 
 :syntax
-echo Syntax^: "TemporaryKey Install.cmd" VS_KEY_HHHHHHHHHHHHHHHH
+echo Syntax^: "TemporaryKey Remove.cmd" VS_KEY_HHHHHHHHHHHHHHHH
 echo.
 echo VS_KEY_... is your unique Visual Studio key container, displayed in
 echo the error message when the key is missing.
