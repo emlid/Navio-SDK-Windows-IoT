@@ -1,7 +1,7 @@
 ﻿using System;
 using Windows.Devices.I2c;
 
-namespace Emlid.WindowsIot.Hardware.Components
+namespace Emlid.WindowsIot.Hardware.System
 {
     /// <summary>
     /// Extensions for work with I2C devices.
@@ -20,7 +20,59 @@ namespace Emlid.WindowsIot.Hardware.Components
 
         #endregion
 
+        #region Connect
+
+        /// <summary>
+        /// Connects to an I2C device if it exists.
+        /// </summary>
+        /// <param name="controller">Controller.</param>
+        /// <param name="address">7-bit I2C slave address (8 bit addresses must be shifted down to exclude the read/write bit).</param>
+        /// <param name="speed">Bus speed.</param>
+        /// <param name="sharingMode">Sharing mode.</param>
+        /// <returns>Device when controller and device exist, otherwise null.</returns>
+        public static I2cDevice Connect(this I2cController controller, int address,
+            I2cBusSpeed speed = I2cBusSpeed.FastMode, I2cSharingMode sharingMode = I2cSharingMode.Exclusive)
+        {
+            // Validate
+            if (controller == null) throw new ArgumentNullException(nameof(controller));
+            if (address < 0 || address > 0x7f) throw new ArgumentOutOfRangeException(nameof(address));
+
+            // Connect to device and return (if exists)
+            var settings = new I2cConnectionSettings(address)
+            {
+                BusSpeed = speed,
+                SharingMode = sharingMode
+            };
+            return controller.GetDevice(settings);
+        }
+
+        #endregion
+
         #region Read
+
+        /// <summary>
+        /// Reads one data byte.
+        /// </summary>
+        /// <param name="device">Device to use.</param>
+        /// <returns>Read data byte.</returns>
+        public static byte ReadByte(this I2cDevice device)
+        {
+            // Call overloaded method
+            return ReadBytes(device, 1)[0];
+        }
+
+        /// <summary>
+        /// Reads one or more data bytes.
+        /// </summary>
+        /// <param name="device">Device to use.</param>
+        /// <param name="size">Amount of data to read.</param>
+        /// <returns>Read data bytes.</returns>
+        public static byte[] ReadBytes(this I2cDevice device, int size)
+        {
+            var buffer = new byte[size];
+            device.Read(buffer);
+            return buffer;
+        }
 
         /// <summary>
         /// Writes data then reads a single byte result.
@@ -142,6 +194,27 @@ namespace Emlid.WindowsIot.Hardware.Components
         #endregion
 
         #region Write
+
+        /// <summary>
+        /// Writes one data byte.
+        /// </summary>
+        /// <param name="device">Device to use.</param>
+        /// <param name="data">Data to write.</param>
+        public static void WriteByte(this I2cDevice device, byte data)
+        {
+            var buffer = new byte[1] { data };
+            device.Write(buffer);
+        }
+
+        /// <summary>
+        /// Writes one or more data bytes.
+        /// </summary>
+        /// <param name="device">Device to use.</param>
+        /// <param name="data">Data to write.</param>
+        public static void WriteBytes(this I2cDevice device, byte[] data)
+        {
+            device.Write(data);
+        }
 
         /// <summary>
         /// Joins two byte values then writes them.

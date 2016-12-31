@@ -55,10 +55,11 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
         /// <summary>
         /// Compares this object with another by value.
         /// </summary>
-        public override bool Equals(object obj)
+        /// <param name="value">Object with which to compare by value.</param>
+        public override bool Equals(object value)
         {
             // Compare nullability and type
-            var other = obj as NxpPca9685Channel;
+            var other = value as NxpPca9685Channel;
             if (ReferenceEquals(other, null))
                 return false;
 
@@ -69,7 +70,7 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
         }
 
         /// <summary>
-        /// Returns a hashcode based on the current value of this object.
+        /// Returns a hash-code based on the current value of this object.
         /// </summary>
         public override int GetHashCode()
         {
@@ -112,6 +113,8 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
         /// <summary>
         /// Fires the <see cref="ValueChanged"/> event when the <see cref="NxpPca9685ChannelValue.Changed"/> event is received.
         /// </summary>
+        /// <param name="sender">Sender, this channel.</param>
+        /// <param name="arguments">Standard event arguments, no specific data.</param>
         private void OnValueChanged(object sender, EventArgs arguments)
         {
             DoValueChanged();

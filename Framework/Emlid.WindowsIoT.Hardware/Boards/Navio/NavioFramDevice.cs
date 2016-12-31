@@ -1,14 +1,14 @@
 ﻿using Emlid.WindowsIot.Common;
 using Emlid.WindowsIot.Hardware.Components.Mb85rcv;
+using Emlid.WindowsIot.Hardware.System;
 using System;
-using System.Globalization;
 
 namespace Emlid.WindowsIot.Hardware.Boards.Navio
 {
     /// <summary>
     /// Navio FRAM (MB85RC256V or MB85RC04V hardware device), connected via I2C.
     /// </summary>
-    public class NavioFramDevice : DisposableObject
+    public sealed class NavioFramDevice : DisposableObject, INavioFramDevice
     {
         #region Constants
 
@@ -18,9 +18,19 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         public const int I2cControllerIndex = 0;
 
         /// <summary>
-        /// I2C address of the MB85RC#V on the Navio board.
+        /// MB85RC#V chip number (device address code).
         /// </summary>
-        public const int I2cAddress = 0x50;
+        public const byte ChipNumber = 0;
+
+        /// <summary>
+        /// FRAM device ID on the Navio.
+        /// </summary>
+        public static readonly Mb85rcvDeviceId Navio1DeviceId = new Mb85rcvDeviceId(Mb85rcvDeviceId.FujitsuManufacturerId, Mb85rc04vDevice.Density, 0x10);
+
+        /// <summary>
+        /// FRAM device ID on the Navio+.
+        /// </summary>
+        public static readonly Mb85rcvDeviceId Navio1PlusDeviceId = new Mb85rcvDeviceId(Mb85rcvDeviceId.FujitsuManufacturerId, Mb85rc256vDevice.Density, 0x10);
 
         #endregion
 
@@ -31,38 +41,23 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         /// </summary>
         public NavioFramDevice(NavioHardwareModel model)
         {
-            // Connect to I2C device
-            var device = NavioHardwareProvider.ConnectI2c(I2cControllerIndex, I2cAddress);
-            if (device == null)
-            {
-                // Initialization error
-                throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture,
-                    Resources.Strings.I2cErrorDeviceNotFound, I2cAddress, I2cControllerIndex));
-            }
+            // Get I2C controller for FRAM chip
+            DeviceProvider.Initialize();
+            var controller = DeviceProvider.I2c[I2cControllerIndex];
 
             // Create model specific device
             switch (model)
             {
-                case NavioHardwareModel.Navio:
-                    
-                    // Connect to upper I2C device
-                    var upperAddress = Mb85rc04vDevice.GetUpperI2cAddress(I2cAddress);
-                    var upperDevice = NavioHardwareProvider.ConnectI2c(I2cControllerIndex, upperAddress);
-                    if (device == null)
-                    {
-                        // Initialization error
-                        throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture,
-                            Resources.Strings.I2cErrorDeviceNotFound, upperAddress, I2cControllerIndex));
-                    }
+                case NavioHardwareModel.Navio1:
 
                     // Create 512 byte device for Navio
-                    Hardware = new Mb85rc04vDevice(device, upperDevice);
+                    _device = new Mb85rc04vDevice(controller, ChipNumber);
                     break;
 
-                case NavioHardwareModel.NavioPlus:
+                case NavioHardwareModel.Navio1Plus:
 
                     // Create 32KiB device for Navio+
-                    Hardware = new Mb85rc256vDevice(device);
+                    _device = new Mb85rc256vDevice(controller, ChipNumber);
                     break;
 
                 default:
@@ -85,20 +80,19 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
                 return;
 
             // Close device
-            Hardware?.Dispose();
+            _device?.Dispose();
         }
 
         #endregion
 
         #endregion
 
-        #region Protected Properties
+        #region Private Fields
 
         /// <summary>
         /// FRAM device specific to the requested Navio model.
         /// </summary>
-        [CLSCompliant(false)]
-        protected Mb85rcvDevice Hardware { get; private set; }
+        private Mb85rcvDevice _device;
 
         #endregion
 
@@ -107,7 +101,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         /// <summary>
         /// Size of memory in bytes.
         /// </summary>
-        public int Size { get { return Hardware.Size; } }
+        public int Size { get { return _device.Size; } }
 
         #endregion
 
@@ -119,61 +113,73 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         public byte ReadByte()
         {
             // Call method on contained instance
-            return Hardware.ReadByte();
+            return _device.ReadByte();
         }
 
         /// <summary>
         /// Reads a single byte at the "current address" (next byte after the last operation).
         /// </summary>
+        /// <param name="length">Length of page to read in bytes.</param>
         public byte[] ReadPage(int length)
         {
             // Call method on contained instance
-            return Hardware.ReadPage(length);
+            return _device.ReadPage(length);
         }
 
         /// <summary>
         /// Reads a single byte "randomly" at the specified address.
         /// </summary>
+        /// <param name="address">Address at which to read.</param>
         public byte ReadByte(int address)
         {
             // Call method on contained instance
-            return Hardware.ReadByte(address);
+            return _device.ReadByte(address);
         }
 
         /// <summary>
         /// Reads a "page" of bytes "sequentially" starting at the specified address.
         /// </summary>
+        /// <param name="address">Address at which to read.</param>
+        /// <param name="length">Length of page to read in bytes.</param>
         public byte[] ReadPage(int address, int length)
         {
             // Call method on contained instance
-            return Hardware.ReadPage(address, length);
+            return _device.ReadPage(address, length);
         }
 
         /// <summary>
         /// Writes a single byte at the specified address.
         /// </summary>
+        /// <param name="address">Address at which to write.</param>
+        /// <param name="data">Source data buffer to write from.</param>
         public void WriteByte(int address, byte data)
         {
             // Call method on contained instance
-            Hardware.WriteByte(address, data);
+            _device.WriteByte(address, data);
         }
 
         /// <summary>
         /// Writes a "page" of multiple bytes starting at the specified address.
         /// </summary>
+        /// <param name="address">Address at which to write.</param>
+        /// <param name="data">Source data buffer to write from.</param>
         public void WritePage(int address, byte[] data)
         {
             // Call method on contained instance
-            Hardware.WritePage(address, data);
+            _device.WritePage(address, data);
         }
 
         /// <summary>
         /// Writes a "page" of multiple bytes starting at the specified address.
         /// </summary>
+        /// <param name="address">Address at which to write.</param>
+        /// <param name="data">Source data buffer to write from.</param>
+        /// <param name="offset">Offset in the source buffer at which to start reading data to write.</param>
+        /// <param name="length">Length of page to write in bytes.</param>
         public void WritePage(int address, byte[] data, int offset, int length)
         {
             // Call method on contained instance
-            Hardware.WritePage(address, data, offset, length);
+            _device.WritePage(address, data, offset, length);
         }
 
         #endregion

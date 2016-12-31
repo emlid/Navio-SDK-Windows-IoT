@@ -1,4 +1,6 @@
 ﻿using Emlid.WindowsIot.Common;
+using Emlid.WindowsIot.Hardware.Protocols.Pwm;
+using Emlid.WindowsIot.Hardware.System;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -48,19 +50,19 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
         public const int ClockSpeedMaximum = 50000000;
 
         /// <summary>
-        /// Minimum value of the <see cref="NxpPca9685Register.PreScale"/> register.
+        /// Minimum value of the <see cref="NxpPca9685Register.Prescale"/> register.
         /// </summary>
-        public const byte PreScaleMinimum = 0x03;
+        public const byte PrescaleMinimum = 0x03;
 
         /// <summary>
-        /// Maximum value of the <see cref="NxpPca9685Register.PreScale"/> register.
+        /// Maximum value of the <see cref="NxpPca9685Register.Prescale"/> register.
         /// </summary>
-        public const byte PreScaleMaximum = 0xff;
+        public const byte PrescaleMaximum = 0xff;
 
         /// <summary>
-        /// Default value of the <see cref="NxpPca9685Register.PreScale"/> register.
+        /// Default value of the <see cref="NxpPca9685Register.Prescale"/> register.
         /// </summary>
-        public const byte PreScaleDefault = 0x30;
+        public const byte PrescaleDefault = 0x30;
 
         /// <summary>
         /// Time to wait in milliseconds after switching modes, stopping or starting the oscillator.
@@ -91,9 +93,9 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
             Hardware = device;
             ClockIsExternal = clockSpeed.HasValue;
             ClockSpeed = clockSpeed ?? InternalClockSpeed;
-            FrequencyDefault = CalculateFrequency(PreScaleDefault, ClockSpeed);
-            FrequencyMinimum = CalculateFrequency(PreScaleMaximum, ClockSpeed); // Inverse relationship (max = min)
-            FrequencyMaximum = CalculateFrequency(PreScaleMinimum, ClockSpeed); // Inverse relationship (min = max)
+            FrequencyDefault = CalculateFrequency(PrescaleDefault, ClockSpeed);
+            FrequencyMinimum = CalculateFrequency(PrescaleMaximum, ClockSpeed); // Inverse relationship (max = min)
+            FrequencyMaximum = CalculateFrequency(PrescaleMinimum, ClockSpeed); // Inverse relationship (min = max)
             _channels = new Collection<NxpPca9685Channel>();
             Channels = new ReadOnlyCollection<NxpPca9685Channel>(_channels);
             for (var index = 0; index < ChannelCount; index++)
@@ -110,8 +112,11 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
         #region IDisposable
 
         /// <summary>
-        /// <see cref="DisposableObject.Dispose(bool)"/>.
+        /// Frees resources owned by this instance.
         /// </summary>
+        /// <param name="disposing">
+        /// True when called via <see cref="IDisposable.Dispose"/>, false when called via finalizer.
+        /// </param>
         protected override void Dispose(bool disposing)
         {
             // Only managed resources to dispose
@@ -132,7 +137,7 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
         /// Channels and their values (also settable).
         /// </summary>
         public ReadOnlyCollection<NxpPca9685Channel> Channels { get; private set; }
-        private Collection<NxpPca9685Channel> _channels;
+        private readonly Collection<NxpPca9685Channel> _channels;
 
         /// <summary>
         /// Indicates the PWM clock is controlled externally.
@@ -147,20 +152,25 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
         /// <summary>
         /// Frequency in Hz.
         /// </summary>
+        /// <remarks>
+        /// Some PWM devices do not tolerate high values and could be damaged if this is set too high,
+        /// e.g. analog servos operate at much lower frequencies than digital servos.
+        /// See <see cref="PwmCycle.ServoSafeFrequency"/> for more information.
+        /// </remarks>
         public float Frequency { get; private set; }
 
         /// <summary>
-        /// Frequency when the hardware <see cref="PreScaleDefault"/> is set.
+        /// Frequency when the hardware <see cref="PrescaleDefault"/> is set.
         /// </summary>
         public float FrequencyDefault { get; private set; }
 
         /// <summary>
-        /// Minimum frequency based on <see cref="ClockSpeed"/> and <see cref="PreScaleMaximum"/> (inverse relation).
+        /// Minimum frequency based on <see cref="ClockSpeed"/> and <see cref="PrescaleMaximum"/> (inverse relation).
         /// </summary>
         public float FrequencyMinimum { get; private set; }
 
         /// <summary>
-        /// Maximum frequency based on <see cref="ClockSpeed"/> and <see cref="PreScaleMinimum"/> (inverse relation).
+        /// Maximum frequency based on <see cref="ClockSpeed"/> and <see cref="PrescaleMinimum"/> (inverse relation).
         /// </summary>
         public float FrequencyMaximum { get; private set; }
 
@@ -369,22 +379,22 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
         #region Frequency
 
         /// <summary>
-        /// Calculates the effective frequency from a <see cref="NxpPca9685Register.PreScale"/> value and clock speed.
+        /// Calculates the effective frequency from a <see cref="NxpPca9685Register.Prescale"/> value and clock speed.
         /// </summary>
-        /// <param name="preScale">Pre-scale value from which to calculate frequency.</param>
-        /// <param name="clockSpeed">Clock speed with with to calcualte the frequency.</param>
+        /// <param name="prescale">Prescale value from which to calculate frequency.</param>
+        /// <param name="clockSpeed">Clock speed with which to calculate the frequency.</param>
         /// <returns>Calculated frequency.</returns>
-        public static float CalculateFrequency(byte preScale, int clockSpeed)
+        public static float CalculateFrequency(byte prescale, int clockSpeed)
         {
-            return clockSpeed / 4096f / (preScale + 1);
+            return clockSpeed / 4096f / (prescale + 1);
         }
 
         /// <summary>
-        /// Calculates the <see cref="NxpPca9685Register.PreScale"/> value from a desired frequency and clock speed.
+        /// Calculates the <see cref="NxpPca9685Register.Prescale"/> value from a desired frequency and clock speed.
         /// </summary>
         /// <remarks>
         /// Due to scaling only certain frequencies are possible. To get the resulting frequency from the desired
-        /// frequency it is necessary to re-calcualte the effective frequency back from the pre-scale,
+        /// frequency it is necessary to re-calculate the effective frequency back from the prescale,
         /// i.e. call <see cref="CalculateFrequency"/>.
         /// </remarks>
         /// <param name="frequency">
@@ -392,29 +402,29 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
         /// Must be between <see cref="FrequencyMinimum"/> and <see cref="FrequencyMaximum"/> to get a valid result.
         /// </param>
         /// <param name="clockSpeed"></param>
-        /// <returns>Calculated pre-scale value.</returns>
+        /// <returns>Calculated prescale value.</returns>
         /// <exception cref="OverflowException">
         /// Thrown when an invalid frequency is used which causes the result to overflow a byte value.
         /// </exception>
-        public static byte CalculatePreScale(float frequency, int clockSpeed)
+        public static byte CalculatePrescale(float frequency, int clockSpeed)
         {
             return Convert.ToByte(Math.Round(clockSpeed / 4096f / frequency) - 1);
         }
 
         /// <summary>
-        /// Reads the pre-scale register and calculates the <see cref="Frequency"/> (and related properties)
+        /// Reads the prescale register and calculates the <see cref="Frequency"/> (and related properties)
         /// based on <see cref="ClockSpeed"/>.
         /// </summary>
         /// <returns>
-        /// Frequency in Hz. Related properties are also udpated.
+        /// Frequency in Hz. Related properties are also updated.
         /// </returns>
         public float ReadFrequency()
         {
-            // Read pre-scale register
-            var preScale = Hardware.WriteReadByte((byte)NxpPca9685Register.PreScale);
+            // Read prescale register
+            var prescale = Hardware.WriteReadByte((byte)NxpPca9685Register.Prescale);
 
             // Calculate frequency
-            var frequency = CalculateFrequency(preScale, ClockSpeed);
+            var frequency = CalculateFrequency(prescale, ClockSpeed);
 
             // Update related properties
             Frequency = frequency;
@@ -426,39 +436,39 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
         }
 
         /// <summary>
-        /// Calculates the pre-scale value from the frequency (according to <see cref="ClockSpeed"/>) 
+        /// Calculates the prescale value from the frequency (according to <see cref="ClockSpeed"/>)
         /// then writes that register, then calls <see cref="ReadFrequency"/> to update properties.
         /// Note the actual frequency may differ to the requested frequency due to clock scale (rounding).
         /// </summary>
         /// <remarks>
-        /// The pre-scale can only be set during sleep mode. This method enters <see cref="Sleep"/> if necessary,
+        /// The prescale can only be set during sleep mode. This method enters <see cref="Sleep"/> if necessary,
         /// then only if the device was awake before, calls <see cref="Wake"/> afterwards. It's important not to
         /// start output unexpectedly to avoid damage, i.e. if the device was sleeping before, the frequency is
         /// changed without starting the oscillator.
         /// </remarks>
         /// <param name="frequency">Frequency to convert in Hz.</param>
-        /// <returns>Effective frequency in Hz, read-back and re-caculated after setting the desired frequency.</returns>
+        /// <returns>
+        /// Effective frequency in Hz, read-back and recalculated after setting the desired frequency.
+        /// Frequency in Hz. Related properties are also updated.
+        /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">
         /// Thrown when <paramref name="frequency"/> is less than <see cref="FrequencyMinimum"/> or greater than
         /// <see cref="FrequencyMaximum"/>.
         /// </exception>
-        /// <returns>
-        /// Frequency in Hz. Related properties are also udpated.
-        /// </returns>
         public float WriteFrequency(float frequency)
         {
             // Validate
             if (frequency < FrequencyMinimum || frequency > FrequencyMaximum)
                 throw new ArgumentOutOfRangeException(nameof(frequency));
 
-            // Calculate pre-scale
-            var preScale = CalculatePreScale(frequency, ClockSpeed);
+            // Calculate prescale
+            var prescale = CalculatePrescale(frequency, ClockSpeed);
 
             // Enter sleep mode and record wake status
             var wasAwake = Sleep();
 
-            // Write pre-scale
-            Hardware.WriteJoinByte((byte)NxpPca9685Register.PreScale, preScale);
+            // Write prescale
+            Hardware.WriteJoinByte((byte)NxpPca9685Register.Prescale, prescale);
 
             // Read result
             var actual = ReadFrequency();
@@ -709,6 +719,8 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
         /// <summary>
         /// Writes channel values to the device when the <see cref="Channels"/> member changes.
         /// </summary>
+        /// <param name="sender">Sender, the channel which changed.</param>
+        /// <param name="arguments">Standard event arguments, no specific data.</param>
         private void OnChannelChanged(object sender, EventArgs arguments)
         {
             var channel = (NxpPca9685Channel)sender;

@@ -1,5 +1,4 @@
-﻿using Emlid.WindowsIot.Hardware;
-using Emlid.WindowsIot.Hardware.Boards.Navio;
+﻿using Emlid.WindowsIot.Hardware.Boards.Navio;
 using System.Diagnostics;
 using Windows.ApplicationModel.Background;
 
@@ -15,13 +14,23 @@ namespace Emlid.WindowsIot.Samples.NavioBarometer
         /// </summary>
         public void Run(IBackgroundTaskInstance taskInstance)
         {
-            using (var barometer = new NavioBarometerDevice())
+            // Connect to hardware
+            Debug.WriteLine("Connecting to Navio board.");
+            using (var board = NavioDeviceProvider.Connect())
             {
+                Debug.WriteLine("Navio board was detected as a \"{0}\".", board.Model);
+                var barometer = board.Barometer;
+
+                // Reset
+                Debug.WriteLine("Resetting device.");
                 barometer.Reset();
+
+                // Infinite update loop
+                Debug.WriteLine("Starting infinite update loop...");
                 while (true)
-                { 
-                    barometer.Update();
-                    Debug.WriteLine(barometer.Measurement);
+                {
+                    var measurement = barometer.Update();
+                    Debug.WriteLine(measurement);
                 }
             }
         }

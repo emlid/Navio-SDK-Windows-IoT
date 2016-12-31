@@ -1,15 +1,18 @@
-﻿using System;
+﻿using Emlid.WindowsIot.Common;
+using System;
 using System.Globalization;
 using System.Text;
 
 namespace Emlid.WindowsIot.Hardware.Protocols.Pwm
 {
     /// <summary>
-    /// Contains data and definitions of an RC input PWM frame.
+    /// PWM frame data, a sequence of one or more PWM values sent together at a time.
     /// </summary>
     /// <remarks>
     /// Used as a standard variable container for both "PWM" (single channel) and other
     /// multi-channel protocols such as CPPM (a.k.a. PPM-Sum).
+    /// The value of each channel depends on the protocol, i.e. what the start and end
+    /// PWM lengths are and polarity (high or low as delimiter).
     /// </remarks>
     public class PwmFrame
     {
@@ -33,6 +36,57 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Pwm
             // Initialize
             Time = sequence;
             Channels = channels;
+        }
+
+        #endregion
+
+        #region Operators
+
+        /// <summary>
+        /// Tests two objects of this type for equality by value.
+        /// </summary>
+        public static bool operator ==(PwmFrame left, PwmFrame right)
+        {
+            return !ReferenceEquals(left, null)
+                ? left.Equals(right)
+                : ReferenceEquals(right, null);
+        }
+
+        /// <summary>
+        /// Tests two objects of this type for inequality by value.
+        /// </summary>
+        public static bool operator !=(PwmFrame left, PwmFrame right)
+        {
+            return !ReferenceEquals(left, null)
+                ? !left.Equals(right)
+                : !ReferenceEquals(right, null);
+        }
+
+        /// <summary>
+        /// Compares this object with another by value.
+        /// </summary>
+        /// <param name="value">Object with which to compare by value.</param>
+        public override bool Equals(object value)
+        {
+            // Compare type
+            var other = value as PwmFrame;
+            if (ReferenceEquals(other, null))
+                return false;
+
+            // Compare values
+            return
+                other.Time == Time &&
+                ArrayExtensions.AreEqual(other.Channels, Channels);
+        }
+
+        /// <summary>
+        /// Returns a hash-code based on the current value of this object.
+        /// </summary>
+        public override int GetHashCode()
+        {
+            return
+                Time.GetHashCode() ^
+                ArrayExtensions.GetHashCode(Channels);
         }
 
         #endregion

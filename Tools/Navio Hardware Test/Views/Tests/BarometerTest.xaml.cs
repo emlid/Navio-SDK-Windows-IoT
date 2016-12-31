@@ -1,21 +1,20 @@
-﻿using Emlid.WindowsIot.Tests.NavioHardwareTestApp.Models;
-using System.Threading.Tasks;
+﻿using Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Shared;
+using System;
+using System.ComponentModel;
+using System.Globalization;
 using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using System.ComponentModel;
 using Windows.UI.Xaml.Shapes;
-using System.Globalization;
-using System;
 
 namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
 {
     /// <summary>
-    /// Main page.
+    /// Barometer test page.
     /// </summary>
-    public sealed partial class BarometerTestPage : Page
+    public sealed partial class BarometerTestPage : UIModelPage
     {
         #region Constants
 
@@ -38,27 +37,9 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
         /// </summary>
         public BarometerTestPage()
         {
-            // Initialize members
-            _uiScheduler = TaskScheduler.FromCurrentSynchronizationContext();
-            _uiFactory = new TaskFactory(_uiScheduler);
-
             // Initialize view
             InitializeComponent();
         }
-
-        #endregion
-
-        #region Fields
-
-        /// <summary>
-        /// Task scheduler for the UI thread.
-        /// </summary>
-        private TaskScheduler _uiScheduler;
-
-        /// <summary>
-        /// Task factory for the UI thread.
-        /// </summary>
-        private TaskFactory _uiFactory;
 
         #endregion
 
@@ -79,7 +60,7 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
         protected override void OnNavigatedTo(NavigationEventArgs arguments)
         {
             // Initialize model and bind
-            DataContext = Model = new BarometerTestUIModel(_uiFactory);
+            DataContext = Model = new BarometerTestUIModel(ApplicationUIModel);
             Model.PropertyChanged += OnModelChanged;
 
             // Initial layout
@@ -283,7 +264,7 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
             Graph.Children.Add(temperatureLine);
 
             // Draw average text
-            var pressureAverageString = string.Format(CultureInfo.CurrentCulture, 
+            var pressureAverageString = string.Format(CultureInfo.CurrentCulture,
                 "Pressure: {0}mbar", pressureAverage.Value);
             var pressureAverageText = new TextBlock
             {
@@ -303,14 +284,14 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
             // Position average text so that it does not overlap
             pressureAverageText.UpdateLayout();
             temperatureAverageText.UpdateLayout();
-            Canvas.SetTop(pressureAverageText, pressureAverageY 
+            Canvas.SetTop(pressureAverageText, pressureAverageY
                 - pressureAverageText.ActualHeight);
             Canvas.SetLeft(pressureAverageText, width
                 - pressureAverageText.ActualWidth - GraphPadding
                 - temperatureAverageText.ActualWidth - GraphPadding);
             Canvas.SetTop(temperatureAverageText, temperatureAverageY
                 - temperatureAverageText.ActualHeight);
-            Canvas.SetLeft(temperatureAverageText, width 
+            Canvas.SetLeft(temperatureAverageText, width
                 - temperatureAverageText.ActualWidth - GraphPadding);
         }
 

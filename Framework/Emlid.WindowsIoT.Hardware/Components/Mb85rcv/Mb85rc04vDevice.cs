@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Emlid.WindowsIot.Hardware.System;
+using System;
 using Windows.Devices.I2c;
-using Resources = Emlid.WindowsIot.Hardware.Resources;
 
 namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
 {
@@ -31,6 +31,16 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
     public class Mb85rc04vDevice : Mb85rcvDevice
     {
         #region Constants
+
+        /// <summary>
+        /// Density of this model.
+        /// </summary>
+        public const byte Density = 0x0;
+
+        /// <summary>
+        /// Maximum number of devices for this model.
+        /// </summary>
+        public const int MaximumDevices = 4;
 
         /// <summary>
         /// Memory size in bytes.
@@ -74,35 +84,35 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
         #region Lifetime
 
         /// <summary>
-        /// Creates an instance using the specified I2C devices.
+        /// Creates an instance connected to the specified I2C bus and chip number.
         /// </summary>
-        /// <param name="lowerDevice">I2C device of the lower memory area.</param>
-        /// <param name="upperDevice">
-        /// I2C device of the upper memory area.
-        /// Use <see cref="GetUpperI2cAddress(int)"/> to get the address for this device from the address of the lower devcie.
-        /// </param>
+        /// <param name="controller">I2C controller.</param>
+        /// <param name="chipNumber">Chip number (device address code).</param>
+        /// <param name="speed">Bus speed.</param>
+        /// <param name="sharingMode">Sharing mode.</param>
         [CLSCompliant(false)]
-        public Mb85rc04vDevice(I2cDevice lowerDevice, I2cDevice upperDevice)
-            : base(lowerDevice, MemorySize)
+        public Mb85rc04vDevice(I2cController controller, byte chipNumber,
+            I2cBusSpeed speed = I2cBusSpeed.FastMode, I2cSharingMode sharingMode = I2cSharingMode.Exclusive)
+            : base(chipNumber, MemorySize)
         {
             // Validate
-            if (lowerDevice == null) throw new ArgumentOutOfRangeException(nameof(lowerDevice));
-            if (upperDevice == null) throw new ArgumentOutOfRangeException(nameof(upperDevice));
+            if (controller == null) throw new ArgumentNullException(nameof(controller));
 
             // Check device addresses
-            var lowerAddress = lowerDevice.ConnectionSettings.SlaveAddress;
-            if ((lowerAddress & MemoryUpperAddressBitmask) != 0)
+            var lowerAddress = GetDataI2cAddress(chipNumber, false);
+            var upperAddress = GetDataI2cAddress(chipNumber, false);
+
+            // Connect to devices
+            try
             {
-                // Invalid - lower has upper address bits
-                throw new ArgumentOutOfRangeException(nameof(lowerDevice),
-                    Resources.Strings.Mb85rc04vLowerAddressInvalidHasUpperBits);
+                Hardware = controller.Connect(lowerAddress, speed, sharingMode);
+                HardwareUpper = controller.Connect(upperAddress, speed, sharingMode);
             }
-            var upperAddress = upperDevice.ConnectionSettings.SlaveAddress;
-            if (upperAddress != (lowerAddress | MemoryUpperAddressBitmask))
+            finally
             {
-                // Invalid - upper does not match lower
-                throw new ArgumentOutOfRangeException(nameof(upperDevice),
-                    Resources.Strings.Mb85rc04vUpperAddressInvalidNoMatchLower);
+                // Free resources on initialization error
+                Hardware?.Dispose();
+                HardwareUpper?.Dispose();
             }
         }
 
@@ -155,16 +165,68 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
         #region Public Methods
 
         /// <summary>
-        /// Calculates the I2C address to access the upper device, given the main/lower address.
+        /// Gets the device identifier by sending the Device ID command to the
+        /// specified chip number (device address code).
         /// </summary>
-        public static int GetUpperI2cAddress(int lowerAddress)
+        /// <param name="controller">I2C controller on which the device is connected.</param>
+        /// <param name="chipNumber">
+        /// Device (chip code, not FRAM memory) address from zero to the supported <see cref="MaximumDevices"/>.
+        /// </param>
+        /// <returns>Device ID.</returns>
+        [CLSCompliant(false)]
+        public static Mb85rcvDeviceId GetDeviceId(I2cController controller, byte chipNumber)
         {
-            return lowerAddress | MemoryUpperAddressBitmask;
+            // Validate
+            if (controller == null) throw new ArgumentNullException(nameof(controller));
+            if (chipNumber < 0 || chipNumber > MaximumDevices)
+                throw new ArgumentOutOfRangeException(nameof(chipNumber));
+
+            // Calculate device ID address
+            var idAddress = GetDeviceIdI2cAddress(chipNumber);
+            var dataAddress = GetDataI2cAddress(chipNumber, false);
+
+            // Call overloaded method
+            return GetDeviceId(controller, idAddress, dataAddress);
         }
 
         #endregion
 
         #region Protected Methods
+
+        /// <summary>
+        /// Gets the I2C address for data commands with the specified chip number (device address code).
+        /// </summary>
+        /// <param name="chipNumber">
+        /// Device (chip code, not FRAM memory) address from zero to the supported <see cref="MaximumDevices"/>.
+        /// </param>
+        /// <param name="upper">Set true when the data command is for the upper memory area.</param>
+        /// <returns>7-bit I2C address.</returns>
+        public static byte GetDataI2cAddress(int chipNumber, bool upper)
+        {
+            // Validate
+            if (chipNumber < 0 || chipNumber > MaximumDevices)
+                throw new ArgumentOutOfRangeException(nameof(chipNumber));
+
+            // Calculate and return address
+            return (byte)(DataI2cAddress + (chipNumber << 1));
+        }
+
+        /// <summary>
+        /// Gets the I2C address for the device ID command with the specified chip number (device address code).
+        /// </summary>
+        /// <param name="chipNumber">
+        /// Device (chip code, not FRAM memory) address from zero to the supported <see cref="MaximumDevices"/>.
+        /// </param>
+        /// <returns>7-bit I2C address.</returns>
+        public static byte GetDeviceIdI2cAddress(int chipNumber)
+        {
+            // Validate
+            if (chipNumber < 0 || chipNumber > MaximumDevices)
+                throw new ArgumentOutOfRangeException(nameof(chipNumber));
+
+            // Calculate and return address
+            return (byte)(DeviceIdI2cAddress + (chipNumber << 1));
+        }
 
         /// <summary>
         /// Gets the <see cref="I2cDevice"/> required to communicate with a specific memory address.
@@ -176,7 +238,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
         /// necessary to use multiple <see cref="I2cDevice"/> instances for each.
         /// </remarks>
         [CLSCompliant(false)]
-        protected override I2cDevice GetDeviceForAddress(int address)
+        protected override I2cDevice GetI2cDeviceForMemoryAddress(int address)
         {
             var upper = (address & MemoryUpperAddressBitmask) != 0;
             return upper ? HardwareUpper : Hardware;
@@ -188,7 +250,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
         /// <param name="address"></param>
         /// <returns>
         /// Byte array which can be written to request the specified memory address,
-        /// assuming the correct I2C device is being used as provided by <see cref="GetDeviceForAddress(int)"/>
+        /// assuming the correct I2C device is being used as provided by <see cref="GetI2cDeviceForMemoryAddress(int)"/>
         /// which may include the MSB in it's I2C address.
         /// </returns>
         /// <remarks>

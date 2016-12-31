@@ -1,53 +1,28 @@
-﻿using Emlid.WindowsIot.Common;
-using System;
-using System.ComponentModel;
+﻿using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Models
+namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
 {
     /// <summary>
     /// Base class for all test UI models.
     /// </summary>
-    public abstract class TestUIModel : DisposableObject, INotifyPropertyChanged
+    public abstract class TestUIModel : PageUIModel
     {
-        #region Constants
-
-        /// <summary>
-        /// Maximum time (in milliseconds) allowed for the UI to process updates before continuing with other updates.
-        /// </summary>
-        /// <remarks>
-        /// When too short and events are generated too quickly, the UI has no chance to refresh.
-        /// When too long and processor intensive operations are triggered, the UI could appear to hang.
-        /// </remarks>
-        public const int UpdateTimeout = 500;
-
-        #endregion
-
         #region Lifetime
 
         /// <summary>
         /// Creates an instance.
         /// </summary>
-        protected TestUIModel(TaskFactory uiThread)
+        protected TestUIModel(ApplicationUIModel application) : base(application)
         {
             // Initialize members
-            UIThread = uiThread;
             InputEnabled = true;
             _output = new StringBuilder();
         }
-
-        #endregion
-
-        #region Fields
-
-        /// <summary>
-        /// UI task factory.
-        /// </summary>
-        protected TaskFactory UIThread { get; private set; }
 
         #endregion
 
@@ -101,15 +76,18 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Models
         /// </summary>
         protected virtual void WriteOutput(string text, params object[] arguments)
         {
+            // Validate
+            if (text == null) throw new ArgumentNullException(nameof(text));
+
             // Add text to output with formatting when necessary
             string output;
-            if (arguments.Length == 0)
+            if (arguments?.Length == 0)
                 output = text;
             else
-                output = String.Format(CultureInfo.CurrentCulture, text, arguments);
+                output = string.Format(CultureInfo.CurrentCulture, text, arguments);
 
             // Add time stamp
-            output = String.Format(CultureInfo.CurrentCulture, "{0} {1}", DateTime.Now, output);
+            output = string.Format(CultureInfo.CurrentCulture, "{0} {1}", DateTime.Now, output);
 
             // Write to output and debugger
             lock (_output)
@@ -161,39 +139,6 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Models
                     DoPropertyChanged(nameof(InputEnabled));
                 }
             });
-        }
-
-        #endregion
-
-        #region Events
-
-        /// <summary>
-        /// Fired when the model data has changed and the view should be refreshed.
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        /// <summary>
-        /// Fires the <see cref="PropertyChanged"/> event.
-        /// </summary>
-        /// <param name="name">Name of the property which changed.</param>
-        protected virtual void DoPropertyChanged(string name)
-        {
-            // Do nothing when disposed
-            if (IsDisposed) return;
-
-            // Run event handler on UI thread
-            if (PropertyChanged != null)
-            {
-                UIThread.StartNew(() =>
-                {
-                    // Do nothing when disposed (may occur whilst scheduling call to UI thread)
-                    if (IsDisposed) return;
-
-                    // Fire event causing UI to update
-                    PropertyChanged(this, new PropertyChangedEventArgs(name));
-                })
-                .Wait(UpdateTimeout);
-            }
         }
 
         #endregion

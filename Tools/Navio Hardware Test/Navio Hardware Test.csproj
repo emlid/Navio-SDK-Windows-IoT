@@ -11,15 +11,13 @@
     <AssemblyName>Emlid.WindowsIot.Tests.NavioHardwareTestApp</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.14393.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.14965.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.14965.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <PackageCertificateKeyFile>..\..\Common\TemporaryKey.pfx</PackageCertificateKeyFile>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
@@ -64,36 +62,48 @@
     <Compile Include="..\..\Common\AssemblyInfoGlobal.cs">
       <Link>Properties\AssemblyInfoGlobal.cs</Link>
     </Compile>
+    <Compile Include="..\..\Common\ByteToHexStringValueConverter.cs">
+      <Link>Models\Shared\ByteToHexStringValueConverter.cs</Link>
+    </Compile>
     <Compile Include="..\..\Common\ConvertibleValueConverter.cs">
-      <Link>Models\ConvertibleValueConverter.cs</Link>
+      <Link>Models\Shared\ConvertibleValueConverter.cs</Link>
     </Compile>
-    <Compile Include="..\..\Common\EnumValueConverter.cs">
-      <Link>Models\EnumValueConverter.cs</Link>
+    <Compile Include="..\..\Common\EnumerationValueConverter.cs">
+      <Link>Models\Shared\EnumerationValueConverter.cs</Link>
     </Compile>
-    <Compile Include="..\..\Common\HexByteValueConverter.cs">
-      <Link>Models\HexByteValueConverter.cs</Link>
+    <Compile Include="..\..\Common\IsNullToBoolValueConverter.cs">
+      <Link>Models\Shared\IsNullToBoolValueConverter.cs</Link>
     </Compile>
     <Compile Include="..\..\Common\StringExtensions.cs">
-      <Link>Models\StringExtensions.cs</Link>
+      <Link>Models\Shared\StringExtensions.cs</Link>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Models\FramTestUIModel.cs" />
-    <Compile Include="Models\BarometerTestUIModel.cs" />
+    <Compile Include="Models\ApplicationUIModel.cs" />
+    <Compile Include="Models\UIModel.cs" />
+    <Compile Include="Models\Tests\FramTestUIModel.cs" />
+    <Compile Include="Models\Tests\BarometerTestUIModel.cs" />
+    <Compile Include="Models\Tests\LedTestUIModel.cs" />
+    <Compile Include="Models\PageUIModel.cs" />
+    <Compile Include="Models\StartUIModel.cs" />
     <Compile Include="Views\Shared\MessageDialog.xaml.cs">
       <DependentUpon>MessageDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\RCInputTestUIModel.cs" />
-    <Compile Include="Models\TestUIModel.cs" />
+    <Compile Include="Models\Tests\RCInputTestUIModel.cs" />
+    <Compile Include="Models\Tests\TestUIModel.cs" />
+    <Compile Include="Views\Shared\UIModelPage.cs" />
     <Compile Include="Views\Tests\FramTest.xaml.cs">
       <DependentUpon>FramTest.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Tests\LedPwmTest.xaml.cs">
-      <DependentUpon>LedPwmTest.xaml</DependentUpon>
+    <Compile Include="Views\Tests\LedTest.xaml.cs">
+      <DependentUpon>LedTest.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\LedPwmTestUIModel.cs" />
+    <Compile Include="Views\Tests\PwmTest.xaml.cs">
+      <DependentUpon>PwmTest.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Tests\PwmTestUIModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\Start.xaml.cs">
       <DependentUpon>Start.xaml</DependentUpon>
@@ -142,11 +152,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Tests\LedTest.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\Tests\RCInputTest.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Tests\LedPwmTest.xaml">
+    <Page Include="Views\Tests\PwmTest.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -169,10 +183,14 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <SDKReference Include="WindowsIoT, Version=10.0.14393.0">
+    <SDKReference Include="WindowsDesktop, Version=10.0.14965.0">
+      <Name>Windows Desktop Extensions for the UWP</Name>
+    </SDKReference>
+    <SDKReference Include="WindowsIoT, Version=10.0.14965.0">
       <Name>Windows IoT Extensions for the UWP</Name>
     </SDKReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

@@ -1,49 +1,26 @@
-﻿using Emlid.WindowsIot.Tests.NavioHardwareTestApp.Models;
-using System;
+﻿using Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Shared;
 using System.ComponentModel;
-using System.Globalization;
-using System.Threading.Tasks;
-using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 
 namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
 {
     /// <summary>
-    /// Main page.
+    /// LED test page.
     /// </summary>
-    public sealed partial class LedPwmTestPage : Page
+    public sealed partial class LedTestPage : UIModelPage
     {
         #region Lifetime
 
         /// <summary>
         /// Initializes the page.
         /// </summary>
-        public LedPwmTestPage()
+        public LedTestPage()
         {
-            // Initialize members
-            _uiScheduler = TaskScheduler.FromCurrentSynchronizationContext();
-            _uiFactory = new TaskFactory(_uiScheduler);
-
             // Initialize view
             InitializeComponent();
         }
-
-        #endregion
-
-        #region Private Fields
-
-        /// <summary>
-        /// Task scheduler for the UI thread.
-        /// </summary>
-        private TaskScheduler _uiScheduler;
-
-        /// <summary>
-        /// Task factory for the UI thread.
-        /// </summary>
-        private TaskFactory _uiFactory;
 
         #endregion
 
@@ -52,7 +29,7 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
         /// <summary>
         /// UI model.
         /// </summary>
-        public LedPwmTestUIModel Model { get; private set; }
+        public LedTestUIModel Model { get; private set; }
 
         #endregion
 
@@ -64,7 +41,7 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
         protected override void OnNavigatedTo(NavigationEventArgs arguments)
         {
             // Initialize model and bind
-            DataContext = Model = new LedPwmTestUIModel(_uiFactory);
+            DataContext = Model = new LedTestUIModel(ApplicationUIModel);
             Model.PropertyChanged += OnModelChanged;
 
             // Initial layout
@@ -102,15 +79,15 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
         }
 
         /// <summary>
-        /// Executes the <see cref="LedPwmTestUIModel.Update"/> action when the related button is clicked.
+        /// Executes the <see cref="PwmTestUIModel.Read"/> action when the related button is clicked.
         /// </summary>
-        private void OnUpdateButtonClick(object sender, RoutedEventArgs arguments)
+        private void OnReadButtonClick(object sender, RoutedEventArgs arguments)
         {
-            Model.Update();
+            Model.Read();
         }
 
         /// <summary>
-        /// Executes the <see cref="LedPwmTestUIModel.Sleep"/> action when the related button is clicked.
+        /// Executes the <see cref="PwmTestUIModel.Sleep"/> action when the related button is clicked.
         /// </summary>
         private void OnSleepButtonClick(object sender, RoutedEventArgs arguments)
         {
@@ -118,7 +95,7 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
         }
 
         /// <summary>
-        /// Executes the <see cref="LedPwmTestUIModel.Wake"/> action when the related button is clicked.
+        /// Executes the <see cref="PwmTestUIModel.Wake"/> action when the related button is clicked.
         /// </summary>
         private void OnWakeButtonClick(object sender, RoutedEventArgs arguments)
         {
@@ -126,7 +103,7 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
         }
 
         /// <summary>
-        /// Executes the <see cref="LedPwmTestUIModel.Restart"/> action when the related button is clicked.
+        /// Executes the <see cref="PwmTestUIModel.Restart"/> action when the related button is clicked.
         /// </summary>
         private void OnRestartButtonClick(object sender, RoutedEventArgs arguments)
         {
@@ -134,7 +111,7 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
         }
 
         /// <summary>
-        /// Executes the <see cref="LedPwmTestUIModel.Clear"/> action when the related button is clicked.
+        /// Executes the <see cref="PwmTestUIModel.Clear"/> action when the related button is clicked.
         /// </summary>
         private void OnClearButtonClick(object sender, RoutedEventArgs arguments)
         {
@@ -147,38 +124,6 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
         private void OnCloseButtonClick(object sender, RoutedEventArgs arguments)
         {
             Frame.GoBack();
-        }
-
-        /// <summary>
-        /// Changes the frequency when the user presses enter and the value has changed.
-        /// </summary>
-        private void OnFrequencyKeyUp(object sender, KeyRoutedEventArgs arguments)
-        {
-            if (arguments.Key == VirtualKey.Enter)
-                SetFrequency();
-        }
-
-        /// <summary>
-        /// Changes the frequency when the user moves out of the text box and the value has changed.
-        /// </summary>
-        private void OnFrequencyLostFocus(object sender, RoutedEventArgs arguments)
-        {
-            SetFrequency();
-        }
-
-        #endregion
-
-        #region Private Methods
-
-        /// <summary>
-        /// Sets the frequency if the value in the <see cref="FrequencyTextBox"/> has changed.
-        /// </summary>
-        private void SetFrequency()
-        {
-            var textBox = FrequencyTextBox;
-            var frequency = Convert.ToSingle(textBox.Text, CultureInfo.CurrentCulture);
-            if (Model.Device.Frequency != frequency)
-                Model.Device.WriteFrequency(frequency);
         }
 
         #endregion

@@ -12,7 +12,7 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Pwm
         /// Maximum number of channels which this decoder produces.
         /// </summary>
         int MaximumChannels { get; }
-        
+
         /// <summary>
         /// Runs the decoder thread.
         /// </summary>
@@ -21,7 +21,7 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Pwm
         /// <param name="outputBuffer">Buffer into which decoded PWM frames are written.</param>
         /// <param name="outputTrigger">Trigger which is fired by this decoder when new data has been decoded.</param>
         /// <param name="stop">Signals when the decoder should stop.</param>
-        void DecodePulse(ConcurrentQueue<PwmValue> inputBuffer, AutoResetEvent inputTrigger, 
+        void DecodePulse(ConcurrentQueue<PwmValue> inputBuffer, AutoResetEvent inputTrigger,
             ConcurrentQueue<PwmFrame> outputBuffer, AutoResetEvent outputTrigger, CancellationToken stop);
     }
 }

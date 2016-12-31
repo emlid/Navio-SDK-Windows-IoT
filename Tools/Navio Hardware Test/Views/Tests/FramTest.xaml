@@ -1,17 +1,18 @@
-﻿<Page
+﻿<base:UIModelPage
     x:Name="PageRoot"
     x:Class="Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests.FramTestPage"
+    xmlns:local="using:Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests"
+    xmlns:base="using:Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Shared"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests"
     xmlns:common="using:Emlid.WindowsIot.Common"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
     <Page.Resources>
-        <common:HexByteValueConverter x:Name="HexByteValueConverter" />
+        <common:ByteToHexStringValueConverter x:Name="ByteToHexStringValueConverter" />
     </Page.Resources>
-    
+
     <!-- Page Layout -->
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
@@ -65,7 +66,7 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Text="Settings" 
+                <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Text="Settings"
                            Style="{StaticResource PanelTitleText}" />
 
                 <!-- Size -->
@@ -78,12 +79,12 @@
                 <!-- Fill -->
                 <TextBlock Grid.Row="3" Grid.Column="0" Text="Fill:" Style="{StaticResource LabelText}" />
                 <TextBox Grid.Row="3" Grid.Column="1" Name="FillTextBox" IsEnabled="{x:Bind Path=Model.InputEnabled, Mode=OneWay}"
-                         Text="{x:Bind Path=Model.FillByte, Mode=TwoWay, Converter={StaticResource HexByteValueConverter}}">
+                         Text="{x:Bind Path=Model.FillByte, Mode=TwoWay, Converter={StaticResource ByteToHexStringValueConverter}}">
                 </TextBox>
                 <TextBlock Grid.Row="3" Grid.Column="2" Text="Byte" Style="{StaticResource LabelText}" />
 
             </Grid>
-            
+
             <!-- Output -->
             <Grid Grid.Column="1" Style="{StaticResource PanelGrid}">
                 <Grid.RowDefinitions>
@@ -121,4 +122,4 @@
             </StackPanel>
         </Grid>
     </Grid>
-</Page>
+</base:UIModelPage>

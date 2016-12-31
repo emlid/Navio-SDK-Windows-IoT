@@ -16,11 +16,9 @@ $job = Invoke-Command -Session $session -AsJob `
 	Start-Service TestSirepSvc
 
 	# Add test signature to trusted root certificates
-	$key = Get-Item -Path Registry::HKLM\SOFTWARE\Microsoft\SystemCertificates\Root\Certificates\8a334aa8052dd244a647306a76b8178fa215f344 -ErrorAction Ignore
-	if ($key -eq $null) {
-			New-Item -Path Registry::HKLM\SOFTWARE\Microsoft\SystemCertificates\Root\Certificates\8a334aa8052dd244a647306a76b8178fa215f344
-	}
-	
+	$certificatePath = Registry::HKLM\SOFTWARE\Microsoft\SystemCertificates\Root\Certificates\8a334aa8052dd244a647306a76b8178fa215f344
+	if (!(Test-Path $certificatePath)) { New-Item -Path $certificatePath }
+
 	# Configure Boot Manager for remote debugging
 	C:\Windows\System32\bcdedit.exe /dbgsettings serial   # Baud rate is hard-coded on Raspberry Pi 2 to 912600
 	C:\Windows\System32\bcdedit.exe /debug on

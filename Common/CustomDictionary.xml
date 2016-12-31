@@ -2,11 +2,14 @@
 <Dictionary>
   <Words>
     <Recognized>
+      <Word>ADC</Word>
       <Word>ASCII</Word>
       <Word>Emlid</Word>
       <Word>FRAM</Word>
       <Word>GPIO</Word>
+      <Word>GPS</Word>
       <Word>I2C</Word>
+      <Word>IMU</Word>
       <Word>IoT</Word>
       <Word>LED</Word>
       <Word>Ms</Word>

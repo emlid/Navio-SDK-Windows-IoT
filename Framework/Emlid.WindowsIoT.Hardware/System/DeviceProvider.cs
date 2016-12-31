@@ -7,24 +7,25 @@ using Windows.Devices.Gpio;
 using Windows.Devices.I2c;
 using Windows.Devices.Spi;
 
-namespace Emlid.WindowsIot.Hardware.Boards.Navio
+namespace Emlid.WindowsIot.Hardware.System
 {
     /// <summary>
-    /// Hardware configuration and device factory.
+    /// Windows IoT hardware configuration and device provider.
     /// </summary>
     /// <remarks>
-    /// Besides ensuring we only configure the hardware once and providing generic device initialization,
-    /// we are also centralizing hardware initialization code so it can easily be upgraded later.
+    /// Windows IoT includes different device controller drivers, e.g. "inbox" and "lightning".
+    /// This provider enables controller agnostic and singleton initialization of each device type.
+    /// It should also ease support for future updates on this constantly evolving platform.
     /// </remarks>
     [CLSCompliant(false)]
-    public static class NavioHardwareProvider
+    public static class DeviceProvider
     {
         #region Private Fields
 
         /// <summary>
         /// Thread synchronization object.
         /// </summary>
-        private static object _lock = new object();
+        private static readonly object _lock = new object();
 
         /// <summary>
         /// Configuration flag.
@@ -62,9 +63,6 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         /// <summary>
         /// Configures the <see cref="LightningProvider"/> when enabled.
         /// </summary>
-        /// <remarks>
-        /// Not thread safe, must be called in a thread safe context.
-        /// </remarks>
         public static void Initialize()
         {
             // Do nothing when already configured
@@ -90,7 +88,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
                 else
                 {
                     // Add single instance providers from old inbox driver
-                    Gpio = new ReadOnlyCollection<GpioController>(new[] { GpioController.GetDefault() });
+                    Gpio = new ReadOnlyCollection<GpioController>(new[] { GpioController.GetDefaultAsync().AsTask().GetAwaiter().GetResult() });
                     I2c = new ReadOnlyCollection<I2cController>(new[] { I2cController.GetDefaultAsync().AsTask().GetAwaiter().GetResult() });
                     Spi = new ReadOnlyCollection<SpiController>(new[] { SpiController.GetDefaultAsync().AsTask().GetAwaiter().GetResult() });
                 }
@@ -108,7 +106,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         /// <param name="driveMode">Drive mode.</param>
         /// <param name="sharingMode">Sharing mode.</param>
         /// <returns>Pin when controller and device exist, otherwise null.</returns>
-        public static GpioPin ConnectGpio(int controllerIndex, int pinNumber, 
+        public static GpioPin ConnectGpio(int controllerIndex, int pinNumber,
             GpioPinDriveMode driveMode = GpioPinDriveMode.Input, GpioSharingMode sharingMode = GpioSharingMode.Exclusive)
         {
             // Validate
@@ -141,7 +139,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         /// <param name="speed">Bus speed.</param>
         /// <param name="sharingMode">Sharing mode.</param>
         /// <returns>Device when controller and device exist, otherwise null.</returns>
-        public static I2cDevice ConnectI2c(int controllerIndex, int address, 
+        public static I2cDevice ConnectI2c(int controllerIndex, int address,
             I2cBusSpeed speed = I2cBusSpeed.FastMode, I2cSharingMode sharingMode = I2cSharingMode.Exclusive)
         {
             // Validate
@@ -156,12 +154,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
             var controller = I2c[controllerIndex];
 
             // Connect to device and return (if exists)
-            var settings = new I2cConnectionSettings(address)
-            {
-                BusSpeed = speed,
-                SharingMode = sharingMode
-            };
-            return controller.GetDevice(settings);
+            return controller.Connect(address, speed, sharingMode);
         }
 
         /// <summary>
@@ -174,7 +167,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         /// <param name="mode">Communication mode, i.e. clock polarity.</param>
         /// <param name="sharingMode">Sharing mode.</param>
         /// <returns>Device when controller and device exist, otherwise null.</returns>
-        public static SpiDevice ConnectSpi(int controllerIndex, int chipSelectLine, int frequency, int bits, 
+        public static SpiDevice ConnectSpi(int controllerIndex, int chipSelectLine, int frequency, int bits,
             SpiMode mode, SpiSharingMode sharingMode = SpiSharingMode.Exclusive)
         {
             // Validate

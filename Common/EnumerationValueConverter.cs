@@ -5,9 +5,14 @@ using Windows.UI.Xaml.Data;
 namespace Emlid.WindowsIot.Common
 {
     /// <summary>
-    /// Enumeration value converter enables enumeration values to be used in data binding.
+    /// Enumeration two-way value converter.
     /// </summary>
-    public class EnumValueConverter : IValueConverter
+    /// <remarks>
+    /// Converts enumeration values to their underlying type's value, e.g. enumeration value to integer.
+    /// Converts to enumeration values by doing nothing but pass the value through,
+    /// allowing the runtime to implicitly cast back to the enumeration value.
+    /// </remarks>
+    public class EnumerationValueConverter : IValueConverter
     {
         /// <summary>
         /// Modifies the source data before passing it to the target for display in the UI.

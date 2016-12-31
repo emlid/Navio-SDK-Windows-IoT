@@ -6,14 +6,14 @@
     public enum NavioHardwareModel
     {
         /// <summary>
-        /// First version.
+        /// First Navio version.
         /// </summary>
-        Navio = 0,
+        Navio1 = 0,
 
         /// <summary>
         /// Navio+ released in 2015.
         /// </summary>
-        NavioPlus = 1,
+        Navio1Plus = 1,
 
         /// <summary>
         /// Navio2 released at the end of 2015-2016.

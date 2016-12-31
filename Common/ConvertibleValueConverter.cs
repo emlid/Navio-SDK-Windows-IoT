@@ -5,9 +5,12 @@ using Windows.UI.Xaml.Data;
 namespace Emlid.WindowsIot.Common
 {
     /// <summary>
-    /// Value converter enables values to be used in data binding which are already convertible
-    /// via <see cref="System.Convert"/>.
+    /// <see cref="IConvertible"/> two-way value converter.
     /// </summary>
+    /// <remarks>
+    /// Enables values to be used in data binding which are already convertible
+    /// via <see cref="System.Convert"/>.
+    /// </remarks>
     public class ConvertibleValueConverter : IValueConverter
     {
         /// <summary>

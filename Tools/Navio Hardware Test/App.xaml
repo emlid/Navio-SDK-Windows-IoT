@@ -12,6 +12,7 @@
         <BitmapImage x:Key="NavioResearchBackground" UriSource="Assets\Navio-Research.jpg" />
         <!-- Primitives -->
         <SolidColorBrush x:Key="EmlidGreenBrush" Color="{StaticResource EmlidGreen}" />
+        <SolidColorBrush x:Key="ApplicationPageBackgroundThemeBrush" Color="White" />
         <SolidColorBrush x:Key="SystemControlForegroundAccentBrush" Color="{StaticResource EmlidGreen}" />
         <SolidColorBrush x:Key="SystemControlHighlightAccentBrush" Color="{StaticResource EmlidGreen}" />
         <SolidColorBrush x:Key="SystemControlBackgroundBaseLowBrush" Color="{StaticResource EmlidGreen}"/>

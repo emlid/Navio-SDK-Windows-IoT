@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Emlid.WindowsIot.Hardware.System;
+using System;
 using Windows.Devices.I2c;
 
 namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
@@ -32,6 +33,16 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
         #region Constants
 
         /// <summary>
+        /// Density of this model.
+        /// </summary>
+        public const byte Density = 0x05;
+
+        /// <summary>
+        /// Maximum number of devices for this model.
+        /// </summary>
+        public const int MaximumDevices = 8;
+
+        /// <summary>
         /// Memory size in bytes.
         /// </summary>
         public const int MemorySize = 32768;
@@ -62,13 +73,88 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
         #region Lifetime
 
         /// <summary>
-        /// Creates an instance using the specified I2C <paramref name="device"/>.
+        /// Creates an instance connected to the specified I2C bus and chip number.
         /// </summary>
-        /// <param name="device">I2C device.</param>
+        /// <param name="controller">I2C controller.</param>
+        /// <param name="chipNumber">Chip number (device address code).</param>
+        /// <param name="speed">Bus speed.</param>
+        /// <param name="sharingMode">Sharing mode.</param>
         [CLSCompliant(false)]
-        public Mb85rc256vDevice(I2cDevice device)
-            : base(device, MemorySize)
+        public Mb85rc256vDevice(I2cController controller, byte chipNumber,
+            I2cBusSpeed speed = I2cBusSpeed.FastMode, I2cSharingMode sharingMode = I2cSharingMode.Exclusive)
+            : base(chipNumber, MemorySize)
         {
+            // Validate
+            if (controller == null) throw new ArgumentNullException(nameof(controller));
+
+            // Get address
+            var address = GetDataI2cAddress(chipNumber);
+
+            // Connect to hardware
+            Hardware = controller.Connect(address, speed, sharingMode);
+        }
+
+        #endregion
+
+        #region Public Methods
+
+        /// <summary>
+        /// Gets the device identifier by sending the Device ID command to the
+        /// specified chip number (device address code).
+        /// </summary>
+        /// <param name="controller">I2C controller on which the device is connected.</param>
+        /// <param name="chipNumber">
+        /// Device (chip code, not FRAM memory) address from zero to the supported <see cref="MaximumDevices"/>.
+        /// </param>
+        /// <returns>Device ID.</returns>
+        [CLSCompliant(false)]
+        public static Mb85rcvDeviceId GetDeviceId(I2cController controller, byte chipNumber)
+        {
+            // Validate
+            if (controller == null) throw new ArgumentNullException(nameof(controller));
+            if (chipNumber < 0 || chipNumber > MaximumDevices)
+                throw new ArgumentOutOfRangeException(nameof(chipNumber));
+
+            // Calculate device addresses
+            var idAddress = GetDeviceIdI2cAddress(chipNumber);
+            var dataAddress = GetDataI2cAddress(chipNumber);
+
+            // Call overloaded method
+            return GetDeviceId(controller, idAddress, dataAddress);
+        }
+
+        /// <summary>
+        /// Gets the I2C address for data commands with the specified chip number (device address code).
+        /// </summary>
+        /// <param name="chipNumber">
+        /// Device (chip code, not FRAM memory) address from zero to the supported <see cref="MaximumDevices"/>.
+        /// </param>
+        /// <returns>7-bit I2C address.</returns>
+        public static byte GetDataI2cAddress(int chipNumber)
+        {
+            // Validate
+            if (chipNumber < 0 || chipNumber > MaximumDevices)
+                throw new ArgumentOutOfRangeException(nameof(chipNumber));
+
+            // Calculate and return address
+            return (byte)(DataI2cAddress + chipNumber);
+        }
+
+        /// <summary>
+        /// Gets the I2C address for the device ID command with the specified chip number (device address code).
+        /// </summary>
+        /// <param name="chipNumber">
+        /// Device (chip code, not FRAM memory) address from zero to the supported <see cref="MaximumDevices"/>.
+        /// </param>
+        /// <returns>7-bit I2C address.</returns>
+        public static byte GetDeviceIdI2cAddress(int chipNumber)
+        {
+            // Validate
+            if (chipNumber < 0 || chipNumber > MaximumDevices)
+                throw new ArgumentOutOfRangeException(nameof(chipNumber));
+
+            // Calculate and return address
+            return (byte)(DeviceIdI2cAddress + chipNumber);
         }
 
         #endregion

@@ -10,7 +10,7 @@ namespace Emlid.WindowsIot.Common
     /// </summary>
     public static class ArrayExtensions
     {
-        #region Public Methods
+       #region Public Methods
 
         /// <summary>
         /// Compares two list based arrays by value.
@@ -147,19 +147,14 @@ namespace Emlid.WindowsIot.Common
         /// <summary>
         /// Gets the hash code of all items in the array.
         /// </summary>
-        public static int GetHashCodeOfItems(this IList array)
+        public static int GetHashCode(this IList array)
         {
-            return array.Cast<object>().Aggregate(0, (current, item) => current ^ (!ReferenceEquals(item, null) ? item.GetHashCode() : 0));
-        }
-
-        /// <summary>
-        /// Gets the hash code of all items in the array, or zero when null.
-        /// </summary>
-        public static int GetHashCodeOfItemsIfExists(IList array)
-        {
+            // Return zero when null
             if (ReferenceEquals(array, null))
                 return 0;
-            return array.GetHashCodeOfItems();
+
+            // Calculate and return hash of all items
+            return array.Cast<object>().Aggregate(0, (current, item) => current ^ (!ReferenceEquals(item, null) ? item.GetHashCode() : 0));
         }
 
         /// <summary>

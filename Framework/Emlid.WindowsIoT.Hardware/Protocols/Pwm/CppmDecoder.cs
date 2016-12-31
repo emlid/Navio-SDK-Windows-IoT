@@ -8,10 +8,10 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Pwm
     /// </summary>
     /// <remarks>
     /// <para>
-    /// A complete CPPM frame is about 22.5 ms (can vary between manufacturer). 
+    /// A complete CPPM frame is about 22.5 ms (can vary between manufacturer).
     /// Signal low state is about 0.3 ms but sometimes a bit longer (<see cref="PwmLowLimit"/>).
-    /// It begins with a start pulse (state high for more than 2 ms <see cref="PwmSyncLengthMinium"/>). 
-    /// Each channel (up to 8) is encoded by the time of the high state 
+    /// It begins with a start pulse (state high for more than 2 ms <see cref="PwmSyncLengthMinium"/>).
+    /// Each channel (up to 8) is encoded by the time of the high state
     /// (CPPM high state + 0.3 x (PPM low state) = servo PWM pulse width).
     /// </para>
     /// See https://en.wikipedia.org/wiki/Pulse-position_modulation for more information.
@@ -41,7 +41,20 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Pwm
 
         #endregion
 
-        #region Fields
+        #region Lifetime
+
+        /// <summary>
+        /// Creates an instance.
+        /// </summary>
+        public CppmDecoder()
+        {
+            _frame = new PwmFrame();
+            _cycle = new PwmCycle();
+        }
+
+        #endregion
+
+        #region Private Fields
 
         /// <summary>
         /// Indicates the decoder is currently processing a channel (when not null)
@@ -53,6 +66,11 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Pwm
         /// Current CPPM frame being decoded.
         /// </summary>
         private PwmFrame _frame;
+
+        /// <summary>
+        /// Current CPPM cycle being decoded.
+        /// </summary>
+        private PwmCycle _cycle;
 
         #endregion
 
@@ -67,8 +85,6 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Pwm
 
         #region Methods
 
-        private PwmCycle _cycle;
-
         /// <summary>
         /// Runs the decoder thread.
         /// </summary>
@@ -77,7 +93,7 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Pwm
         /// <param name="outputBuffer">Buffer into which decoded PWM frames are written.</param>
         /// <param name="outputTrigger">Trigger which is fired by this decoder when new data has been decoded.</param>
         /// <param name="stop">Signals when the decoder should stop.</param>
-        public void DecodePulse(ConcurrentQueue<PwmValue> inputBuffer, AutoResetEvent inputTrigger, 
+        public void DecodePulse(ConcurrentQueue<PwmValue> inputBuffer, AutoResetEvent inputTrigger,
             ConcurrentQueue<PwmFrame> outputBuffer, AutoResetEvent outputTrigger, CancellationToken stop)
         {
             // Decode until stopped...

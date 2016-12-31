@@ -1,9 +1,8 @@
 ﻿using Emlid.WindowsIot.Hardware.Boards.Navio;
 using Emlid.WindowsIot.Hardware.Protocols.Pwm;
 using System;
-using System.Threading.Tasks;
 
-namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Models
+namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
 {
     /// <summary>
     /// UI model for testing the <see cref="NavioRCInputDevice"/>.
@@ -15,10 +14,10 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Models
         /// <summary>
         /// Creates an instance.
         /// </summary>
-        public RCInputTestUIModel(TaskFactory uiThread) : base(uiThread)
+        public RCInputTestUIModel(ApplicationUIModel application) : base(application)
         {
             // Initialize device
-            Device = new NavioRCInputDevice();
+            Device = Application.Board.RCInput;
             Device.ChannelsChanged += OnChannelsChanged;
         }
 
@@ -32,15 +31,20 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Models
         /// </param>
         protected override void Dispose(bool disposing)
         {
-            // Only managed resources to dispose
-            if (!disposing)
-                return;
-
-            // Un-hook events
-            Device.ChannelsChanged -= OnChannelsChanged;
-
-            // Close device
-            Device?.Dispose();
+            try
+            {
+                // Dispose resources when possible
+                if (disposing)
+                {
+                    // Unhook events
+                    Device.ChannelsChanged -= OnChannelsChanged;
+                }
+            }
+            finally
+            {
+                // Dispose base class
+                base.Dispose(disposing);
+            }
         }
 
         #endregion
@@ -52,7 +56,7 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Models
         /// <summary>
         /// Device.
         /// </summary>
-        public NavioRCInputDevice Device { get; private set; }
+        public INavioRCInputDevice Device { get; private set; }
 
         #endregion
 

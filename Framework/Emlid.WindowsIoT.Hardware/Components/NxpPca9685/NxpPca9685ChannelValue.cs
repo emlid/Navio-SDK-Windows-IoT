@@ -15,7 +15,7 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
         public const int Maximum = 0x0fff;
 
         /// <summary>
-        /// This value, one higher than <see cref="Maximum"/>, causes the the channel to be always on or off.
+        /// This value, one higher than <see cref="Maximum"/>, causes the channel to be always on or off.
         /// </summary>
         public const int Always = 0x1000;
 
@@ -75,10 +75,11 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
         /// <summary>
         /// Compares this object with another by value.
         /// </summary>
-        public override bool Equals(object obj)
+        /// <param name="value">Object with which to compare by value.</param>
+        public override bool Equals(object value)
         {
             // Compare nullability and type
-            var other = obj as NxpPca9685ChannelValue;
+            var other = value as NxpPca9685ChannelValue;
             if (ReferenceEquals(other, null))
                 return false;
 
@@ -90,7 +91,7 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
         }
 
         /// <summary>
-        /// Returns a hashcode based on the current value of this object.
+        /// Returns a hash-code based on the current value of this object.
         /// </summary>
         public override int GetHashCode()
         {
@@ -219,6 +220,8 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
         /// <summary>
         /// Calculates PWM length from on (rising) and off (falling) delay/tick values.
         /// </summary>
+        /// <param name="on">PWM on time.</param>
+        /// <param name="off">PWM off time.</param>
         public static int CalculateLength(int on, int off)
         {
             // Check for always off condition (takes precedence over always on)
@@ -295,6 +298,8 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
         /// <summary>
         /// Converts a byte array into a value of this type.
         /// </summary>
+        /// <param name="data">Byte array to convert.</param>
+        /// <param name="offset">Offset at which to start conversion.</param>
         public static NxpPca9685ChannelValue FromByteArray(byte[] data, int offset = 0)
         {
             return new NxpPca9685ChannelValue(data, offset);
@@ -307,7 +312,7 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
         /// Automatically converts zero length to "always off" and maximum length to "always on".
         /// </remarks>
         /// <param name="length">Pulse length in clock ticks, between 0 and <see cref="Maximum"/>.</param>
-        /// <param name="delay">Optional delay in clock ticks, beteween 0 and <see cref="Maximum"/>.</param>
+        /// <param name="delay">Optional delay in clock ticks, between 0 and <see cref="Maximum"/>.</param>
         /// <returns>Calculated channel value.</returns>
         public static NxpPca9685ChannelValue FromLength(int length, int delay = 0)
         {
@@ -340,7 +345,7 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
         /// </param>
         /// <param name="frequency">Clock frequency of the <see cref="NxpPca9685Device"/>.</param>
         /// <param name="delay">Optional delay in milliseconds. Cannot be greater than one clock interval (1000 / frequency).</param>
-        /// <returns>Value with on and off values caculated.</returns>
+        /// <returns>Value with on and off values calculated.</returns>
         public static NxpPca9685ChannelValue FromMilliseconds(float length, float frequency, float delay)
         {
             // Validate

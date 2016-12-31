@@ -1,6 +1,8 @@
 ﻿using Emlid.WindowsIot.Hardware.Boards.Navio;
 using Emlid.WindowsIot.Hardware.Protocols.Pwm;
+using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
 
 namespace Emlid.WindowsIot.Samples.NavioRCInput
@@ -15,9 +17,13 @@ namespace Emlid.WindowsIot.Samples.NavioRCInput
         /// </summary>
         public void Run(IBackgroundTaskInstance taskInstance)
         {
-            // Create the RC input device
-            using (var rcInput = new NavioRCInputDevice())
+            // Connect to hardware
+            Debug.WriteLine("Connecting to Navio board.");
+            using (var board = NavioDeviceProvider.Connect())
             {
+                Debug.WriteLine("Navio board was detected as a \"{0}\".", board.Model);
+                var rcInput = board.RCInput;
+
                 // Log start
                 Debug.WriteLine("Navio RC input test start.");
 
@@ -26,7 +32,7 @@ namespace Emlid.WindowsIot.Samples.NavioRCInput
                 rcInput.ChannelsChanged += OnChannelsChanged;
 
                 // Wait forever (this background task has no GUI)
-                rcInput.Stopped.WaitOne();
+                Task.Delay(-1).Wait();
             }
         }
 

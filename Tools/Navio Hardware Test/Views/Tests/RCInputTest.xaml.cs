@@ -1,6 +1,5 @@
-﻿using Emlid.WindowsIot.Tests.NavioHardwareTestApp.Models;
+﻿using Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Shared;
 using System.ComponentModel;
-using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -10,7 +9,7 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
     /// <summary>
     /// Main page.
     /// </summary>
-    public sealed partial class RCInputTestPage : Page
+    public sealed partial class RCInputTestPage : UIModelPage
     {
         #region Lifetime
 
@@ -19,27 +18,9 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
         /// </summary>
         public RCInputTestPage()
         {
-            // Initialize members
-            _uiScheduler = TaskScheduler.FromCurrentSynchronizationContext();
-            _uiFactory = new TaskFactory(_uiScheduler);
-
             // Initialize view
             InitializeComponent();
         }
-
-        #endregion
-
-        #region Private Fields
-
-        /// <summary>
-        /// Task scheduler for the UI thread.
-        /// </summary>
-        private TaskScheduler _uiScheduler;
-
-        /// <summary>
-        /// Task factory for the UI thread.
-        /// </summary>
-        private TaskFactory _uiFactory;
 
         #endregion
 
@@ -60,7 +41,7 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
         protected override void OnNavigatedTo(NavigationEventArgs arguments)
         {
             // Initialize model and bind
-            DataContext = Model = new RCInputTestUIModel(_uiFactory);
+            DataContext = Model = new RCInputTestUIModel(ApplicationUIModel);
             Model.PropertyChanged += OnModelChanged;
 
             // Initial layout

@@ -1,16 +1,15 @@
-﻿using Emlid.WindowsIot.Tests.NavioHardwareTestApp.Models;
-using System.Threading.Tasks;
+﻿using Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Shared;
+using System.ComponentModel;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using System.ComponentModel;
 
 namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
 {
     /// <summary>
-    /// Main page.
+    /// FRAM test page.
     /// </summary>
-    public sealed partial class FramTestPage : Page
+    public sealed partial class FramTestPage : UIModelPage
     {
         #region Lifetime
 
@@ -19,27 +18,9 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
         /// </summary>
         public FramTestPage()
         {
-            // Initialize members
-            _uiScheduler = TaskScheduler.FromCurrentSynchronizationContext();
-            _uiFactory = new TaskFactory(_uiScheduler);
-
             // Initialize view
             InitializeComponent();
         }
-
-        #endregion
-
-        #region Fields
-
-        /// <summary>
-        /// Task scheduler for the UI thread.
-        /// </summary>
-        private TaskScheduler _uiScheduler;
-
-        /// <summary>
-        /// Task factory for the UI thread.
-        /// </summary>
-        private TaskFactory _uiFactory;
 
         #endregion
 
@@ -60,7 +41,7 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
         protected override void OnNavigatedTo(NavigationEventArgs arguments)
         {
             // Initialize model and bind
-            DataContext = Model = new FramTestUIModel(_uiFactory);
+            DataContext = Model = new FramTestUIModel(ApplicationUIModel);
             Model.PropertyChanged += OnModelChanged;
 
             // Initial layout

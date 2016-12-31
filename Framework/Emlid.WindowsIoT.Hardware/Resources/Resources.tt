@@ -51,9 +51,9 @@ namespace <#= resourcesNamespace #>  {
 	foreach (var item in reswItems) {					
 #>
 		
-    /// <summary>
-    /// <#= item.Key #>.
-    /// </summary>
+	/// <summary>
+	/// <#= item.Key #>.
+	/// </summary>
 	public class <#= item.Key #> {
 		
 		private static Windows.ApplicationModel.Resources.ResourceLoader resourceLoader;
@@ -71,10 +71,10 @@ namespace <#= resourcesNamespace #>  {
 		}
 		<# 
 		foreach(var resource in item.Distinct())
-        {
+		{
 		 #>	
 		///<summary>
-        ///<#= resource.Comment.Replace("\r", "").Replace("\n", " ")#>
+		///<#= resource.Comment.Replace("\r", "").Replace("\n", " ")#>
 		///</summary>
 		public static string <#= resource.Key #> 
 		{ 
@@ -90,15 +90,15 @@ namespace <#= resourcesNamespace #>  {
 	public class ReswInformation
 	{
 		public string ResourceFileName { get; set; }
-        public string Key { get; set; }
-        public string Comment { get; set; }
+		public string Key { get; set; }
+		public string Comment { get; set; }
 
 		public override bool Equals(object obj)
-        {
+		{
 			ReswInformation information = obj as ReswInformation;
 
 			return information != null && this.ResourceFileName == information.ResourceFileName && this.Key == information.Key;
-        }
+		}
 
 		public override int GetHashCode()
 		{
@@ -106,254 +106,254 @@ namespace <#= resourcesNamespace #>  {
 		}
 
 		public static IEnumerable<ReswInformation> ConvertFromItemPath(string itemPath)
-        {
+		{
 			List<ReswInformation> informations = new List<ReswInformation>();
 
 			var xml = new XmlDocument();
-            xml.Load(itemPath);
+			xml.Load(itemPath);
 
-            if (xml.DocumentElement != null)
-            {
-                var nodes = xml.DocumentElement.SelectNodes("//data");
-                if (nodes != null)
-                {
-                    foreach (XmlElement element in nodes)
-                    {
+			if (xml.DocumentElement != null)
+			{
+				var nodes = xml.DocumentElement.SelectNodes("//data");
+				if (nodes != null)
+				{
+					foreach (XmlElement element in nodes)
+					{
 						var keyElement = element.Attributes.GetNamedItem("name");
 						var commentElement = element.SelectSingleNode("comment");
 
 						informations.Add(new ReswInformation
-                        {
+						{
 							ResourceFileName = System.IO.Path.GetFileNameWithoutExtension(itemPath),
 							Key = keyElement != null ? keyElement.Value : string.Empty,
 							Comment = commentElement != null ? commentElement.InnerText : string.Empty
-                        });
-                    }
-                }
-            }
+						});
+					}
+				}
+			}
 
 			return informations;
-        }
+		}
 	}
 	
 	#region TangibleT4 Helpers
-    public DteHelper T4Helper;   
+	public DteHelper T4Helper;   
 
-    /// <summary>
-    /// Collection of Visual Studio Automation-Helper methods.
-    /// </summary>
-    /// <returns></returns>
-    public class DteHelper 
-    {
-	    public DteHelper(object host)
-	    {
-		    Host = host as ITextTemplatingEngineHost;
-	    }
+	/// <summary>
+	/// Collection of Visual Studio Automation-Helper methods.
+	/// </summary>
+	/// <returns></returns>
+	public class DteHelper 
+	{
+		public DteHelper(object host)
+		{
+			Host = host as ITextTemplatingEngineHost;
+		}
 	
-	    public EnvDTE.DTE Dte
-	    {
-		    get
-		    {
-			    return GetHostServiceProvider();
-		    }
-	    }
+		public EnvDTE.DTE Dte
+		{
+			get
+			{
+				return GetHostServiceProvider();
+			}
+		}
 	
-	    private readonly ITextTemplatingEngineHost Host;
+		private readonly ITextTemplatingEngineHost Host;
 	
-	    /// Functions requires hostspecific true
-	    /// <summary>
-	    /// Gets the solution name of the project.
-	    /// </summary>
-	    public string GetSolutionName()
-	    {
-            return Path.GetFileNameWithoutExtension(Dte.Solution.FullName);
-	    }
+		/// Functions requires hostspecific true
+		/// <summary>
+		/// Gets the solution name of the project.
+		/// </summary>
+		public string GetSolutionName()
+		{
+			return Path.GetFileNameWithoutExtension(Dte.Solution.FullName);
+		}
 	
-	    public EnvDTE.Project GetProject(string projectName)
-	    {
-		    return GetAllProjects().First(p => p.Name == projectName);
-	    }
+		public EnvDTE.Project GetProject(string projectName)
+		{
+			return GetAllProjects().First(p => p.Name == projectName);
+		}
 	
-	    /// <summary>
-	    /// Get all projects of the solution.
-	    /// Works not with nested solutions folders.
-	    /// </summary>
-	    /// <returns></returns>
-	    public IEnumerable<EnvDTE.Project> GetAllProjects()
-	    {
-		    var projectList = new List<EnvDTE.Project>();
+		/// <summary>
+		/// Get all projects of the solution.
+		/// Works not with nested solutions folders.
+		/// </summary>
+		/// <returns></returns>
+		public IEnumerable<EnvDTE.Project> GetAllProjects()
+		{
+			var projectList = new List<EnvDTE.Project>();
 		
-		    var folders = Dte.Solution.Projects.Cast<EnvDTE.Project>().Where(p => p.Kind == EnvDTE80.ProjectKinds.vsProjectKindSolutionFolder);
+			var folders = Dte.Solution.Projects.Cast<EnvDTE.Project>().Where(p => p.Kind == EnvDTE80.ProjectKinds.vsProjectKindSolutionFolder);
 
-		    foreach (EnvDTE.Project folder in folders)
-		    {
-			    if (folder.ProjectItems == null) continue;
+			foreach (EnvDTE.Project folder in folders)
+			{
+				if (folder.ProjectItems == null) continue;
 			
-			    foreach (EnvDTE.ProjectItem item in folder.ProjectItems)
-			    {
-				    if (item.Object is EnvDTE.Project)
-				    {
-					    projectList.Add(item.Object as EnvDTE.Project);
-				    }
-			    }
-		    }
+				foreach (EnvDTE.ProjectItem item in folder.ProjectItems)
+				{
+					if (item.Object is EnvDTE.Project)
+					{
+						projectList.Add(item.Object as EnvDTE.Project);
+					}
+				}
+			}
 		
-		    var projects = Dte.Solution.Projects.Cast<EnvDTE.Project>().Where(p => p.Kind != EnvDTE80.ProjectKinds.vsProjectKindSolutionFolder);
-		    if (projects.Any())
-		    {
-		        projectList.AddRange(projects);
-		    }
+			var projects = Dte.Solution.Projects.Cast<EnvDTE.Project>().Where(p => p.Kind != EnvDTE80.ProjectKinds.vsProjectKindSolutionFolder);
+			if (projects.Any())
+			{
+				projectList.AddRange(projects);
+			}
 		
-		    return projectList;
-	    }
+			return projectList;
+		}
 
-	    public IEnumerable<EnvDTE.ProjectItem> GetAllSolutionItems()
-	    {
-		    var itemList = new List<EnvDTE.ProjectItem>();
-		    foreach (EnvDTE.Project item in GetAllProjects())
-		    {
-			    if (item == null || item.ProjectItems == null)
-			    {
-			        continue;
-			    }
+		public IEnumerable<EnvDTE.ProjectItem> GetAllSolutionItems()
+		{
+			var itemList = new List<EnvDTE.ProjectItem>();
+			foreach (EnvDTE.Project item in GetAllProjects())
+			{
+				if (item == null || item.ProjectItems == null)
+				{
+					continue;
+				}
 			
-			    itemList.AddRange(GetAllProjectItemsRecursive(item.ProjectItems));	 
-		    }
+				itemList.AddRange(GetAllProjectItemsRecursive(item.ProjectItems));	 
+			}
 		
-		    return itemList;
-	    }
+			return itemList;
+		}
 	
-	    public IEnumerable<EnvDTE.ProjectItem> GetAllProjectItems()
-	    {
-            return GetAllProjectItemsRecursive(GetTemplateAsProjectItem(Dte).ContainingProject.ProjectItems);
-	    }
+		public IEnumerable<EnvDTE.ProjectItem> GetAllProjectItems()
+		{
+			return GetAllProjectItemsRecursive(GetTemplateAsProjectItem(Dte).ContainingProject.ProjectItems);
+		}
 	
-        public IEnumerable<EnvDTE.ProjectItem> GetAllProjectItemsRecursive(EnvDTE.ProjectItems projectItems) 
-	    {
-    	    foreach (EnvDTE.ProjectItem projectItem in projectItems) 
-		    {
-			    if (projectItem.ProjectItems == null)
-			    {
-			        continue;
-			    }
+		public IEnumerable<EnvDTE.ProjectItem> GetAllProjectItemsRecursive(EnvDTE.ProjectItems projectItems) 
+		{
+			foreach (EnvDTE.ProjectItem projectItem in projectItems) 
+			{
+				if (projectItem.ProjectItems == null)
+				{
+					continue;
+				}
 
-        	    foreach (EnvDTE.ProjectItem subItem in GetAllProjectItemsRecursive(projectItem.ProjectItems))
-        	    {
-            	    yield return subItem;
-        	    }
+				foreach (EnvDTE.ProjectItem subItem in GetAllProjectItemsRecursive(projectItem.ProjectItems))
+				{
+					yield return subItem;
+				}
 			
-        	    yield return projectItem;
-    	    }
-	    }
+				yield return projectItem;
+			}
+		}
 	
-	    public string GetProjectItemFullPath(EnvDTE.ProjectItem item)
-	    {
-		    return item.Properties.Item("FullPath").Value.ToString();
-	    }
+		public string GetProjectItemFullPath(EnvDTE.ProjectItem item)
+		{
+			return item.Properties.Item("FullPath").Value.ToString();
+		}
 	
-	    /// <summary>
-	    /// Gets the project name of the active template file.
-	    /// </summary>
-	    public string GetCurrentProjectName()
-	    {
-            return Dte.ActiveDocument.ProjectItem.ContainingProject.Name;
-	    }
+		/// <summary>
+		/// Gets the project name of the active template file.
+		/// </summary>
+		public string GetCurrentProjectName()
+		{
+			return Dte.ActiveDocument.ProjectItem.ContainingProject.Name;
+		}
 
-	    /// <summary>
-	    /// Sets the custom tool for generated item.
-	    /// <param name="generatedFilename">Filename of the generated item</param>
-	    /// <param name="customToolName">The name of the custom tool.</param>
-	    /// <example>
-	    /// 	SetCustomToolForGeneratedItem("Resource.resx", "ResXFileCodeGenerator");
-	    /// </example>
-	    /// </summary>
-	    public void SetCustomToolForGeneratedItem(string generatedFilename, string customToolName)
-	    {
-            EnvDTE.ProjectItem subItem = GetTemplateAsProjectItem(Dte).ProjectItems.Cast<EnvDTE.ProjectItem>().First(p => p.Name == generatedFilename);
+		/// <summary>
+		/// Sets the custom tool for generated item.
+		/// <param name="generatedFilename">Filename of the generated item</param>
+		/// <param name="customToolName">The name of the custom tool.</param>
+		/// <example>
+		/// 	SetCustomToolForGeneratedItem("Resource.resx", "ResXFileCodeGenerator");
+		/// </example>
+		/// </summary>
+		public void SetCustomToolForGeneratedItem(string generatedFilename, string customToolName)
+		{
+			EnvDTE.ProjectItem subItem = GetTemplateAsProjectItem(Dte).ProjectItems.Cast<EnvDTE.ProjectItem>().First(p => p.Name == generatedFilename);
 		
-		    SetPropertyValue(subItem, "CustomTool", customToolName);
-	    }
+			SetPropertyValue(subItem, "CustomTool", customToolName);
+		}
 
-	    /// <summary>
-	    /// Sets the custom tool for the first generated item.
-	    /// <param name="customToolName">The name of the custom tool.</param>
-	    /// <example>
-	    /// 	SetCustomToolForFirstGeneratedItem("ResXFileCodeGenerator");
-	    /// </example>
-	    /// </summary>
-	    public void SetCustomToolForFirstGeneratedItem(string customToolName)
-	    {
-            EnvDTE.ProjectItem firstSubItem = GetTemplateAsProjectItem(Dte).ProjectItems.Cast<EnvDTE.ProjectItem>().First();
+		/// <summary>
+		/// Sets the custom tool for the first generated item.
+		/// <param name="customToolName">The name of the custom tool.</param>
+		/// <example>
+		/// 	SetCustomToolForFirstGeneratedItem("ResXFileCodeGenerator");
+		/// </example>
+		/// </summary>
+		public void SetCustomToolForFirstGeneratedItem(string customToolName)
+		{
+			EnvDTE.ProjectItem firstSubItem = GetTemplateAsProjectItem(Dte).ProjectItems.Cast<EnvDTE.ProjectItem>().First();
 
-		    SetPropertyValue(firstSubItem, "CustomTool", customToolName);
-	    }
+			SetPropertyValue(firstSubItem, "CustomTool", customToolName);
+		}
 
-	    /// <summary>
-	    /// Sets a property value for the project item.
-	    /// </summary>
-	    public void SetPropertyValue(EnvDTE.ProjectItem item, string propertyName, object value)
-	    {
-		    EnvDTE.Property property = item.Properties.Item(propertyName);
+		/// <summary>
+		/// Sets a property value for the project item.
+		/// </summary>
+		public void SetPropertyValue(EnvDTE.ProjectItem item, string propertyName, object value)
+		{
+			EnvDTE.Property property = item.Properties.Item(propertyName);
 
-		    if (property == null)
-		    {
-			    throw new ArgumentException(String.Format("The property {0} was not found.", propertyName));
-		    }
+			if (property == null)
+			{
+				throw new ArgumentException(String.Format("The property {0} was not found.", propertyName));
+			}
 
 			property.Value = value;
-	    }
+		}
 
-	    /// <summary>
-	    /// Gets the T4 template as vs projectitem.
-	    /// </summary>
-	    public EnvDTE.ProjectItem GetTemplateAsProjectItem(EnvDTE.DTE dte)
-	    {
-		    return dte.Solution.FindProjectItem(Host.TemplateFile);
-	    }
+		/// <summary>
+		/// Gets the T4 template as vs projectitem.
+		/// </summary>
+		public EnvDTE.ProjectItem GetTemplateAsProjectItem(EnvDTE.DTE dte)
+		{
+			return dte.Solution.FindProjectItem(Host.TemplateFile);
+		}
 
-	    /// <summary>
-	    /// Adds a missing file to the t4 vs projectitem.
-	    /// </summary>
-	    public void AddMissingFileToProject(EnvDTE.ProjectItem pItem, string fileName)
-	    {
-		    var isMissing = !(from itm in pItem.ProjectItems.Cast<EnvDTE.ProjectItem>()
-		                      where itm.Name == fileName
-		                      select itm).Any();
+		/// <summary>
+		/// Adds a missing file to the t4 vs projectitem.
+		/// </summary>
+		public void AddMissingFileToProject(EnvDTE.ProjectItem pItem, string fileName)
+		{
+			var isMissing = !(from itm in pItem.ProjectItems.Cast<EnvDTE.ProjectItem>()
+							  where itm.Name == fileName
+							  select itm).Any();
 
-		    if (isMissing)
-		    {
-		        pItem.ProjectItems.AddFromFile(GetPath(fileName));
-		    }	
-	    }
+			if (isMissing)
+			{
+				pItem.ProjectItems.AddFromFile(GetPath(fileName));
+			}	
+		}
 
-	    /// <summary>
-	    /// Gets the vs automation object EnvDTE.DTE.
-	    /// </summary>
-	    public EnvDTE.DTE GetHostServiceProvider()
-	    {
-		    var hostServiceProvider = Host as IServiceProvider;
-		    EnvDTE.DTE dte = null;
-		    if (hostServiceProvider != null)
-		    {
-			    dte = hostServiceProvider.GetService(typeof(EnvDTE.DTE)) as EnvDTE.DTE;
-		    }
+		/// <summary>
+		/// Gets the vs automation object EnvDTE.DTE.
+		/// </summary>
+		public EnvDTE.DTE GetHostServiceProvider()
+		{
+			var hostServiceProvider = Host as IServiceProvider;
+			EnvDTE.DTE dte = null;
+			if (hostServiceProvider != null)
+			{
+				dte = hostServiceProvider.GetService(typeof(EnvDTE.DTE)) as EnvDTE.DTE;
+			}
 
-		    return dte;
-	    }
+			return dte;
+		}
 	
-	    /// <summary>
-	    /// Gets the full path of the file.
-	    /// </summary>
-	    public string GetPath(string fileName)
-	    {
-	        string templateDirectory = Path.GetDirectoryName(Host.TemplateFile);
-	        if (templateDirectory != null)
-	        {
-	            return Path.Combine(templateDirectory, fileName);
-	        }
+		/// <summary>
+		/// Gets the full path of the file.
+		/// </summary>
+		public string GetPath(string fileName)
+		{
+			string templateDirectory = Path.GetDirectoryName(Host.TemplateFile);
+			if (templateDirectory != null)
+			{
+				return Path.Combine(templateDirectory, fileName);
+			}
 
-	        return null;
-	    }
-    }
-    #endregion
+			return null;
+		}
+	}
+	#endregion
 #>

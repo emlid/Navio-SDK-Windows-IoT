@@ -12,18 +12,16 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{116C1C54-44B7-4C82-87CC-489B5ED85975}</ProjectGuid>
-    <TemplateGuid>{1bc93793-694f-48fe-9372-81e2b05556fd}</TemplateGuid>
+    <TemplateGuid>{497e31cb-056b-4f31-abb8-447fd55ee5a5}</TemplateGuid>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
+    <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <Configuration>Debug</Configuration>
     <Platform Condition="'$(Platform)' == ''">Win32</Platform>
     <RootNamespace>Navio_RC_Input_Driver</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.14965.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="Configuration">
-    <TargetVersion>
-    </TargetVersion>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>WindowsKernelModeDriver10.0</PlatformToolset>
     <ConfigurationType>Driver</ConfigurationType>
@@ -35,8 +33,6 @@
     <ALLOW_DATE_TIME>1</ALLOW_DATE_TIME>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="Configuration">
-    <TargetVersion>
-    </TargetVersion>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>WindowsKernelModeDriver10.0</PlatformToolset>
     <ConfigurationType>Driver</ConfigurationType>
@@ -62,6 +58,7 @@
     <OutDir>$(ProjectDir)$(Platform)\$(ConfigurationName)\</OutDir>
     <TargetName>NavioRCInput</TargetName>
     <LinkIncremental>false</LinkIncremental>
+    <EnablePkgGen>false</EnablePkgGen>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <DebuggerFlavor>DbgengKernelDebugger</DebuggerFlavor>
@@ -69,15 +66,15 @@
     <OutDir>$(ProjectDir)$(Platform)\$(ConfigurationName)\</OutDir>
     <TargetName>NavioRCInput</TargetName>
     <LinkIncremental>false</LinkIncremental>
+    <EnablePkgGen>false</EnablePkgGen>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
-    <PkgGen>
-      <Version>1.0.0.8</Version>
-    </PkgGen>
+    <PkgGen />
     <ClCompile>
       <WppEnabled>true</WppEnabled>
       <WppRecorderEnabled>true</WppRecorderEnabled>
       <WppScanConfigurationData>Trace.h</WppScanConfigurationData>
+      <WppKernelMode>true</WppKernelMode>
     </ClCompile>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)Public.h" "$(SolutionDir)Drivers\Include\NavioRCInputDriver.h" /d /y</Command>
@@ -88,13 +85,11 @@
       <WppEnabled>true</WppEnabled>
       <WppRecorderEnabled>true</WppRecorderEnabled>
       <WppScanConfigurationData>Trace.h</WppScanConfigurationData>
+      <WppKernelMode>true</WppKernelMode>
     </ClCompile>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)Public.h" "$(SolutionDir)Drivers\Include\NavioRCInputDriver.h" /d /y</Command>
     </PostBuildEvent>
-    <PkgGen>
-      <Version>1.0.0.8</Version>
-    </PkgGen>
   </ItemDefinitionGroup>
   <ItemGroup>
     <FilesToPackage Include="$(SolutionDir)Drivers\ACPI\ACPITABL.DAT" Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">

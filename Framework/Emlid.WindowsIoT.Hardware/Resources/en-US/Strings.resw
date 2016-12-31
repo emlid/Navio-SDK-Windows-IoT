@@ -125,12 +125,6 @@
     <value>I2C slave address {0:X2} on controller {1} was not found.</value>
     <comment>0 = address, 1 = controller index.</comment>
   </data>
-  <data name="Mb85rc04vLowerAddressInvalidHasUpperBits" xml:space="preserve">
-    <value>The MB85RC04V lower I2C device address must not have the memory upper address bit set.</value>
-  </data>
-  <data name="Mb85rc04vUpperAddressInvalidNoMatchLower" xml:space="preserve">
-    <value>The MB85RC04V upper I2C device address does not match the the lower address.</value>
-  </data>
   <data name="MS5611MeasurementStringFormat" xml:space="preserve">
     <value>Pressure: {0}mbar Temperature: {1}°c</value>
     <comment>0 = pressure, 1 = temperature.</comment>
@@ -154,5 +148,9 @@
   <data name="PwmValueStringFormat" xml:space="preserve">
     <value>PWM {0}@{1}</value>
     <comment>0 = level, 1 = time.</comment>
+  </data>
+  <data name="BarometerMeasurementStringFormat" xml:space="preserve">
+    <value>Pressure: {0}mbar Temperature: {1}°c</value>
+    <comment>0 = pressure, 1 = temperature.</comment>
   </data>
 </root>

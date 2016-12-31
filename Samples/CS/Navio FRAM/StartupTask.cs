@@ -16,9 +16,19 @@ namespace Emlid.WindowsIot.Samples.NavioFram
         /// </summary>
         public void Run(IBackgroundTaskInstance taskInstance)
         {
-            // TODO: Auto-detect Navio model
-            using (var fram = new NavioFramDevice(NavioHardwareModel.NavioPlus))
+            // Connect to hardware
+            Debug.WriteLine("Connecting to Navio board.");
+            using (var board = NavioDeviceProvider.Connect())
             {
+                Debug.WriteLine("Navio board was detected as a \"{0}\".", board.Model);
+                var fram = board.Fram;
+                if (fram == null)
+                {
+                    // No FRAM on this board!
+                    Debug.WriteLine("This board does not have a FRAM chip!");
+                    throw new NotSupportedException();
+                }
+
                 // Log start
                 Debug.WriteLine("Navio FRAM memory test start.");
 

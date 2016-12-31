@@ -1,13 +1,17 @@
-﻿using Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests;
+﻿using System;
+using System.ComponentModel;
+using Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Shared;
+using Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 
 namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views
 {
     /// <summary>
     /// Start page of the application.
     /// </summary>
-    public sealed partial class StartPage : Page
+    public sealed partial class StartPage : UIModelPage
     {
         #region Lifetime
 
@@ -16,19 +20,87 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views
         /// </summary>
         public StartPage()
         {
+            // Initialize view
             InitializeComponent();
         }
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// UI model.
+        /// </summary>
+        public StartUIModel Model { get; private set; }
 
         #endregion
 
         #region Events
 
         /// <summary>
-        /// Navigates to the <see cref="LedPwmTestPage"/> when the corresponding button is clicked.
+        /// Initializes the page when it is loaded.
         /// </summary>
-        private void OnLedPwmTestButtonClick(object sender, RoutedEventArgs arguments)
+        protected override void OnNavigatedTo(NavigationEventArgs arguments)
         {
-            Frame.Navigate(typeof(LedPwmTestPage));
+            // Initialize model
+            DataContext = Model = new StartUIModel(ApplicationUIModel);
+            Model.PropertyChanged += OnModelChanged;
+
+            // Initial layout
+            UpdateLayout();
+
+            // Call base class method
+            base.OnNavigatedTo(arguments);
+        }
+
+        /// <summary>
+        /// Cleans-up when navigating away from the page.
+        /// </summary>
+        protected override void OnNavigatedFrom(NavigationEventArgs arguments)
+        {
+            // Dispose model
+            Model?.Dispose();
+
+            // Call base class method
+            base.OnNavigatedFrom(arguments);
+        }
+
+        /// <summary>
+        /// Updates view elements when the model changes and no automatic
+        /// method is currently available.
+        /// </summary>
+        private void OnModelChanged(object sender, PropertyChangedEventArgs arguments)
+        {
+            switch (arguments.PropertyName)
+            {
+                case nameof(Model.Model):
+                    Bindings.Update();
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Calls the model <see cref="StartUIModel.Detect"/> method when the detect button is clicked.
+        /// </summary>
+        private void OnDetectButtonClick(object sender, RoutedEventArgs e)
+        {
+            Model?.Detect();
+        }
+
+        /// <summary>
+        /// Navigates to the <see cref="LedTestPage"/> when the corresponding button is clicked.
+        /// </summary>
+        private void OnLedTestButtonClick(object sender, RoutedEventArgs arguments)
+        {
+            Frame.Navigate(typeof(LedTestPage));
+        }
+
+        /// <summary>
+        /// Navigates to the <see cref="PwmTestPage"/> when the corresponding button is clicked.
+        /// </summary>
+        private void OnPwmTestButtonClick(object sender, RoutedEventArgs arguments)
+        {
+            Frame.Navigate(typeof(PwmTestPage));
         }
 
         /// <summary>

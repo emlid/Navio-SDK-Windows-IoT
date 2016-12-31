@@ -1,5 +1,5 @@
 // ConsoleApplication.cpp : Defines the entry point for the console application.
-//
+// TODO: This is a test consumer for the RC Input driver which is mostly incomplete.
 
 #include "pch.h"
 

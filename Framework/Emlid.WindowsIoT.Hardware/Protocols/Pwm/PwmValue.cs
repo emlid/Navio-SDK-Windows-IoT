@@ -20,6 +20,53 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Pwm
 
         #endregion
 
+        #region Operators
+
+        /// <summary>
+        /// Tests two objects of this type for equality by value.
+        /// </summary>
+        public static bool operator ==(PwmValue  left, PwmValue  right)
+        {
+            return left.Equals(right);
+        }
+
+        /// <summary>
+        /// Tests two objects of this type for inequality by value.
+        /// </summary>
+        public static bool operator !=(PwmValue  left, PwmValue  right)
+        {
+            return !left.Equals(right);
+        }
+
+        /// <summary>
+        /// Compares this object with another by value.
+        /// </summary>
+        /// <param name="value">Object with which to compare by value.</param>
+        public override bool Equals(object value)
+        {
+            // Compare type
+            if (!(value is PwmValue))
+                return false;
+            var other = (PwmValue)value;
+
+            // Compare values
+            return
+                other.Time == Time &&
+                other.Level == Level;
+        }
+
+        /// <summary>
+        /// Returns a hash-code based on the current value of this object.
+        /// </summary>
+        public override int GetHashCode()
+        {
+            return
+                Time.GetHashCode() ^
+                Level.GetHashCode();
+        }
+
+        #endregion
+
         #region Properties
 
         /// <summary>
@@ -41,7 +88,7 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Pwm
         /// </summary>
         public override string ToString()
         {
-            return string.Format(CultureInfo.CurrentCulture, 
+            return string.Format(CultureInfo.CurrentCulture,
                 Resources.Strings.PwmValueStringFormat, Level ? 1 : 0, Time);
         }
 

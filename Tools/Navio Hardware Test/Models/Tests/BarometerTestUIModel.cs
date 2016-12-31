@@ -1,13 +1,13 @@
-﻿using System;
-using System.Threading.Tasks;
-using System.Linq;
-using System.Collections.Generic;
-using System.Threading;
-using System.Runtime.CompilerServices;
-using Emlid.WindowsIot.Hardware.Boards.Navio;
+﻿using Emlid.WindowsIot.Hardware.Boards.Navio;
 using Emlid.WindowsIot.Hardware.Components.Ms5611;
+using Emlid.WindowsIot.Hardware.Protocols.Barometer;
+using System;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using System.Threading;
+using System.Threading.Tasks;
 
-namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Models
+namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
 {
     /// <summary>
     /// UI model for testing the <see cref="NavioBarometerDevice"/>.
@@ -19,14 +19,13 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Models
         /// <summary>
         /// Creates an instance.
         /// </summary>
-        public BarometerTestUIModel(TaskFactory uiThread) : base(uiThread)
+        public BarometerTestUIModel(ApplicationUIModel application) : base(application)
         {
             // Initialize members
-            OsrList = new List<int>(Enum.GetValues(typeof(Ms5611Osr)).Cast<int>());
-            Graph = new List<Ms5611Measurement>();
+            Graph = new List<BarometerMeasurement>();
 
             // Initialize device
-            Device = new NavioBarometerDevice();
+            Device = Application.Board.Barometer;
             Device.MeasurementUpdated += OnMeasurementUpdated;
         }
 
@@ -40,15 +39,23 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Models
         /// </param>
         protected override void Dispose(bool disposing)
         {
-            // Only managed resources to dispose
-            if (!disposing)
-                return;
+            try
+            {
+                // Dispose resources when possible
+                if (disposing)
+                {
+                    // Stop updates
+                    StopAutoUpdateTask();
 
-            // Stop updates
-            StopAutoUpdateTask();
-
-            // Close device
-            Device?.Dispose();
+                    // Unhook events
+                    Device.MeasurementUpdated -= OnMeasurementUpdated;
+                }
+            }
+            finally
+            {
+                // Dispose base class
+                base.Dispose(disposing);
+            }
         }
 
         #endregion
@@ -77,12 +84,7 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Models
         /// <summary>
         /// Device.
         /// </summary>
-        public NavioBarometerDevice Device { get; private set; }
-
-        /// <summary>
-        /// OSR option list.
-        /// </summary>
-        public List<int> OsrList { get; private set; }
+        public INavioBarometerDevice Device { get; private set; }
 
         /// <summary>
         /// History of measurements for display as a graph, with oldest items first.
@@ -91,7 +93,7 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Models
         /// For performance new entries are added to the end of the list, to avoid having to insert.
         /// When rendering the graph iterate backwards from <see cref="ICollection{T}.Count"/> to display the newest items first.
         /// </remarks>
-        public List<Ms5611Measurement> Graph { get; private set; }
+        public List<BarometerMeasurement> Graph { get; private set; }
 
         /// <summary>
         /// Starts or stops the automatic-update background task.
@@ -172,7 +174,7 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Models
         /// <summary>
         /// Updates the display when the <see cref="Device"/> channels change.
         /// </summary>
-        private void OnMeasurementUpdated(object sender, Ms5611Measurement measurement)
+        private void OnMeasurementUpdated(object sender, BarometerMeasurement measurement)
         {
             // Dump statistics to output
             WriteOutput(measurement.ToString());

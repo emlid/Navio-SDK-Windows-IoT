@@ -171,12 +171,25 @@ Mission statement: "Expand support and add new devices."
 
 ## Change Log
 
+*2016.12.31* v1.0.9
+
+1. Tested with latest insider preview 10.0.14993.1000.
+2. Updated and cleaned various solution and project issues caused by previous updates and betas.
+3. Updated .NET Core SDK package to latest preview 5.3.0-beta2.
+4. Major refactor of the API to support multiple hardware models (Navio, Navio+ and Navio 2) with hardware detection.
+5. New component independent interfaces for boards and chips, allows same code to work with any model. This is not final!
+6. Updated and fixed various bugs in samples and test tool.
+
+Major update and refactoring to prepare for final development of outstanding device support in the core SDK.
+Only works with the "inbox" (non-lightning) provider in current Insider Preview builds because Microsoft are consolidating it into one faster API which supports buffered GPIO (what we need for RC input on Navio and Navio+).
+
+
 *2016.08.24* v1.0.8
 
 1. Updated solution to Visual Studio 2015 Update 3 and Windows 10 SDK and WDK version 1607 build 10.0.14393.
 2. Support new Microsoft Lightning provider v1.1.0 for faster hardware access. Now referenced via NuGet package, removing the need for manually built dependencies.
 3. Updated .NET Core SDK package to current 5.2.2.
-4. Refactored harwdare source into separate subdirectories/namespaces so it is easier to manage and use.
+4. Refactored hardware source into separate subdirectories/namespaces so it is easier to manage and use.
 5. Addressed some minor bugs in the GUI.
 6. General refactoring and tidy-up.
 7. Improved setup scripts and instructions.

@@ -1,5 +1,6 @@
-﻿using Emlid.WindowsIot.Hardware.Components;
-using Emlid.WindowsIot.Hardware.Components.NxpPca9685;
+﻿using Emlid.WindowsIot.Hardware.Components.NxpPca9685;
+using Emlid.WindowsIot.Hardware.Protocols.Pwm;
+using Emlid.WindowsIot.Hardware.System;
 using System;
 using System.Collections.ObjectModel;
 using System.Globalization;
@@ -9,7 +10,7 @@ using Windows.Devices.I2c;
 namespace Emlid.WindowsIot.Hardware.Boards.Navio
 {
     /// <summary>
-    /// Navio LED &amp; PWM servo driver (PCA9685 hardware device), connected via I2C.
+    /// Navio and Navio+ LED &amp; PWM servo device, a PCA9685 chip connected via I2C.
     /// </summary>
     /// <remarks>
     /// Navio uses the <see cref="NxpPca9685Device"/> as a dual-purpose PWM and LED driver,
@@ -17,7 +18,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
     /// See http://docs.emlid.com/Navio-dev/servo-and-rgb-led/ for more information.
     /// <seealso cref="NxpPca9685Device"/>
     /// </remarks>
-    public class NavioLedPwmDevice : NxpPca9685Device
+    public sealed class NavioLedPwmDevice : NxpPca9685Device, INavioLedDevice, INavioPwmDevice
     {
         #region Constants
 
@@ -42,7 +43,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         public const int I2cAddress = 0x0040;
 
         /// <summary>
-        /// I2C address of the PCA9685 "all call" address on the Navio board. 
+        /// I2C address of the PCA9685 "all call" address on the Navio board.
         /// </summary>
         public const int I2cAllCallAddress = 0x0070;
 
@@ -71,29 +72,17 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         /// </summary>
         public const int PwmChannelCount = 13;
 
-        /// <summary>
-        /// Frequency which many analog servos support.
-        /// </summary>
-        /// <remarks>
-        /// Always check the specification of your servo before enabling output to avoid damage!
-        /// Digital servos are capable of frequencies over 100Hz, some between 300-400Hz and higher.
-        /// Some analog servos may even have trouble with 50Hz, but as most other autopilots
-        /// are using 50Hz are default we choose this as an acceptable default.
-        ///  See http://pcbheaven.com/wikipages/How_RC_Servos_Works/ for more information.
-        /// </remarks>
-        public const float ServoFrequencyDefault = 50;
-
         #endregion
 
         #region Lifetime
 
         /// <summary>
-        /// Creates an instance using the specified I2C device.
+        /// Creates an instance and reads current values.
         /// </summary>
         /// <remarks>
         /// <para>
         /// The required mode bits are set, but the device state and PWM values unchanged (supporting recovery).
-        /// Initializing without restart allows the caller decide whether to recover or reset the device. 
+        /// Initializing without restart allows the caller decide whether to recover or reset the device.
         /// Before starting any output be sure to check the <see cref="NxpPca9685Device.Frequency"/>.
         /// </para>
         /// <para>
@@ -116,10 +105,11 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
                 _outputEnablePin.SetDriveMode(GpioPinDriveMode.Output);
 
             // Enable auto-increment and "all call"
-            Hardware.WriteReadWriteBit((byte)NxpPca9685Register.Mode1, (byte)(NxpPca9685Mode1Bits.AutoIncrement | NxpPca9685Mode1Bits.AllCall), true);
+            Hardware.WriteReadWriteBit((byte)NxpPca9685Register.Mode1,
+                (byte)(NxpPca9685Mode1Bits.AutoIncrement | NxpPca9685Mode1Bits.AllCall), true);
 
             // Set "all call" address
-            Hardware.WriteJoinByte((byte)NxpPca9685Register.AllCall, (byte)I2cAllCallAddress);
+            Hardware.WriteJoinByte((byte)NxpPca9685Register.AllCall, I2cAllCallAddress);
 
             // Update property
             ReadMode1();
@@ -143,24 +133,25 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         /// Creates an initialized instance.
         /// </summary>
         /// <param name="frequency">
-        /// <see cref="NxpPca9685Device.Frequency"/> for important information.
-        /// Use <see cref="ServoFrequencyDefault"/> to support most analog servos.
+        /// Some PWM devices do not tolerate high values and could be damaged if this is set too high,
+        /// e.g. analog servos operate at much lower frequencies than digital servos.
+        /// The default <see cref="PwmCycle.ServoSafeFrequency"/> supports most analog servos.
         /// </param>
         /// <param name="clear">Clears all LED/PWM values.</param>
         /// <param name="restart">
-        /// Set true to restart the device which also enables the osciallator.
+        /// Set true to restart the device which also enables the oscillator.
         /// When false, you have to call <see cref="NxpPca9685Device.Wake"/> or <see cref="Restart"/> later to enable the oscillator.
         /// </param>
         /// <param name="enable">
         /// Set true to enable output, or false to continue with further initialization before enabling output.
         /// When false, you have to set it later before any output can occur.
-        /// Defaults to false to prevent unexpected behaviour from damaging hardware.
+        /// Defaults to false to prevent unexpected behavior from damaging hardware.
         /// </param>
-        public static NavioLedPwmDevice Initialize(float frequency,
+        public static NavioLedPwmDevice Initialize(float frequency = PwmCycle.ServoSafeFrequency,
             bool clear = true, bool restart = true, bool enable = false)
         {
             // Connect to I2C device
-            var device = NavioHardwareProvider.ConnectI2c(I2cControllerIndex, I2cAddress);
+            var device = DeviceProvider.ConnectI2c(I2cControllerIndex, I2cAddress);
             if (device == null)
             {
                 // Initialization error
@@ -169,8 +160,11 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
             }
 
             // Perform device initialization sequence...
-            var navioDevice = new NavioLedPwmDevice(device);
-            navioDevice.OutputEnabled = false;              // Disable output
+            var navioDevice = new NavioLedPwmDevice(device)
+            {
+                // Start with output disabled (protect against potential damage)
+                OutputEnabled = false
+            };
             navioDevice.WriteFrequency(frequency);          // Set frequency
             if (clear) navioDevice.Clear();                 // Clear LED/PWM values when specified
             if (restart) navioDevice.Restart();             // Restart when specified
@@ -200,7 +194,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
                 // Put chip to sleep
                 Sleep();
 
-                // Un-hook events
+                // Unhook events
                 Channels[LedRedChannelIndex].ValueChanged -= OnLedRedChannelChanged;
                 Channels[LedGreenChannelIndex].ValueChanged -= OnLedGreenChannelChanged;
                 Channels[LedBlueChannelIndex].ValueChanged -= OnLedBlueChannelChanged;
@@ -224,7 +218,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         /// <summary>
         /// GPIO output enable pin.
         /// </summary>
-        private GpioPin _outputEnablePin;
+        private readonly GpioPin _outputEnablePin;
 
         #endregion
 
@@ -337,7 +331,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         /// </summary>
         /// <remarks>
         /// It's extremely important to set the frequency to a known value before starting output.
-        /// Use <see cref="ServoFrequencyDefault"/> for most analog servos. Digital servos support
+        /// Use <see cref="PwmCycle.ServoSafeFrequency"/> for most analog servos. Digital servos support
         /// much faster update speeds, so if you have one read their specification and choose a
         /// sensible value (perhaps not maximum) for best performance without overheating.
         /// </remarks>
@@ -380,7 +374,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         /// Sets RGB values of the high intensity LED together (in one operation).
         /// </summary>
         /// <remarks>
-        /// Automatically inverts the value, providing a natural behaviour where a higher number
+        /// Automatically inverts the value, providing a natural behavior where a higher number
         /// produces a higher LED intensity. Normally, when written as raw PWM values, the output
         /// is inverted due to common anode.
         /// </remarks>
@@ -445,11 +439,56 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
 
         #endregion
 
+        #region Common LED Interface
+
+        // Map interface calls to instance specific members.
+        // No XML documentation necessary because members behind explicitly implemented interfaces are not directly visible.
+        bool INavioLedDevice.CanDisable => true;
+        bool INavioLedDevice.CanSleep => true;
+        bool INavioLedDevice.CanRestart => true;
+        bool INavioLedDevice.Enabled { get { return OutputEnabled; } set { OutputEnabled = value; } }
+        int INavioLedDevice.MaximumValue => NxpPca9685ChannelValue.Maximum;
+        int INavioLedDevice.Red { get { return LedRed; } set { LedRed = value; } }
+        int INavioLedDevice.Green { get { return LedGreen; } set { LedGreen = value; } }
+        int INavioLedDevice.Blue { get { return LedBlue; } set { LedBlue = value; } }
+        void INavioLedDevice.Read() { ReadLed(); }
+        void INavioLedDevice.SetRgb(int red, int green, int blue) => SetLed(red, green, blue);
+
+        #endregion
+
+        #region Common PWM Interface
+
+        // Map interface calls to instance specific members.
+        // No XML documentation necessary because members behind explicitly implemented interfaces are not directly visible.
+        bool INavioPwmDevice.CanDisable => true;
+        bool INavioPwmDevice.CanSleep => true;
+        bool INavioPwmDevice.CanRestart => true;
+        bool INavioPwmDevice.FrequencyPerChannel => false;
+        float INavioPwmDevice.FrequencyMinimum => FrequencyMaximum;
+        float INavioPwmDevice.FrequencyMaximum => FrequencyMaximum;
+        float INavioPwmDevice.LengthMinimum => PwmMsMinimum;
+        float INavioPwmDevice.LengthMaximum => PwmMsMaximum;
+        bool INavioPwmDevice.Enabled { get { return OutputEnabled; } set { OutputEnabled = value; } }
+        Collection<PwmCycle> INavioPwmDevice.Channels
+        {
+            get
+            {
+                // TODO: Translate values or refactor original
+                throw new NotImplementedException();
+            }
+        }
+        void INavioPwmDevice.Read() { base.ReadAll(); }
+        float INavioPwmDevice.SetFrequency(float frequency) { return WriteFrequency(frequency); }
+
+        #endregion
+
         #region Events
 
         /// <summary>
         /// Updates the <see cref="LedRed"/> property when the related channel changed.
         /// </summary>
+        /// <param name="sender">Sender, the channel which changed.</param>
+        /// <param name="arguments">Standard event arguments, no specific data.</param>
         private void OnLedRedChannelChanged(object sender, EventArgs arguments)
         {
             var value = Channels[LedRedChannelIndex].Value;
@@ -459,6 +498,8 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         /// <summary>
         /// Updates the <see cref="LedGreen"/> property when the related channel changed.
         /// </summary>
+        /// <param name="sender">Sender, the channel which changed.</param>
+        /// <param name="arguments">Standard event arguments, no specific data.</param>
         private void OnLedGreenChannelChanged(object sender, EventArgs arguments)
         {
             var value = Channels[LedGreenChannelIndex].Value;
@@ -468,6 +509,8 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         /// <summary>
         /// Updates the <see cref="LedBlue"/> property when the related channel changed.
         /// </summary>
+        /// <param name="sender">Sender, the channel which changed.</param>
+        /// <param name="arguments">Standard event arguments, no specific data.</param>
         private void OnLedBlueChannelChanged(object sender, EventArgs arguments)
         {
             var value = Channels[LedBlueChannelIndex].Value;

@@ -1,4 +1,5 @@
 ﻿using Emlid.WindowsIot.Common;
+using Emlid.WindowsIot.Hardware.System;
 using System;
 using Windows.Devices.I2c;
 
@@ -25,8 +26,12 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
     /// memory or E2PROM.
     /// </para>
     /// <para>
-    /// MB85RC04V data sheet: https://www.fujitsu.com/us/Images/MB85RC256V-DS501-00017-3v0-E.pdf
+    /// MB85RC04V data sheet: https://www.fujitsu.com/us/Images/MB85RC04V-DS501-00016-2v0-E.pdf
     /// MB85RC256V data sheet: https://www.fujitsu.com/us/Images/MB85RC256V-DS501-00017-3v0-E.pdf
+    /// </para>
+    /// <para>
+    /// The "Device Address Code" has been renamed to "chip number" in code to help clarify documentation and
+    /// avoid confusion of I2C and RAM address parameters.
     /// </para>
     /// </remarks>
     public abstract class Mb85rcvDevice : DisposableObject
@@ -34,45 +39,61 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
         #region Constants
 
         /// <summary>
-        /// The upper 4 bits of the device address byte are a device type code that identifies the device type, and are
-        /// fixed at “1010” for the MB85RC#V.
+        /// Code which identifies the device type, and are fixed at “1010” for the MB85RC#V.
         /// </summary>
-        /// <remarks>
-        /// Shifted down 1 bit because the <see cref="I2cDevice"/> handles the read/write flag automatically (a.k.a. 7-bit addressing).
-        /// </remarks>
-        public const int DeviceTypeCode = 0x90 >> 1;
+        public const byte TypeCode = 0xa;
 
         /// <summary>
-        /// Bit mask for the <see cref="DeviceTypeCode"/>.
+        /// 7-bit I2C address of the first chip on the I2C bus.
         /// </summary>
         /// <remarks>
-        /// Shifted down 1 bit because the <see cref="I2cDevice"/> handles the read/write flag automatically (a.k.a. 7-bit addressing).
+        /// When using multiple chips the chip address must be added.
         /// </remarks>
-        public const int DeviceTypeMask = 0xf0 >> 1;
+        public const byte DataI2cAddress = TypeCode << 3;
 
         /// <summary>
-        /// Maximum amount of data which can be transferred in one operation.
+        /// 7-bit I2C address used for chip identification.
         /// </summary>
-        /// <seealso cref="I2cExtensions.MaximumTransferSize"/>
-        public const int MaximumTransferSize = I2cExtensions.MaximumTransferSize;
+        /// <remarks>
+        /// <para>
+        /// The device ID sequence is as follows (Master = host, Slave = chip):
+        /// 1) Master: Start of transaction.
+        /// 2) Master: Byte 1 = 0XF8.
+        /// 3) Master: Byte 2 = Address of chip to query, e.g. 0XA0, 0XA4, 0XA8, 0XAA.
+        /// 4) Slave: Byte 3...5 device ID data bytes.
+        /// 5) Master: End of transaction.
+        /// </para>
+        /// <para>
+        /// With read and write operations (bit 1) both 0XF8 and 0XF9 are used. Hence the device ID sequence for obtaining
+        /// the device ID bytes is to call <see cref="I2cDevice.WriteRead(byte[], byte[])"/> writing one byte as
+        /// the <see cref="DataI2cAddress"/> set to the chip number to identify (full byte as data, not shifted down to 7-bit address)
+        /// then reading the resulting 3 device ID bytes, all in one operation.
+        /// </para>
+        /// </remarks>
+        public const byte DeviceIdI2cAddress = 0xf8 >> 1;
 
         #endregion
 
         #region Lifetime
 
         /// <summary>
-        /// Creates an instance using the specified I2C device and memory size.
+        /// Creates an instance with the specified parameters.
         /// </summary>
-        /// <param name="device">I2C device.</param>
+        /// <param name="chipNumber">Chip number (device address code).</param>
         /// <param name="size">Memory size in bytes.</param>
+        /// <remarks>
+        /// Inheritors must connect to the I2C device and set it in the <see cref="Hardware"/> property,
+        /// which is disposed by this base class.
+        /// </remarks>
         [CLSCompliant(false)]
-        protected Mb85rcvDevice(I2cDevice device, int size)
+        protected Mb85rcvDevice(byte chipNumber, int size)
         {
             // Validate
-            if (device == null) throw new ArgumentNullException(nameof(device));
+            if (chipNumber < 0) throw new ArgumentOutOfRangeException(nameof(chipNumber));
+            if (size < 0) throw new ArgumentOutOfRangeException(nameof(size));
 
             // Initialize members
-            Hardware = device;
+            ChipNumber = chipNumber;
             Size = size;
         }
 
@@ -98,6 +119,11 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
         #region Public Properties
 
         /// <summary>
+        /// Device address code (chip number).
+        /// </summary>
+        public byte ChipNumber { get; protected set; }
+
+        /// <summary>
         /// Size of memory in bytes.
         /// </summary>
         public int Size { get; private set; }
@@ -110,14 +136,64 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
         /// Main I2C device of the chip (the lower memory area).
         /// </summary>
         /// <remarks>
-        /// Additonal I2C devices may exist to facilitate access to higher memory areas.
+        /// Additional I2C devices may exist to facilitate access to higher memory areas.
         /// </remarks>
         [CLSCompliant(false)]
-        protected I2cDevice Hardware { get; private set; }
+        protected I2cDevice Hardware { get; set; }
 
         #endregion
 
         #region Public Methods
+
+        /// <summary>
+        /// Gets the device identifier of the first device (address code zero).
+        /// </summary>
+        /// <param name="controller">I2C controller on which the device is connected.</param>
+        /// <returns>Device ID.</returns>
+        /// <remarks>
+        /// It is not possible to get the identifier of other devices until the device
+        /// density is known, because one bit of the device address code is used
+        /// for the higher address commands with lower densities.
+        /// </remarks>
+        [CLSCompliant(false)]
+        public static Mb85rcvDeviceId GetDeviceId(I2cController controller)
+        {
+            // Call overloaded method
+            return GetDeviceId(controller, DeviceIdI2cAddress, DataI2cAddress);
+        }
+
+        /// <summary>
+        /// Gets the device identifier by sending the Device ID command to the
+        /// specified I2C (device ID) address.
+        /// </summary>
+        /// <param name="controller">I2C controller on which the device is connected.</param>
+        /// <param name="idAddress">
+        /// 7-bit I2C device ID command address for the desired chip number
+        /// (offset by device address code differently depending on model).
+        /// </param>
+        /// <param name="dataAddress">
+        /// 7-bit I2C memory address for the desired chip number
+        /// (offset by device address code differently depending on model).
+        /// Required to complete the ID command sequence.
+        /// </param>
+        /// <returns>Device ID.</returns>
+        [CLSCompliant(false)]
+        public static Mb85rcvDeviceId GetDeviceId(I2cController controller, byte idAddress, byte dataAddress)
+        {
+            // Validate
+            if (controller == null) throw new ArgumentNullException(nameof(controller));
+
+            // Connect to ID device
+            using (var framId = controller.Connect(idAddress))
+            {
+                // Send ID command sequence, returning device ID bytes
+                var dataAddress8bit = (byte)(dataAddress << 1);
+                var data = framId.WriteReadBytes(dataAddress8bit, Mb85rcvDeviceId.Size);
+
+                // Return data structure
+                return new Mb85rcvDeviceId(data);
+            }
+        }
 
         /// <summary>
         /// Reads a single byte at the "current address" (next byte after the last operation).
@@ -125,12 +201,10 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
         public byte ReadByte()
         {
             // Get correct I2C device for memory address and flags
-            var device = GetDeviceForAddress(0);
+            var device = GetI2cDeviceForMemoryAddress(0);
 
             // Read and return data
-            var buffer = new byte[1];
-            device.Read(buffer);
-            return buffer[0];
+            return device.ReadByte();
         }
 
         /// <summary>
@@ -142,7 +216,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
             if (length < 0 || length > Size) throw new ArgumentOutOfRangeException(nameof(length));
 
             // Get correct I2C device for memory address and flags
-            var device = GetDeviceForAddress(0);
+            var device = GetI2cDeviceForMemoryAddress(0);
 
             // Read data with chunking when transfer size exceeds limit
             var resultBuffer = new byte[length];
@@ -151,12 +225,11 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
             {
                 // Check transfer size and reduce when necessary
                 var transferSize = remaining;
-                if (transferSize > MaximumTransferSize)
-                    transferSize = MaximumTransferSize;
+                if (transferSize > I2cExtensions.MaximumTransferSize)
+                    transferSize = I2cExtensions.MaximumTransferSize;
 
                 // Read data
-                var buffer = new byte[transferSize];
-                device.Read(buffer);
+                var buffer = device.ReadBytes(transferSize);
                 Array.ConstrainedCopy(buffer, 0, resultBuffer, offset, transferSize);
 
                 // Next transfer when necessary...
@@ -176,13 +249,11 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
             if (address < 0 || address > Size - 1) throw new ArgumentOutOfRangeException(nameof(address));
 
             // Get correct I2C device and data for memory address and flags
-            var device = GetDeviceForAddress(address);
+            var device = GetI2cDeviceForMemoryAddress(address);
             var addressBytes = GetMemoryAddressBytes(address);
 
             // Read and return data
-            var buffer = new byte[1];
-            device.WriteRead(addressBytes, buffer);
-            return buffer[0];
+            return device.WriteReadByte(addressBytes);
         }
 
         /// <summary>
@@ -195,7 +266,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
             if (length < 0 || length > Size - address) throw new ArgumentOutOfRangeException(nameof(length));
 
             // Get correct I2C device and data for memory address and flags
-            var device = GetDeviceForAddress(address);
+            var device = GetI2cDeviceForMemoryAddress(address);
 
             // Read data with chunking when transfer size exceeds limit
             var resultBuffer = new byte[length];
@@ -207,12 +278,11 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
 
                 // Check transfer size and reduce when necessary
                 var transferSize = remaining;
-                if (transferSize > MaximumTransferSize)
-                    transferSize = MaximumTransferSize;
+                if (transferSize > I2cExtensions.MaximumTransferSize)
+                    transferSize = I2cExtensions.MaximumTransferSize;
 
                 // Read data
-                var buffer = new byte[transferSize];
-                device.WriteRead(addressBytes, buffer);
+                var buffer = device.WriteReadBytes(addressBytes, transferSize);
                 Array.ConstrainedCopy(buffer, 0, resultBuffer, offset, transferSize);
 
                 // Next transfer when necessary...
@@ -233,15 +303,11 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
             if (address < 0 || address > Size - 1) throw new ArgumentOutOfRangeException(nameof(address));
 
             // Get correct I2C device and data for memory address and flags
-            var device = GetDeviceForAddress(address);
+            var device = GetI2cDeviceForMemoryAddress(address);
             var addressBytes = GetMemoryAddressBytes(address);
 
             // Write data
-            var addressBytesLength = addressBytes.Length;
-            var buffer = new byte[addressBytesLength + 1];
-            Array.Copy(addressBytes, buffer, addressBytesLength);
-            buffer[addressBytesLength] = data;
-            device.Write(buffer);
+            device.WriteJoinByte(addressBytes, data);
         }
 
         /// <summary>
@@ -266,7 +332,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
                 throw new ArgumentOutOfRangeException(nameof(data));
 
             // Get correct I2C device and data for memory address and flags
-            var device = GetDeviceForAddress(address);
+            var device = GetI2cDeviceForMemoryAddress(address);
 
             // Write data with chunking when transfer size exceeds limit
             var remaining = length;
@@ -277,8 +343,8 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
 
                 // Check transfer size and reduce when necessary
                 var transferSize = addressBytesLength + remaining;
-                if (transferSize > MaximumTransferSize)
-                    transferSize = MaximumTransferSize;
+                if (transferSize > I2cExtensions.MaximumTransferSize)
+                    transferSize = I2cExtensions.MaximumTransferSize;
                 var transferDataSize = transferSize - addressBytesLength;
 
                 // Write data
@@ -315,7 +381,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
         /// </para>
         /// </remarks>
         [CLSCompliant(false)]
-        protected virtual I2cDevice GetDeviceForAddress(int address)
+        protected virtual I2cDevice GetI2cDeviceForMemoryAddress(int address)
         {
             return Hardware;
         }
@@ -326,7 +392,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
         /// <param name="address"></param>
         /// <returns>
         /// Byte array which can be written to request the specified memory address,
-        /// assuming the correct I2C device is being used as provided by <see cref="GetDeviceForAddress(int)"/>
+        /// assuming the correct I2C device is being used as provided by <see cref="GetI2cDeviceForMemoryAddress(int)"/>
         /// which may include the MSB in it's I2C address.
         /// </returns>
         /// <remarks>

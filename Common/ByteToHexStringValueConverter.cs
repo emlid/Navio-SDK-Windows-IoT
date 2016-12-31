@@ -5,9 +5,15 @@ using Windows.UI.Xaml.Data;
 namespace Emlid.WindowsIot.Common
 {
     /// <summary>
-    /// Hexadecimal value converter enables hexadecimal values to be used in data binding.
+    /// Byte to hexadecimal string two-way value converter.
     /// </summary>
-    public class HexByteValueConverter : IValueConverter
+    /// <remarks>
+    /// Converts an unsigned byte to a fixed width format uppercase hexadecimal string
+    /// without any prefix, i.e. exactly two characters "00" to "FF".
+    /// Converts a string of any supported (<see cref="NumberStyles.HexNumber"/>)
+    /// format to an unsigned byte.
+    /// </remarks>
+    public class ByteToHexStringValueConverter : IValueConverter
     {
         /// <summary>
         /// Modifies the source data before passing it to the target for display in the UI.
@@ -22,7 +28,7 @@ namespace Emlid.WindowsIot.Common
             var byteValue = (byte)value;
 
             // Convert to hexadecimal byte string
-            return String.Format(CultureInfo.InvariantCulture, "{0:X2}", byteValue);
+            return string.Format(CultureInfo.InvariantCulture, "{0:X2}", byteValue);
         }
 
         /// <summary>

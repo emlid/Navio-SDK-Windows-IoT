@@ -1,6 +1,7 @@
 ﻿using Emlid.WindowsIot.Hardware.Boards.Navio;
-using Emlid.WindowsIot.Hardware.Components.NxpPca9685;
+using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
 
 namespace Emlid.WindowsIot.Samples.NavioLed
@@ -13,77 +14,95 @@ namespace Emlid.WindowsIot.Samples.NavioLed
         /// <summary>
         /// Executes the task.
         /// </summary>
+        /// <param name="taskInstance">Background task instance.</param>
         public void Run(IBackgroundTaskInstance taskInstance)
         {
-            // Initialize PWM device at servo frequency (50Hz) with output disabled
-            var pwm = NavioLedPwmDevice.Initialize(NavioLedPwmDevice.ServoFrequencyDefault);
-
-            // Log start
-            Debug.WriteLine("Navio LED test start.");
-
-            // Enable oscillator and output
-            pwm.Wake();
-            pwm.OutputEnabled = true;
-
-            // Fade LEDs to blue
-            Debug.WriteLine("Fading to blue.");
-            var maximum = NxpPca9685ChannelValue.Maximum;
-            bool fade;
-            do
+            // Connect to hardware
+            Debug.WriteLine("Connecting to Navio board.");
+            using (var board = NavioDeviceProvider.Connect())
             {
-                fade = false;
-                if (pwm.LedRed > 0)
+                Debug.WriteLine("Navio board was detected as a \"{0}\".", board.Model);
+                var led = board.Led;
+
+                // Log start
+                Debug.WriteLine("Navio LED test start.");
+
+                // Enable oscillator and output if necessary
+                if (led.CanSleep) led.Wake();
+                if (led.CanDisable) led.Enabled = true;
+
+                // Fade LEDs to blue
+                Debug.WriteLine("Fading to blue.");
+                var maximum = led.MaximumValue;
+                bool fade;
+                do
                 {
-                    pwm.LedRed--;
-                    fade = true;
+                    fade = false;
+                    if (led.Red > 0)
+                    {
+                        led.Red--;
+                        fade = true;
+                    }
+                    if (led.Green > 0)
+                    {
+                        led.Green--;
+                        fade = true;
+                    }
+                    if (led.Blue < maximum)
+                    {
+                        led.Blue++;
+                        fade = true;
+                    }
                 }
-                if (pwm.LedGreen > 0)
+                while (fade);
+
+                // Cycle LED in infinite loop...
+                Debug.WriteLine("Cycling in infinite loop...");
+                while (true)
                 {
-                    pwm.LedGreen--;
-                    fade = true;
+                    // Red up via property...
+                    Debug.WriteLine("Red up via property...");
+                    while (led.Red < maximum) led.Red++;
+
+                    // Wait a bit...
+                    Task.Delay(TimeSpan.FromSeconds(1)).Wait();
+
+                    // Blue down via property...
+                    Debug.WriteLine("Blue down via property...");
+                    while (led.Blue > 0) led.Blue--;
+
+                    // Wait a bit...
+                    Task.Delay(TimeSpan.FromSeconds(1)).Wait();
+
+                    // Green up via property..
+                    Debug.WriteLine("Green up via property...");
+                    while (led.Green < maximum) led.Green++;
+
+                    // Wait a bit...
+                    Task.Delay(TimeSpan.FromSeconds(1)).Wait();
+
+                    // Red down via set RGB method...
+                    Debug.WriteLine("Red down via set RGB method...");
+                    var red = maximum; var green = maximum; var blue = 0;
+                    do { led.SetRgb(--red, green, blue); } while (red > 0);
+
+                    // Wait a bit...
+                    Task.Delay(TimeSpan.FromSeconds(1)).Wait();
+
+                    // Blue up via set RGB method...
+                    Debug.WriteLine("Blue up via set RGB method...");
+                    do { led.SetRgb(red, green, ++blue); } while (blue < maximum);
+
+                    // Wait a bit...
+                    Task.Delay(TimeSpan.FromSeconds(1)).Wait();
+
+                    // Green down via set RGB method...
+                    Debug.WriteLine("Green down via set RGB method...");
+                    do { led.SetRgb(red, --green, blue); } while (green > 0);
+
+                    // Wait a bit...
+                    Task.Delay(TimeSpan.FromSeconds(1)).Wait();
                 }
-                if (pwm.LedBlue < maximum)
-                {
-                    pwm.LedBlue++;
-                    fade = true;
-                }
-            }
-            while (fade);
-
-            // Cycle LED in infinite loop...
-            Debug.WriteLine("Cycling in infinite loop...");
-            while (true)
-            {
-                // Red up via property...
-                Debug.WriteLine("Red up via property...");
-                while (pwm.LedRed < maximum)
-                    pwm.LedRed++;
-
-                // Blue down via property...
-                Debug.WriteLine("Blue down via property...");
-                while (pwm.LedBlue > 0)
-                    pwm.LedBlue--;
-
-                // Green up via propety..
-                Debug.WriteLine("Green up via property...");
-                while (pwm.LedGreen < maximum)
-                    pwm.LedGreen++;
-
-                // Red down via set RGB method...
-                Debug.WriteLine("Red down via set RGB method...");
-                int red = maximum, green = maximum, blue = 0;
-                for (red = maximum; red > 0; red--)
-                    pwm.SetLed(red, green, blue);
-
-                // Blue upvia set RGB method...
-                Debug.WriteLine("Blue up via set RGB method...");
-                for (blue = 0; blue < maximum; blue++)
-                    pwm.SetLed(red, green, blue);
-
-                // Green downvia set RGB method...
-                Debug.WriteLine("Green down via set RGB method...");
-                for (green = maximum; green > 0; green--)
-                    pwm.SetLed(red, green, blue);
             }
         }
     }

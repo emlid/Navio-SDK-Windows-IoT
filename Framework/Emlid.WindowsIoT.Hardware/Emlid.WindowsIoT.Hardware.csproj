@@ -14,8 +14,8 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.14393.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.14965.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.14965.0</TargetPlatformMinVersion>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
@@ -37,6 +37,7 @@
     <DocumentationFile>bin\ARM\Debug\Emlid.WindowsIot.Hardware.xml</DocumentationFile>
     <RunCodeAnalysis>false</RunCodeAnalysis>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <GenerateLibraryLayout>false</GenerateLibraryLayout>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
     <PlatformTarget>ARM</PlatformTarget>
@@ -76,15 +77,32 @@
     <Compile Include="..\..\Common\TimeSpanExtensions.cs">
       <Link>TimeSpanExtensions.cs</Link>
     </Compile>
+    <Compile Include="Boards\Navio\INavioFramDevice.cs" />
+    <Compile Include="Boards\Navio\INavioBoard.cs" />
+    <Compile Include="Boards\Navio\INavioBarometerDevice.cs" />
+    <Compile Include="Boards\Navio\INavioAdcDevice.cs" />
+    <Compile Include="Boards\Navio\INavioImuDevice.cs" />
+    <Compile Include="Boards\Navio\INavioGpsDevice.cs" />
+    <Compile Include="Boards\Navio\INavioLedDevice.cs" />
+    <Compile Include="Boards\Navio\INavioRCInputDevice.cs" />
+    <Compile Include="Boards\Navio\INavioPwmDevice.cs" />
+    <Compile Include="Boards\Navio\Navio1Board.cs" />
+    <Compile Include="Boards\Navio\Navio2Board.cs" />
+    <Compile Include="Boards\Navio\Navio1PlusBoard.cs" />
+    <Compile Include="Boards\Navio\Navio2LedDevice.cs" />
+    <Compile Include="Boards\Navio\NavioDeviceProvider.cs" />
+    <Compile Include="Components\Mb85rcv\Mb85rcvDeviceId.cs" />
+    <Compile Include="Protocols\Barometer\BarometerMeasurement.cs" />
     <Compile Include="Protocols\Pwm\CppmDecoder.cs" />
-    <Compile Include="Components\I2cExtensions.cs" />
-    <Compile Include="Boards\Navio\NavioHardwareProvider.cs" />
+    <Compile Include="Protocols\Pwm\PwmChannel.cs" />
+    <Compile Include="System\GpioExtensions.cs" />
+    <Compile Include="System\I2cExtensions.cs" />
+    <Compile Include="System\DeviceProvider.cs" />
     <Compile Include="Components\Mb85rcv\Mb85rc04vDevice.cs" />
     <Compile Include="Components\Mb85rcv\Mb85rcvDevice.cs" />
     <Compile Include="Components\Mb85rcv\Mb85rc256vDevice.cs" />
     <Compile Include="Components\Ms5611\Ms5611Device.cs" />
     <Compile Include="Components\Ms5611\Ms5611Command.cs" />
-    <Compile Include="Components\Ms5611\Ms5611Measurement.cs" />
     <Compile Include="Components\Ms5611\Ms5611Osr.cs" />
     <Compile Include="Components\Ms5611\Ms5611PromData.cs" />
     <Compile Include="Boards\Navio\NavioBarometerDevice.cs" />
@@ -131,11 +149,13 @@
     <None Include="TemporaryKey.snk" />
   </ItemGroup>
   <ItemGroup>
-    <SDKReference Include="WindowsIoT, Version=10.0.14393.0">
+    <SDKReference Include="WindowsDesktop, Version=10.0.14965.0">
+      <Name>Windows Desktop Extensions for the UWP</Name>
+    </SDKReference>
+    <SDKReference Include="WindowsIoT, Version=10.0.14965.0">
       <Name>Windows IoT Extensions for the UWP</Name>
     </SDKReference>
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

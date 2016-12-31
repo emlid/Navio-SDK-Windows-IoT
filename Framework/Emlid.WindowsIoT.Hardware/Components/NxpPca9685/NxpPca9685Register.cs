@@ -37,7 +37,7 @@
         SubAddress3 = 0x04,
 
         /// <summary>
-        /// Enables or disbales calling all LED channels.
+        /// Enables or disables calling all LED channels.
         /// </summary>
         AllCall = 0x05,
 
@@ -48,7 +48,7 @@
         /// Minimum value is 3.
         /// Writes to prescale register are blocked when sleep bit is 0 (mode 1).
         /// </remarks>
-        PreScale = 0xfe,
+        Prescale = 0xfe,
 
         /// <summary>
         /// Test mode.

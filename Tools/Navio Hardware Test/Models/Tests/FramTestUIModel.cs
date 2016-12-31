@@ -4,9 +4,8 @@ using System;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Models
+namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
 {
     /// <summary>
     /// UI model for testing the <see cref="NavioFramDevice"/>.
@@ -27,36 +26,15 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Models
         /// <summary>
         /// Creates an instance.
         /// </summary>
-        public FramTestUIModel(TaskFactory uiThread) : base(uiThread)
+        public FramTestUIModel(ApplicationUIModel application) : base(application)
         {
             // Initialize members
             Contents = "";
             FillByte = 0xFF;
 
             // Initialize device
-            // TODO: Auto-detect Navio model
-            Device = new NavioFramDevice(NavioHardwareModel.NavioPlus);
+            Device = application.Board.Fram;
         }
-
-        #region IDisposable
-
-        /// <summary>
-        /// Frees resources owned by this instance.
-        /// </summary>
-        /// <param name="disposing">
-        /// True when called via <see cref="IDisposable.Dispose()"/>, false when called during finalization.
-        /// </param>
-        protected override void Dispose(bool disposing)
-        {
-            // Only managed resources to dispose
-            if (!disposing)
-                return;
-
-            // Close device
-            Device?.Dispose();
-        }
-
-        #endregion
 
         #endregion
 
@@ -65,7 +43,7 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Models
         /// <summary>
         /// Device.
         /// </summary>
-        public NavioFramDevice Device { get; private set; }
+        public INavioFramDevice Device { get; private set; }
 
         /// <summary>
         /// Memory content view.
@@ -125,7 +103,7 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Models
         /// </summary>
         public void Fill()
         {
-            RunTest(delegate 
+            RunTest(delegate
             {
                 // Write single bytes
                 var fillByte = FillByte;

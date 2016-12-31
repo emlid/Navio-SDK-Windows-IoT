@@ -197,3 +197,6 @@ FakesAssemblies/
 project.lock.json
 *.db
 *.opendb
+
+# Windows system files
+Thumbs.db

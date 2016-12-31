@@ -1,0 +1,157 @@
+﻿<base:UIModelPage
+    x:Name="PageRoot"
+    x:Class="Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests.LedTestPage"
+    xmlns:local="using:Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests"
+    xmlns:base="using:Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Shared"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:common="using:Emlid.WindowsIot.Common"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <Style x:Key="ChannelSlider" TargetType="Slider">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Padding" Value="5" />
+            <Setter Property="TickPlacement" Value="Outside" />
+            <Setter Property="Orientation" Value="Vertical" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="Minimum" Value="0" />
+            <Setter Property="Maximum" Value="4095" />
+            <Setter Property="SmallChange" Value="1" />
+            <Setter Property="LargeChange" Value="16" />
+            <Setter Property="TickFrequency" Value="64" />
+        </Style>
+        <common:ConvertibleValueConverter x:Name="ConvertibleValueConverter" />
+    </Page.Resources>
+
+    <!-- Page Layout -->
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <!-- Title -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Image Source="{StaticResource EmlidLogo}" Width="48" Margin="10" />
+            <TextBlock Text="Navio LED Test" Style="{StaticResource TitleText}" />
+        </StackPanel>
+
+        <!-- Top Row -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+
+            <!-- LED -->
+            <Grid Grid.Column="0" Style="{StaticResource PanelGrid}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <!-- LED Red -->
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Red:" Style="{StaticResource LabelTextTop}" />
+                <Slider Name="LedRedSlider" Grid.Row="1" Grid.Column="0" Style="{StaticResource ChannelSlider}"
+                        Value="{x:Bind Path=Model.Device.Red, Mode=TwoWay, Converter={StaticResource ConvertibleValueConverter}}"/>
+
+                <!-- LED Green -->
+                <TextBlock Grid.Row="0" Grid.Column="1" Text="Green:" Style="{StaticResource LabelTextTop}"/>
+                <Slider Name="LedGreenSlider" Grid.Row="1" Grid.Column="1" Style="{StaticResource ChannelSlider}"
+                        Value="{x:Bind Path=Model.Device.Green, Mode=TwoWay, Converter={StaticResource ConvertibleValueConverter}}"/>
+
+                <!-- LED Blue -->
+                <TextBlock Grid.Row="0" Grid.Column="2" Text="Blue:" Style="{StaticResource LabelTextTop}"/>
+                <Slider Name="LedBlueSlider" Grid.Row="1" Grid.Column="2" Style="{StaticResource ChannelSlider}"
+                        Value="{x:Bind Path=Model.Device.Blue, Mode=TwoWay, Converter={StaticResource ConvertibleValueConverter}}"/>
+
+            </Grid>
+
+        </StackPanel>
+
+        <!-- Bottom Row -->
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Settings -->
+            <Grid Grid.Column="0" Style="{StaticResource PanelGrid}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <!-- Title -->
+                <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Text="Settings"
+                           Style="{StaticResource PanelTitleText}" />
+
+                <!-- Enabled -->
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Enabled:" Style="{StaticResource LabelText}" />
+                <ToggleSwitch Grid.Row="1" Grid.Column="1" Name="EnabledSwitch"
+                              IsEnabled="{x:Bind Path=Model.InputEnabled, Mode=OneWay}"
+                              IsOn="{x:Bind Path=Model.Device.Enabled, Mode=TwoWay}" />
+
+
+                <!-- Cycle -->
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Cycle:" Style="{StaticResource LabelText}" />
+                <ToggleSwitch Grid.Row="2" Grid.Column="1" Name="CycleSwitch" IsEnabled="{x:Bind Path=Model.InputEnabled, Mode=OneWay}"
+                              IsOn="{x:Bind Path=Model.Cycle, Mode=TwoWay}" />
+
+            </Grid>
+
+            <!-- Output -->
+            <Grid Grid.Column="1" Style="{StaticResource PanelGrid}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="Output" Style="{StaticResource PanelTitleText}"/>
+                <ScrollViewer Name="OutputScroller" Grid.Row="1" Margin="5"
+                              IsDeferredScrollingEnabled="False" BorderThickness="1" BorderBrush="Black">
+                    <TextBlock Name="ResultTextBox" Text="{x:Bind Path=Model.Output, Mode=OneWay}"
+                           ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" />
+                </ScrollViewer>
+
+            </Grid>
+
+            <!-- Commands -->
+            <StackPanel Grid.Column="2" Style="{StaticResource PanelStack}">
+
+                <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Commands" Style="{StaticResource PanelTitleText}" />
+
+                <Button x:Name="ClearButton" Content="Clear" Margin="5" HorizontalAlignment="Stretch"
+                        IsEnabled="{x:Bind Path=Model.InputEnabled, Mode=OneWay}" Click="OnClearButtonClick" />
+                <Button x:Name="ReadButton" Content="Read" Margin="5" HorizontalAlignment="Stretch"
+                        IsEnabled="{x:Bind Path=Model.InputEnabled, Mode=OneWay}" Click="OnReadButtonClick" />
+                <Button x:Name="SleepButton" Content="Sleep" Margin="5" HorizontalAlignment="Stretch"
+                        IsEnabled="{x:Bind Path=Model.InputEnabled, Mode=OneWay}" Click="OnSleepButtonClick" />
+                <Button x:Name="Wakeutton" Content="Wake" Margin="5" HorizontalAlignment="Stretch"
+                        IsEnabled="{x:Bind Path=Model.InputEnabled, Mode=OneWay}" Click="OnWakeButtonClick" />
+                <Button x:Name="RestartButton" Content="Restart" Margin="5" HorizontalAlignment="Stretch"
+                        IsEnabled="{x:Bind Path=Model.InputEnabled, Mode=OneWay}" Click="OnRestartButtonClick" />
+                <Button x:Name="CloseButton" Content="Close" Margin="5" HorizontalAlignment="Stretch"
+                        IsEnabled="{x:Bind Path=Model.InputEnabled, Mode=OneWay}" Click="OnCloseButtonClick" />
+
+            </StackPanel>
+
+        </Grid>
+
+    </Grid>
+
+</base:UIModelPage>

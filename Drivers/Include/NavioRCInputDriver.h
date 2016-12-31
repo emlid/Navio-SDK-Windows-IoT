@@ -19,7 +19,7 @@ Environment:
 #ifndef _NAVIORCINPUT_PUBLIC_H_
 #define _NAVIORCINPUT_PUBLIC_H_
 
-// Device Interface ID for appliation access
+// Device Interface ID for application access
 DEFINE_GUID (GUID_DEVINTERFACE_NavioRCInput,
 	0x9d3b9fcf,0x65e4,0x4736,0xb4,0x33,0x15,0x29,0xa5,0x90,0xa3,0x80);
 // {9d3b9fcf-65e4-4736-b433-1529a590a380}

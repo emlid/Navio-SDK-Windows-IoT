@@ -27,6 +27,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Emlid", "Emlid", "{C5BE4849-C884-4527-8C1E-46CEB39E0F54}"
 	ProjectSection(SolutionItems) = preProject
 		Media\Images\Emlid\emlid_logo_no_text.png = Media\Images\Emlid\emlid_logo_no_text.png
+		Media\Images\Emlid\Navio 2 HAT Pins.png = Media\Images\Emlid\Navio 2 HAT Pins.png
 		Media\Images\Emlid\Navio-Research.jpg = Media\Images\Emlid\Navio-Research.jpg
 		Media\Images\Emlid\TopView8.jpg = Media\Images\Emlid\TopView8.jpg
 	EndProjectSection
@@ -35,11 +36,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{E2AC6B
 	ProjectSection(SolutionItems) = preProject
 		Common\ArrayExtensions.cs = Common\ArrayExtensions.cs
 		Common\AssemblyInfoGlobal.cs = Common\AssemblyInfoGlobal.cs
+		Common\ByteToHexStringValueConverter.cs = Common\ByteToHexStringValueConverter.cs
 		Common\ConvertibleValueConverter.cs = Common\ConvertibleValueConverter.cs
 		Common\CustomDictionary.xml = Common\CustomDictionary.xml
 		Common\DisposableObject.cs = Common\DisposableObject.cs
-		Common\EnumValueConverter.cs = Common\EnumValueConverter.cs
-		Common\HexByteValueConverter.cs = Common\HexByteValueConverter.cs
+		Common\EnumerationValueConverter.cs = Common\EnumerationValueConverter.cs
+		Common\IsNullToBoolValueConverter.cs = Common\IsNullToBoolValueConverter.cs
 		Common\StopwatchExtensions.cs = Common\StopwatchExtensions.cs
 		Common\StringExtensions.cs = Common\StringExtensions.cs
 		Common\TemporaryKey Install.cmd = Common\TemporaryKey Install.cmd
@@ -59,8 +61,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ACPI", "ACPI", "{A02B6648-A6A0-4655-B658-EC3F9B1E0CE1}"
 	ProjectSection(SolutionItems) = preProject
 		Drivers\ACPI\ACPITABL.DAT = Drivers\ACPI\ACPITABL.DAT
+		Drivers\ACPI\ACPITABL2.DAT = Drivers\ACPI\ACPITABL2.DAT
 		Drivers\ACPI\Build.cmd = Drivers\ACPI\Build.cmd
 		Drivers\ACPI\Navio.asl = Drivers\ACPI\Navio.asl
+		Drivers\ACPI\Navio2.asl = Drivers\ACPI\Navio2.asl
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CPP", "CPP", "{175F3EA8-E13A-41F9-81E9-EFE31813D8F0}"
@@ -81,8 +85,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{703F
 		Tools\Scripts\Setup Remote.ps1 = Tools\Scripts\Setup Remote.ps1
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Navio RC Input Driver", "Drivers\Navio RC Input\Navio RC Input Driver.vcxproj", "{116C1C54-44B7-4C82-87CC-489B5ED85975}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{6637C7B9-0DFD-410A-89F1-C1DD8E2D01EC}"
 	ProjectSection(SolutionItems) = preProject
 		Tools\NuGet\nuget.exe = Tools\NuGet\nuget.exe
@@ -97,6 +99,21 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Emlid", "Emlid", "{ABA42A63-65A8-424C-A138-8DFD5A56047F}"
 	ProjectSection(SolutionItems) = preProject
 		Documentation\Emlid\Windows-IoT.md = Documentation\Emlid\Windows-IoT.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Raspberry Pi", "Raspberry Pi", "{1F9D80D0-B763-4DB7-8BC4-51CCE403842F}"
+	ProjectSection(SolutionItems) = preProject
+		Media\Images\Raspberry Pi\Raspberry Pi 2 HAT Pins.png = Media\Images\Raspberry Pi\Raspberry Pi 2 HAT Pins.png
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Navio RC Input Driver", "Drivers\Navio RC Input\Navio RC Input Driver.vcxproj", "{116C1C54-44B7-4C82-87CC-489B5ED85975}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Components", "Components", "{7F2BB098-FCAF-4EAD-8C2F-A461F02CFE2B}"
+	ProjectSection(SolutionItems) = preProject
+		Documentation\Components\ENG_DS_MS5611-01BA03_B.pdf = Documentation\Components\ENG_DS_MS5611-01BA03_B.pdf
+		Documentation\Components\MB85RC04V-DS501-00016-2v0-E.pdf = Documentation\Components\MB85RC04V-DS501-00016-2v0-E.pdf
+		Documentation\Components\MB85RC256V-DS501-00017-3v0-E.pdf = Documentation\Components\MB85RC256V-DS501-00017-3v0-E.pdf
+		Documentation\Components\PCA9685.pdf = Documentation\Components\PCA9685.pdf
 	EndProjectSection
 EndProject
 Global
@@ -133,12 +150,6 @@ Global
 		{243E8ED0-58CF-4322-BB7D-D52E70352608}.Release|ARM.ActiveCfg = Release|ARM
 		{243E8ED0-58CF-4322-BB7D-D52E70352608}.Release|ARM.Build.0 = Release|ARM
 		{243E8ED0-58CF-4322-BB7D-D52E70352608}.Release|ARM.Deploy.0 = Release|ARM
-		{116C1C54-44B7-4C82-87CC-489B5ED85975}.Debug|ARM.ActiveCfg = Debug|ARM
-		{116C1C54-44B7-4C82-87CC-489B5ED85975}.Debug|ARM.Build.0 = Debug|ARM
-		{116C1C54-44B7-4C82-87CC-489B5ED85975}.Debug|ARM.Deploy.0 = Debug|ARM
-		{116C1C54-44B7-4C82-87CC-489B5ED85975}.Release|ARM.ActiveCfg = Release|ARM
-		{116C1C54-44B7-4C82-87CC-489B5ED85975}.Release|ARM.Build.0 = Release|ARM
-		{116C1C54-44B7-4C82-87CC-489B5ED85975}.Release|ARM.Deploy.0 = Release|ARM
 		{ABE84FDC-D12F-40E9-8F2A-CB10245C4A26}.Debug|ARM.ActiveCfg = Debug|ARM
 		{ABE84FDC-D12F-40E9-8F2A-CB10245C4A26}.Debug|ARM.Build.0 = Debug|ARM
 		{ABE84FDC-D12F-40E9-8F2A-CB10245C4A26}.Debug|ARM.Deploy.0 = Debug|ARM
@@ -151,6 +162,12 @@ Global
 		{6C7E0CAD-E4A0-4B2E-A723-5AE1EB019932}.Release|ARM.ActiveCfg = Release|ARM
 		{6C7E0CAD-E4A0-4B2E-A723-5AE1EB019932}.Release|ARM.Build.0 = Release|ARM
 		{6C7E0CAD-E4A0-4B2E-A723-5AE1EB019932}.Release|ARM.Deploy.0 = Release|ARM
+		{116C1C54-44B7-4C82-87CC-489B5ED85975}.Debug|ARM.ActiveCfg = Debug|ARM
+		{116C1C54-44B7-4C82-87CC-489B5ED85975}.Debug|ARM.Build.0 = Debug|ARM
+		{116C1C54-44B7-4C82-87CC-489B5ED85975}.Debug|ARM.Deploy.0 = Debug|ARM
+		{116C1C54-44B7-4C82-87CC-489B5ED85975}.Release|ARM.ActiveCfg = Release|ARM
+		{116C1C54-44B7-4C82-87CC-489B5ED85975}.Release|ARM.Build.0 = Release|ARM
+		{116C1C54-44B7-4C82-87CC-489B5ED85975}.Release|ARM.Deploy.0 = Release|ARM
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -168,10 +185,12 @@ Global
 		{F138A081-8CD8-484F-A45A-6B0CAF289BA4} = {CDC2AC5F-B61D-4271-8721-83D9B0703F51}
 		{243E8ED0-58CF-4322-BB7D-D52E70352608} = {175F3EA8-E13A-41F9-81E9-EFE31813D8F0}
 		{703F0B97-99AB-4EEE-B9BD-D9C86883CB8C} = {C1B9EF36-2E1E-4BCB-A85F-E85DF75F737A}
-		{116C1C54-44B7-4C82-87CC-489B5ED85975} = {CDC2AC5F-B61D-4271-8721-83D9B0703F51}
 		{6637C7B9-0DFD-410A-89F1-C1DD8E2D01EC} = {C1B9EF36-2E1E-4BCB-A85F-E85DF75F737A}
 		{ABE84FDC-D12F-40E9-8F2A-CB10245C4A26} = {7E41DA83-4FEE-4D23-9172-12D93906F9DF}
 		{6C7E0CAD-E4A0-4B2E-A723-5AE1EB019932} = {7E41DA83-4FEE-4D23-9172-12D93906F9DF}
 		{ABA42A63-65A8-424C-A138-8DFD5A56047F} = {0BBA5CC3-BF97-43C8-AD5A-1DC8F968031F}
+		{1F9D80D0-B763-4DB7-8BC4-51CCE403842F} = {A63BF65A-DC4C-47F8-A58E-3AA04FCAD340}
+		{116C1C54-44B7-4C82-87CC-489B5ED85975} = {CDC2AC5F-B61D-4271-8721-83D9B0703F51}
+		{7F2BB098-FCAF-4EAD-8C2F-A461F02CFE2B} = {0BBA5CC3-BF97-43C8-AD5A-1DC8F968031F}
 	EndGlobalSection
 EndGlobal

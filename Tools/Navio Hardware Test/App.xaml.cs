@@ -1,4 +1,4 @@
-﻿using Emlid.WindowsIot.Hardware.Boards.Navio;
+﻿using Emlid.WindowsIot.Hardware.System;
 using Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views;
 using Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Shared;
 using System;
@@ -14,19 +14,36 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
-    sealed partial class App : Application
+    public sealed partial class App : Application
     {
+        #region Lifetime
+
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
         /// </summary>
         public App()
         {
+            // Initialize component
             InitializeComponent();
+
+            // Hook events
             Suspending += OnSuspending;
             UnhandledException += OnError;
-            NavioHardwareProvider.Initialize();
         }
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// Application UI model.
+        /// </summary>
+        public ApplicationUIModel Model { get; private set; }
+
+        #endregion
+
+        #region Events
 
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
@@ -35,6 +52,14 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp
         /// <param name="arguments">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs arguments)
         {
+
+            // Initialize hardware
+            DeviceProvider.Initialize();
+
+            // Create UI model
+            Model = new ApplicationUIModel();
+
+            // Start frame counter when debugging
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
                 DebugSettings.EnableFrameRateCounter = true;
@@ -111,7 +136,9 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp
             // TODO: Get this working
             var uiScheduler = TaskScheduler.FromCurrentSynchronizationContext();
             var uiFactory = new TaskFactory(uiScheduler);
-            uiFactory.StartNew(() => { dialog.ShowAsync().AsTask().Wait(); }).Wait();
+            uiFactory.StartNew(() => { dialog.ShowAsync().AsTask().Wait(); });
         }
+
+        #endregion
     }
 }

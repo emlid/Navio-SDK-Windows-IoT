@@ -1,4 +1,7 @@
-﻿using Emlid.WindowsIot.Hardware.Components.Ms5611;
+﻿using Emlid.WindowsIot.Common;
+using Emlid.WindowsIot.Hardware.Components.Ms5611;
+using Emlid.WindowsIot.Hardware.Protocols.Barometer;
+using Emlid.WindowsIot.Hardware.System;
 using System;
 
 namespace Emlid.WindowsIot.Hardware.Boards.Navio
@@ -6,7 +9,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
     /// <summary>
     /// Navio barometric pressure and temperature sensor (MS5611 hardware device), connected via I2C.
     /// </summary>
-    public sealed class NavioBarometerDevice : Ms5611Device
+    public sealed class NavioBarometerDevice : DisposableObject, INavioBarometerDevice
     {
         #region Constants
 
@@ -16,9 +19,9 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         public const int I2cControllerIndex = 0;
 
         /// <summary>
-        /// I2C address of the MS5611 on the Navio board.
+        /// Chip Select Bit (CSB) of the MS5611 on the Navio board.
         /// </summary>
-        public const int I2cAddress = 0x77;
+        public const bool ChipSelectBit = true;
 
         /// <summary>
         /// Over-Sampling Rate to use by default (maximum of 4096).
@@ -38,24 +41,85 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         /// </remarks>
         [CLSCompliant(false)]
         public NavioBarometerDevice()
-            : base(NavioHardwareProvider.ConnectI2c(I2cControllerIndex, I2cAddress), DefaultOsr)
         {
+            // Get I2C controller for barometer chip
+            DeviceProvider.Initialize();
+            var controller = DeviceProvider.I2c[I2cControllerIndex];
+
+            // Connect to hardware
+            _device = new Ms5611Device(controller, ChipSelectBit, DefaultOsr);
+        }
+
+        #region IDisposable
+
+        /// <summary>
+        /// Frees resources owned by this instance.
+        /// </summary>
+        /// <param name="disposing">
+        /// True when called via <see cref="IDisposable.Dispose()"/>, false when called from the finalizer.
+        /// </param>
+        protected override void Dispose(bool disposing)
+        {
+            // Only managed resources to dispose
+            if (!disposing)
+                return;
+
+            // Close device
+            _device?.Dispose();
         }
 
         #endregion
 
-        #region Protected Methods
+        #endregion
+
+        #region Private Fields
 
         /// <summary>
-        /// Performs calculation then fires the <see cref="MeasurementUpdated"/> event.
+        /// FRAM device specific to the requested Navio model.
         /// </summary>
-        protected override void Calculate(int rawPressure, int rawTemperature)
+        private Ms5611Device _device;
+
+        #endregion
+
+        #region Public Properties
+
+        /// <summary>
+        /// Last measurement taken from the device.
+        /// </summary>
+        public BarometerMeasurement Measurement { get; private set; }
+
+        #endregion
+
+        #region Public Methods
+        /// <summary>
+        /// Resets the device and clears current measurements.
+        /// </summary>
+        public void Reset()
+        {
+            // Reset device
+            _device.Reset();
+
+            // Clear measurement
+            Measurement = new BarometerMeasurement();
+        }
+
+        /// <summary>
+        /// Performs calculation on the device then fires the <see cref="MeasurementUpdated"/> event.
+        /// </summary>
+        public BarometerMeasurement Update()
         {
             // Perform calculation
-            base.Calculate(rawPressure, rawTemperature);
+            _device.Update();
+            var measurement = new BarometerMeasurement(_device.Pressure, _device.Temperature);
+
+            // Update property
+            Measurement = measurement;
 
             // Fire event
-            MeasurementUpdated?.Invoke(this, Measurement);
+            MeasurementUpdated?.Invoke(this, measurement);
+
+            // Return result
+            return measurement;
         }
 
         #endregion
@@ -63,9 +127,9 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         #region Events
 
         /// <summary>
-        /// Fired when a new measurement is calculated.
+        /// Fired after a new measurement is calculated.
         /// </summary>
-        public EventHandler<Ms5611Measurement> MeasurementUpdated;
+        public event EventHandler<BarometerMeasurement> MeasurementUpdated;
 
         #endregion
     }
