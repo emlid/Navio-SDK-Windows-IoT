@@ -3,16 +3,15 @@ using Emlid.WindowsIot.Hardware.Components.Ms5611;
 using Emlid.WindowsIot.Hardware.Protocols.Barometer;
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
 {
     /// <summary>
-    /// UI model for testing the <see cref="NavioBarometerDevice"/>.
+    /// UI model for testing the <see cref="INavioBarometerDevice"/>.
     /// </summary>
-    public class BarometerTestUIModel : TestUIModel
+    public sealed class BarometerTestUIModel : TestUIModel
     {
         #region Lifetime
 
@@ -141,7 +140,11 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
         /// </summary>
         public void Reset()
         {
+            // Run test
             RunTest(delegate { Device.Reset(); });
+
+            // Update view
+            DoPropertyChanged(nameof(Device));
         }
 
         /// <summary>
@@ -149,7 +152,11 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
         /// </summary>
         public void Update()
         {
+            // Run test
             RunTest(delegate { Device.Update(); });
+
+            // Update view
+            DoPropertyChanged(nameof(Device));
         }
 
         /// <summary>
@@ -192,20 +199,6 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
         #region Non-Public Methods
 
         /// <summary>
-        /// Runs a test method with status and error output.
-        /// </summary>
-        /// <param name="test">Test delegate to run.</param>
-        /// <param name="name">Name to use in the output.</param>
-        protected override void RunTest(Action test, [CallerMemberName] string name = "")
-        {
-            // Call base class to run test
-            base.RunTest(test, name);
-
-            // Update properties
-            DoPropertyChanged(nameof(Device));
-        }
-
-        /// <summary>
         /// Background task delegate which executes the auto-update.
         /// </summary>
         /// <param name="cancel">Cancellation token.</param>
@@ -216,15 +209,9 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
                 // Initialize
                 WriteOutput("Auto-update starting on background thread...");
 
-                // Run until canceled
+                // Run as fast as possible until canceled
                 while (!cancel.IsCancellationRequested)
-                {
-                    // Request hardware update
                     Device.Update();
-
-                    // Update properties
-                    DoPropertyChanged(nameof(Device));
-                }
             }
             catch (OperationCanceledException) { }
 

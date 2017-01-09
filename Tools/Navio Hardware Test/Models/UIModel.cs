@@ -18,6 +18,8 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views
         /// <remarks>
         /// When too short and events are generated too quickly, the UI has no chance to refresh.
         /// When too long and processor intensive operations are triggered, the UI could appear to hang.
+        /// Deadlocks could occur when background threads with call <see cref="DoPropertyChanged(string)"/>
+        /// to update the UI thread and another UI action has been performed which also requires the same lock.
         /// </remarks>
         public const int UpdateTimeout = 500;
 

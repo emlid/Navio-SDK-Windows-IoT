@@ -1,18 +1,19 @@
 ﻿using System.Globalization;
 
-namespace Emlid.WindowsIot.Hardware.Protocols.Pwm
+namespace Emlid.WindowsIot.Hardware.Protocols.Ppm
 {
     /// <summary>
-    /// Contains information about a PWM value (time and low or high)
+    /// Contains information about a PPM (Pulse Position Modulation) pulse (time and logic level).
     /// </summary>
-    public struct PwmValue
+    /// <see href="https://en.wikipedia.org/wiki/Pulse-position_modulation"/>
+    public struct PpmPulse
     {
         #region Lifetime
 
         /// <summary>
         /// Creates an instance with the specified values.
         /// </summary>
-        public PwmValue(long time, bool state)
+        public PpmPulse(long time, bool state)
         {
            Time = time;
            Level = state;
@@ -25,7 +26,7 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Pwm
         /// <summary>
         /// Tests two objects of this type for equality by value.
         /// </summary>
-        public static bool operator ==(PwmValue  left, PwmValue  right)
+        public static bool operator ==(PpmPulse  left, PpmPulse  right)
         {
             return left.Equals(right);
         }
@@ -33,7 +34,7 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Pwm
         /// <summary>
         /// Tests two objects of this type for inequality by value.
         /// </summary>
-        public static bool operator !=(PwmValue  left, PwmValue  right)
+        public static bool operator !=(PpmPulse  left, PpmPulse  right)
         {
             return !left.Equals(right);
         }
@@ -45,9 +46,9 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Pwm
         public override bool Equals(object value)
         {
             // Compare type
-            if (!(value is PwmValue))
+            if (!(value is PpmPulse))
                 return false;
-            var other = (PwmValue)value;
+            var other = (PpmPulse)value;
 
             // Compare values
             return
@@ -70,7 +71,7 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Pwm
         #region Properties
 
         /// <summary>
-        /// Timestamp at which the event occurred in microseconds.
+        /// Time at which the event occurred in microseconds.
         /// </summary>
         public long Time { get; set; }
 
@@ -89,7 +90,7 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Pwm
         public override string ToString()
         {
             return string.Format(CultureInfo.CurrentCulture,
-                Resources.Strings.PwmValueStringFormat, Level ? 1 : 0, Time);
+                Resources.Strings.PpmPulseFormat, Level ? 1 : 0, Time);
         }
 
         #endregion

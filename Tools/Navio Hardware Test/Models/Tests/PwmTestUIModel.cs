@@ -1,6 +1,6 @@
 ﻿using Emlid.WindowsIot.Hardware.Boards.Navio;
+using Emlid.WindowsIot.Hardware.Protocols.Pwm;
 using System;
-using System.Runtime.CompilerServices;
 
 namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
 {
@@ -18,6 +18,9 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
         {
             // Initialize members
             Device = application.Board.Pwm;
+
+            // Start at a safe frequency to avoid damage
+            Device.Frequency = PwmPulse.ServoSafeFrequency;
         }
 
         #region IDisposable
@@ -63,15 +66,15 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
         #region Public Methods
 
         /// <summary>
-        /// Clears any existing output then tests the <see cref="INavioPwmDevice.Clear"/> function.
+        /// Tests the <see cref="INavioPwmDevice.Reset"/> function.
         /// </summary>
-        public override void Clear()
+        public void Reset()
         {
-            // Call base class to clear output
-            base.Clear();
+            // Run test
+            RunTest(delegate { Device.Reset(); });
 
-            // Run device clear test
-            RunTest(delegate { Device.Clear(); });
+            // Update view
+            DoPropertyChanged(nameof(Device));
         }
 
         /// <summary>
@@ -79,62 +82,11 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
         /// </summary>
         public void Read()
         {
+            // Run test
             RunTest(delegate { Device.Read(); });
-        }
 
-        /// <summary>
-        /// Tests the <see cref="INavioPwmDevice.Sleep"/> function.
-        /// </summary>
-        public void Sleep()
-        {
-            RunTest(delegate { Device.Sleep(); });
-        }
-
-        /// <summary>
-        /// Tests the <see cref="INavioPwmDevice.Wake"/> function.
-        /// </summary>
-        public void Wake()
-        {
-            RunTest(delegate { Device.Wake(); });
-        }
-
-        /// <summary>
-        /// Tests the <see cref="INavioPwmDevice.Restart"/> function.
-        /// </summary>
-        public void Restart()
-        {
-            RunTest(delegate { Device.Restart(); });
-        }
-
-        #endregion
-
-        #region Non-Public Methods
-
-        /// <summary>
-        /// Runs a test method with status and error output.
-        /// </summary>
-        /// <param name="test">Test delegate to run.</param>
-        /// <param name="name">Name to use in the output.</param>
-        protected override void RunTest(Action test, [CallerMemberName] string name = "")
-        {
-            // Call base class to run test
-            base.RunTest(test, name);
-
-            // Update properties
+            // Update view
             DoPropertyChanged(nameof(Device));
-        }
-
-        /// <summary>
-        /// Enables output if necessary.
-        /// </summary>
-        private void EnsureOutputEnabled()
-        {
-            if (!Device.Enabled)
-            {
-                WriteOutput("Enabling output.");
-                Device.Enabled = true;
-                DoPropertyChanged(nameof(Device));
-            }
         }
 
         #endregion

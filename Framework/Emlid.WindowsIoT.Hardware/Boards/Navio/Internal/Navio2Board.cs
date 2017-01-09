@@ -1,8 +1,7 @@
 ﻿using Emlid.WindowsIot.Common;
-using Emlid.WindowsIot.Hardware.Protocols.Pwm;
 using System;
 
-namespace Emlid.WindowsIot.Hardware.Boards.Navio
+namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
 {
     /// <summary>
     /// Navio 2 hardware board.
@@ -10,26 +9,18 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
     /// <remarks>
     /// Encapsulates common initialization and access to all components on this hardware model.
     /// </remarks>
-    public sealed class Navio2Board : DisposableObject, INavioBoard
+    internal sealed class Navio2Board : DisposableObject, INavioBoard
     {
         #region Lifetime
 
         /// <summary>
         /// Creates an instance.
         /// </summary>
-        /// <param name="pwmFrequency">
-        /// Some PWM devices do not tolerate high values and could be damaged if this is set too high,
-        /// e.g. analog servos operate at much lower frequencies than digital servos.
-        /// See <see cref="PwmCycle.ServoSafeFrequency"/> for more information.
-        /// </param>
-        public Navio2Board(float pwmFrequency = PwmCycle.ServoSafeFrequency)
+        public Navio2Board()
         {
             // Initialize components
-            Ms5611 = new NavioBarometerDevice();
-            GpioLed = new Navio2LedDevice();
-
-            // TODO: Implement Navio 2 PWM
-            if (pwmFrequency > 0) { /* Ignore unused parameter warning. */ ; }
+            _barometerDevice = new NavioBarometerDevice();
+            _ledDevice = new Navio2LedDevice();
         }
 
         #region IDisposable
@@ -47,17 +38,29 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
                 return;
 
             // Dispose owned objects
-            Ms5611?.Dispose();
-            GpioLed?.Dispose();
+            _barometerDevice?.Dispose();
+            _ledDevice?.Dispose();
         }
 
         #endregion
 
         #endregion
 
-        #region Public Properties
+        #region Private Fields
 
-        #region Common Interface
+        /// <summary>
+        /// Model specific MS5611 chip which provides <see cref="Barometer"/> functionality.
+        /// </summary>
+        private NavioBarometerDevice _barometerDevice;
+
+        /// <summary>
+        /// Model specific LED chip with RGB components connected to GPIO pins.
+        /// </summary>
+        private Navio2LedDevice _ledDevice;
+
+        #endregion
+
+        #region Public Properties
 
         /// <summary>
         /// Hardware model.
@@ -72,7 +75,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         /// <summary>
         /// Barometric pressure and temperature sensor.
         /// </summary>
-        public INavioBarometerDevice Barometer => Ms5611;
+        public INavioBarometerDevice Barometer => _barometerDevice;
 
         /// <summary>
         /// Ferroelectric RAM device.
@@ -100,7 +103,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         /// <summary>
         /// LED device.
         /// </summary>
-        public INavioLedDevice Led => GpioLed;
+        public INavioLedDevice Led => _ledDevice;
 
         /// <summary>
         /// PWM device.
@@ -115,24 +118,6 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         /// Latencies and inaccuracies possible due to software overhead.
         /// </remarks>
         public INavioRCInputDevice RCInput { get; private set; }
-
-        #endregion
-
-        #region Model Specific
-
-        /// <summary>
-        /// Model specific MS5611 chip which provides <see cref="Barometer"/> functionality.
-        /// </summary>
-        public NavioBarometerDevice Ms5611 { get; private set; }
-
-        /// <summary>
-        /// Model specific LED chip with RGB components connected to GPIO pins.
-        /// </summary>
-        public Navio2LedDevice GpioLed { get; private set; }
-
-        // TODO: Implement Navio 2 specific devices
-
-        #endregion
 
         #endregion
     }

@@ -126,9 +126,6 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp
         /// </summary>
         private void OnError(object sender, UnhandledExceptionEventArgs error)
         {
-            // Flag handled so app can continue
-            error.Handled = true;
-
             // Create error dialog
             var dialog = new MessageDialog("Error", error.Message);
 
@@ -137,6 +134,9 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp
             var uiScheduler = TaskScheduler.FromCurrentSynchronizationContext();
             var uiFactory = new TaskFactory(uiScheduler);
             uiFactory.StartNew(() => { dialog.ShowAsync().AsTask().Wait(); });
+
+            // Flag handled so app can continue
+            error.Handled = false;
         }
 
         #endregion

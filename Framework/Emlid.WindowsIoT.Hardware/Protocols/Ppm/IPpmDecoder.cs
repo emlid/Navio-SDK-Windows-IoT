@@ -1,12 +1,12 @@
 ﻿using System.Collections.Concurrent;
 using System.Threading;
 
-namespace Emlid.WindowsIot.Hardware.Protocols.Pwm
+namespace Emlid.WindowsIot.Hardware.Protocols.Ppm
 {
     /// <summary>
-    /// Defines a common PWM decoder interface to support multiple protocols.
+    /// Defines a common PPM decoder interface to support multiple protocols.
     /// </summary>
-    public interface IPwmDecoder
+    public interface IPpmDecoder
     {
         /// <summary>
         /// Maximum number of channels which this decoder produces.
@@ -16,12 +16,12 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Pwm
         /// <summary>
         /// Runs the decoder thread.
         /// </summary>
-        /// <param name="inputBuffer">Buffer from which new PWM values are read.</param>
+        /// <param name="inputBuffer">Buffer from which new PPM values are read.</param>
         /// <param name="inputTrigger">Trigger which is fired by the caller when new data arrives.</param>
-        /// <param name="outputBuffer">Buffer into which decoded PWM frames are written.</param>
+        /// <param name="outputBuffer">Buffer into which decoded PPM frames are written.</param>
         /// <param name="outputTrigger">Trigger which is fired by this decoder when new data has been decoded.</param>
         /// <param name="stop">Signals when the decoder should stop.</param>
-        void DecodePulse(ConcurrentQueue<PwmValue> inputBuffer, AutoResetEvent inputTrigger,
-            ConcurrentQueue<PwmFrame> outputBuffer, AutoResetEvent outputTrigger, CancellationToken stop);
+        void DecodePulse(ConcurrentQueue<PpmPulse> inputBuffer, AutoResetEvent inputTrigger,
+            ConcurrentQueue<PpmFrame> outputBuffer, AutoResetEvent outputTrigger, CancellationToken stop);
     }
 }

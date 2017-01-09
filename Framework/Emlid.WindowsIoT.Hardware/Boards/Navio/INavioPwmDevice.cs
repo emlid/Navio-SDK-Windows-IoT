@@ -1,5 +1,6 @@
 ﻿using Emlid.WindowsIot.Hardware.Protocols.Pwm;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace Emlid.WindowsIot.Hardware.Boards.Navio
@@ -33,16 +34,6 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         bool CanDisable { get; }
 
         /// <summary>
-        /// Indicates whether sleep mode (<see cref="Sleep"/> and <see cref="Wake"/>) is supported.
-        /// </summary>
-        bool CanSleep { get; }
-
-        /// <summary>
-        /// Indicates whether <see cref="Restart"/> is supported.
-        /// </summary>
-        bool CanRestart { get; }
-
-        /// <summary>
         /// Enables or disables PWM when possible.
         /// </summary>
         /// <remarks>
@@ -52,53 +43,69 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         bool Enabled { get; set; }
 
         /// <summary>
-        /// PWM channels.
-        /// </summary>
-        Collection<PwmCycle> Channels { get; }
-
-        /// <summary>
         /// Indicates a different frequency can be set for each channel.
         /// </summary>
         bool FrequencyPerChannel { get; }
 
         /// <summary>
-        /// Frequency in Hz.
+        /// Frequency for all channels in Hz.
         /// </summary>
         /// <remarks>
+        /// <para>
+        /// When <see cref="FrequencyPerChannel"/> is true, reading this value returns the highest of all frequencies
+        /// and writing it sets all channels to the same frequency.
+        /// When <see cref="FrequencyPerChannel"/> is false, the device does not support multiple frequencies so
+        /// all values are tied together.
+        /// </para>
+        /// <para>
+        /// When setting the frequency, the device clock and oscillator characteristics may cause the resulting
+        /// frequency to be different to what was set. Read back the value after setting to get the actual value.
+        /// </para>
+        /// <para>
         /// Some PWM devices do not tolerate high values and could be damaged if this is set too high,
         /// e.g. analog servos operate at much lower frequencies than digital servos.
-        /// See <see cref="PwmCycle.ServoSafeFrequency"/> for more information.
+        /// See <see cref="PwmPulse.ServoSafeFrequency"/> for more information.
+        /// </para>
         /// </remarks>
-        float Frequency { get; }
+        int Frequency { get; set; }
 
         /// <summary>
-        /// Minimum frequency supported.
+        /// Minimum frequency supported in Hz.
         /// </summary>
-        float FrequencyMinimum { get; }
+        int FrequencyMinimum { get; }
 
         /// <summary>
-        /// Maximum frequency supported.
+        /// Maximum frequency supported in Hz.
         /// </summary>
-        float FrequencyMaximum { get; }
+        int FrequencyMaximum { get; }
 
         /// <summary>
-        /// Minimum PWM length in milliseconds, based on the current <see cref="Frequency"/>.
+        /// Minimum pulse width in fractions of milliseconds, based on the current <see cref="Frequency"/>.
         /// </summary>
-        float LengthMinimum { get; }
+        decimal WidthMinimum { get; }
 
         /// <summary>
-        /// Maximum PWM length in milliseconds, based on the current <see cref="Frequency"/>.
+        /// Maximum pulse width in fractions of milliseconds, based on the current <see cref="Frequency"/>.
         /// </summary>
-        float LengthMaximum { get; }
+        decimal WidthMaximum { get; }
+
+        /// <summary>
+        /// PWM channel pulse widths in milliseconds.
+        /// </summary>
+        /// <remarks>
+        /// The <see cref="PwmPulse.Frequency"/> can only be changed when the device supports independent
+        /// frequencies per channel, i.e. <see cref="FrequencyPerChannel"/> is true.
+        /// </remarks>
+        ReadOnlyCollection<PwmPulse> Channels { get; }
 
         #endregion
 
         #region Methods
 
         /// <summary>
-        /// Clears all values.
+        /// Clears all values and resets the device state to default (disabled).
         /// </summary>
-        void Clear();
+        void Reset();
 
         /// <summary>
         /// Reads the PWM channels from the device then updates the related properties.
@@ -106,39 +113,14 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         void Read();
 
         /// <summary>
-        /// Puts the device into sleep mode when supported.
+        /// Sets a single channel value.
         /// </summary>
-        /// <returns>
-        /// True when mode was changed, false when already set.
-        /// </returns>
-        bool Sleep();
+        void SetChannel(int number, PwmPulse value);
 
         /// <summary>
-        /// Resumes from sleep when supported.
+        /// Sets multiple channel values at once.
         /// </summary>
-        /// <returns>
-        /// True when mode was changed, false when already set.
-        /// </returns>
-        bool Wake();
-
-        /// <summary>
-        /// Restarts the device when supported.
-        /// </summary>
-        void Restart();
-
-        /// <summary>
-        /// Sets the frequency in Hz.
-        /// </summary>
-        /// <param name="frequency">Frequency to set in Hz.</param>
-        /// <returns>
-        /// Effective frequency in Hz, read-back and recalculated after setting the desired frequency.
-        /// Frequency in Hz. Related properties are also updated.
-        /// </returns>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// Thrown when <paramref name="frequency"/> is less than <see cref="FrequencyMinimum"/> or greater than
-        /// <see cref="FrequencyMaximum"/>.
-        /// </exception>
-        float SetFrequency(float frequency);
+        void SetChannels(int number, IList<PwmPulse> values, int count);
 
         #endregion
     }

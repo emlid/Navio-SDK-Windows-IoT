@@ -1,5 +1,5 @@
 ﻿using Emlid.WindowsIot.Common;
-using Emlid.WindowsIot.Hardware.Protocols.Pwm;
+using Emlid.WindowsIot.Hardware.Protocols.Ppm;
 using Emlid.WindowsIot.Hardware.System;
 using System;
 using System.Collections.Concurrent;
@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Windows.Devices.Gpio;
 
-namespace Emlid.WindowsIot.Hardware.Boards.Navio
+namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
 {
 
     /// <summary>
@@ -22,7 +22,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
     /// The older Navio model only has a built-in voltage divider in PPM Input that lowers the voltage level from 5V to 3.3V.
     /// So if you connect a 3.3V PPM device (which is rare) to the original Navio, no signal will not be detected.
     /// </remarks>
-    public sealed class NavioRCInputDevice : DisposableObject, INavioRCInputDevice
+    internal sealed class Navio1RCInputDevice : DisposableObject, INavioRCInputDevice
     {
         #region Constants
 
@@ -43,12 +43,12 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         /// <summary>
         /// Creates and initializes an instance.
         /// </summary>
-        public NavioRCInputDevice()
+        public Navio1RCInputDevice()
         {
             // Initialize buffers
-            _valueBuffer = new ConcurrentQueue<PwmValue>();
-            _valueTrigger = new AutoResetEvent(false);
-            _frameBuffer = new ConcurrentQueue<PwmFrame>();
+            _pulseBuffer = new ConcurrentQueue<PpmPulse>();
+            _pulseTrigger = new AutoResetEvent(false);
+            _frameBuffer = new ConcurrentQueue<PpmFrame>();
             _frameTrigger = new AutoResetEvent(false);
 
             // Configure GPIO
@@ -67,7 +67,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
             _stop = new CancellationTokenSource();
             _channels = new int[_decoder.MaximumChannels];
             Channels = new ReadOnlyCollection<int>(_channels);
-            _decoderTask = Task.Factory.StartNew(() => { _decoder.DecodePulse(_valueBuffer, _valueTrigger, _frameBuffer, _frameTrigger, _stop.Token); });
+            _decoderTask = Task.Factory.StartNew(() => { _decoder.DecodePulse(_pulseBuffer, _pulseTrigger, _frameBuffer, _frameTrigger, _stop.Token); });
 
             // Create receiver thread
             _receiverTask = Task.Factory.StartNew(() => { Receiver(); });
@@ -108,7 +108,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
             _stop?.Cancel();
 
             // Stop events
-            _valueTrigger?.Dispose();
+            _pulseTrigger?.Dispose();
             _frameTrigger?.Dispose();
 
             //  Close device
@@ -127,9 +127,9 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         private readonly GpioPin _inputPin;
 
         /// <summary>
-        /// Decoder called when each PWM cycle is detected.
+        /// Decoder called when each PPM cycle is detected.
         /// </summary>
-        private readonly IPwmDecoder _decoder;
+        private readonly IPpmDecoder _decoder;
 
         /// <summary>
         /// Background decoder task.
@@ -147,22 +147,22 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         private readonly CancellationTokenSource _stop;
 
         /// <summary>
-        /// Buffer containing raw PWM values.
+        /// Buffer containing raw PPM pulses.
         /// </summary>
-        private readonly ConcurrentQueue<PwmValue> _valueBuffer;
+        private readonly ConcurrentQueue<PpmPulse> _pulseBuffer;
 
         /// <summary>
-        /// Event used to signal the decoder that new captured PWM values are waiting to decode.
+        /// Event used to signal the decoder that new captured PPM values are waiting to decode.
         /// </summary>
-        private readonly AutoResetEvent _valueTrigger;
+        private readonly AutoResetEvent _pulseTrigger;
 
         /// <summary>
-        /// Buffer containing decoded PWM frames.
+        /// Buffer containing decoded PPM frames.
         /// </summary>
-        private readonly ConcurrentQueue<PwmFrame> _frameBuffer;
+        private readonly ConcurrentQueue<PpmFrame> _frameBuffer;
 
         /// <summary>
-        /// Event used to signal the consumer that new decoded PWM frames are ready to use.
+        /// Event used to signal the consumer that new decoded PPM frames are ready to use.
         /// </summary>
         private readonly AutoResetEvent _frameTrigger;
 
@@ -191,7 +191,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         #region Events
 
         /// <summary>
-        /// Handles GPIO changes (rising and falling PWM signal), recording them to the decoder queue.
+        /// Handles GPIO changes (rising and falling PPM signal), recording them to the decoder queue.
         /// </summary>
         /// <param name="sender">Event source, the <see cref="GpioPin"/> which changed.</param>
         /// <param name="arguments">Information about the GPIO pin value change.</param>
@@ -201,20 +201,20 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         /// </remarks>
         private void OnInputPinValueChanged(GpioPin sender, GpioPinValueChangedEventArgs arguments)
         {
-            // Get PWM value
+            // Get PPM value
             var time = StopwatchExtensions.GetTimestampInMicroseconds();
             var level = arguments.Edge == GpioPinEdge.RisingEdge;
-            var value = new PwmValue(time, level);
+            var value = new PpmPulse(time, level);
 
             // Queue for processing
-            _valueBuffer.Enqueue(value);
-            _valueTrigger.Set();
+            _pulseBuffer.Enqueue(value);
+            _pulseTrigger.Set();
         }
 
         /// <summary>
         /// Fired after a new frame of data has been received and decoded into <see cref="Channels"/>.
         /// </summary>
-        public event EventHandler<PwmFrame> ChannelsChanged;
+        public event EventHandler<PpmFrame> ChannelsChanged;
 
         #endregion
 
@@ -230,7 +230,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
             {
                 // Run until stopped...
                 // Wait for frame
-                PwmFrame frame;
+                PpmFrame frame;
                 if (!_frameBuffer.TryDequeue(out frame))
                 {
                     _frameTrigger.WaitOne(1000);

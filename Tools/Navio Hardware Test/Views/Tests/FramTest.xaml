@@ -72,15 +72,13 @@
                 <!-- Size -->
                 <TextBlock Grid.Row="2" Grid.Column="0" Text="Size:" Style="{StaticResource LabelText}" />
                 <TextBox Grid.Row="2" Grid.Column="1" Name="SizeTextBox" IsReadOnly="True" IsTabStop="False"
-                         Text="{x:Bind Path=Model.Device.Size, Mode=OneTime}">
-                </TextBox>
+                         Text="{x:Bind Path=Model.Device.Size, Mode=OneTime}" />
                 <TextBlock Grid.Row="2" Grid.Column="2" Text="Bytes" Style="{StaticResource LabelText}" />
 
                 <!-- Fill -->
                 <TextBlock Grid.Row="3" Grid.Column="0" Text="Fill:" Style="{StaticResource LabelText}" />
                 <TextBox Grid.Row="3" Grid.Column="1" Name="FillTextBox" IsEnabled="{x:Bind Path=Model.InputEnabled, Mode=OneWay}"
-                         Text="{x:Bind Path=Model.FillByte, Mode=TwoWay, Converter={StaticResource ByteToHexStringValueConverter}}">
-                </TextBox>
+                         Text="{x:Bind Path=Model.FillByte, Mode=TwoWay, Converter={StaticResource ByteToHexStringValueConverter}}" />
                 <TextBlock Grid.Row="3" Grid.Column="2" Text="Byte" Style="{StaticResource LabelText}" />
 
             </Grid>

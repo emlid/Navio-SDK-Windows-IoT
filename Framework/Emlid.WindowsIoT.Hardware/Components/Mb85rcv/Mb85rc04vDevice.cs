@@ -38,7 +38,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
         public const byte Density = 0x0;
 
         /// <summary>
-        /// Maximum number of devices for this model.
+        /// Maximum number of devices (chip number) for this model.
         /// </summary>
         public const int MaximumDevices = 4;
 
@@ -170,7 +170,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
         /// </summary>
         /// <param name="controller">I2C controller on which the device is connected.</param>
         /// <param name="chipNumber">
-        /// Device (chip code, not FRAM memory) address from zero to the supported <see cref="MaximumDevices"/>.
+        /// Device (chip) number, from zero to the <see cref="MaximumDevices"/> supported.
         /// </param>
         /// <returns>Device ID.</returns>
         [CLSCompliant(false)]
@@ -197,11 +197,11 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
         /// Gets the I2C address for data commands with the specified chip number (device address code).
         /// </summary>
         /// <param name="chipNumber">
-        /// Device (chip code, not FRAM memory) address from zero to the supported <see cref="MaximumDevices"/>.
+        /// Device (chip) number, from zero to the <see cref="MaximumDevices"/> supported.
         /// </param>
         /// <param name="upper">Set true when the data command is for the upper memory area.</param>
         /// <returns>7-bit I2C address.</returns>
-        public static byte GetDataI2cAddress(int chipNumber, bool upper)
+        public static byte GetDataI2cAddress(byte chipNumber, bool upper)
         {
             // Validate
             if (chipNumber < 0 || chipNumber > MaximumDevices)
@@ -218,7 +218,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
         /// Device (chip code, not FRAM memory) address from zero to the supported <see cref="MaximumDevices"/>.
         /// </param>
         /// <returns>7-bit I2C address.</returns>
-        public static byte GetDeviceIdI2cAddress(int chipNumber)
+        public static byte GetDeviceIdI2cAddress(byte chipNumber)
         {
             // Validate
             if (chipNumber < 0 || chipNumber > MaximumDevices)

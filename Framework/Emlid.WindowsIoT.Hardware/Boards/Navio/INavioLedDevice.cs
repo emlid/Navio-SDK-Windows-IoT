@@ -19,16 +19,6 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         bool CanDisable { get; }
 
         /// <summary>
-        /// Indicates whether sleep mode (<see cref="Sleep"/> and <see cref="Wake"/>) is supported.
-        /// </summary>
-        bool CanSleep { get; }
-
-        /// <summary>
-        /// Indicates whether <see cref="Restart"/> is supported.
-        /// </summary>
-        bool CanRestart { get; }
-
-        /// <summary>
         /// Enables or disables the LED when possible.
         /// </summary>
         /// <remarks>
@@ -74,9 +64,9 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         #region Methods
 
         /// <summary>
-        /// Clears all values.
+        /// Clears all values and resets the device state to default (disabled).
         /// </summary>
-        void Clear();
+        void Reset();
 
         /// <summary>
         /// Reads the LED values from the device then updates the related properties.
@@ -90,27 +80,6 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         /// <param name="green">Green value in the range 0-<see cref="MaximumValue"/>.</param>
         /// <param name="blue">Blue value in the range 0-<see cref="MaximumValue"/>.</param>
         void SetRgb(int red, int green, int blue);
-
-        /// <summary>
-        /// Puts the device into sleep mode when supported.
-        /// </summary>
-        /// <returns>
-        /// True when mode was changed, false when already set.
-        /// </returns>
-        bool Sleep();
-
-        /// <summary>
-        /// Resumes from sleep when supported.
-        /// </summary>
-        /// <returns>
-        /// True when mode was changed, false when already set.
-        /// </returns>
-        bool Wake();
-
-        /// <summary>
-        /// Restarts the device when supported.
-        /// </summary>
-        void Restart();
 
         #endregion
     }

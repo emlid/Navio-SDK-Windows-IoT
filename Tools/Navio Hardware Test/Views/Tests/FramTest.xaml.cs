@@ -41,7 +41,7 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
         protected override void OnNavigatedTo(NavigationEventArgs arguments)
         {
             // Initialize model and bind
-            DataContext = Model = new FramTestUIModel(ApplicationUIModel);
+            DataContext = Model = new FramTestUIModel(ApplicationModel);
             Model.PropertyChanged += OnModelChanged;
 
             // Initial layout

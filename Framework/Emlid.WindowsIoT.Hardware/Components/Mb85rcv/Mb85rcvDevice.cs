@@ -44,7 +44,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
         public const byte TypeCode = 0xa;
 
         /// <summary>
-        /// 7-bit I2C address of the first chip on the I2C bus.
+        /// 7-bit I2C address of the first chip on the bus.
         /// </summary>
         /// <remarks>
         /// When using multiple chips the chip address must be added.

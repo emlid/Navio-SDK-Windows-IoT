@@ -1,12 +1,12 @@
 ﻿using Emlid.WindowsIot.Common;
-using Emlid.WindowsIot.Hardware.Protocols.Pwm;
 using Emlid.WindowsIot.Hardware.System;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Windows.Devices.I2c;
 
-namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
+namespace Emlid.WindowsIot.Hardware.Components.Pca9685
 {
     /// <summary>
     /// PCA9685 PWM LED driver (hardware device), connected via I2C.
@@ -20,19 +20,34 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
     /// See http://www.nxp.com/documents/data_sheet/PCA9685.pdf for more information.
     /// </para>
     /// </remarks>
-    public class NxpPca9685Device : DisposableObject
+    public sealed class Pca9685Device : DisposableObject
     {
         #region Constants
 
         /// <summary>
-        /// Offset of the first channel register, <see cref="NxpPca9685Register.Channel0OnLow"/>.
+        /// 7-bit I2C address of the first PCA9685 on the bus.
+        /// </summary>
+        public const byte I2cAddress = 0x80 >> 1;
+
+        /// <summary>
+        /// 7-bit I2C address of the PCA9685 "all call" address.
+        /// </summary>
+        public const byte I2cAllCallAddress = 0x70 >> 1;
+
+        /// <summary>
+        /// Maximum number of devices (chip number) for this model.
+        /// </summary>
+        public const int MaximumDevices = 62;
+
+        /// <summary>
+        /// Offset of the first channel register, <see cref="Pca9685Register.Channel0OnLow"/>.
         /// </summary>
         public const byte ChannelStartAddress = 0x06;
 
         /// <summary>
         /// Size of the channel register groups, added to <see cref="ChannelStartAddress"/> to calculate the address of specific channels.
         /// </summary>
-        public const byte ChannelSize = 4;
+        public const byte ChannelSize = sizeof(ushort) * 2;
 
         /// <summary>
         /// Total number of channels.
@@ -50,17 +65,17 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
         public const int ClockSpeedMaximum = 50000000;
 
         /// <summary>
-        /// Minimum value of the <see cref="NxpPca9685Register.Prescale"/> register.
+        /// Minimum value of the <see cref="Pca9685Register.Prescale"/> register.
         /// </summary>
         public const byte PrescaleMinimum = 0x03;
 
         /// <summary>
-        /// Maximum value of the <see cref="NxpPca9685Register.Prescale"/> register.
+        /// Maximum value of the <see cref="Pca9685Register.Prescale"/> register.
         /// </summary>
         public const byte PrescaleMaximum = 0xff;
 
         /// <summary>
-        /// Default value of the <see cref="NxpPca9685Register.Prescale"/> register.
+        /// Default value of the <see cref="Pca9685Register.Prescale"/> register.
         /// </summary>
         public const byte PrescaleDefault = 0x30;
 
@@ -76,37 +91,51 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
         /// <summary>
         /// Creates an instance using the specified I2C device.
         /// </summary>
-        /// <param name="device">I2C device.</param>
+        /// <param name="controller">I2C controller.</param>
+        /// <param name="chipNumber">Chip number.</param>
         /// <param name="clockSpeed">
         /// Optional external clock speed in Hz. Otherwise the <see cref="InternalClockSpeed"/> is used.
         /// This is a physical property, not a software option.
         /// </param>
+        /// <param name="speed">Bus speed.</param>
+        /// <param name="sharingMode">Sharing mode.</param>
         [CLSCompliant(false)]
-        public NxpPca9685Device(I2cDevice device, int? clockSpeed)
+        public Pca9685Device(I2cController controller, byte chipNumber, int? clockSpeed,
+            I2cBusSpeed speed = I2cBusSpeed.FastMode, I2cSharingMode sharingMode = I2cSharingMode.Exclusive)
         {
             // Validate
-            if (device == null) throw new ArgumentNullException(nameof(device));
+            if (controller == null) throw new ArgumentNullException(nameof(controller));
             if (clockSpeed.HasValue && (clockSpeed == 0 || clockSpeed.Value > ClockSpeedMaximum))
                 throw new ArgumentOutOfRangeException(nameof(clockSpeed));
 
-            // Initialize members
-            Hardware = device;
+            // Get address
+            var address = GetI2cAddress(chipNumber);
+
+            // Connect to hardware
+            _hardware = controller.Connect(address, speed, sharingMode);
+
+            // Initialize configuration
             ClockIsExternal = clockSpeed.HasValue;
             ClockSpeed = clockSpeed ?? InternalClockSpeed;
             FrequencyDefault = CalculateFrequency(PrescaleDefault, ClockSpeed);
             FrequencyMinimum = CalculateFrequency(PrescaleMaximum, ClockSpeed); // Inverse relationship (max = min)
             FrequencyMaximum = CalculateFrequency(PrescaleMinimum, ClockSpeed); // Inverse relationship (min = max)
-            _channels = new Collection<NxpPca9685Channel>();
-            Channels = new ReadOnlyCollection<NxpPca9685Channel>(_channels);
+
+            // Build channels
+            _channels = new Collection<Pca9685ChannelValue>();
+            Channels = new ReadOnlyCollection<Pca9685ChannelValue>(_channels);
             for (var index = 0; index < ChannelCount; index++)
-                _channels.Add(new NxpPca9685Channel(index));
+                _channels.Add(new Pca9685ChannelValue(index));
 
-            // Read current values
+            // Set "all call" address
+            _hardware.WriteJoinByte((byte)Pca9685Register.AllCall, I2cAllCallAddress);
+
+            // Enable auto-increment and "all call"
+            _hardware.WriteReadWriteBit((byte)Pca9685Register.Mode1,
+                (byte)(Pca9685Mode1Bits.AutoIncrement | Pca9685Mode1Bits.AllCall), true);
+
+            // Read current values and update properties
             ReadAll();
-
-            // Hook change events
-            foreach (var channel in Channels)
-                channel.ValueChanged += OnChannelChanged;
         }
 
         #region IDisposable
@@ -124,10 +153,19 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
                 return;
 
             // Close device
-            Hardware?.Dispose();
+            _hardware?.Dispose();
         }
 
         #endregion
+
+        #endregion
+
+        #region Private Fields
+
+        /// <summary>
+        /// I2C device.
+        /// </summary>
+        private I2cDevice _hardware;
 
         #endregion
 
@@ -136,8 +174,8 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
         /// <summary>
         /// Channels and their values (also settable).
         /// </summary>
-        public ReadOnlyCollection<NxpPca9685Channel> Channels { get; private set; }
-        private readonly Collection<NxpPca9685Channel> _channels;
+        public ReadOnlyCollection<Pca9685ChannelValue> Channels { get; private set; }
+        private readonly Collection<Pca9685ChannelValue> _channels;
 
         /// <summary>
         /// Indicates the PWM clock is controlled externally.
@@ -145,64 +183,49 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
         public bool ClockIsExternal { get; private set; }
 
         /// <summary>
-        /// PWM clock speed, either internal or external.
+        /// PWM clock speed in Hz, either internal or external.
         /// </summary>
         public int ClockSpeed { get; private set; }
 
         /// <summary>
         /// Frequency in Hz.
         /// </summary>
-        /// <remarks>
-        /// Some PWM devices do not tolerate high values and could be damaged if this is set too high,
-        /// e.g. analog servos operate at much lower frequencies than digital servos.
-        /// See <see cref="PwmCycle.ServoSafeFrequency"/> for more information.
-        /// </remarks>
-        public float Frequency { get; private set; }
+        public int Frequency { get; private set; }
 
         /// <summary>
         /// Frequency when the hardware <see cref="PrescaleDefault"/> is set.
         /// </summary>
-        public float FrequencyDefault { get; private set; }
+        public int FrequencyDefault { get; private set; }
 
         /// <summary>
         /// Minimum frequency based on <see cref="ClockSpeed"/> and <see cref="PrescaleMaximum"/> (inverse relation).
         /// </summary>
-        public float FrequencyMinimum { get; private set; }
+        public int FrequencyMinimum { get; private set; }
 
         /// <summary>
         /// Maximum frequency based on <see cref="ClockSpeed"/> and <see cref="PrescaleMinimum"/> (inverse relation).
         /// </summary>
-        public float FrequencyMaximum { get; private set; }
+        public int FrequencyMaximum { get; private set; }
 
         /// <summary>
         /// Last known mode 1 register bits.
         /// </summary>
-        public NxpPca9685Mode1Bits Mode1Register { get; private set; }
+        public Pca9685Mode1Bits Mode1Register { get; private set; }
 
         /// <summary>
         /// Last known mode 2 register bits.
         /// </summary>
-        public NxpPca9685Mode2Bits Mode2Register { get; private set; }
+        public Pca9685Mode2Bits Mode2Register { get; private set; }
 
         /// <summary>
         /// Minimum PWM length in milliseconds, based on the current frequency.
         /// </summary>
-        public float PwmMsMinimum { get; private set; }
+        public decimal PwmMsMinimum { get; private set; }
 
         /// <summary>
         /// Maximum PWM length in milliseconds, based on the current frequency.
         /// </summary>
-        public float PwmMsMaximum { get; private set; }
-
-        #endregion
-
-        #region Protected Properties
-
-        /// <summary>
-        /// I2C device.
-        /// </summary>
-        [CLSCompliant(false)]
-        protected I2cDevice Hardware { get; private set; }
+        public decimal PwmMsMaximum { get; private set; }
 
         #endregion
 
@@ -211,9 +234,26 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
         #region General
 
         /// <summary>
+        /// Gets the I2C address for communication with the specified chip number.
+        /// </summary>
+        /// <param name="chipNumber">
+        /// Device (chip) number, from zero to the <see cref="MaximumDevices"/> supported.
+        /// </param>
+        /// <returns>7-bit I2C address.</returns>
+        public static byte GetI2cAddress(byte chipNumber)
+        {
+            // Validate
+            if (chipNumber < 0 || chipNumber > MaximumDevices)
+                throw new ArgumentOutOfRangeException(nameof(chipNumber));
+
+            // Calculate and return address
+            return (byte)(I2cAddress + chipNumber);
+        }
+
+        /// <summary>
         /// Reads all values from the device and updates properties.
         /// </summary>
-        public virtual void ReadAll()
+        public void ReadAll()
         {
             ReadMode1();
             ReadMode2();
@@ -226,13 +266,13 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
         #region Mode
 
         /// <summary>
-        /// Reads the current value of the <see cref="NxpPca9685Register.Mode1"/> register.
+        /// Reads the current value of the <see cref="Pca9685Register.Mode1"/> register.
         /// </summary>
         /// <returns>Bit flags corresponding to the actual mode byte.</returns>
-        public NxpPca9685Mode1Bits ReadMode1()
+        public Pca9685Mode1Bits ReadMode1()
         {
             // Read register
-            var value = (NxpPca9685Mode1Bits)Hardware.WriteReadByte((byte)NxpPca9685Register.Mode1);
+            var value = (Pca9685Mode1Bits)_hardware.WriteReadByte((byte)Pca9685Register.Mode1);
 
             // Update property
             Mode1Register = value;
@@ -242,13 +282,13 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
         }
 
         /// <summary>
-        /// Reads the current value of the <see cref="NxpPca9685Register.Mode2"/> register.
+        /// Reads the current value of the <see cref="Pca9685Register.Mode2"/> register.
         /// </summary>
         /// <returns>Bit flags corresponding to the actual mode byte.</returns>
-        public NxpPca9685Mode2Bits ReadMode2()
+        public Pca9685Mode2Bits ReadMode2()
         {
             // Read register
-            var value = (NxpPca9685Mode2Bits)Hardware.WriteReadByte((byte)NxpPca9685Register.Mode2);
+            var value = (Pca9685Mode2Bits)_hardware.WriteReadByte((byte)Pca9685Register.Mode2);
 
             // Update property
             Mode2Register = value;
@@ -265,24 +305,27 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
         /// Enters sleep mode.
         /// </summary>
         /// <remarks>
-        /// Sets the <see cref="NxpPca9685Register.Mode1"/> register <see cref="NxpPca9685Mode1Bits.Sleep"/> bit
+        /// Sets the <see cref="Pca9685Register.Mode1"/> register <see cref="Pca9685Mode1Bits.Sleep"/> bit
         /// then waits for <see cref="ModeSwitchDelay"/> to allow the oscillator to stop.
         /// </remarks>
         /// <returns>
         /// True when mode was changed, false when already set.
         /// </returns>
-        public virtual bool Sleep()
+        public bool Sleep()
         {
             // Read sleep bit (do nothing when already sleeping)
-            var sleeping = Hardware.WriteReadBit((byte)NxpPca9685Register.Mode1, (byte)NxpPca9685Mode1Bits.Sleep);
+            var sleeping = _hardware.WriteReadBit((byte)Pca9685Register.Mode1, (byte)Pca9685Mode1Bits.Sleep);
             if (sleeping)
                 return false;
 
             // Set sleep bit
-            Hardware.WriteReadWriteBit((byte)NxpPca9685Register.Mode1, (byte)NxpPca9685Mode1Bits.Sleep, true);
+            _hardware.WriteReadWriteBit((byte)Pca9685Register.Mode1, (byte)Pca9685Mode1Bits.Sleep, true);
 
             // Wait for completion
             Task.Delay(ModeSwitchDelay).Wait();
+
+            // Update related properties
+            ReadMode1();
 
             // Return changed
             return true;
@@ -292,24 +335,27 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
         /// Leaves sleep mode.
         /// </summary>
         /// <remarks>
-        /// Clears the <see cref="NxpPca9685Register.Mode1"/> register <see cref="NxpPca9685Mode1Bits.Sleep"/> bit
+        /// Clears the <see cref="Pca9685Register.Mode1"/> register <see cref="Pca9685Mode1Bits.Sleep"/> bit
         /// then waits for <see cref="ModeSwitchDelay"/> to allow the oscillator to start.
         /// </remarks>
         /// <returns>
         /// True when mode was changed, false when not sleeping.
         /// </returns>
-        public virtual bool Wake()
+        public bool Wake()
         {
             // Read sleep bit (do nothing when already sleeping)
-            var sleeping = Hardware.WriteReadBit((byte)NxpPca9685Register.Mode1, (byte)NxpPca9685Mode1Bits.Sleep);
+            var sleeping = _hardware.WriteReadBit((byte)Pca9685Register.Mode1, (byte)Pca9685Mode1Bits.Sleep);
             if (!sleeping)
                 return false;
 
             // Clear sleep bit
-            Hardware.WriteReadWriteBit((byte)NxpPca9685Register.Mode1, (byte)NxpPca9685Mode1Bits.Sleep, false);
+            _hardware.WriteReadWriteBit((byte)Pca9685Register.Mode1, (byte)Pca9685Mode1Bits.Sleep, false);
 
             // Wait for completion
             Task.Delay(ModeSwitchDelay).Wait();
+
+            // Update related properties
+            ReadMode1();
 
             // Return changed
             return true;
@@ -322,10 +368,10 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
         /// <summary>
         /// Restarts the device with default options, then updates all properties.
         /// </summary>
-        public virtual void Restart()
+        public void Restart()
         {
             // Call overloaded method
-            Restart(NxpPca9685Mode1Bits.None);
+            Restart(Pca9685Mode1Bits.None);
         }
 
         /// <summary>
@@ -333,10 +379,10 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
         /// </summary>
         /// <param name="options">
         /// Optional mode 1 parameters to add to the final restart sequence. A logical OR is applied to this value and
-        /// the standard <see cref="NxpPca9685Mode1Bits.Restart"/>, <see cref="NxpPca9685Mode1Bits.ExternalClock"/> and
-        /// <see cref="NxpPca9685Mode1Bits.AutoIncrement"/> bits.
+        /// the standard <see cref="Pca9685Mode1Bits.Restart"/>, <see cref="Pca9685Mode1Bits.ExternalClock"/> and
+        /// <see cref="Pca9685Mode1Bits.AutoIncrement"/> bits.
         /// </param>
-        public virtual void Restart(NxpPca9685Mode1Bits options)
+        public void Restart(Pca9685Mode1Bits options)
         {
             // Configure according to external clock presence
             var externalClock = ClockIsExternal;
@@ -345,14 +391,14 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
             // Send I2C restart sequence...
 
             // Write first sleep
-            var sleep = (byte)NxpPca9685Mode1Bits.Sleep;
-            Hardware.WriteJoinByte((byte)NxpPca9685Register.Mode1, sleep);
+            var sleep = (byte)Pca9685Mode1Bits.Sleep;
+            _hardware.WriteJoinByte((byte)Pca9685Register.Mode1, sleep);
 
             // Write sleep again with external clock option (when present)
             if (externalClock)
             {
-                sleep |= (byte)(NxpPca9685Mode1Bits.ExternalClock);
-                Hardware.WriteJoinByte((byte)NxpPca9685Register.Mode1, sleep);
+                sleep |= (byte)(Pca9685Mode1Bits.ExternalClock);
+                _hardware.WriteJoinByte((byte)Pca9685Register.Mode1, sleep);
             }
             else
             {
@@ -361,11 +407,11 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
             }
 
             // Write reset with external clock option and any additional options
-            var restart = (byte)(NxpPca9685Mode1Bits.Restart | NxpPca9685Mode1Bits.AutoIncrement);
+            var restart = (byte)(Pca9685Mode1Bits.Restart | Pca9685Mode1Bits.AutoIncrement);
             if (externalClock)
-                restart |= (byte)NxpPca9685Mode1Bits.ExternalClock;
+                restart |= (byte)Pca9685Mode1Bits.ExternalClock;
             restart |= (byte)options;
-            Hardware.WriteJoinByte((byte)NxpPca9685Register.Mode1, restart);
+            _hardware.WriteJoinByte((byte)Pca9685Register.Mode1, restart);
 
             // At least 500 nanoseconds delay to allow oscillator to start
             Task.Delay(delay).Wait();
@@ -379,18 +425,25 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
         #region Frequency
 
         /// <summary>
-        /// Calculates the effective frequency from a <see cref="NxpPca9685Register.Prescale"/> value and clock speed.
+        /// Calculates the effective frequency from a <see cref="Pca9685Register.Prescale"/> value and clock speed.
         /// </summary>
         /// <param name="prescale">Prescale value from which to calculate frequency.</param>
         /// <param name="clockSpeed">Clock speed with which to calculate the frequency.</param>
-        /// <returns>Calculated frequency.</returns>
-        public static float CalculateFrequency(byte prescale, int clockSpeed)
+        /// <returns>Calculated frequency in Hz.</returns>
+        public static int CalculateFrequency(byte prescale, int clockSpeed)
         {
-            return clockSpeed / 4096f / (prescale + 1);
+            // Validate
+            if (prescale < PrescaleMinimum || prescale > PrescaleMaximum)
+                throw new ArgumentOutOfRangeException(nameof(prescale));
+            if (clockSpeed <= 0 || clockSpeed > ClockSpeedMaximum)
+                throw new ArgumentOutOfRangeException(nameof(clockSpeed));
+
+            // Calculate and return result
+            return Convert.ToInt32(Math.Round(clockSpeed / 4096f / (prescale + 1f)));
         }
 
         /// <summary>
-        /// Calculates the <see cref="NxpPca9685Register.Prescale"/> value from a desired frequency and clock speed.
+        /// Calculates the <see cref="Pca9685Register.Prescale"/> value from a desired frequency and clock speed.
         /// </summary>
         /// <remarks>
         /// Due to scaling only certain frequencies are possible. To get the resulting frequency from the desired
@@ -398,17 +451,28 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
         /// i.e. call <see cref="CalculateFrequency"/>.
         /// </remarks>
         /// <param name="frequency">
-        /// Desired frequency.
+        /// Desired frequency in Hz.
         /// Must be between <see cref="FrequencyMinimum"/> and <see cref="FrequencyMaximum"/> to get a valid result.
         /// </param>
         /// <param name="clockSpeed"></param>
         /// <returns>Calculated prescale value.</returns>
-        /// <exception cref="OverflowException">
-        /// Thrown when an invalid frequency is used which causes the result to overflow a byte value.
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// Thrown when an invalid parameter is passed.
         /// </exception>
-        public static byte CalculatePrescale(float frequency, int clockSpeed)
+        /// <exception cref="OverflowException">
+        /// Thrown when parameters are passed which causes the resulting prescale to be higher than
+        /// <see cref="PrescaleMaximum"/> or lower than <see cref="PrescaleMinimum"/>.
+        /// </exception>
+        public static byte CalculatePrescale(int frequency, int clockSpeed)
         {
-            return Convert.ToByte(Math.Round(clockSpeed / 4096f / frequency) - 1);
+            // Validate
+            if (frequency <= 0)
+                throw new ArgumentOutOfRangeException(nameof(frequency));
+            if (clockSpeed <= 0 || clockSpeed > ClockSpeedMaximum)
+                throw new ArgumentOutOfRangeException(nameof(clockSpeed));
+
+            // Calculate and prescale
+            return Convert.ToByte(Math.Round(clockSpeed / (4096f * frequency)) - 1);
         }
 
         /// <summary>
@@ -418,18 +482,18 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
         /// <returns>
         /// Frequency in Hz. Related properties are also updated.
         /// </returns>
-        public float ReadFrequency()
+        public int ReadFrequency()
         {
             // Read prescale register
-            var prescale = Hardware.WriteReadByte((byte)NxpPca9685Register.Prescale);
+            var prescale = _hardware.WriteReadByte((byte)Pca9685Register.Prescale);
 
             // Calculate frequency
             var frequency = CalculateFrequency(prescale, ClockSpeed);
 
             // Update related properties
             Frequency = frequency;
-            PwmMsMinimum = NxpPca9685ChannelValue.CalculateMilliseconds(Frequency, 0);
-            PwmMsMaximum = NxpPca9685ChannelValue.CalculateMilliseconds(Frequency, NxpPca9685ChannelValue.Maximum);
+            PwmMsMinimum = Pca9685ChannelValue.CalculateWidthMs(frequency, 0);
+            PwmMsMaximum = Pca9685ChannelValue.CalculateWidthMs(frequency, Pca9685ChannelValue.Maximum);
 
             // Return result
             return frequency;
@@ -446,7 +510,7 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
         /// start output unexpectedly to avoid damage, i.e. if the device was sleeping before, the frequency is
         /// changed without starting the oscillator.
         /// </remarks>
-        /// <param name="frequency">Frequency to convert in Hz.</param>
+        /// <param name="frequency">Desired frequency to set in Hz.</param>
         /// <returns>
         /// Effective frequency in Hz, read-back and recalculated after setting the desired frequency.
         /// Frequency in Hz. Related properties are also updated.
@@ -455,7 +519,7 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
         /// Thrown when <paramref name="frequency"/> is less than <see cref="FrequencyMinimum"/> or greater than
         /// <see cref="FrequencyMaximum"/>.
         /// </exception>
-        public float WriteFrequency(float frequency)
+        public int WriteFrequency(int frequency)
         {
             // Validate
             if (frequency < FrequencyMinimum || frequency > FrequencyMaximum)
@@ -468,7 +532,7 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
             var wasAwake = Sleep();
 
             // Write prescale
-            Hardware.WriteJoinByte((byte)NxpPca9685Register.Prescale, prescale);
+            _hardware.WriteJoinByte((byte)Pca9685Register.Prescale, prescale);
 
             // Read result
             var actual = ReadFrequency();
@@ -476,6 +540,10 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
             // Wake-up if previously running
             if (wasAwake)
                 Wake();
+
+            // Update related properties
+            PwmMsMinimum = Pca9685ChannelValue.CalculateWidthMs(frequency, 0);
+            PwmMsMaximum = Pca9685ChannelValue.CalculateWidthMs(frequency, Pca9685ChannelValue.Maximum);
 
             // Return actual frequency
             return actual;
@@ -507,16 +575,16 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
         /// set them to zero, then disable them. Otherwise the ON value and the low OFF value
         /// remain because writes are ignored when the OFF channel bit 12 is already set.
         /// </remarks>
-        public virtual void Clear()
+        public void Clear()
         {
             // Enable all channels
-            Hardware.WriteJoinByte((byte)NxpPca9685Register.AllChannelsOffHigh, 0x00);
+            _hardware.WriteJoinByte((byte)Pca9685Register.AllChannelsOffHigh, 0x00);
 
             // Zero all channels
-            Hardware.WriteJoinBytes((byte)NxpPca9685Register.AllChannelsOnLow, new byte[] { 0x00, 0x00, 0x00, 0x00 });
+            _hardware.WriteJoinBytes((byte)Pca9685Register.AllChannelsOnLow, new byte[] { 0x00, 0x00, 0x00, 0x00 });
 
             // Disable all channels
-            Hardware.WriteJoinByte((byte)NxpPca9685Register.AllChannelsOffHigh, 0x10);
+            _hardware.WriteJoinByte((byte)Pca9685Register.AllChannelsOffHigh, 0x10);
 
             // Update channels
             ReadAllChannels();
@@ -527,7 +595,7 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
         /// </summary>
         /// <param name="index">Zero based channel number (0-15).</param>
         /// <returns>Channel value</returns>
-        public NxpPca9685Channel ReadChannel(int index)
+        public Pca9685ChannelValue ReadChannel(int index)
         {
             // Validate
             if (index < 0 | index >= ChannelCount) throw new ArgumentOutOfRangeException(nameof(index));
@@ -536,12 +604,49 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
             var register = GetChannelAddress(index);
 
             // Read value
-            var bytes = Hardware.WriteReadBytes(register, sizeof(ushort) * 2);
+            var bytes = _hardware.WriteReadBytes(register, sizeof(ushort) * 2);
 
             // Update channel property and return result
-            var channel = _channels[index];
-            channel.Value.SetBytes(bytes);
-            return channel;
+            var value = Pca9685ChannelValue.FromByteArray(bytes);
+            return _channels[index] = value;
+        }
+
+        /// <summary>
+        /// Reads multiple channel values (both on and off for each), and updates it in <see cref="Channels"/>.
+        /// </summary>
+        /// <param name="index">Zero based channel number (0-15).</param>
+        /// <param name="count">Number of channels to read.</param>
+        /// <returns>Channel values</returns>
+        public Collection<Pca9685ChannelValue> ReadChannels(int index, int count)
+        {
+            // Validate
+            if (index < 0 | index >= ChannelCount)
+                throw new ArgumentOutOfRangeException(nameof(index));
+            if (count < 1 || index + count > ChannelCount)
+                throw new ArgumentOutOfRangeException(nameof(count));
+
+            // Calculate register address
+            var register = GetChannelAddress(index);
+
+            // Send I2C command to read channels in one operation
+            var data = _hardware.WriteReadBytes(register, ChannelSize * count);
+
+            // Update channel properties and add to results
+            var results = new Collection<Pca9685ChannelValue>();
+            for (int channelIndex = index, offset = 0; count > 0; count--, channelIndex++, offset += ChannelSize)
+            {
+                // Calculate value
+                var value = Pca9685ChannelValue.FromByteArray(data, offset);
+
+                // Update property
+                _channels[channelIndex] = value;
+
+                // Add to results
+                results.Add(value);
+            }
+
+            // Return results
+            return results;
         }
 
         /// <summary>
@@ -558,12 +663,15 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
             var register = GetChannelAddress(index);
 
             // Read and convert value
-            var bytes = Hardware.WriteReadBytes(register, sizeof(ushort));
+            var bytes = _hardware.WriteReadBytes(register, sizeof(ushort));
             var value = BitConverter.ToUInt16(bytes, 0);
 
-            // Update channel property and return result
-            var channel = _channels[index];
-            channel.Value.On = value;
+            // Update channel when changed
+            var oldValue = _channels[index];
+            if (oldValue.On != value)
+                _channels[index] = new Pca9685ChannelValue(value, oldValue.Off);
+
+            // Return result
             return value;
         }
 
@@ -581,12 +689,15 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
             var register = (byte)(GetChannelAddress(index) + sizeof(ushort));
 
             // Read and convert value
-            var bytes = Hardware.WriteReadBytes(register, sizeof(ushort));
+            var bytes = _hardware.WriteReadBytes(register, sizeof(ushort));
             var value = BitConverter.ToUInt16(bytes, 0);
 
-            // Update channel property and return result
-            var channel = _channels[index];
-            channel.Value.Off = value;
+            // Update channel when changed
+            var oldValue = _channels[index];
+            if (oldValue.Off != value)
+                _channels[index] = new Pca9685ChannelValue(oldValue.On, value);
+
+            // Return result
             return value;
         }
 
@@ -595,15 +706,15 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
         /// then writes them together, and updates it in <see cref="Channels"/>.
         /// </summary>
         /// <param name="index">Zero based channel number (0-15) or 16 for the "all call" channel.</param>
-        /// <param name="length">Pulse length in clock ticks.</param>
+        /// <param name="width">Pulse width in clock ticks.</param>
         /// <param name="delay">Optional delay in clock ticks.</param>
         /// <returns>
         /// Updated channel value or null when all channels were updated.
         /// </returns>
-        public NxpPca9685Channel WriteChannelLength(int index, int length, int delay = 0)
+        public Pca9685ChannelValue? WriteChannelLength(int index, int width, int delay = 0)
         {
             // Call overloaded method
-            return WriteChannel(index, NxpPca9685ChannelValue.FromLength(length, delay));
+            return WriteChannel(index, Pca9685ChannelValue.FromWidth(width, delay));
         }
 
         /// <summary>
@@ -611,121 +722,139 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
         /// then writes them together, and updates it in <see cref="Channels"/>.
         /// </summary>
         /// <param name="index">Zero based channel number (0-15) or 16 for the "all call" channel.</param>
-        /// <param name="length">
-        /// Pulse length in milliseconds. Cannot be greater than one clock interval (1000 / frequency).
+        /// <param name="width">
+        /// Pulse width in milliseconds. Cannot be greater than one clock interval (1000 / frequency).
         /// </param>
         /// <param name="delay">Optional delay in milliseconds. Cannot be greater than one clock interval (1000 / frequency).</param>
         /// <returns>
         /// Updated channel value or null when all channels were updated.
         /// </returns>
-        public NxpPca9685Channel WriteChannelMilliseconds(int index, float length, float delay = 0)
+        public Pca9685ChannelValue? WriteChannelMs(int index, decimal width, int delay = 0)
         {
-            // Read current frequency
-            var frequency = ReadFrequency();
-
             // Call overloaded method
-            return WriteChannel(index, NxpPca9685ChannelValue.FromMilliseconds(length, frequency, delay));
+            return WriteChannel(index, Pca9685ChannelValue.FromWidthMs(width, Frequency, delay));
         }
 
         /// <summary>
         /// Writes the "on" and "off" values of a channel together, and updates it in <see cref="Channels"/>.
         /// </summary>
         /// <param name="index">Zero based channel number (0-15) or 16 for the "all call" channel.</param>
-        /// <param name="value"><see cref="NxpPca9685ChannelValue"/> to write.</param>
+        /// <param name="value"><see cref="Pca9685ChannelValue"/> to write.</param>
         /// <returns>
         /// Updated channel value or null when all channels were updated.
         /// </returns>
-        public NxpPca9685Channel WriteChannel(int index, NxpPca9685ChannelValue value)
+        public Pca9685ChannelValue? WriteChannel(int index, Pca9685ChannelValue value)
         {
             // Validate
             if (index < 0 | index > ChannelCount) throw new ArgumentOutOfRangeException(nameof(index));
-
-            // Validate
-            if (value.On > NxpPca9685ChannelValue.Maximum + 1 ||
-            value.Off > NxpPca9685ChannelValue.Maximum + 1)
-                throw new ArgumentOutOfRangeException(nameof(value));
+            if (value == null) throw new ArgumentNullException(nameof(value));
 
             // Calculate register address
             var register = GetChannelAddress(index);
 
             // Convert and write value
             var bytes = value.ToByteArray();
-            Hardware.WriteJoinBytes(register, bytes);
+            _hardware.WriteJoinBytes(register, bytes);
 
-            // Read and return result
+            // Read and return result when single channel
             if (index < ChannelCount)
                 return ReadChannel(index);
+
+            // Read all channels when "all call".
             ReadAllChannels();
             return null;
+        }
+
+
+        /// <summary>
+        /// Writes multiple channels together (both "on" and "off" values), and updates it in <see cref="Channels"/>.
+        /// </summary>
+        /// <param name="index">Zero based channel number (0-15) or 16 for the "all call" channel.</param>
+        /// <param name="values">Collection of <see cref="Pca9685ChannelValue"/>s to write.</param>
+        public void WriteChannels(int index, IList<Pca9685ChannelValue> values)
+        {
+            // Validate
+            if (index < 0 | index > ChannelCount) throw new ArgumentOutOfRangeException(nameof(index));
+            if (values == null || values.Count == 0) throw new ArgumentNullException(nameof(values));
+            var count = values.Count;
+            if (index + count > ChannelCount) throw new ArgumentOutOfRangeException(nameof(values));
+
+            // Build I2C packet
+            var data = new byte[1 + ChannelSize * count];
+
+            // Calculate first register address
+            var register = GetChannelAddress(index);
+            data[0] = register;
+
+            // Write channels and update properties
+            for (int dataIndex = 0, dataOffset = 1; dataIndex < count; dataIndex++, dataOffset += ChannelSize)
+            {
+                // Get channel data
+                var channelData = values[dataIndex].ToByteArray();
+
+                // Copy to buffer
+                Array.ConstrainedCopy(channelData, 0, data, dataOffset, ChannelSize);
+
+                // Update property
+                _channels[index + dataIndex] = Pca9685ChannelValue.FromByteArray(channelData);
+            }
+
+            // Send packet
+            _hardware.WriteBytes(data);
         }
 
         /// <summary>
         /// Writes the PWM "on" (rising) value of a channel.
         /// </summary>
         /// <param name="index">Zero based channel number (0-15) or 16 for the "all call" channel.</param>
-        /// <param name="value">12-bit channel value in the range 0-<see cref="NxpPca9685ChannelValue.Maximum"/>.</param>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown when the <paramref name="value"/> is greater than <see cref="NxpPca9685ChannelValue.Maximum"/>.</exception>
+        /// <param name="value">12-bit channel value in the range 0-<see cref="Pca9685ChannelValue.Maximum"/>.</param>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown when the <paramref name="value"/> is greater than <see cref="Pca9685ChannelValue.Maximum"/>.</exception>
         public void WriteChannelOn(int index, int value)
         {
             // Validate
-            if (value > NxpPca9685ChannelValue.Maximum) throw new ArgumentOutOfRangeException(nameof(value));
+            if (value > Pca9685ChannelValue.Maximum) throw new ArgumentOutOfRangeException(nameof(value));
 
             // Calculate register address
             var register = GetChannelAddress(index);
 
             // Convert and write value
-            var bytes = BitConverter.GetBytes(value);
-            Hardware.WriteJoinBytes(register, bytes);
+            var data = BitConverter.GetBytes(value);
+            _hardware.WriteJoinBytes(register, data);
         }
 
         /// <summary>
         /// Writes the PWM "off" (falling) value of a channel.
         /// </summary>
         /// <param name="index">Zero based channel number (0-15) or 16 for the "all call" channel.</param>
-        /// <param name="value">12-bit channel value in the range 0-<see cref="NxpPca9685ChannelValue.Maximum"/>.</param>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown when the <paramref name="value"/> is greater then <see cref="NxpPca9685ChannelValue.Maximum"/>.</exception>
+        /// <param name="value">12-bit channel value in the range 0-<see cref="Pca9685ChannelValue.Maximum"/>.</param>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown when the <paramref name="value"/> is greater then <see cref="Pca9685ChannelValue.Maximum"/>.</exception>
         public void WriteChannelOff(int index, int value)
         {
             // Validate
-            if (value > NxpPca9685ChannelValue.Maximum) throw new ArgumentOutOfRangeException(nameof(value));
+            if (value > Pca9685ChannelValue.Maximum) throw new ArgumentOutOfRangeException(nameof(value));
 
             // Calculate register address of second word value
             var register = (byte)(GetChannelAddress(index) + sizeof(ushort));
 
             // Convert and write value
             var bytes = BitConverter.GetBytes(value);
-            Hardware.WriteJoinBytes(register, bytes);
+            _hardware.WriteJoinBytes(register, bytes);
         }
 
         /// <summary>
         /// Reads all channels and updates <see cref="Channels"/>.
         /// </summary>
-        protected virtual void ReadAllChannels()
+        public void ReadAllChannels()
         {
             // Read all channels as one block of data
-            var data = Hardware.WriteReadBytes(ChannelStartAddress, ChannelSize * ChannelCount);
+            var data = _hardware.WriteReadBytes(ChannelStartAddress, ChannelSize * ChannelCount);
 
             // Update properties
             for (var index = 0; index < ChannelCount; index++)
-                _channels[index].Value.SetBytes(data, ChannelSize * index);
+                _channels[index] = Pca9685ChannelValue.FromByteArray(data, ChannelSize * index);
         }
 
         #endregion
-
-        #endregion
-
-        #region Events
-
-        /// <summary>
-        /// Writes channel values to the device when the <see cref="Channels"/> member changes.
-        /// </summary>
-        /// <param name="sender">Sender, the channel which changed.</param>
-        /// <param name="arguments">Standard event arguments, no specific data.</param>
-        private void OnChannelChanged(object sender, EventArgs arguments)
-        {
-            var channel = (NxpPca9685Channel)sender;
-            WriteChannel(channel.Index, channel.Value);
-        }
 
         #endregion
     }

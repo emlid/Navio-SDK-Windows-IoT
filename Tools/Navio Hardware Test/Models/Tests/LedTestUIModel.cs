@@ -1,6 +1,5 @@
 ﻿using Emlid.WindowsIot.Hardware.Boards.Navio;
 using System;
-using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -16,7 +15,7 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
         /// <summary>
         /// Steps in which to cycle the LED.
         /// </summary>
-        public const int LedCycleStep = 16;
+        public const int LedCycleStep = 100;
 
         #endregion
 
@@ -82,6 +81,10 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
 
         #endregion
 
+        #region Private Fields
+
+        #endregion
+
         #region Public Properties
 
         /// <summary>
@@ -131,15 +134,18 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
         #region Public Methods
 
         /// <summary>
-        /// Clears any existing output then tests the <see cref="INavioLedDevice.Clear"/> function.
+        /// Tests the <see cref="INavioLedDevice.Reset"/> function.
         /// </summary>
-        public override void Clear()
+        public void Reset()
         {
-            // Call base class to clear output
-            base.Clear();
+            lock (Device)
+            {
+                // Run test
+                RunTest(delegate { Device.Reset(); });
 
-            // Run device clear test
-            RunTest(delegate { Device.Clear(); });
+                // Update view
+                DoPropertyChanged(nameof(Device));
+            }
         }
 
         /// <summary>
@@ -147,63 +153,19 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
         /// </summary>
         public void Read()
         {
-            RunTest(delegate { Device.Read(); });
-        }
+            lock (Device)
+            {
+                // Run test
+                RunTest(delegate { Device.Read(); });
 
-        /// <summary>
-        /// Tests the <see cref="INavioLedDevice.Sleep"/> function.
-        /// </summary>
-        public void Sleep()
-        {
-            RunTest(delegate { Device.Sleep(); });
-        }
-
-        /// <summary>
-        /// Tests the <see cref="INavioLedDevice.Wake"/> function.
-        /// </summary>
-        public void Wake()
-        {
-            RunTest(delegate { Device.Wake(); });
-        }
-
-        /// <summary>
-        /// Tests the <see cref="INavioLedDevice.Restart"/> function.
-        /// </summary>
-        public void Restart()
-        {
-            RunTest(delegate { Device.Restart(); });
+                // Update view
+                DoPropertyChanged(nameof(Device));
+            }
         }
 
         #endregion
 
         #region Non-Public Methods
-
-        /// <summary>
-        /// Runs a test method with status and error output.
-        /// </summary>
-        /// <param name="test">Test delegate to run.</param>
-        /// <param name="name">Name to use in the output.</param>
-        protected override void RunTest(Action test, [CallerMemberName] string name = "")
-        {
-            // Call base class to run test
-            base.RunTest(test, name);
-
-            // Update properties
-            DoPropertyChanged(nameof(Device));
-        }
-
-        /// <summary>
-        /// Enables output if necessary.
-        /// </summary>
-        private void EnsureOutputEnabled()
-        {
-            if (!Device.Enabled)
-            {
-                WriteOutput("Enabling output.");
-                Device.Enabled = true;
-                DoPropertyChanged(nameof(Device));
-            }
-        }
 
         /// <summary>
         /// Background task delegate which executes the LED Cycle.
@@ -219,86 +181,134 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
                 var red = Device.Red;
                 var green = Device.Green;
                 var blue = Device.Blue;
+
+                // Break LED range into steps
+                var step = (int)Math.Round((float)maximum / LedCycleStep);
+                if (step < 1) step = 1;
                 Func<int, int> increment = (int value) => { value += LedCycleStep; return value < maximum ? value : maximum; };
                 Func<int, int> decrement = (int value) => { value -= LedCycleStep; return value > 0 ? value : 0; };
 
                 // Ensure output is enabled
-                EnsureOutputEnabled();
+                if (!Device.Enabled)
+                {
+                    // Enable output
+                    WriteOutput("Enabling output...");
+                    Device.Enabled = true;
+
+                    // Update view
+                    DoPropertyChanged(nameof(Device));
+                }
 
                 // Cycle until stopped
                 while (!cancel.IsCancellationRequested)
                 {
-                    // Cycle red LED component down...
-                    WriteOutput("Cycling red down...");
-                    while (red > 0)
-                    {
-                        red = decrement(red);
-                        Device.SetRgb(red, green, blue);
-                        DoPropertyChanged(nameof(Device));
-
-                        // Check for cancellation
-                        cancel.ThrowIfCancellationRequested();
-                    }
-
-                    // Cycle green LED component down...
-                    WriteOutput("Cycling green down...");
-                    while (green > 0)
-                    {
-                        green = decrement(green);
-                        Device.SetRgb(red, green, blue);
-                        DoPropertyChanged(nameof(Device));
-
-                        // Check for cancellation
-                        cancel.ThrowIfCancellationRequested();
-                    }
-
-                    // Cycle blue LED component down...
-                    WriteOutput("Cycling blue down...");
-                    while (blue > 0)
-                    {
-                        blue = decrement(blue);
-                        Device.SetRgb(red, green, blue);
-                        DoPropertyChanged(nameof(Device));
-
-                        // Check for cancellation
-                        cancel.ThrowIfCancellationRequested();
-                    }
-
-                    // Cycle red LED component up...
-                    WriteOutput("Cycling red up...");
+                    // Cycle red LED component up via property...
+                    WriteOutput("Cycling red up via property...");
                     while (red < maximum)
                     {
+                        // Decrement red channel
                         red = increment(red);
-                        Device.SetRgb(red, green, blue);
+                        Device.Red = red;
+
+                        // Update view
                         DoPropertyChanged(nameof(Device));
 
                         // Check for cancellation
                         cancel.ThrowIfCancellationRequested();
                     }
 
-                    // Cycle greed LED component up...
-                    WriteOutput("Cycling green up...");
+                    // Wait a bit...
+                    Task.Delay(TimeSpan.FromSeconds(1)).Wait();
+
+                    // Cycle blue LED component down via property...
+                    WriteOutput("Cycling blue down via property...");
+                    while (blue > 0)
+                    {
+                        // Decrement blue channel
+                        blue = decrement(blue);
+                        Device.Blue = blue;
+
+                        // Update view
+                        DoPropertyChanged(nameof(Device));
+
+                        // Check for cancellation
+                        cancel.ThrowIfCancellationRequested();
+                    }
+
+                    // Wait a bit...
+                    Task.Delay(TimeSpan.FromSeconds(1)).Wait();
+
+                    // Cycle green LED component up via property...
+                    WriteOutput("Cycling green up via property...");
                     while (green < maximum)
                     {
+                        // Decrement green channel
                         green = increment(green);
-                        Device.SetRgb(red, green, blue);
+                        Device.Green = green;
+
+                        // Update view
                         DoPropertyChanged(nameof(Device));
 
                         // Check for cancellation
                         cancel.ThrowIfCancellationRequested();
                     }
+
+                    // Wait a bit...
+                    Task.Delay(TimeSpan.FromSeconds(1)).Wait();
+
+                    // Cycle red LED component down via RGB...
+                    WriteOutput("Cycling red down via RGB...");
+                    while (red > 0)
+                    {
+                        // Increment red channel
+                        red = decrement(red);
+                        Device.SetRgb(red, green, blue);
+
+                        // Update view
+                        DoPropertyChanged(nameof(Device));
+
+                        // Check for cancellation
+                        cancel.ThrowIfCancellationRequested();
+                    }
+
+                    // Wait a bit...
+                    Task.Delay(TimeSpan.FromSeconds(1)).Wait();
 
                     // Cycle blue LED component up...
-                    WriteOutput("Cycling blue up...");
+                    WriteOutput("Cycling blue up via RGB...");
                     while (blue < maximum)
                     {
+                        // Increment blue
                         blue = increment(blue);
                         Device.SetRgb(red, green, blue);
+
+                        // Update view
                         DoPropertyChanged(nameof(Device));
 
                         // Check for cancellation
                         cancel.ThrowIfCancellationRequested();
                     }
+
+                    // Wait a bit...
+                    Task.Delay(TimeSpan.FromSeconds(1)).Wait();
+
+                    // Cycle greed LED component down...
+                    WriteOutput("Cycling green down via RGB...");
+                    while (green > 0)
+                    {
+                        // Increment green channel
+                        green = decrement(green);
+                        Device.SetRgb(red, green, blue);
+
+                        // Update view
+                        DoPropertyChanged(nameof(Device));
+
+                        // Check for cancellation
+                        cancel.ThrowIfCancellationRequested();
+                    }
+
+                    // Wait a bit...
+                    Task.Delay(TimeSpan.FromSeconds(1)).Wait();
                 }
             }
             catch (OperationCanceledException)
@@ -318,7 +328,7 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
         /// </summary>
         private void StopCycleTask()
         {
-            lock(this)
+            lock(Device)
             {
                 if (_cycleCancel != null)
                 {

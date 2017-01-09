@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
+namespace Emlid.WindowsIot.Hardware.Components.Pca9685
 {
     /// <summary>
-    /// Bitmask for the <see cref="NxpPca9685Register.Mode1"/> register.
+    /// Bitmask for the <see cref="Pca9685Register.Mode1"/> register.
     /// </summary>
     [Flags]
-    public enum NxpPca9685Mode1Bits : byte
+    public enum Pca9685Mode1Bits : byte
     {
         /// <summary>
         /// No bits set.
@@ -14,22 +14,22 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
         None = 0x00,
 
         /// <summary>
-        /// Enables or disables the <see cref="NxpPca9685Register.AllCall"/>.
+        /// Enables or disables the <see cref="Pca9685Register.AllCall"/>.
         /// </summary>
         AllCall = 0x01,
 
         /// <summary>
-        /// Enables or disables the <see cref="NxpPca9685Register.SubAddress3"/>.
+        /// Enables or disables the <see cref="Pca9685Register.SubAddress3"/>.
         /// </summary>
         SubAddress3 = 0x02,
 
         /// <summary>
-        /// Enables or disables the <see cref="NxpPca9685Register.SubAddress2"/>
+        /// Enables or disables the <see cref="Pca9685Register.SubAddress2"/>
         /// </summary>
         SubAddress2 = 0x04,
 
         /// <summary>
-        /// Enables or disables the <see cref="NxpPca9685Register.SubAddress1"/>
+        /// Enables or disables the <see cref="Pca9685Register.SubAddress1"/>
         /// </summary>
         SubAddress1 = 0x08,
 
@@ -58,7 +58,7 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
         AutoIncrement = 0x20,
 
         /// <summary>
-        /// Enables or disables the <see cref="NxpPca9685Register.SubAddress2"/>
+        /// Enables or disables the <see cref="Pca9685Register.SubAddress2"/>
         /// </summary>
         /// <remarks>
         /// <para>
@@ -83,7 +83,7 @@ namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
         ExternalClock = 0x40,
 
         /// <summary>
-        /// Enables or disables the <see cref="NxpPca9685Register.SubAddress2"/>
+        /// Enables or disables the <see cref="Pca9685Register.SubAddress2"/>
         /// </summary>
         /// <remarks>
         /// Reading shows the state of restart logic.

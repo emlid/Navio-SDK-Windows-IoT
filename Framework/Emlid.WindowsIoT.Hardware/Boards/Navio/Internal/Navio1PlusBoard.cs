@@ -1,8 +1,7 @@
 ﻿using Emlid.WindowsIot.Common;
-using Emlid.WindowsIot.Hardware.Protocols.Pwm;
 using System;
 
-namespace Emlid.WindowsIot.Hardware.Boards.Navio
+namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
 {
     /// <summary>
     /// Navio+ hardware board.
@@ -10,25 +9,20 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
     /// <remarks>
     /// Encapsulates common initialization and access to all components on this hardware model.
     /// </remarks>
-    public sealed class Navio1PlusBoard : DisposableObject, INavioBoard
+    internal sealed class Navio1PlusBoard : DisposableObject, INavioBoard
     {
         #region Lifetime
 
         /// <summary>
         /// Creates an instance.
         /// </summary>
-        /// <param name="pwmFrequency">
-        /// Some PWM devices do not tolerate high values and could be damaged if this is set too high,
-        /// e.g. analog servos operate at much lower frequencies than digital servos.
-        /// See <see cref="PwmCycle.ServoSafeFrequency"/> for more information.
-        /// </param>
-        public Navio1PlusBoard(float pwmFrequency = PwmCycle.ServoSafeFrequency)
+        internal Navio1PlusBoard()
         {
             // Initialize components
-            Ms5611 = new NavioBarometerDevice();
-            Mb85rc256v = new NavioFramDevice(NavioHardwareModel.Navio1Plus);
-            Pca9685 = NavioLedPwmDevice.Initialize(pwmFrequency);
-            GpioRCInput = new NavioRCInputDevice();
+            _barometerDevice = new NavioBarometerDevice();
+            _framDevice = new Navio1FramDevice(NavioHardwareModel.Navio1Plus);
+            _ledPwmDevice = new Navio1LedPwmDevice();
+            _rcInputDevice = new Navio1RCInputDevice();
         }
 
         #region IDisposable
@@ -46,19 +40,41 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
                 return;
 
             // Dispose owned objects
-            Ms5611?.Dispose();
-            Mb85rc256v?.Dispose();
-            Pca9685?.Dispose();
-            GpioRCInput?.Dispose();
+            _barometerDevice?.Dispose();
+            _framDevice?.Dispose();
+            _ledPwmDevice?.Dispose();
+            _rcInputDevice?.Dispose();
         }
 
         #endregion
 
         #endregion
 
-        #region Public Properties
+        #region Private Fields
 
-        #region Common Interface
+        /// <summary>
+        /// Model specific MS5611 chip which provides <see cref="Barometer"/> functionality.
+        /// </summary>
+        NavioBarometerDevice _barometerDevice;
+
+        /// <summary>
+        /// Model specific MB85RC256V chip which provides <see cref="Fram"/> functionality.
+        /// </summary>
+        Navio1FramDevice _framDevice;
+
+        /// <summary>
+        /// Model specific PCA9685 chip which provides <see cref="Led"/> and <see cref="Pwm"/> functionality.
+        /// </summary>
+        Navio1LedPwmDevice _ledPwmDevice;
+
+        /// <summary>
+        /// Model specific GPIO software PWM decoding, providing the <see cref="RCInput"/> functionality.
+        /// </summary>
+        Navio1RCInputDevice _rcInputDevice;
+
+        #endregion
+
+        #region Public Properties
 
         /// <summary>
         /// Hardware model.
@@ -73,12 +89,12 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         /// <summary>
         /// Barometric pressure and temperature sensor.
         /// </summary>
-        public INavioBarometerDevice Barometer { get { return Ms5611; } }
+        public INavioBarometerDevice Barometer { get { return _barometerDevice; } }
 
         /// <summary>
         /// Ferroelectric RAM device.
         /// </summary>
-        public INavioFramDevice Fram { get { return Mb85rc256v; } }
+        public INavioFramDevice Fram { get { return _framDevice; } }
 
         /// <summary>
         /// GPS device.
@@ -98,12 +114,12 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         /// <summary>
         /// LED device.
         /// </summary>
-        public INavioLedDevice Led { get { return Pca9685; } }
+        public INavioLedDevice Led { get { return _ledPwmDevice; } }
 
         /// <summary>
         /// PWM device.
         /// </summary>
-        public INavioPwmDevice Pwm { get { return Pca9685; } }
+        public INavioPwmDevice Pwm { get { return _ledPwmDevice; } }
 
         /// <summary>
         /// RC input device.
@@ -112,33 +128,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         /// Not really hardware; only software PWM decoding over a GPIO pin on Navio and Navio boards.
         /// Latencies and inaccuracies possible due to software overhead.
         /// </remarks>
-        public INavioRCInputDevice RCInput { get { return GpioRCInput; } }
-
-        #endregion
-
-        #region Model Specific
-
-        /// <summary>
-        /// Model specific MS5611 chip which provides <see cref="Barometer"/> functionality.
-        /// </summary>
-        public NavioBarometerDevice Ms5611 { get; private set; }
-
-        /// <summary>
-        /// Model specific MB85RC256V chip which provides <see cref="Fram"/> functionality.
-        /// </summary>
-        public NavioFramDevice Mb85rc256v { get; private set; }
-
-        /// <summary>
-        /// Model specific PCA9685 chip which provides <see cref="Led"/> and <see cref="Pwm"/> functionality.
-        /// </summary>
-        public NavioLedPwmDevice Pca9685 { get; private set; }
-
-        /// <summary>
-        /// Model specific GPIO software PWM decoding, providing the <see cref="RCInput"/> functionality.
-        /// </summary>
-        public NavioRCInputDevice GpioRCInput { get; private set; }
-
-        #endregion
+        public INavioRCInputDevice RCInput { get { return _rcInputDevice; } }
 
         #endregion
     }

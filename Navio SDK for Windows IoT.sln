@@ -6,8 +6,8 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{101AF3F7-293E-46CF-8C37-EAA61DFDF0A5}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
-		LICENSE = LICENSE
-		README.md = README.md
+		License = License
+		ReadMe.md = ReadMe.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{24C4538B-C6A4-4D47-80C9-4249164C222F}"
@@ -98,6 +98,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Emlid", "Emlid", "{ABA42A63-65A8-424C-A138-8DFD5A56047F}"
 	ProjectSection(SolutionItems) = preProject
+		Documentation\Emlid\Changes.md = Documentation\Emlid\Changes.md
+		Documentation\Emlid\Coding-Standards.md = Documentation\Emlid\Coding-Standards.md
+		Documentation\Emlid\Development.md = Documentation\Emlid\Development.md
+		Documentation\Emlid\Project.md = Documentation\Emlid\Project.md
+		Documentation\Emlid\Requirements.md = Documentation\Emlid\Requirements.md
+		Documentation\Emlid\Usage.md = Documentation\Emlid\Usage.md
 		Documentation\Emlid\Windows-IoT.md = Documentation\Emlid\Windows-IoT.md
 	EndProjectSection
 EndProject
@@ -110,9 +116,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Navio RC Input Driver", "Dr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Components", "Components", "{7F2BB098-FCAF-4EAD-8C2F-A461F02CFE2B}"
 	ProjectSection(SolutionItems) = preProject
-		Documentation\Components\ENG_DS_MS5611-01BA03_B.pdf = Documentation\Components\ENG_DS_MS5611-01BA03_B.pdf
-		Documentation\Components\MB85RC04V-DS501-00016-2v0-E.pdf = Documentation\Components\MB85RC04V-DS501-00016-2v0-E.pdf
-		Documentation\Components\MB85RC256V-DS501-00017-3v0-E.pdf = Documentation\Components\MB85RC256V-DS501-00017-3v0-E.pdf
+		Documentation\Components\MB85RC04V.pdf = Documentation\Components\MB85RC04V.pdf
+		Documentation\Components\MB85RC256V.pdf = Documentation\Components\MB85RC256V.pdf
+		Documentation\Components\MS5611.pdf = Documentation\Components\MS5611.pdf
 		Documentation\Components\PCA9685.pdf = Documentation\Components\PCA9685.pdf
 	EndProjectSection
 EndProject

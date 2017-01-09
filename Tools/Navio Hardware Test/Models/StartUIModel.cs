@@ -9,7 +9,7 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views
     /// Provides the selection or detection of Navio board and lists the available
     /// components which can be tested.
     /// </remarks>
-    public class StartUIModel : PageUIModel
+    public sealed class StartUIModel : PageUIModel
     {
         #region Lifetime
 

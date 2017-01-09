@@ -13,25 +13,20 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Shared
         /// <summary>
         /// Initializes an instance.
         /// </summary>
-        public UIModelPage()
+        protected UIModelPage()
         {
             var application = (ThisApp)App.Current;
-            ApplicationUIModel = application.Model;
+            ApplicationModel = application.Model;
         }
 
         #endregion
 
         #region Public Properties
 
-        ///// <summary>
-        ///// XAML Application.
-        ///// </summary>
-        //public ThisApp Application { get; private set; }
-
         /// <summary>
         /// Application UI model.
         /// </summary>
-        public ApplicationUIModel ApplicationUIModel { get; private set; }
+        public ApplicationUIModel ApplicationModel { get; private set; }
 
         #endregion
     }

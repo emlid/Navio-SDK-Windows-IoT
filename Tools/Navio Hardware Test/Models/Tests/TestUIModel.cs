@@ -3,7 +3,6 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
 {
@@ -110,7 +109,7 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
                 return;
 
             // Run test on background thread...
-            Task.Factory.StartNew(() =>
+            Application.UIThreadFactory.StartNew(() =>
             {
                 try
                 {

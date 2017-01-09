@@ -3,32 +3,32 @@ using System;
 using System.Globalization;
 using System.Text;
 
-namespace Emlid.WindowsIot.Hardware.Protocols.Pwm
+namespace Emlid.WindowsIot.Hardware.Protocols.Ppm
 {
     /// <summary>
-    /// PWM frame data, a sequence of one or more PWM values sent together at a time.
+    /// PPM frame data, a sequence of one or more PPM values sent together at a time.
     /// </summary>
     /// <remarks>
-    /// Used as a standard variable container for both "PWM" (single channel) and other
+    /// Used as a standard variable container for both "PPM" (single channel) and other
     /// multi-channel protocols such as CPPM (a.k.a. PPM-Sum).
     /// The value of each channel depends on the protocol, i.e. what the start and end
-    /// PWM lengths are and polarity (high or low as delimiter).
+    /// PPM lengths are and polarity (high or low as delimiter).
     /// </remarks>
-    public class PwmFrame
+    public class PpmFrame
     {
         #region Lifetime
 
         /// <summary>
         /// Creates an empty instance.
         /// </summary>
-        public PwmFrame()
+        public PpmFrame()
         {
         }
 
         /// <summary>
         /// Creates an instance using the specified data.
         /// </summary>
-        public PwmFrame(long sequence, int[] channels)
+        public PpmFrame(long sequence, int[] channels)
         {
             // Validate
             if (channels == null) throw new ArgumentNullException(nameof(channels));
@@ -45,7 +45,7 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Pwm
         /// <summary>
         /// Tests two objects of this type for equality by value.
         /// </summary>
-        public static bool operator ==(PwmFrame left, PwmFrame right)
+        public static bool operator ==(PpmFrame left, PpmFrame right)
         {
             return !ReferenceEquals(left, null)
                 ? left.Equals(right)
@@ -55,7 +55,7 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Pwm
         /// <summary>
         /// Tests two objects of this type for inequality by value.
         /// </summary>
-        public static bool operator !=(PwmFrame left, PwmFrame right)
+        public static bool operator !=(PpmFrame left, PpmFrame right)
         {
             return !ReferenceEquals(left, null)
                 ? !left.Equals(right)
@@ -69,7 +69,7 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Pwm
         public override bool Equals(object value)
         {
             // Compare type
-            var other = value as PwmFrame;
+            var other = value as PpmFrame;
             if (ReferenceEquals(other, null))
                 return false;
 
@@ -119,13 +119,13 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Pwm
         {
             // Start with timestamp
             var result = new StringBuilder();
-            result.AppendFormat(CultureInfo.CurrentCulture, Resources.Strings.PwmFrameStringFormatStart, Time);
+            result.AppendFormat(CultureInfo.CurrentCulture, Resources.Strings.PpmFrameFormatStart, Time);
 
             // Add each channel value
             for (var index = 0; index < Channels.Length; index++)
             {
                 result.AppendFormat(CultureInfo.CurrentCulture,
-                    Resources.Strings.PwmFrameStringFormatChannel, index + 1, Channels[index]);
+                    Resources.Strings.PpmFrameFormatChannel, index + 1, Channels[index]);
             }
 
             // Return whole string

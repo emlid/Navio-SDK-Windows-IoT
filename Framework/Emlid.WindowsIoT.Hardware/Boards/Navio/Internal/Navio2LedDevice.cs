@@ -3,12 +3,12 @@ using Emlid.WindowsIot.Hardware.System;
 using System;
 using Windows.Devices.Gpio;
 
-namespace Emlid.WindowsIot.Hardware.Boards.Navio
+namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
 {
     /// <summary>
     /// Navio 2 LED device, three GPIO pins for RGB components of an LED.
     /// </summary>
-    public sealed class Navio2LedDevice : DisposableObject, INavioLedDevice
+    internal sealed class Navio2LedDevice : DisposableObject, INavioLedDevice
     {
         #region Constants
 
@@ -39,8 +39,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         /// <summary>
         /// Creates an instance and read current values.
         /// </summary>
-        [CLSCompliant(false)]
-        public Navio2LedDevice()
+        internal Navio2LedDevice()
         {
             // Get GPIO controller for LED pins
             DeviceProvider.Initialize();
@@ -82,6 +81,11 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         #region Private Fields
 
         /// <summary>
+        /// Thread synchronization.
+        /// </summary>
+        private static object _lock = new object();
+
+        /// <summary>
         /// LED red component GPIO pin.
         /// </summary>
         GpioPin _redPin;
@@ -108,16 +112,6 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         public bool CanDisable => true;
 
         /// <summary>
-        /// Returns false because the Navio 2 GPIO based LED has no controller to sleep.
-        /// </summary>
-        public bool CanSleep => false;
-
-        /// <summary>
-        /// Returns false because the Navio 2 GPIO based LED has no controller to restart.
-        /// </summary>
-        public bool CanRestart => false;
-
-        /// <summary>
         /// Simulates enabling or disabling the LED by setting it to black (RGB components all off).
         /// The Navio 2 GPIO based LED has no controller to disable.
         /// </summary>
@@ -126,24 +120,28 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
             get { return _enabled; }
             set
             {
-                // Do nothing when value not changed
-                if (value == _enabled) return;
-
-                // Enable or disable
-                if (value)
+                // Thread-safe lock
+                lock (_lock)
                 {
-                    // Enable: reset all pins to their current (last read) RGB values
-                    _redPin.Write(ConvertToGpioValue(_red));
-                    _greenPin.Write(ConvertToGpioValue(_green));
-                    _bluePin.Write(ConvertToGpioValue(_blue));
+                    // Do nothing when value not changed
+                    if (value == _enabled) return;
+
+                    // Enable or disable
+                    if (value)
+                    {
+                        // Enable: reset all pins to their current (last read) RGB values
+                        _redPin.Write(ConvertToGpioValue(_red));
+                        _greenPin.Write(ConvertToGpioValue(_green));
+                        _bluePin.Write(ConvertToGpioValue(_blue));
+                    }
+                    else
+                    {   // Disable: set all pins high (off)
+                        _redPin.Write(GpioPinValue.High);
+                        _greenPin.Write(GpioPinValue.High);
+                        _bluePin.Write(GpioPinValue.High);
+                    }
+                    _enabled = value;
                 }
-                else
-                {   // Disable: set all pins high (off)
-                    _redPin.Write(GpioPinValue.High);
-                    _greenPin.Write(GpioPinValue.High);
-                    _bluePin.Write(GpioPinValue.High);
-                }
-                _enabled = value;
             }
         }
         private bool _enabled;
@@ -162,15 +160,19 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
             get { return _red; }
             set
             {
-                // Validate
-                if (value > MaximumValue) throw new ArgumentOutOfRangeException(nameof(Red));
+                // Thread-safe lock
+                lock (_lock)
+                {
+                    // Validate
+                    if (value > MaximumValue) throw new ArgumentOutOfRangeException(nameof(Red));
 
-                // Set pin value
-                var gpioValue = ConvertToGpioValue(value);
-                _redPin.Write(gpioValue);
+                    // Set pin value
+                    var gpioValue = ConvertToGpioValue(value);
+                    _redPin.Write(gpioValue);
 
-                // Update property
-                _red = value;
+                    // Update property
+                    _red = value;
+                }
             }
         }
         private int _red;
@@ -183,15 +185,19 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
             get { return _green; }
             set
             {
-                // Validate
-                if (value > MaximumValue) throw new ArgumentOutOfRangeException(nameof(Green));
+                // Thread-safe lock
+                lock (_lock)
+                {
+                    // Validate
+                    if (value > MaximumValue) throw new ArgumentOutOfRangeException(nameof(Green));
 
-                // Set pin value
-                var gpioValue = ConvertToGpioValue(value);
-                _greenPin.Write(gpioValue);
+                    // Set pin value
+                    var gpioValue = ConvertToGpioValue(value);
+                    _greenPin.Write(gpioValue);
 
-                // Update property
-                _green = value;
+                    // Update property
+                    _green = value;
+                }
             }
         }
         private int _green;
@@ -204,15 +210,19 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
             get { return _blue; }
             set
             {
-                // Validate
-                if (value > MaximumValue) throw new ArgumentOutOfRangeException(nameof(Blue));
+                // Thread-safe lock
+                lock (_lock)
+                {
+                    // Validate
+                    if (value > MaximumValue) throw new ArgumentOutOfRangeException(nameof(Blue));
 
-                // Set pin value
-                var gpioValue = ConvertToGpioValue(value);
-                _bluePin.Write(gpioValue);
+                    // Set pin value
+                    var gpioValue = ConvertToGpioValue(value);
+                    _bluePin.Write(gpioValue);
 
-                // Update property
-                _blue = value;
+                    // Update property
+                    _blue = value;
+                }
             }
         }
         private int _blue;
@@ -228,8 +238,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         /// </summary>
         /// <param name="value">LED component value.</param>
         /// <returns>GPIO pin value.</returns>
-        [CLSCompliant(false)]
-        public static GpioPinValue ConvertToGpioValue(int value)
+        internal static GpioPinValue ConvertToGpioValue(int value)
         {
             return value > 0 ? GpioPinValue.Low : GpioPinValue.High;
         }
@@ -239,8 +248,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         /// </summary>
         /// <param name="edge">GPIO event edge.</param>
         /// <returns>LED component value.</returns>
-        [CLSCompliant(false)]
-        public static int ConvertToLedValue(GpioPinEdge edge)
+        internal static int ConvertToLedValue(GpioPinEdge edge)
         {
             return edge == GpioPinEdge.RisingEdge ? 0 : 1;
         }
@@ -250,8 +258,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         /// </summary>
         /// <param name="value">GPIO pin value.</param>
         /// <returns>LED component value.</returns>
-        [CLSCompliant(false)]
-        public static int ConvertToLedValue(GpioPinValue value)
+        internal static int ConvertToLedValue(GpioPinValue value)
         {
             return value == GpioPinValue.High ? 0 : 1;
         }
@@ -263,7 +270,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         /// <summary>
         /// Clears all values.
         /// </summary>
-        public void Clear()
+        public void Reset()
         {
             SetRgb(0, 0, 0);
         }
@@ -273,9 +280,13 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         /// </summary>
         public void Read()
         {
-            _red = ConvertToLedValue(_redPin.Read());
-            _green = ConvertToLedValue(_greenPin.Read());
-            _blue = ConvertToLedValue(_bluePin.Read());
+            // Thread-safe lock
+            lock (_lock)
+            {
+                _red = ConvertToLedValue(_redPin.Read());
+                _green = ConvertToLedValue(_greenPin.Read());
+                _blue = ConvertToLedValue(_bluePin.Read());
+            }
         }
 
         /// <summary>
@@ -286,42 +297,19 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         /// <param name="blue">Blue value in the range 0-<see cref="MaximumValue"/>.</param>
         public void SetRgb(int red, int green, int blue)
         {
-            // Write GPIO pin values
-            _redPin.Write(ConvertToGpioValue(red));
-            _greenPin.Write(ConvertToGpioValue(green));
-            _bluePin.Write(ConvertToGpioValue(blue));
+            // Thread-safe lock
+            lock (_lock)
+            {
+                // Write GPIO pin values
+                _redPin.Write(ConvertToGpioValue(red));
+                _greenPin.Write(ConvertToGpioValue(green));
+                _bluePin.Write(ConvertToGpioValue(blue));
 
-            // Update local values
-            _red = red;
-            _green = green;
-            _blue = blue;
-        }
-
-        /// <summary>
-        /// Not implemented because the Navio 2 LED has no controller to sleep.
-        /// </summary>
-        /// <exception cref="NotImplementedException">Thrown always.</exception>
-        public bool Sleep()
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Not implemented because the Navio 2 LED has no controller to wake.
-        /// </summary>
-        /// <exception cref="NotImplementedException">Thrown always.</exception>
-        public bool Wake()
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Not implemented because the Navio 2 LED has no controller to restart.
-        /// </summary>
-        /// <exception cref="NotImplementedException">Thrown always.</exception>
-        public void Restart()
-        {
-            throw new NotImplementedException();
+                // Update local values
+                _red = red;
+                _green = green;
+                _blue = blue;
+            }
         }
 
         #endregion

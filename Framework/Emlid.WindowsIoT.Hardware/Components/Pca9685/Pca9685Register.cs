@@ -1,13 +1,13 @@
-﻿namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
+﻿namespace Emlid.WindowsIot.Hardware.Components.Pca9685
 {
     /// <summary>
-    /// Defines the I2C registers of the <see cref="NxpPca9685Device"/>.
+    /// Defines the I2C registers of the <see cref="Pca9685Device"/>.
     /// </summary>
     /// <remarks>
     /// Auto Increment past register 69 will point to mode 1 register (register 0).
     /// Auto Increment also works from register 250 to register 254, then rolls over to register 0.
     /// </remarks>
-    public enum NxpPca9685Register : byte
+    public enum Pca9685Register : byte
     {
         #region Control
 

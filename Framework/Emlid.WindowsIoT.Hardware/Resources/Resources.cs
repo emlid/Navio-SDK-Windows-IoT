@@ -58,33 +58,33 @@ namespace Emlid.WindowsIot.Hardware.Resources  {
 		///<summary>
 		///0 = low time, 1 = low length, 2 = high time, 3 = high length, 4 = total length.
 		///</summary>
-		public static string PwmCycleStringFormat 
+		public static string PpmCycleFormat 
 		{ 
-			get { return ResourceLoader.GetString("PwmCycleStringFormat"); }
+			get { return ResourceLoader.GetString("PpmCycleFormat"); }
 		}
  	
 		///<summary>
 		///0 = channel, 1 = value.
 		///</summary>
-		public static string PwmFrameStringFormatChannel 
+		public static string PpmFrameFormatChannel 
 		{ 
-			get { return ResourceLoader.GetString("PwmFrameStringFormatChannel"); }
+			get { return ResourceLoader.GetString("PpmFrameFormatChannel"); }
 		}
  	
 		///<summary>
 		///0 = time.
 		///</summary>
-		public static string PwmFrameStringFormatStart 
+		public static string PpmFrameFormatStart 
 		{ 
-			get { return ResourceLoader.GetString("PwmFrameStringFormatStart"); }
+			get { return ResourceLoader.GetString("PpmFrameFormatStart"); }
 		}
  	
 		///<summary>
 		///0 = level, 1 = time.
 		///</summary>
-		public static string PwmValueStringFormat 
+		public static string PpmPulseFormat 
 		{ 
-			get { return ResourceLoader.GetString("PwmValueStringFormat"); }
+			get { return ResourceLoader.GetString("PpmPulseFormat"); }
 		}
  	
 		///<summary>
@@ -93,6 +93,14 @@ namespace Emlid.WindowsIot.Hardware.Resources  {
 		public static string BarometerMeasurementStringFormat 
 		{ 
 			get { return ResourceLoader.GetString("BarometerMeasurementStringFormat"); }
+		}
+ 	
+		///<summary>
+		///0 = width, 1 = length, 2 = percent.
+		///</summary>
+		public static string PwmPulseFormat 
+		{ 
+			get { return ResourceLoader.GetString("PwmPulseFormat"); }
 		}
  	}
 }

@@ -3,12 +3,12 @@ using Emlid.WindowsIot.Hardware.Components.Mb85rcv;
 using Emlid.WindowsIot.Hardware.System;
 using System;
 
-namespace Emlid.WindowsIot.Hardware.Boards.Navio
+namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
 {
     /// <summary>
     /// Navio FRAM (MB85RC256V or MB85RC04V hardware device), connected via I2C.
     /// </summary>
-    public sealed class NavioFramDevice : DisposableObject, INavioFramDevice
+    internal sealed class Navio1FramDevice : DisposableObject, INavioFramDevice
     {
         #region Constants
 
@@ -39,7 +39,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         /// <summary>
         /// Creates an instance of the correct type depending on the Navio model.
         /// </summary>
-        public NavioFramDevice(NavioHardwareModel model)
+        internal Navio1FramDevice(NavioHardwareModel model)
         {
             // Get I2C controller for FRAM chip
             DeviceProvider.Initialize();
@@ -90,6 +90,11 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         #region Private Fields
 
         /// <summary>
+        /// Thread synchronization.
+        /// </summary>
+        private static object _lock = new object();
+
+        /// <summary>
         /// FRAM device specific to the requested Navio model.
         /// </summary>
         private Mb85rcvDevice _device;
@@ -112,8 +117,12 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         /// </summary>
         public byte ReadByte()
         {
-            // Call method on contained instance
-            return _device.ReadByte();
+            // Thread-safe lock
+            lock (_lock)
+            {
+                // Call method on contained instance
+                return _device.ReadByte();
+            }
         }
 
         /// <summary>
@@ -122,8 +131,12 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         /// <param name="length">Length of page to read in bytes.</param>
         public byte[] ReadPage(int length)
         {
-            // Call method on contained instance
-            return _device.ReadPage(length);
+            // Thread-safe lock
+            lock (_lock)
+            {
+                // Call method on contained instance
+                return _device.ReadPage(length);
+            }
         }
 
         /// <summary>
@@ -132,8 +145,12 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         /// <param name="address">Address at which to read.</param>
         public byte ReadByte(int address)
         {
-            // Call method on contained instance
-            return _device.ReadByte(address);
+            // Thread-safe lock
+            lock (_lock)
+            {
+                // Call method on contained instance
+                return _device.ReadByte(address);
+            }
         }
 
         /// <summary>
@@ -143,8 +160,12 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         /// <param name="length">Length of page to read in bytes.</param>
         public byte[] ReadPage(int address, int length)
         {
-            // Call method on contained instance
-            return _device.ReadPage(address, length);
+            // Thread-safe lock
+            lock (_lock)
+            {
+                // Call method on contained instance
+                return _device.ReadPage(address, length);
+            }
         }
 
         /// <summary>
@@ -154,8 +175,12 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         /// <param name="data">Source data buffer to write from.</param>
         public void WriteByte(int address, byte data)
         {
-            // Call method on contained instance
-            _device.WriteByte(address, data);
+            // Thread-safe lock
+            lock (_lock)
+            {
+                // Call method on contained instance
+                _device.WriteByte(address, data);
+            }
         }
 
         /// <summary>
@@ -165,8 +190,12 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         /// <param name="data">Source data buffer to write from.</param>
         public void WritePage(int address, byte[] data)
         {
-            // Call method on contained instance
-            _device.WritePage(address, data);
+            // Thread-safe lock
+            lock (_lock)
+            {
+                // Call method on contained instance
+                _device.WritePage(address, data);
+            }
         }
 
         /// <summary>
@@ -178,8 +207,12 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         /// <param name="length">Length of page to write in bytes.</param>
         public void WritePage(int address, byte[] data, int offset, int length)
         {
-            // Call method on contained instance
-            _device.WritePage(address, data, offset, length);
+            // Thread-safe lock
+            lock (_lock)
+            {
+                // Call method on contained instance
+                _device.WritePage(address, data, offset, length);
+            }
         }
 
         #endregion

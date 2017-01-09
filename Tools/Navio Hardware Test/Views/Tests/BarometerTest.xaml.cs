@@ -60,7 +60,7 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
         protected override void OnNavigatedTo(NavigationEventArgs arguments)
         {
             // Initialize model and bind
-            DataContext = Model = new BarometerTestUIModel(ApplicationUIModel);
+            DataContext = Model = new BarometerTestUIModel(ApplicationModel);
             Model.PropertyChanged += OnModelChanged;
 
             // Initial layout

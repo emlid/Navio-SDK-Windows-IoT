@@ -2,15 +2,14 @@
 using Emlid.WindowsIot.Hardware.Boards.Navio;
 using System;
 using System.Globalization;
-using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
 {
     /// <summary>
-    /// UI model for testing the <see cref="NavioFramDevice"/>.
+    /// UI model for testing the <see cref="INavioFramDevice"/>.
     /// </summary>
-    public class FramTestUIModel : TestUIModel
+    public sealed class FramTestUIModel : TestUIModel
     {
         #region Constants
 
@@ -187,20 +186,6 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
         #endregion
 
         #region Non-Public Methods
-
-        /// <summary>
-        /// Runs a test method with status and error output.
-        /// </summary>
-        /// <param name="test">Test delegate to run.</param>
-        /// <param name="name">Name to use in the output.</param>
-        protected override void RunTest(Action test, [CallerMemberName] string name = "")
-        {
-            // Call base class to run test
-            base.RunTest(test, name);
-
-            // Update properties
-            DoPropertyChanged(nameof(Device));
-        }
 
         /// <summary>
         /// Reads all memory, formats for display then updates <see cref="Contents"/>.

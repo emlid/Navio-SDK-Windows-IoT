@@ -1,13 +1,13 @@
 ﻿using Emlid.WindowsIot.Hardware.Boards.Navio;
-using Emlid.WindowsIot.Hardware.Protocols.Pwm;
+using Emlid.WindowsIot.Hardware.Protocols.Ppm;
 using System;
 
 namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
 {
     /// <summary>
-    /// UI model for testing the <see cref="NavioRCInputDevice"/>.
+    /// UI model for testing the <see cref="INavioRCInputDevice"/>.
     /// </summary>
-    public class RCInputTestUIModel : TestUIModel
+    public sealed class RCInputTestUIModel : TestUIModel
     {
         #region Lifetime
 
@@ -65,7 +65,7 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
         /// <summary>
         /// Updates the display when the <see cref="Device"/> channels change.
         /// </summary>
-        private void OnChannelsChanged(object sender, PwmFrame frame)
+        private void OnChannelsChanged(object sender, PpmFrame frame)
         {
             // Dump statistics to output
             WriteOutput(frame.ToString());

@@ -1,22 +1,22 @@
 ﻿using System.Collections.Concurrent;
 using System.Threading;
 
-namespace Emlid.WindowsIot.Hardware.Protocols.Pwm
+namespace Emlid.WindowsIot.Hardware.Protocols.Ppm
 {
     /// <summary>
-    /// PWM decoder for the CPPM protocol.
+    /// PPM decoder for the CPPM protocol.
     /// </summary>
     /// <remarks>
     /// <para>
     /// A complete CPPM frame is about 22.5 ms (can vary between manufacturer).
-    /// Signal low state is about 0.3 ms but sometimes a bit longer (<see cref="PwmLowLimit"/>).
-    /// It begins with a start pulse (state high for more than 2 ms <see cref="PwmSyncLengthMinium"/>).
+    /// Signal low state is about 0.3 ms but sometimes a bit longer (<see cref="LowLimit"/>).
+    /// It begins with a start pulse (state high for more than 2 ms <see cref="SyncLengthMinium"/>).
     /// Each channel (up to 8) is encoded by the time of the high state
-    /// (CPPM high state + 0.3 x (PPM low state) = servo PWM pulse width).
+    /// (CPPM high state + 0.3 x (PPM low state) = servo PPM pulse width).
     /// </para>
     /// See https://en.wikipedia.org/wiki/Pulse-position_modulation for more information.
     /// </remarks>
-    public class CppmDecoder : IPwmDecoder
+    public class CppmDecoder : IPpmDecoder
     {
         #region Constants
 
@@ -26,18 +26,18 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Pwm
         public const int ChannelCount = 8;
 
         /// <summary>
-        /// Minimum sync (PWM cycle) length in microseconds.
+        /// Minimum sync (PPM cycle) length in microseconds.
         /// </summary>
-        public const int PwmSyncLengthMinium = 4000;
+        public const int SyncLengthMinium = 4000;
 
         /// <summary>
-        /// Maximum time in microseconds which a PWM signal may be low before it is considered invalid for CPPM.
+        /// Maximum time in microseconds which a PPM signal may be low before it is considered invalid for CPPM.
         /// </summary>
         /// <remarks>
         /// Some specifications state 0.3ms is expected, but 0.4-0.5ms has been observed.
         /// We also add a bit more time for inaccuracies and differences between manufacturers.
         /// </remarks>
-        public const int PwmLowLimit = 600;
+        public const int LowLimit = 600;
 
         #endregion
 
@@ -48,8 +48,8 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Pwm
         /// </summary>
         public CppmDecoder()
         {
-            _frame = new PwmFrame();
-            _cycle = new PwmCycle();
+            _frame = new PpmFrame();
+            _cycle = new PpmCycle();
         }
 
         #endregion
@@ -65,12 +65,12 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Pwm
         /// <summary>
         /// Current CPPM frame being decoded.
         /// </summary>
-        private PwmFrame _frame;
+        private PpmFrame _frame;
 
         /// <summary>
         /// Current CPPM cycle being decoded.
         /// </summary>
-        private PwmCycle _cycle;
+        private PpmCycle _cycle;
 
         #endregion
 
@@ -88,22 +88,22 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Pwm
         /// <summary>
         /// Runs the decoder thread.
         /// </summary>
-        /// <param name="inputBuffer">Buffer from which new PWM values are read.</param>
+        /// <param name="inputBuffer">Buffer from which new PPM values are read.</param>
         /// <param name="inputTrigger">Trigger which is fired by the caller when new data arrives.</param>
-        /// <param name="outputBuffer">Buffer into which decoded PWM frames are written.</param>
+        /// <param name="outputBuffer">Buffer into which decoded PPM frames are written.</param>
         /// <param name="outputTrigger">Trigger which is fired by this decoder when new data has been decoded.</param>
         /// <param name="stop">Signals when the decoder should stop.</param>
-        public void DecodePulse(ConcurrentQueue<PwmValue> inputBuffer, AutoResetEvent inputTrigger,
-            ConcurrentQueue<PwmFrame> outputBuffer, AutoResetEvent outputTrigger, CancellationToken stop)
+        public void DecodePulse(ConcurrentQueue<PpmPulse> inputBuffer, AutoResetEvent inputTrigger,
+            ConcurrentQueue<PpmFrame> outputBuffer, AutoResetEvent outputTrigger, CancellationToken stop)
         {
             // Decode until stopped...
             while (!stop.IsCancellationRequested)
             {
                 // Wait for value in queue...
-                PwmValue value;
+                PpmPulse value;
                 if (!inputBuffer.TryDequeue(out value))
                 {
-                    inputTrigger.WaitOne(PwmSyncLengthMinium * 2);
+                    inputTrigger.WaitOne(SyncLengthMinium * 2);
                     continue;
                 }
 
@@ -122,7 +122,7 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Pwm
 
                     // Prepare next value
                     var cycle = _cycle;
-                    _cycle = new PwmCycle(time);
+                    _cycle = new PpmCycle(time);
 
                     // Decode cycles into frames...
                     var frame = DecodeCycle(cycle);
@@ -137,16 +137,16 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Pwm
         }
 
         /// <summary>
-        /// Decodes the incoming PWM signal (each complete cycle) using the CPPM protocol.
+        /// Decodes the incoming PPM signal (each complete cycle) using the CPPM protocol.
         /// </summary>
-        /// <param name="cycle">PWM cycle to decode.</param>
+        /// <param name="cycle">PPM cycle to decode.</param>
         /// <returns>
-        /// <see cref="PwmFrame"/> when complete else null whilst decoding or skipping invalid cycles.
+        /// <see cref="PpmFrame"/> when complete else null whilst decoding or skipping invalid cycles.
         /// </returns>
-        private PwmFrame DecodeCycle(PwmCycle cycle)
+        private PpmFrame DecodeCycle(PpmCycle cycle)
         {
             // Validate
-            if (!cycle.IsValid() || cycle.LowLength >= PwmLowLimit)
+            if (!cycle.IsValid() || cycle.LowLength >= LowLimit)
             {
                 // Discard frame
                 _channel = null;
@@ -154,11 +154,11 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Pwm
             }
 
             // Detect start frame
-            if (cycle.HighLength >= PwmSyncLengthMinium)
+            if (cycle.HighLength >= SyncLengthMinium)
             {
                 // Start decoding from channel 0 at next pulse
                 _channel = 0;
-                _frame = new PwmFrame(cycle.LowTime, new int[ChannelCount]);
+                _frame = new PpmFrame(cycle.LowTime, new int[ChannelCount]);
                 return null;
             }
 

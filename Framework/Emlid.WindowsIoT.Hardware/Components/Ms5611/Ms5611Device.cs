@@ -130,6 +130,15 @@ namespace Emlid.WindowsIot.Hardware.Components.Ms5611
 
         #endregion
 
+        #region Private Fields
+
+        /// <summary>
+        /// I2C device.
+        /// </summary>
+        private I2cDevice _hardware;
+
+        #endregion
+
         #region Public Properties
 
         /// <summary>
@@ -171,15 +180,6 @@ namespace Emlid.WindowsIot.Hardware.Components.Ms5611
         /// </remarks>
         public double Temperature { get; private set; }
 
-
-        #endregion
-
-        #region Private Fields
-
-        /// <summary>
-        /// I2C device.
-        /// </summary>
-        private I2cDevice _hardware;
 
         #endregion
 

@@ -4,7 +4,7 @@ using Emlid.WindowsIot.Hardware.Protocols.Barometer;
 using Emlid.WindowsIot.Hardware.System;
 using System;
 
-namespace Emlid.WindowsIot.Hardware.Boards.Navio
+namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
 {
     /// <summary>
     /// Navio barometric pressure and temperature sensor (MS5611 hardware device), connected via I2C.
@@ -75,7 +75,12 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         #region Private Fields
 
         /// <summary>
-        /// FRAM device specific to the requested Navio model.
+        /// Thread synchronization.
+        /// </summary>
+        private static object _lock = new object();
+
+        /// <summary>
+        /// Barometer device.
         /// </summary>
         private Ms5611Device _device;
 
@@ -96,11 +101,15 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         /// </summary>
         public void Reset()
         {
-            // Reset device
-            _device.Reset();
+            // Thread-safe lock
+            lock (_lock)
+            {
+                // Reset device
+                _device.Reset();
 
-            // Clear measurement
-            Measurement = new BarometerMeasurement();
+                // Clear measurement
+                Measurement = new BarometerMeasurement();
+            }
         }
 
         /// <summary>
@@ -108,18 +117,22 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         /// </summary>
         public BarometerMeasurement Update()
         {
-            // Perform calculation
-            _device.Update();
-            var measurement = new BarometerMeasurement(_device.Pressure, _device.Temperature);
+            // Thread-safe lock
+            lock (_lock)
+            {
+                // Perform calculation
+                _device.Update();
+                var measurement = new BarometerMeasurement(_device.Pressure, _device.Temperature);
 
-            // Update property
-            Measurement = measurement;
+                // Update property
+                Measurement = measurement;
 
-            // Fire event
-            MeasurementUpdated?.Invoke(this, measurement);
+                // Fire event
+                MeasurementUpdated?.Invoke(this, measurement);
 
-            // Return result
-            return measurement;
+                // Return result
+                return measurement;
+            }
         }
 
         #endregion

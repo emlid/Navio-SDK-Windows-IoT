@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace Emlid.WindowsIot.Hardware.Components.NxpPca9685
+namespace Emlid.WindowsIot.Hardware.Components.Pca9685
 {
     /// <summary>
-    /// Bitmask for the <see cref="NxpPca9685Register.Mode1"/> register.
+    /// Bitmask for the <see cref="Pca9685Register.Mode1"/> register.
     /// </summary>
     [Flags]
-    public enum NxpPca9685Mode2Bits : byte
+    public enum Pca9685Mode2Bits : byte
     {
         /// <summary>
         /// No bits set.

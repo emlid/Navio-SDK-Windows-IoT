@@ -1,47 +1,37 @@
 ﻿using System.Globalization;
 
-namespace Emlid.WindowsIot.Hardware.Protocols.Pwm
+namespace Emlid.WindowsIot.Hardware.Protocols.Ppm
 {
     /// <summary>
-    /// Contains information about a PWM cycle (low-high cycle)
+    /// Contains information about a PPM cycle (low-high pulse cycle)
     /// </summary>
-    public class PwmCycle
+    public struct PpmCycle
     {
-        #region Constants
-
-        /// <summary>
-        /// Frequency which many analog servos support.
-        /// </summary>
-        /// <remarks>
-        /// Always check the specification of your servo before enabling output to avoid damage!
-        /// Digital servos are capable of frequencies over 100Hz, some between 300-400Hz and higher.
-        /// Some analog servos may even have trouble with 50Hz, but as most other autopilots
-        /// are using 50Hz are default we choose this as an acceptable default.
-        ///  See http://pcbheaven.com/wikipages/How_RC_Servos_Works/ for more information.
-        /// </remarks>
-        public const float ServoSafeFrequency = 50;
-
-        #endregion
-
         #region Lifetime
 
         /// <summary>
-        /// Creates an empty instance.
+        /// Creates an almost empty instance, with only the initial start (low) time.
         /// </summary>
-        public PwmCycle()
+        public PpmCycle(long lowTime)
         {
+            LowTime = 0;
+            HighTime = 0;
+            LowLength = 0;
+            HighLength = 0;
         }
 
         /// <summary>
-        /// Creates an instance with zeros except the time of the last cycle low.
+        /// Sets values with <see cref="LowLength"/> calculated automatically.
         /// </summary>
-        /// <remarks>Typically used as a follow-on to a previous cycle.</remarks>
-        public PwmCycle(long lowTime)
+        /// <param name="lowTime">Low time in microseconds.</param>
+        /// <param name="highTime">High time in microseconds.</param>
+        /// <param name="highLength">High length in microseconds.</param>
+        public PpmCycle(long lowTime, long highTime, long highLength)
         {
             LowTime = lowTime;
-            LowLength = 0;
-            HighTime = 0;
-            HighLength = 0;
+            HighTime = highTime;
+            LowLength = highTime - lowTime;
+            HighLength = highLength;
         }
 
         #endregion
@@ -51,7 +41,7 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Pwm
         /// <summary>
         /// Tests two objects of this type for equality by value.
         /// </summary>
-        public static bool operator ==(PwmCycle left, PwmCycle right)
+        public static bool operator ==(PpmCycle left, PpmCycle right)
         {
             return !ReferenceEquals(left, null)
                 ? left.Equals(right)
@@ -61,7 +51,7 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Pwm
         /// <summary>
         /// Tests two objects of this type for inequality by value.
         /// </summary>
-        public static bool operator !=(PwmCycle left, PwmCycle right)
+        public static bool operator !=(PpmCycle left, PpmCycle right)
         {
             return !ReferenceEquals(left, null)
                 ? !left.Equals(right)
@@ -75,9 +65,9 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Pwm
         public override bool Equals(object value)
         {
             // Compare type
-            var other = value as PwmCycle;
-            if (ReferenceEquals(other, null))
+            if (!(value is PpmCycle))
                 return false;
+            var other = (PpmCycle)value;
 
             // Compare values
             return
@@ -133,16 +123,6 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Pwm
         #region Methods
 
         /// <summary>
-        /// Return a string representation of the current values.
-        /// </summary>
-        public override string ToString()
-        {
-            return string.Format(CultureInfo.CurrentCulture,
-                Resources.Strings.PwmCycleStringFormat,
-                LowTime, LowLength, HighTime, HighLength, Length);
-        }
-
-        /// <summary>
         /// Checks if the cycle is valid.
         /// </summary>
         public bool IsValid()
@@ -151,6 +131,28 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Pwm
                 LowTime > 0 && LowLength > 0 &&
                 HighTime > 0 && HighLength > 0 &&
                 LowTime < HighTime;
+        }
+
+        /// <summary>
+        /// Copies values from another instance.
+        /// </summary>
+        /// <param name="source">Source from which to copy values.</param>
+        public void Copy(PpmCycle source)
+        {
+            LowTime = source.LowTime;
+            LowLength = source.LowLength;
+            HighTime = source.HighTime;
+            HighLength = source.HighLength;
+        }
+
+        /// <summary>
+        /// Return a string representation of the current values.
+        /// </summary>
+        public override string ToString()
+        {
+            return string.Format(CultureInfo.CurrentCulture,
+                Resources.Strings.PpmCycleFormat,
+                LowTime, LowLength, HighTime, HighLength, Length);
         }
 
         #endregion

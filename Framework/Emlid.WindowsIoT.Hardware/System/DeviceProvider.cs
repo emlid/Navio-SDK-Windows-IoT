@@ -182,14 +182,7 @@ namespace Emlid.WindowsIot.Hardware.System
             var controller = Spi[controllerIndex];
 
             // Connect to device and return (if exists)
-            var settings = new SpiConnectionSettings(chipSelectLine)
-            {
-                ClockFrequency = frequency,
-                DataBitLength = bits,
-                Mode = mode,
-                SharingMode = sharingMode
-            };
-            return controller.GetDevice(settings);
+            return controller.Connect(chipSelectLine, frequency, bits, mode, sharingMode);
         }
 
         #endregion

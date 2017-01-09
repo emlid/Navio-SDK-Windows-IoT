@@ -1,4 +1,5 @@
-﻿using Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Shared;
+﻿using Emlid.WindowsIot.Hardware.Protocols.Pwm;
+using Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Shared;
 using System;
 using System.ComponentModel;
 using System.Globalization;
@@ -45,7 +46,7 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
         protected override void OnNavigatedTo(NavigationEventArgs arguments)
         {
             // Initialize model and bind
-            DataContext = Model = new PwmTestUIModel(ApplicationUIModel);
+            DataContext = Model = new PwmTestUIModel(ApplicationModel);
             Model.PropertyChanged += OnModelChanged;
 
             // Initial layout
@@ -75,11 +76,22 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
         {
             switch (arguments.PropertyName)
             {
+                case nameof(Model.Device):
+                    Bindings.Update();
+                    break;
+
                 case nameof(Model.Output):
                     OutputScroller.UpdateLayout();
                     OutputScroller.ChangeView(null, OutputScroller.ScrollableHeight, null);
                     break;
             }
+        }
+        /// <summary>
+        /// Executes the <see cref="PwmTestUIModel.Reset"/> action when the related button is clicked.
+        /// </summary>
+        private void OnResetButtonClick(object sender, RoutedEventArgs arguments)
+        {
+            Model.Reset();
         }
 
         /// <summary>
@@ -91,31 +103,7 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
         }
 
         /// <summary>
-        /// Executes the <see cref="PwmTestUIModel.Sleep"/> action when the related button is clicked.
-        /// </summary>
-        private void OnSleepButtonClick(object sender, RoutedEventArgs arguments)
-        {
-            Model.Sleep();
-        }
-
-        /// <summary>
-        /// Executes the <see cref="PwmTestUIModel.Wake"/> action when the related button is clicked.
-        /// </summary>
-        private void OnWakeButtonClick(object sender, RoutedEventArgs arguments)
-        {
-            Model.Wake();
-        }
-
-        /// <summary>
-        /// Executes the <see cref="PwmTestUIModel.Restart"/> action when the related button is clicked.
-        /// </summary>
-        private void OnRestartButtonClick(object sender, RoutedEventArgs arguments)
-        {
-            Model.Restart();
-        }
-
-        /// <summary>
-        /// Executes the <see cref="PwmTestUIModel.Clear"/> action when the related button is clicked.
+        /// Executes the <see cref="TestUIModel.Clear"/> action when the related button is clicked.
         /// </summary>
         private void OnClearButtonClick(object sender, RoutedEventArgs arguments)
         {
@@ -147,6 +135,15 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
             SetFrequency();
         }
 
+        /// <summary>
+        /// Changes the channel value when it's value is changed in the UI.
+        /// </summary>
+        private void OnChannelChanged(object sender, ValueChangedEventArgs<PwmPulse> value)
+        {
+            var slider = (PwmChannelSlider)sender;
+            Model.Device.SetChannel(slider.Number, value.NewValue);
+        }
+
         #endregion
 
         #region Private Methods
@@ -156,10 +153,28 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
         /// </summary>
         private void SetFrequency()
         {
-            var textBox = FrequencyTextBox;
-            var frequency = Convert.ToSingle(textBox.Text, CultureInfo.CurrentCulture);
-            if (Model.Device.Frequency != frequency)
-                Model.Device.SetFrequency(frequency);
+            // Get frequency text from input
+            var frequencyText = FrequencyTextBox.Text;
+
+            // Reset value when invalid
+            int frequency;
+            if (!int.TryParse(frequencyText, out frequency) ||
+                frequency < Model.Device.FrequencyMinimum ||
+                frequency > Model.Device.FrequencyMaximum)
+            {
+                FrequencyTextBox.Text = Model.Device.Frequency.ToString(CultureInfo.CurrentCulture);
+                return;
+            }
+
+            // Do nothing when same
+            if (frequency == Model.Device.Frequency)
+                return;
+
+            // Set new frequency
+            Model.Device.Frequency = frequency;
+
+            // Update bindings
+            Bindings.Update();
         }
 
         #endregion
