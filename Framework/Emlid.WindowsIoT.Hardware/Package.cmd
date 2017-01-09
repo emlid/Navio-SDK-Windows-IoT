@@ -5,6 +5,11 @@ rem Creates a release build then generates the NuGet package into the output dir
 rem Remember to update the version number and release notes in the "nuspec" file before each release.
 
 echo.
+echo Initializing Visual Studio tools...
+call "%vs140comntools%\vsvars32.bat"
+if %errorlevel% neq 0 goto error
+
+echo.
 echo Creating Release build
 msbuild "%~dp0Emlid.WindowsIot.Hardware.csproj" /p:Configuration=Release
 if %errorlevel% neq 0 goto error
