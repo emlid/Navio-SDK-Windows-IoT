@@ -116,9 +116,13 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Navio RC Input Driver", "Dr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Components", "Components", "{7F2BB098-FCAF-4EAD-8C2F-A461F02CFE2B}"
 	ProjectSection(SolutionItems) = preProject
+		Documentation\Components\ADS1115.pdf = Documentation\Components\ADS1115.pdf
+		Documentation\Components\LSM9DS1.pdf = Documentation\Components\LSM9DS1.pdf
 		Documentation\Components\MB85RC04V.pdf = Documentation\Components\MB85RC04V.pdf
 		Documentation\Components\MB85RC256V.pdf = Documentation\Components\MB85RC256V.pdf
+		Documentation\Components\MPU9250.pdf = Documentation\Components\MPU9250.pdf
 		Documentation\Components\MS5611.pdf = Documentation\Components\MS5611.pdf
+		Documentation\Components\NEO-M8.pdf = Documentation\Components\NEO-M8.pdf
 		Documentation\Components\PCA9685.pdf = Documentation\Components\PCA9685.pdf
 	EndProjectSection
 EndProject
