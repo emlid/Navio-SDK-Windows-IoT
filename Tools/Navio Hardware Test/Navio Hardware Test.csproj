@@ -7,8 +7,8 @@
     <ProjectGuid>{B3E2E3DD-67EE-49D6-A31B-4B6A19B0F640}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Emlid.WindowsIot.Tests.NavioHardwareTestApp</RootNamespace>
-    <AssemblyName>Emlid.WindowsIot.Tests.NavioHardwareTestApp</AssemblyName>
+    <RootNamespace>Emlid.WindowsIot.Tools.NavioHardwareTest</RootNamespace>
+    <AssemblyName>Emlid.WindowsIot.Tools.NavioHardwareTest</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.14965.0</TargetPlatformVersion>
@@ -37,7 +37,7 @@
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <DocumentationFile>bin\ARM\Debug\Emlid.WindowsIot.Tests.NavioHardwareTestApp.xml</DocumentationFile>
+    <DocumentationFile>bin\ARM\Debug\Emlid.WindowsIot.Tools.NavioHardwareTest.xml</DocumentationFile>
     <UseDotNetNativeToolchain>false</UseDotNetNativeToolchain>
     <SuppressXamlWarnings>3270</SuppressXamlWarnings>
   </PropertyGroup>
@@ -55,50 +55,42 @@
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <DocumentationFile>bin\ARM\Release\Emlid.WindowsIot.Tests.NavioHardwareTestApp.xml</DocumentationFile>
+    <DocumentationFile>bin\ARM\Release\Emlid.WindowsIot.Tools.NavioHardwareTest.xml</DocumentationFile>
     <SuppressXamlWarnings>3270</SuppressXamlWarnings>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\..\Common\AssemblyInfoGlobal.cs">
       <Link>Properties\AssemblyInfoGlobal.cs</Link>
     </Compile>
-    <Compile Include="..\..\Common\ByteToHexStringValueConverter.cs">
-      <Link>Models\Shared\ByteToHexStringValueConverter.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Common\ConvertibleValueConverter.cs">
-      <Link>Models\Shared\ConvertibleValueConverter.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Common\EnumerationValueConverter.cs">
-      <Link>Models\Shared\EnumerationValueConverter.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Common\IsNullToBoolValueConverter.cs">
-      <Link>Models\Shared\IsNullToBoolValueConverter.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Common\StringExtensions.cs">
-      <Link>Models\Shared\StringExtensions.cs</Link>
-    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AppBase.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Models\ApplicationUIModel.cs" />
-    <Compile Include="Models\Shared\PwmPulseValueConverter.cs" />
-    <Compile Include="Models\UIModel.cs" />
+    <Compile Include="Models\TestApplicationUIModel.cs" />
     <Compile Include="Models\Tests\FramTestUIModel.cs" />
     <Compile Include="Models\Tests\BarometerTestUIModel.cs" />
     <Compile Include="Models\Tests\LedTestUIModel.cs" />
-    <Compile Include="Models\PageUIModel.cs" />
     <Compile Include="Models\StartUIModel.cs" />
-    <Compile Include="Views\Shared\MessageDialog.xaml.cs">
-      <DependentUpon>MessageDialog.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Models\Tests\RCInputTestUIModel.cs" />
     <Compile Include="Models\Tests\TestUIModel.cs" />
-    <Compile Include="Views\Shared\PwmChannelSlider.xaml.cs">
-      <DependentUpon>PwmChannelSlider.xaml</DependentUpon>
+    <Compile Include="Views\StartPageBase.cs">
+      <DependentUpon>Start.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Shared\UIModelPage.cs" />
-    <Compile Include="Models\Shared\ValueChangedEventArgs.cs" />
+    <Compile Include="Views\Tests\BarometerTestPageBase.cs">
+      <DependentUpon>BarometerTest.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tests\FramTestPageBase.cs">
+      <DependentUpon>FramTest.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tests\LedTestPageBase.cs">
+      <DependentUpon>LedTest.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tests\PwmTestPageBase.cs">
+      <DependentUpon>PwmTest.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Tests\FramTest.xaml.cs">
       <DependentUpon>FramTest.xaml</DependentUpon>
     </Compile>
@@ -117,6 +109,9 @@
       <DependentUpon>BarometerTest.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Tests\RCInputTest.xaml.cs">
+      <DependentUpon>RCInputTest.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tests\RCInputTestPageBase.cs">
       <DependentUpon>RCInputTest.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -145,14 +140,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Views\Shared\MessageDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Shared\PwmChannelSlider.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\Tests\FramTest.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -179,6 +166,14 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Framework\Emlid.UniversalWindows.UI\Emlid.UniversalWindows.UI.csproj">
+      <Project>{e431a011-c230-4cf5-8321-c47e07ae7683}</Project>
+      <Name>Emlid.UniversalWindows.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Framework\Emlid.UniversalWindows\Emlid.UniversalWindows.csproj">
+      <Project>{d8f241c6-29cb-4aa6-ad34-398cba6d1c16}</Project>
+      <Name>Emlid.UniversalWindows</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Framework\Emlid.WindowsIoT.Hardware\Emlid.WindowsIot.Hardware.csproj">
       <Project>{fe8e8830-ee45-46f0-88a5-4a14ad02ee50}</Project>
       <Name>Emlid.WindowsIot.Hardware</Name>

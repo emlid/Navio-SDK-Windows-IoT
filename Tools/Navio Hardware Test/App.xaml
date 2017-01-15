@@ -1,15 +1,17 @@
-﻿<Application
-    x:Class="Emlid.WindowsIot.Tests.NavioHardwareTestApp.App"
+﻿<local:AppBase
+    x:Class="Emlid.WindowsIot.Tools.NavioHardwareTest.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Emlid.WindowsIot.Tests.NavioHardwareTestApp"
+    xmlns:local="using:Emlid.WindowsIot.Tools.NavioHardwareTest"
     RequestedTheme="Light">
     <Application.Resources>
+
         <!-- Brand -->
         <Color x:Key="EmlidGreen">#FF44D62C</Color>
         <Color x:Key="EmlidDarkGreen">#77226315</Color>
         <BitmapImage x:Key="EmlidLogo" UriSource="Assets\emlid_logo_no_text.png" />
         <BitmapImage x:Key="NavioResearchBackground" UriSource="Assets\Navio-Research.jpg" />
+
         <!-- Primitives -->
         <SolidColorBrush x:Key="EmlidGreenBrush" Color="{StaticResource EmlidGreen}" />
         <SolidColorBrush x:Key="ApplicationPageBackgroundThemeBrush" Color="White" />
@@ -19,6 +21,7 @@
         <SolidColorBrush x:Key="SystemControlForegroundTransparentBrush" Color="{StaticResource EmlidDarkGreen}" />
         <SolidColorBrush x:Key="SystemControlForegroundBaseMediumLowBrush" Color="{StaticResource EmlidDarkGreen}" />
         <SolidColorBrush x:Key="SystemControlHighlightListAccentHighBrush" Color="Black" />
+
         <!-- Control Style -->
         <Style TargetType="Page">
             <Setter Property="Background" Value="{ThemeResource ApplicationPageBackgroundThemeBrush}" />
@@ -100,5 +103,6 @@
         <Style x:Key="CodeText" TargetType="TextBlock">
             <Setter Property="FontFamily" Value="Courier New" />
         </Style>
+
     </Application.Resources>
-</Application>
+</local:AppBase>

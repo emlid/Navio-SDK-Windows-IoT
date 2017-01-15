@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
+namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models.Tests
 {
     /// <summary>
     /// UI model for testing the <see cref="INavioBarometerDevice"/>.
@@ -18,7 +18,7 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
         /// <summary>
         /// Creates an instance.
         /// </summary>
-        public BarometerTestUIModel(ApplicationUIModel application) : base(application)
+        public BarometerTestUIModel(TestApplicationUIModel application) : base(application)
         {
             // Initialize members
             Graph = new List<BarometerMeasurement>();
@@ -48,6 +48,9 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
 
                     // Unhook events
                     Device.MeasurementUpdated -= OnMeasurementUpdated;
+
+                    // Dispose resources
+                    _autoUpdateCancel?.Dispose();
                 }
             }
             finally

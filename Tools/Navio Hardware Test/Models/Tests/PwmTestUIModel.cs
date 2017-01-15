@@ -2,7 +2,7 @@
 using Emlid.WindowsIot.Hardware.Protocols.Pwm;
 using System;
 
-namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
+namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models.Tests
 {
     /// <summary>
     /// UI model for testing the <see cref="INavioPwmDevice"/>.
@@ -14,7 +14,7 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
         /// <summary>
         /// Creates an instance.
         /// </summary>
-        public PwmTestUIModel(ApplicationUIModel application) : base(application)
+        public PwmTestUIModel(TestApplicationUIModel application) : base(application)
         {
             // Initialize members
             Device = application.Board.Pwm;

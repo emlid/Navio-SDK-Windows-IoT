@@ -1,7 +1,6 @@
-﻿using Emlid.WindowsIot.Common;
+﻿using Emlid.UniversalWindows;
 using Emlid.WindowsIot.Hardware.Components.Ms5611;
 using Emlid.WindowsIot.Hardware.Protocols.Barometer;
-using Emlid.WindowsIot.Hardware.System;
 using System;
 
 namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
@@ -42,12 +41,8 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         [CLSCompliant(false)]
         public NavioBarometerDevice()
         {
-            // Get I2C controller for barometer chip
-            DeviceProvider.Initialize();
-            var controller = DeviceProvider.I2c[I2cControllerIndex];
-
             // Connect to hardware
-            _device = new Ms5611Device(controller, ChipSelectBit, DefaultOsr);
+            _device = new Ms5611Device(I2cControllerIndex, ChipSelectBit, DefaultOsr);
         }
 
         #region IDisposable

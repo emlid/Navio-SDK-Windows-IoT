@@ -2,7 +2,7 @@
 using Emlid.WindowsIot.Hardware.Protocols.Ppm;
 using System;
 
-namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
+namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models.Tests
 {
     /// <summary>
     /// UI model for testing the <see cref="INavioRCInputDevice"/>.
@@ -14,7 +14,7 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
         /// <summary>
         /// Creates an instance.
         /// </summary>
-        public RCInputTestUIModel(ApplicationUIModel application) : base(application)
+        public RCInputTestUIModel(TestApplicationUIModel application) : base(application)
         {
             // Initialize device
             Device = Application.Board.RCInput;

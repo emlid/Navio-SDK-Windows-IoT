@@ -157,4 +157,8 @@
     <value>PWM {0}/{1}mHz={2}%</value>
     <comment>0 = width, 1 = length, 2 = percent.</comment>
   </data>
+  <data name="SpiErrorDeviceNotFound" xml:space="preserve">
+    <value>SPI device with CSL {0} on controller {1} was not found.</value>
+    <comment>0 = CSL, 1 = controller index.</comment>
+  </data>
 </root>

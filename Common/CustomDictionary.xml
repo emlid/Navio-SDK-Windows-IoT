@@ -18,6 +18,7 @@
       <Word>OSR</Word>
       <Word>PCA</Word>
       <Word>PWM</Word>
+      <Word>RCIO</Word>
     </Recognized>
     <Deprecated>
       <Term PreferredAlternate="Login">Logon</Term>

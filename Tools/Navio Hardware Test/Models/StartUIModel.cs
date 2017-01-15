@@ -1,6 +1,7 @@
-﻿using Emlid.WindowsIot.Hardware.Boards.Navio;
+﻿using Emlid.UniversalWindows.UI.Models;
+using Emlid.WindowsIot.Hardware.Boards.Navio;
 
-namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views
+namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models
 {
     /// <summary>
     /// Start page UI model.
@@ -9,14 +10,14 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views
     /// Provides the selection or detection of Navio board and lists the available
     /// components which can be tested.
     /// </remarks>
-    public sealed class StartUIModel : PageUIModel
+    public sealed class StartUIModel : PageUIModel<TestApplicationUIModel>
     {
         #region Lifetime
 
         /// <summary>
         /// Creates an instance.
         /// </summary>
-        public StartUIModel(ApplicationUIModel application) : base(application)
+        public StartUIModel(TestApplicationUIModel application) : base(application)
         {
         }
 

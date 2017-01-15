@@ -1,15 +1,16 @@
-﻿using Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Shared;
+﻿using Emlid.WindowsIot.Tools.NavioHardwareTest.Models;
+using Emlid.WindowsIot.Tools.NavioHardwareTest.Models.Tests;
 using System.ComponentModel;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
+namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Views.Tests
 {
     /// <summary>
     /// Main page.
     /// </summary>
-    public sealed partial class RCInputTestPage : UIModelPage
+    public sealed partial class RCInputTestPage : RCInputTestPageBase
     {
         #region Lifetime
 
@@ -24,12 +25,15 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
 
         #endregion
 
-        #region Properties
+        #region Protected Methods
 
         /// <summary>
-        /// UI model.
+        /// Creates the page model when it is displayed.
         /// </summary>
-        public RCInputTestUIModel Model { get; private set; }
+        protected override RCInputTestUIModel CreateModel(TestApplicationUIModel application)
+        {
+            return new RCInputTestUIModel(application);
+        }
 
         #endregion
 
@@ -40,27 +44,17 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
         /// </summary>
         protected override void OnNavigatedTo(NavigationEventArgs arguments)
         {
-            // Initialize model and bind
-            DataContext = Model = new RCInputTestUIModel(ApplicationModel);
+            // Call base class method
+            base.OnNavigatedTo(arguments);
+
+            // Hook events
             Model.PropertyChanged += OnModelChanged;
+
+            // Update bindings
+            Bindings.Update();
 
             // Initial layout
             UpdateLayout();
-
-            // Call base class method
-            base.OnNavigatedTo(arguments);
-        }
-
-        /// <summary>
-        /// Cleans-up when navigating away from the page.
-        /// </summary>
-        protected override void OnNavigatedFrom(NavigationEventArgs arguments)
-        {
-            // Dispose model
-            Model?.Dispose();
-
-            // Call base class method
-            base.OnNavigatedFrom(arguments);
         }
 
         /// <summary>

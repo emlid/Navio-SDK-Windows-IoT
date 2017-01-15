@@ -1,4 +1,4 @@
-﻿using Emlid.WindowsIot.Common;
+﻿using Emlid.UniversalWindows;
 using Emlid.WindowsIot.Hardware.Components.Pca9685;
 using Emlid.WindowsIot.Hardware.Protocols.Pwm;
 using Emlid.WindowsIot.Hardware.System;
@@ -18,7 +18,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
     /// See http://docs.emlid.com/Navio-dev/servo-and-rgb-led/ for more information.
     /// <seealso cref="Pca9685Device"/>
     /// </remarks>
-    internal sealed class Navio1LedPwmDevice : DisposableObject, INavioLedDevice, INavioPwmDevice
+    public sealed class Navio1LedPwmDevice : DisposableObject, INavioLedDevice, INavioPwmDevice
     {
         #region Constants
 
@@ -89,20 +89,15 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         /// To start with new settings, call <see cref="Reset"/> then set <see cref="Enabled"/>.
         /// </para>
         /// </remarks>
-        internal Navio1LedPwmDevice()
+        public Navio1LedPwmDevice()
         {
             // Initialize members
             _pwmChannels = new PwmPulse[PwmChannelCount];
             _pwmChannelsReadOnly = new ReadOnlyCollection<PwmPulse>(_pwmChannels);
 
-            // Get I2C controller for barometer chip
-            DeviceProvider.Initialize();
-            var i2cController = DeviceProvider.I2c[I2cControllerIndex];
-            var gpioController = DeviceProvider.Gpio[GpioControllerIndex];
-
             // Connect to hardware
-            _device = new Pca9685Device(i2cController, ChipNumber, ExternalClockSpeed);
-            _enablePin = gpioController.OpenPin(OutputEnableGpioPin, GpioPinDriveMode.Output);
+            _device = new Pca9685Device(I2cControllerIndex, ChipNumber, ExternalClockSpeed);
+            _enablePin = GpioExtensions.Connect(GpioControllerIndex, OutputEnableGpioPin, GpioPinDriveMode.Output).GetAwaiter().GetResult();
 
             // Read properties
             Read();

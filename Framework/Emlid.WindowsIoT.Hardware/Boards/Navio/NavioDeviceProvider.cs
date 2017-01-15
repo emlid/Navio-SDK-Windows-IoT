@@ -1,6 +1,5 @@
 ﻿using Emlid.WindowsIot.Hardware.Boards.Navio.Internal;
 using Emlid.WindowsIot.Hardware.Components.Mb85rcv;
-using Emlid.WindowsIot.Hardware.System;
 using System;
 
 namespace Emlid.WindowsIot.Hardware.Boards.Navio
@@ -52,15 +51,11 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
             // Thread-safe lock
             lock (_lock)
             {
-                // Get FRAM controller
-                DeviceProvider.Initialize();
-                var controller = DeviceProvider.I2c[Navio1FramDevice.I2cControllerIndex];
-
                 // Detect the FRAM model
                 Mb85rcvDeviceId? framId = null;
                 try
                 {
-                    framId = Mb85rcvDevice.GetDeviceId(controller);
+                    framId = Mb85rcvDevice.GetDeviceId(Navio1FramDevice.I2cControllerIndex);
 
                     // Return Navio model for known FRAM IDs
                     if (framId.Value == Navio1FramDevice.Navio1PlusDeviceId)

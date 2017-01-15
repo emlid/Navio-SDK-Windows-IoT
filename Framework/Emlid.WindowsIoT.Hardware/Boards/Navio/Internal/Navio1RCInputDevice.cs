@@ -1,4 +1,4 @@
-﻿using Emlid.WindowsIot.Common;
+﻿using Emlid.UniversalWindows;
 using Emlid.WindowsIot.Hardware.Protocols.Ppm;
 using Emlid.WindowsIot.Hardware.System;
 using System;
@@ -22,7 +22,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
     /// The older Navio model only has a built-in voltage divider in PPM Input that lowers the voltage level from 5V to 3.3V.
     /// So if you connect a 3.3V PPM device (which is rare) to the original Navio, no signal will not be detected.
     /// </remarks>
-    internal sealed class Navio1RCInputDevice : DisposableObject, INavioRCInputDevice
+    public sealed class Navio1RCInputDevice : DisposableObject, INavioRCInputDevice
     {
         #region Constants
 
@@ -52,7 +52,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
             _frameTrigger = new AutoResetEvent(false);
 
             // Configure GPIO
-            _inputPin = DeviceProvider.ConnectGpio(0, GpioInputPinNumber);
+            _inputPin = GpioExtensions.Connect(GpioControllerIndex, GpioInputPinNumber).GetAwaiter().GetResult();
             if (_inputPin == null)
             {
                 // Initialization error
@@ -182,9 +182,9 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         public WaitHandle Stopped { get { return _stop.Token.WaitHandle; } }
 
         /// <summary>
-        /// Returns true because multiple protocols are supported including SBUS and CPPM.
+        /// Returns false because multiple protocols are not supported, only CPPM.
         /// </summary>
-        public bool Multiprotocol { get { return true; } }
+        public bool Multiprotocol { get { return false; } }
 
         #endregion
 

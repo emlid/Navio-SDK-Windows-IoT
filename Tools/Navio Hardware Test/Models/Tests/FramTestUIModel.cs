@@ -1,10 +1,10 @@
-﻿using Emlid.WindowsIot.Common;
+﻿using Emlid.UniversalWindows;
 using Emlid.WindowsIot.Hardware.Boards.Navio;
 using System;
 using System.Globalization;
 using System.Text;
 
-namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
+namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models.Tests
 {
     /// <summary>
     /// UI model for testing the <see cref="INavioFramDevice"/>.
@@ -25,7 +25,7 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
         /// <summary>
         /// Creates an instance.
         /// </summary>
-        public FramTestUIModel(ApplicationUIModel application) : base(application)
+        public FramTestUIModel(TestApplicationUIModel application) : base(application)
         {
             // Initialize members
             Contents = "";

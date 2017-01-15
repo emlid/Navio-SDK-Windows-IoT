@@ -1,17 +1,18 @@
 ﻿using Emlid.WindowsIot.Hardware.Boards.Navio;
-using Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Shared;
+using Emlid.WindowsIot.Tools.NavioHardwareTest.Models;
+using Emlid.WindowsIot.Tools.NavioHardwareTest.Models.Tests;
 using System;
 using System.ComponentModel;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
+namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Views.Tests
 {
     /// <summary>
     /// LED test page.
     /// </summary>
-    public sealed partial class LedTestPage : UIModelPage
+    public sealed partial class LedTestPage : LedTestPageBase
     {
         #region Lifetime
 
@@ -26,12 +27,15 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
 
         #endregion
 
-        #region Properties
+        #region Protected Methods
 
         /// <summary>
-        /// UI model.
+        /// Creates the page model when it is displayed.
         /// </summary>
-        public LedTestUIModel Model { get; private set; }
+        protected override LedTestUIModel CreateModel(TestApplicationUIModel application)
+        {
+            return new LedTestUIModel(application);
+        }
 
         #endregion
 
@@ -42,8 +46,10 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
         /// </summary>
         protected override void OnNavigatedTo(NavigationEventArgs arguments)
         {
-            // Initialize model and bind
-            DataContext = Model = new LedTestUIModel(ApplicationModel);
+            // Call base class method
+            base.OnNavigatedTo(arguments);
+
+            // Hook events
             Model.PropertyChanged += OnModelChanged;
 
             // Set slider range
@@ -51,23 +57,11 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
             SetRange(LedGreenSlider);
             SetRange(LedBlueSlider);
 
+            // Update bindings
+            Bindings.Update();
+
             // Initial layout
             UpdateLayout();
-
-            // Call base class method
-            base.OnNavigatedTo(arguments);
-        }
-
-        /// <summary>
-        /// Cleans-up when navigating away from the page.
-        /// </summary>
-        protected override void OnNavigatedFrom(NavigationEventArgs arguments)
-        {
-            // Dispose model
-            Model?.Dispose();
-
-            // Call base class method
-            base.OnNavigatedFrom(arguments);
         }
 
         /// <summary>

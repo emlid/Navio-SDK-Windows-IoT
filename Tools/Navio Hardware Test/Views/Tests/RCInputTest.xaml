@@ -1,11 +1,11 @@
-﻿<base:UIModelPage
+﻿<views:RCInputTestPageBase
     x:Name="PageRoot"
-    x:Class="Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests.RCInputTestPage"
-    xmlns:local="using:Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests"
-    xmlns:base="using:Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Shared"
+    x:Class="Emlid.WindowsIot.Tools.NavioHardwareTest.Views.Tests.RCInputTestPage"
+    xmlns:views="using:Emlid.WindowsIot.Tools.NavioHardwareTest.Views.Tests"
+    xmlns:models="using:Emlid.WindowsIot.Tools.NavioHardwareTest.Models.Tests"
+    xmlns:converters="using:Emlid.UniversalWindows.UI.Converters"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:common="using:Emlid.WindowsIot.Common"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
@@ -25,7 +25,7 @@
             <Setter Property="TickFrequency" Value="100" />
             <Setter Property="IsEnabled" Value="True" />
         </Style>
-        <common:ConvertibleValueConverter x:Name="ConvertibleValueConverter" />
+        <converters:ConvertibleValueConverter x:Name="ConvertibleValueConverter" />
     </Page.Resources>
 
     <!-- Page Layout -->
@@ -146,4 +146,4 @@
             </StackPanel>
         </Grid>
     </Grid>
-</base:UIModelPage>
+</views:RCInputTestPageBase>

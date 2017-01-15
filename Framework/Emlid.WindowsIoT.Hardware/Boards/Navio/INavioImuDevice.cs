@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Emlid.WindowsIot.Hardware.Boards.Navio
+﻿namespace Emlid.WindowsIot.Hardware.Boards.Navio
 {
     /// <summary>
     /// Navio GPS device interface.

@@ -1,22 +1,23 @@
-﻿using System;
+﻿using Emlid.UniversalWindows.UI.Models;
+using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Tests
+namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models.Tests
 {
     /// <summary>
     /// Base class for all test UI models.
     /// </summary>
-    public abstract class TestUIModel : PageUIModel
+    public abstract class TestUIModel : PageUIModel<TestApplicationUIModel>
     {
         #region Lifetime
 
         /// <summary>
         /// Creates an instance.
         /// </summary>
-        protected TestUIModel(ApplicationUIModel application) : base(application)
+        protected TestUIModel(TestApplicationUIModel application) : base(application)
         {
             // Initialize members
             InputEnabled = true;

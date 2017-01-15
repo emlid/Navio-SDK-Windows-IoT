@@ -62,20 +62,8 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\Common\ArrayExtensions.cs">
-      <Link>ArrayExtensions.cs</Link>
-    </Compile>
     <Compile Include="..\..\Common\AssemblyInfoGlobal.cs">
       <Link>Properties\AssemblyInfoGlobal.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Common\DisposableObject.cs">
-      <Link>DisposableObject.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Common\StopwatchExtensions.cs">
-      <Link>StopwatchExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Common\TimeSpanExtensions.cs">
-      <Link>TimeSpanExtensions.cs</Link>
     </Compile>
     <Compile Include="Boards\Navio\INavioFramDevice.cs" />
     <Compile Include="Boards\Navio\INavioBoard.cs" />
@@ -87,9 +75,15 @@
     <Compile Include="Boards\Navio\INavioRCInputDevice.cs" />
     <Compile Include="Boards\Navio\INavioPwmDevice.cs" />
     <Compile Include="Boards\Navio\Internal\Navio1Board.cs" />
+    <Compile Include="Boards\Navio\Internal\Navio2RcioDevice.cs" />
     <Compile Include="Boards\Navio\Internal\Navio2Board.cs" />
     <Compile Include="Boards\Navio\Internal\Navio1PlusBoard.cs" />
     <Compile Include="Boards\Navio\Internal\Navio2LedDevice.cs" />
+    <Compile Include="Components\Px4io\Px4ioConfigurationPage.cs" />
+    <Compile Include="Components\Px4io\Px4ioPacket.cs" />
+    <Compile Include="Components\Px4io\Px4ioPage.cs" />
+    <Compile Include="Components\Px4io\Px4ioProtocol.cs" />
+    <Compile Include="Components\Px4io\Px4ioSerialPacketCode.cs" />
     <Compile Include="Boards\Navio\NavioDeviceProvider.cs" />
     <Compile Include="Components\Mb85rcv\Mb85rcvDeviceId.cs" />
     <Compile Include="Protocols\Barometer\BarometerMeasurement.cs" />
@@ -98,7 +92,6 @@
     <Compile Include="System\SpiExtensions.cs" />
     <Compile Include="System\GpioExtensions.cs" />
     <Compile Include="System\I2cExtensions.cs" />
-    <Compile Include="System\DeviceProvider.cs" />
     <Compile Include="Components\Mb85rcv\Mb85rc04vDevice.cs" />
     <Compile Include="Components\Mb85rcv\Mb85rcvDevice.cs" />
     <Compile Include="Components\Mb85rcv\Mb85rc256vDevice.cs" />
@@ -155,6 +148,16 @@
     <SDKReference Include="WindowsIoT, Version=10.0.14965.0">
       <Name>Windows IoT Extensions for the UWP</Name>
     </SDKReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Emlid.UniversalWindows\Emlid.UniversalWindows.csproj">
+      <Project>{d8f241c6-29cb-4aa6-ad34-398cba6d1c16}</Project>
+      <Name>Emlid.UniversalWindows</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Emlid.WindowsIot.HardwarePlus\Emlid.WindowsIot.HardwarePlus.vcxproj">
+      <Project>{2c5df7f8-8e4f-451b-88e2-b9c879c923e6}</Project>
+      <Name>Emlid.WindowsIot.HardwarePlus</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

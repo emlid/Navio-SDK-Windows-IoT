@@ -1,6 +1,5 @@
-﻿using Emlid.WindowsIot.Common;
+﻿using Emlid.UniversalWindows;
 using Emlid.WindowsIot.Hardware.Components.Mb85rcv;
-using Emlid.WindowsIot.Hardware.System;
 using System;
 
 namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
@@ -8,7 +7,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
     /// <summary>
     /// Navio FRAM (MB85RC256V or MB85RC04V hardware device), connected via I2C.
     /// </summary>
-    internal sealed class Navio1FramDevice : DisposableObject, INavioFramDevice
+    public sealed class Navio1FramDevice : DisposableObject, INavioFramDevice
     {
         #region Constants
 
@@ -39,25 +38,21 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         /// <summary>
         /// Creates an instance of the correct type depending on the Navio model.
         /// </summary>
-        internal Navio1FramDevice(NavioHardwareModel model)
+        public Navio1FramDevice(NavioHardwareModel model)
         {
-            // Get I2C controller for FRAM chip
-            DeviceProvider.Initialize();
-            var controller = DeviceProvider.I2c[I2cControllerIndex];
-
             // Create model specific device
             switch (model)
             {
                 case NavioHardwareModel.Navio1:
 
                     // Create 512 byte device for Navio
-                    _device = new Mb85rc04vDevice(controller, ChipNumber);
+                    _device = new Mb85rc04vDevice(I2cControllerIndex, ChipNumber);
                     break;
 
                 case NavioHardwareModel.Navio1Plus:
 
                     // Create 32KiB device for Navio+
-                    _device = new Mb85rc256vDevice(controller, ChipNumber);
+                    _device = new Mb85rc256vDevice(I2cControllerIndex, ChipNumber);
                     break;
 
                 default:

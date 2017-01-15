@@ -82,6 +82,10 @@
     <Content Include="Properties\Default.rd.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Framework\Emlid.WindowsIot.HardwarePlus\Emlid.WindowsIot.HardwarePlus.vcxproj">
+      <Project>{2c5df7f8-8e4f-451b-88e2-b9c879c923e6}</Project>
+      <Name>Emlid.WindowsIot.HardwarePlus</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Framework\Emlid.WindowsIoT.Hardware\Emlid.WindowsIot.Hardware.csproj">
       <Project>{fe8e8830-ee45-46f0-88a5-4a14ad02ee50}</Project>
       <Name>Emlid.WindowsIot.Hardware</Name>

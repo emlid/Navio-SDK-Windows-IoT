@@ -1,8 +1,8 @@
-﻿<base:UIModelPage
+﻿<views:StartPageBase
     x:Name="PageRoot"
-    x:Class="Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.StartPage"
-    xmlns:local="using:Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views"
-    xmlns:base="using:Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Shared"
+    x:Class="Emlid.WindowsIot.Tools.NavioHardwareTest.Views.StartPage"
+    xmlns:views="using:Emlid.WindowsIot.Tools.NavioHardwareTest.Views"
+    xmlns:models="using:Emlid.WindowsIot.Tools.NavioHardwareTest.Models"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -64,4 +64,4 @@
 
     </Grid>
 
-</base:UIModelPage>
+</views:StartPageBase>

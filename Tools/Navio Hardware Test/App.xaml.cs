@@ -1,6 +1,6 @@
-﻿using Emlid.WindowsIot.Hardware.System;
-using Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views;
-using Emlid.WindowsIot.Tests.NavioHardwareTestApp.Views.Shared;
+﻿using Emlid.UniversalWindows.UI.Views;
+using Emlid.WindowsIot.Tools.NavioHardwareTest.Models;
+using Emlid.WindowsIot.Tools.NavioHardwareTest.Views;
 using System;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
@@ -9,12 +9,12 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp
+namespace Emlid.WindowsIot.Tools.NavioHardwareTest
 {
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
-    public sealed partial class App : Application
+    public sealed partial class App : AppBase
     {
         #region Lifetime
 
@@ -34,15 +34,6 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp
 
         #endregion
 
-        #region Properties
-
-        /// <summary>
-        /// Application UI model.
-        /// </summary>
-        public ApplicationUIModel Model { get; private set; }
-
-        #endregion
-
         #region Events
 
         /// <summary>
@@ -52,12 +43,8 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp
         /// <param name="arguments">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs arguments)
         {
-
-            // Initialize hardware
-            DeviceProvider.Initialize();
-
-            // Create UI model
-            Model = new ApplicationUIModel();
+            // Call base class method
+            base.OnLaunched(arguments);
 
             // Start frame counter when debugging
 #if DEBUG
@@ -93,6 +80,15 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp
             }
             // Ensure the current window is active
             Window.Current.Activate();
+        }
+
+        /// <summary>
+        /// Creates an application specific model at runtime.
+        /// </summary>
+        protected override TestApplicationUIModel CreateModel()
+        {
+            // Create UI model
+            return new TestApplicationUIModel();
         }
 
         /// <summary>
@@ -135,7 +131,7 @@ namespace Emlid.WindowsIot.Tests.NavioHardwareTestApp
             var uiFactory = new TaskFactory(uiScheduler);
             uiFactory.StartNew(() => { dialog.ShowAsync().AsTask().Wait(); });
 
-            // Flag handled so app can continue
+            // Flag handled so application can continue
             error.Handled = false;
         }
 

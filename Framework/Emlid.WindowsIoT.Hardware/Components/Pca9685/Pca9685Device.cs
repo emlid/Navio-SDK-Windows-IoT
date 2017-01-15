@@ -1,4 +1,4 @@
-﻿using Emlid.WindowsIot.Common;
+﻿using Emlid.UniversalWindows;
 using Emlid.WindowsIot.Hardware.System;
 using System;
 using System.Collections.Generic;
@@ -91,7 +91,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Pca9685
         /// <summary>
         /// Creates an instance using the specified I2C device.
         /// </summary>
-        /// <param name="controller">I2C controller.</param>
+        /// <param name="busNumber">I2C bus controller number (zero based).</param>
         /// <param name="chipNumber">Chip number.</param>
         /// <param name="clockSpeed">
         /// Optional external clock speed in Hz. Otherwise the <see cref="InternalClockSpeed"/> is used.
@@ -100,11 +100,10 @@ namespace Emlid.WindowsIot.Hardware.Components.Pca9685
         /// <param name="speed">Bus speed.</param>
         /// <param name="sharingMode">Sharing mode.</param>
         [CLSCompliant(false)]
-        public Pca9685Device(I2cController controller, byte chipNumber, int? clockSpeed,
+        public Pca9685Device(int busNumber, byte chipNumber, int? clockSpeed,
             I2cBusSpeed speed = I2cBusSpeed.FastMode, I2cSharingMode sharingMode = I2cSharingMode.Exclusive)
         {
             // Validate
-            if (controller == null) throw new ArgumentNullException(nameof(controller));
             if (clockSpeed.HasValue && (clockSpeed == 0 || clockSpeed.Value > ClockSpeedMaximum))
                 throw new ArgumentOutOfRangeException(nameof(clockSpeed));
 
@@ -112,7 +111,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Pca9685
             var address = GetI2cAddress(chipNumber);
 
             // Connect to hardware
-            _hardware = controller.Connect(address, speed, sharingMode);
+            _hardware = I2cExtensions.Connect(busNumber, address, speed, sharingMode).GetAwaiter().GetResult();
 
             // Initialize configuration
             ClockIsExternal = clockSpeed.HasValue;

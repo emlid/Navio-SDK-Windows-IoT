@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Windows.Devices.Gpio;
 
 namespace Emlid.WindowsIot.Hardware.System
@@ -10,23 +12,38 @@ namespace Emlid.WindowsIot.Hardware.System
     public static class GpioExtensions
     {
         /// <summary>
-        /// Opens a GPIO pin and checks the drive mode.
+        /// Connects to a GPIO pin if it exists.
         /// </summary>
-        /// <param name="controller">GPIO controller.</param>
-        /// <param name="pinNumber">GPIO pin number.</param>
-        /// <param name="driveMode">Desired drive mode.</param>
-        /// <param name="shareMode">Optional share mode, default is <see cref="GpioSharingMode.Exclusive"/>.</param>
-        /// <returns>GPIO pin.</returns>
-        public static GpioPin OpenPin(this GpioController controller, int pinNumber,
-            GpioPinDriveMode driveMode, GpioSharingMode shareMode = GpioSharingMode.Exclusive)
+        /// <param name="busNumber">Bus controller number, zero based.</param>
+        /// <param name="pinNumber">Pin number.</param>
+        /// <param name="driveMode">Drive mode.</param>
+        /// <param name="sharingMode">Sharing mode.</param>
+        /// <returns>Pin when controller and device exist, otherwise null.</returns>
+        public async static Task<GpioPin> Connect(int busNumber, int pinNumber,
+            GpioPinDriveMode driveMode = GpioPinDriveMode.Input,
+            GpioSharingMode sharingMode = GpioSharingMode.Exclusive)
         {
-            // Open pin
-            var pin = controller.OpenPin(pinNumber, shareMode);
+            // Validate
+            if (busNumber < 0) throw new ArgumentOutOfRangeException(nameof(busNumber));
+            if (pinNumber < 0) throw new ArgumentOutOfRangeException(nameof(pinNumber));
+
+            // Get controller (return null when doesn't exist)
+            var controllers = new List<GpioController> { await GpioController.GetDefaultAsync() };
+            // TODO: support multiple controllers (after lightning)
+            if (busNumber >= controllers.Count)
+                throw new ArgumentOutOfRangeException(nameof(busNumber));
+            var controller = controllers[busNumber];
+
+            // Connect to device (return null when doesn't exist)
+            var pin = controller.OpenPin(pinNumber, sharingMode);
+            if (pin == null)
+                return null;
             try
             {
-                // Check drive mode when specified
+                // Configure and return pin
                 if (pin.GetDriveMode() != driveMode)
                     pin.SetDriveMode(driveMode);
+                return pin;
             }
             catch
             {
@@ -36,9 +53,6 @@ namespace Emlid.WindowsIot.Hardware.System
                 // Continue error
                 throw;
             }
-
-            // Return initialized pin
-            return pin;
         }
     }
 }

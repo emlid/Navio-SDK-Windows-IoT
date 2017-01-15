@@ -1,6 +1,11 @@
 ## Change Log
 
-*2017.01.09* v1.0.9
+*2017.01.XX* v1.0.10 **PRIVATE WORK IN PROGRESS**
+
+1. Removed Lightning providers. Microsoft clearly stopped developing and supporting it. It does not work properly anymore. Either we get a new converged driver from them soon or finish writing our own.
+2. 
+
+*2017.01.09* v1.0.9 **PUBLIC RELEASE ON NUGET**
 
 1. Tested with latest insider preview 10.0.14993.1000.
 2. Updated and cleaned various solution and project issues caused by previous updates and betas.

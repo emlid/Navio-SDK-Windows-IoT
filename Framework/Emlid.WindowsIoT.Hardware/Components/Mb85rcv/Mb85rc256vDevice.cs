@@ -75,23 +75,20 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
         /// <summary>
         /// Creates an instance connected to the specified I2C bus and chip number.
         /// </summary>
-        /// <param name="controller">I2C controller.</param>
+        /// <param name="busNumber">I2C bus controller number (zero based).</param>
         /// <param name="chipNumber">Chip number (device address code).</param>
         /// <param name="speed">Bus speed.</param>
         /// <param name="sharingMode">Sharing mode.</param>
         [CLSCompliant(false)]
-        public Mb85rc256vDevice(I2cController controller, byte chipNumber,
+        public Mb85rc256vDevice(int busNumber, byte chipNumber,
             I2cBusSpeed speed = I2cBusSpeed.FastMode, I2cSharingMode sharingMode = I2cSharingMode.Exclusive)
             : base(chipNumber, MemorySize)
         {
-            // Validate
-            if (controller == null) throw new ArgumentNullException(nameof(controller));
-
             // Get address
             var address = GetDataI2cAddress(chipNumber);
 
             // Connect to hardware
-            Hardware = controller.Connect(address, speed, sharingMode);
+            Hardware = I2cExtensions.Connect(busNumber, address, speed, sharingMode).GetAwaiter().GetResult();
         }
 
         #endregion
@@ -102,16 +99,18 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
         /// Gets the device identifier by sending the Device ID command to the
         /// specified chip number (device address code).
         /// </summary>
-        /// <param name="controller">I2C controller on which the device is connected.</param>
+        /// <param name="busNumber">I2C bus controller number (zero based).</param>
         /// <param name="chipNumber">
         /// Device (chip) number, from zero to the <see cref="MaximumDevices"/> supported.
         /// </param>
+        /// <param name="speed">Bus speed.</param>
+        /// <param name="sharingMode">Sharing mode.</param>
         /// <returns>Device ID.</returns>
         [CLSCompliant(false)]
-        public static Mb85rcvDeviceId GetDeviceId(I2cController controller, byte chipNumber)
+        public static Mb85rcvDeviceId GetDeviceId(int busNumber, byte chipNumber,
+            I2cBusSpeed speed = I2cBusSpeed.FastMode, I2cSharingMode sharingMode = I2cSharingMode.Exclusive)
         {
             // Validate
-            if (controller == null) throw new ArgumentNullException(nameof(controller));
             if (chipNumber < 0 || chipNumber > MaximumDevices)
                 throw new ArgumentOutOfRangeException(nameof(chipNumber));
 
@@ -120,7 +119,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
             var dataAddress = GetDataI2cAddress(chipNumber);
 
             // Call overloaded method
-            return GetDeviceId(controller, idAddress, dataAddress);
+            return GetDeviceId(busNumber, idAddress, dataAddress);
         }
 
         /// <summary>

@@ -1,0 +1,43 @@
+﻿<UserControl
+    x:Class="Emlid.UniversalWindows.UI.Views.PwmChannelSlider"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Emlid.UniversalWindows.UI.Views"
+    xmlns:converters="using:Emlid.UniversalWindows.UI.Converters"
+    xmlns:sharedModels="using:Emlid.UniversalWindows.UI.Models"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignWidth="100" d:DesignHeight="300">
+
+    <Control.Resources>
+        <Style x:Key="ChannelSlider" TargetType="Slider">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="TickPlacement" Value="Outside" />
+            <Setter Property="Orientation" Value="Vertical" />
+        </Style>
+        <converters:ConvertibleValueConverter x:Name="ConvertValueConverter" />
+    </Control.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock x:Name="NumberText" Grid.Row="0" Grid.Column="0"
+                   HorizontalAlignment="Center"
+                   Text="{x:Bind Path=Number, Mode=OneWay}" />
+
+        <Slider x:Name="WidthSlider" Grid.Row="1" Grid.Column="0"
+                HorizontalAlignment="Center"
+                Style="{StaticResource ChannelSlider}"
+                Value="{x:Bind Path=PulseWidth, Mode=TwoWay, Converter={StaticResource ResourceKey=ConvertValueConverter}}" />
+
+        <TextBox x:Name="WidthText" Grid.Row="2" Grid.Column="0"
+                 HorizontalAlignment="Center"
+                 Text="{x:Bind Path=PulseWidth, Mode=TwoWay}" InputScope="Number" />
+    </Grid>
+
+</UserControl>

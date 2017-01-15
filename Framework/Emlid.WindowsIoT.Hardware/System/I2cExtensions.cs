@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading.Tasks;
+using Windows.Devices.Enumeration;
 using Windows.Devices.I2c;
 
 namespace Emlid.WindowsIot.Hardware.System
@@ -25,25 +27,33 @@ namespace Emlid.WindowsIot.Hardware.System
         /// <summary>
         /// Connects to an I2C device if it exists.
         /// </summary>
-        /// <param name="controller">Controller.</param>
+        /// <param name="busNumber">Bus controller number, zero based.</param>
         /// <param name="address">7-bit I2C slave address (8 bit addresses must be shifted down to exclude the read/write bit).</param>
         /// <param name="speed">Bus speed.</param>
         /// <param name="sharingMode">Sharing mode.</param>
-        /// <returns>Device when controller and device exist, otherwise null.</returns>
-        public static I2cDevice Connect(this I2cController controller, int address,
+        /// <returns>Device when the bus controller and device exist, otherwise null.</returns>
+        public async static Task<I2cDevice> Connect(int busNumber, int address,
             I2cBusSpeed speed = I2cBusSpeed.FastMode, I2cSharingMode sharingMode = I2cSharingMode.Exclusive)
         {
             // Validate
-            if (controller == null) throw new ArgumentNullException(nameof(controller));
+            if (busNumber < 0) throw new ArgumentOutOfRangeException(nameof(busNumber));
             if (address < 0 || address > 0x7f) throw new ArgumentOutOfRangeException(nameof(address));
 
-            // Connect to device and return (if exists)
+            // Lookup bus controller
+            var controllers = await DeviceInformation.FindAllAsync(I2cDevice.GetDeviceSelector());
+            if (busNumber >= controllers.Count)
+                throw new ArgumentOutOfRangeException(nameof(busNumber));
+            var busId = controllers[busNumber].Id;
+
+            // Create connection settings
             var settings = new I2cConnectionSettings(address)
             {
                 BusSpeed = speed,
                 SharingMode = sharingMode
             };
-            return controller.GetDevice(settings);
+
+            // Create and return device
+            return await I2cDevice.FromIdAsync(busId, settings);
         }
 
         #endregion

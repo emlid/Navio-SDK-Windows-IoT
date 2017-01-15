@@ -1,4 +1,4 @@
-﻿using Emlid.WindowsIot.Common;
+﻿using Emlid.UniversalWindows.Collections;
 using System;
 using System.Globalization;
 using System.Text;

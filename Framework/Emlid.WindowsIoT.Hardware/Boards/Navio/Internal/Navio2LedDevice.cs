@@ -1,4 +1,4 @@
-﻿using Emlid.WindowsIot.Common;
+﻿using Emlid.UniversalWindows;
 using Emlid.WindowsIot.Hardware.System;
 using System;
 using Windows.Devices.Gpio;
@@ -8,7 +8,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
     /// <summary>
     /// Navio 2 LED device, three GPIO pins for RGB components of an LED.
     /// </summary>
-    internal sealed class Navio2LedDevice : DisposableObject, INavioLedDevice
+    public sealed class Navio2LedDevice : DisposableObject, INavioLedDevice
     {
         #region Constants
 
@@ -39,16 +39,12 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         /// <summary>
         /// Creates an instance and read current values.
         /// </summary>
-        internal Navio2LedDevice()
+        public Navio2LedDevice()
         {
-            // Get GPIO controller for LED pins
-            DeviceProvider.Initialize();
-            var controller = DeviceProvider.Gpio[GpioControllerIndex];
-
             // Open pins
-            _redPin = controller.OpenPin(4, GpioPinDriveMode.Output);
-            _greenPin = controller.OpenPin(27, GpioPinDriveMode.Output);
-            _bluePin = controller.OpenPin(6, GpioPinDriveMode.Output);
+            _redPin = GpioExtensions.Connect(GpioControllerIndex, 4, GpioPinDriveMode.Output).GetAwaiter().GetResult();
+            _greenPin = GpioExtensions.Connect(GpioControllerIndex, 27, GpioPinDriveMode.Output).GetAwaiter().GetResult();
+            _bluePin = GpioExtensions.Connect(GpioControllerIndex, 6, GpioPinDriveMode.Output).GetAwaiter().GetResult();
 
             // Read current values
             Read();

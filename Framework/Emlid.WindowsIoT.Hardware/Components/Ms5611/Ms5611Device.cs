@@ -1,4 +1,4 @@
-﻿using Emlid.WindowsIot.Common;
+﻿using Emlid.UniversalWindows;
 using Emlid.WindowsIot.Hardware.System;
 using System;
 using System.Threading.Tasks;
@@ -88,23 +88,20 @@ namespace Emlid.WindowsIot.Hardware.Components.Ms5611
         /// <summary>
         /// Creates an instance using the specified device and sampling rate.
         /// </summary>
-        /// <param name="controller">I2C controller.</param>
+        /// <param name="busNumber">I2C bus controller number (zero based).</param>
         /// <param name="csb">Chip Select Bit (CSB).</param>
         /// <param name="rate">Sampling rate.</param>
         /// <param name="speed">Bus speed.</param>
         /// <param name="sharingMode">Sharing mode.</param>
         [CLSCompliant(false)]
-        public Ms5611Device(I2cController controller, bool csb, Ms5611Osr rate,
+        public Ms5611Device(int busNumber, bool csb, Ms5611Osr rate,
             I2cBusSpeed speed = I2cBusSpeed.FastMode, I2cSharingMode sharingMode = I2cSharingMode.Exclusive)
         {
-            // Validate
-            if (controller == null) throw new ArgumentNullException(nameof(controller));
-
             // Get address
             var address = GetI2cAddress(csb);
 
             // Connect to hardware
-            _hardware = controller.Connect(address, speed, sharingMode);
+            _hardware = I2cExtensions.Connect(busNumber, address, speed, sharingMode).GetAwaiter().GetResult();
 
             // Initialize members
             Prom = new Ms5611PromData();

@@ -1,4 +1,4 @@
-﻿using Emlid.WindowsIot.Common;
+﻿using Emlid.UniversalWindows;
 using System;
 
 namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
@@ -9,7 +9,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
     /// <remarks>
     /// Encapsulates common initialization and access to all components on this hardware model.
     /// </remarks>
-    internal sealed class Navio2Board : DisposableObject, INavioBoard
+    public sealed class Navio2Board : DisposableObject, INavioBoard
     {
         #region Lifetime
 
