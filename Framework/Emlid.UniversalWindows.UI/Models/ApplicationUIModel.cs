@@ -1,4 +1,6 @@
-﻿namespace Emlid.UniversalWindows.UI.Models
+﻿using System.Threading.Tasks;
+
+namespace Emlid.UniversalWindows.UI.Models
 {
     /// <summary>
     /// Application UI model.
@@ -10,7 +12,8 @@
         /// <summary>
         /// Creates an instance.
         /// </summary>
-        public ApplicationUIModel()
+        public ApplicationUIModel(TaskFactory uiTaskFactory)
+            : base(uiTaskFactory)
         {
         }
 

@@ -1,23 +1,83 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 
 namespace Emlid.WindowsIot.Hardware.Components.Px4io
 {
     /// <summary>
-    /// PX4IO serial protocol packet.
+    /// PX4IO serial interface protocol packet.
     /// </summary>
     /// <see href="https://github.com/emlid/navio-rcio-linux-driver/blob/master/protocol.h"/>
-    public class Px4ioPacket
+    /// <remarks>
+    /// <para>
+    /// Communication is performed via writes to and reads from 16-bit virtual
+    /// registers organized into pages of 255 registers each.
+    /// </para>
+    /// <para>
+    /// The first two bytes of each write select a page and offset address
+    /// respectively. Subsequent reads and writes increment the offset within
+    /// the page.
+    /// </para>
+    /// <para>
+    /// Some pages are read or write-only.
+    /// </para>
+    /// <para>
+    /// Note that some pages may permit offset values greater than 255, which
+    /// can only be achieved by long writes. The offset does not wrap.
+    /// </para>
+    /// <para>
+    /// Writes to unimplemented registers are ignored. Reads from unimplemented
+    /// registers return undefined values.
+    /// </para>
+    /// <para>
+    /// As convention, values that would be floating point in other parts of
+    /// the PX4 system are expressed as signed integer values scaled by 10000,
+    /// e.g.control values range from -10000..10000.  Use the REG_TO_SIGNED and
+    /// SIGNED_TO_REG macros to convert between register representation and
+    /// the signed version, and REG_TO_FLOAT/FLOAT_TO_REG to convert to float.
+    /// </para>
+    /// <para>
+    /// Note that the implementation of readable pages prefers registers within
+    /// readable pages to be densely packed. Page numbers do not need to be
+    /// packed.
+    /// </para>
+    /// </remarks>
+    [CLSCompliant(false)]
+    [StructLayout(LayoutKind.Explicit)]
+    public struct Px4ioPacket
     {
         #region Constants
 
         /// <summary>
-        /// Minimum size of a packet, i.e. just the header values and no registers.
+        /// Highest compatible protocol version.
+        /// </summary>
+        public const int Version = 4;
+
+        /// <summary>
+        /// Header size in bytes.
         /// </summary>
         public const int HeaderSize = 4;
 
         /// <summary>
+        /// Data <see cref="Registers"/> size in bytes.
+        /// </summary>
+        public const int DataSize = sizeof(ushort) * RegistersMaximum;
+
+        /// <summary>
+        /// Total size of a packet in bytes.
+        /// </summary>
+        /// <remarks>
+        /// The full package size is always transmitted or received regardless of how many
+        /// registers actually contain data.
+        /// </remarks>
+        public const int Size = HeaderSize + DataSize;
+
+        /// <summary>
         /// Maximum number of <see cref="Registers"/>.
         /// </summary>
+        /// <remarks>
+        /// The full package size is always transmitted or received regardless of how many
+        /// registers actually contain data.
+        /// </remarks>
         public const int RegistersMaximum = 32;
 
         /// <summary>
@@ -35,49 +95,54 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io
         #region Lifetime
 
         /// <summary>
-        /// Creates an empty instance.
+        /// Creates an instance with the specified values.
         /// </summary>
-        public Px4ioPacket()
-        {
-        }
-
-        /// <summary>
-        /// Creates an instance with the specified code and register count.
-        /// </summary>
-        public Px4ioPacket(Px4ioSerialPacketCode code, byte count)
+        public Px4ioPacket(byte code, byte page, byte offset, byte count)
         {
             // Validate
-            if (count <= 0 || (count & CountMask) != 0) throw new ArgumentOutOfRangeException(nameof(count));
+            if ((code & CountMask) != 0) throw new ArgumentOutOfRangeException(nameof(code));
+            if ((count & CodeMask) != 0) throw new ArgumentOutOfRangeException(nameof(count));
 
             // Initialize members
-            CountCode = (byte)((byte)code & count);
-            Registers = new byte[count];
+            CountCode = (byte)(code | count);
+            Page = page;
+            Offset = offset;
+            Crc = 0;
+            Registers = new ushort[count];
         }
 
         /// <summary>
-        /// Creates an instance from a raw data bytes.
+        /// Creates an instance with the specified values.
+        /// </summary>
+        public Px4ioPacket(byte code, byte page, byte offset, ushort[] values)
+            : this(code, page, offset, (byte)values.Length)
+        {
+            // Copy register values
+            Array.Copy(values, Registers, values.Length);
+        }
+
+        /// <summary>
+        /// Creates an instance from raw data bytes.
         /// </summary>
         public Px4ioPacket(byte[] buffer)
         {
             // Validate
             if (buffer == null) throw new ArgumentNullException(nameof(buffer));
-            if (buffer.Length < HeaderSize) throw new ArgumentOutOfRangeException(nameof(buffer));
+            if (buffer.Length != Size) throw new ArgumentOutOfRangeException(nameof(buffer));
 
             // Copy header values
-            CountCode = buffer[0];
-            Crc = buffer[1];
-            Page = buffer[2];
-            Offset = buffer[3];
+            var offset = 0;
+            var countCode = buffer[offset++];
+            CountCode = countCode;
+            var count = countCode & CountMask;
+            Crc = buffer[offset++];
+            Page = buffer[offset++];
+            Offset = buffer[offset++];
+            Registers = new ushort[count];
 
-            // Check size with registers
-            var size = Size;
-            var count = Count;
-            if (size < HeaderSize + count)
-                throw new ArgumentOutOfRangeException(nameof(buffer));
-
-            // Copy registers
-            for (int registerIndex = 0, bufferIndex = HeaderSize; bufferIndex < size; registerIndex++, bufferIndex++)
-                Registers[registerIndex] = buffer[bufferIndex];
+            // Copy register values
+            for (int index = 0; index < count; index++, offset += 2)
+                Registers[index] = BitConverter.ToUInt16(buffer, offset);
         }
 
         #endregion
@@ -87,12 +152,13 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io
         /// <summary>
         /// Count and code.
         /// </summary>
+        [FieldOffset(0)]
         public byte CountCode;
 
         /// <summary>
         /// Code from the <see cref="CountCode"/> (masked with <see cref="CodeMask"/>).
         /// </summary>
-        public Px4ioSerialPacketCode Code => (Px4ioSerialPacketCode)(CountCode & CodeMask);
+        public byte Code => (byte)(CountCode & CodeMask);
 
         /// <summary>
         /// Count from the <see cref="CountCode"/> (masked with <see cref="CountMask"/>).
@@ -102,27 +168,27 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io
         /// <summary>
         /// CRC checksum.
         /// </summary>
+        [FieldOffset(1)]
         public byte Crc;
 
         /// <summary>
-        /// Configuration page.
+        /// Page number.
         /// </summary>
+        [FieldOffset(2)]
         public byte Page;
 
         /// <summary>
-        /// Configuration offset.
+        /// Register offset.
         /// </summary>
+        [FieldOffset(3)]
         public byte Offset;
 
         /// <summary>
-        /// Registers.
+        /// Register values.
         /// </summary>
-        public byte[] Registers;
-
-        /// <summary>
-        /// Size in bytes with the current <see cref="Count"/>.
-        /// </summary>
-        public int Size => (sizeof(byte) * (HeaderSize + Count));
+        [CLSCompliant(false)]
+        [FieldOffset(4)]
+        public readonly ushort[] Registers;
 
         #endregion
 
@@ -181,14 +247,35 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io
             crc = _crcTable[crc ^ packet.CountCode];
             crc = _crcTable[crc ^ 0];                   // Cannot CRC self
             crc = _crcTable[crc ^ packet.Page];
-            crc = _crcTable[crc ^ packet.CountCode];
+            crc = _crcTable[crc ^ packet.Offset];
 
             // Add register CRCs
-            foreach (var register in packet.Registers)
-                crc = _crcTable[crc ^ register];
+            for (var index = 0; index < packet.Count; index++)
+            {
+                var value = packet.Registers[index];
+                var bytes = BitConverter.GetBytes(value);
+                crc = _crcTable[crc ^ bytes[0]];
+                crc = _crcTable[crc ^ bytes[1]];
+            }
 
             // Return result
             return crc;
+        }
+
+        /// <summary>
+        /// Calculates and updates the <see cref="Crc"/> of the current packet.
+        /// </summary>
+        public void CalculateCrc()
+        {
+            Crc = CalculateCrc(this);
+        }
+
+        /// <summary>
+        /// Recalculates then validates the current <see cref="Crc"/>.
+        /// </summary>
+        public bool ValidateCrc()
+        {
+            return Crc == CalculateCrc(this);
         }
 
         /// <summary>
@@ -207,18 +294,22 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io
         public byte[] ToByteArray()
         {
             // Allocate buffer
-            var size = Size;
-            var buffer = new byte[size];
+            var buffer = new byte[Size];
+            var offset = 0;
 
             // Copy fixed values
-            buffer[0] = CountCode;
-            buffer[1] = Crc;
-            buffer[2] = Page;
-            buffer[3] = Offset;
+            buffer[offset++] = CountCode;
+            buffer[offset++] = Crc;
+            buffer[offset++] = Page;
+            buffer[offset++] = Offset;
 
             // Copy registers
-            for (var index = HeaderSize; index < size; index++)
-                buffer[index] = Registers[index];
+            for (var index = 0; index < Count; index++)
+            {
+                var valueBytes = BitConverter.GetBytes(Registers[index]);
+                buffer[offset++] = valueBytes[0];
+                buffer[offset++] = valueBytes[1];
+            }
 
             // Return result
             return buffer;

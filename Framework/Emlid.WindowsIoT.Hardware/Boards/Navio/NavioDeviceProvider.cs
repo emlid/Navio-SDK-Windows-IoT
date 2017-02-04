@@ -1,6 +1,8 @@
 ﻿using Emlid.WindowsIot.Hardware.Boards.Navio.Internal;
 using Emlid.WindowsIot.Hardware.Components.Mb85rcv;
+using Emlid.WindowsIot.HardwarePlus.Buses;
 using System;
+using Windows.Devices.Spi;
 
 namespace Emlid.WindowsIot.Hardware.Boards.Navio
 {
@@ -51,48 +53,43 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
             // Thread-safe lock
             lock (_lock)
             {
-                // Detect the FRAM model
-                Mb85rcvDeviceId? framId = null;
+                // Try to detect a Navio 1 or 1+ via FRAM model
                 try
                 {
-                    framId = Mb85rcvDevice.GetDeviceId(Navio1FramDevice.I2cControllerIndex);
+                    // Connect to FRAM I2C device and read FRAM model
+                    var framId = Mb85rcvDevice.GetDeviceId(Navio1FramDevice.I2cControllerIndex);
 
                     // Return Navio model for known FRAM IDs
-                    if (framId.Value == Navio1FramDevice.Navio1PlusDeviceId)
+                    if (framId == Navio1FramDevice.Navio1PlusDeviceId)
                     {
-                        // TODO: Additional Navio 1 Plus Test
-                        if (DateTime.Now > DateTime.MinValue)   // Avoid compiler warning
-                        {
-                            // Must be a Navio+
-                            return NavioHardwareModel.Navio1Plus;
-                        }
+                        // Must be a Navio 1+
+                        return NavioHardwareModel.Navio1Plus;
                     }
-                    else if (framId.Value == Navio1FramDevice.Navio1DeviceId)
+                    if (framId == Navio1FramDevice.Navio1DeviceId)
                     {
-                        // TODO: Additional Navio 1 Test
-                        if (DateTime.Now > DateTime.MinValue)   // Avoid compiler warning
-                        {
-                            // Must be a Navio+
-                            return NavioHardwareModel.Navio1Plus;
-                        }
+                        // Must be a Navio 1
+                        return NavioHardwareModel.Navio1;
                     }
 
-                    // Unsupported model
+                    // Unsupported FRAM device ID
                     return null;
                 }
                 catch
                 {
-                    // No FRAM = not a Navio 1 or 1+, check for Navio 2...
-
-                    // TODO: Additional test for Navio 2
-                    if (DateTime.Now > DateTime.MinValue)   // Avoid compiler warning
+                    // Try to detect a Navio 2 RCIO co-processor
+                    try
                     {
-                        // Must be a Navio 2
-                        return NavioHardwareModel.Navio2;
+                        using (var rcio = new Navio2RcioDevice())
+                        {
+                            // Must be a Navio 2
+                            return NavioHardwareModel.Navio2;
+                        }
                     }
-
-                    // No Navio hardware found
-                    return null;
+                    catch
+                    {
+                        // No Navio hardware found
+                        return null;
+                    }
                 }
             }
         }

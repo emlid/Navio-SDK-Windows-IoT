@@ -77,3 +77,10 @@ If you wish to contribute to the project, it is necessary to understand the foll
 2. The standard of coding is very high and robust, common as you will see in professional enterprise class development teams. You may find this a steep learning curve. Don't be upset if your code is rejected for this purpose. If you see an error in the code and do not have time to follow the coding standards it would be better to open an issue and let another developer fix it properly rather than making a pull request.
 
 [The coding standards are here.](Coding-Standards.md)
+
+### State of The Code
+
+Developer notes:
+
+1. Current focus is migration from the C# framework to C++/CX. The "Emlid.WindowsIot.HardwarePlus" project/assembly will be renamed to overwrite the old C# "Emlid.WindowsIot.Hardware" project/assembly once conversion is complete.
+2. C++/CX does not support the ExtensionAttribute (available in C++/CLI and .NET specific/non-UWP) so cannot declare the device extensions as extension methods to languages which support them.

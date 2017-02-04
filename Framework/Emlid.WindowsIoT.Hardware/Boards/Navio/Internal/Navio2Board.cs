@@ -21,6 +21,8 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
             // Initialize components
             _barometerDevice = new NavioBarometerDevice();
             _ledDevice = new Navio2LedDevice();
+            _rcioDevice = new Navio2RcioDevice();
+
         }
 
         #region IDisposable
@@ -40,6 +42,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
             // Dispose owned objects
             _barometerDevice?.Dispose();
             _ledDevice?.Dispose();
+            _rcioDevice?.Dispose();
         }
 
         #endregion
@@ -49,14 +52,19 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         #region Private Fields
 
         /// <summary>
-        /// Model specific MS5611 chip which provides <see cref="Barometer"/> functionality.
+        /// MS5611 chip which provides <see cref="Barometer"/> functionality.
         /// </summary>
         private NavioBarometerDevice _barometerDevice;
 
         /// <summary>
-        /// Model specific LED chip with RGB components connected to GPIO pins.
+        /// LED chip with RGB components connected to GPIO pins.
         /// </summary>
         private Navio2LedDevice _ledDevice;
+
+        /// <summary>
+        /// RCIO co-processor which acts as a proxy to the two IMUs, RC input and output.
+        /// </summary>
+        private Navio2RcioDevice _rcioDevice;
 
         #endregion
 
@@ -113,11 +121,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         /// <summary>
         /// RC input device.
         /// </summary>
-        /// <remarks>
-        /// Not really hardware; only software PWM decoding over a GPIO pin on Navio and Navio plus boards.
-        /// Latencies and inaccuracies possible due to software overhead.
-        /// </remarks>
-        public INavioRCInputDevice RCInput { get; private set; }
+        public INavioRCInputDevice RCInput => _rcioDevice;
 
         #endregion
     }

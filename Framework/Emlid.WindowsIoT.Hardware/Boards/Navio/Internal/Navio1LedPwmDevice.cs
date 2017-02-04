@@ -1,7 +1,7 @@
 ﻿using Emlid.UniversalWindows;
 using Emlid.WindowsIot.Hardware.Components.Pca9685;
 using Emlid.WindowsIot.Hardware.Protocols.Pwm;
-using Emlid.WindowsIot.Hardware.System;
+using Emlid.WindowsIot.HardwarePlus.Buses;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -97,7 +97,8 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
 
             // Connect to hardware
             _device = new Pca9685Device(I2cControllerIndex, ChipNumber, ExternalClockSpeed);
-            _enablePin = GpioExtensions.Connect(GpioControllerIndex, OutputEnableGpioPin, GpioPinDriveMode.Output).GetAwaiter().GetResult();
+            _enablePin = GpioExtensions.Connect(GpioControllerIndex, OutputEnableGpioPin,
+                GpioPinDriveMode.Output, GpioSharingMode.Exclusive);
 
             // Read properties
             Read();

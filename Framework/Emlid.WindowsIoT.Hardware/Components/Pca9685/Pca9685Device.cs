@@ -1,5 +1,5 @@
 ﻿using Emlid.UniversalWindows;
-using Emlid.WindowsIot.Hardware.System;
+using Emlid.WindowsIot.HardwarePlus.Buses;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -111,7 +111,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Pca9685
             var address = GetI2cAddress(chipNumber);
 
             // Connect to hardware
-            _hardware = I2cExtensions.Connect(busNumber, address, speed, sharingMode).GetAwaiter().GetResult();
+            _hardware = I2cExtensions.Connect(busNumber, address, speed, sharingMode);
 
             // Initialize configuration
             ClockIsExternal = clockSpeed.HasValue;
@@ -127,10 +127,10 @@ namespace Emlid.WindowsIot.Hardware.Components.Pca9685
                 _channels.Add(new Pca9685ChannelValue(index));
 
             // Set "all call" address
-            _hardware.WriteJoinByte((byte)Pca9685Register.AllCall, I2cAllCallAddress);
+            I2cExtensions.WriteJoinByte(_hardware, (byte)Pca9685Register.AllCall, I2cAllCallAddress);
 
             // Enable auto-increment and "all call"
-            _hardware.WriteReadWriteBit((byte)Pca9685Register.Mode1,
+            I2cExtensions.WriteReadWriteBit(_hardware, (byte)Pca9685Register.Mode1,
                 (byte)(Pca9685Mode1Bits.AutoIncrement | Pca9685Mode1Bits.AllCall), true);
 
             // Read current values and update properties
@@ -271,7 +271,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Pca9685
         public Pca9685Mode1Bits ReadMode1()
         {
             // Read register
-            var value = (Pca9685Mode1Bits)_hardware.WriteReadByte((byte)Pca9685Register.Mode1);
+            var value = (Pca9685Mode1Bits)I2cExtensions.WriteReadByte(_hardware, (byte)Pca9685Register.Mode1);
 
             // Update property
             Mode1Register = value;
@@ -287,7 +287,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Pca9685
         public Pca9685Mode2Bits ReadMode2()
         {
             // Read register
-            var value = (Pca9685Mode2Bits)_hardware.WriteReadByte((byte)Pca9685Register.Mode2);
+            var value = (Pca9685Mode2Bits)I2cExtensions.WriteReadByte(_hardware, (byte)Pca9685Register.Mode2);
 
             // Update property
             Mode2Register = value;
@@ -313,12 +313,12 @@ namespace Emlid.WindowsIot.Hardware.Components.Pca9685
         public bool Sleep()
         {
             // Read sleep bit (do nothing when already sleeping)
-            var sleeping = _hardware.WriteReadBit((byte)Pca9685Register.Mode1, (byte)Pca9685Mode1Bits.Sleep);
+            var sleeping = I2cExtensions.WriteReadBit(_hardware, (byte)Pca9685Register.Mode1, (byte)Pca9685Mode1Bits.Sleep);
             if (sleeping)
                 return false;
 
             // Set sleep bit
-            _hardware.WriteReadWriteBit((byte)Pca9685Register.Mode1, (byte)Pca9685Mode1Bits.Sleep, true);
+            I2cExtensions.WriteReadWriteBit(_hardware, (byte)Pca9685Register.Mode1, (byte)Pca9685Mode1Bits.Sleep, true);
 
             // Wait for completion
             Task.Delay(ModeSwitchDelay).Wait();
@@ -343,12 +343,12 @@ namespace Emlid.WindowsIot.Hardware.Components.Pca9685
         public bool Wake()
         {
             // Read sleep bit (do nothing when already sleeping)
-            var sleeping = _hardware.WriteReadBit((byte)Pca9685Register.Mode1, (byte)Pca9685Mode1Bits.Sleep);
+            var sleeping = I2cExtensions.WriteReadBit(_hardware, (byte)Pca9685Register.Mode1, (byte)Pca9685Mode1Bits.Sleep);
             if (!sleeping)
                 return false;
 
             // Clear sleep bit
-            _hardware.WriteReadWriteBit((byte)Pca9685Register.Mode1, (byte)Pca9685Mode1Bits.Sleep, false);
+            I2cExtensions.WriteReadWriteBit(_hardware, (byte)Pca9685Register.Mode1, (byte)Pca9685Mode1Bits.Sleep, false);
 
             // Wait for completion
             Task.Delay(ModeSwitchDelay).Wait();
@@ -391,13 +391,13 @@ namespace Emlid.WindowsIot.Hardware.Components.Pca9685
 
             // Write first sleep
             var sleep = (byte)Pca9685Mode1Bits.Sleep;
-            _hardware.WriteJoinByte((byte)Pca9685Register.Mode1, sleep);
+            I2cExtensions.WriteJoinByte(_hardware, (byte)Pca9685Register.Mode1, sleep);
 
             // Write sleep again with external clock option (when present)
             if (externalClock)
             {
                 sleep |= (byte)(Pca9685Mode1Bits.ExternalClock);
-                _hardware.WriteJoinByte((byte)Pca9685Register.Mode1, sleep);
+                I2cExtensions.WriteJoinByte(_hardware, (byte)Pca9685Register.Mode1, sleep);
             }
             else
             {
@@ -410,7 +410,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Pca9685
             if (externalClock)
                 restart |= (byte)Pca9685Mode1Bits.ExternalClock;
             restart |= (byte)options;
-            _hardware.WriteJoinByte((byte)Pca9685Register.Mode1, restart);
+            I2cExtensions.WriteJoinByte(_hardware, (byte)Pca9685Register.Mode1, restart);
 
             // At least 500 nanoseconds delay to allow oscillator to start
             Task.Delay(delay).Wait();
@@ -484,7 +484,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Pca9685
         public int ReadFrequency()
         {
             // Read prescale register
-            var prescale = _hardware.WriteReadByte((byte)Pca9685Register.Prescale);
+            var prescale = I2cExtensions.WriteReadByte(_hardware, (byte)Pca9685Register.Prescale);
 
             // Calculate frequency
             var frequency = CalculateFrequency(prescale, ClockSpeed);
@@ -531,7 +531,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Pca9685
             var wasAwake = Sleep();
 
             // Write prescale
-            _hardware.WriteJoinByte((byte)Pca9685Register.Prescale, prescale);
+            I2cExtensions.WriteJoinByte(_hardware, (byte)Pca9685Register.Prescale, prescale);
 
             // Read result
             var actual = ReadFrequency();
@@ -577,13 +577,13 @@ namespace Emlid.WindowsIot.Hardware.Components.Pca9685
         public void Clear()
         {
             // Enable all channels
-            _hardware.WriteJoinByte((byte)Pca9685Register.AllChannelsOffHigh, 0x00);
+            I2cExtensions.WriteJoinByte(_hardware, (byte)Pca9685Register.AllChannelsOffHigh, 0x00);
 
             // Zero all channels
-            _hardware.WriteJoinBytes((byte)Pca9685Register.AllChannelsOnLow, new byte[] { 0x00, 0x00, 0x00, 0x00 });
+            I2cExtensions.WriteJoinBytes(_hardware, (byte)Pca9685Register.AllChannelsOnLow, new byte[] { 0x00, 0x00, 0x00, 0x00 });
 
             // Disable all channels
-            _hardware.WriteJoinByte((byte)Pca9685Register.AllChannelsOffHigh, 0x10);
+            I2cExtensions.WriteJoinByte(_hardware, (byte)Pca9685Register.AllChannelsOffHigh, 0x10);
 
             // Update channels
             ReadAllChannels();
@@ -603,7 +603,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Pca9685
             var register = GetChannelAddress(index);
 
             // Read value
-            var bytes = _hardware.WriteReadBytes(register, sizeof(ushort) * 2);
+            var bytes = I2cExtensions.WriteReadBytes(_hardware, register, sizeof(ushort) * 2);
 
             // Update channel property and return result
             var value = Pca9685ChannelValue.FromByteArray(bytes);
@@ -628,7 +628,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Pca9685
             var register = GetChannelAddress(index);
 
             // Send I2C command to read channels in one operation
-            var data = _hardware.WriteReadBytes(register, ChannelSize * count);
+            var data = I2cExtensions.WriteReadBytes(_hardware, register, ChannelSize * count);
 
             // Update channel properties and add to results
             var results = new Collection<Pca9685ChannelValue>();
@@ -662,7 +662,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Pca9685
             var register = GetChannelAddress(index);
 
             // Read and convert value
-            var bytes = _hardware.WriteReadBytes(register, sizeof(ushort));
+            var bytes = I2cExtensions.WriteReadBytes(_hardware, register, sizeof(ushort));
             var value = BitConverter.ToUInt16(bytes, 0);
 
             // Update channel when changed
@@ -688,7 +688,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Pca9685
             var register = (byte)(GetChannelAddress(index) + sizeof(ushort));
 
             // Read and convert value
-            var bytes = _hardware.WriteReadBytes(register, sizeof(ushort));
+            var bytes = I2cExtensions.WriteReadBytes(_hardware, register, sizeof(ushort));
             var value = BitConverter.ToUInt16(bytes, 0);
 
             // Update channel when changed
@@ -753,7 +753,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Pca9685
 
             // Convert and write value
             var bytes = value.ToByteArray();
-            _hardware.WriteJoinBytes(register, bytes);
+            I2cExtensions.WriteJoinBytes(_hardware, register, bytes);
 
             // Read and return result when single channel
             if (index < ChannelCount)
@@ -799,7 +799,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Pca9685
             }
 
             // Send packet
-            _hardware.WriteBytes(data);
+            I2cExtensions.WriteBytes(_hardware, data);
         }
 
         /// <summary>
@@ -818,7 +818,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Pca9685
 
             // Convert and write value
             var data = BitConverter.GetBytes(value);
-            _hardware.WriteJoinBytes(register, data);
+            I2cExtensions.WriteJoinBytes(_hardware, register, data);
         }
 
         /// <summary>
@@ -837,7 +837,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Pca9685
 
             // Convert and write value
             var bytes = BitConverter.GetBytes(value);
-            _hardware.WriteJoinBytes(register, bytes);
+            I2cExtensions.WriteJoinBytes(_hardware, register, bytes);
         }
 
         /// <summary>
@@ -846,7 +846,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Pca9685
         public void ReadAllChannels()
         {
             // Read all channels as one block of data
-            var data = _hardware.WriteReadBytes(ChannelStartAddress, ChannelSize * ChannelCount);
+            var data = I2cExtensions.WriteReadBytes(_hardware, ChannelStartAddress, ChannelSize * ChannelCount);
 
             // Update properties
             for (var index = 0; index < ChannelCount; index++)

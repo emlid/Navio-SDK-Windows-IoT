@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26127.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{101AF3F7-293E-46CF-8C37-EAA61DFDF0A5}"
 	ProjectSection(SolutionItems) = preProject
@@ -34,20 +34,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Emlid", "Emlid", "{C5BE4849
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{E2AC6BB4-4B51-4E37-8401-DBE2EB7D8116}"
 	ProjectSection(SolutionItems) = preProject
-		Common\ArrayExtensions.cs = Common\ArrayExtensions.cs
 		Common\AssemblyInfoGlobal.cs = Common\AssemblyInfoGlobal.cs
-		Common\ByteToHexStringValueConverter.cs = Common\ByteToHexStringValueConverter.cs
-		Common\ConvertibleValueConverter.cs = Common\ConvertibleValueConverter.cs
 		Common\CustomDictionary.xml = Common\CustomDictionary.xml
-		Common\DisposableObject.cs = Common\DisposableObject.cs
-		Common\EnumerationValueConverter.cs = Common\EnumerationValueConverter.cs
-		Common\IsNullToBoolValueConverter.cs = Common\IsNullToBoolValueConverter.cs
-		Common\StopwatchExtensions.cs = Common\StopwatchExtensions.cs
-		Common\StringExtensions.cs = Common\StringExtensions.cs
 		Common\TemporaryKey Install.cmd = Common\TemporaryKey Install.cmd
 		Common\TemporaryKey Remove.cmd = Common\TemporaryKey Remove.cmd
 		Common\TemporaryKey.pfx = Common\TemporaryKey.pfx
-		Common\TimeSpanExtensions.cs = Common\TimeSpanExtensions.cs
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CS", "CS", "{7E41DA83-4FEE-4D23-9172-12D93906F9DF}"
@@ -73,8 +64,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Include", "Include", "{F138
 	ProjectSection(SolutionItems) = preProject
 		Drivers\Include\NavioRCInputDriver.h = Drivers\Include\NavioRCInputDriver.h
 	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Navio RC Input Console CPP Sample", "Samples\CPP\Navio RC Input Console CPP Sample\Navio RC Input Console CPP Sample.vcxproj", "{243E8ED0-58CF-4322-BB7D-D52E70352608}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{703F0B97-99AB-4EEE-B9BD-D9C86883CB8C}"
 	ProjectSection(SolutionItems) = preProject
@@ -117,11 +106,15 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Components", "Components", "{7F2BB098-FCAF-4EAD-8C2F-A461F02CFE2B}"
 	ProjectSection(SolutionItems) = preProject
 		Documentation\Components\ADS1115.pdf = Documentation\Components\ADS1115.pdf
+		Documentation\Components\BCM2835.pdf = Documentation\Components\BCM2835.pdf
 		Documentation\Components\LSM9DS1.pdf = Documentation\Components\LSM9DS1.pdf
 		Documentation\Components\MB85RC04V.pdf = Documentation\Components\MB85RC04V.pdf
 		Documentation\Components\MB85RC256V.pdf = Documentation\Components\MB85RC256V.pdf
 		Documentation\Components\MPU9250.pdf = Documentation\Components\MPU9250.pdf
 		Documentation\Components\MS5611.pdf = Documentation\Components\MS5611.pdf
+		Documentation\Components\NEO-6.pdf = Documentation\Components\NEO-6.pdf
+		Documentation\Components\NEO-7.pdf = Documentation\Components\NEO-7.pdf
+		Documentation\Components\NEO-M8 Protocol.pdf = Documentation\Components\NEO-M8 Protocol.pdf
 		Documentation\Components\NEO-M8.pdf = Documentation\Components\NEO-M8.pdf
 		Documentation\Components\PCA9685.pdf = Documentation\Components\PCA9685.pdf
 	EndProjectSection
@@ -134,7 +127,23 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Navio 2 RCIO Terminal", "To
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Emlid.WindowsIot.HardwarePlus", "Framework\Emlid.WindowsIot.HardwarePlus\Emlid.WindowsIot.HardwarePlus.vcxproj", "{2C5DF7F8-8E4F-451B-88E2-B9C879C923E6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CPP", "CPP", "{2A7B48B2-0AE6-4B76-A48B-BD26F5EA7448}"
+	ProjectSection(SolutionItems) = preProject
+		Common\CPP\Macros.h = Common\CPP\Macros.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencies", "{59AC22D9-5AB2-42B0-BFCE-4E3D1C63E8E0}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CppWinRT", "Dependencies\CppWinRT\CppWinRT.vcxitems", "{45D41ACC-2C3C-43D2-BC10-02AA73FFC7C7}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Navio RC Input CPP Sample", "Samples\CPP\Navio RC Input CPP Sample\Navio RC Input CPP Sample.vcxproj", "{243E8ED0-58CF-4322-BB7D-D52E70352608}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Dependencies\CppWinRT\CppWinRT.vcxitems*{243e8ed0-58cf-4322-bb7d-d52e70352608}*SharedItemsImports = 4
+		Dependencies\CppWinRT\CppWinRT.vcxitems*{2c5df7f8-8e4f-451b-88e2-b9c879c923e6}*SharedItemsImports = 4
+		Dependencies\CppWinRT\CppWinRT.vcxitems*{45d41acc-2c3c-43d2-bc10-02aa73ffc7c7}*SharedItemsImports = 9
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM = Debug|ARM
 		Release|ARM = Release|ARM
@@ -162,12 +171,6 @@ Global
 		{DDEAAFA9-024A-4AB3-B8BB-14D93AB59641}.Release|ARM.ActiveCfg = Release|ARM
 		{DDEAAFA9-024A-4AB3-B8BB-14D93AB59641}.Release|ARM.Build.0 = Release|ARM
 		{DDEAAFA9-024A-4AB3-B8BB-14D93AB59641}.Release|ARM.Deploy.0 = Release|ARM
-		{243E8ED0-58CF-4322-BB7D-D52E70352608}.Debug|ARM.ActiveCfg = Debug|ARM
-		{243E8ED0-58CF-4322-BB7D-D52E70352608}.Debug|ARM.Build.0 = Debug|ARM
-		{243E8ED0-58CF-4322-BB7D-D52E70352608}.Debug|ARM.Deploy.0 = Debug|ARM
-		{243E8ED0-58CF-4322-BB7D-D52E70352608}.Release|ARM.ActiveCfg = Release|ARM
-		{243E8ED0-58CF-4322-BB7D-D52E70352608}.Release|ARM.Build.0 = Release|ARM
-		{243E8ED0-58CF-4322-BB7D-D52E70352608}.Release|ARM.Deploy.0 = Release|ARM
 		{ABE84FDC-D12F-40E9-8F2A-CB10245C4A26}.Debug|ARM.ActiveCfg = Debug|ARM
 		{ABE84FDC-D12F-40E9-8F2A-CB10245C4A26}.Debug|ARM.Build.0 = Debug|ARM
 		{ABE84FDC-D12F-40E9-8F2A-CB10245C4A26}.Debug|ARM.Deploy.0 = Debug|ARM
@@ -181,11 +184,7 @@ Global
 		{6C7E0CAD-E4A0-4B2E-A723-5AE1EB019932}.Release|ARM.Build.0 = Release|ARM
 		{6C7E0CAD-E4A0-4B2E-A723-5AE1EB019932}.Release|ARM.Deploy.0 = Release|ARM
 		{116C1C54-44B7-4C82-87CC-489B5ED85975}.Debug|ARM.ActiveCfg = Debug|ARM
-		{116C1C54-44B7-4C82-87CC-489B5ED85975}.Debug|ARM.Build.0 = Debug|ARM
-		{116C1C54-44B7-4C82-87CC-489B5ED85975}.Debug|ARM.Deploy.0 = Debug|ARM
 		{116C1C54-44B7-4C82-87CC-489B5ED85975}.Release|ARM.ActiveCfg = Release|ARM
-		{116C1C54-44B7-4C82-87CC-489B5ED85975}.Release|ARM.Build.0 = Release|ARM
-		{116C1C54-44B7-4C82-87CC-489B5ED85975}.Release|ARM.Deploy.0 = Release|ARM
 		{D8F241C6-29CB-4AA6-AD34-398CBA6D1C16}.Debug|ARM.ActiveCfg = Debug|ARM
 		{D8F241C6-29CB-4AA6-AD34-398CBA6D1C16}.Debug|ARM.Build.0 = Debug|ARM
 		{D8F241C6-29CB-4AA6-AD34-398CBA6D1C16}.Release|ARM.ActiveCfg = Release|ARM
@@ -204,6 +203,12 @@ Global
 		{2C5DF7F8-8E4F-451B-88E2-B9C879C923E6}.Debug|ARM.Build.0 = Debug|ARM
 		{2C5DF7F8-8E4F-451B-88E2-B9C879C923E6}.Release|ARM.ActiveCfg = Release|ARM
 		{2C5DF7F8-8E4F-451B-88E2-B9C879C923E6}.Release|ARM.Build.0 = Release|ARM
+		{243E8ED0-58CF-4322-BB7D-D52E70352608}.Debug|ARM.ActiveCfg = Debug|ARM
+		{243E8ED0-58CF-4322-BB7D-D52E70352608}.Debug|ARM.Build.0 = Debug|ARM
+		{243E8ED0-58CF-4322-BB7D-D52E70352608}.Debug|ARM.Deploy.0 = Debug|ARM
+		{243E8ED0-58CF-4322-BB7D-D52E70352608}.Release|ARM.ActiveCfg = Release|ARM
+		{243E8ED0-58CF-4322-BB7D-D52E70352608}.Release|ARM.Build.0 = Release|ARM
+		{243E8ED0-58CF-4322-BB7D-D52E70352608}.Release|ARM.Deploy.0 = Release|ARM
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -219,7 +224,6 @@ Global
 		{A02B6648-A6A0-4655-B658-EC3F9B1E0CE1} = {CDC2AC5F-B61D-4271-8721-83D9B0703F51}
 		{175F3EA8-E13A-41F9-81E9-EFE31813D8F0} = {3A067FD7-5276-4CB5-BE74-9DD9965529D0}
 		{F138A081-8CD8-484F-A45A-6B0CAF289BA4} = {CDC2AC5F-B61D-4271-8721-83D9B0703F51}
-		{243E8ED0-58CF-4322-BB7D-D52E70352608} = {175F3EA8-E13A-41F9-81E9-EFE31813D8F0}
 		{703F0B97-99AB-4EEE-B9BD-D9C86883CB8C} = {C1B9EF36-2E1E-4BCB-A85F-E85DF75F737A}
 		{6637C7B9-0DFD-410A-89F1-C1DD8E2D01EC} = {C1B9EF36-2E1E-4BCB-A85F-E85DF75F737A}
 		{ABE84FDC-D12F-40E9-8F2A-CB10245C4A26} = {7E41DA83-4FEE-4D23-9172-12D93906F9DF}
@@ -232,5 +236,8 @@ Global
 		{E431A011-C230-4CF5-8321-C47E07AE7683} = {24C4538B-C6A4-4D47-80C9-4249164C222F}
 		{7B09FA7C-9385-4AA0-A659-4A55ACBE3B37} = {C1B9EF36-2E1E-4BCB-A85F-E85DF75F737A}
 		{2C5DF7F8-8E4F-451B-88E2-B9C879C923E6} = {24C4538B-C6A4-4D47-80C9-4249164C222F}
+		{2A7B48B2-0AE6-4B76-A48B-BD26F5EA7448} = {E2AC6BB4-4B51-4E37-8401-DBE2EB7D8116}
+		{45D41ACC-2C3C-43D2-BC10-02AA73FFC7C7} = {59AC22D9-5AB2-42B0-BFCE-4E3D1C63E8E0}
+		{243E8ED0-58CF-4322-BB7D-D52E70352608} = {175F3EA8-E13A-41F9-81E9-EFE31813D8F0}
 	EndGlobalSection
 EndGlobal

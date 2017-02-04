@@ -14,10 +14,8 @@ namespace Emlid.UniversalWindows.UI.Models
         /// Creates an instance.
         /// </summary>
         protected PageUIModel(TApplicationUIModel application)
+            : base(application.UITaskFactory)
         {
-            // Validate
-            if (application == null) throw new ArgumentNullException(nameof(application));
-
             // Initialize members
             Application = application;
         }

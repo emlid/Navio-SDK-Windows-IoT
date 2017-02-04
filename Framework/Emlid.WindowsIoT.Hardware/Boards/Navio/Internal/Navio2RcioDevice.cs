@@ -1,8 +1,13 @@
 ﻿using Emlid.UniversalWindows;
-using Emlid.WindowsIot.Hardware.System;
+using Emlid.WindowsIot.HardwarePlus.Buses;
 using System;
 using System.Globalization;
 using Windows.Devices.Spi;
+using Emlid.WindowsIot.Hardware.Protocols.Ppm;
+using System.Collections.ObjectModel;
+using Emlid.WindowsIot.Hardware.Components.Px4io;
+using Emlid.WindowsIot.Hardware.Components.Px4io.Data;
+using System.Collections.Generic;
 
 namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
 {
@@ -14,7 +19,8 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
     /// Navio 2 provides ADC, RC (receiver) input SBUS and CPPM decoding, and RC PWM output via
     /// firmware running on an ARM co-processor connected to via the Raspberry Pi auxiliary SPI bus.
     /// </remarks>
-    public sealed class Navio2RcioDevice : DisposableObject
+    [CLSCompliant(false)]
+    public sealed class Navio2RcioDevice : DisposableObject, INavioRCInputDevice // TODO: INavioPwmDevice, INavioImuDevice x 2
     {
         #region Constants
 
@@ -26,7 +32,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         /// <summary>
         /// SPI Chip Select Line (CSL) number.
         /// </summary>
-        public const int SpiChipSelectLine = 1;
+        public const int SpiChipSelectLine = 0;
 
         /// <summary>
         /// SPI speed in Hz.
@@ -41,8 +47,12 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         /// <summary>
         /// SPI operation mode.
         /// </summary>
-        [CLSCompliant(false)]
         public const SpiMode SpiOperationMode = SpiMode.Mode0;
+
+        /// <summary>
+        /// Maximum number of RC input channels.
+        /// </summary>
+        public const int RcInputChannelsMaximum = 16;
 
         #endregion
 
@@ -53,15 +63,12 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         /// </summary>
         public Navio2RcioDevice()
         {
-            // Configure GPIO
-            _device = SpiExtensions.Connect(SpiBusNumber, SpiChipSelectLine, SpiFrequency, SpiBitsPerWord, SpiOperationMode)
-                .GetAwaiter().GetResult();
-            if (_device == null)
-            {
-                // Initialization error
-                throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture,
-                    Resources.Strings.SpiErrorDeviceNotFound, SpiBusNumber));
-            }
+            // Create device
+            _device = new Px4ioDevice(SpiBusNumber, SpiChipSelectLine, SpiOperationMode, SpiBitsPerWord, SpiFrequency, SpiSharingMode.Exclusive);
+
+            // Initialize members
+            _channels = new int[_device.Configuration.RCInputCount];
+            _channelsReadOnly = new ReadOnlyCollection<int>(_channels);
         }
 
         #region IDisposable
@@ -91,7 +98,41 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         /// <summary>
         /// SPI connection to the RCIO co-processor.
         /// </summary>
-        private readonly SpiDevice _device;
+        private readonly Px4ioDevice _device;
+
+        #endregion
+
+        #region INavioRCInputDevice
+
+        #region Properties
+
+        /// <summary>
+        /// Channel values in microseconds.
+        /// </summary>
+        ReadOnlyCollection<int> INavioRCInputDevice.Channels => _channelsReadOnly;
+        private ReadOnlyCollection<int> _channelsReadOnly;
+        private int[] _channels;
+
+        /// <summary>
+        /// Returns false because multiple protocols are not supported, only CPPM.
+        /// </summary>
+        bool INavioRCInputDevice.Multiprotocol { get { return true; } }
+
+        #endregion
+
+        #region Events
+
+        /// <summary>
+        /// Fired after a new frame of data has been received and decoded into <see cref="INavioRCInputDevice.Channels"/>.
+        /// </summary>
+        event EventHandler<PpmFrame> INavioRCInputDevice.ChannelsChanged
+        {
+            add { _channelsChanged += value; }
+            remove { _channelsChanged -= value; }
+        }
+        private EventHandler<PpmFrame> _channelsChanged;
+
+        #endregion
 
         #endregion
     }

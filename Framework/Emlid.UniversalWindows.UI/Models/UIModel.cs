@@ -28,11 +28,10 @@ namespace Emlid.UniversalWindows.UI.Models
         /// <summary>
         /// Creates an instance.
         /// </summary>
-        protected UIModel()
+        protected UIModel(TaskFactory uiTaskFactory)
         {
             // Initialize members
-            _uiScheduler = TaskScheduler.FromCurrentSynchronizationContext();
-            UIThreadFactory = new TaskFactory(_uiScheduler);
+            UITaskFactory = uiTaskFactory;
         }
 
         #region IDisposable
@@ -52,21 +51,12 @@ namespace Emlid.UniversalWindows.UI.Models
 
         #endregion
 
-        #region Fields
-
-        /// <summary>
-        /// Task scheduler for the UI thread.
-        /// </summary>
-        private TaskScheduler _uiScheduler;
-
-        #endregion
-
         #region Properties
 
         /// <summary>
         /// Task factory for the UI thread.
         /// </summary>
-        public TaskFactory UIThreadFactory { get; private set; }
+        public TaskFactory UITaskFactory { get; private set; }
 
         #endregion
 
@@ -89,7 +79,7 @@ namespace Emlid.UniversalWindows.UI.Models
             // Run event handler on UI thread
             if (PropertyChanged != null)
             {
-                UIThreadFactory.StartNew(() =>
+                UITaskFactory.StartNew(() =>
                 {
                     // Do nothing when disposed (may occur whilst scheduling call to UI thread)
                     if (IsDisposed) return;

@@ -1,4 +1,4 @@
-﻿using Emlid.WindowsIot.Hardware.System;
+﻿using Emlid.WindowsIot.HardwarePlus.Buses;
 using System;
 using Windows.Devices.I2c;
 
@@ -102,8 +102,8 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
             // Connect to devices
             try
             {
-                Hardware = I2cExtensions.Connect(busNumber, lowerAddress, speed, sharingMode).GetAwaiter().GetResult();
-                HardwareUpper = I2cExtensions.Connect(busNumber, upperAddress, speed, sharingMode).GetAwaiter().GetResult();
+                Hardware = I2cExtensions.Connect(busNumber, lowerAddress, speed, sharingMode);
+                HardwareUpper = I2cExtensions.Connect(busNumber, upperAddress, speed, sharingMode);
             }
             finally
             {

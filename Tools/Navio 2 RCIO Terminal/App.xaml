@@ -10,10 +10,12 @@
         <Color x:Key="EmlidGreen">#FF44D62C</Color>
         <Color x:Key="EmlidDarkGreen">#77226315</Color>
         <BitmapImage x:Key="EmlidLogo" UriSource="Assets\emlid_logo_no_text.png" />
-        <BitmapImage x:Key="NavioResearchBackground" UriSource="Assets\Navio-Research.jpg" />
 
         <!-- Primitives -->
         <SolidColorBrush x:Key="EmlidGreenBrush" Color="{StaticResource EmlidGreen}" />
+        <SolidColorBrush x:Key="EmlidDarkGreenBrush" Color="{StaticResource EmlidDarkGreen}" />
+        <SolidColorBrush x:Key="TerminalBackgroundBrush" Color="Black" />
+        <SolidColorBrush x:Key="TerminalForegroundBrush" Color="{StaticResource EmlidGreen}" />
         <SolidColorBrush x:Key="ApplicationPageBackgroundThemeBrush" Color="White" />
         <SolidColorBrush x:Key="SystemControlForegroundAccentBrush" Color="{StaticResource EmlidGreen}" />
         <SolidColorBrush x:Key="SystemControlHighlightAccentBrush" Color="{StaticResource EmlidGreen}" />
@@ -100,7 +102,16 @@
             <Setter Property="HorizontalAlignment" Value="Center" />
             <Setter Property="FontSize" Value="32" />
         </Style>
-        <Style x:Key="CodeText" TargetType="TextBlock">
+        <Style x:Key="TerminalScreen" TargetType="Grid">
+            <Setter Property="Background" Value="{ThemeResource TerminalBackgroundBrush}" />
+        </Style>
+        <Style x:Key="TerminalTextBlock" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{ThemeResource TerminalForegroundBrush}" />
+            <Setter Property="FontFamily" Value="Courier New" />
+        </Style>
+        <Style x:Key="TerminalTextBox" TargetType="TextBox">
+            <Setter Property="Background" Value="{ThemeResource TerminalBackgroundBrush}" />
+            <Setter Property="Foreground" Value="{ThemeResource TerminalForegroundBrush}" />
             <Setter Property="FontFamily" Value="Courier New" />
         </Style>
 

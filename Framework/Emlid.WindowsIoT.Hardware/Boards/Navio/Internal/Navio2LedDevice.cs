@@ -1,5 +1,5 @@
 ﻿using Emlid.UniversalWindows;
-using Emlid.WindowsIot.Hardware.System;
+using Emlid.WindowsIot.HardwarePlus.Buses;
 using System;
 using Windows.Devices.Gpio;
 
@@ -42,9 +42,9 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         public Navio2LedDevice()
         {
             // Open pins
-            _redPin = GpioExtensions.Connect(GpioControllerIndex, 4, GpioPinDriveMode.Output).GetAwaiter().GetResult();
-            _greenPin = GpioExtensions.Connect(GpioControllerIndex, 27, GpioPinDriveMode.Output).GetAwaiter().GetResult();
-            _bluePin = GpioExtensions.Connect(GpioControllerIndex, 6, GpioPinDriveMode.Output).GetAwaiter().GetResult();
+            _redPin = GpioExtensions.Connect(GpioControllerIndex, 4, GpioPinDriveMode.Output, GpioSharingMode.Exclusive);
+            _greenPin = GpioExtensions.Connect(GpioControllerIndex, 27, GpioPinDriveMode.Output, GpioSharingMode.Exclusive);
+            _bluePin = GpioExtensions.Connect(GpioControllerIndex, 6, GpioPinDriveMode.Output, GpioSharingMode.Exclusive);
 
             // Read current values
             Read();

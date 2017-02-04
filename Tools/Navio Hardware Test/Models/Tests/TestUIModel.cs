@@ -110,7 +110,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models.Tests
                 return;
 
             // Run test on background thread...
-            Application.UIThreadFactory.StartNew(() =>
+            Application.UITaskFactory.StartNew(() =>
             {
                 try
                 {

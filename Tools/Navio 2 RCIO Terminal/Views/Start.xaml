@@ -19,11 +19,18 @@
         <!-- Title -->
         <StackPanel Grid.Row="0" Orientation="Horizontal">
             <Image Source="{StaticResource EmlidLogo}" Width="48" Margin="10" />
-            <TextBlock Text="Navio Hardware Tests" Style="{StaticResource TitleText}" />
+            <TextBlock Text="Navio 2 RCIO Terminal" Style="{StaticResource TitleText}" />
         </StackPanel>
 
         <!-- Main Panel -->
-        <Grid Grid.Row="1" Background="{ThemeResource EmlidGreenBrush}">
+        <Grid Grid.Row="1" Style="{ThemeResource TerminalScreen}">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <TextBlock x:Name="TerminalTextBlock" Grid.Row="0" Style="{ThemeResource TerminalTextBlock}" Text="Test Test Test" />
+            <TextBox x:Name="CommandTextBox" Grid.Row="1" Style="{ThemeResource TerminalTextBox}" Text="Command...." />
 
         </Grid>
 

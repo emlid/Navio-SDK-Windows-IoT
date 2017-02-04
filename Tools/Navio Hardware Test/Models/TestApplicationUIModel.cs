@@ -1,6 +1,7 @@
 ﻿using Emlid.UniversalWindows.UI.Models;
 using Emlid.WindowsIot.Hardware.Boards.Navio;
 using System;
+using System.Threading.Tasks;
 
 namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models
 {
@@ -14,7 +15,8 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models
         /// <summary>
         /// Creates an instance.
         /// </summary>
-        public TestApplicationUIModel()
+        public TestApplicationUIModel(TaskFactory uiTaskFactory)
+            : base(uiTaskFactory)
         {
         }
 

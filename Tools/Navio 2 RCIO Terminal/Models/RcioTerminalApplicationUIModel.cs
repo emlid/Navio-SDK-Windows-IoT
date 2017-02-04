@@ -1,6 +1,7 @@
 ﻿using Emlid.UniversalWindows.UI.Models;
 using Emlid.WindowsIot.Hardware.Boards.Navio.Internal;
 using System;
+using System.Threading.Tasks;
 
 namespace Emlid.WindowsIot.Tools.Navio2RcioTerminal.Models
 {
@@ -14,7 +15,8 @@ namespace Emlid.WindowsIot.Tools.Navio2RcioTerminal.Models
         /// <summary>
         /// Creates an instance.
         /// </summary>
-        public RcioTerminalApplicationUIModel()
+        public RcioTerminalApplicationUIModel(TaskFactory uiTaskFactory)
+            : base(uiTaskFactory)
         {
             Rcio = new Navio2RcioDevice();
         }

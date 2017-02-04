@@ -1,6 +1,6 @@
 ﻿using Emlid.UniversalWindows;
 using Emlid.WindowsIot.Hardware.Protocols.Ppm;
-using Emlid.WindowsIot.Hardware.System;
+using Emlid.WindowsIot.HardwarePlus.Buses;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.ObjectModel;
@@ -52,7 +52,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
             _frameTrigger = new AutoResetEvent(false);
 
             // Configure GPIO
-            _inputPin = GpioExtensions.Connect(GpioControllerIndex, GpioInputPinNumber).GetAwaiter().GetResult();
+            _inputPin = GpioExtensions.Connect(GpioControllerIndex, GpioInputPinNumber, GpioPinDriveMode.Input, GpioSharingMode.Exclusive);
             if (_inputPin == null)
             {
                 // Initialization error
@@ -177,11 +177,6 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         private int[] _channels;
 
         /// <summary>
-        /// Used to wait until the device is stopped.
-        /// </summary>
-        public WaitHandle Stopped { get { return _stop.Token.WaitHandle; } }
-
-        /// <summary>
         /// Returns false because multiple protocols are not supported, only CPPM.
         /// </summary>
         public bool Multiprotocol { get { return false; } }
@@ -230,8 +225,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
             {
                 // Run until stopped...
                 // Wait for frame
-                PpmFrame frame;
-                if (!_frameBuffer.TryDequeue(out frame))
+                if (!_frameBuffer.TryDequeue(out PpmFrame frame))
                 {
                     _frameTrigger.WaitOne(1000);
                     continue;

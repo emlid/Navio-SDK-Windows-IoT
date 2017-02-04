@@ -1,4 +1,5 @@
 ﻿using Emlid.UniversalWindows.UI.Models;
+using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -37,10 +38,7 @@ namespace Emlid.UniversalWindows.UI.Views
         /// <summary>
         /// Creates the page model when it is displayed.
         /// </summary>
-        protected virtual TPageUIModel CreateModel(TApplicationUIModel application)
-        {
-            return default(TPageUIModel);
-        }
+        protected abstract TPageUIModel CreateModel(TApplicationUIModel application);
 
         #endregion
 

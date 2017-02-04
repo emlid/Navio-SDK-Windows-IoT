@@ -1,5 +1,5 @@
 ﻿using Emlid.UniversalWindows;
-using Emlid.WindowsIot.Hardware.System;
+using Emlid.WindowsIot.HardwarePlus.Buses;
 using System;
 using System.Threading.Tasks;
 using Windows.Devices.I2c;
@@ -101,7 +101,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Ms5611
             var address = GetI2cAddress(csb);
 
             // Connect to hardware
-            _hardware = I2cExtensions.Connect(busNumber, address, speed, sharingMode).GetAwaiter().GetResult();
+            _hardware = I2cExtensions.Connect(busNumber, address, speed, sharingMode);
 
             // Initialize members
             Prom = new Ms5611PromData();
@@ -198,7 +198,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Ms5611
         public void Reset()
         {
             // Send reset command
-            _hardware.WriteJoinByte((byte)Ms5611Command.Reset, 0);
+            I2cExtensions.WriteJoinByte(_hardware, (byte)Ms5611Command.Reset, 0);
 
             // Wait for completion
             Task.Delay(TimeSpanExtensions.FromMicroseconds(ResetTime)).Wait();
@@ -261,7 +261,8 @@ namespace Emlid.WindowsIot.Hardware.Components.Ms5611
         {
             var coefficientOffset = (byte)(index * Ms5611PromData.CoefficientSize);
             var address = (byte)(Ms5611Command.PromRead + coefficientOffset);
-            _hardware.WriteReadBytes(address, Ms5611PromData.CoefficientSize, buffer, offset);
+            var coefficient = I2cExtensions.WriteReadBytes(_hardware, address, Ms5611PromData.CoefficientSize);
+            Array.ConstrainedCopy(coefficient, 0, buffer, offset, Ms5611PromData.CoefficientSize);
         }
 
         /// <summary>
@@ -271,13 +272,13 @@ namespace Emlid.WindowsIot.Hardware.Components.Ms5611
         public int ConvertPressure(Ms5611Osr rate)
         {
             // Send command to hardware
-            _hardware.WriteJoinByte((byte)(Ms5611Command.ConvertD1Pressure + (byte)rate), 0);
+            I2cExtensions.WriteJoinByte(_hardware, (byte)(Ms5611Command.ConvertD1Pressure + (byte)rate), 0);
 
             // Wait for completion
             WaitForConversion(rate);
 
             // Return result
-            var result = _hardware.WriteReadBytes((byte)Ms5611Command.AdcRead, 3);
+            var result = I2cExtensions.WriteReadBytes(_hardware, (byte)Ms5611Command.AdcRead, 3);
             return result[0] << 16 | result[1] << 8 | result[2];
         }
 
@@ -288,13 +289,13 @@ namespace Emlid.WindowsIot.Hardware.Components.Ms5611
         public int ConvertTemperature(Ms5611Osr rate)
         {
             // Send command to hardware
-            _hardware.WriteJoinByte((byte)(Ms5611Command.ConvertD2Temperature + (byte)rate), 0);
+            I2cExtensions.WriteJoinByte(_hardware, (byte)(Ms5611Command.ConvertD2Temperature + (byte)rate), 0);
 
             // Wait for completion
             WaitForConversion(rate);
 
             // Return result
-            var result = _hardware.WriteReadBytes((byte)Ms5611Command.AdcRead, 3);
+            var result = I2cExtensions.WriteReadBytes(_hardware, (byte)Ms5611Command.AdcRead, 3);
             return result[0] << 16 | result[1] << 8 | result[2];
         }
 

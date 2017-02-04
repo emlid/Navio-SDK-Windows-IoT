@@ -2,13 +2,12 @@
 // (c) Sébastien Ollivier - https://github.com/sebastieno/PublicResWFileCodeGenerator/
 // Updated by Tony Wall for Windows 10/IoT usage.
 
-namespace Emlid.WindowsIot.Hardware.Resources
-{
-
-    /// <summary>
-    /// Strings.
-    /// </summary>
-    public class Strings {
+namespace Emlid.WindowsIot.Hardware.Resources  {
+		
+	/// <summary>
+	/// Strings.
+	/// </summary>
+	public class Strings {
 		
 		private static Windows.ApplicationModel.Resources.ResourceLoader resourceLoader;
 		internal static Windows.ApplicationModel.Resources.ResourceLoader ResourceLoader
@@ -110,6 +109,30 @@ namespace Emlid.WindowsIot.Hardware.Resources
 		public static string SpiErrorDeviceNotFound 
 		{ 
 			get { return ResourceLoader.GetString("SpiErrorDeviceNotFound"); }
+		}
+ 	
+		///<summary>
+		///
+		///</summary>
+		public static string Px4ioPacketCorruptReceive 
+		{ 
+			get { return ResourceLoader.GetString("Px4ioPacketCorruptReceive"); }
+		}
+ 	
+		///<summary>
+		///
+		///</summary>
+		public static string Px4ioPacketCorruptTransmit 
+		{ 
+			get { return ResourceLoader.GetString("Px4ioPacketCorruptTransmit"); }
+		}
+ 	
+		///<summary>
+		///
+		///</summary>
+		public static string Px4ioPacketError 
+		{ 
+			get { return ResourceLoader.GetString("Px4ioPacketError"); }
 		}
  	}
 }

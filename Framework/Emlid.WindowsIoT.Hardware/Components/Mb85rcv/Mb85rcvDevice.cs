@@ -1,5 +1,5 @@
 ﻿using Emlid.UniversalWindows;
-using Emlid.WindowsIot.Hardware.System;
+using Emlid.WindowsIot.HardwarePlus.Buses;
 using System;
 using Windows.Devices.I2c;
 
@@ -187,11 +187,11 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
             I2cBusSpeed speed = I2cBusSpeed.FastMode, I2cSharingMode sharingMode = I2cSharingMode.Exclusive)
         {
             // Connect to ID device
-            using (var framId = I2cExtensions.Connect(busNumber, idAddress, speed, sharingMode).GetAwaiter().GetResult())
+            using (var framId = I2cExtensions.Connect(busNumber, idAddress, speed, sharingMode))
             {
                 // Send ID command sequence, returning device ID bytes
                 var dataAddress8bit = (byte)(dataAddress << 1);
-                var data = framId.WriteReadBytes(dataAddress8bit, Mb85rcvDeviceId.Size);
+                var data = I2cExtensions.WriteReadBytes(framId, dataAddress8bit, Mb85rcvDeviceId.Size);
 
                 // Return data structure
                 return new Mb85rcvDeviceId(data);
@@ -207,7 +207,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
             var device = GetI2cDeviceForMemoryAddress(0);
 
             // Read and return data
-            return device.ReadByte();
+            return I2cExtensions.ReadByte(device);
         }
 
         /// <summary>
@@ -232,7 +232,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
                     transferSize = I2cExtensions.MaximumTransferSize;
 
                 // Read data
-                var buffer = device.ReadBytes(transferSize);
+                var buffer = I2cExtensions.ReadBytes(device, transferSize);
                 Array.ConstrainedCopy(buffer, 0, resultBuffer, offset, transferSize);
 
                 // Next transfer when necessary...
@@ -256,7 +256,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
             var addressBytes = GetMemoryAddressBytes(address);
 
             // Read and return data
-            return device.WriteReadByte(addressBytes);
+            return I2cExtensions.WriteReadByte(device, addressBytes);
         }
 
         /// <summary>
@@ -285,7 +285,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
                     transferSize = I2cExtensions.MaximumTransferSize;
 
                 // Read data
-                var buffer = device.WriteReadBytes(addressBytes, transferSize);
+                var buffer = I2cExtensions.WriteReadBytes(device, addressBytes, transferSize);
                 Array.ConstrainedCopy(buffer, 0, resultBuffer, offset, transferSize);
 
                 // Next transfer when necessary...
@@ -310,7 +310,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
             var addressBytes = GetMemoryAddressBytes(address);
 
             // Write data
-            device.WriteJoinByte(addressBytes, data);
+            I2cExtensions.WriteJoinByte(device, addressBytes, data);
         }
 
         /// <summary>
