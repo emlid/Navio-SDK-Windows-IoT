@@ -1,8 +1,6 @@
 ﻿using Emlid.WindowsIot.Hardware.Boards.Navio.Internal;
 using Emlid.WindowsIot.Hardware.Components.Mb85rcv;
-using Emlid.WindowsIot.HardwarePlus.Buses;
 using System;
-using Windows.Devices.Spi;
 
 namespace Emlid.WindowsIot.Hardware.Boards.Navio
 {

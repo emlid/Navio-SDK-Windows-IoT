@@ -110,12 +110,18 @@
     <ClInclude Include="Buses\GpioExtensions.h" />
     <ClInclude Include="Buses\I2cExtensions.h" />
     <ClInclude Include="Buses\SpiExtensions.h" />
+    <ClInclude Include="Buses\GpioSwdPort.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Protocols\SerialWireDebug\SwdDebugPortIdRegisterBits.h" />
+    <ClInclude Include="Protocols\SerialWireDebug\SwdRegisterAddresses.h" />
+    <ClInclude Include="Protocols\SerialWireDebug\SwdRequestBits.h" />
+    <ClInclude Include="Protocols\SerialWireDebug\SwdResponseBits.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Buses\GpioExtensions.cpp" />
     <ClCompile Include="Buses\I2cExtensions.cpp" />
     <ClCompile Include="Buses\SpiExtensions.cpp" />
+    <ClCompile Include="Buses\GpioSwdPort.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>

@@ -2,6 +2,30 @@
 
 #pragma comment(lib, "windowsapp")
 
+// ----------------------------------------------------------------------------
+// Disable Visual Studio Code Analysis warnings for external include files
+#include <codeanalysis\warnings.h>
+#pragma warning(push)
+#pragma warning(disable : ALL_CODE_ANALYSIS_WARNINGS)
+// ----------------------------------------------------------------------------
+
+// C++/CX headers
+#include <collection.h>
+//#include <experimental\resumable>
+//#include <ppltasks.h>
+//#include <pplawait.h>
+
+// CRT headers
+#define _CRT_SECURE_DEPRECATE_MEMORY
+#include <tchar.h>
+
+// STL headers
+//#include <stdio.h>
+//#include <iostream>
+#include <memory>
+//#include <sstream>
+
+// C++/WinRT headers
 #include "winrt\base.h"
 #include "winrt\ppl.h"
 #include "winrt\Windows.Foundation.h"
@@ -13,17 +37,12 @@
 #include "winrt\Windows.Devices.I2c.h"
 #include "winrt\Windows.Devices.Spi.h"
 
-#include <collection.h>
-//#include <experimental\resumable>
-//#include <ppltasks.h>
-//#include <pplawait.h>
-#define _CRT_SECURE_DEPRECATE_MEMORY
-#include <tchar.h>
-//#include <stdio.h>
-//#include <iostream>
-#include <memory>
-//#include <sstream>
+// ----------------------------------------------------------------------------
+// Resume Visual Studio Code Analysis warnings after external includes
+#pragma warning(pop)
+// ----------------------------------------------------------------------------
 
+// C++/CX namespaces (isolated for side-by-side use)
 namespace cx
 {
 	using namespace Platform;
@@ -36,6 +55,7 @@ namespace cx
 	using namespace Windows::Devices::Gpio;
 }
 
+// C++/WinRT namespaces (isolated for side-by-side use)
 namespace winrt
 {
 	using namespace winrt::Windows::Foundation;

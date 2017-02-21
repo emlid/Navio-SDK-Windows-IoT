@@ -1,13 +1,11 @@
 ﻿using Emlid.UniversalWindows;
+using Emlid.WindowsIot.Hardware.Components.Px4io;
+using Emlid.WindowsIot.Hardware.Protocols.Ppm;
 using Emlid.WindowsIot.HardwarePlus.Buses;
 using System;
-using System.Globalization;
-using Windows.Devices.Spi;
-using Emlid.WindowsIot.Hardware.Protocols.Ppm;
 using System.Collections.ObjectModel;
-using Emlid.WindowsIot.Hardware.Components.Px4io;
-using Emlid.WindowsIot.Hardware.Components.Px4io.Data;
-using System.Collections.Generic;
+using Windows.Devices.Gpio;
+using Windows.Devices.Spi;
 
 namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
 {
@@ -54,6 +52,26 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         /// </summary>
         public const int RcInputChannelsMaximum = 16;
 
+        /// <summary>
+        /// GPIO bus controller number.
+        /// </summary>
+        public const int GpioBusNumber = 1;
+
+        /// <summary>
+        /// GPIO pin for the RCIO "PC11" interrupt pin.
+        /// </summary>
+        public const int GpioInterruptPinNumber = 5;
+
+        /// <summary>
+        /// GPIO pin for the RCIO SWD_CLK pin.
+        /// </summary>
+        public const int GpioSwdClockPinNumber = 12;
+
+        /// <summary>
+        /// GPIO pin for the RCIO SWD_IO pin.
+        /// </summary>
+        public const int GpioSwdIoPinNumber = 13;
+
         #endregion
 
         #region Lifetime
@@ -64,10 +82,13 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         public Navio2RcioDevice()
         {
             // Create device
-            _device = new Px4ioDevice(SpiBusNumber, SpiChipSelectLine, SpiOperationMode, SpiBitsPerWord, SpiFrequency, SpiSharingMode.Exclusive);
+            _chip = new Px4ioDevice(SpiBusNumber, SpiChipSelectLine, SpiOperationMode, SpiBitsPerWord, SpiFrequency, SpiSharingMode.Exclusive);
+            _interruptPin = GpioExtensions.Connect(GpioBusNumber, GpioInterruptPinNumber, GpioPinDriveMode.Input, GpioSharingMode.Exclusive);
+            _interruptPin.ValueChanged += OnInterruptPinValueChanged;
+            _swdPort = new GpioSwdPort(GpioBusNumber, GpioSwdClockPinNumber, GpioSwdIoPinNumber);
 
             // Initialize members
-            _channels = new int[_device.Configuration.RCInputCount];
+            _channels = new int[_chip.Configuration.RCInputCount];
             _channelsReadOnly = new ReadOnlyCollection<int>(_channels);
         }
 
@@ -81,12 +102,18 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         /// </param>
         protected override void Dispose(bool disposing)
         {
-            // Only managed resources to dispose
+            // Only dispose managed resources
             if (!disposing)
                 return;
 
-            //  Close device
-            _device?.Dispose();
+            //  Release devices
+            _chip?.Dispose();
+            if (_interruptPin != null)
+            {
+                _interruptPin.ValueChanged -= OnInterruptPinValueChanged;
+                _interruptPin.Dispose();
+            }
+            _swdPort?.Dispose();
         }
 
         #endregion
@@ -98,7 +125,17 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         /// <summary>
         /// SPI connection to the RCIO co-processor.
         /// </summary>
-        private readonly Px4ioDevice _device;
+        private readonly Px4ioDevice _chip;
+
+        /// <summary>
+        /// RCIO GPIO interrupt pin.
+        /// </summary>
+        private GpioPin _interruptPin;
+
+        /// <summary>
+        /// RCIO Serial Wire Debug GPIO port.
+        /// </summary>
+        private GpioSwdPort _swdPort;
 
         #endregion
 
@@ -121,6 +158,15 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         #endregion
 
         #region Events
+
+        /// <summary>
+        /// Updates RCIO register values when it fires the interrupt.
+        /// </summary>
+        private void OnInterruptPinValueChanged(GpioPin sender, GpioPinValueChangedEventArgs args)
+        {
+            if (args.Edge == GpioPinEdge.RisingEdge)
+                _chip.Read();
+        }
 
         /// <summary>
         /// Fired after a new frame of data has been received and decoded into <see cref="INavioRCInputDevice.Channels"/>.

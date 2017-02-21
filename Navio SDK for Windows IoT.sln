@@ -27,7 +27,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Emlid", "Emlid", "{C5BE4849-C884-4527-8C1E-46CEB39E0F54}"
 	ProjectSection(SolutionItems) = preProject
 		Media\Images\Emlid\emlid_logo_no_text.png = Media\Images\Emlid\emlid_logo_no_text.png
-		Media\Images\Emlid\Navio 2 HAT Pins.png = Media\Images\Emlid\Navio 2 HAT Pins.png
+		Media\Images\Emlid\Navio 2 Pinout.png = Media\Images\Emlid\Navio 2 Pinout.png
+		Media\Images\Emlid\Navio 2 Top.png = Media\Images\Emlid\Navio 2 Top.png
+		Media\Images\Emlid\Navio Top.png = Media\Images\Emlid\Navio Top.png
+		Media\Images\Emlid\Navio+ Side.png = Media\Images\Emlid\Navio+ Side.png
+		Media\Images\Emlid\Navio+ Top.png = Media\Images\Emlid\Navio+ Top.png
+		Media\Images\Emlid\Navio-ConnectionMap.jpg = Media\Images\Emlid\Navio-ConnectionMap.jpg
 		Media\Images\Emlid\Navio-Research.jpg = Media\Images\Emlid\Navio-Research.jpg
 		Media\Images\Emlid\TopView8.jpg = Media\Images\Emlid\TopView8.jpg
 	EndProjectSection
@@ -106,6 +111,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Components", "Components", "{7F2BB098-FCAF-4EAD-8C2F-A461F02CFE2B}"
 	ProjectSection(SolutionItems) = preProject
 		Documentation\Components\ADS1115.pdf = Documentation\Components\ADS1115.pdf
+		Documentation\Components\ARM Debug Interface.pdf = Documentation\Components\ARM Debug Interface.pdf
 		Documentation\Components\BCM2835.pdf = Documentation\Components\BCM2835.pdf
 		Documentation\Components\LSM9DS1.pdf = Documentation\Components\LSM9DS1.pdf
 		Documentation\Components\MB85RC04V.pdf = Documentation\Components\MB85RC04V.pdf

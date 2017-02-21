@@ -13,14 +13,14 @@ cx::SpiDevice^ SpiExtensions::Connect(int busNumber, int chipSelectLine, cx::Spi
 	// C++/WinRT Start -----------------------------------------------------------
 
 	// Validate
-	if (busNumber < 0) throw ref new cx::InvalidArgumentException("busNumber");
-	if (chipSelectLine < 0) throw ref new cx::InvalidArgumentException("chipSelectLine");
+	if (busNumber < 0) throw winrt::hresult_invalid_argument(L"busNumber");
+	if (chipSelectLine < 0) throw winrt::hresult_invalid_argument(L"chipSelectLine");
 
 	// Query bus information
 	auto query = winrt::SpiDevice::GetDeviceSelector();
 	auto busInformation = winrt::DeviceInformation::FindAllAsync(query).get();
 	if (busInformation.Size() < 1)
-		throw ref new cx::InvalidArgumentException(L"busNumber");
+		throw winrt::hresult_invalid_argument(L"busNumber");
 
 	// Configure connection
 	auto id = busInformation.GetAt(busNumber).Id();

@@ -4,6 +4,12 @@
     <Filter Include="Buses">
       <UniqueIdentifier>{12d85262-b852-4933-af61-bd3a1e29f65f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Protocols">
+      <UniqueIdentifier>{a56cb169-12d0-457a-a70e-b129425e03d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Protocols\SerialWireDebug">
+      <UniqueIdentifier>{a9e5318a-5c11-4ca0-970d-958f8f0145b9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -14,6 +20,9 @@
       <Filter>Buses</Filter>
     </ClCompile>
     <ClCompile Include="Buses\SpiExtensions.cpp">
+      <Filter>Buses</Filter>
+    </ClCompile>
+    <ClCompile Include="Buses\GpioSwdPort.cpp">
       <Filter>Buses</Filter>
     </ClCompile>
   </ItemGroup>
@@ -28,5 +37,16 @@
     <ClInclude Include="Buses\SpiExtensions.h">
       <Filter>Buses</Filter>
     </ClInclude>
+    <ClInclude Include="Buses\GpioSwdPort.h">
+      <Filter>Buses</Filter>
+    </ClInclude>
+    <ClInclude Include="Protocols\SerialWireDebug\SwdRequestBits.h">
+      <Filter>Protocols\SerialWireDebug</Filter>
+    </ClInclude>
+    <ClInclude Include="Protocols\SerialWireDebug\SwdResponseBits.h">
+      <Filter>Protocols\SerialWireDebug</Filter>
+    </ClInclude>
+    <ClInclude Include="Protocols\SerialWireDebug\SwdDebugPortIdRegisterBits.h" />
+    <ClInclude Include="Protocols\SerialWireDebug\SwdRegisterAddresses.h" />
   </ItemGroup>
 </Project>
