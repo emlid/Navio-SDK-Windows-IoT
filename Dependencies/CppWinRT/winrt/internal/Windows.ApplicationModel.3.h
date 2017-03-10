@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -43,9 +43,9 @@ struct FullTrustProcessLauncher
 {
     FullTrustProcessLauncher() = delete;
     static Windows::Foundation::IAsyncAction LaunchFullTrustProcessForCurrentAppAsync();
-    static Windows::Foundation::IAsyncAction LaunchFullTrustProcessForCurrentAppAsync(hstring_ref parameterGroupId);
-    static Windows::Foundation::IAsyncAction LaunchFullTrustProcessForAppAsync(hstring_ref fullTrustPackageRelativeAppId);
-    static Windows::Foundation::IAsyncAction LaunchFullTrustProcessForAppAsync(hstring_ref fullTrustPackageRelativeAppId, hstring_ref parameterGroupId);
+    static Windows::Foundation::IAsyncAction LaunchFullTrustProcessForCurrentAppAsync(hstring_view parameterGroupId);
+    static Windows::Foundation::IAsyncAction LaunchFullTrustProcessForAppAsync(hstring_view fullTrustPackageRelativeAppId);
+    static Windows::Foundation::IAsyncAction LaunchFullTrustProcessForAppAsync(hstring_view fullTrustPackageRelativeAppId, hstring_view parameterGroupId);
 };
 
 struct WINRT_EBO LeavingBackgroundEventArgs :
@@ -56,18 +56,38 @@ struct WINRT_EBO LeavingBackgroundEventArgs :
 
 struct WINRT_EBO Package :
     Windows::ApplicationModel::IPackage,
-    impl::require<Package, Windows::ApplicationModel::IPackageWithMetadata, Windows::ApplicationModel::IPackage2, Windows::ApplicationModel::IPackage3, Windows::ApplicationModel::IPackage4>
+    impl::require<Package, Windows::ApplicationModel::IPackageWithMetadata, Windows::ApplicationModel::IPackage2, Windows::ApplicationModel::IPackage3, Windows::ApplicationModel::IPackage4, Windows::ApplicationModel::IPackage5>
 {
     Package(std::nullptr_t) noexcept {}
     static Windows::ApplicationModel::Package Current();
 };
 
 struct WINRT_EBO PackageCatalog :
-    Windows::ApplicationModel::IPackageCatalog
+    Windows::ApplicationModel::IPackageCatalog,
+    impl::require<PackageCatalog, Windows::ApplicationModel::IPackageCatalog2>
 {
     PackageCatalog(std::nullptr_t) noexcept {}
     static Windows::ApplicationModel::PackageCatalog OpenForCurrentPackage();
     static Windows::ApplicationModel::PackageCatalog OpenForCurrentUser();
+};
+
+struct WINRT_EBO PackageCatalogAddOptionalPackageResult :
+    Windows::ApplicationModel::IPackageCatalogAddOptionalPackageResult
+{
+    PackageCatalogAddOptionalPackageResult(std::nullptr_t) noexcept {}
+};
+
+struct WINRT_EBO PackageContentGroup :
+    Windows::ApplicationModel::IPackageContentGroup
+{
+    PackageContentGroup(std::nullptr_t) noexcept {}
+    static hstring RequiredGroupName();
+};
+
+struct WINRT_EBO PackageContentGroupStagingEventArgs :
+    Windows::ApplicationModel::IPackageContentGroupStagingEventArgs
+{
+    PackageContentGroupStagingEventArgs(std::nullptr_t) noexcept {}
 };
 
 struct WINRT_EBO PackageId :
@@ -90,7 +110,8 @@ struct WINRT_EBO PackageStagingEventArgs :
 };
 
 struct WINRT_EBO PackageStatus :
-    Windows::ApplicationModel::IPackageStatus
+    Windows::ApplicationModel::IPackageStatus,
+    impl::require<PackageStatus, Windows::ApplicationModel::IPackageStatus2>
 {
     PackageStatus(std::nullptr_t) noexcept {}
 };
@@ -118,7 +139,7 @@ struct WINRT_EBO StartupTask :
 {
     StartupTask(std::nullptr_t) noexcept {}
     static Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::StartupTask>> GetForCurrentPackageAsync();
-    static Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::StartupTask> GetAsync(hstring_ref taskId);
+    static Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::StartupTask> GetAsync(hstring_view taskId);
 };
 
 struct WINRT_EBO SuspendingDeferral :

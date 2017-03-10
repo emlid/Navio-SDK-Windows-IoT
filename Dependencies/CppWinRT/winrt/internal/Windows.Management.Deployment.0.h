@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -21,15 +21,19 @@ using DeploymentProgress = ABI::Windows::Management::Deployment::DeploymentProgr
 namespace ABI::Windows::Management::Deployment {
 
 struct IDeploymentResult;
+struct IDeploymentResult2;
 struct IPackageManager;
 struct IPackageManager2;
 struct IPackageManager3;
 struct IPackageManager4;
+struct IPackageManager5;
+struct IPackageManagerDebugSettings;
 struct IPackageUserInformation;
 struct IPackageVolume;
 struct IPackageVolume2;
 struct DeploymentResult;
 struct PackageManager;
+struct PackageManagerDebugSettings;
 struct PackageUserInformation;
 struct PackageVolume;
 
@@ -38,17 +42,37 @@ struct PackageVolume;
 namespace Windows::Management::Deployment {
 
 struct IDeploymentResult;
+struct IDeploymentResult2;
 struct IPackageManager;
 struct IPackageManager2;
 struct IPackageManager3;
 struct IPackageManager4;
+struct IPackageManager5;
+struct IPackageManagerDebugSettings;
 struct IPackageUserInformation;
 struct IPackageVolume;
 struct IPackageVolume2;
 struct DeploymentResult;
 struct PackageManager;
+struct PackageManagerDebugSettings;
 struct PackageUserInformation;
 struct PackageVolume;
+
+}
+
+namespace Windows::Management::Deployment {
+
+template <typename T> struct impl_IDeploymentResult;
+template <typename T> struct impl_IDeploymentResult2;
+template <typename T> struct impl_IPackageManager;
+template <typename T> struct impl_IPackageManager2;
+template <typename T> struct impl_IPackageManager3;
+template <typename T> struct impl_IPackageManager4;
+template <typename T> struct impl_IPackageManager5;
+template <typename T> struct impl_IPackageManagerDebugSettings;
+template <typename T> struct impl_IPackageUserInformation;
+template <typename T> struct impl_IPackageVolume;
+template <typename T> struct impl_IPackageVolume2;
 
 }
 
@@ -61,6 +85,7 @@ enum class DeploymentOptions : unsigned
     DevelopmentMode = 0x2,
     InstallAllResources = 0x20,
     ForceTargetApplicationShutdown = 0x40,
+    RequiredContentGroupOnly = 0x100,
 };
 
 DEFINE_ENUM_FLAG_OPERATORS(DeploymentOptions)

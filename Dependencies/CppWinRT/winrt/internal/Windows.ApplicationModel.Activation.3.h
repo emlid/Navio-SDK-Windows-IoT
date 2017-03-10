@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -79,6 +79,13 @@ struct WINRT_EBO ContactMessageActivatedEventArgs :
     Windows::ApplicationModel::Activation::IContactMessageActivatedEventArgs
 {
     ContactMessageActivatedEventArgs(std::nullptr_t) noexcept {}
+};
+
+struct WINRT_EBO ContactPanelActivatedEventArgs :
+    Windows::ApplicationModel::Activation::IContactPanelActivatedEventArgs,
+    impl::require<ContactPanelActivatedEventArgs, Windows::ApplicationModel::Activation::IActivatedEventArgs, Windows::ApplicationModel::Activation::IActivatedEventArgsWithUser>
+{
+    ContactPanelActivatedEventArgs(std::nullptr_t) noexcept {}
 };
 
 struct WINRT_EBO ContactPickerActivatedEventArgs :
@@ -183,6 +190,12 @@ struct WINRT_EBO LockScreenCallActivatedEventArgs :
     LockScreenCallActivatedEventArgs(std::nullptr_t) noexcept {}
 };
 
+struct WINRT_EBO LockScreenComponentActivatedEventArgs :
+    Windows::ApplicationModel::Activation::IActivatedEventArgs
+{
+    LockScreenComponentActivatedEventArgs(std::nullptr_t) noexcept {}
+};
+
 struct WINRT_EBO PickerReturnedActivatedEventArgs :
     Windows::ApplicationModel::Activation::IPickerReturnedActivatedEventArgs
 {
@@ -199,6 +212,12 @@ struct WINRT_EBO PrintTaskSettingsActivatedEventArgs :
     Windows::ApplicationModel::Activation::IPrintTaskSettingsActivatedEventArgs
 {
     PrintTaskSettingsActivatedEventArgs(std::nullptr_t) noexcept {}
+};
+
+struct WINRT_EBO PrintWorkflowForegroundTaskActivatedEventArgs :
+    Windows::ApplicationModel::Activation::IPrintWorkflowForegroundTaskActivatedEventArgs
+{
+    PrintWorkflowForegroundTaskActivatedEventArgs(std::nullptr_t) noexcept {}
 };
 
 struct WINRT_EBO ProtocolActivatedEventArgs :
@@ -250,7 +269,7 @@ struct WINRT_EBO TileActivatedInfo :
 
 struct WINRT_EBO ToastNotificationActivatedEventArgs :
     Windows::ApplicationModel::Activation::IToastNotificationActivatedEventArgs,
-    impl::require<ToastNotificationActivatedEventArgs, Windows::ApplicationModel::Activation::IActivatedEventArgsWithUser>
+    impl::require<ToastNotificationActivatedEventArgs, Windows::ApplicationModel::Activation::IActivatedEventArgsWithUser, Windows::ApplicationModel::Activation::IApplicationViewActivatedEventArgs>
 {
     ToastNotificationActivatedEventArgs(std::nullptr_t) noexcept {}
 };

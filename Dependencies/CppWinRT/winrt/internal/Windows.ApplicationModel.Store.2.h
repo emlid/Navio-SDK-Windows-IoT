@@ -1,21 +1,11 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
 #include "Windows.ApplicationModel.Store.1.h"
 
 WINRT_EXPORT namespace winrt {
-
-namespace ABI::Windows::Foundation {
-
-#ifndef WINRT_GENERIC_3e1fe603_f897_5263_b328_0806426b8a79
-#define WINRT_GENERIC_3e1fe603_f897_5263_b328_0806426b8a79
-template <> struct __declspec(uuid("3e1fe603-f897-5263-b328-0806426b8a79")) __declspec(novtable) IAsyncOperation<hstring> : impl_IAsyncOperation<hstring> {};
-#endif
-
-
-}
 
 namespace ABI::Windows::Foundation::Collections {
 
@@ -24,10 +14,25 @@ namespace ABI::Windows::Foundation::Collections {
 template <> struct __declspec(uuid("e2fcc7c1-3bfc-5a0b-b2b0-72e769d1cb7e")) __declspec(novtable) IIterable<hstring> : impl_IIterable<hstring> {};
 #endif
 
+#ifndef WINRT_GENERIC_2f13c006_a03a_5f69_b090_75a43e33423e
+#define WINRT_GENERIC_2f13c006_a03a_5f69_b090_75a43e33423e
+template <> struct __declspec(uuid("2f13c006-a03a-5f69-b090-75a43e33423e")) __declspec(novtable) IVectorView<hstring> : impl_IVectorView<hstring> {};
+#endif
+
+#ifndef WINRT_GENERIC_98b9acc1_4b56_532e_ac73_03d5291cca90
+#define WINRT_GENERIC_98b9acc1_4b56_532e_ac73_03d5291cca90
+template <> struct __declspec(uuid("98b9acc1-4b56-532e-ac73-03d5291cca90")) __declspec(novtable) IVector<hstring> : impl_IVector<hstring> {};
+#endif
+
 
 }
 
 namespace ABI::Windows::Foundation {
+
+#ifndef WINRT_GENERIC_3e1fe603_f897_5263_b328_0806426b8a79
+#define WINRT_GENERIC_3e1fe603_f897_5263_b328_0806426b8a79
+template <> struct __declspec(uuid("3e1fe603-f897-5263-b328-0806426b8a79")) __declspec(novtable) IAsyncOperation<hstring> : impl_IAsyncOperation<hstring> {};
+#endif
 
 #ifndef WINRT_GENERIC_161600f7_6d4f_500d_93a8_09ad6b5ac4ab
 #define WINRT_GENERIC_161600f7_6d4f_500d_93a8_09ad6b5ac4ab
@@ -64,21 +69,6 @@ template <> struct __declspec(uuid("d6434f65-dd84-534c-b579-cc10d69ec30a")) __de
 template <> struct __declspec(uuid("3206de83-efbe-5791-a487-2ac974206ec6")) __declspec(novtable) IMapView<hstring, Windows::ApplicationModel::Store::ProductListing> : impl_IMapView<hstring, Windows::ApplicationModel::Store::ProductListing> {};
 #endif
 
-
-}
-
-namespace ABI::Windows::Foundation {
-
-#ifndef WINRT_GENERIC_b79a741f_7fb5_50ae_9e99_911201ec3d41
-#define WINRT_GENERIC_b79a741f_7fb5_50ae_9e99_911201ec3d41
-template <> struct __declspec(uuid("b79a741f-7fb5-50ae-9e99-911201ec3d41")) __declspec(novtable) AsyncOperationCompletedHandler<hstring> : impl_AsyncOperationCompletedHandler<hstring> {};
-#endif
-
-
-}
-
-namespace ABI::Windows::Foundation::Collections {
-
 #ifndef WINRT_GENERIC_8c304ebb_6615_50a4_8829_879ecd443236
 #define WINRT_GENERIC_8c304ebb_6615_50a4_8829_879ecd443236
 template <> struct __declspec(uuid("8c304ebb-6615-50a4-8829-879ecd443236")) __declspec(novtable) IIterator<hstring> : impl_IIterator<hstring> {};
@@ -88,6 +78,11 @@ template <> struct __declspec(uuid("8c304ebb-6615-50a4-8829-879ecd443236")) __de
 }
 
 namespace ABI::Windows::Foundation {
+
+#ifndef WINRT_GENERIC_b79a741f_7fb5_50ae_9e99_911201ec3d41
+#define WINRT_GENERIC_b79a741f_7fb5_50ae_9e99_911201ec3d41
+template <> struct __declspec(uuid("b79a741f-7fb5-50ae-9e99-911201ec3d41")) __declspec(novtable) AsyncOperationCompletedHandler<hstring> : impl_AsyncOperationCompletedHandler<hstring> {};
+#endif
 
 #ifndef WINRT_GENERIC_fdf83922_762e_57dc_b721_c72ee568fd96
 #define WINRT_GENERIC_fdf83922_762e_57dc_b721_c72ee568fd96
@@ -109,6 +104,11 @@ template <> struct __declspec(uuid("24b6922a-fdb1-5003-ae89-c8bf16ca0143")) __de
 
 namespace ABI::Windows::Foundation::Collections {
 
+#ifndef WINRT_GENERIC_e053ff3a_ca1f_5135_931d_f03508032850
+#define WINRT_GENERIC_e053ff3a_ca1f_5135_931d_f03508032850
+template <> struct __declspec(uuid("e053ff3a-ca1f-5135-931d-f03508032850")) __declspec(novtable) IVector<Windows::ApplicationModel::Store::UnfulfilledConsumable> : impl_IVector<Windows::ApplicationModel::Store::UnfulfilledConsumable> {};
+#endif
+
 #ifndef WINRT_GENERIC_cb77cf2e_ef57_5256_9753_214baada2301
 #define WINRT_GENERIC_cb77cf2e_ef57_5256_9753_214baada2301
 template <> struct __declspec(uuid("cb77cf2e-ef57-5256-9753-214baada2301")) __declspec(novtable) IIterator<Windows::ApplicationModel::Store::UnfulfilledConsumable> : impl_IIterator<Windows::ApplicationModel::Store::UnfulfilledConsumable> {};
@@ -124,9 +124,19 @@ template <> struct __declspec(uuid("2f4d1483-dd86-5fdb-8c44-06c98844bf3d")) __de
 template <> struct __declspec(uuid("ff71c38c-3e6e-5e60-994b-9201436deed1")) __declspec(novtable) IKeyValuePair<hstring, Windows::ApplicationModel::Store::ProductLicense> : impl_IKeyValuePair<hstring, Windows::ApplicationModel::Store::ProductLicense> {};
 #endif
 
+#ifndef WINRT_GENERIC_56c2be30_197a_59cc_9acf_26ea81a8753f
+#define WINRT_GENERIC_56c2be30_197a_59cc_9acf_26ea81a8753f
+template <> struct __declspec(uuid("56c2be30-197a-59cc-9acf-26ea81a8753f")) __declspec(novtable) IMap<hstring, Windows::ApplicationModel::Store::ProductLicense> : impl_IMap<hstring, Windows::ApplicationModel::Store::ProductLicense> {};
+#endif
+
 #ifndef WINRT_GENERIC_61a02c5d_4007_573e_8a01_0259714927df
 #define WINRT_GENERIC_61a02c5d_4007_573e_8a01_0259714927df
 template <> struct __declspec(uuid("61a02c5d-4007-573e-8a01-0259714927df")) __declspec(novtable) IKeyValuePair<hstring, Windows::ApplicationModel::Store::ProductListing> : impl_IKeyValuePair<hstring, Windows::ApplicationModel::Store::ProductListing> {};
+#endif
+
+#ifndef WINRT_GENERIC_100b61ec_b969_57fa_822a_cc321bfaa6c5
+#define WINRT_GENERIC_100b61ec_b969_57fa_822a_cc321bfaa6c5
+template <> struct __declspec(uuid("100b61ec-b969-57fa-822a-cc321bfaa6c5")) __declspec(novtable) IMap<hstring, Windows::ApplicationModel::Store::ProductListing> : impl_IMap<hstring, Windows::ApplicationModel::Store::ProductListing> {};
 #endif
 
 
@@ -174,203 +184,9 @@ template <> struct __declspec(uuid("3a7d9a2f-2a82-59f8-bd7c-d691ca169863")) __de
 
 namespace Windows::ApplicationModel::Store {
 
-template <typename D>
-struct WINRT_EBO impl_ICurrentApp
-{
-    Windows::ApplicationModel::Store::LicenseInformation LicenseInformation() const;
-    Windows::Foundation::Uri LinkUri() const;
-    GUID AppId() const;
-    Windows::Foundation::IAsyncOperation<hstring> RequestAppPurchaseAsync(bool includeReceipt) const;
-    Windows::Foundation::IAsyncOperation<hstring> RequestProductPurchaseAsync(hstring_ref productId, bool includeReceipt) const;
-    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::ListingInformation> LoadListingInformationAsync() const;
-    Windows::Foundation::IAsyncOperation<hstring> GetAppReceiptAsync() const;
-    Windows::Foundation::IAsyncOperation<hstring> GetProductReceiptAsync(hstring_ref productId) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_ICurrentApp2Statics
-{
-    Windows::Foundation::IAsyncOperation<hstring> GetCustomerPurchaseIdAsync(hstring_ref serviceTicket, hstring_ref publisherUserId) const;
-    Windows::Foundation::IAsyncOperation<hstring> GetCustomerCollectionsIdAsync(hstring_ref serviceTicket, hstring_ref publisherUserId) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_ICurrentAppSimulator
-{
-    Windows::ApplicationModel::Store::LicenseInformation LicenseInformation() const;
-    Windows::Foundation::Uri LinkUri() const;
-    GUID AppId() const;
-    Windows::Foundation::IAsyncOperation<hstring> RequestAppPurchaseAsync(bool includeReceipt) const;
-    Windows::Foundation::IAsyncOperation<hstring> RequestProductPurchaseAsync(hstring_ref productId, bool includeReceipt) const;
-    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::ListingInformation> LoadListingInformationAsync() const;
-    Windows::Foundation::IAsyncOperation<hstring> GetAppReceiptAsync() const;
-    Windows::Foundation::IAsyncOperation<hstring> GetProductReceiptAsync(hstring_ref productId) const;
-    Windows::Foundation::IAsyncAction ReloadSimulatorAsync(const Windows::Storage::StorageFile & simulatorSettingsFile) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_ICurrentAppSimulatorStaticsWithFiltering
-{
-    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::ListingInformation> LoadListingInformationByProductIdsAsync(const Windows::Foundation::Collections::IIterable<hstring> & productIds) const;
-    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::ListingInformation> LoadListingInformationByKeywordsAsync(const Windows::Foundation::Collections::IIterable<hstring> & keywords) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_ICurrentAppSimulatorWithCampaignId
-{
-    Windows::Foundation::IAsyncOperation<hstring> GetAppPurchaseCampaignIdAsync() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_ICurrentAppSimulatorWithConsumables
-{
-    Windows::Foundation::IAsyncOperation<winrt::Windows::ApplicationModel::Store::FulfillmentResult> ReportConsumableFulfillmentAsync(hstring_ref productId, GUID transactionId) const;
-    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::PurchaseResults> RequestProductPurchaseAsync(hstring_ref productId) const;
-    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::PurchaseResults> RequestProductPurchaseAsync(hstring_ref productId, hstring_ref offerId, const Windows::ApplicationModel::Store::ProductPurchaseDisplayProperties & displayProperties) const;
-    Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Store::UnfulfilledConsumable>> GetUnfulfilledConsumablesAsync() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_ICurrentAppStaticsWithFiltering
-{
-    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::ListingInformation> LoadListingInformationByProductIdsAsync(const Windows::Foundation::Collections::IIterable<hstring> & productIds) const;
-    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::ListingInformation> LoadListingInformationByKeywordsAsync(const Windows::Foundation::Collections::IIterable<hstring> & keywords) const;
-    void ReportProductFulfillment(hstring_ref productId) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_ICurrentAppWithCampaignId
-{
-    Windows::Foundation::IAsyncOperation<hstring> GetAppPurchaseCampaignIdAsync() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_ICurrentAppWithConsumables
-{
-    Windows::Foundation::IAsyncOperation<winrt::Windows::ApplicationModel::Store::FulfillmentResult> ReportConsumableFulfillmentAsync(hstring_ref productId, GUID transactionId) const;
-    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::PurchaseResults> RequestProductPurchaseAsync(hstring_ref productId) const;
-    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::PurchaseResults> RequestProductPurchaseAsync(hstring_ref productId, hstring_ref offerId, const Windows::ApplicationModel::Store::ProductPurchaseDisplayProperties & displayProperties) const;
-    Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Store::UnfulfilledConsumable>> GetUnfulfilledConsumablesAsync() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_ILicenseInformation
-{
-    Windows::Foundation::Collections::IMapView<hstring, Windows::ApplicationModel::Store::ProductLicense> ProductLicenses() const;
-    bool IsActive() const;
-    bool IsTrial() const;
-    Windows::Foundation::DateTime ExpirationDate() const;
-    event_token LicenseChanged(const Windows::ApplicationModel::Store::LicenseChangedEventHandler & handler) const;
-    using LicenseChanged_revoker = event_revoker<ILicenseInformation>;
-    LicenseChanged_revoker LicenseChanged(auto_revoke_t, const Windows::ApplicationModel::Store::LicenseChangedEventHandler & handler) const;
-    void LicenseChanged(event_token cookie) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IListingInformation
-{
-    hstring CurrentMarket() const;
-    hstring Description() const;
-    Windows::Foundation::Collections::IMapView<hstring, Windows::ApplicationModel::Store::ProductListing> ProductListings() const;
-    hstring FormattedPrice() const;
-    hstring Name() const;
-    uint32_t AgeRating() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IListingInformation2
-{
-    hstring FormattedBasePrice() const;
-    Windows::Foundation::DateTime SaleEndDate() const;
-    bool IsOnSale() const;
-    hstring CurrencyCode() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IProductLicense
-{
-    hstring ProductId() const;
-    bool IsActive() const;
-    Windows::Foundation::DateTime ExpirationDate() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IProductLicenseWithFulfillment
-{
-    bool IsConsumable() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IProductListing
-{
-    hstring ProductId() const;
-    hstring FormattedPrice() const;
-    hstring Name() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IProductListing2
-{
-    hstring FormattedBasePrice() const;
-    Windows::Foundation::DateTime SaleEndDate() const;
-    bool IsOnSale() const;
-    hstring CurrencyCode() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IProductListingWithConsumables
-{
-    Windows::ApplicationModel::Store::ProductType ProductType() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IProductListingWithMetadata
-{
-    hstring Description() const;
-    Windows::Foundation::Collections::IIterable<hstring> Keywords() const;
-    Windows::ApplicationModel::Store::ProductType ProductType() const;
-    hstring Tag() const;
-    Windows::Foundation::Uri ImageUri() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IProductPurchaseDisplayProperties
-{
-    hstring Name() const;
-    void Name(hstring_ref value) const;
-    hstring Description() const;
-    void Description(hstring_ref value) const;
-    Windows::Foundation::Uri Image() const;
-    void Image(const Windows::Foundation::Uri & value) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IProductPurchaseDisplayPropertiesFactory
-{
-    Windows::ApplicationModel::Store::ProductPurchaseDisplayProperties CreateProductPurchaseDisplayProperties(hstring_ref name) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IPurchaseResults
-{
-    Windows::ApplicationModel::Store::ProductPurchaseStatus Status() const;
-    GUID TransactionId() const;
-    hstring ReceiptXml() const;
-    hstring OfferId() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IUnfulfilledConsumable
-{
-    hstring ProductId() const;
-    GUID TransactionId() const;
-    hstring OfferId() const;
-};
-
-struct LicenseChangedEventHandler : Windows::IUnknown
+struct LicenseChangedEventHandler : Windows::Foundation::IUnknown
 {
     LicenseChangedEventHandler(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<LicenseChangedEventHandler>(m_ptr); }
     template <typename L> LicenseChangedEventHandler(L lambda);
     template <typename F> LicenseChangedEventHandler (F * function);
     template <typename O, typename M> LicenseChangedEventHandler(O * object, M method);
@@ -378,181 +194,159 @@ struct LicenseChangedEventHandler : Windows::IUnknown
 };
 
 struct ICurrentApp :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<ICurrentApp>
 {
     ICurrentApp(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<ICurrentApp>(m_ptr); }
 };
 
 struct ICurrentApp2Statics :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<ICurrentApp2Statics>
 {
     ICurrentApp2Statics(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<ICurrentApp2Statics>(m_ptr); }
 };
 
 struct ICurrentAppSimulator :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<ICurrentAppSimulator>
 {
     ICurrentAppSimulator(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<ICurrentAppSimulator>(m_ptr); }
 };
 
 struct ICurrentAppSimulatorStaticsWithFiltering :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<ICurrentAppSimulatorStaticsWithFiltering>
 {
     ICurrentAppSimulatorStaticsWithFiltering(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<ICurrentAppSimulatorStaticsWithFiltering>(m_ptr); }
 };
 
 struct ICurrentAppSimulatorWithCampaignId :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<ICurrentAppSimulatorWithCampaignId>
 {
     ICurrentAppSimulatorWithCampaignId(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<ICurrentAppSimulatorWithCampaignId>(m_ptr); }
 };
 
 struct ICurrentAppSimulatorWithConsumables :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<ICurrentAppSimulatorWithConsumables>
 {
     ICurrentAppSimulatorWithConsumables(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<ICurrentAppSimulatorWithConsumables>(m_ptr); }
 };
 
 struct ICurrentAppStaticsWithFiltering :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<ICurrentAppStaticsWithFiltering>
 {
     ICurrentAppStaticsWithFiltering(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<ICurrentAppStaticsWithFiltering>(m_ptr); }
 };
 
 struct ICurrentAppWithCampaignId :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<ICurrentAppWithCampaignId>
 {
     ICurrentAppWithCampaignId(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<ICurrentAppWithCampaignId>(m_ptr); }
 };
 
 struct ICurrentAppWithConsumables :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<ICurrentAppWithConsumables>
 {
     ICurrentAppWithConsumables(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<ICurrentAppWithConsumables>(m_ptr); }
 };
 
 struct ILicenseInformation :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<ILicenseInformation>
 {
     ILicenseInformation(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<ILicenseInformation>(m_ptr); }
 };
 
 struct IListingInformation :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IListingInformation>
 {
     IListingInformation(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IListingInformation>(m_ptr); }
 };
 
 struct IListingInformation2 :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IListingInformation2>
 {
     IListingInformation2(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IListingInformation2>(m_ptr); }
 };
 
 struct IProductLicense :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IProductLicense>
 {
     IProductLicense(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IProductLicense>(m_ptr); }
 };
 
 struct IProductLicenseWithFulfillment :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IProductLicenseWithFulfillment>,
     impl::require<IProductLicenseWithFulfillment, Windows::ApplicationModel::Store::IProductLicense>
 {
     IProductLicenseWithFulfillment(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IProductLicenseWithFulfillment>(m_ptr); }
 };
 
 struct IProductListing :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IProductListing>
 {
     IProductListing(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IProductListing>(m_ptr); }
 };
 
 struct IProductListing2 :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IProductListing2>
 {
     IProductListing2(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IProductListing2>(m_ptr); }
 };
 
 struct IProductListingWithConsumables :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IProductListingWithConsumables>
 {
     IProductListingWithConsumables(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IProductListingWithConsumables>(m_ptr); }
 };
 
 struct IProductListingWithMetadata :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IProductListingWithMetadata>,
     impl::require<IProductListingWithMetadata, Windows::ApplicationModel::Store::IProductListing>
 {
     IProductListingWithMetadata(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IProductListingWithMetadata>(m_ptr); }
 };
 
 struct IProductPurchaseDisplayProperties :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IProductPurchaseDisplayProperties>
 {
     IProductPurchaseDisplayProperties(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IProductPurchaseDisplayProperties>(m_ptr); }
 };
 
 struct IProductPurchaseDisplayPropertiesFactory :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IProductPurchaseDisplayPropertiesFactory>
 {
     IProductPurchaseDisplayPropertiesFactory(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IProductPurchaseDisplayPropertiesFactory>(m_ptr); }
 };
 
 struct IPurchaseResults :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IPurchaseResults>
 {
     IPurchaseResults(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IPurchaseResults>(m_ptr); }
 };
 
 struct IUnfulfilledConsumable :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IUnfulfilledConsumable>
 {
     IUnfulfilledConsumable(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IUnfulfilledConsumable>(m_ptr); }
 };
 
 }

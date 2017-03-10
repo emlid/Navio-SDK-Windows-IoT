@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -36,8 +36,85 @@ struct WINRT_EBO AudioTrackSupportInfo :
     AudioTrackSupportInfo(std::nullptr_t) noexcept {}
 };
 
+struct WINRT_EBO ChapterCue :
+    Windows::Media::Core::IChapterCue
+{
+    ChapterCue(std::nullptr_t) noexcept {}
+    ChapterCue();
+};
+
+struct WINRT_EBO CodecInfo :
+    Windows::Media::Core::ICodecInfo
+{
+    CodecInfo(std::nullptr_t) noexcept {}
+};
+
+struct WINRT_EBO CodecQuery :
+    Windows::Media::Core::ICodecQuery
+{
+    CodecQuery(std::nullptr_t) noexcept {}
+    CodecQuery();
+};
+
+struct CodecSubtypes
+{
+    CodecSubtypes() = delete;
+    static hstring VideoFormatDV25();
+    static hstring VideoFormatDV50();
+    static hstring VideoFormatDvc();
+    static hstring VideoFormatDvh1();
+    static hstring VideoFormatDvhD();
+    static hstring VideoFormatDvsd();
+    static hstring VideoFormatDvsl();
+    static hstring VideoFormatH263();
+    static hstring VideoFormatH264();
+    static hstring VideoFormatH265();
+    static hstring VideoFormatH264ES();
+    static hstring VideoFormatHevc();
+    static hstring VideoFormatHevcES();
+    static hstring VideoFormatM4S2();
+    static hstring VideoFormatMjpg();
+    static hstring VideoFormatMP43();
+    static hstring VideoFormatMP4S();
+    static hstring VideoFormatMP4V();
+    static hstring VideoFormatMpeg2();
+    static hstring VideoFormatVP80();
+    static hstring VideoFormatVP90();
+    static hstring VideoFormatMpg1();
+    static hstring VideoFormatMss1();
+    static hstring VideoFormatMss2();
+    static hstring VideoFormatWmv1();
+    static hstring VideoFormatWmv2();
+    static hstring VideoFormatWmv3();
+    static hstring VideoFormatWvc1();
+    static hstring VideoFormat420O();
+    static hstring AudioFormatAac();
+    static hstring AudioFormatAdts();
+    static hstring AudioFormatAlac();
+    static hstring AudioFormatAmrNB();
+    static hstring AudioFormatAmrWB();
+    static hstring AudioFormatAmrWP();
+    static hstring AudioFormatDolbyAC3();
+    static hstring AudioFormatDolbyAC3Spdif();
+    static hstring AudioFormatDolbyDDPlus();
+    static hstring AudioFormatDrm();
+    static hstring AudioFormatDts();
+    static hstring AudioFormatFlac();
+    static hstring AudioFormatFloat();
+    static hstring AudioFormatMP3();
+    static hstring AudioFormatMPeg();
+    static hstring AudioFormatMsp1();
+    static hstring AudioFormatOpus();
+    static hstring AudioFormatPcm();
+    static hstring AudioFormatWmaSpdif();
+    static hstring AudioFormatWMAudioLossless();
+    static hstring AudioFormatWMAudioV8();
+    static hstring AudioFormatWMAudioV9();
+};
+
 struct WINRT_EBO DataCue :
-    Windows::Media::Core::IDataCue
+    Windows::Media::Core::IDataCue,
+    impl::require<DataCue, Windows::Media::Core::IDataCue2>
 {
     DataCue(std::nullptr_t) noexcept {}
     DataCue();
@@ -81,6 +158,13 @@ struct WINRT_EBO HighDynamicRangeOutput :
     HighDynamicRangeOutput(std::nullptr_t) noexcept {}
 };
 
+struct WINRT_EBO ImageCue :
+    Windows::Media::Core::IImageCue
+{
+    ImageCue(std::nullptr_t) noexcept {}
+    ImageCue();
+};
+
 struct WINRT_EBO MediaBinder :
     Windows::Media::Core::IMediaBinder
 {
@@ -89,7 +173,8 @@ struct WINRT_EBO MediaBinder :
 };
 
 struct WINRT_EBO MediaBindingEventArgs :
-    Windows::Media::Core::IMediaBindingEventArgs
+    Windows::Media::Core::IMediaBindingEventArgs,
+    impl::require<MediaBindingEventArgs, Windows::Media::Core::IMediaBindingEventArgs2>
 {
     MediaBindingEventArgs(std::nullptr_t) noexcept {}
 };
@@ -102,7 +187,7 @@ struct WINRT_EBO MediaCueEventArgs :
 
 struct WINRT_EBO MediaSource :
     Windows::Media::Core::IMediaSource2,
-    impl::require<MediaSource, Windows::Media::Core::IMediaSource3>
+    impl::require<MediaSource, Windows::Media::Core::IMediaSource3, Windows::Media::Core::IMediaSource4>
 {
     MediaSource(std::nullptr_t) noexcept {}
     static Windows::Media::Core::MediaSource CreateFromAdaptiveMediaSource(const Windows::Media::Streaming::Adaptive::AdaptiveMediaSource & mediaSource);
@@ -110,8 +195,8 @@ struct WINRT_EBO MediaSource :
     static Windows::Media::Core::MediaSource CreateFromMseStreamSource(const Windows::Media::Core::MseStreamSource & mediaSource);
     static Windows::Media::Core::MediaSource CreateFromIMediaSource(const Windows::Media::Core::IMediaSource & mediaSource);
     static Windows::Media::Core::MediaSource CreateFromStorageFile(const Windows::Storage::IStorageFile & file);
-    static Windows::Media::Core::MediaSource CreateFromStream(const Windows::Storage::Streams::IRandomAccessStream & stream, hstring_ref contentType);
-    static Windows::Media::Core::MediaSource CreateFromStreamReference(const Windows::Storage::Streams::IRandomAccessStreamReference & stream, hstring_ref contentType);
+    static Windows::Media::Core::MediaSource CreateFromStream(const Windows::Storage::Streams::IRandomAccessStream & stream, hstring_view contentType);
+    static Windows::Media::Core::MediaSource CreateFromStreamReference(const Windows::Storage::Streams::IRandomAccessStreamReference & stream, hstring_view contentType);
     static Windows::Media::Core::MediaSource CreateFromUri(const Windows::Foundation::Uri & uri);
     static Windows::Media::Core::MediaSource CreateFromMediaBinder(const Windows::Media::Core::MediaBinder & binder);
 };
@@ -143,7 +228,7 @@ struct WINRT_EBO MediaStreamSample :
 };
 
 struct WINRT_EBO MediaStreamSamplePropertySet :
-    Windows::Foundation::Collections::IMap<GUID, Windows::IInspectable>
+    Windows::Foundation::Collections::IMap<GUID, Windows::Foundation::IInspectable>
 {
     MediaStreamSamplePropertySet(std::nullptr_t) noexcept {}
 };
@@ -156,7 +241,7 @@ struct WINRT_EBO MediaStreamSampleProtectionProperties :
 
 struct WINRT_EBO MediaStreamSource :
     Windows::Media::Core::IMediaStreamSource,
-    impl::require<MediaStreamSource, Windows::Media::Core::IMediaStreamSource2>
+    impl::require<MediaStreamSource, Windows::Media::Core::IMediaStreamSource2, Windows::Media::Core::IMediaStreamSource3>
 {
     MediaStreamSource(std::nullptr_t) noexcept {}
     MediaStreamSource(const Windows::Media::Core::IMediaStreamDescriptor & descriptor);
@@ -252,7 +337,7 @@ struct WINRT_EBO MseStreamSource :
 {
     MseStreamSource(std::nullptr_t) noexcept {}
     MseStreamSource();
-    static bool IsContentTypeSupported(hstring_ref contentType);
+    static bool IsContentTypeSupported(hstring_view contentType);
 };
 
 struct WINRT_EBO SceneAnalysisEffect :
@@ -280,12 +365,19 @@ struct WINRT_EBO SceneAnalyzedEventArgs :
     SceneAnalyzedEventArgs(std::nullptr_t) noexcept {}
 };
 
+struct WINRT_EBO SpeechCue :
+    Windows::Media::Core::ISpeechCue
+{
+    SpeechCue(std::nullptr_t) noexcept {}
+    SpeechCue();
+};
+
 struct WINRT_EBO TimedMetadataTrack :
     Windows::Media::Core::ITimedMetadataTrack,
     impl::require<TimedMetadataTrack, Windows::Media::Core::ITimedMetadataTrack2>
 {
     TimedMetadataTrack(std::nullptr_t) noexcept {}
-    TimedMetadataTrack(hstring_ref id, hstring_ref language, Windows::Media::Core::TimedMetadataKind kind);
+    TimedMetadataTrack(hstring_view id, hstring_view language, Windows::Media::Core::TimedMetadataKind kind);
 };
 
 struct WINRT_EBO TimedMetadataTrackError :
@@ -327,8 +419,12 @@ struct WINRT_EBO TimedTextSource :
     TimedTextSource(std::nullptr_t) noexcept {}
     static Windows::Media::Core::TimedTextSource CreateFromStream(const Windows::Storage::Streams::IRandomAccessStream & stream);
     static Windows::Media::Core::TimedTextSource CreateFromUri(const Windows::Foundation::Uri & uri);
-    static Windows::Media::Core::TimedTextSource CreateFromStream(const Windows::Storage::Streams::IRandomAccessStream & stream, hstring_ref defaultLanguage);
-    static Windows::Media::Core::TimedTextSource CreateFromUri(const Windows::Foundation::Uri & uri, hstring_ref defaultLanguage);
+    static Windows::Media::Core::TimedTextSource CreateFromStream(const Windows::Storage::Streams::IRandomAccessStream & stream, hstring_view defaultLanguage);
+    static Windows::Media::Core::TimedTextSource CreateFromUri(const Windows::Foundation::Uri & uri, hstring_view defaultLanguage);
+    static Windows::Media::Core::TimedTextSource CreateFromStreamWithIndex(const Windows::Storage::Streams::IRandomAccessStream & stream, const Windows::Storage::Streams::IRandomAccessStream & indexStream);
+    static Windows::Media::Core::TimedTextSource CreateFromUriWithIndex(const Windows::Foundation::Uri & uri, const Windows::Foundation::Uri & indexUri);
+    static Windows::Media::Core::TimedTextSource CreateFromStreamWithIndex(const Windows::Storage::Streams::IRandomAccessStream & stream, const Windows::Storage::Streams::IRandomAccessStream & indexStream, hstring_view defaultLanguage);
+    static Windows::Media::Core::TimedTextSource CreateFromUriWithIndex(const Windows::Foundation::Uri & uri, const Windows::Foundation::Uri & indexUri, hstring_view defaultLanguage);
 };
 
 struct WINRT_EBO TimedTextSourceResolveResultEventArgs :
@@ -338,7 +434,8 @@ struct WINRT_EBO TimedTextSourceResolveResultEventArgs :
 };
 
 struct WINRT_EBO TimedTextStyle :
-    Windows::Media::Core::ITimedTextStyle
+    Windows::Media::Core::ITimedTextStyle,
+    impl::require<TimedTextStyle, Windows::Media::Core::ITimedTextStyle2>
 {
     TimedTextStyle(std::nullptr_t) noexcept {}
     TimedTextStyle();

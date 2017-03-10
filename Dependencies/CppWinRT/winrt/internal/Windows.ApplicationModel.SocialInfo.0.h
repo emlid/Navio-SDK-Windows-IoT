@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -42,26 +42,37 @@ struct SocialUserInfo;
 
 namespace Windows::ApplicationModel::SocialInfo {
 
-enum class SocialFeedItemStyle
+template <typename T> struct impl_ISocialFeedChildItem;
+template <typename T> struct impl_ISocialFeedContent;
+template <typename T> struct impl_ISocialFeedItem;
+template <typename T> struct impl_ISocialFeedSharedItem;
+template <typename T> struct impl_ISocialItemThumbnail;
+template <typename T> struct impl_ISocialUserInfo;
+
+}
+
+namespace Windows::ApplicationModel::SocialInfo {
+
+enum class [[deprecated("SocialFeedItemStyle is deprecated and might not work on all platforms. For more info, see MSDN.")]] SocialFeedItemStyle
 {
     Default = 0,
     Photo = 1,
 };
 
-enum class SocialFeedKind
+enum class [[deprecated("SocialFeedKind is deprecated and might not work on all platforms. For more info, see MSDN.")]] SocialFeedKind
 {
     HomeFeed = 0,
     ContactFeed = 1,
     Dashboard = 2,
 };
 
-enum class SocialFeedUpdateMode
+enum class [[deprecated("SocialFeedUpdateMode is deprecated and might not work on all platforms. For more info, see MSDN.")]] SocialFeedUpdateMode
 {
     Append = 0,
     Replace = 1,
 };
 
-enum class SocialItemBadgeStyle
+enum class [[deprecated("SocialItemBadgeStyle is deprecated and might not work on all platforms. For more info, see MSDN.")]] SocialItemBadgeStyle
 {
     Hidden = 0,
     Visible = 1,

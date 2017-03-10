@@ -1,11 +1,16 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
+#include "base.h"
+WINRT_WARNING_PUSH
+
 #include "internal/Windows.Foundation.3.h"
 #include "internal/Windows.System.3.h"
+#include "internal/Windows.Storage.Streams.3.h"
 #include "internal/Windows.UI.Notifications.3.h"
+#include "internal/Windows.Foundation.Collections.3.h"
 #include "internal/Windows.Networking.PushNotifications.3.h"
 #include "Windows.Networking.h"
 
@@ -16,11 +21,12 @@ namespace impl {
 template <typename D>
 struct produce<D, Windows::Networking::PushNotifications::IPushNotificationChannel> : produce_base<D, Windows::Networking::PushNotifications::IPushNotificationChannel>
 {
-    HRESULT __stdcall get_Uri(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Uri(impl::abi_arg_out<hstring> value) noexcept override
     {
         try
         {
-            *value = detach(this->shim().Uri());
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().Uri());
             return S_OK;
         }
         catch (...)
@@ -30,11 +36,12 @@ struct produce<D, Windows::Networking::PushNotifications::IPushNotificationChann
         }
     }
 
-    HRESULT __stdcall get_ExpirationTime(abi_arg_out<Windows::Foundation::DateTime> value) noexcept override
+    HRESULT __stdcall get_ExpirationTime(impl::abi_arg_out<Windows::Foundation::DateTime> value) noexcept override
     {
         try
         {
-            *value = detach(this->shim().ExpirationTime());
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().ExpirationTime());
             return S_OK;
         }
         catch (...)
@@ -47,6 +54,7 @@ struct produce<D, Windows::Networking::PushNotifications::IPushNotificationChann
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().Close();
             return S_OK;
         }
@@ -56,11 +64,12 @@ struct produce<D, Windows::Networking::PushNotifications::IPushNotificationChann
         }
     }
 
-    HRESULT __stdcall add_PushNotificationReceived(abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::Networking::PushNotifications::PushNotificationChannel, Windows::Networking::PushNotifications::PushNotificationReceivedEventArgs>> handler, event_token * token) noexcept override
+    HRESULT __stdcall add_PushNotificationReceived(impl::abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::Networking::PushNotifications::PushNotificationChannel, Windows::Networking::PushNotifications::PushNotificationReceivedEventArgs>> handler, event_token * token) noexcept override
     {
         try
         {
-            *token = detach(this->shim().PushNotificationReceived(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::Networking::PushNotifications::PushNotificationChannel, Windows::Networking::PushNotifications::PushNotificationReceivedEventArgs> *>(&handler)));
+            typename D::abi_guard guard(this->shim());
+            *token = detach_abi(this->shim().PushNotificationReceived(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::Networking::PushNotifications::PushNotificationChannel, Windows::Networking::PushNotifications::PushNotificationReceivedEventArgs> *>(&handler)));
             return S_OK;
         }
         catch (...)
@@ -73,6 +82,7 @@ struct produce<D, Windows::Networking::PushNotifications::IPushNotificationChann
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().PushNotificationReceived(token);
             return S_OK;
         }
@@ -86,11 +96,12 @@ struct produce<D, Windows::Networking::PushNotifications::IPushNotificationChann
 template <typename D>
 struct produce<D, Windows::Networking::PushNotifications::IPushNotificationChannelManagerForUser> : produce_base<D, Windows::Networking::PushNotifications::IPushNotificationChannelManagerForUser>
 {
-    HRESULT __stdcall abi_CreatePushNotificationChannelForApplicationAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Networking::PushNotifications::PushNotificationChannel>> operation) noexcept override
+    HRESULT __stdcall abi_CreatePushNotificationChannelForApplicationAsync(impl::abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Networking::PushNotifications::PushNotificationChannel>> operation) noexcept override
     {
         try
         {
-            *operation = detach(this->shim().CreatePushNotificationChannelForApplicationAsync());
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().CreatePushNotificationChannelForApplicationAsync());
             return S_OK;
         }
         catch (...)
@@ -100,11 +111,12 @@ struct produce<D, Windows::Networking::PushNotifications::IPushNotificationChann
         }
     }
 
-    HRESULT __stdcall abi_CreatePushNotificationChannelForApplicationAsyncWithId(abi_arg_in<hstring> applicationId, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Networking::PushNotifications::PushNotificationChannel>> operation) noexcept override
+    HRESULT __stdcall abi_CreatePushNotificationChannelForApplicationAsyncWithId(impl::abi_arg_in<hstring> applicationId, impl::abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Networking::PushNotifications::PushNotificationChannel>> operation) noexcept override
     {
         try
         {
-            *operation = detach(this->shim().CreatePushNotificationChannelForApplicationAsync(*reinterpret_cast<const hstring *>(&applicationId)));
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().CreatePushNotificationChannelForApplicationAsync(*reinterpret_cast<const hstring *>(&applicationId)));
             return S_OK;
         }
         catch (...)
@@ -114,11 +126,12 @@ struct produce<D, Windows::Networking::PushNotifications::IPushNotificationChann
         }
     }
 
-    HRESULT __stdcall abi_CreatePushNotificationChannelForSecondaryTileAsync(abi_arg_in<hstring> tileId, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Networking::PushNotifications::PushNotificationChannel>> operation) noexcept override
+    HRESULT __stdcall abi_CreatePushNotificationChannelForSecondaryTileAsync(impl::abi_arg_in<hstring> tileId, impl::abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Networking::PushNotifications::PushNotificationChannel>> operation) noexcept override
     {
         try
         {
-            *operation = detach(this->shim().CreatePushNotificationChannelForSecondaryTileAsync(*reinterpret_cast<const hstring *>(&tileId)));
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().CreatePushNotificationChannelForSecondaryTileAsync(*reinterpret_cast<const hstring *>(&tileId)));
             return S_OK;
         }
         catch (...)
@@ -128,11 +141,12 @@ struct produce<D, Windows::Networking::PushNotifications::IPushNotificationChann
         }
     }
 
-    HRESULT __stdcall get_User(abi_arg_out<Windows::System::IUser> value) noexcept override
+    HRESULT __stdcall get_User(impl::abi_arg_out<Windows::System::IUser> value) noexcept override
     {
         try
         {
-            *value = detach(this->shim().User());
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().User());
             return S_OK;
         }
         catch (...)
@@ -144,13 +158,48 @@ struct produce<D, Windows::Networking::PushNotifications::IPushNotificationChann
 };
 
 template <typename D>
+struct produce<D, Windows::Networking::PushNotifications::IPushNotificationChannelManagerForUser2> : produce_base<D, Windows::Networking::PushNotifications::IPushNotificationChannelManagerForUser2>
+{
+    HRESULT __stdcall abi_CreateRawPushNotificationChannelWithAlternateKeyForApplicationAsync(impl::abi_arg_in<Windows::Storage::Streams::IBuffer> appServerKey, impl::abi_arg_in<hstring> channelId, impl::abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Networking::PushNotifications::PushNotificationChannel>> operation) noexcept override
+    {
+        try
+        {
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().CreateRawPushNotificationChannelWithAlternateKeyForApplicationAsync(*reinterpret_cast<const Windows::Storage::Streams::IBuffer *>(&appServerKey), *reinterpret_cast<const hstring *>(&channelId)));
+            return S_OK;
+        }
+        catch (...)
+        {
+            *operation = nullptr;
+            return impl::to_hresult();
+        }
+    }
+
+    HRESULT __stdcall abi_CreateRawPushNotificationChannelWithAlternateKeyForApplicationAsyncWithId(impl::abi_arg_in<Windows::Storage::Streams::IBuffer> appServerKey, impl::abi_arg_in<hstring> channelId, impl::abi_arg_in<hstring> appId, impl::abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Networking::PushNotifications::PushNotificationChannel>> operation) noexcept override
+    {
+        try
+        {
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().CreateRawPushNotificationChannelWithAlternateKeyForApplicationAsync(*reinterpret_cast<const Windows::Storage::Streams::IBuffer *>(&appServerKey), *reinterpret_cast<const hstring *>(&channelId), *reinterpret_cast<const hstring *>(&appId)));
+            return S_OK;
+        }
+        catch (...)
+        {
+            *operation = nullptr;
+            return impl::to_hresult();
+        }
+    }
+};
+
+template <typename D>
 struct produce<D, Windows::Networking::PushNotifications::IPushNotificationChannelManagerStatics> : produce_base<D, Windows::Networking::PushNotifications::IPushNotificationChannelManagerStatics>
 {
-    HRESULT __stdcall abi_CreatePushNotificationChannelForApplicationAsync(abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Networking::PushNotifications::PushNotificationChannel>> operation) noexcept override
+    HRESULT __stdcall abi_CreatePushNotificationChannelForApplicationAsync(impl::abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Networking::PushNotifications::PushNotificationChannel>> operation) noexcept override
     {
         try
         {
-            *operation = detach(this->shim().CreatePushNotificationChannelForApplicationAsync());
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().CreatePushNotificationChannelForApplicationAsync());
             return S_OK;
         }
         catch (...)
@@ -160,11 +209,12 @@ struct produce<D, Windows::Networking::PushNotifications::IPushNotificationChann
         }
     }
 
-    HRESULT __stdcall abi_CreatePushNotificationChannelForApplicationAsyncWithId(abi_arg_in<hstring> applicationId, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Networking::PushNotifications::PushNotificationChannel>> operation) noexcept override
+    HRESULT __stdcall abi_CreatePushNotificationChannelForApplicationAsyncWithId(impl::abi_arg_in<hstring> applicationId, impl::abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Networking::PushNotifications::PushNotificationChannel>> operation) noexcept override
     {
         try
         {
-            *operation = detach(this->shim().CreatePushNotificationChannelForApplicationAsync(*reinterpret_cast<const hstring *>(&applicationId)));
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().CreatePushNotificationChannelForApplicationAsync(*reinterpret_cast<const hstring *>(&applicationId)));
             return S_OK;
         }
         catch (...)
@@ -174,11 +224,12 @@ struct produce<D, Windows::Networking::PushNotifications::IPushNotificationChann
         }
     }
 
-    HRESULT __stdcall abi_CreatePushNotificationChannelForSecondaryTileAsync(abi_arg_in<hstring> tileId, abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Networking::PushNotifications::PushNotificationChannel>> operation) noexcept override
+    HRESULT __stdcall abi_CreatePushNotificationChannelForSecondaryTileAsync(impl::abi_arg_in<hstring> tileId, impl::abi_arg_out<Windows::Foundation::IAsyncOperation<Windows::Networking::PushNotifications::PushNotificationChannel>> operation) noexcept override
     {
         try
         {
-            *operation = detach(this->shim().CreatePushNotificationChannelForSecondaryTileAsync(*reinterpret_cast<const hstring *>(&tileId)));
+            typename D::abi_guard guard(this->shim());
+            *operation = detach_abi(this->shim().CreatePushNotificationChannelForSecondaryTileAsync(*reinterpret_cast<const hstring *>(&tileId)));
             return S_OK;
         }
         catch (...)
@@ -192,16 +243,36 @@ struct produce<D, Windows::Networking::PushNotifications::IPushNotificationChann
 template <typename D>
 struct produce<D, Windows::Networking::PushNotifications::IPushNotificationChannelManagerStatics2> : produce_base<D, Windows::Networking::PushNotifications::IPushNotificationChannelManagerStatics2>
 {
-    HRESULT __stdcall abi_GetForUser(abi_arg_in<Windows::System::IUser> user, abi_arg_out<Windows::Networking::PushNotifications::IPushNotificationChannelManagerForUser> result) noexcept override
+    HRESULT __stdcall abi_GetForUser(impl::abi_arg_in<Windows::System::IUser> user, impl::abi_arg_out<Windows::Networking::PushNotifications::IPushNotificationChannelManagerForUser> result) noexcept override
     {
         try
         {
-            *result = detach(this->shim().GetForUser(*reinterpret_cast<const Windows::System::User *>(&user)));
+            typename D::abi_guard guard(this->shim());
+            *result = detach_abi(this->shim().GetForUser(*reinterpret_cast<const Windows::System::User *>(&user)));
             return S_OK;
         }
         catch (...)
         {
             *result = nullptr;
+            return impl::to_hresult();
+        }
+    }
+};
+
+template <typename D>
+struct produce<D, Windows::Networking::PushNotifications::IPushNotificationChannelManagerStatics3> : produce_base<D, Windows::Networking::PushNotifications::IPushNotificationChannelManagerStatics3>
+{
+    HRESULT __stdcall abi_GetDefault(impl::abi_arg_out<Windows::Networking::PushNotifications::IPushNotificationChannelManagerForUser> value) noexcept override
+    {
+        try
+        {
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().GetDefault());
+            return S_OK;
+        }
+        catch (...)
+        {
+            *value = nullptr;
             return impl::to_hresult();
         }
     }
@@ -214,6 +285,7 @@ struct produce<D, Windows::Networking::PushNotifications::IPushNotificationRecei
     {
         try
         {
+            typename D::abi_guard guard(this->shim());
             this->shim().Cancel(value);
             return S_OK;
         }
@@ -227,7 +299,8 @@ struct produce<D, Windows::Networking::PushNotifications::IPushNotificationRecei
     {
         try
         {
-            *value = detach(this->shim().Cancel());
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().Cancel());
             return S_OK;
         }
         catch (...)
@@ -240,7 +313,8 @@ struct produce<D, Windows::Networking::PushNotifications::IPushNotificationRecei
     {
         try
         {
-            *value = detach(this->shim().NotificationType());
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().NotificationType());
             return S_OK;
         }
         catch (...)
@@ -249,25 +323,12 @@ struct produce<D, Windows::Networking::PushNotifications::IPushNotificationRecei
         }
     }
 
-    HRESULT __stdcall get_ToastNotification(abi_arg_out<Windows::UI::Notifications::IToastNotification> value) noexcept override
+    HRESULT __stdcall get_ToastNotification(impl::abi_arg_out<Windows::UI::Notifications::IToastNotification> value) noexcept override
     {
         try
         {
-            *value = detach(this->shim().ToastNotification());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *value = nullptr;
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall get_TileNotification(abi_arg_out<Windows::UI::Notifications::ITileNotification> value) noexcept override
-    {
-        try
-        {
-            *value = detach(this->shim().TileNotification());
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().ToastNotification());
             return S_OK;
         }
         catch (...)
@@ -277,11 +338,12 @@ struct produce<D, Windows::Networking::PushNotifications::IPushNotificationRecei
         }
     }
 
-    HRESULT __stdcall get_BadgeNotification(abi_arg_out<Windows::UI::Notifications::IBadgeNotification> value) noexcept override
+    HRESULT __stdcall get_TileNotification(impl::abi_arg_out<Windows::UI::Notifications::ITileNotification> value) noexcept override
     {
         try
         {
-            *value = detach(this->shim().BadgeNotification());
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().TileNotification());
             return S_OK;
         }
         catch (...)
@@ -291,11 +353,27 @@ struct produce<D, Windows::Networking::PushNotifications::IPushNotificationRecei
         }
     }
 
-    HRESULT __stdcall get_RawNotification(abi_arg_out<Windows::Networking::PushNotifications::IRawNotification> value) noexcept override
+    HRESULT __stdcall get_BadgeNotification(impl::abi_arg_out<Windows::UI::Notifications::IBadgeNotification> value) noexcept override
     {
         try
         {
-            *value = detach(this->shim().RawNotification());
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().BadgeNotification());
+            return S_OK;
+        }
+        catch (...)
+        {
+            *value = nullptr;
+            return impl::to_hresult();
+        }
+    }
+
+    HRESULT __stdcall get_RawNotification(impl::abi_arg_out<Windows::Networking::PushNotifications::IRawNotification> value) noexcept override
+    {
+        try
+        {
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().RawNotification());
             return S_OK;
         }
         catch (...)
@@ -309,11 +387,46 @@ struct produce<D, Windows::Networking::PushNotifications::IPushNotificationRecei
 template <typename D>
 struct produce<D, Windows::Networking::PushNotifications::IRawNotification> : produce_base<D, Windows::Networking::PushNotifications::IRawNotification>
 {
-    HRESULT __stdcall get_Content(abi_arg_out<hstring> value) noexcept override
+    HRESULT __stdcall get_Content(impl::abi_arg_out<hstring> value) noexcept override
     {
         try
         {
-            *value = detach(this->shim().Content());
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().Content());
+            return S_OK;
+        }
+        catch (...)
+        {
+            *value = nullptr;
+            return impl::to_hresult();
+        }
+    }
+};
+
+template <typename D>
+struct produce<D, Windows::Networking::PushNotifications::IRawNotification2> : produce_base<D, Windows::Networking::PushNotifications::IRawNotification2>
+{
+    HRESULT __stdcall get_Headers(impl::abi_arg_out<Windows::Foundation::Collections::IMapView<hstring, hstring>> value) noexcept override
+    {
+        try
+        {
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().Headers());
+            return S_OK;
+        }
+        catch (...)
+        {
+            *value = nullptr;
+            return impl::to_hresult();
+        }
+    }
+
+    HRESULT __stdcall get_ChannelId(impl::abi_arg_out<hstring> value) noexcept override
+    {
+        try
+        {
+            typename D::abi_guard guard(this->shim());
+            *value = detach_abi(this->shim().ChannelId());
             return S_OK;
         }
         catch (...)
@@ -331,82 +444,103 @@ namespace Windows::Networking::PushNotifications {
 template <typename D> Windows::Foundation::IAsyncOperation<Windows::Networking::PushNotifications::PushNotificationChannel> impl_IPushNotificationChannelManagerStatics<D>::CreatePushNotificationChannelForApplicationAsync() const
 {
     Windows::Foundation::IAsyncOperation<Windows::Networking::PushNotifications::PushNotificationChannel> operation;
-    check_hresult(static_cast<const IPushNotificationChannelManagerStatics &>(static_cast<const D &>(*this))->abi_CreatePushNotificationChannelForApplicationAsync(put(operation)));
+    check_hresult(WINRT_SHIM(IPushNotificationChannelManagerStatics)->abi_CreatePushNotificationChannelForApplicationAsync(put_abi(operation)));
     return operation;
 }
 
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Networking::PushNotifications::PushNotificationChannel> impl_IPushNotificationChannelManagerStatics<D>::CreatePushNotificationChannelForApplicationAsync(hstring_ref applicationId) const
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Networking::PushNotifications::PushNotificationChannel> impl_IPushNotificationChannelManagerStatics<D>::CreatePushNotificationChannelForApplicationAsync(hstring_view applicationId) const
 {
     Windows::Foundation::IAsyncOperation<Windows::Networking::PushNotifications::PushNotificationChannel> operation;
-    check_hresult(static_cast<const IPushNotificationChannelManagerStatics &>(static_cast<const D &>(*this))->abi_CreatePushNotificationChannelForApplicationAsyncWithId(get(applicationId), put(operation)));
+    check_hresult(WINRT_SHIM(IPushNotificationChannelManagerStatics)->abi_CreatePushNotificationChannelForApplicationAsyncWithId(get_abi(applicationId), put_abi(operation)));
     return operation;
 }
 
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Networking::PushNotifications::PushNotificationChannel> impl_IPushNotificationChannelManagerStatics<D>::CreatePushNotificationChannelForSecondaryTileAsync(hstring_ref tileId) const
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Networking::PushNotifications::PushNotificationChannel> impl_IPushNotificationChannelManagerStatics<D>::CreatePushNotificationChannelForSecondaryTileAsync(hstring_view tileId) const
 {
     Windows::Foundation::IAsyncOperation<Windows::Networking::PushNotifications::PushNotificationChannel> operation;
-    check_hresult(static_cast<const IPushNotificationChannelManagerStatics &>(static_cast<const D &>(*this))->abi_CreatePushNotificationChannelForSecondaryTileAsync(get(tileId), put(operation)));
+    check_hresult(WINRT_SHIM(IPushNotificationChannelManagerStatics)->abi_CreatePushNotificationChannelForSecondaryTileAsync(get_abi(tileId), put_abi(operation)));
     return operation;
 }
 
 template <typename D> Windows::Networking::PushNotifications::PushNotificationChannelManagerForUser impl_IPushNotificationChannelManagerStatics2<D>::GetForUser(const Windows::System::User & user) const
 {
     Windows::Networking::PushNotifications::PushNotificationChannelManagerForUser result { nullptr };
-    check_hresult(static_cast<const IPushNotificationChannelManagerStatics2 &>(static_cast<const D &>(*this))->abi_GetForUser(get(user), put(result)));
+    check_hresult(WINRT_SHIM(IPushNotificationChannelManagerStatics2)->abi_GetForUser(get_abi(user), put_abi(result)));
     return result;
+}
+
+template <typename D> Windows::Networking::PushNotifications::PushNotificationChannelManagerForUser impl_IPushNotificationChannelManagerStatics3<D>::GetDefault() const
+{
+    Windows::Networking::PushNotifications::PushNotificationChannelManagerForUser value { nullptr };
+    check_hresult(WINRT_SHIM(IPushNotificationChannelManagerStatics3)->abi_GetDefault(put_abi(value)));
+    return value;
 }
 
 template <typename D> Windows::Foundation::IAsyncOperation<Windows::Networking::PushNotifications::PushNotificationChannel> impl_IPushNotificationChannelManagerForUser<D>::CreatePushNotificationChannelForApplicationAsync() const
 {
     Windows::Foundation::IAsyncOperation<Windows::Networking::PushNotifications::PushNotificationChannel> operation;
-    check_hresult(static_cast<const IPushNotificationChannelManagerForUser &>(static_cast<const D &>(*this))->abi_CreatePushNotificationChannelForApplicationAsync(put(operation)));
+    check_hresult(WINRT_SHIM(IPushNotificationChannelManagerForUser)->abi_CreatePushNotificationChannelForApplicationAsync(put_abi(operation)));
     return operation;
 }
 
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Networking::PushNotifications::PushNotificationChannel> impl_IPushNotificationChannelManagerForUser<D>::CreatePushNotificationChannelForApplicationAsync(hstring_ref applicationId) const
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Networking::PushNotifications::PushNotificationChannel> impl_IPushNotificationChannelManagerForUser<D>::CreatePushNotificationChannelForApplicationAsync(hstring_view applicationId) const
 {
     Windows::Foundation::IAsyncOperation<Windows::Networking::PushNotifications::PushNotificationChannel> operation;
-    check_hresult(static_cast<const IPushNotificationChannelManagerForUser &>(static_cast<const D &>(*this))->abi_CreatePushNotificationChannelForApplicationAsyncWithId(get(applicationId), put(operation)));
+    check_hresult(WINRT_SHIM(IPushNotificationChannelManagerForUser)->abi_CreatePushNotificationChannelForApplicationAsyncWithId(get_abi(applicationId), put_abi(operation)));
     return operation;
 }
 
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::Networking::PushNotifications::PushNotificationChannel> impl_IPushNotificationChannelManagerForUser<D>::CreatePushNotificationChannelForSecondaryTileAsync(hstring_ref tileId) const
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Networking::PushNotifications::PushNotificationChannel> impl_IPushNotificationChannelManagerForUser<D>::CreatePushNotificationChannelForSecondaryTileAsync(hstring_view tileId) const
 {
     Windows::Foundation::IAsyncOperation<Windows::Networking::PushNotifications::PushNotificationChannel> operation;
-    check_hresult(static_cast<const IPushNotificationChannelManagerForUser &>(static_cast<const D &>(*this))->abi_CreatePushNotificationChannelForSecondaryTileAsync(get(tileId), put(operation)));
+    check_hresult(WINRT_SHIM(IPushNotificationChannelManagerForUser)->abi_CreatePushNotificationChannelForSecondaryTileAsync(get_abi(tileId), put_abi(operation)));
     return operation;
 }
 
 template <typename D> Windows::System::User impl_IPushNotificationChannelManagerForUser<D>::User() const
 {
     Windows::System::User value { nullptr };
-    check_hresult(static_cast<const IPushNotificationChannelManagerForUser &>(static_cast<const D &>(*this))->get_User(put(value)));
+    check_hresult(WINRT_SHIM(IPushNotificationChannelManagerForUser)->get_User(put_abi(value)));
     return value;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Networking::PushNotifications::PushNotificationChannel> impl_IPushNotificationChannelManagerForUser2<D>::CreateRawPushNotificationChannelWithAlternateKeyForApplicationAsync(const Windows::Storage::Streams::IBuffer & appServerKey, hstring_view channelId) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Networking::PushNotifications::PushNotificationChannel> operation;
+    check_hresult(WINRT_SHIM(IPushNotificationChannelManagerForUser2)->abi_CreateRawPushNotificationChannelWithAlternateKeyForApplicationAsync(get_abi(appServerKey), get_abi(channelId), put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::Networking::PushNotifications::PushNotificationChannel> impl_IPushNotificationChannelManagerForUser2<D>::CreateRawPushNotificationChannelWithAlternateKeyForApplicationAsync(const Windows::Storage::Streams::IBuffer & appServerKey, hstring_view channelId, hstring_view appId) const
+{
+    Windows::Foundation::IAsyncOperation<Windows::Networking::PushNotifications::PushNotificationChannel> operation;
+    check_hresult(WINRT_SHIM(IPushNotificationChannelManagerForUser2)->abi_CreateRawPushNotificationChannelWithAlternateKeyForApplicationAsyncWithId(get_abi(appServerKey), get_abi(channelId), get_abi(appId), put_abi(operation)));
+    return operation;
 }
 
 template <typename D> hstring impl_IPushNotificationChannel<D>::Uri() const
 {
     hstring value;
-    check_hresult(static_cast<const IPushNotificationChannel &>(static_cast<const D &>(*this))->get_Uri(put(value)));
+    check_hresult(WINRT_SHIM(IPushNotificationChannel)->get_Uri(put_abi(value)));
     return value;
 }
 
 template <typename D> Windows::Foundation::DateTime impl_IPushNotificationChannel<D>::ExpirationTime() const
 {
     Windows::Foundation::DateTime value {};
-    check_hresult(static_cast<const IPushNotificationChannel &>(static_cast<const D &>(*this))->get_ExpirationTime(put(value)));
+    check_hresult(WINRT_SHIM(IPushNotificationChannel)->get_ExpirationTime(put_abi(value)));
     return value;
 }
 
 template <typename D> void impl_IPushNotificationChannel<D>::Close() const
 {
-    check_hresult(static_cast<const IPushNotificationChannel &>(static_cast<const D &>(*this))->abi_Close());
+    check_hresult(WINRT_SHIM(IPushNotificationChannel)->abi_Close());
 }
 
 template <typename D> event_token impl_IPushNotificationChannel<D>::PushNotificationReceived(const Windows::Foundation::TypedEventHandler<Windows::Networking::PushNotifications::PushNotificationChannel, Windows::Networking::PushNotifications::PushNotificationReceivedEventArgs> & handler) const
 {
     event_token token {};
-    check_hresult(static_cast<const IPushNotificationChannel &>(static_cast<const D &>(*this))->add_PushNotificationReceived(get(handler), &token));
+    check_hresult(WINRT_SHIM(IPushNotificationChannel)->add_PushNotificationReceived(get_abi(handler), &token));
     return token;
 }
 
@@ -417,60 +551,74 @@ template <typename D> event_revoker<IPushNotificationChannel> impl_IPushNotifica
 
 template <typename D> void impl_IPushNotificationChannel<D>::PushNotificationReceived(event_token token) const
 {
-    check_hresult(static_cast<const IPushNotificationChannel &>(static_cast<const D &>(*this))->remove_PushNotificationReceived(token));
+    check_hresult(WINRT_SHIM(IPushNotificationChannel)->remove_PushNotificationReceived(token));
 }
 
 template <typename D> void impl_IPushNotificationReceivedEventArgs<D>::Cancel(bool value) const
 {
-    check_hresult(static_cast<const IPushNotificationReceivedEventArgs &>(static_cast<const D &>(*this))->put_Cancel(value));
+    check_hresult(WINRT_SHIM(IPushNotificationReceivedEventArgs)->put_Cancel(value));
 }
 
 template <typename D> bool impl_IPushNotificationReceivedEventArgs<D>::Cancel() const
 {
     bool value {};
-    check_hresult(static_cast<const IPushNotificationReceivedEventArgs &>(static_cast<const D &>(*this))->get_Cancel(&value));
+    check_hresult(WINRT_SHIM(IPushNotificationReceivedEventArgs)->get_Cancel(&value));
     return value;
 }
 
 template <typename D> Windows::Networking::PushNotifications::PushNotificationType impl_IPushNotificationReceivedEventArgs<D>::NotificationType() const
 {
     Windows::Networking::PushNotifications::PushNotificationType value {};
-    check_hresult(static_cast<const IPushNotificationReceivedEventArgs &>(static_cast<const D &>(*this))->get_NotificationType(&value));
+    check_hresult(WINRT_SHIM(IPushNotificationReceivedEventArgs)->get_NotificationType(&value));
     return value;
 }
 
 template <typename D> Windows::UI::Notifications::ToastNotification impl_IPushNotificationReceivedEventArgs<D>::ToastNotification() const
 {
     Windows::UI::Notifications::ToastNotification value { nullptr };
-    check_hresult(static_cast<const IPushNotificationReceivedEventArgs &>(static_cast<const D &>(*this))->get_ToastNotification(put(value)));
+    check_hresult(WINRT_SHIM(IPushNotificationReceivedEventArgs)->get_ToastNotification(put_abi(value)));
     return value;
 }
 
 template <typename D> Windows::UI::Notifications::TileNotification impl_IPushNotificationReceivedEventArgs<D>::TileNotification() const
 {
     Windows::UI::Notifications::TileNotification value { nullptr };
-    check_hresult(static_cast<const IPushNotificationReceivedEventArgs &>(static_cast<const D &>(*this))->get_TileNotification(put(value)));
+    check_hresult(WINRT_SHIM(IPushNotificationReceivedEventArgs)->get_TileNotification(put_abi(value)));
     return value;
 }
 
 template <typename D> Windows::UI::Notifications::BadgeNotification impl_IPushNotificationReceivedEventArgs<D>::BadgeNotification() const
 {
     Windows::UI::Notifications::BadgeNotification value { nullptr };
-    check_hresult(static_cast<const IPushNotificationReceivedEventArgs &>(static_cast<const D &>(*this))->get_BadgeNotification(put(value)));
+    check_hresult(WINRT_SHIM(IPushNotificationReceivedEventArgs)->get_BadgeNotification(put_abi(value)));
     return value;
 }
 
 template <typename D> Windows::Networking::PushNotifications::RawNotification impl_IPushNotificationReceivedEventArgs<D>::RawNotification() const
 {
     Windows::Networking::PushNotifications::RawNotification value { nullptr };
-    check_hresult(static_cast<const IPushNotificationReceivedEventArgs &>(static_cast<const D &>(*this))->get_RawNotification(put(value)));
+    check_hresult(WINRT_SHIM(IPushNotificationReceivedEventArgs)->get_RawNotification(put_abi(value)));
     return value;
 }
 
 template <typename D> hstring impl_IRawNotification<D>::Content() const
 {
     hstring value;
-    check_hresult(static_cast<const IRawNotification &>(static_cast<const D &>(*this))->get_Content(put(value)));
+    check_hresult(WINRT_SHIM(IRawNotification)->get_Content(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Collections::IMapView<hstring, hstring> impl_IRawNotification2<D>::Headers() const
+{
+    Windows::Foundation::Collections::IMapView<hstring, hstring> value;
+    check_hresult(WINRT_SHIM(IRawNotification2)->get_Headers(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring impl_IRawNotification2<D>::ChannelId() const
+{
+    hstring value;
+    check_hresult(WINRT_SHIM(IRawNotification2)->get_ChannelId(put_abi(value)));
     return value;
 }
 
@@ -479,12 +627,12 @@ inline Windows::Foundation::IAsyncOperation<Windows::Networking::PushNotificatio
     return get_activation_factory<PushNotificationChannelManager, IPushNotificationChannelManagerStatics>().CreatePushNotificationChannelForApplicationAsync();
 }
 
-inline Windows::Foundation::IAsyncOperation<Windows::Networking::PushNotifications::PushNotificationChannel> PushNotificationChannelManager::CreatePushNotificationChannelForApplicationAsync(hstring_ref applicationId)
+inline Windows::Foundation::IAsyncOperation<Windows::Networking::PushNotifications::PushNotificationChannel> PushNotificationChannelManager::CreatePushNotificationChannelForApplicationAsync(hstring_view applicationId)
 {
     return get_activation_factory<PushNotificationChannelManager, IPushNotificationChannelManagerStatics>().CreatePushNotificationChannelForApplicationAsync(applicationId);
 }
 
-inline Windows::Foundation::IAsyncOperation<Windows::Networking::PushNotifications::PushNotificationChannel> PushNotificationChannelManager::CreatePushNotificationChannelForSecondaryTileAsync(hstring_ref tileId)
+inline Windows::Foundation::IAsyncOperation<Windows::Networking::PushNotifications::PushNotificationChannel> PushNotificationChannelManager::CreatePushNotificationChannelForSecondaryTileAsync(hstring_view tileId)
 {
     return get_activation_factory<PushNotificationChannelManager, IPushNotificationChannelManagerStatics>().CreatePushNotificationChannelForSecondaryTileAsync(tileId);
 }
@@ -494,6 +642,130 @@ inline Windows::Networking::PushNotifications::PushNotificationChannelManagerFor
     return get_activation_factory<PushNotificationChannelManager, IPushNotificationChannelManagerStatics2>().GetForUser(user);
 }
 
+inline Windows::Networking::PushNotifications::PushNotificationChannelManagerForUser PushNotificationChannelManager::GetDefault()
+{
+    return get_activation_factory<PushNotificationChannelManager, IPushNotificationChannelManagerStatics3>().GetDefault();
 }
 
 }
+
+}
+
+template<>
+struct std::hash<winrt::Windows::Networking::PushNotifications::IPushNotificationChannel>
+{
+    size_t operator()(const winrt::Windows::Networking::PushNotifications::IPushNotificationChannel & value) const noexcept
+    {
+        return winrt::impl::hash_unknown(value);
+    }
+};
+
+template<>
+struct std::hash<winrt::Windows::Networking::PushNotifications::IPushNotificationChannelManagerForUser>
+{
+    size_t operator()(const winrt::Windows::Networking::PushNotifications::IPushNotificationChannelManagerForUser & value) const noexcept
+    {
+        return winrt::impl::hash_unknown(value);
+    }
+};
+
+template<>
+struct std::hash<winrt::Windows::Networking::PushNotifications::IPushNotificationChannelManagerForUser2>
+{
+    size_t operator()(const winrt::Windows::Networking::PushNotifications::IPushNotificationChannelManagerForUser2 & value) const noexcept
+    {
+        return winrt::impl::hash_unknown(value);
+    }
+};
+
+template<>
+struct std::hash<winrt::Windows::Networking::PushNotifications::IPushNotificationChannelManagerStatics>
+{
+    size_t operator()(const winrt::Windows::Networking::PushNotifications::IPushNotificationChannelManagerStatics & value) const noexcept
+    {
+        return winrt::impl::hash_unknown(value);
+    }
+};
+
+template<>
+struct std::hash<winrt::Windows::Networking::PushNotifications::IPushNotificationChannelManagerStatics2>
+{
+    size_t operator()(const winrt::Windows::Networking::PushNotifications::IPushNotificationChannelManagerStatics2 & value) const noexcept
+    {
+        return winrt::impl::hash_unknown(value);
+    }
+};
+
+template<>
+struct std::hash<winrt::Windows::Networking::PushNotifications::IPushNotificationChannelManagerStatics3>
+{
+    size_t operator()(const winrt::Windows::Networking::PushNotifications::IPushNotificationChannelManagerStatics3 & value) const noexcept
+    {
+        return winrt::impl::hash_unknown(value);
+    }
+};
+
+template<>
+struct std::hash<winrt::Windows::Networking::PushNotifications::IPushNotificationReceivedEventArgs>
+{
+    size_t operator()(const winrt::Windows::Networking::PushNotifications::IPushNotificationReceivedEventArgs & value) const noexcept
+    {
+        return winrt::impl::hash_unknown(value);
+    }
+};
+
+template<>
+struct std::hash<winrt::Windows::Networking::PushNotifications::IRawNotification>
+{
+    size_t operator()(const winrt::Windows::Networking::PushNotifications::IRawNotification & value) const noexcept
+    {
+        return winrt::impl::hash_unknown(value);
+    }
+};
+
+template<>
+struct std::hash<winrt::Windows::Networking::PushNotifications::IRawNotification2>
+{
+    size_t operator()(const winrt::Windows::Networking::PushNotifications::IRawNotification2 & value) const noexcept
+    {
+        return winrt::impl::hash_unknown(value);
+    }
+};
+
+template<>
+struct std::hash<winrt::Windows::Networking::PushNotifications::PushNotificationChannel>
+{
+    size_t operator()(const winrt::Windows::Networking::PushNotifications::PushNotificationChannel & value) const noexcept
+    {
+        return winrt::impl::hash_unknown(value);
+    }
+};
+
+template<>
+struct std::hash<winrt::Windows::Networking::PushNotifications::PushNotificationChannelManagerForUser>
+{
+    size_t operator()(const winrt::Windows::Networking::PushNotifications::PushNotificationChannelManagerForUser & value) const noexcept
+    {
+        return winrt::impl::hash_unknown(value);
+    }
+};
+
+template<>
+struct std::hash<winrt::Windows::Networking::PushNotifications::PushNotificationReceivedEventArgs>
+{
+    size_t operator()(const winrt::Windows::Networking::PushNotifications::PushNotificationReceivedEventArgs & value) const noexcept
+    {
+        return winrt::impl::hash_unknown(value);
+    }
+};
+
+template<>
+struct std::hash<winrt::Windows::Networking::PushNotifications::RawNotification>
+{
+    size_t operator()(const winrt::Windows::Networking::PushNotifications::RawNotification & value) const noexcept
+    {
+        return winrt::impl::hash_unknown(value);
+    }
+};
+
+WINRT_WARNING_POP

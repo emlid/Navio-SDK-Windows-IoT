@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -10,14 +10,15 @@ WINRT_EXPORT namespace winrt {
 namespace Windows::Management::Deployment {
 
 struct WINRT_EBO DeploymentResult :
-    Windows::Management::Deployment::IDeploymentResult
+    Windows::Management::Deployment::IDeploymentResult,
+    impl::require<DeploymentResult, Windows::Management::Deployment::IDeploymentResult2>
 {
     DeploymentResult(std::nullptr_t) noexcept {}
 };
 
 struct WINRT_EBO PackageManager :
     Windows::Management::Deployment::IPackageManager,
-    impl::require<PackageManager, Windows::Management::Deployment::IPackageManager2, Windows::Management::Deployment::IPackageManager3, Windows::Management::Deployment::IPackageManager4>
+    impl::require<PackageManager, Windows::Management::Deployment::IPackageManager2, Windows::Management::Deployment::IPackageManager3, Windows::Management::Deployment::IPackageManager4, Windows::Management::Deployment::IPackageManager5>
 {
     PackageManager(std::nullptr_t) noexcept {}
     PackageManager();
@@ -32,6 +33,14 @@ struct WINRT_EBO PackageManager :
     using impl_IPackageManager3::RegisterPackageAsync;
     using impl_IPackageManager3::StagePackageAsync;
     using impl_IPackageManager3::StageUserDataAsync;
+    using impl_IPackageManager5::AddPackageAsync;
+    using impl_IPackageManager5::StagePackageAsync;
+};
+
+struct WINRT_EBO PackageManagerDebugSettings :
+    Windows::Management::Deployment::IPackageManagerDebugSettings
+{
+    PackageManagerDebugSettings(std::nullptr_t) noexcept {}
 };
 
 struct WINRT_EBO PackageUserInformation :

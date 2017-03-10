@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -22,9 +22,23 @@ struct WINRT_EBO BluetoothLEAdvertisementWatcherTriggerDetails :
 };
 
 struct WINRT_EBO GattCharacteristicNotificationTriggerDetails :
-    Windows::Devices::Bluetooth::Background::IGattCharacteristicNotificationTriggerDetails
+    Windows::Devices::Bluetooth::Background::IGattCharacteristicNotificationTriggerDetails,
+    impl::require<GattCharacteristicNotificationTriggerDetails, Windows::Devices::Bluetooth::Background::IGattCharacteristicNotificationTriggerDetails2>
 {
     GattCharacteristicNotificationTriggerDetails(std::nullptr_t) noexcept {}
+};
+
+struct WINRT_EBO GattServiceProviderConnection :
+    Windows::Devices::Bluetooth::Background::IGattServiceProviderConnection
+{
+    GattServiceProviderConnection(std::nullptr_t) noexcept {}
+    static Windows::Foundation::Collections::IMapView<hstring, Windows::Devices::Bluetooth::Background::GattServiceProviderConnection> AllServices();
+};
+
+struct WINRT_EBO GattServiceProviderTriggerDetails :
+    Windows::Devices::Bluetooth::Background::IGattServiceProviderTriggerDetails
+{
+    GattServiceProviderTriggerDetails(std::nullptr_t) noexcept {}
 };
 
 struct WINRT_EBO RfcommConnectionTriggerDetails :

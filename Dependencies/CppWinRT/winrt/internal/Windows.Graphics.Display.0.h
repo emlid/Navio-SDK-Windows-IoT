@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -9,12 +9,15 @@ WINRT_EXPORT namespace winrt {
 namespace ABI::Windows::Graphics::Display {
 
 struct DisplayPropertiesEventHandler;
+struct IBrightnessOverride;
+struct IBrightnessOverrideStatics;
 struct IDisplayInformation;
 struct IDisplayInformation2;
 struct IDisplayInformation3;
 struct IDisplayInformation4;
 struct IDisplayInformationStatics;
 struct IDisplayPropertiesStatics;
+struct BrightnessOverride;
 struct DisplayInformation;
 
 }
@@ -22,18 +25,51 @@ struct DisplayInformation;
 namespace Windows::Graphics::Display {
 
 struct DisplayPropertiesEventHandler;
+struct IBrightnessOverride;
+struct IBrightnessOverrideStatics;
 struct IDisplayInformation;
 struct IDisplayInformation2;
 struct IDisplayInformation3;
 struct IDisplayInformation4;
 struct IDisplayInformationStatics;
 struct IDisplayPropertiesStatics;
+struct BrightnessOverride;
 struct DisplayInformation;
 struct DisplayProperties;
 
 }
 
 namespace Windows::Graphics::Display {
+
+template <typename T> struct impl_IBrightnessOverride;
+template <typename T> struct impl_IBrightnessOverrideStatics;
+template <typename T> struct impl_IDisplayInformation;
+template <typename T> struct impl_IDisplayInformation2;
+template <typename T> struct impl_IDisplayInformation3;
+template <typename T> struct impl_IDisplayInformation4;
+template <typename T> struct impl_IDisplayInformationStatics;
+template <typename T> struct impl_IDisplayPropertiesStatics;
+template <typename T> struct impl_DisplayPropertiesEventHandler;
+
+}
+
+namespace Windows::Graphics::Display {
+
+enum class DisplayBrightnessOverrideOptions : unsigned
+{
+    None = 0x0,
+    UseDimmedPolicyWhenBatteryIsLow = 0x1,
+};
+
+DEFINE_ENUM_FLAG_OPERATORS(DisplayBrightnessOverrideOptions)
+
+enum class DisplayBrightnessScenario
+{
+    DefaultBrightness = 0,
+    IdleBrightness = 1,
+    BarcodeReadingBrightness = 2,
+    FullBrightness = 3,
+};
 
 enum class DisplayOrientations : unsigned
 {

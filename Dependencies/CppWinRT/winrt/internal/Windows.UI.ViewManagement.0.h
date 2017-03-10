@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -13,7 +13,9 @@ struct IActivationViewSwitcher;
 struct IApplicationView;
 struct IApplicationView2;
 struct IApplicationView3;
+struct IApplicationView4;
 struct IApplicationViewConsolidatedEventArgs;
+struct IApplicationViewConsolidatedEventArgs2;
 struct IApplicationViewFullscreenStatics;
 struct IApplicationViewInteropStatics;
 struct IApplicationViewScaling;
@@ -23,6 +25,7 @@ struct IApplicationViewStatics2;
 struct IApplicationViewStatics3;
 struct IApplicationViewSwitcherStatics;
 struct IApplicationViewSwitcherStatics2;
+struct IApplicationViewSwitcherStatics3;
 struct IApplicationViewTitleBar;
 struct IApplicationViewTransferContext;
 struct IApplicationViewTransferContextStatics;
@@ -39,8 +42,11 @@ struct IStatusBarStatics;
 struct IUISettings;
 struct IUISettings2;
 struct IUISettings3;
+struct IUISettings4;
 struct IUIViewSettings;
 struct IUIViewSettingsStatics;
+struct IViewModePreferences;
+struct IViewModePreferencesStatics;
 struct AccessibilitySettings;
 struct ActivationViewSwitcher;
 struct ApplicationView;
@@ -54,6 +60,7 @@ struct StatusBar;
 struct StatusBarProgressIndicator;
 struct UISettings;
 struct UIViewSettings;
+struct ViewModePreferences;
 
 }
 
@@ -64,7 +71,9 @@ struct IActivationViewSwitcher;
 struct IApplicationView;
 struct IApplicationView2;
 struct IApplicationView3;
+struct IApplicationView4;
 struct IApplicationViewConsolidatedEventArgs;
+struct IApplicationViewConsolidatedEventArgs2;
 struct IApplicationViewFullscreenStatics;
 struct IApplicationViewInteropStatics;
 struct IApplicationViewScaling;
@@ -74,6 +83,7 @@ struct IApplicationViewStatics2;
 struct IApplicationViewStatics3;
 struct IApplicationViewSwitcherStatics;
 struct IApplicationViewSwitcherStatics2;
+struct IApplicationViewSwitcherStatics3;
 struct IApplicationViewTitleBar;
 struct IApplicationViewTransferContext;
 struct IApplicationViewTransferContextStatics;
@@ -90,8 +100,11 @@ struct IStatusBarStatics;
 struct IUISettings;
 struct IUISettings2;
 struct IUISettings3;
+struct IUISettings4;
 struct IUIViewSettings;
 struct IUIViewSettingsStatics;
+struct IViewModePreferences;
+struct IViewModePreferencesStatics;
 struct AccessibilitySettings;
 struct ActivationViewSwitcher;
 struct ApplicationView;
@@ -107,6 +120,51 @@ struct StatusBar;
 struct StatusBarProgressIndicator;
 struct UISettings;
 struct UIViewSettings;
+struct ViewModePreferences;
+
+}
+
+namespace Windows::UI::ViewManagement {
+
+template <typename T> struct impl_IAccessibilitySettings;
+template <typename T> struct impl_IActivationViewSwitcher;
+template <typename T> struct impl_IApplicationView;
+template <typename T> struct impl_IApplicationView2;
+template <typename T> struct impl_IApplicationView3;
+template <typename T> struct impl_IApplicationView4;
+template <typename T> struct impl_IApplicationViewConsolidatedEventArgs;
+template <typename T> struct impl_IApplicationViewConsolidatedEventArgs2;
+template <typename T> struct impl_IApplicationViewFullscreenStatics;
+template <typename T> struct impl_IApplicationViewInteropStatics;
+template <typename T> struct impl_IApplicationViewScaling;
+template <typename T> struct impl_IApplicationViewScalingStatics;
+template <typename T> struct impl_IApplicationViewStatics;
+template <typename T> struct impl_IApplicationViewStatics2;
+template <typename T> struct impl_IApplicationViewStatics3;
+template <typename T> struct impl_IApplicationViewSwitcherStatics;
+template <typename T> struct impl_IApplicationViewSwitcherStatics2;
+template <typename T> struct impl_IApplicationViewSwitcherStatics3;
+template <typename T> struct impl_IApplicationViewTitleBar;
+template <typename T> struct impl_IApplicationViewTransferContext;
+template <typename T> struct impl_IApplicationViewTransferContextStatics;
+template <typename T> struct impl_IInputPane;
+template <typename T> struct impl_IInputPane2;
+template <typename T> struct impl_IInputPaneControl;
+template <typename T> struct impl_IInputPaneStatics;
+template <typename T> struct impl_IInputPaneVisibilityEventArgs;
+template <typename T> struct impl_IProjectionManagerStatics;
+template <typename T> struct impl_IProjectionManagerStatics2;
+template <typename T> struct impl_IStatusBar;
+template <typename T> struct impl_IStatusBarProgressIndicator;
+template <typename T> struct impl_IStatusBarStatics;
+template <typename T> struct impl_IUISettings;
+template <typename T> struct impl_IUISettings2;
+template <typename T> struct impl_IUISettings3;
+template <typename T> struct impl_IUISettings4;
+template <typename T> struct impl_IUIViewSettings;
+template <typename T> struct impl_IUIViewSettingsStatics;
+template <typename T> struct impl_IViewModePreferences;
+template <typename T> struct impl_IViewModePreferencesStatics;
 
 }
 
@@ -118,13 +176,19 @@ enum class ApplicationViewBoundsMode
     UseCoreWindow = 1,
 };
 
+enum class ApplicationViewMode
+{
+    Default = 0,
+    CompactOverlay = 1,
+};
+
 enum class ApplicationViewOrientation
 {
     Landscape = 0,
     Portrait = 1,
 };
 
-enum class ApplicationViewState
+enum class [[deprecated("ApplicationViewState may be altered or unavailable for releases after Windows 8.1. Instead, query for window layout sizes directly.")]] ApplicationViewState
 {
     FullScreenLandscape = 0,
     Filled = 1,
@@ -205,6 +269,7 @@ enum class ViewSizePreference
     UseMore = 3,
     UseMinimum = 4,
     UseNone = 5,
+    Custom = 6,
 };
 
 }

@@ -1,10 +1,22 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
 
 WINRT_EXPORT namespace winrt {
+
+namespace ABI::Windows::Media {
+
+struct MediaTimeRange;
+
+}
+
+namespace Windows::Media {
+
+using MediaTimeRange = ABI::Windows::Media::MediaTimeRange;
+
+}
 
 namespace ABI::Windows::Media {
 
@@ -16,12 +28,15 @@ struct IImageDisplayProperties;
 struct IMediaControl;
 struct IMediaExtension;
 struct IMediaExtensionManager;
+struct IMediaExtensionManager2;
 struct IMediaFrame;
 struct IMediaMarker;
 struct IMediaMarkerTypesStatics;
 struct IMediaMarkers;
 struct IMediaProcessingTriggerDetails;
 struct IMediaTimelineController;
+struct IMediaTimelineController2;
+struct IMediaTimelineControllerFailedEventArgs;
 struct IMusicDisplayProperties;
 struct IMusicDisplayProperties2;
 struct IMusicDisplayProperties3;
@@ -47,6 +62,7 @@ struct ImageDisplayProperties;
 struct MediaExtensionManager;
 struct MediaProcessingTriggerDetails;
 struct MediaTimelineController;
+struct MediaTimelineControllerFailedEventArgs;
 struct MusicDisplayProperties;
 struct PlaybackPositionChangeRequestedEventArgs;
 struct PlaybackRateChangeRequestedEventArgs;
@@ -71,12 +87,15 @@ struct IImageDisplayProperties;
 struct IMediaControl;
 struct IMediaExtension;
 struct IMediaExtensionManager;
+struct IMediaExtensionManager2;
 struct IMediaFrame;
 struct IMediaMarker;
 struct IMediaMarkerTypesStatics;
 struct IMediaMarkers;
 struct IMediaProcessingTriggerDetails;
 struct IMediaTimelineController;
+struct IMediaTimelineController2;
+struct IMediaTimelineControllerFailedEventArgs;
 struct IMusicDisplayProperties;
 struct IMusicDisplayProperties2;
 struct IMusicDisplayProperties3;
@@ -104,6 +123,7 @@ struct MediaExtensionManager;
 struct MediaMarkerTypes;
 struct MediaProcessingTriggerDetails;
 struct MediaTimelineController;
+struct MediaTimelineControllerFailedEventArgs;
 struct MusicDisplayProperties;
 struct PlaybackPositionChangeRequestedEventArgs;
 struct PlaybackRateChangeRequestedEventArgs;
@@ -116,6 +136,46 @@ struct SystemMediaTransportControlsTimelineProperties;
 struct VideoDisplayProperties;
 struct VideoEffects;
 struct VideoFrame;
+
+}
+
+namespace Windows::Media {
+
+template <typename T> struct impl_IAudioBuffer;
+template <typename T> struct impl_IAudioFrame;
+template <typename T> struct impl_IAudioFrameFactory;
+template <typename T> struct impl_IAutoRepeatModeChangeRequestedEventArgs;
+template <typename T> struct impl_IImageDisplayProperties;
+template <typename T> struct impl_IMediaControl;
+template <typename T> struct impl_IMediaExtension;
+template <typename T> struct impl_IMediaExtensionManager;
+template <typename T> struct impl_IMediaExtensionManager2;
+template <typename T> struct impl_IMediaFrame;
+template <typename T> struct impl_IMediaMarker;
+template <typename T> struct impl_IMediaMarkerTypesStatics;
+template <typename T> struct impl_IMediaMarkers;
+template <typename T> struct impl_IMediaProcessingTriggerDetails;
+template <typename T> struct impl_IMediaTimelineController;
+template <typename T> struct impl_IMediaTimelineController2;
+template <typename T> struct impl_IMediaTimelineControllerFailedEventArgs;
+template <typename T> struct impl_IMusicDisplayProperties;
+template <typename T> struct impl_IMusicDisplayProperties2;
+template <typename T> struct impl_IMusicDisplayProperties3;
+template <typename T> struct impl_IPlaybackPositionChangeRequestedEventArgs;
+template <typename T> struct impl_IPlaybackRateChangeRequestedEventArgs;
+template <typename T> struct impl_IShuffleEnabledChangeRequestedEventArgs;
+template <typename T> struct impl_ISystemMediaTransportControls;
+template <typename T> struct impl_ISystemMediaTransportControls2;
+template <typename T> struct impl_ISystemMediaTransportControlsButtonPressedEventArgs;
+template <typename T> struct impl_ISystemMediaTransportControlsDisplayUpdater;
+template <typename T> struct impl_ISystemMediaTransportControlsPropertyChangedEventArgs;
+template <typename T> struct impl_ISystemMediaTransportControlsStatics;
+template <typename T> struct impl_ISystemMediaTransportControlsTimelineProperties;
+template <typename T> struct impl_IVideoDisplayProperties;
+template <typename T> struct impl_IVideoDisplayProperties2;
+template <typename T> struct impl_IVideoEffectsStatics;
+template <typename T> struct impl_IVideoFrame;
+template <typename T> struct impl_IVideoFrameFactory;
 
 }
 
@@ -162,6 +222,8 @@ enum class MediaTimelineControllerState
 {
     Paused = 0,
     Running = 1,
+    Stalled = 2,
+    Error = 3,
 };
 
 enum class SoundLevel

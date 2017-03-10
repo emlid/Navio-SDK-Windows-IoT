@@ -1,5 +1,5 @@
 @echo off
-call "%vs140comntools%vsvars32.bat"
+setlocal
 
 echo Remove Visual Studio Temporary Key
 echo ==================================
@@ -18,6 +18,13 @@ echo.
 rem * Parse parameters
 if "%~1" == "" goto syntax
 set VSKeyContainerName=%~1
+
+rem * Initialize environment
+echo Initializing Visual Studio tools...
+pushd "%~dp0"
+call "%VS150ComnTools%VsDevCmd.bat"
+if %errorlevel% neq 0 goto error
+popd
 
 rem * Remove key
 sn -d %VSKeyContainerName%

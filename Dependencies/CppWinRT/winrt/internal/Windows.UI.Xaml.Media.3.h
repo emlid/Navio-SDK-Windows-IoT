@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -13,11 +13,11 @@ template <typename H> struct impl_RateChangedRoutedEventHandler : implements<imp
 {
     impl_RateChangedRoutedEventHandler(H && handler) : H(std::forward<H>(handler)) {}
 
-    HRESULT __stdcall abi_Invoke(abi_arg_in<Windows::IInspectable> sender, abi_arg_in<Windows::UI::Xaml::Media::IRateChangedRoutedEventArgs> e) noexcept override
+    HRESULT __stdcall abi_Invoke(impl::abi_arg_in<Windows::Foundation::IInspectable> sender, impl::abi_arg_in<Windows::UI::Xaml::Media::IRateChangedRoutedEventArgs> e) noexcept override
     {
         try
         {
-            (*this)(*reinterpret_cast<const Windows::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Xaml::Media::RateChangedRoutedEventArgs *>(&e));
+            (*this)(*reinterpret_cast<const Windows::Foundation::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Xaml::Media::RateChangedRoutedEventArgs *>(&e));
             return S_OK;
         }
         catch (...)
@@ -31,11 +31,11 @@ template <typename H> struct impl_TimelineMarkerRoutedEventHandler : implements<
 {
     impl_TimelineMarkerRoutedEventHandler(H && handler) : H(std::forward<H>(handler)) {}
 
-    HRESULT __stdcall abi_Invoke(abi_arg_in<Windows::IInspectable> sender, abi_arg_in<Windows::UI::Xaml::Media::ITimelineMarkerRoutedEventArgs> e) noexcept override
+    HRESULT __stdcall abi_Invoke(impl::abi_arg_in<Windows::Foundation::IInspectable> sender, impl::abi_arg_in<Windows::UI::Xaml::Media::ITimelineMarkerRoutedEventArgs> e) noexcept override
     {
         try
         {
-            (*this)(*reinterpret_cast<const Windows::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Xaml::Media::TimelineMarkerRoutedEventArgs *>(&e));
+            (*this)(*reinterpret_cast<const Windows::Foundation::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Xaml::Media::TimelineMarkerRoutedEventArgs *>(&e));
             return S_OK;
         }
         catch (...)
@@ -132,13 +132,13 @@ struct WINRT_EBO CompositionTarget :
     Windows::UI::Xaml::Media::ICompositionTarget
 {
     CompositionTarget(std::nullptr_t) noexcept {}
-    static event_token Rendering(const Windows::Foundation::EventHandler<Windows::IInspectable> & value);
+    static event_token Rendering(const Windows::Foundation::EventHandler<Windows::Foundation::IInspectable> & value);
     using Rendering_revoker = factory_event_revoker<ICompositionTargetStatics>;
-    static Rendering_revoker Rendering(auto_revoke_t, const Windows::Foundation::EventHandler<Windows::IInspectable> & value);
+    static Rendering_revoker Rendering(auto_revoke_t, const Windows::Foundation::EventHandler<Windows::Foundation::IInspectable> & value);
     static void Rendering(event_token token);
-    static event_token SurfaceContentsLost(const Windows::Foundation::EventHandler<Windows::IInspectable> & value);
+    static event_token SurfaceContentsLost(const Windows::Foundation::EventHandler<Windows::Foundation::IInspectable> & value);
     using SurfaceContentsLost_revoker = factory_event_revoker<ICompositionTargetStatics>;
-    static SurfaceContentsLost_revoker SurfaceContentsLost(auto_revoke_t, const Windows::Foundation::EventHandler<Windows::IInspectable> & value);
+    static SurfaceContentsLost_revoker SurfaceContentsLost(auto_revoke_t, const Windows::Foundation::EventHandler<Windows::Foundation::IInspectable> & value);
     static void SurfaceContentsLost(event_token token);
 };
 
@@ -165,7 +165,7 @@ struct WINRT_EBO FontFamily :
     Windows::UI::Xaml::Media::IFontFamily
 {
     FontFamily(std::nullptr_t) noexcept {}
-    FontFamily(hstring_ref familyName);
+    FontFamily(hstring_view familyName);
     static Windows::UI::Xaml::Media::FontFamily XamlAutoFontFamily();
 };
 
@@ -285,6 +285,23 @@ struct WINRT_EBO LinearGradientBrush :
     LinearGradientBrush(const Windows::UI::Xaml::Media::GradientStopCollection & gradientStopCollection, double angle);
     static Windows::UI::Xaml::DependencyProperty StartPointProperty();
     static Windows::UI::Xaml::DependencyProperty EndPointProperty();
+};
+
+struct WINRT_EBO LoadedImageSourceLoadCompletedEventArgs :
+    Windows::UI::Xaml::Media::ILoadedImageSourceLoadCompletedEventArgs
+{
+    LoadedImageSourceLoadCompletedEventArgs(std::nullptr_t) noexcept {}
+};
+
+struct WINRT_EBO LoadedImageSurface :
+    Windows::UI::Xaml::Media::ILoadedImageSurface,
+    impl::require<LoadedImageSurface, Windows::Foundation::IClosable, Windows::UI::Composition::ICompositionSurface>
+{
+    LoadedImageSurface(std::nullptr_t) noexcept {}
+    static Windows::UI::Xaml::Media::LoadedImageSurface StartLoadFromUri(const Windows::Foundation::Uri & uri, const Windows::Foundation::Size & desiredMaxSize);
+    static Windows::UI::Xaml::Media::LoadedImageSurface StartLoadFromUri(const Windows::Foundation::Uri & uri);
+    static Windows::UI::Xaml::Media::LoadedImageSurface StartLoadFromStream(const Windows::Storage::Streams::IRandomAccessStream & stream, const Windows::Foundation::Size & desiredMaxSize);
+    static Windows::UI::Xaml::Media::LoadedImageSurface StartLoadFromStream(const Windows::Storage::Streams::IRandomAccessStream & stream);
 };
 
 struct WINRT_EBO Matrix3DProjection :
@@ -617,6 +634,28 @@ struct WINRT_EBO VisualTreeHelper :
     static Windows::UI::Xaml::DependencyObject GetParent(const Windows::UI::Xaml::DependencyObject & reference);
     static void DisconnectChildrenRecursive(const Windows::UI::Xaml::UIElement & element);
     static Windows::Foundation::Collections::IVectorView<Windows::UI::Xaml::Controls::Primitives::Popup> GetOpenPopups(const Windows::UI::Xaml::Window & window);
+};
+
+struct WINRT_EBO XamlCompositionBrushBase :
+    Windows::UI::Xaml::Media::IXamlCompositionBrushBase,
+    impl::bases<XamlCompositionBrushBase, Windows::UI::Xaml::DependencyObject, Windows::UI::Xaml::Media::Brush>,
+    impl::require<XamlCompositionBrushBase, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2, Windows::UI::Xaml::Media::IBrush, Windows::UI::Xaml::Media::IXamlCompositionBrushBaseOverrides>
+{
+    XamlCompositionBrushBase(std::nullptr_t) noexcept {}
+    static Windows::UI::Xaml::DependencyProperty FallbackColorProperty();
+};
+
+struct WINRT_EBO XamlLight :
+    Windows::UI::Xaml::Media::IXamlLight,
+    impl::bases<XamlLight, Windows::UI::Xaml::DependencyObject>,
+    impl::require<XamlLight, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2, Windows::UI::Xaml::Media::IXamlLightOverrides>
+{
+    XamlLight(std::nullptr_t) noexcept {}
+    XamlLight();
+    static void AddTargetElement(hstring_view lightId, const Windows::UI::Xaml::UIElement & element);
+    static void RemoveTargetElement(hstring_view lightId, const Windows::UI::Xaml::UIElement & element);
+    static void AddTargetBrush(hstring_view lightId, const Windows::UI::Xaml::Media::Brush & brush);
+    static void RemoveTargetBrush(hstring_view lightId, const Windows::UI::Xaml::Media::Brush & brush);
 };
 
 }

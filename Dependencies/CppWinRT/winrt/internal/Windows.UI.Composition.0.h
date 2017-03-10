@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -19,12 +19,16 @@ struct ICompositionBackdropBrush;
 struct ICompositionBatchCompletedEventArgs;
 struct ICompositionBrush;
 struct ICompositionBrushFactory;
+struct ICompositionCapabilities;
+struct ICompositionCapabilitiesStatics;
 struct ICompositionClip;
 struct ICompositionClip2;
 struct ICompositionClipFactory;
 struct ICompositionColorBrush;
 struct ICompositionCommitBatch;
 struct ICompositionDrawingSurface;
+struct ICompositionDrawingSurface2;
+struct ICompositionDrawingSurfaceFactory;
 struct ICompositionEasingFunction;
 struct ICompositionEasingFunctionFactory;
 struct ICompositionEffectBrush;
@@ -32,6 +36,7 @@ struct ICompositionEffectFactory;
 struct ICompositionEffectSourceParameter;
 struct ICompositionEffectSourceParameterFactory;
 struct ICompositionGraphicsDevice;
+struct ICompositionGraphicsDevice2;
 struct ICompositionLight;
 struct ICompositionLightFactory;
 struct ICompositionMaskBrush;
@@ -48,8 +53,11 @@ struct ICompositionSurface;
 struct ICompositionSurfaceBrush;
 struct ICompositionSurfaceBrush2;
 struct ICompositionTarget;
+struct ICompositionVirtualDrawingSurface;
+struct ICompositionVirtualDrawingSurfaceFactory;
 struct ICompositor;
 struct ICompositor2;
+struct ICompositor3;
 struct IContainerVisual;
 struct IContainerVisualFactory;
 struct ICubicBezierEasingFunction;
@@ -60,6 +68,7 @@ struct IImplicitAnimationCollection;
 struct IInsetClip;
 struct IKeyFrameAnimation;
 struct IKeyFrameAnimation2;
+struct IKeyFrameAnimation3;
 struct IKeyFrameAnimationFactory;
 struct ILayerVisual;
 struct ILinearEasingFunction;
@@ -75,6 +84,7 @@ struct IVector2KeyFrameAnimation;
 struct IVector3KeyFrameAnimation;
 struct IVector4KeyFrameAnimation;
 struct IVisual;
+struct IVisual2;
 struct IVisualCollection;
 struct IVisualFactory;
 struct IVisualUnorderedCollection;
@@ -85,6 +95,7 @@ struct CompositionAnimationGroup;
 struct CompositionBackdropBrush;
 struct CompositionBatchCompletedEventArgs;
 struct CompositionBrush;
+struct CompositionCapabilities;
 struct CompositionClip;
 struct CompositionColorBrush;
 struct CompositionCommitBatch;
@@ -103,6 +114,7 @@ struct CompositionScopedBatch;
 struct CompositionShadow;
 struct CompositionSurfaceBrush;
 struct CompositionTarget;
+struct CompositionVirtualDrawingSurface;
 struct Compositor;
 struct ContainerVisual;
 struct CubicBezierEasingFunction;
@@ -143,12 +155,16 @@ struct ICompositionBackdropBrush;
 struct ICompositionBatchCompletedEventArgs;
 struct ICompositionBrush;
 struct ICompositionBrushFactory;
+struct ICompositionCapabilities;
+struct ICompositionCapabilitiesStatics;
 struct ICompositionClip;
 struct ICompositionClip2;
 struct ICompositionClipFactory;
 struct ICompositionColorBrush;
 struct ICompositionCommitBatch;
 struct ICompositionDrawingSurface;
+struct ICompositionDrawingSurface2;
+struct ICompositionDrawingSurfaceFactory;
 struct ICompositionEasingFunction;
 struct ICompositionEasingFunctionFactory;
 struct ICompositionEffectBrush;
@@ -156,6 +172,7 @@ struct ICompositionEffectFactory;
 struct ICompositionEffectSourceParameter;
 struct ICompositionEffectSourceParameterFactory;
 struct ICompositionGraphicsDevice;
+struct ICompositionGraphicsDevice2;
 struct ICompositionLight;
 struct ICompositionLightFactory;
 struct ICompositionMaskBrush;
@@ -172,8 +189,11 @@ struct ICompositionSurface;
 struct ICompositionSurfaceBrush;
 struct ICompositionSurfaceBrush2;
 struct ICompositionTarget;
+struct ICompositionVirtualDrawingSurface;
+struct ICompositionVirtualDrawingSurfaceFactory;
 struct ICompositor;
 struct ICompositor2;
+struct ICompositor3;
 struct IContainerVisual;
 struct IContainerVisualFactory;
 struct ICubicBezierEasingFunction;
@@ -184,6 +204,7 @@ struct IImplicitAnimationCollection;
 struct IInsetClip;
 struct IKeyFrameAnimation;
 struct IKeyFrameAnimation2;
+struct IKeyFrameAnimation3;
 struct IKeyFrameAnimationFactory;
 struct ILayerVisual;
 struct ILinearEasingFunction;
@@ -199,6 +220,7 @@ struct IVector2KeyFrameAnimation;
 struct IVector3KeyFrameAnimation;
 struct IVector4KeyFrameAnimation;
 struct IVisual;
+struct IVisual2;
 struct IVisualCollection;
 struct IVisualFactory;
 struct IVisualUnorderedCollection;
@@ -209,6 +231,7 @@ struct CompositionAnimationGroup;
 struct CompositionBackdropBrush;
 struct CompositionBatchCompletedEventArgs;
 struct CompositionBrush;
+struct CompositionCapabilities;
 struct CompositionClip;
 struct CompositionColorBrush;
 struct CompositionCommitBatch;
@@ -227,6 +250,7 @@ struct CompositionScopedBatch;
 struct CompositionShadow;
 struct CompositionSurfaceBrush;
 struct CompositionTarget;
+struct CompositionVirtualDrawingSurface;
 struct Compositor;
 struct ContainerVisual;
 struct CubicBezierEasingFunction;
@@ -255,6 +279,97 @@ struct VisualUnorderedCollection;
 }
 
 namespace Windows::UI::Composition {
+
+template <typename T> struct impl_IAmbientLight;
+template <typename T> struct impl_IColorKeyFrameAnimation;
+template <typename T> struct impl_ICompositionAnimation;
+template <typename T> struct impl_ICompositionAnimation2;
+template <typename T> struct impl_ICompositionAnimationBase;
+template <typename T> struct impl_ICompositionAnimationFactory;
+template <typename T> struct impl_ICompositionAnimationGroup;
+template <typename T> struct impl_ICompositionBackdropBrush;
+template <typename T> struct impl_ICompositionBatchCompletedEventArgs;
+template <typename T> struct impl_ICompositionBrush;
+template <typename T> struct impl_ICompositionBrushFactory;
+template <typename T> struct impl_ICompositionCapabilities;
+template <typename T> struct impl_ICompositionCapabilitiesStatics;
+template <typename T> struct impl_ICompositionClip;
+template <typename T> struct impl_ICompositionClip2;
+template <typename T> struct impl_ICompositionClipFactory;
+template <typename T> struct impl_ICompositionColorBrush;
+template <typename T> struct impl_ICompositionCommitBatch;
+template <typename T> struct impl_ICompositionDrawingSurface;
+template <typename T> struct impl_ICompositionDrawingSurface2;
+template <typename T> struct impl_ICompositionDrawingSurfaceFactory;
+template <typename T> struct impl_ICompositionEasingFunction;
+template <typename T> struct impl_ICompositionEasingFunctionFactory;
+template <typename T> struct impl_ICompositionEffectBrush;
+template <typename T> struct impl_ICompositionEffectFactory;
+template <typename T> struct impl_ICompositionEffectSourceParameter;
+template <typename T> struct impl_ICompositionEffectSourceParameterFactory;
+template <typename T> struct impl_ICompositionGraphicsDevice;
+template <typename T> struct impl_ICompositionGraphicsDevice2;
+template <typename T> struct impl_ICompositionLight;
+template <typename T> struct impl_ICompositionLightFactory;
+template <typename T> struct impl_ICompositionMaskBrush;
+template <typename T> struct impl_ICompositionNineGridBrush;
+template <typename T> struct impl_ICompositionObject;
+template <typename T> struct impl_ICompositionObject2;
+template <typename T> struct impl_ICompositionObjectFactory;
+template <typename T> struct impl_ICompositionPropertySet;
+template <typename T> struct impl_ICompositionPropertySet2;
+template <typename T> struct impl_ICompositionScopedBatch;
+template <typename T> struct impl_ICompositionShadow;
+template <typename T> struct impl_ICompositionShadowFactory;
+template <typename T> struct impl_ICompositionSurface;
+template <typename T> struct impl_ICompositionSurfaceBrush;
+template <typename T> struct impl_ICompositionSurfaceBrush2;
+template <typename T> struct impl_ICompositionTarget;
+template <typename T> struct impl_ICompositionVirtualDrawingSurface;
+template <typename T> struct impl_ICompositionVirtualDrawingSurfaceFactory;
+template <typename T> struct impl_ICompositor;
+template <typename T> struct impl_ICompositor2;
+template <typename T> struct impl_ICompositor3;
+template <typename T> struct impl_IContainerVisual;
+template <typename T> struct impl_IContainerVisualFactory;
+template <typename T> struct impl_ICubicBezierEasingFunction;
+template <typename T> struct impl_IDistantLight;
+template <typename T> struct impl_IDropShadow;
+template <typename T> struct impl_IExpressionAnimation;
+template <typename T> struct impl_IImplicitAnimationCollection;
+template <typename T> struct impl_IInsetClip;
+template <typename T> struct impl_IKeyFrameAnimation;
+template <typename T> struct impl_IKeyFrameAnimation2;
+template <typename T> struct impl_IKeyFrameAnimation3;
+template <typename T> struct impl_IKeyFrameAnimationFactory;
+template <typename T> struct impl_ILayerVisual;
+template <typename T> struct impl_ILinearEasingFunction;
+template <typename T> struct impl_IPointLight;
+template <typename T> struct impl_IQuaternionKeyFrameAnimation;
+template <typename T> struct impl_IRenderingDeviceReplacedEventArgs;
+template <typename T> struct impl_IScalarKeyFrameAnimation;
+template <typename T> struct impl_ISpotLight;
+template <typename T> struct impl_ISpriteVisual;
+template <typename T> struct impl_ISpriteVisual2;
+template <typename T> struct impl_IStepEasingFunction;
+template <typename T> struct impl_IVector2KeyFrameAnimation;
+template <typename T> struct impl_IVector3KeyFrameAnimation;
+template <typename T> struct impl_IVector4KeyFrameAnimation;
+template <typename T> struct impl_IVisual;
+template <typename T> struct impl_IVisual2;
+template <typename T> struct impl_IVisualCollection;
+template <typename T> struct impl_IVisualFactory;
+template <typename T> struct impl_IVisualUnorderedCollection;
+
+}
+
+namespace Windows::UI::Composition {
+
+enum class AnimationDelayBehavior
+{
+    SetInitialValueAfterDelay = 0,
+    SetInitialValueBeforeDelay = 1,
+};
 
 enum class AnimationDirection
 {

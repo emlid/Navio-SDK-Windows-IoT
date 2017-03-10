@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -16,7 +16,12 @@ struct IAdvancedVideoCaptureDeviceController;
 struct IAdvancedVideoCaptureDeviceController2;
 struct IAdvancedVideoCaptureDeviceController3;
 struct IAdvancedVideoCaptureDeviceController4;
+struct IAdvancedVideoCaptureDeviceController5;
 struct IAudioDeviceController;
+struct IAudioDeviceModule;
+struct IAudioDeviceModuleNotificationEventArgs;
+struct IAudioDeviceModulesManager;
+struct IAudioDeviceModulesManagerFactory;
 struct ICallControl;
 struct ICallControlStatics;
 struct IDefaultAudioDeviceChangedEventArgs;
@@ -39,6 +44,7 @@ struct IMediaDeviceControl;
 struct IMediaDeviceControlCapabilities;
 struct IMediaDeviceController;
 struct IMediaDeviceStatics;
+struct IModuleCommandResult;
 struct IOpticalImageStabilizationControl;
 struct IPhotoConfirmationControl;
 struct IRedialRequestedEventArgs;
@@ -48,6 +54,7 @@ struct IRegionsOfInterestControl;
 struct ISceneModeControl;
 struct ITorchControl;
 struct IVideoDeviceController;
+struct IVideoDeviceControllerGetDevicePropertyResult;
 struct IWhiteBalanceControl;
 struct IZoomControl;
 struct IZoomControl2;
@@ -57,6 +64,9 @@ struct RedialRequestedEventHandler;
 struct AdvancedPhotoCaptureSettings;
 struct AdvancedPhotoControl;
 struct AudioDeviceController;
+struct AudioDeviceModule;
+struct AudioDeviceModuleNotificationEventArgs;
+struct AudioDeviceModulesManager;
 struct CallControl;
 struct DefaultAudioCaptureDeviceChangedEventArgs;
 struct DefaultAudioRenderDeviceChangedEventArgs;
@@ -74,6 +84,7 @@ struct LowLagPhotoControl;
 struct LowLagPhotoSequenceControl;
 struct MediaDeviceControl;
 struct MediaDeviceControlCapabilities;
+struct ModuleCommandResult;
 struct OpticalImageStabilizationControl;
 struct PhotoConfirmationControl;
 struct RedialRequestedEventArgs;
@@ -82,6 +93,7 @@ struct RegionsOfInterestControl;
 struct SceneModeControl;
 struct TorchControl;
 struct VideoDeviceController;
+struct VideoDeviceControllerGetDevicePropertyResult;
 struct WhiteBalanceControl;
 struct ZoomControl;
 struct ZoomSettings;
@@ -100,7 +112,12 @@ struct IAdvancedVideoCaptureDeviceController;
 struct IAdvancedVideoCaptureDeviceController2;
 struct IAdvancedVideoCaptureDeviceController3;
 struct IAdvancedVideoCaptureDeviceController4;
+struct IAdvancedVideoCaptureDeviceController5;
 struct IAudioDeviceController;
+struct IAudioDeviceModule;
+struct IAudioDeviceModuleNotificationEventArgs;
+struct IAudioDeviceModulesManager;
+struct IAudioDeviceModulesManagerFactory;
 struct ICallControl;
 struct ICallControlStatics;
 struct IDefaultAudioDeviceChangedEventArgs;
@@ -123,6 +140,7 @@ struct IMediaDeviceControl;
 struct IMediaDeviceControlCapabilities;
 struct IMediaDeviceController;
 struct IMediaDeviceStatics;
+struct IModuleCommandResult;
 struct IOpticalImageStabilizationControl;
 struct IPhotoConfirmationControl;
 struct IRedialRequestedEventArgs;
@@ -132,6 +150,7 @@ struct IRegionsOfInterestControl;
 struct ISceneModeControl;
 struct ITorchControl;
 struct IVideoDeviceController;
+struct IVideoDeviceControllerGetDevicePropertyResult;
 struct IWhiteBalanceControl;
 struct IZoomControl;
 struct IZoomControl2;
@@ -139,6 +158,9 @@ struct IZoomSettings;
 struct AdvancedPhotoCaptureSettings;
 struct AdvancedPhotoControl;
 struct AudioDeviceController;
+struct AudioDeviceModule;
+struct AudioDeviceModuleNotificationEventArgs;
+struct AudioDeviceModulesManager;
 struct CallControl;
 struct DefaultAudioCaptureDeviceChangedEventArgs;
 struct DefaultAudioRenderDeviceChangedEventArgs;
@@ -157,6 +179,7 @@ struct LowLagPhotoSequenceControl;
 struct MediaDevice;
 struct MediaDeviceControl;
 struct MediaDeviceControlCapabilities;
+struct ModuleCommandResult;
 struct OpticalImageStabilizationControl;
 struct PhotoConfirmationControl;
 struct RedialRequestedEventArgs;
@@ -165,9 +188,68 @@ struct RegionsOfInterestControl;
 struct SceneModeControl;
 struct TorchControl;
 struct VideoDeviceController;
+struct VideoDeviceControllerGetDevicePropertyResult;
 struct WhiteBalanceControl;
 struct ZoomControl;
 struct ZoomSettings;
+
+}
+
+namespace Windows::Media::Devices {
+
+template <typename T> struct impl_IAdvancedPhotoCaptureSettings;
+template <typename T> struct impl_IAdvancedPhotoControl;
+template <typename T> struct impl_IAdvancedVideoCaptureDeviceController;
+template <typename T> struct impl_IAdvancedVideoCaptureDeviceController2;
+template <typename T> struct impl_IAdvancedVideoCaptureDeviceController3;
+template <typename T> struct impl_IAdvancedVideoCaptureDeviceController4;
+template <typename T> struct impl_IAdvancedVideoCaptureDeviceController5;
+template <typename T> struct impl_IAudioDeviceController;
+template <typename T> struct impl_IAudioDeviceModule;
+template <typename T> struct impl_IAudioDeviceModuleNotificationEventArgs;
+template <typename T> struct impl_IAudioDeviceModulesManager;
+template <typename T> struct impl_IAudioDeviceModulesManagerFactory;
+template <typename T> struct impl_ICallControl;
+template <typename T> struct impl_ICallControlStatics;
+template <typename T> struct impl_IDefaultAudioDeviceChangedEventArgs;
+template <typename T> struct impl_IDialRequestedEventArgs;
+template <typename T> struct impl_IExposureCompensationControl;
+template <typename T> struct impl_IExposureControl;
+template <typename T> struct impl_IExposurePriorityVideoControl;
+template <typename T> struct impl_IFlashControl;
+template <typename T> struct impl_IFlashControl2;
+template <typename T> struct impl_IFocusControl;
+template <typename T> struct impl_IFocusControl2;
+template <typename T> struct impl_IFocusSettings;
+template <typename T> struct impl_IHdrVideoControl;
+template <typename T> struct impl_IIsoSpeedControl;
+template <typename T> struct impl_IIsoSpeedControl2;
+template <typename T> struct impl_IKeypadPressedEventArgs;
+template <typename T> struct impl_ILowLagPhotoControl;
+template <typename T> struct impl_ILowLagPhotoSequenceControl;
+template <typename T> struct impl_IMediaDeviceControl;
+template <typename T> struct impl_IMediaDeviceControlCapabilities;
+template <typename T> struct impl_IMediaDeviceController;
+template <typename T> struct impl_IMediaDeviceStatics;
+template <typename T> struct impl_IModuleCommandResult;
+template <typename T> struct impl_IOpticalImageStabilizationControl;
+template <typename T> struct impl_IPhotoConfirmationControl;
+template <typename T> struct impl_IRedialRequestedEventArgs;
+template <typename T> struct impl_IRegionOfInterest;
+template <typename T> struct impl_IRegionOfInterest2;
+template <typename T> struct impl_IRegionsOfInterestControl;
+template <typename T> struct impl_ISceneModeControl;
+template <typename T> struct impl_ITorchControl;
+template <typename T> struct impl_IVideoDeviceController;
+template <typename T> struct impl_IVideoDeviceControllerGetDevicePropertyResult;
+template <typename T> struct impl_IWhiteBalanceControl;
+template <typename T> struct impl_IZoomControl;
+template <typename T> struct impl_IZoomControl2;
+template <typename T> struct impl_IZoomSettings;
+template <typename T> struct impl_CallControlEventHandler;
+template <typename T> struct impl_DialRequestedEventHandler;
+template <typename T> struct impl_KeypadPressedEventHandler;
+template <typename T> struct impl_RedialRequestedEventHandler;
 
 }
 
@@ -263,7 +345,7 @@ enum class HdrVideoMode
     Auto = 2,
 };
 
-enum class IsoSpeedPreset
+enum class [[deprecated("IsoSpeedPreset may not be available in future versions of Windows Phone. Starting with Windows Phone 8.1, use SetAutoAsync, Auto, SetValueAsync, and Value instead")]] IsoSpeedPreset
 {
     Auto = 0,
     Iso50 = 1,
@@ -325,6 +407,12 @@ enum class RegionOfInterestType
     Face = 1,
 };
 
+enum class SendCommandStatus
+{
+    Success = 0,
+    DeviceNotAvailable = 1,
+};
+
 enum class TelephonyKey
 {
     D0 = 0,
@@ -343,6 +431,27 @@ enum class TelephonyKey
     B = 13,
     C = 14,
     D = 15,
+};
+
+enum class VideoDeviceControllerGetDevicePropertyStatus
+{
+    Success = 0,
+    UnknownFailure = 1,
+    BufferTooSmall = 2,
+    NotSupported = 3,
+    DeviceNotAvailable = 4,
+    MaxPropertyValueSizeTooSmall = 5,
+    MaxPropertyValueSizeRequired = 6,
+};
+
+enum class VideoDeviceControllerSetDevicePropertyStatus
+{
+    Success = 0,
+    UnknownFailure = 1,
+    NotSupported = 2,
+    InvalidValue = 3,
+    DeviceNotAvailable = 4,
+    NotInControl = 5,
 };
 
 enum class ZoomTransitionMode

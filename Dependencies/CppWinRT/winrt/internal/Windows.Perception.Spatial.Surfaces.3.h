@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -43,6 +43,7 @@ struct WINRT_EBO SpatialSurfaceObserver :
     SpatialSurfaceObserver(std::nullptr_t) noexcept {}
     SpatialSurfaceObserver();
     static Windows::Foundation::IAsyncOperation<winrt::Windows::Perception::Spatial::SpatialPerceptionAccessStatus> RequestAccessAsync();
+    static bool IsSupported();
 };
 
 }

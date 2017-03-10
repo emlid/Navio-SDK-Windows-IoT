@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -8,6 +8,15 @@
 WINRT_EXPORT namespace winrt {
 
 namespace Windows::UI::Composition::Interactions {
+
+struct WINRT_EBO CompositionConditionalValue :
+    Windows::UI::Composition::Interactions::ICompositionConditionalValue,
+    impl::bases<CompositionConditionalValue, Windows::UI::Composition::CompositionObject>,
+    impl::require<CompositionConditionalValue, Windows::Foundation::IClosable, Windows::UI::Composition::ICompositionObject, Windows::UI::Composition::ICompositionObject2>
+{
+    CompositionConditionalValue(std::nullptr_t) noexcept {}
+    static Windows::UI::Composition::Interactions::CompositionConditionalValue Create(const Windows::UI::Composition::Compositor & compositor);
+};
 
 struct WINRT_EBO CompositionInteractionSourceCollection :
     Windows::UI::Composition::Interactions::ICompositionInteractionSourceCollection,
@@ -20,7 +29,7 @@ struct WINRT_EBO CompositionInteractionSourceCollection :
 struct WINRT_EBO InteractionTracker :
     Windows::UI::Composition::Interactions::IInteractionTracker,
     impl::bases<InteractionTracker, Windows::UI::Composition::CompositionObject>,
-    impl::require<InteractionTracker, Windows::Foundation::IClosable, Windows::UI::Composition::ICompositionObject, Windows::UI::Composition::ICompositionObject2>
+    impl::require<InteractionTracker, Windows::Foundation::IClosable, Windows::UI::Composition::Interactions::IInteractionTracker2, Windows::UI::Composition::ICompositionObject, Windows::UI::Composition::ICompositionObject2>
 {
     InteractionTracker(std::nullptr_t) noexcept {}
     static Windows::UI::Composition::Interactions::InteractionTracker Create(const Windows::UI::Composition::Compositor & compositor);
@@ -92,7 +101,7 @@ struct WINRT_EBO InteractionTrackerValuesChangedArgs :
 struct WINRT_EBO VisualInteractionSource :
     Windows::UI::Composition::Interactions::IVisualInteractionSource,
     impl::bases<VisualInteractionSource, Windows::UI::Composition::CompositionObject>,
-    impl::require<VisualInteractionSource, Windows::Foundation::IClosable, Windows::UI::Composition::Interactions::ICompositionInteractionSource, Windows::UI::Composition::ICompositionObject, Windows::UI::Composition::ICompositionObject2>
+    impl::require<VisualInteractionSource, Windows::Foundation::IClosable, Windows::UI::Composition::Interactions::ICompositionInteractionSource, Windows::UI::Composition::Interactions::IVisualInteractionSource2, Windows::UI::Composition::ICompositionObject, Windows::UI::Composition::ICompositionObject2>
 {
     VisualInteractionSource(std::nullptr_t) noexcept {}
     static Windows::UI::Composition::Interactions::VisualInteractionSource Create(const Windows::UI::Composition::Visual & source);

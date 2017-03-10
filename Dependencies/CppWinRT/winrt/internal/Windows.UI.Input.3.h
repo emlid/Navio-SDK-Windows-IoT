@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -109,7 +109,8 @@ struct WINRT_EBO PointerVisualizationSettings :
 };
 
 struct WINRT_EBO RadialController :
-    Windows::UI::Input::IRadialController
+    Windows::UI::Input::IRadialController,
+    impl::require<RadialController, Windows::UI::Input::IRadialController2>
 {
     RadialController(std::nullptr_t) noexcept {}
     static bool IsSupported();
@@ -117,20 +118,41 @@ struct WINRT_EBO RadialController :
 };
 
 struct WINRT_EBO RadialControllerButtonClickedEventArgs :
-    Windows::UI::Input::IRadialControllerButtonClickedEventArgs
+    Windows::UI::Input::IRadialControllerButtonClickedEventArgs,
+    impl::require<RadialControllerButtonClickedEventArgs, Windows::UI::Input::IRadialControllerButtonClickedEventArgs2>
 {
     RadialControllerButtonClickedEventArgs(std::nullptr_t) noexcept {}
 };
 
+struct WINRT_EBO RadialControllerButtonHoldingEventArgs :
+    Windows::UI::Input::IRadialControllerButtonHoldingEventArgs
+{
+    RadialControllerButtonHoldingEventArgs(std::nullptr_t) noexcept {}
+};
+
+struct WINRT_EBO RadialControllerButtonPressedEventArgs :
+    Windows::UI::Input::IRadialControllerButtonPressedEventArgs
+{
+    RadialControllerButtonPressedEventArgs(std::nullptr_t) noexcept {}
+};
+
+struct WINRT_EBO RadialControllerButtonReleasedEventArgs :
+    Windows::UI::Input::IRadialControllerButtonReleasedEventArgs
+{
+    RadialControllerButtonReleasedEventArgs(std::nullptr_t) noexcept {}
+};
+
 struct WINRT_EBO RadialControllerConfiguration :
-    Windows::UI::Input::IRadialControllerConfiguration
+    Windows::UI::Input::IRadialControllerConfiguration,
+    impl::require<RadialControllerConfiguration, Windows::UI::Input::IRadialControllerConfiguration2>
 {
     RadialControllerConfiguration(std::nullptr_t) noexcept {}
     static Windows::UI::Input::RadialControllerConfiguration GetForCurrentView();
 };
 
 struct WINRT_EBO RadialControllerControlAcquiredEventArgs :
-    Windows::UI::Input::IRadialControllerControlAcquiredEventArgs
+    Windows::UI::Input::IRadialControllerControlAcquiredEventArgs,
+    impl::require<RadialControllerControlAcquiredEventArgs, Windows::UI::Input::IRadialControllerControlAcquiredEventArgs2>
 {
     RadialControllerControlAcquiredEventArgs(std::nullptr_t) noexcept {}
 };
@@ -145,12 +167,15 @@ struct WINRT_EBO RadialControllerMenuItem :
     Windows::UI::Input::IRadialControllerMenuItem
 {
     RadialControllerMenuItem(std::nullptr_t) noexcept {}
-    static Windows::UI::Input::RadialControllerMenuItem CreateFromIcon(hstring_ref displayText, const Windows::Storage::Streams::RandomAccessStreamReference & icon);
-    static Windows::UI::Input::RadialControllerMenuItem CreateFromKnownIcon(hstring_ref displayText, Windows::UI::Input::RadialControllerMenuKnownIcon value);
+    static Windows::UI::Input::RadialControllerMenuItem CreateFromIcon(hstring_view displayText, const Windows::Storage::Streams::RandomAccessStreamReference & icon);
+    static Windows::UI::Input::RadialControllerMenuItem CreateFromKnownIcon(hstring_view displayText, Windows::UI::Input::RadialControllerMenuKnownIcon value);
+    static Windows::UI::Input::RadialControllerMenuItem CreateFromFontGlyph(hstring_view displayText, hstring_view glyph, hstring_view fontFamily);
+    static Windows::UI::Input::RadialControllerMenuItem CreateFromFontGlyph(hstring_view displayText, hstring_view glyph, hstring_view fontFamily, const Windows::Foundation::Uri & fontUri);
 };
 
 struct WINRT_EBO RadialControllerRotationChangedEventArgs :
-    Windows::UI::Input::IRadialControllerRotationChangedEventArgs
+    Windows::UI::Input::IRadialControllerRotationChangedEventArgs,
+    impl::require<RadialControllerRotationChangedEventArgs, Windows::UI::Input::IRadialControllerRotationChangedEventArgs2>
 {
     RadialControllerRotationChangedEventArgs(std::nullptr_t) noexcept {}
 };
@@ -162,13 +187,21 @@ struct WINRT_EBO RadialControllerScreenContact :
 };
 
 struct WINRT_EBO RadialControllerScreenContactContinuedEventArgs :
-    Windows::UI::Input::IRadialControllerScreenContactContinuedEventArgs
+    Windows::UI::Input::IRadialControllerScreenContactContinuedEventArgs,
+    impl::require<RadialControllerScreenContactContinuedEventArgs, Windows::UI::Input::IRadialControllerScreenContactContinuedEventArgs2>
 {
     RadialControllerScreenContactContinuedEventArgs(std::nullptr_t) noexcept {}
 };
 
+struct WINRT_EBO RadialControllerScreenContactEndedEventArgs :
+    Windows::UI::Input::IRadialControllerScreenContactEndedEventArgs
+{
+    RadialControllerScreenContactEndedEventArgs(std::nullptr_t) noexcept {}
+};
+
 struct WINRT_EBO RadialControllerScreenContactStartedEventArgs :
-    Windows::UI::Input::IRadialControllerScreenContactStartedEventArgs
+    Windows::UI::Input::IRadialControllerScreenContactStartedEventArgs,
+    impl::require<RadialControllerScreenContactStartedEventArgs, Windows::UI::Input::IRadialControllerScreenContactStartedEventArgs2>
 {
     RadialControllerScreenContactStartedEventArgs(std::nullptr_t) noexcept {}
 };

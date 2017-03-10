@@ -1,11 +1,61 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
 #include "Windows.ApplicationModel.Resources.Core.1.h"
 
 WINRT_EXPORT namespace winrt {
+
+namespace ABI::Windows::Foundation::Collections {
+
+#ifndef WINRT_GENERIC_e2fcc7c1_3bfc_5a0b_b2b0_72e769d1cb7e
+#define WINRT_GENERIC_e2fcc7c1_3bfc_5a0b_b2b0_72e769d1cb7e
+template <> struct __declspec(uuid("e2fcc7c1-3bfc-5a0b-b2b0-72e769d1cb7e")) __declspec(novtable) IIterable<hstring> : impl_IIterable<hstring> {};
+#endif
+
+#ifndef WINRT_GENERIC_2f13c006_a03a_5f69_b090_75a43e33423e
+#define WINRT_GENERIC_2f13c006_a03a_5f69_b090_75a43e33423e
+template <> struct __declspec(uuid("2f13c006-a03a-5f69-b090-75a43e33423e")) __declspec(novtable) IVectorView<hstring> : impl_IVectorView<hstring> {};
+#endif
+
+
+}
+
+namespace ABI::Windows::Foundation {
+
+#ifndef WINRT_GENERIC_430ecece_1418_5d19_81b2_5ddb381603cc
+#define WINRT_GENERIC_430ecece_1418_5d19_81b2_5ddb381603cc
+template <> struct __declspec(uuid("430ecece-1418-5d19-81b2-5ddb381603cc")) __declspec(novtable) IAsyncOperation<Windows::Storage::Streams::IRandomAccessStream> : impl_IAsyncOperation<Windows::Storage::Streams::IRandomAccessStream> {};
+#endif
+
+
+}
+
+namespace ABI::Windows::Foundation::Collections {
+
+#ifndef WINRT_GENERIC_98b9acc1_4b56_532e_ac73_03d5291cca90
+#define WINRT_GENERIC_98b9acc1_4b56_532e_ac73_03d5291cca90
+template <> struct __declspec(uuid("98b9acc1-4b56-532e-ac73-03d5291cca90")) __declspec(novtable) IVector<hstring> : impl_IVector<hstring> {};
+#endif
+
+#ifndef WINRT_GENERIC_ac7f26f2_feb7_5b2a_8ac4_345bc62caede
+#define WINRT_GENERIC_ac7f26f2_feb7_5b2a_8ac4_345bc62caede
+template <> struct __declspec(uuid("ac7f26f2-feb7-5b2a-8ac4-345bc62caede")) __declspec(novtable) IMapView<hstring, hstring> : impl_IMapView<hstring, hstring> {};
+#endif
+
+
+}
+
+namespace ABI::Windows::Foundation {
+
+#ifndef WINRT_GENERIC_5e52f8ce_aced_5a42_95b4_f674dd84885e
+#define WINRT_GENERIC_5e52f8ce_aced_5a42_95b4_f674dd84885e
+template <> struct __declspec(uuid("5e52f8ce-aced-5a42-95b4-f674dd84885e")) __declspec(novtable) IAsyncOperation<Windows::Storage::StorageFile> : impl_IAsyncOperation<Windows::Storage::StorageFile> {};
+#endif
+
+
+}
 
 namespace ABI::Windows::Foundation::Collections {
 
@@ -23,36 +73,6 @@ template <> struct __declspec(uuid("60310303-49c5-52e6-abc6-a9b36eccc716")) __de
 #define WINRT_GENERIC_1e036276_2f60_55f6_b7f3_f86079e6900b
 template <> struct __declspec(uuid("1e036276-2f60-55f6-b7f3-f86079e6900b")) __declspec(novtable) IObservableMap<hstring, hstring> : impl_IObservableMap<hstring, hstring> {};
 #endif
-
-#ifndef WINRT_GENERIC_2f13c006_a03a_5f69_b090_75a43e33423e
-#define WINRT_GENERIC_2f13c006_a03a_5f69_b090_75a43e33423e
-template <> struct __declspec(uuid("2f13c006-a03a-5f69-b090-75a43e33423e")) __declspec(novtable) IVectorView<hstring> : impl_IVectorView<hstring> {};
-#endif
-
-#ifndef WINRT_GENERIC_e2fcc7c1_3bfc_5a0b_b2b0_72e769d1cb7e
-#define WINRT_GENERIC_e2fcc7c1_3bfc_5a0b_b2b0_72e769d1cb7e
-template <> struct __declspec(uuid("e2fcc7c1-3bfc-5a0b-b2b0-72e769d1cb7e")) __declspec(novtable) IIterable<hstring> : impl_IIterable<hstring> {};
-#endif
-
-
-}
-
-namespace ABI::Windows::Foundation {
-
-#ifndef WINRT_GENERIC_430ecece_1418_5d19_81b2_5ddb381603cc
-#define WINRT_GENERIC_430ecece_1418_5d19_81b2_5ddb381603cc
-template <> struct __declspec(uuid("430ecece-1418-5d19-81b2-5ddb381603cc")) __declspec(novtable) IAsyncOperation<Windows::Storage::Streams::IRandomAccessStream> : impl_IAsyncOperation<Windows::Storage::Streams::IRandomAccessStream> {};
-#endif
-
-#ifndef WINRT_GENERIC_5e52f8ce_aced_5a42_95b4_f674dd84885e
-#define WINRT_GENERIC_5e52f8ce_aced_5a42_95b4_f674dd84885e
-template <> struct __declspec(uuid("5e52f8ce-aced-5a42-95b4-f674dd84885e")) __declspec(novtable) IAsyncOperation<Windows::Storage::StorageFile> : impl_IAsyncOperation<Windows::Storage::StorageFile> {};
-#endif
-
-
-}
-
-namespace ABI::Windows::Foundation::Collections {
 
 #ifndef WINRT_GENERIC_d4349ade_93b1_5325_ba5c_05f35eeffc55
 #define WINRT_GENERIC_d4349ade_93b1_5325_ba5c_05f35eeffc55
@@ -104,24 +124,9 @@ template <> struct __declspec(uuid("e28e92f0-9ffb-5ea7-9fc9-a73bda471886")) __de
 template <> struct __declspec(uuid("159782ba-798d-5ae6-85c7-c7bb551aae61")) __declspec(novtable) IKeyValuePair<hstring, Windows::ApplicationModel::Resources::Core::ResourceMap> : impl_IKeyValuePair<hstring, Windows::ApplicationModel::Resources::Core::ResourceMap> {};
 #endif
 
-#ifndef WINRT_GENERIC_ac7f26f2_feb7_5b2a_8ac4_345bc62caede
-#define WINRT_GENERIC_ac7f26f2_feb7_5b2a_8ac4_345bc62caede
-template <> struct __declspec(uuid("ac7f26f2-feb7-5b2a-8ac4-345bc62caede")) __declspec(novtable) IMapView<hstring, hstring> : impl_IMapView<hstring, hstring> {};
-#endif
-
 #ifndef WINRT_GENERIC_d89c9498_8869_57f8_a883_9c2dfeecb6c6
 #define WINRT_GENERIC_d89c9498_8869_57f8_a883_9c2dfeecb6c6
 template <> struct __declspec(uuid("d89c9498-8869-57f8-a883-9c2dfeecb6c6")) __declspec(novtable) IIterable<Windows::ApplicationModel::Resources::Core::ResourceCandidate> : impl_IIterable<Windows::ApplicationModel::Resources::Core::ResourceCandidate> {};
-#endif
-
-#ifndef WINRT_GENERIC_60141efb_f2f9_5377_96fd_f8c60d9558b5
-#define WINRT_GENERIC_60141efb_f2f9_5377_96fd_f8c60d9558b5
-template <> struct __declspec(uuid("60141efb-f2f9-5377-96fd-f8c60d9558b5")) __declspec(novtable) IMapChangedEventArgs<hstring> : impl_IMapChangedEventArgs<hstring> {};
-#endif
-
-#ifndef WINRT_GENERIC_e2663f37_2e1b_500c_ad68_c3ed7a8f74c8
-#define WINRT_GENERIC_e2663f37_2e1b_500c_ad68_c3ed7a8f74c8
-template <> struct __declspec(uuid("e2663f37-2e1b-500c-ad68-c3ed7a8f74c8")) __declspec(novtable) MapChangedEventHandler<hstring, hstring> : impl_MapChangedEventHandler<hstring, hstring> {};
 #endif
 
 #ifndef WINRT_GENERIC_8c304ebb_6615_50a4_8829_879ecd443236
@@ -149,9 +154,44 @@ template <> struct __declspec(uuid("e521c894-2c26-5946-9e61-2b5e188d01ed")) __de
 
 namespace ABI::Windows::Foundation::Collections {
 
+#ifndef WINRT_GENERIC_60141efb_f2f9_5377_96fd_f8c60d9558b5
+#define WINRT_GENERIC_60141efb_f2f9_5377_96fd_f8c60d9558b5
+template <> struct __declspec(uuid("60141efb-f2f9-5377-96fd-f8c60d9558b5")) __declspec(novtable) IMapChangedEventArgs<hstring> : impl_IMapChangedEventArgs<hstring> {};
+#endif
+
+#ifndef WINRT_GENERIC_e2663f37_2e1b_500c_ad68_c3ed7a8f74c8
+#define WINRT_GENERIC_e2663f37_2e1b_500c_ad68_c3ed7a8f74c8
+template <> struct __declspec(uuid("e2663f37-2e1b-500c-ad68-c3ed7a8f74c8")) __declspec(novtable) MapChangedEventHandler<hstring, hstring> : impl_MapChangedEventHandler<hstring, hstring> {};
+#endif
+
+#ifndef WINRT_GENERIC_05c98cda_6582_5e32_b0a8_ec00eecbbcbe
+#define WINRT_GENERIC_05c98cda_6582_5e32_b0a8_ec00eecbbcbe
+template <> struct __declspec(uuid("05c98cda-6582-5e32-b0a8-ec00eecbbcbe")) __declspec(novtable) IMap<hstring, Windows::ApplicationModel::Resources::Core::ResourceMap> : impl_IMap<hstring, Windows::ApplicationModel::Resources::Core::ResourceMap> {};
+#endif
+
+#ifndef WINRT_GENERIC_021a3f69_ad1e_5fb9_978a_056984ae2b2d
+#define WINRT_GENERIC_021a3f69_ad1e_5fb9_978a_056984ae2b2d
+template <> struct __declspec(uuid("021a3f69-ad1e-5fb9-978a-056984ae2b2d")) __declspec(novtable) IVector<Windows::Storage::IStorageFile> : impl_IVector<Windows::Storage::IStorageFile> {};
+#endif
+
+#ifndef WINRT_GENERIC_4296b6e8_e219_5e74_8dde_196f57200a82
+#define WINRT_GENERIC_4296b6e8_e219_5e74_8dde_196f57200a82
+template <> struct __declspec(uuid("4296b6e8-e219-5e74-8dde-196f57200a82")) __declspec(novtable) IVectorView<Windows::Storage::IStorageFile> : impl_IVectorView<Windows::Storage::IStorageFile> {};
+#endif
+
 #ifndef WINRT_GENERIC_314d2318_74ee_535c_b361_2144dbc573a0
 #define WINRT_GENERIC_314d2318_74ee_535c_b361_2144dbc573a0
 template <> struct __declspec(uuid("314d2318-74ee-535c-b361-2144dbc573a0")) __declspec(novtable) IIterator<Windows::Storage::IStorageFile> : impl_IIterator<Windows::Storage::IStorageFile> {};
+#endif
+
+#ifndef WINRT_GENERIC_23e390c1_267d_526b_80b2_61e2f92c8a0c
+#define WINRT_GENERIC_23e390c1_267d_526b_80b2_61e2f92c8a0c
+template <> struct __declspec(uuid("23e390c1-267d-526b-80b2-61e2f92c8a0c")) __declspec(novtable) IMap<hstring, Windows::ApplicationModel::Resources::Core::NamedResource> : impl_IMap<hstring, Windows::ApplicationModel::Resources::Core::NamedResource> {};
+#endif
+
+#ifndef WINRT_GENERIC_1c1ba78d_0af4_5167_a2e4_ce440213720b
+#define WINRT_GENERIC_1c1ba78d_0af4_5167_a2e4_ce440213720b
+template <> struct __declspec(uuid("1c1ba78d-0af4-5167-a2e4-ce440213720b")) __declspec(novtable) IVector<Windows::ApplicationModel::Resources::Core::NamedResource> : impl_IVector<Windows::ApplicationModel::Resources::Core::NamedResource> {};
 #endif
 
 #ifndef WINRT_GENERIC_0c5a605f_a7f1_5030_a179_9fd363caf3b5
@@ -164,6 +204,11 @@ template <> struct __declspec(uuid("0c5a605f-a7f1-5030-a179-9fd363caf3b5")) __de
 template <> struct __declspec(uuid("e80d3d9d-96c9-579e-8e42-d550700de925")) __declspec(novtable) IIterable<Windows::ApplicationModel::Resources::Core::NamedResource> : impl_IIterable<Windows::ApplicationModel::Resources::Core::NamedResource> {};
 #endif
 
+#ifndef WINRT_GENERIC_4b7199f7_ace8_54e4_95f3_408d1d30f042
+#define WINRT_GENERIC_4b7199f7_ace8_54e4_95f3_408d1d30f042
+template <> struct __declspec(uuid("4b7199f7-ace8-54e4-95f3-408d1d30f042")) __declspec(novtable) IVector<Windows::ApplicationModel::Resources::Core::ResourceMap> : impl_IVector<Windows::ApplicationModel::Resources::Core::ResourceMap> {};
+#endif
+
 #ifndef WINRT_GENERIC_3dedcae6_d048_5eaa_afa2_fb4a7970ef68
 #define WINRT_GENERIC_3dedcae6_d048_5eaa_afa2_fb4a7970ef68
 template <> struct __declspec(uuid("3dedcae6-d048-5eaa-afa2-fb4a7970ef68")) __declspec(novtable) IIterator<Windows::ApplicationModel::Resources::Core::ResourceMap> : impl_IIterator<Windows::ApplicationModel::Resources::Core::ResourceMap> {};
@@ -174,9 +219,19 @@ template <> struct __declspec(uuid("3dedcae6-d048-5eaa-afa2-fb4a7970ef68")) __de
 template <> struct __declspec(uuid("8bbe1154-19aa-53e7-9d6e-dc7d358580f4")) __declspec(novtable) IIterable<Windows::ApplicationModel::Resources::Core::ResourceMap> : impl_IIterable<Windows::ApplicationModel::Resources::Core::ResourceMap> {};
 #endif
 
+#ifndef WINRT_GENERIC_4f4b75ee_9915_5467_983c_ed51df0eb704
+#define WINRT_GENERIC_4f4b75ee_9915_5467_983c_ed51df0eb704
+template <> struct __declspec(uuid("4f4b75ee-9915-5467-983c-ed51df0eb704")) __declspec(novtable) IVector<Windows::ApplicationModel::Resources::Core::ResourceQualifier> : impl_IVector<Windows::ApplicationModel::Resources::Core::ResourceQualifier> {};
+#endif
+
 #ifndef WINRT_GENERIC_fedb74db_e74f_597a_b9bf_704b0dadca38
 #define WINRT_GENERIC_fedb74db_e74f_597a_b9bf_704b0dadca38
 template <> struct __declspec(uuid("fedb74db-e74f-597a-b9bf-704b0dadca38")) __declspec(novtable) IIterator<Windows::ApplicationModel::Resources::Core::ResourceQualifier> : impl_IIterator<Windows::ApplicationModel::Resources::Core::ResourceQualifier> {};
+#endif
+
+#ifndef WINRT_GENERIC_720cd1d8_86ae_5df8_8cc6_f6152fe75c56
+#define WINRT_GENERIC_720cd1d8_86ae_5df8_8cc6_f6152fe75c56
+template <> struct __declspec(uuid("720cd1d8-86ae-5df8-8cc6-f6152fe75c56")) __declspec(novtable) IVector<Windows::ApplicationModel::Resources::Core::ResourceCandidate> : impl_IVector<Windows::ApplicationModel::Resources::Core::ResourceCandidate> {};
 #endif
 
 #ifndef WINRT_GENERIC_e151bd8c_a286_57ab_bcea_79b7bc2687a1
@@ -219,207 +274,90 @@ template <> struct __declspec(uuid("05eb86f1-7140-5517-b88d-cbaebe57e6b1")) __de
 
 namespace Windows::ApplicationModel::Resources::Core {
 
-template <typename D>
-struct WINRT_EBO impl_INamedResource
-{
-    Windows::Foundation::Uri Uri() const;
-    Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Resources::Core::ResourceCandidate> Candidates() const;
-    Windows::ApplicationModel::Resources::Core::ResourceCandidate Resolve() const;
-    Windows::ApplicationModel::Resources::Core::ResourceCandidate Resolve(const Windows::ApplicationModel::Resources::Core::ResourceContext & resourceContext) const;
-    Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Resources::Core::ResourceCandidate> ResolveAll() const;
-    Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Resources::Core::ResourceCandidate> ResolveAll(const Windows::ApplicationModel::Resources::Core::ResourceContext & resourceContext) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IResourceCandidate
-{
-    Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Resources::Core::ResourceQualifier> Qualifiers() const;
-    bool IsMatch() const;
-    bool IsMatchAsDefault() const;
-    bool IsDefault() const;
-    hstring ValueAsString() const;
-    Windows::Foundation::IAsyncOperation<Windows::Storage::StorageFile> GetValueAsFileAsync() const;
-    hstring GetQualifierValue(hstring_ref qualifierName) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IResourceCandidate2
-{
-    Windows::Foundation::IAsyncOperation<Windows::Storage::Streams::IRandomAccessStream> GetValueAsStreamAsync() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IResourceContext
-{
-    Windows::Foundation::Collections::IObservableMap<hstring, hstring> QualifierValues() const;
-    void Reset() const;
-    void Reset(const Windows::Foundation::Collections::IIterable<hstring> & qualifierNames) const;
-    void OverrideToMatch(const Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Resources::Core::ResourceQualifier> & result) const;
-    Windows::ApplicationModel::Resources::Core::ResourceContext Clone() const;
-    Windows::Foundation::Collections::IVectorView<hstring> Languages() const;
-    void Languages(const Windows::Foundation::Collections::IVectorView<hstring> & languages) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IResourceContextStatics
-{
-    Windows::ApplicationModel::Resources::Core::ResourceContext CreateMatchingContext(const Windows::Foundation::Collections::IIterable<Windows::ApplicationModel::Resources::Core::ResourceQualifier> & result) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IResourceContextStatics2
-{
-    Windows::ApplicationModel::Resources::Core::ResourceContext GetForCurrentView() const;
-    void SetGlobalQualifierValue(hstring_ref key, hstring_ref value) const;
-    void ResetGlobalQualifierValues() const;
-    void ResetGlobalQualifierValues(const Windows::Foundation::Collections::IIterable<hstring> & qualifierNames) const;
-    Windows::ApplicationModel::Resources::Core::ResourceContext GetForViewIndependentUse() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IResourceContextStatics3
-{
-    void SetGlobalQualifierValue(hstring_ref key, hstring_ref value, Windows::ApplicationModel::Resources::Core::ResourceQualifierPersistence persistence) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IResourceManager
-{
-    Windows::ApplicationModel::Resources::Core::ResourceMap MainResourceMap() const;
-    Windows::Foundation::Collections::IMapView<hstring, Windows::ApplicationModel::Resources::Core::ResourceMap> AllResourceMaps() const;
-    Windows::ApplicationModel::Resources::Core::ResourceContext DefaultContext() const;
-    void LoadPriFiles(const Windows::Foundation::Collections::IIterable<Windows::Storage::IStorageFile> & files) const;
-    void UnloadPriFiles(const Windows::Foundation::Collections::IIterable<Windows::Storage::IStorageFile> & files) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IResourceManager2
-{
-    Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Resources::Core::NamedResource> GetAllNamedResourcesForPackage(hstring_ref packageName, const Windows::ApplicationModel::Resources::Core::ResourceLayoutInfo & resourceLayoutInfo) const;
-    Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Resources::Core::ResourceMap> GetAllSubtreesForPackage(hstring_ref packageName, const Windows::ApplicationModel::Resources::Core::ResourceLayoutInfo & resourceLayoutInfo) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IResourceManagerStatics
-{
-    Windows::ApplicationModel::Resources::Core::ResourceManager Current() const;
-    bool IsResourceReference(hstring_ref resourceReference) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IResourceMap
-{
-    Windows::Foundation::Uri Uri() const;
-    Windows::ApplicationModel::Resources::Core::ResourceCandidate GetValue(hstring_ref resource) const;
-    Windows::ApplicationModel::Resources::Core::ResourceCandidate GetValue(hstring_ref resource, const Windows::ApplicationModel::Resources::Core::ResourceContext & context) const;
-    Windows::ApplicationModel::Resources::Core::ResourceMap GetSubtree(hstring_ref reference) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IResourceQualifier
-{
-    hstring QualifierName() const;
-    hstring QualifierValue() const;
-    bool IsDefault() const;
-    bool IsMatch() const;
-    double Score() const;
-};
-
 struct INamedResource :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<INamedResource>
 {
     INamedResource(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<INamedResource>(m_ptr); }
 };
 
 struct IResourceCandidate :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IResourceCandidate>
 {
     IResourceCandidate(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IResourceCandidate>(m_ptr); }
 };
 
 struct IResourceCandidate2 :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IResourceCandidate2>
 {
     IResourceCandidate2(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IResourceCandidate2>(m_ptr); }
 };
 
 struct IResourceContext :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IResourceContext>
 {
     IResourceContext(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IResourceContext>(m_ptr); }
 };
 
 struct IResourceContextStatics :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IResourceContextStatics>
 {
     IResourceContextStatics(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IResourceContextStatics>(m_ptr); }
 };
+struct [[deprecated("CreateMatchingContext may be altered or unavailable for releases after Windows 8.1. Instead, use ResourceContext.GetForCurrentView.OverrideToMatch.")]] IResourceContextStatics;
 
 struct IResourceContextStatics2 :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IResourceContextStatics2>
 {
     IResourceContextStatics2(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IResourceContextStatics2>(m_ptr); }
 };
 
 struct IResourceContextStatics3 :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IResourceContextStatics3>
 {
     IResourceContextStatics3(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IResourceContextStatics3>(m_ptr); }
 };
 
 struct IResourceManager :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IResourceManager>
 {
     IResourceManager(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IResourceManager>(m_ptr); }
 };
 
 struct IResourceManager2 :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IResourceManager2>
 {
     IResourceManager2(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IResourceManager2>(m_ptr); }
 };
 
 struct IResourceManagerStatics :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IResourceManagerStatics>
 {
     IResourceManagerStatics(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IResourceManagerStatics>(m_ptr); }
 };
 
 struct IResourceMap :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IResourceMap>,
     impl::require<IResourceMap, Windows::Foundation::Collections::IIterable<Windows::Foundation::Collections::IKeyValuePair<hstring, Windows::ApplicationModel::Resources::Core::NamedResource>>, Windows::Foundation::Collections::IMapView<hstring, Windows::ApplicationModel::Resources::Core::NamedResource>>
 {
     IResourceMap(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IResourceMap>(m_ptr); }
 };
 
 struct IResourceQualifier :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IResourceQualifier>
 {
     IResourceQualifier(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IResourceQualifier>(m_ptr); }
 };
 
 }

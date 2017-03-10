@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -17,6 +17,7 @@ struct IWebProviderError;
 struct IWebProviderErrorFactory;
 struct IWebTokenRequest;
 struct IWebTokenRequest2;
+struct IWebTokenRequest3;
 struct IWebTokenRequestFactory;
 struct IWebTokenRequestResult;
 struct IWebTokenResponse;
@@ -41,6 +42,7 @@ struct IWebProviderError;
 struct IWebProviderErrorFactory;
 struct IWebTokenRequest;
 struct IWebTokenRequest2;
+struct IWebTokenRequest3;
 struct IWebTokenRequestFactory;
 struct IWebTokenRequestResult;
 struct IWebTokenResponse;
@@ -52,6 +54,25 @@ struct WebProviderError;
 struct WebTokenRequest;
 struct WebTokenRequestResult;
 struct WebTokenResponse;
+
+}
+
+namespace Windows::Security::Authentication::Web::Core {
+
+template <typename T> struct impl_IWebAccountEventArgs;
+template <typename T> struct impl_IWebAccountMonitor;
+template <typename T> struct impl_IWebAuthenticationCoreManagerStatics;
+template <typename T> struct impl_IWebAuthenticationCoreManagerStatics2;
+template <typename T> struct impl_IWebAuthenticationCoreManagerStatics3;
+template <typename T> struct impl_IWebProviderError;
+template <typename T> struct impl_IWebProviderErrorFactory;
+template <typename T> struct impl_IWebTokenRequest;
+template <typename T> struct impl_IWebTokenRequest2;
+template <typename T> struct impl_IWebTokenRequest3;
+template <typename T> struct impl_IWebTokenRequestFactory;
+template <typename T> struct impl_IWebTokenRequestResult;
+template <typename T> struct impl_IWebTokenResponse;
+template <typename T> struct impl_IWebTokenResponseFactory;
 
 }
 

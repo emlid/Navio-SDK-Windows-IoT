@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -11,7 +11,7 @@ namespace Windows::ApplicationModel::Store::Preview::InstallControl {
 
 struct WINRT_EBO AppInstallItem :
     Windows::ApplicationModel::Store::Preview::InstallControl::IAppInstallItem,
-    impl::require<AppInstallItem, Windows::ApplicationModel::Store::Preview::InstallControl::IAppInstallItem2>
+    impl::require<AppInstallItem, Windows::ApplicationModel::Store::Preview::InstallControl::IAppInstallItem2, Windows::ApplicationModel::Store::Preview::InstallControl::IAppInstallItem3>
 {
     AppInstallItem(std::nullptr_t) noexcept {}
     using impl_IAppInstallItem::Cancel;
@@ -24,7 +24,7 @@ struct WINRT_EBO AppInstallItem :
 
 struct WINRT_EBO AppInstallManager :
     Windows::ApplicationModel::Store::Preview::InstallControl::IAppInstallManager,
-    impl::require<AppInstallManager, Windows::ApplicationModel::Store::Preview::InstallControl::IAppInstallManager2, Windows::ApplicationModel::Store::Preview::InstallControl::IAppInstallManager3>
+    impl::require<AppInstallManager, Windows::ApplicationModel::Store::Preview::InstallControl::IAppInstallManager2, Windows::ApplicationModel::Store::Preview::InstallControl::IAppInstallManager3, Windows::ApplicationModel::Store::Preview::InstallControl::IAppInstallManager4, Windows::ApplicationModel::Store::Preview::InstallControl::IAppInstallManager5>
 {
     AppInstallManager(std::nullptr_t) noexcept {}
     AppInstallManager();
@@ -57,6 +57,12 @@ struct WINRT_EBO AppInstallStatus :
     impl::require<AppInstallStatus, Windows::ApplicationModel::Store::Preview::InstallControl::IAppInstallStatus2>
 {
     AppInstallStatus(std::nullptr_t) noexcept {}
+};
+
+struct WINRT_EBO GetEntitlementResult :
+    Windows::ApplicationModel::Store::Preview::InstallControl::IGetEntitlementResult
+{
+    GetEntitlementResult(std::nullptr_t) noexcept {}
 };
 
 }

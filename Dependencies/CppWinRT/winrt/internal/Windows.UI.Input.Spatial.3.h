@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -40,8 +40,21 @@ struct WINRT_EBO SpatialInteraction :
     SpatialInteraction(std::nullptr_t) noexcept {}
 };
 
+struct WINRT_EBO SpatialInteractionController :
+    Windows::UI::Input::Spatial::ISpatialInteractionController
+{
+    SpatialInteractionController(std::nullptr_t) noexcept {}
+};
+
+struct WINRT_EBO SpatialInteractionControllerProperties :
+    Windows::UI::Input::Spatial::ISpatialInteractionControllerProperties
+{
+    SpatialInteractionControllerProperties(std::nullptr_t) noexcept {}
+};
+
 struct WINRT_EBO SpatialInteractionDetectedEventArgs :
-    Windows::UI::Input::Spatial::ISpatialInteractionDetectedEventArgs
+    Windows::UI::Input::Spatial::ISpatialInteractionDetectedEventArgs,
+    impl::require<SpatialInteractionDetectedEventArgs, Windows::UI::Input::Spatial::ISpatialInteractionDetectedEventArgs2>
 {
     SpatialInteractionDetectedEventArgs(std::nullptr_t) noexcept {}
 };
@@ -54,13 +67,15 @@ struct WINRT_EBO SpatialInteractionManager :
 };
 
 struct WINRT_EBO SpatialInteractionSource :
-    Windows::UI::Input::Spatial::ISpatialInteractionSource
+    Windows::UI::Input::Spatial::ISpatialInteractionSource,
+    impl::require<SpatialInteractionSource, Windows::UI::Input::Spatial::ISpatialInteractionSource2>
 {
     SpatialInteractionSource(std::nullptr_t) noexcept {}
 };
 
 struct WINRT_EBO SpatialInteractionSourceEventArgs :
-    Windows::UI::Input::Spatial::ISpatialInteractionSourceEventArgs
+    Windows::UI::Input::Spatial::ISpatialInteractionSourceEventArgs,
+    impl::require<SpatialInteractionSourceEventArgs, Windows::UI::Input::Spatial::ISpatialInteractionSourceEventArgs2>
 {
     SpatialInteractionSourceEventArgs(std::nullptr_t) noexcept {}
 };
@@ -79,7 +94,8 @@ struct WINRT_EBO SpatialInteractionSourceProperties :
 };
 
 struct WINRT_EBO SpatialInteractionSourceState :
-    Windows::UI::Input::Spatial::ISpatialInteractionSourceState
+    Windows::UI::Input::Spatial::ISpatialInteractionSourceState,
+    impl::require<SpatialInteractionSourceState, Windows::UI::Input::Spatial::ISpatialInteractionSourceState2>
 {
     SpatialInteractionSourceState(std::nullptr_t) noexcept {}
 };
@@ -138,8 +154,15 @@ struct WINRT_EBO SpatialNavigationUpdatedEventArgs :
     SpatialNavigationUpdatedEventArgs(std::nullptr_t) noexcept {}
 };
 
+struct WINRT_EBO SpatialPointerInteractionSourcePose :
+    Windows::UI::Input::Spatial::ISpatialPointerInteractionSourcePose
+{
+    SpatialPointerInteractionSourcePose(std::nullptr_t) noexcept {}
+};
+
 struct WINRT_EBO SpatialPointerPose :
-    Windows::UI::Input::Spatial::ISpatialPointerPose
+    Windows::UI::Input::Spatial::ISpatialPointerPose,
+    impl::require<SpatialPointerPose, Windows::UI::Input::Spatial::ISpatialPointerPose2>
 {
     SpatialPointerPose(std::nullptr_t) noexcept {}
     static Windows::UI::Input::Spatial::SpatialPointerPose TryGetAtTimestamp(const Windows::Perception::Spatial::SpatialCoordinateSystem & coordinateSystem, const Windows::Perception::PerceptionTimestamp & timestamp);

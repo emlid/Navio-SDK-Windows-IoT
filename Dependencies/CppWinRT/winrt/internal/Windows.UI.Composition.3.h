@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -20,7 +20,7 @@ struct WINRT_EBO AmbientLight :
 struct WINRT_EBO ColorKeyFrameAnimation :
     Windows::UI::Composition::IColorKeyFrameAnimation,
     impl::bases<ColorKeyFrameAnimation, Windows::UI::Composition::CompositionObject, Windows::UI::Composition::CompositionAnimation, Windows::UI::Composition::KeyFrameAnimation>,
-    impl::require<ColorKeyFrameAnimation, Windows::Foundation::IClosable, Windows::UI::Composition::ICompositionAnimation, Windows::UI::Composition::ICompositionAnimation2, Windows::UI::Composition::ICompositionAnimationBase, Windows::UI::Composition::ICompositionObject, Windows::UI::Composition::ICompositionObject2, Windows::UI::Composition::IKeyFrameAnimation, Windows::UI::Composition::IKeyFrameAnimation2>
+    impl::require<ColorKeyFrameAnimation, Windows::Foundation::IClosable, Windows::UI::Composition::ICompositionAnimation, Windows::UI::Composition::ICompositionAnimation2, Windows::UI::Composition::ICompositionAnimationBase, Windows::UI::Composition::ICompositionObject, Windows::UI::Composition::ICompositionObject2, Windows::UI::Composition::IKeyFrameAnimation, Windows::UI::Composition::IKeyFrameAnimation2, Windows::UI::Composition::IKeyFrameAnimation3>
 {
     ColorKeyFrameAnimation(std::nullptr_t) noexcept {}
 };
@@ -65,6 +65,13 @@ struct WINRT_EBO CompositionBrush :
     CompositionBrush(std::nullptr_t) noexcept {}
 };
 
+struct WINRT_EBO CompositionCapabilities :
+    Windows::UI::Composition::ICompositionCapabilities
+{
+    CompositionCapabilities(std::nullptr_t) noexcept {}
+    static Windows::UI::Composition::CompositionCapabilities GetForCurrentView();
+};
+
 struct WINRT_EBO CompositionClip :
     Windows::UI::Composition::ICompositionClip,
     impl::bases<CompositionClip, Windows::UI::Composition::CompositionObject>,
@@ -92,7 +99,7 @@ struct WINRT_EBO CompositionCommitBatch :
 struct WINRT_EBO CompositionDrawingSurface :
     Windows::UI::Composition::ICompositionDrawingSurface,
     impl::bases<CompositionDrawingSurface, Windows::UI::Composition::CompositionObject>,
-    impl::require<CompositionDrawingSurface, Windows::Foundation::IClosable, Windows::UI::Composition::ICompositionObject, Windows::UI::Composition::ICompositionObject2, Windows::UI::Composition::ICompositionSurface>
+    impl::require<CompositionDrawingSurface, Windows::Foundation::IClosable, Windows::UI::Composition::ICompositionDrawingSurface2, Windows::UI::Composition::ICompositionObject, Windows::UI::Composition::ICompositionObject2, Windows::UI::Composition::ICompositionSurface>
 {
     CompositionDrawingSurface(std::nullptr_t) noexcept {}
 };
@@ -125,13 +132,13 @@ struct WINRT_EBO CompositionEffectSourceParameter :
     Windows::UI::Composition::ICompositionEffectSourceParameter
 {
     CompositionEffectSourceParameter(std::nullptr_t) noexcept {}
-    CompositionEffectSourceParameter(hstring_ref name);
+    CompositionEffectSourceParameter(hstring_view name);
 };
 
 struct WINRT_EBO CompositionGraphicsDevice :
     Windows::UI::Composition::ICompositionGraphicsDevice,
     impl::bases<CompositionGraphicsDevice, Windows::UI::Composition::CompositionObject>,
-    impl::require<CompositionGraphicsDevice, Windows::Foundation::IClosable, Windows::UI::Composition::ICompositionObject, Windows::UI::Composition::ICompositionObject2>
+    impl::require<CompositionGraphicsDevice, Windows::Foundation::IClosable, Windows::UI::Composition::ICompositionGraphicsDevice2, Windows::UI::Composition::ICompositionObject, Windows::UI::Composition::ICompositionObject2>
 {
     CompositionGraphicsDevice(std::nullptr_t) noexcept {}
 };
@@ -207,9 +214,17 @@ struct WINRT_EBO CompositionTarget :
     CompositionTarget(std::nullptr_t) noexcept {}
 };
 
+struct WINRT_EBO CompositionVirtualDrawingSurface :
+    Windows::UI::Composition::ICompositionVirtualDrawingSurface,
+    impl::bases<CompositionVirtualDrawingSurface, Windows::UI::Composition::CompositionObject, Windows::UI::Composition::CompositionDrawingSurface>,
+    impl::require<CompositionVirtualDrawingSurface, Windows::Foundation::IClosable, Windows::UI::Composition::ICompositionDrawingSurface, Windows::UI::Composition::ICompositionDrawingSurface2, Windows::UI::Composition::ICompositionObject, Windows::UI::Composition::ICompositionObject2, Windows::UI::Composition::ICompositionSurface>
+{
+    CompositionVirtualDrawingSurface(std::nullptr_t) noexcept {}
+};
+
 struct WINRT_EBO Compositor :
     Windows::UI::Composition::ICompositor,
-    impl::require<Compositor, Windows::Foundation::IClosable, Windows::UI::Composition::ICompositor2>
+    impl::require<Compositor, Windows::Foundation::IClosable, Windows::UI::Composition::ICompositor2, Windows::UI::Composition::ICompositor3>
 {
     Compositor(std::nullptr_t) noexcept {}
     Compositor();
@@ -218,7 +233,7 @@ struct WINRT_EBO Compositor :
 struct WINRT_EBO ContainerVisual :
     Windows::UI::Composition::IContainerVisual,
     impl::bases<ContainerVisual, Windows::UI::Composition::CompositionObject, Windows::UI::Composition::Visual>,
-    impl::require<ContainerVisual, Windows::Foundation::IClosable, Windows::UI::Composition::ICompositionObject, Windows::UI::Composition::ICompositionObject2, Windows::UI::Composition::IVisual>
+    impl::require<ContainerVisual, Windows::Foundation::IClosable, Windows::UI::Composition::ICompositionObject, Windows::UI::Composition::ICompositionObject2, Windows::UI::Composition::IVisual, Windows::UI::Composition::IVisual2>
 {
     ContainerVisual(std::nullptr_t) noexcept {}
 };
@@ -274,7 +289,7 @@ struct WINRT_EBO InsetClip :
 struct WINRT_EBO KeyFrameAnimation :
     Windows::UI::Composition::IKeyFrameAnimation,
     impl::bases<KeyFrameAnimation, Windows::UI::Composition::CompositionObject, Windows::UI::Composition::CompositionAnimation>,
-    impl::require<KeyFrameAnimation, Windows::Foundation::IClosable, Windows::UI::Composition::ICompositionAnimation, Windows::UI::Composition::ICompositionAnimation2, Windows::UI::Composition::ICompositionAnimationBase, Windows::UI::Composition::ICompositionObject, Windows::UI::Composition::ICompositionObject2, Windows::UI::Composition::IKeyFrameAnimation2>
+    impl::require<KeyFrameAnimation, Windows::Foundation::IClosable, Windows::UI::Composition::ICompositionAnimation, Windows::UI::Composition::ICompositionAnimation2, Windows::UI::Composition::ICompositionAnimationBase, Windows::UI::Composition::ICompositionObject, Windows::UI::Composition::ICompositionObject2, Windows::UI::Composition::IKeyFrameAnimation2, Windows::UI::Composition::IKeyFrameAnimation3>
 {
     KeyFrameAnimation(std::nullptr_t) noexcept {}
 };
@@ -282,7 +297,7 @@ struct WINRT_EBO KeyFrameAnimation :
 struct WINRT_EBO LayerVisual :
     Windows::UI::Composition::ILayerVisual,
     impl::bases<LayerVisual, Windows::UI::Composition::CompositionObject, Windows::UI::Composition::Visual, Windows::UI::Composition::ContainerVisual>,
-    impl::require<LayerVisual, Windows::Foundation::IClosable, Windows::UI::Composition::ICompositionObject, Windows::UI::Composition::ICompositionObject2, Windows::UI::Composition::IContainerVisual, Windows::UI::Composition::IVisual>
+    impl::require<LayerVisual, Windows::Foundation::IClosable, Windows::UI::Composition::ICompositionObject, Windows::UI::Composition::ICompositionObject2, Windows::UI::Composition::IContainerVisual, Windows::UI::Composition::IVisual, Windows::UI::Composition::IVisual2>
 {
     LayerVisual(std::nullptr_t) noexcept {}
 };
@@ -306,7 +321,7 @@ struct WINRT_EBO PointLight :
 struct WINRT_EBO QuaternionKeyFrameAnimation :
     Windows::UI::Composition::IQuaternionKeyFrameAnimation,
     impl::bases<QuaternionKeyFrameAnimation, Windows::UI::Composition::CompositionObject, Windows::UI::Composition::CompositionAnimation, Windows::UI::Composition::KeyFrameAnimation>,
-    impl::require<QuaternionKeyFrameAnimation, Windows::Foundation::IClosable, Windows::UI::Composition::ICompositionAnimation, Windows::UI::Composition::ICompositionAnimation2, Windows::UI::Composition::ICompositionAnimationBase, Windows::UI::Composition::ICompositionObject, Windows::UI::Composition::ICompositionObject2, Windows::UI::Composition::IKeyFrameAnimation, Windows::UI::Composition::IKeyFrameAnimation2>
+    impl::require<QuaternionKeyFrameAnimation, Windows::Foundation::IClosable, Windows::UI::Composition::ICompositionAnimation, Windows::UI::Composition::ICompositionAnimation2, Windows::UI::Composition::ICompositionAnimationBase, Windows::UI::Composition::ICompositionObject, Windows::UI::Composition::ICompositionObject2, Windows::UI::Composition::IKeyFrameAnimation, Windows::UI::Composition::IKeyFrameAnimation2, Windows::UI::Composition::IKeyFrameAnimation3>
 {
     QuaternionKeyFrameAnimation(std::nullptr_t) noexcept {}
 };
@@ -322,7 +337,7 @@ struct WINRT_EBO RenderingDeviceReplacedEventArgs :
 struct WINRT_EBO ScalarKeyFrameAnimation :
     Windows::UI::Composition::IScalarKeyFrameAnimation,
     impl::bases<ScalarKeyFrameAnimation, Windows::UI::Composition::CompositionObject, Windows::UI::Composition::CompositionAnimation, Windows::UI::Composition::KeyFrameAnimation>,
-    impl::require<ScalarKeyFrameAnimation, Windows::Foundation::IClosable, Windows::UI::Composition::ICompositionAnimation, Windows::UI::Composition::ICompositionAnimation2, Windows::UI::Composition::ICompositionAnimationBase, Windows::UI::Composition::ICompositionObject, Windows::UI::Composition::ICompositionObject2, Windows::UI::Composition::IKeyFrameAnimation, Windows::UI::Composition::IKeyFrameAnimation2>
+    impl::require<ScalarKeyFrameAnimation, Windows::Foundation::IClosable, Windows::UI::Composition::ICompositionAnimation, Windows::UI::Composition::ICompositionAnimation2, Windows::UI::Composition::ICompositionAnimationBase, Windows::UI::Composition::ICompositionObject, Windows::UI::Composition::ICompositionObject2, Windows::UI::Composition::IKeyFrameAnimation, Windows::UI::Composition::IKeyFrameAnimation2, Windows::UI::Composition::IKeyFrameAnimation3>
 {
     ScalarKeyFrameAnimation(std::nullptr_t) noexcept {}
 };
@@ -338,7 +353,7 @@ struct WINRT_EBO SpotLight :
 struct WINRT_EBO SpriteVisual :
     Windows::UI::Composition::ISpriteVisual,
     impl::bases<SpriteVisual, Windows::UI::Composition::CompositionObject, Windows::UI::Composition::Visual, Windows::UI::Composition::ContainerVisual>,
-    impl::require<SpriteVisual, Windows::Foundation::IClosable, Windows::UI::Composition::ICompositionObject, Windows::UI::Composition::ICompositionObject2, Windows::UI::Composition::IContainerVisual, Windows::UI::Composition::ISpriteVisual2, Windows::UI::Composition::IVisual>
+    impl::require<SpriteVisual, Windows::Foundation::IClosable, Windows::UI::Composition::ICompositionObject, Windows::UI::Composition::ICompositionObject2, Windows::UI::Composition::IContainerVisual, Windows::UI::Composition::ISpriteVisual2, Windows::UI::Composition::IVisual, Windows::UI::Composition::IVisual2>
 {
     SpriteVisual(std::nullptr_t) noexcept {}
 };
@@ -354,7 +369,7 @@ struct WINRT_EBO StepEasingFunction :
 struct WINRT_EBO Vector2KeyFrameAnimation :
     Windows::UI::Composition::IVector2KeyFrameAnimation,
     impl::bases<Vector2KeyFrameAnimation, Windows::UI::Composition::CompositionObject, Windows::UI::Composition::CompositionAnimation, Windows::UI::Composition::KeyFrameAnimation>,
-    impl::require<Vector2KeyFrameAnimation, Windows::Foundation::IClosable, Windows::UI::Composition::ICompositionAnimation, Windows::UI::Composition::ICompositionAnimation2, Windows::UI::Composition::ICompositionAnimationBase, Windows::UI::Composition::ICompositionObject, Windows::UI::Composition::ICompositionObject2, Windows::UI::Composition::IKeyFrameAnimation, Windows::UI::Composition::IKeyFrameAnimation2>
+    impl::require<Vector2KeyFrameAnimation, Windows::Foundation::IClosable, Windows::UI::Composition::ICompositionAnimation, Windows::UI::Composition::ICompositionAnimation2, Windows::UI::Composition::ICompositionAnimationBase, Windows::UI::Composition::ICompositionObject, Windows::UI::Composition::ICompositionObject2, Windows::UI::Composition::IKeyFrameAnimation, Windows::UI::Composition::IKeyFrameAnimation2, Windows::UI::Composition::IKeyFrameAnimation3>
 {
     Vector2KeyFrameAnimation(std::nullptr_t) noexcept {}
 };
@@ -362,7 +377,7 @@ struct WINRT_EBO Vector2KeyFrameAnimation :
 struct WINRT_EBO Vector3KeyFrameAnimation :
     Windows::UI::Composition::IVector3KeyFrameAnimation,
     impl::bases<Vector3KeyFrameAnimation, Windows::UI::Composition::CompositionObject, Windows::UI::Composition::CompositionAnimation, Windows::UI::Composition::KeyFrameAnimation>,
-    impl::require<Vector3KeyFrameAnimation, Windows::Foundation::IClosable, Windows::UI::Composition::ICompositionAnimation, Windows::UI::Composition::ICompositionAnimation2, Windows::UI::Composition::ICompositionAnimationBase, Windows::UI::Composition::ICompositionObject, Windows::UI::Composition::ICompositionObject2, Windows::UI::Composition::IKeyFrameAnimation, Windows::UI::Composition::IKeyFrameAnimation2>
+    impl::require<Vector3KeyFrameAnimation, Windows::Foundation::IClosable, Windows::UI::Composition::ICompositionAnimation, Windows::UI::Composition::ICompositionAnimation2, Windows::UI::Composition::ICompositionAnimationBase, Windows::UI::Composition::ICompositionObject, Windows::UI::Composition::ICompositionObject2, Windows::UI::Composition::IKeyFrameAnimation, Windows::UI::Composition::IKeyFrameAnimation2, Windows::UI::Composition::IKeyFrameAnimation3>
 {
     Vector3KeyFrameAnimation(std::nullptr_t) noexcept {}
 };
@@ -370,7 +385,7 @@ struct WINRT_EBO Vector3KeyFrameAnimation :
 struct WINRT_EBO Vector4KeyFrameAnimation :
     Windows::UI::Composition::IVector4KeyFrameAnimation,
     impl::bases<Vector4KeyFrameAnimation, Windows::UI::Composition::CompositionObject, Windows::UI::Composition::CompositionAnimation, Windows::UI::Composition::KeyFrameAnimation>,
-    impl::require<Vector4KeyFrameAnimation, Windows::Foundation::IClosable, Windows::UI::Composition::ICompositionAnimation, Windows::UI::Composition::ICompositionAnimation2, Windows::UI::Composition::ICompositionAnimationBase, Windows::UI::Composition::ICompositionObject, Windows::UI::Composition::ICompositionObject2, Windows::UI::Composition::IKeyFrameAnimation, Windows::UI::Composition::IKeyFrameAnimation2>
+    impl::require<Vector4KeyFrameAnimation, Windows::Foundation::IClosable, Windows::UI::Composition::ICompositionAnimation, Windows::UI::Composition::ICompositionAnimation2, Windows::UI::Composition::ICompositionAnimationBase, Windows::UI::Composition::ICompositionObject, Windows::UI::Composition::ICompositionObject2, Windows::UI::Composition::IKeyFrameAnimation, Windows::UI::Composition::IKeyFrameAnimation2, Windows::UI::Composition::IKeyFrameAnimation3>
 {
     Vector4KeyFrameAnimation(std::nullptr_t) noexcept {}
 };
@@ -378,7 +393,7 @@ struct WINRT_EBO Vector4KeyFrameAnimation :
 struct WINRT_EBO Visual :
     Windows::UI::Composition::IVisual,
     impl::bases<Visual, Windows::UI::Composition::CompositionObject>,
-    impl::require<Visual, Windows::Foundation::IClosable, Windows::UI::Composition::ICompositionObject, Windows::UI::Composition::ICompositionObject2>
+    impl::require<Visual, Windows::Foundation::IClosable, Windows::UI::Composition::ICompositionObject, Windows::UI::Composition::ICompositionObject2, Windows::UI::Composition::IVisual2>
 {
     Visual(std::nullptr_t) noexcept {}
 };

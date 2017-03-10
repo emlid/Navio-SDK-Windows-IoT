@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -17,6 +17,7 @@ struct ICalendarIdentifiersStatics2;
 struct ICalendarIdentifiersStatics3;
 struct IClockIdentifiersStatics;
 struct ICurrencyIdentifiersStatics;
+struct ICurrencyIdentifiersStatics2;
 struct IGeographicRegion;
 struct IGeographicRegionFactory;
 struct IGeographicRegionStatics;
@@ -48,6 +49,7 @@ struct ICalendarIdentifiersStatics2;
 struct ICalendarIdentifiersStatics3;
 struct IClockIdentifiersStatics;
 struct ICurrencyIdentifiersStatics;
+struct ICurrencyIdentifiersStatics2;
 struct IGeographicRegion;
 struct IGeographicRegionFactory;
 struct IGeographicRegionStatics;
@@ -71,6 +73,34 @@ struct JapanesePhoneme;
 struct JapanesePhoneticAnalyzer;
 struct Language;
 struct NumeralSystemIdentifiers;
+
+}
+
+namespace Windows::Globalization {
+
+template <typename T> struct impl_IApplicationLanguagesStatics;
+template <typename T> struct impl_ICalendar;
+template <typename T> struct impl_ICalendarFactory;
+template <typename T> struct impl_ICalendarFactory2;
+template <typename T> struct impl_ICalendarIdentifiersStatics;
+template <typename T> struct impl_ICalendarIdentifiersStatics2;
+template <typename T> struct impl_ICalendarIdentifiersStatics3;
+template <typename T> struct impl_IClockIdentifiersStatics;
+template <typename T> struct impl_ICurrencyIdentifiersStatics;
+template <typename T> struct impl_ICurrencyIdentifiersStatics2;
+template <typename T> struct impl_IGeographicRegion;
+template <typename T> struct impl_IGeographicRegionFactory;
+template <typename T> struct impl_IGeographicRegionStatics;
+template <typename T> struct impl_IJapanesePhoneme;
+template <typename T> struct impl_IJapanesePhoneticAnalyzerStatics;
+template <typename T> struct impl_ILanguage;
+template <typename T> struct impl_ILanguageExtensionSubtags;
+template <typename T> struct impl_ILanguageFactory;
+template <typename T> struct impl_ILanguageStatics;
+template <typename T> struct impl_ILanguageStatics2;
+template <typename T> struct impl_INumeralSystemIdentifiersStatics;
+template <typename T> struct impl_INumeralSystemIdentifiersStatics2;
+template <typename T> struct impl_ITimeZoneOnCalendar;
 
 }
 

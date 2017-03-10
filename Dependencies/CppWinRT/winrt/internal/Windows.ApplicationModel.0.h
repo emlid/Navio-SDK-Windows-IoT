@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -31,14 +31,21 @@ struct IPackage;
 struct IPackage2;
 struct IPackage3;
 struct IPackage4;
+struct IPackage5;
 struct IPackageCatalog;
+struct IPackageCatalog2;
+struct IPackageCatalogAddOptionalPackageResult;
 struct IPackageCatalogStatics;
+struct IPackageContentGroup;
+struct IPackageContentGroupStagingEventArgs;
+struct IPackageContentGroupStatics;
 struct IPackageId;
 struct IPackageIdWithMetadata;
 struct IPackageInstallingEventArgs;
 struct IPackageStagingEventArgs;
 struct IPackageStatics;
 struct IPackageStatus;
+struct IPackageStatus2;
 struct IPackageStatusChangedEventArgs;
 struct IPackageUninstallingEventArgs;
 struct IPackageUpdatingEventArgs;
@@ -54,6 +61,9 @@ struct EnteredBackgroundEventArgs;
 struct LeavingBackgroundEventArgs;
 struct Package;
 struct PackageCatalog;
+struct PackageCatalogAddOptionalPackageResult;
+struct PackageContentGroup;
+struct PackageContentGroupStagingEventArgs;
 struct PackageId;
 struct PackageInstallingEventArgs;
 struct PackageStagingEventArgs;
@@ -81,14 +91,21 @@ struct IPackage;
 struct IPackage2;
 struct IPackage3;
 struct IPackage4;
+struct IPackage5;
 struct IPackageCatalog;
+struct IPackageCatalog2;
+struct IPackageCatalogAddOptionalPackageResult;
 struct IPackageCatalogStatics;
+struct IPackageContentGroup;
+struct IPackageContentGroupStagingEventArgs;
+struct IPackageContentGroupStatics;
 struct IPackageId;
 struct IPackageIdWithMetadata;
 struct IPackageInstallingEventArgs;
 struct IPackageStagingEventArgs;
 struct IPackageStatics;
 struct IPackageStatus;
+struct IPackageStatus2;
 struct IPackageStatusChangedEventArgs;
 struct IPackageUninstallingEventArgs;
 struct IPackageUpdatingEventArgs;
@@ -107,6 +124,9 @@ struct FullTrustProcessLauncher;
 struct LeavingBackgroundEventArgs;
 struct Package;
 struct PackageCatalog;
+struct PackageCatalogAddOptionalPackageResult;
+struct PackageContentGroup;
+struct PackageContentGroupStagingEventArgs;
 struct PackageId;
 struct PackageInstallingEventArgs;
 struct PackageStagingEventArgs;
@@ -122,6 +142,54 @@ struct SuspendingOperation;
 }
 
 namespace Windows::ApplicationModel {
+
+template <typename T> struct impl_IAppDisplayInfo;
+template <typename T> struct impl_IAppInfo;
+template <typename T> struct impl_ICameraApplicationManagerStatics;
+template <typename T> struct impl_IDesignModeStatics;
+template <typename T> struct impl_IEnteredBackgroundEventArgs;
+template <typename T> struct impl_IFullTrustProcessLauncherStatics;
+template <typename T> struct impl_ILeavingBackgroundEventArgs;
+template <typename T> struct impl_IPackage;
+template <typename T> struct impl_IPackage2;
+template <typename T> struct impl_IPackage3;
+template <typename T> struct impl_IPackage4;
+template <typename T> struct impl_IPackage5;
+template <typename T> struct impl_IPackageCatalog;
+template <typename T> struct impl_IPackageCatalog2;
+template <typename T> struct impl_IPackageCatalogAddOptionalPackageResult;
+template <typename T> struct impl_IPackageCatalogStatics;
+template <typename T> struct impl_IPackageContentGroup;
+template <typename T> struct impl_IPackageContentGroupStagingEventArgs;
+template <typename T> struct impl_IPackageContentGroupStatics;
+template <typename T> struct impl_IPackageId;
+template <typename T> struct impl_IPackageIdWithMetadata;
+template <typename T> struct impl_IPackageInstallingEventArgs;
+template <typename T> struct impl_IPackageStagingEventArgs;
+template <typename T> struct impl_IPackageStatics;
+template <typename T> struct impl_IPackageStatus;
+template <typename T> struct impl_IPackageStatus2;
+template <typename T> struct impl_IPackageStatusChangedEventArgs;
+template <typename T> struct impl_IPackageUninstallingEventArgs;
+template <typename T> struct impl_IPackageUpdatingEventArgs;
+template <typename T> struct impl_IPackageWithMetadata;
+template <typename T> struct impl_IStartupTask;
+template <typename T> struct impl_IStartupTaskStatics;
+template <typename T> struct impl_ISuspendingDeferral;
+template <typename T> struct impl_ISuspendingEventArgs;
+template <typename T> struct impl_ISuspendingOperation;
+
+}
+
+namespace Windows::ApplicationModel {
+
+enum class PackageContentGroupState
+{
+    NotStaged = 0,
+    Queued = 1,
+    Staging = 2,
+    Staged = 3,
+};
 
 enum class PackageSignatureKind
 {

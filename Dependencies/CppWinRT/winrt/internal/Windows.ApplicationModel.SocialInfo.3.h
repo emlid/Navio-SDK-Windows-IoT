@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -9,41 +9,41 @@ WINRT_EXPORT namespace winrt {
 
 namespace Windows::ApplicationModel::SocialInfo {
 
-struct WINRT_EBO SocialFeedChildItem :
+struct [[deprecated("SocialFeedChildItem is deprecated and might not work on all platforms. For more info, see MSDN.")]] WINRT_EBO SocialFeedChildItem :
     Windows::ApplicationModel::SocialInfo::ISocialFeedChildItem
 {
     SocialFeedChildItem(std::nullptr_t) noexcept {}
     SocialFeedChildItem();
 };
 
-struct WINRT_EBO SocialFeedContent :
+struct [[deprecated("SocialFeedContent is deprecated and might not work on all platforms. For more info, see MSDN.")]] WINRT_EBO SocialFeedContent :
     Windows::ApplicationModel::SocialInfo::ISocialFeedContent
 {
     SocialFeedContent(std::nullptr_t) noexcept {}
 };
 
-struct WINRT_EBO SocialFeedItem :
+struct [[deprecated("SocialFeedItem is deprecated and might not work on all platforms. For more info, see MSDN.")]] WINRT_EBO SocialFeedItem :
     Windows::ApplicationModel::SocialInfo::ISocialFeedItem
 {
     SocialFeedItem(std::nullptr_t) noexcept {}
     SocialFeedItem();
 };
 
-struct WINRT_EBO SocialFeedSharedItem :
+struct [[deprecated("SocialFeedSharedItem is deprecated and might not work on all platforms. For more info, see MSDN.")]] WINRT_EBO SocialFeedSharedItem :
     Windows::ApplicationModel::SocialInfo::ISocialFeedSharedItem
 {
     SocialFeedSharedItem(std::nullptr_t) noexcept {}
     SocialFeedSharedItem();
 };
 
-struct WINRT_EBO SocialItemThumbnail :
+struct [[deprecated("SocialItemThumbnail is deprecated and might not work on all platforms. For more info, see MSDN.")]] WINRT_EBO SocialItemThumbnail :
     Windows::ApplicationModel::SocialInfo::ISocialItemThumbnail
 {
     SocialItemThumbnail(std::nullptr_t) noexcept {}
     SocialItemThumbnail();
 };
 
-struct WINRT_EBO SocialUserInfo :
+struct [[deprecated("SocialUserInfo is deprecated and might not work on all platforms. For more info, see MSDN.")]] WINRT_EBO SocialUserInfo :
     Windows::ApplicationModel::SocialInfo::ISocialUserInfo
 {
     SocialUserInfo(std::nullptr_t) noexcept {}

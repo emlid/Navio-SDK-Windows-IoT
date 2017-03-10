@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -13,11 +13,11 @@ template <typename H> struct impl_DownloadProgressEventHandler : implements<impl
 {
     impl_DownloadProgressEventHandler(H && handler) : H(std::forward<H>(handler)) {}
 
-    HRESULT __stdcall abi_Invoke(abi_arg_in<Windows::IInspectable> sender, abi_arg_in<Windows::UI::Xaml::Media::Imaging::IDownloadProgressEventArgs> e) noexcept override
+    HRESULT __stdcall abi_Invoke(impl::abi_arg_in<Windows::Foundation::IInspectable> sender, impl::abi_arg_in<Windows::UI::Xaml::Media::Imaging::IDownloadProgressEventArgs> e) noexcept override
     {
         try
         {
-            (*this)(*reinterpret_cast<const Windows::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Xaml::Media::Imaging::DownloadProgressEventArgs *>(&e));
+            (*this)(*reinterpret_cast<const Windows::Foundation::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Xaml::Media::Imaging::DownloadProgressEventArgs *>(&e));
             return S_OK;
         }
         catch (...)
@@ -93,6 +93,31 @@ struct WINRT_EBO SurfaceImageSource :
     SurfaceImageSource(std::nullptr_t) noexcept {}
     SurfaceImageSource(int32_t pixelWidth, int32_t pixelHeight);
     SurfaceImageSource(int32_t pixelWidth, int32_t pixelHeight, bool isOpaque);
+};
+
+struct WINRT_EBO SvgImageSource :
+    Windows::UI::Xaml::Media::Imaging::ISvgImageSource,
+    impl::bases<SvgImageSource, Windows::UI::Xaml::DependencyObject, Windows::UI::Xaml::Media::ImageSource>,
+    impl::require<SvgImageSource, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2, Windows::UI::Xaml::Media::IImageSource>
+{
+    SvgImageSource(std::nullptr_t) noexcept {}
+    SvgImageSource();
+    SvgImageSource(const Windows::Foundation::Uri & uriSource);
+    static Windows::UI::Xaml::DependencyProperty UriSourceProperty();
+    static Windows::UI::Xaml::DependencyProperty RasterizePixelWidthProperty();
+    static Windows::UI::Xaml::DependencyProperty RasterizePixelHeightProperty();
+};
+
+struct WINRT_EBO SvgImageSourceFailedEventArgs :
+    Windows::UI::Xaml::Media::Imaging::ISvgImageSourceFailedEventArgs
+{
+    SvgImageSourceFailedEventArgs(std::nullptr_t) noexcept {}
+};
+
+struct WINRT_EBO SvgImageSourceOpenedEventArgs :
+    Windows::UI::Xaml::Media::Imaging::ISvgImageSourceOpenedEventArgs
+{
+    SvgImageSourceOpenedEventArgs(std::nullptr_t) noexcept {}
 };
 
 struct WINRT_EBO VirtualSurfaceImageSource :

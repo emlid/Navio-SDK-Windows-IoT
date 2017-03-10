@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -10,6 +10,7 @@ namespace ABI::Windows::Media::Capture::Frames {
 
 struct IBufferMediaFrame;
 struct IDepthMediaFrame;
+struct IDepthMediaFrame2;
 struct IDepthMediaFrameFormat;
 struct IInfraredMediaFrame;
 struct IMediaFrameArrivedEventArgs;
@@ -18,10 +19,14 @@ struct IMediaFrameReader;
 struct IMediaFrameReference;
 struct IMediaFrameSource;
 struct IMediaFrameSourceController;
+struct IMediaFrameSourceController2;
 struct IMediaFrameSourceGetPropertyResult;
 struct IMediaFrameSourceGroup;
 struct IMediaFrameSourceGroupStatics;
 struct IMediaFrameSourceInfo;
+struct IMultiSourceMediaFrameArrivedEventArgs;
+struct IMultiSourceMediaFrameReader;
+struct IMultiSourceMediaFrameReference;
 struct IVideoMediaFrame;
 struct IVideoMediaFrameFormat;
 struct BufferMediaFrame;
@@ -37,6 +42,9 @@ struct MediaFrameSourceController;
 struct MediaFrameSourceGetPropertyResult;
 struct MediaFrameSourceGroup;
 struct MediaFrameSourceInfo;
+struct MultiSourceMediaFrameArrivedEventArgs;
+struct MultiSourceMediaFrameReader;
+struct MultiSourceMediaFrameReference;
 struct VideoMediaFrame;
 struct VideoMediaFrameFormat;
 
@@ -46,6 +54,7 @@ namespace Windows::Media::Capture::Frames {
 
 struct IBufferMediaFrame;
 struct IDepthMediaFrame;
+struct IDepthMediaFrame2;
 struct IDepthMediaFrameFormat;
 struct IInfraredMediaFrame;
 struct IMediaFrameArrivedEventArgs;
@@ -54,10 +63,14 @@ struct IMediaFrameReader;
 struct IMediaFrameReference;
 struct IMediaFrameSource;
 struct IMediaFrameSourceController;
+struct IMediaFrameSourceController2;
 struct IMediaFrameSourceGetPropertyResult;
 struct IMediaFrameSourceGroup;
 struct IMediaFrameSourceGroupStatics;
 struct IMediaFrameSourceInfo;
+struct IMultiSourceMediaFrameArrivedEventArgs;
+struct IMultiSourceMediaFrameReader;
+struct IMultiSourceMediaFrameReference;
 struct IVideoMediaFrame;
 struct IVideoMediaFrameFormat;
 struct BufferMediaFrame;
@@ -73,8 +86,37 @@ struct MediaFrameSourceController;
 struct MediaFrameSourceGetPropertyResult;
 struct MediaFrameSourceGroup;
 struct MediaFrameSourceInfo;
+struct MultiSourceMediaFrameArrivedEventArgs;
+struct MultiSourceMediaFrameReader;
+struct MultiSourceMediaFrameReference;
 struct VideoMediaFrame;
 struct VideoMediaFrameFormat;
+
+}
+
+namespace Windows::Media::Capture::Frames {
+
+template <typename T> struct impl_IBufferMediaFrame;
+template <typename T> struct impl_IDepthMediaFrame;
+template <typename T> struct impl_IDepthMediaFrame2;
+template <typename T> struct impl_IDepthMediaFrameFormat;
+template <typename T> struct impl_IInfraredMediaFrame;
+template <typename T> struct impl_IMediaFrameArrivedEventArgs;
+template <typename T> struct impl_IMediaFrameFormat;
+template <typename T> struct impl_IMediaFrameReader;
+template <typename T> struct impl_IMediaFrameReference;
+template <typename T> struct impl_IMediaFrameSource;
+template <typename T> struct impl_IMediaFrameSourceController;
+template <typename T> struct impl_IMediaFrameSourceController2;
+template <typename T> struct impl_IMediaFrameSourceGetPropertyResult;
+template <typename T> struct impl_IMediaFrameSourceGroup;
+template <typename T> struct impl_IMediaFrameSourceGroupStatics;
+template <typename T> struct impl_IMediaFrameSourceInfo;
+template <typename T> struct impl_IMultiSourceMediaFrameArrivedEventArgs;
+template <typename T> struct impl_IMultiSourceMediaFrameReader;
+template <typename T> struct impl_IMultiSourceMediaFrameReference;
+template <typename T> struct impl_IVideoMediaFrame;
+template <typename T> struct impl_IVideoMediaFrameFormat;
 
 }
 
@@ -86,6 +128,7 @@ enum class MediaFrameReaderStartStatus
     UnknownFailure = 1,
     DeviceNotAvailable = 2,
     OutputFormatNotSupported = 3,
+    ExclusiveControlNotAvailable = 4,
 };
 
 enum class MediaFrameSourceGetPropertyStatus
@@ -94,6 +137,8 @@ enum class MediaFrameSourceGetPropertyStatus
     UnknownFailure = 1,
     NotSupported = 2,
     DeviceNotAvailable = 3,
+    MaxPropertyValueSizeTooSmall = 4,
+    MaxPropertyValueSizeRequired = 5,
 };
 
 enum class MediaFrameSourceKind
@@ -112,6 +157,15 @@ enum class MediaFrameSourceSetPropertyStatus
     InvalidValue = 3,
     DeviceNotAvailable = 4,
     NotInControl = 5,
+};
+
+enum class MultiSourceMediaFrameReaderStartStatus
+{
+    Success = 0,
+    NotSupported = 1,
+    InsufficientResources = 2,
+    DeviceNotAvailable = 3,
+    UnknownFailure = 4,
 };
 
 }

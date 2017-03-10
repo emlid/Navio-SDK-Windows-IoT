@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -8,6 +8,11 @@
 WINRT_EXPORT namespace winrt {
 
 namespace ABI::Windows::Foundation {
+
+#ifndef WINRT_GENERIC_a55a747d_59f6_5cb6_b439_c8aad670905c
+#define WINRT_GENERIC_a55a747d_59f6_5cb6_b439_c8aad670905c
+template <> struct __declspec(uuid("a55a747d-59f6-5cb6-b439-c8aad670905c")) __declspec(novtable) IAsyncOperation<winrt::Windows::ApplicationModel::Background::AlarmAccessStatus> : impl_IAsyncOperation<winrt::Windows::ApplicationModel::Background::AlarmAccessStatus> {};
+#endif
 
 #ifndef WINRT_GENERIC_7b44e581_cfa9_5763_bed7_6a65739f0dbf
 #define WINRT_GENERIC_7b44e581_cfa9_5763_bed7_6a65739f0dbf
@@ -34,6 +39,31 @@ namespace ABI::Windows::Foundation::Collections {
 template <> struct __declspec(uuid("78c880f6-a7dc-5172-89da-7749fc82aa82")) __declspec(novtable) IMapView<GUID, Windows::ApplicationModel::Background::IBackgroundTaskRegistration> : impl_IMapView<GUID, Windows::ApplicationModel::Background::IBackgroundTaskRegistration> {};
 #endif
 
+#ifndef WINRT_GENERIC_f6a9dc12_01f7_54f0_a257_c404815b9c1c
+#define WINRT_GENERIC_f6a9dc12_01f7_54f0_a257_c404815b9c1c
+template <> struct __declspec(uuid("f6a9dc12-01f7-54f0-a257-c404815b9c1c")) __declspec(novtable) IMapView<hstring, Windows::ApplicationModel::Background::BackgroundTaskRegistrationGroup> : impl_IMapView<hstring, Windows::ApplicationModel::Background::BackgroundTaskRegistrationGroup> {};
+#endif
+
+
+}
+
+namespace ABI::Windows::Foundation {
+
+#ifndef WINRT_GENERIC_d4f89768_688f_59ec_bf24_c2af6a310fa4
+#define WINRT_GENERIC_d4f89768_688f_59ec_bf24_c2af6a310fa4
+template <> struct __declspec(uuid("d4f89768-688f-59ec-bf24-c2af6a310fa4")) __declspec(novtable) TypedEventHandler<Windows::ApplicationModel::Background::BackgroundTaskRegistrationGroup, Windows::ApplicationModel::Activation::BackgroundActivatedEventArgs> : impl_TypedEventHandler<Windows::ApplicationModel::Background::BackgroundTaskRegistrationGroup, Windows::ApplicationModel::Activation::BackgroundActivatedEventArgs> {};
+#endif
+
+
+}
+
+namespace ABI::Windows::Foundation::Collections {
+
+#ifndef WINRT_GENERIC_2c08602f_40b1_5e97_ae21_5c04d7fb829c
+#define WINRT_GENERIC_2c08602f_40b1_5e97_ae21_5c04d7fb829c
+template <> struct __declspec(uuid("2c08602f-40b1-5e97-ae21-5c04d7fb829c")) __declspec(novtable) IMapView<GUID, Windows::ApplicationModel::Background::BackgroundTaskRegistration> : impl_IMapView<GUID, Windows::ApplicationModel::Background::BackgroundTaskRegistration> {};
+#endif
+
 #ifndef WINRT_GENERIC_851e3cfd_306b_5c8e_ae3c_a8d83c623604
 #define WINRT_GENERIC_851e3cfd_306b_5c8e_ae3c_a8d83c623604
 template <> struct __declspec(uuid("851e3cfd-306b-5c8e-ae3c-a8d83c623604")) __declspec(novtable) IIterable<Windows::Storage::StorageLibrary> : impl_IIterable<Windows::Storage::StorageLibrary> {};
@@ -52,6 +82,11 @@ template <> struct __declspec(uuid("b5136c46-2f2e-511d-9e8e-5ef4decb1da7")) __de
 #ifndef WINRT_GENERIC_9d01424d_5653_59f8_ba6b_d0c077346d2d
 #define WINRT_GENERIC_9d01424d_5653_59f8_ba6b_d0c077346d2d
 template <> struct __declspec(uuid("9d01424d-5653-59f8-ba6b-d0c077346d2d")) __declspec(novtable) IAsyncOperation<Windows::ApplicationModel::Background::DeviceConnectionChangeTrigger> : impl_IAsyncOperation<Windows::ApplicationModel::Background::DeviceConnectionChangeTrigger> {};
+#endif
+
+#ifndef WINRT_GENERIC_f402ec9f_84b2_57c3_9543_01fbda05219b
+#define WINRT_GENERIC_f402ec9f_84b2_57c3_9543_01fbda05219b
+template <> struct __declspec(uuid("f402ec9f-84b2-57c3-9543-01fbda05219b")) __declspec(novtable) IAsyncOperation<Windows::ApplicationModel::Background::GattServiceProviderTriggerResult> : impl_IAsyncOperation<Windows::ApplicationModel::Background::GattServiceProviderTriggerResult> {};
 #endif
 
 
@@ -74,9 +109,9 @@ template <> struct __declspec(uuid("fc7a0488-2803-505c-9e62-9200afe416c6")) __de
 
 namespace ABI::Windows::Foundation {
 
-#ifndef WINRT_GENERIC_a55a747d_59f6_5cb6_b439_c8aad670905c
-#define WINRT_GENERIC_a55a747d_59f6_5cb6_b439_c8aad670905c
-template <> struct __declspec(uuid("a55a747d-59f6-5cb6-b439-c8aad670905c")) __declspec(novtable) IAsyncOperation<winrt::Windows::ApplicationModel::Background::AlarmAccessStatus> : impl_IAsyncOperation<winrt::Windows::ApplicationModel::Background::AlarmAccessStatus> {};
+#ifndef WINRT_GENERIC_84108017_a8e7_5449_b713_df48503a953e
+#define WINRT_GENERIC_84108017_a8e7_5449_b713_df48503a953e
+template <> struct __declspec(uuid("84108017-a8e7-5449-b713-df48503a953e")) __declspec(novtable) AsyncOperationCompletedHandler<winrt::Windows::ApplicationModel::Background::AlarmAccessStatus> : impl_AsyncOperationCompletedHandler<winrt::Windows::ApplicationModel::Background::AlarmAccessStatus> {};
 #endif
 
 #ifndef WINRT_GENERIC_26dd26e3_3f47_5709_b2f2_d6d0ad3288f0
@@ -104,6 +139,41 @@ namespace ABI::Windows::Foundation::Collections {
 template <> struct __declspec(uuid("5a1f6d75-8678-547c-8fd7-fbceb6ebf968")) __declspec(novtable) IKeyValuePair<GUID, Windows::ApplicationModel::Background::IBackgroundTaskRegistration> : impl_IKeyValuePair<GUID, Windows::ApplicationModel::Background::IBackgroundTaskRegistration> {};
 #endif
 
+#ifndef WINRT_GENERIC_6fe872bd_1090_50ef_aa1a_82b7f9bce2b8
+#define WINRT_GENERIC_6fe872bd_1090_50ef_aa1a_82b7f9bce2b8
+template <> struct __declspec(uuid("6fe872bd-1090-50ef-aa1a-82b7f9bce2b8")) __declspec(novtable) IMap<GUID, Windows::ApplicationModel::Background::IBackgroundTaskRegistration> : impl_IMap<GUID, Windows::ApplicationModel::Background::IBackgroundTaskRegistration> {};
+#endif
+
+#ifndef WINRT_GENERIC_67a07f76_20b0_573b_9d74_ed0fc4f653c7
+#define WINRT_GENERIC_67a07f76_20b0_573b_9d74_ed0fc4f653c7
+template <> struct __declspec(uuid("67a07f76-20b0-573b-9d74-ed0fc4f653c7")) __declspec(novtable) IKeyValuePair<hstring, Windows::ApplicationModel::Background::BackgroundTaskRegistrationGroup> : impl_IKeyValuePair<hstring, Windows::ApplicationModel::Background::BackgroundTaskRegistrationGroup> {};
+#endif
+
+#ifndef WINRT_GENERIC_f451776c_7fde_5cd0_a068_68884c99d37c
+#define WINRT_GENERIC_f451776c_7fde_5cd0_a068_68884c99d37c
+template <> struct __declspec(uuid("f451776c-7fde-5cd0-a068-68884c99d37c")) __declspec(novtable) IMap<hstring, Windows::ApplicationModel::Background::BackgroundTaskRegistrationGroup> : impl_IMap<hstring, Windows::ApplicationModel::Background::BackgroundTaskRegistrationGroup> {};
+#endif
+
+#ifndef WINRT_GENERIC_9bcb843b_221b_5fbe_9b20_7028bc4e8653
+#define WINRT_GENERIC_9bcb843b_221b_5fbe_9b20_7028bc4e8653
+template <> struct __declspec(uuid("9bcb843b-221b-5fbe-9b20-7028bc4e8653")) __declspec(novtable) IKeyValuePair<GUID, Windows::ApplicationModel::Background::BackgroundTaskRegistration> : impl_IKeyValuePair<GUID, Windows::ApplicationModel::Background::BackgroundTaskRegistration> {};
+#endif
+
+#ifndef WINRT_GENERIC_aaca6f20_2990_5c73_8c6a_ce9224bb0170
+#define WINRT_GENERIC_aaca6f20_2990_5c73_8c6a_ce9224bb0170
+template <> struct __declspec(uuid("aaca6f20-2990-5c73-8c6a-ce9224bb0170")) __declspec(novtable) IMap<GUID, Windows::ApplicationModel::Background::BackgroundTaskRegistration> : impl_IMap<GUID, Windows::ApplicationModel::Background::BackgroundTaskRegistration> {};
+#endif
+
+#ifndef WINRT_GENERIC_753d0623_9a04_54a0_b3e2_8f5c15313194
+#define WINRT_GENERIC_753d0623_9a04_54a0_b3e2_8f5c15313194
+template <> struct __declspec(uuid("753d0623-9a04-54a0-b3e2-8f5c15313194")) __declspec(novtable) IVector<Windows::Storage::StorageLibrary> : impl_IVector<Windows::Storage::StorageLibrary> {};
+#endif
+
+#ifndef WINRT_GENERIC_4fcf1b1d_d3a7_577a_bdf9_060443bb7956
+#define WINRT_GENERIC_4fcf1b1d_d3a7_577a_bdf9_060443bb7956
+template <> struct __declspec(uuid("4fcf1b1d-d3a7-577a-bdf9-060443bb7956")) __declspec(novtable) IVectorView<Windows::Storage::StorageLibrary> : impl_IVectorView<Windows::Storage::StorageLibrary> {};
+#endif
+
 #ifndef WINRT_GENERIC_0a1c6409_fbd3_58c8_9af3_6262cc56e5b3
 #define WINRT_GENERIC_0a1c6409_fbd3_58c8_9af3_6262cc56e5b3
 template <> struct __declspec(uuid("0a1c6409-fbd3-58c8-9af3-6262cc56e5b3")) __declspec(novtable) IIterator<Windows::Storage::StorageLibrary> : impl_IIterator<Windows::Storage::StorageLibrary> {};
@@ -124,6 +194,11 @@ template <> struct __declspec(uuid("d5aa9506-1464-57d4-859d-7ee9b26cb1f9")) __de
 template <> struct __declspec(uuid("3fd5a57e-47e4-5921-b148-5cb586166ca8")) __declspec(novtable) AsyncOperationCompletedHandler<Windows::ApplicationModel::Background::DeviceConnectionChangeTrigger> : impl_AsyncOperationCompletedHandler<Windows::ApplicationModel::Background::DeviceConnectionChangeTrigger> {};
 #endif
 
+#ifndef WINRT_GENERIC_39d8105f_a505_5f88_91a9_b0fc6d628699
+#define WINRT_GENERIC_39d8105f_a505_5f88_91a9_b0fc6d628699
+template <> struct __declspec(uuid("39d8105f-a505-5f88-91a9-b0fc6d628699")) __declspec(novtable) AsyncOperationCompletedHandler<Windows::ApplicationModel::Background::GattServiceProviderTriggerResult> : impl_AsyncOperationCompletedHandler<Windows::ApplicationModel::Background::GattServiceProviderTriggerResult> {};
+#endif
+
 
 }
 
@@ -139,21 +214,6 @@ template <> struct __declspec(uuid("40524281-a7c6-50b1-b6f5-0baa95d902c2")) __de
 template <> struct __declspec(uuid("2a04cdfa-5dfd-5178-8731-ade998e4a7f6")) __declspec(novtable) IIterable<winrt::Windows::Devices::Sensors::ActivityType> : impl_IIterable<winrt::Windows::Devices::Sensors::ActivityType> {};
 #endif
 
-
-}
-
-namespace ABI::Windows::Foundation {
-
-#ifndef WINRT_GENERIC_84108017_a8e7_5449_b713_df48503a953e
-#define WINRT_GENERIC_84108017_a8e7_5449_b713_df48503a953e
-template <> struct __declspec(uuid("84108017-a8e7-5449-b713-df48503a953e")) __declspec(novtable) AsyncOperationCompletedHandler<winrt::Windows::ApplicationModel::Background::AlarmAccessStatus> : impl_AsyncOperationCompletedHandler<winrt::Windows::ApplicationModel::Background::AlarmAccessStatus> {};
-#endif
-
-
-}
-
-namespace ABI::Windows::Foundation::Collections {
-
 #ifndef WINRT_GENERIC_2001aea5_1a86_517e_8be5_11d7fb5935b2
 #define WINRT_GENERIC_2001aea5_1a86_517e_8be5_11d7fb5935b2
 template <> struct __declspec(uuid("2001aea5-1a86-517e-8be5-11d7fb5935b2")) __declspec(novtable) IIterator<Windows::Foundation::Collections::IKeyValuePair<GUID, Windows::ApplicationModel::Background::IBackgroundTaskRegistration>> : impl_IIterator<Windows::Foundation::Collections::IKeyValuePair<GUID, Windows::ApplicationModel::Background::IBackgroundTaskRegistration>> {};
@@ -164,532 +224,52 @@ template <> struct __declspec(uuid("2001aea5-1a86-517e-8be5-11d7fb5935b2")) __de
 template <> struct __declspec(uuid("80fb0327-5a00-55cc-85db-a852719981b9")) __declspec(novtable) IIterable<Windows::Foundation::Collections::IKeyValuePair<GUID, Windows::ApplicationModel::Background::IBackgroundTaskRegistration>> : impl_IIterable<Windows::Foundation::Collections::IKeyValuePair<GUID, Windows::ApplicationModel::Background::IBackgroundTaskRegistration>> {};
 #endif
 
+#ifndef WINRT_GENERIC_4c21744b_b583_559d_89f7_d4138cffffbc
+#define WINRT_GENERIC_4c21744b_b583_559d_89f7_d4138cffffbc
+template <> struct __declspec(uuid("4c21744b-b583-559d-89f7-d4138cffffbc")) __declspec(novtable) IIterator<Windows::Foundation::Collections::IKeyValuePair<hstring, Windows::ApplicationModel::Background::BackgroundTaskRegistrationGroup>> : impl_IIterator<Windows::Foundation::Collections::IKeyValuePair<hstring, Windows::ApplicationModel::Background::BackgroundTaskRegistrationGroup>> {};
+#endif
+
+#ifndef WINRT_GENERIC_04428524_7d54_59b4_bf17_ac57c4ce6b40
+#define WINRT_GENERIC_04428524_7d54_59b4_bf17_ac57c4ce6b40
+template <> struct __declspec(uuid("04428524-7d54-59b4-bf17-ac57c4ce6b40")) __declspec(novtable) IIterable<Windows::Foundation::Collections::IKeyValuePair<hstring, Windows::ApplicationModel::Background::BackgroundTaskRegistrationGroup>> : impl_IIterable<Windows::Foundation::Collections::IKeyValuePair<hstring, Windows::ApplicationModel::Background::BackgroundTaskRegistrationGroup>> {};
+#endif
+
+#ifndef WINRT_GENERIC_8445d2ae_dd03_5b98_95e4_82b43a3f0d64
+#define WINRT_GENERIC_8445d2ae_dd03_5b98_95e4_82b43a3f0d64
+template <> struct __declspec(uuid("8445d2ae-dd03-5b98-95e4-82b43a3f0d64")) __declspec(novtable) IIterator<Windows::Foundation::Collections::IKeyValuePair<GUID, Windows::ApplicationModel::Background::BackgroundTaskRegistration>> : impl_IIterator<Windows::Foundation::Collections::IKeyValuePair<GUID, Windows::ApplicationModel::Background::BackgroundTaskRegistration>> {};
+#endif
+
+#ifndef WINRT_GENERIC_62ae0fda_b238_554f_a275_1dc16d6ca03a
+#define WINRT_GENERIC_62ae0fda_b238_554f_a275_1dc16d6ca03a
+template <> struct __declspec(uuid("62ae0fda-b238-554f-a275-1dc16d6ca03a")) __declspec(novtable) IIterable<Windows::Foundation::Collections::IKeyValuePair<GUID, Windows::ApplicationModel::Background::BackgroundTaskRegistration>> : impl_IIterable<Windows::Foundation::Collections::IKeyValuePair<GUID, Windows::ApplicationModel::Background::BackgroundTaskRegistration>> {};
+#endif
+
 
 }
 
 namespace Windows::ApplicationModel::Background {
 
-template <typename D>
-struct WINRT_EBO impl_IActivitySensorTrigger
-{
-    Windows::Foundation::Collections::IVector<winrt::Windows::Devices::Sensors::ActivityType> SubscribedActivities() const;
-    uint32_t ReportInterval() const;
-    Windows::Foundation::Collections::IVectorView<winrt::Windows::Devices::Sensors::ActivityType> SupportedActivities() const;
-    uint32_t MinimumReportInterval() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IActivitySensorTriggerFactory
-{
-    Windows::ApplicationModel::Background::ActivitySensorTrigger Create(uint32_t reportIntervalInMilliseconds) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IAlarmApplicationManagerStatics
-{
-    Windows::Foundation::IAsyncOperation<winrt::Windows::ApplicationModel::Background::AlarmAccessStatus> RequestAccessAsync() const;
-    Windows::ApplicationModel::Background::AlarmAccessStatus GetAccessStatus() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IApplicationTrigger
-{
-    Windows::Foundation::IAsyncOperation<winrt::Windows::ApplicationModel::Background::ApplicationTriggerResult> RequestAsync() const;
-    Windows::Foundation::IAsyncOperation<winrt::Windows::ApplicationModel::Background::ApplicationTriggerResult> RequestAsync(const Windows::Foundation::Collections::ValueSet & arguments) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IApplicationTriggerDetails
-{
-    Windows::Foundation::Collections::ValueSet Arguments() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IAppointmentStoreNotificationTrigger
-{
-};
-
-template <typename D>
-struct WINRT_EBO impl_IBackgroundCondition
-{
-};
-
-template <typename D>
-struct WINRT_EBO impl_IBackgroundExecutionManagerStatics
-{
-    Windows::Foundation::IAsyncOperation<winrt::Windows::ApplicationModel::Background::BackgroundAccessStatus> RequestAccessAsync() const;
-    Windows::Foundation::IAsyncOperation<winrt::Windows::ApplicationModel::Background::BackgroundAccessStatus> RequestAccessAsync(hstring_ref applicationId) const;
-    void RemoveAccess() const;
-    void RemoveAccess(hstring_ref applicationId) const;
-    Windows::ApplicationModel::Background::BackgroundAccessStatus GetAccessStatus() const;
-    Windows::ApplicationModel::Background::BackgroundAccessStatus GetAccessStatus(hstring_ref applicationId) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IBackgroundTask
-{
-    void Run(const Windows::ApplicationModel::Background::IBackgroundTaskInstance & taskInstance) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IBackgroundTaskBuilder
-{
-    void TaskEntryPoint(hstring_ref value) const;
-    hstring TaskEntryPoint() const;
-    void SetTrigger(const Windows::ApplicationModel::Background::IBackgroundTrigger & trigger) const;
-    void AddCondition(const Windows::ApplicationModel::Background::IBackgroundCondition & condition) const;
-    void Name(hstring_ref value) const;
-    hstring Name() const;
-    Windows::ApplicationModel::Background::BackgroundTaskRegistration Register() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IBackgroundTaskBuilder2
-{
-    void CancelOnConditionLoss(bool value) const;
-    bool CancelOnConditionLoss() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IBackgroundTaskBuilder3
-{
-    void IsNetworkRequested(bool value) const;
-    bool IsNetworkRequested() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IBackgroundTaskCompletedEventArgs
-{
-    GUID InstanceId() const;
-    void CheckResult() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IBackgroundTaskDeferral
-{
-    void Complete() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IBackgroundTaskInstance
-{
-    GUID InstanceId() const;
-    Windows::ApplicationModel::Background::BackgroundTaskRegistration Task() const;
-    uint32_t Progress() const;
-    void Progress(uint32_t value) const;
-    Windows::IInspectable TriggerDetails() const;
-    event_token Canceled(const Windows::ApplicationModel::Background::BackgroundTaskCanceledEventHandler & cancelHandler) const;
-    using Canceled_revoker = event_revoker<IBackgroundTaskInstance>;
-    Canceled_revoker Canceled(auto_revoke_t, const Windows::ApplicationModel::Background::BackgroundTaskCanceledEventHandler & cancelHandler) const;
-    void Canceled(event_token cookie) const;
-    uint32_t SuspendedCount() const;
-    Windows::ApplicationModel::Background::BackgroundTaskDeferral GetDeferral() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IBackgroundTaskInstance2
-{
-    uint32_t GetThrottleCount(Windows::ApplicationModel::Background::BackgroundTaskThrottleCounter counter) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IBackgroundTaskInstance4
-{
-    Windows::System::User User() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IBackgroundTaskProgressEventArgs
-{
-    GUID InstanceId() const;
-    uint32_t Progress() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IBackgroundTaskRegistration
-{
-    GUID TaskId() const;
-    hstring Name() const;
-    event_token Progress(const Windows::ApplicationModel::Background::BackgroundTaskProgressEventHandler & handler) const;
-    using Progress_revoker = event_revoker<IBackgroundTaskRegistration>;
-    Progress_revoker Progress(auto_revoke_t, const Windows::ApplicationModel::Background::BackgroundTaskProgressEventHandler & handler) const;
-    void Progress(event_token cookie) const;
-    event_token Completed(const Windows::ApplicationModel::Background::BackgroundTaskCompletedEventHandler & handler) const;
-    using Completed_revoker = event_revoker<IBackgroundTaskRegistration>;
-    Completed_revoker Completed(auto_revoke_t, const Windows::ApplicationModel::Background::BackgroundTaskCompletedEventHandler & handler) const;
-    void Completed(event_token cookie) const;
-    void Unregister(bool cancelTask) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IBackgroundTaskRegistration2
-{
-    Windows::ApplicationModel::Background::IBackgroundTrigger Trigger() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IBackgroundTaskRegistrationStatics
-{
-    Windows::Foundation::Collections::IMapView<GUID, Windows::ApplicationModel::Background::IBackgroundTaskRegistration> AllTasks() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IBackgroundTrigger
-{
-};
-
-template <typename D>
-struct WINRT_EBO impl_IBackgroundWorkCostStatics
-{
-    Windows::ApplicationModel::Background::BackgroundWorkCostValue CurrentBackgroundWorkCost() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IBluetoothLEAdvertisementPublisherTrigger
-{
-    Windows::Devices::Bluetooth::Advertisement::BluetoothLEAdvertisement Advertisement() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IBluetoothLEAdvertisementWatcherTrigger
-{
-    Windows::Foundation::TimeSpan MinSamplingInterval() const;
-    Windows::Foundation::TimeSpan MaxSamplingInterval() const;
-    Windows::Foundation::TimeSpan MinOutOfRangeTimeout() const;
-    Windows::Foundation::TimeSpan MaxOutOfRangeTimeout() const;
-    Windows::Devices::Bluetooth::BluetoothSignalStrengthFilter SignalStrengthFilter() const;
-    void SignalStrengthFilter(const Windows::Devices::Bluetooth::BluetoothSignalStrengthFilter & value) const;
-    Windows::Devices::Bluetooth::Advertisement::BluetoothLEAdvertisementFilter AdvertisementFilter() const;
-    void AdvertisementFilter(const Windows::Devices::Bluetooth::Advertisement::BluetoothLEAdvertisementFilter & value) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_ICachedFileUpdaterTrigger
-{
-};
-
-template <typename D>
-struct WINRT_EBO impl_ICachedFileUpdaterTriggerDetails
-{
-    Windows::Storage::Provider::CachedFileTarget UpdateTarget() const;
-    Windows::Storage::Provider::FileUpdateRequest UpdateRequest() const;
-    bool CanRequestUserInput() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IChatMessageNotificationTrigger
-{
-};
-
-template <typename D>
-struct WINRT_EBO impl_IChatMessageReceivedNotificationTrigger
-{
-};
-
-template <typename D>
-struct WINRT_EBO impl_ICommunicationBlockingAppSetAsActiveTrigger
-{
-};
-
-template <typename D>
-struct WINRT_EBO impl_IContactStoreNotificationTrigger
-{
-};
-
-template <typename D>
-struct WINRT_EBO impl_IContentPrefetchTrigger
-{
-    Windows::Foundation::TimeSpan WaitInterval() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IContentPrefetchTriggerFactory
-{
-    Windows::ApplicationModel::Background::ContentPrefetchTrigger Create(const Windows::Foundation::TimeSpan & waitInterval) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IDeviceConnectionChangeTrigger
-{
-    hstring DeviceId() const;
-    bool CanMaintainConnection() const;
-    bool MaintainConnection() const;
-    void MaintainConnection(bool value) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IDeviceConnectionChangeTriggerStatics
-{
-    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Background::DeviceConnectionChangeTrigger> FromIdAsync(hstring_ref deviceId) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IDeviceManufacturerNotificationTrigger
-{
-    hstring TriggerQualifier() const;
-    bool OneShot() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IDeviceManufacturerNotificationTriggerFactory
-{
-    Windows::ApplicationModel::Background::DeviceManufacturerNotificationTrigger Create(hstring_ref triggerQualifier, bool oneShot) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IDeviceServicingTrigger
-{
-    Windows::Foundation::IAsyncOperation<winrt::Windows::ApplicationModel::Background::DeviceTriggerResult> RequestAsync(hstring_ref deviceId, const Windows::Foundation::TimeSpan & expectedDuration) const;
-    Windows::Foundation::IAsyncOperation<winrt::Windows::ApplicationModel::Background::DeviceTriggerResult> RequestAsync(hstring_ref deviceId, const Windows::Foundation::TimeSpan & expectedDuration, hstring_ref arguments) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IDeviceUseTrigger
-{
-    Windows::Foundation::IAsyncOperation<winrt::Windows::ApplicationModel::Background::DeviceTriggerResult> RequestAsync(hstring_ref deviceId) const;
-    Windows::Foundation::IAsyncOperation<winrt::Windows::ApplicationModel::Background::DeviceTriggerResult> RequestAsync(hstring_ref deviceId, hstring_ref arguments) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IDeviceWatcherTrigger
-{
-};
-
-template <typename D>
-struct WINRT_EBO impl_IEmailStoreNotificationTrigger
-{
-};
-
-template <typename D>
-struct WINRT_EBO impl_IGattCharacteristicNotificationTrigger
-{
-    Windows::Devices::Bluetooth::GenericAttributeProfile::GattCharacteristic Characteristic() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IGattCharacteristicNotificationTriggerFactory
-{
-    Windows::ApplicationModel::Background::GattCharacteristicNotificationTrigger Create(const Windows::Devices::Bluetooth::GenericAttributeProfile::GattCharacteristic & characteristic) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_ILocationTrigger
-{
-    Windows::ApplicationModel::Background::LocationTriggerType TriggerType() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_ILocationTriggerFactory
-{
-    Windows::ApplicationModel::Background::LocationTrigger Create(Windows::ApplicationModel::Background::LocationTriggerType triggerType) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IMaintenanceTrigger
-{
-    uint32_t FreshnessTime() const;
-    bool OneShot() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IMaintenanceTriggerFactory
-{
-    Windows::ApplicationModel::Background::MaintenanceTrigger Create(uint32_t freshnessTime, bool oneShot) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IMediaProcessingTrigger
-{
-    Windows::Foundation::IAsyncOperation<winrt::Windows::ApplicationModel::Background::MediaProcessingTriggerResult> RequestAsync() const;
-    Windows::Foundation::IAsyncOperation<winrt::Windows::ApplicationModel::Background::MediaProcessingTriggerResult> RequestAsync(const Windows::Foundation::Collections::ValueSet & arguments) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_INetworkOperatorHotspotAuthenticationTrigger
-{
-};
-
-template <typename D>
-struct WINRT_EBO impl_INetworkOperatorNotificationTrigger
-{
-    hstring NetworkAccountId() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_INetworkOperatorNotificationTriggerFactory
-{
-    Windows::ApplicationModel::Background::NetworkOperatorNotificationTrigger Create(hstring_ref networkAccountId) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IPhoneTrigger
-{
-    bool OneShot() const;
-    Windows::ApplicationModel::Calls::Background::PhoneTriggerType TriggerType() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IPhoneTriggerFactory
-{
-    Windows::ApplicationModel::Background::PhoneTrigger Create(Windows::ApplicationModel::Calls::Background::PhoneTriggerType type, bool oneShot) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IPushNotificationTriggerFactory
-{
-    Windows::ApplicationModel::Background::PushNotificationTrigger Create(hstring_ref applicationId) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IRcsEndUserMessageAvailableTrigger
-{
-};
-
-template <typename D>
-struct WINRT_EBO impl_IRfcommConnectionTrigger
-{
-    Windows::Devices::Bluetooth::Background::RfcommInboundConnectionInformation InboundConnection() const;
-    Windows::Devices::Bluetooth::Background::RfcommOutboundConnectionInformation OutboundConnection() const;
-    bool AllowMultipleConnections() const;
-    void AllowMultipleConnections(bool value) const;
-    Windows::Networking::Sockets::SocketProtectionLevel ProtectionLevel() const;
-    void ProtectionLevel(Windows::Networking::Sockets::SocketProtectionLevel value) const;
-    Windows::Networking::HostName RemoteHostName() const;
-    void RemoteHostName(const Windows::Networking::HostName & value) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_ISecondaryAuthenticationFactorAuthenticationTrigger
-{
-};
-
-template <typename D>
-struct WINRT_EBO impl_ISensorDataThresholdTrigger
-{
-};
-
-template <typename D>
-struct WINRT_EBO impl_ISensorDataThresholdTriggerFactory
-{
-    Windows::ApplicationModel::Background::SensorDataThresholdTrigger Create(const Windows::Devices::Sensors::ISensorDataThreshold & threshold) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_ISmartCardTrigger
-{
-    Windows::Devices::SmartCards::SmartCardTriggerType TriggerType() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_ISmartCardTriggerFactory
-{
-    Windows::ApplicationModel::Background::SmartCardTrigger Create(Windows::Devices::SmartCards::SmartCardTriggerType triggerType) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_ISmsMessageReceivedTriggerFactory
-{
-    Windows::ApplicationModel::Background::SmsMessageReceivedTrigger Create(const Windows::Devices::Sms::SmsFilterRules & filterRules) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_ISocketActivityTrigger
-{
-    bool IsWakeFromLowPowerSupported() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IStorageLibraryContentChangedTrigger
-{
-};
-
-template <typename D>
-struct WINRT_EBO impl_IStorageLibraryContentChangedTriggerStatics
-{
-    Windows::ApplicationModel::Background::StorageLibraryContentChangedTrigger Create(const Windows::Storage::StorageLibrary & storageLibrary) const;
-    Windows::ApplicationModel::Background::StorageLibraryContentChangedTrigger CreateFromLibraries(const Windows::Foundation::Collections::IIterable<Windows::Storage::StorageLibrary> & storageLibraries) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_ISystemCondition
-{
-    Windows::ApplicationModel::Background::SystemConditionType ConditionType() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_ISystemConditionFactory
-{
-    Windows::ApplicationModel::Background::SystemCondition Create(Windows::ApplicationModel::Background::SystemConditionType conditionType) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_ISystemTrigger
-{
-    bool OneShot() const;
-    Windows::ApplicationModel::Background::SystemTriggerType TriggerType() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_ISystemTriggerFactory
-{
-    Windows::ApplicationModel::Background::SystemTrigger Create(Windows::ApplicationModel::Background::SystemTriggerType triggerType, bool oneShot) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_ITimeTrigger
-{
-    uint32_t FreshnessTime() const;
-    bool OneShot() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_ITimeTriggerFactory
-{
-    Windows::ApplicationModel::Background::TimeTrigger Create(uint32_t freshnessTime, bool oneShot) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IToastNotificationActionTriggerFactory
-{
-    Windows::ApplicationModel::Background::ToastNotificationActionTrigger Create(hstring_ref applicationId) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IToastNotificationHistoryChangedTriggerFactory
-{
-    Windows::ApplicationModel::Background::ToastNotificationHistoryChangedTrigger Create(hstring_ref applicationId) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IUserNotificationChangedTriggerFactory
-{
-    Windows::ApplicationModel::Background::UserNotificationChangedTrigger Create(Windows::UI::Notifications::NotificationKinds notificationKinds) const;
-};
-
-struct BackgroundTaskCanceledEventHandler : Windows::IUnknown
+struct BackgroundTaskCanceledEventHandler : Windows::Foundation::IUnknown
 {
     BackgroundTaskCanceledEventHandler(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<BackgroundTaskCanceledEventHandler>(m_ptr); }
     template <typename L> BackgroundTaskCanceledEventHandler(L lambda);
     template <typename F> BackgroundTaskCanceledEventHandler (F * function);
     template <typename O, typename M> BackgroundTaskCanceledEventHandler(O * object, M method);
     void operator()(const Windows::ApplicationModel::Background::IBackgroundTaskInstance & sender, Windows::ApplicationModel::Background::BackgroundTaskCancellationReason reason) const;
 };
 
-struct BackgroundTaskCompletedEventHandler : Windows::IUnknown
+struct BackgroundTaskCompletedEventHandler : Windows::Foundation::IUnknown
 {
     BackgroundTaskCompletedEventHandler(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<BackgroundTaskCompletedEventHandler>(m_ptr); }
     template <typename L> BackgroundTaskCompletedEventHandler(L lambda);
     template <typename F> BackgroundTaskCompletedEventHandler (F * function);
     template <typename O, typename M> BackgroundTaskCompletedEventHandler(O * object, M method);
     void operator()(const Windows::ApplicationModel::Background::BackgroundTaskRegistration & sender, const Windows::ApplicationModel::Background::BackgroundTaskCompletedEventArgs & args) const;
 };
 
-struct BackgroundTaskProgressEventHandler : Windows::IUnknown
+struct BackgroundTaskProgressEventHandler : Windows::Foundation::IUnknown
 {
     BackgroundTaskProgressEventHandler(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<BackgroundTaskProgressEventHandler>(m_ptr); }
     template <typename L> BackgroundTaskProgressEventHandler(L lambda);
     template <typename F> BackgroundTaskProgressEventHandler (F * function);
     template <typename O, typename M> BackgroundTaskProgressEventHandler(O * object, M method);
@@ -697,633 +277,653 @@ struct BackgroundTaskProgressEventHandler : Windows::IUnknown
 };
 
 struct IActivitySensorTrigger :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IActivitySensorTrigger>,
     impl::require<IActivitySensorTrigger, Windows::ApplicationModel::Background::IBackgroundTrigger>
 {
     IActivitySensorTrigger(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IActivitySensorTrigger>(m_ptr); }
 };
 
 struct IActivitySensorTriggerFactory :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IActivitySensorTriggerFactory>
 {
     IActivitySensorTriggerFactory(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IActivitySensorTriggerFactory>(m_ptr); }
 };
 
 struct IAlarmApplicationManagerStatics :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IAlarmApplicationManagerStatics>
 {
     IAlarmApplicationManagerStatics(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IAlarmApplicationManagerStatics>(m_ptr); }
+};
+
+struct IAppBroadcastTrigger :
+    Windows::Foundation::IInspectable,
+    impl::consume<IAppBroadcastTrigger>,
+    impl::require<IAppBroadcastTrigger, Windows::ApplicationModel::Background::IBackgroundTrigger>
+{
+    IAppBroadcastTrigger(std::nullptr_t = nullptr) noexcept {}
+};
+
+struct IAppBroadcastTriggerFactory :
+    Windows::Foundation::IInspectable,
+    impl::consume<IAppBroadcastTriggerFactory>
+{
+    IAppBroadcastTriggerFactory(std::nullptr_t = nullptr) noexcept {}
+};
+
+struct IAppBroadcastTriggerProviderInfo :
+    Windows::Foundation::IInspectable,
+    impl::consume<IAppBroadcastTriggerProviderInfo>
+{
+    IAppBroadcastTriggerProviderInfo(std::nullptr_t = nullptr) noexcept {}
 };
 
 struct IApplicationTrigger :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IApplicationTrigger>,
     impl::require<IApplicationTrigger, Windows::ApplicationModel::Background::IBackgroundTrigger>
 {
     IApplicationTrigger(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IApplicationTrigger>(m_ptr); }
 };
 
 struct IApplicationTriggerDetails :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IApplicationTriggerDetails>
 {
     IApplicationTriggerDetails(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IApplicationTriggerDetails>(m_ptr); }
 };
 
 struct IAppointmentStoreNotificationTrigger :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IAppointmentStoreNotificationTrigger>,
     impl::require<IAppointmentStoreNotificationTrigger, Windows::ApplicationModel::Background::IBackgroundTrigger>
 {
     IAppointmentStoreNotificationTrigger(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IAppointmentStoreNotificationTrigger>(m_ptr); }
 };
 
 struct IBackgroundCondition :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IBackgroundCondition>
 {
     IBackgroundCondition(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IBackgroundCondition>(m_ptr); }
 };
 
 struct IBackgroundExecutionManagerStatics :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IBackgroundExecutionManagerStatics>
 {
     IBackgroundExecutionManagerStatics(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IBackgroundExecutionManagerStatics>(m_ptr); }
 };
 
 struct IBackgroundTask :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IBackgroundTask>
 {
     IBackgroundTask(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IBackgroundTask>(m_ptr); }
 };
 
 struct IBackgroundTaskBuilder :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IBackgroundTaskBuilder>
 {
     IBackgroundTaskBuilder(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IBackgroundTaskBuilder>(m_ptr); }
 };
 
 struct IBackgroundTaskBuilder2 :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IBackgroundTaskBuilder2>,
     impl::require<IBackgroundTaskBuilder2, Windows::ApplicationModel::Background::IBackgroundTaskBuilder>
 {
     IBackgroundTaskBuilder2(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IBackgroundTaskBuilder2>(m_ptr); }
 };
 
 struct IBackgroundTaskBuilder3 :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IBackgroundTaskBuilder3>,
     impl::require<IBackgroundTaskBuilder3, Windows::ApplicationModel::Background::IBackgroundTaskBuilder>
 {
     IBackgroundTaskBuilder3(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IBackgroundTaskBuilder3>(m_ptr); }
+};
+
+struct IBackgroundTaskBuilder4 :
+    Windows::Foundation::IInspectable,
+    impl::consume<IBackgroundTaskBuilder4>,
+    impl::require<IBackgroundTaskBuilder4, Windows::ApplicationModel::Background::IBackgroundTaskBuilder>
+{
+    IBackgroundTaskBuilder4(std::nullptr_t = nullptr) noexcept {}
 };
 
 struct IBackgroundTaskCompletedEventArgs :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IBackgroundTaskCompletedEventArgs>
 {
     IBackgroundTaskCompletedEventArgs(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IBackgroundTaskCompletedEventArgs>(m_ptr); }
 };
 
 struct IBackgroundTaskDeferral :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IBackgroundTaskDeferral>
 {
     IBackgroundTaskDeferral(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IBackgroundTaskDeferral>(m_ptr); }
 };
 
 struct IBackgroundTaskInstance :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IBackgroundTaskInstance>
 {
     IBackgroundTaskInstance(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IBackgroundTaskInstance>(m_ptr); }
 };
 
 struct IBackgroundTaskInstance2 :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IBackgroundTaskInstance2>,
     impl::require<IBackgroundTaskInstance2, Windows::ApplicationModel::Background::IBackgroundTaskInstance>
 {
     IBackgroundTaskInstance2(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IBackgroundTaskInstance2>(m_ptr); }
 };
 
 struct IBackgroundTaskInstance4 :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IBackgroundTaskInstance4>,
     impl::require<IBackgroundTaskInstance4, Windows::ApplicationModel::Background::IBackgroundTaskInstance>
 {
     IBackgroundTaskInstance4(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IBackgroundTaskInstance4>(m_ptr); }
 };
 
 struct IBackgroundTaskProgressEventArgs :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IBackgroundTaskProgressEventArgs>
 {
     IBackgroundTaskProgressEventArgs(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IBackgroundTaskProgressEventArgs>(m_ptr); }
 };
 
 struct IBackgroundTaskRegistration :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IBackgroundTaskRegistration>
 {
     IBackgroundTaskRegistration(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IBackgroundTaskRegistration>(m_ptr); }
 };
 
 struct IBackgroundTaskRegistration2 :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IBackgroundTaskRegistration2>,
     impl::require<IBackgroundTaskRegistration2, Windows::ApplicationModel::Background::IBackgroundTaskRegistration>
 {
     IBackgroundTaskRegistration2(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IBackgroundTaskRegistration2>(m_ptr); }
+};
+
+struct IBackgroundTaskRegistration3 :
+    Windows::Foundation::IInspectable,
+    impl::consume<IBackgroundTaskRegistration3>,
+    impl::require<IBackgroundTaskRegistration3, Windows::ApplicationModel::Background::IBackgroundTaskRegistration>
+{
+    IBackgroundTaskRegistration3(std::nullptr_t = nullptr) noexcept {}
+};
+
+struct IBackgroundTaskRegistrationGroup :
+    Windows::Foundation::IInspectable,
+    impl::consume<IBackgroundTaskRegistrationGroup>
+{
+    IBackgroundTaskRegistrationGroup(std::nullptr_t = nullptr) noexcept {}
+};
+
+struct IBackgroundTaskRegistrationGroupFactory :
+    Windows::Foundation::IInspectable,
+    impl::consume<IBackgroundTaskRegistrationGroupFactory>
+{
+    IBackgroundTaskRegistrationGroupFactory(std::nullptr_t = nullptr) noexcept {}
 };
 
 struct IBackgroundTaskRegistrationStatics :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IBackgroundTaskRegistrationStatics>
 {
     IBackgroundTaskRegistrationStatics(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IBackgroundTaskRegistrationStatics>(m_ptr); }
+};
+
+struct IBackgroundTaskRegistrationStatics2 :
+    Windows::Foundation::IInspectable,
+    impl::consume<IBackgroundTaskRegistrationStatics2>
+{
+    IBackgroundTaskRegistrationStatics2(std::nullptr_t = nullptr) noexcept {}
 };
 
 struct IBackgroundTrigger :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IBackgroundTrigger>
 {
     IBackgroundTrigger(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IBackgroundTrigger>(m_ptr); }
 };
 
 struct IBackgroundWorkCostStatics :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IBackgroundWorkCostStatics>
 {
     IBackgroundWorkCostStatics(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IBackgroundWorkCostStatics>(m_ptr); }
 };
 
 struct IBluetoothLEAdvertisementPublisherTrigger :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IBluetoothLEAdvertisementPublisherTrigger>,
     impl::require<IBluetoothLEAdvertisementPublisherTrigger, Windows::ApplicationModel::Background::IBackgroundTrigger>
 {
     IBluetoothLEAdvertisementPublisherTrigger(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IBluetoothLEAdvertisementPublisherTrigger>(m_ptr); }
 };
 
 struct IBluetoothLEAdvertisementWatcherTrigger :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IBluetoothLEAdvertisementWatcherTrigger>,
     impl::require<IBluetoothLEAdvertisementWatcherTrigger, Windows::ApplicationModel::Background::IBackgroundTrigger>
 {
     IBluetoothLEAdvertisementWatcherTrigger(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IBluetoothLEAdvertisementWatcherTrigger>(m_ptr); }
 };
 
 struct ICachedFileUpdaterTrigger :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<ICachedFileUpdaterTrigger>,
     impl::require<ICachedFileUpdaterTrigger, Windows::ApplicationModel::Background::IBackgroundTrigger>
 {
     ICachedFileUpdaterTrigger(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<ICachedFileUpdaterTrigger>(m_ptr); }
 };
 
 struct ICachedFileUpdaterTriggerDetails :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<ICachedFileUpdaterTriggerDetails>
 {
     ICachedFileUpdaterTriggerDetails(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<ICachedFileUpdaterTriggerDetails>(m_ptr); }
 };
 
 struct IChatMessageNotificationTrigger :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IChatMessageNotificationTrigger>,
     impl::require<IChatMessageNotificationTrigger, Windows::ApplicationModel::Background::IBackgroundTrigger>
 {
     IChatMessageNotificationTrigger(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IChatMessageNotificationTrigger>(m_ptr); }
 };
 
 struct IChatMessageReceivedNotificationTrigger :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IChatMessageReceivedNotificationTrigger>,
     impl::require<IChatMessageReceivedNotificationTrigger, Windows::ApplicationModel::Background::IBackgroundTrigger>
 {
     IChatMessageReceivedNotificationTrigger(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IChatMessageReceivedNotificationTrigger>(m_ptr); }
 };
 
 struct ICommunicationBlockingAppSetAsActiveTrigger :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<ICommunicationBlockingAppSetAsActiveTrigger>,
     impl::require<ICommunicationBlockingAppSetAsActiveTrigger, Windows::ApplicationModel::Background::IBackgroundTrigger>
 {
     ICommunicationBlockingAppSetAsActiveTrigger(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<ICommunicationBlockingAppSetAsActiveTrigger>(m_ptr); }
 };
 
 struct IContactStoreNotificationTrigger :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IContactStoreNotificationTrigger>,
     impl::require<IContactStoreNotificationTrigger, Windows::ApplicationModel::Background::IBackgroundTrigger>
 {
     IContactStoreNotificationTrigger(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IContactStoreNotificationTrigger>(m_ptr); }
 };
 
 struct IContentPrefetchTrigger :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IContentPrefetchTrigger>,
     impl::require<IContentPrefetchTrigger, Windows::ApplicationModel::Background::IBackgroundTrigger>
 {
     IContentPrefetchTrigger(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IContentPrefetchTrigger>(m_ptr); }
 };
 
 struct IContentPrefetchTriggerFactory :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IContentPrefetchTriggerFactory>
 {
     IContentPrefetchTriggerFactory(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IContentPrefetchTriggerFactory>(m_ptr); }
 };
 
 struct IDeviceConnectionChangeTrigger :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IDeviceConnectionChangeTrigger>,
     impl::require<IDeviceConnectionChangeTrigger, Windows::ApplicationModel::Background::IBackgroundTrigger>
 {
     IDeviceConnectionChangeTrigger(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IDeviceConnectionChangeTrigger>(m_ptr); }
 };
 
 struct IDeviceConnectionChangeTriggerStatics :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IDeviceConnectionChangeTriggerStatics>
 {
     IDeviceConnectionChangeTriggerStatics(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IDeviceConnectionChangeTriggerStatics>(m_ptr); }
 };
 
 struct IDeviceManufacturerNotificationTrigger :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IDeviceManufacturerNotificationTrigger>,
     impl::require<IDeviceManufacturerNotificationTrigger, Windows::ApplicationModel::Background::IBackgroundTrigger>
 {
     IDeviceManufacturerNotificationTrigger(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IDeviceManufacturerNotificationTrigger>(m_ptr); }
 };
 
 struct IDeviceManufacturerNotificationTriggerFactory :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IDeviceManufacturerNotificationTriggerFactory>
 {
     IDeviceManufacturerNotificationTriggerFactory(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IDeviceManufacturerNotificationTriggerFactory>(m_ptr); }
 };
 
 struct IDeviceServicingTrigger :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IDeviceServicingTrigger>,
     impl::require<IDeviceServicingTrigger, Windows::ApplicationModel::Background::IBackgroundTrigger>
 {
     IDeviceServicingTrigger(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IDeviceServicingTrigger>(m_ptr); }
 };
 
 struct IDeviceUseTrigger :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IDeviceUseTrigger>,
     impl::require<IDeviceUseTrigger, Windows::ApplicationModel::Background::IBackgroundTrigger>
 {
     IDeviceUseTrigger(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IDeviceUseTrigger>(m_ptr); }
 };
 
 struct IDeviceWatcherTrigger :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IDeviceWatcherTrigger>,
     impl::require<IDeviceWatcherTrigger, Windows::ApplicationModel::Background::IBackgroundTrigger>
 {
     IDeviceWatcherTrigger(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IDeviceWatcherTrigger>(m_ptr); }
 };
 
 struct IEmailStoreNotificationTrigger :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IEmailStoreNotificationTrigger>,
     impl::require<IEmailStoreNotificationTrigger, Windows::ApplicationModel::Background::IBackgroundTrigger>
 {
     IEmailStoreNotificationTrigger(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IEmailStoreNotificationTrigger>(m_ptr); }
 };
 
 struct IGattCharacteristicNotificationTrigger :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IGattCharacteristicNotificationTrigger>,
     impl::require<IGattCharacteristicNotificationTrigger, Windows::ApplicationModel::Background::IBackgroundTrigger>
 {
     IGattCharacteristicNotificationTrigger(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IGattCharacteristicNotificationTrigger>(m_ptr); }
+};
+
+struct IGattCharacteristicNotificationTrigger2 :
+    Windows::Foundation::IInspectable,
+    impl::consume<IGattCharacteristicNotificationTrigger2>
+{
+    IGattCharacteristicNotificationTrigger2(std::nullptr_t = nullptr) noexcept {}
 };
 
 struct IGattCharacteristicNotificationTriggerFactory :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IGattCharacteristicNotificationTriggerFactory>
 {
     IGattCharacteristicNotificationTriggerFactory(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IGattCharacteristicNotificationTriggerFactory>(m_ptr); }
+};
+
+struct IGattCharacteristicNotificationTriggerFactory2 :
+    Windows::Foundation::IInspectable,
+    impl::consume<IGattCharacteristicNotificationTriggerFactory2>
+{
+    IGattCharacteristicNotificationTriggerFactory2(std::nullptr_t = nullptr) noexcept {}
+};
+
+struct IGattServiceProviderTrigger :
+    Windows::Foundation::IInspectable,
+    impl::consume<IGattServiceProviderTrigger>
+{
+    IGattServiceProviderTrigger(std::nullptr_t = nullptr) noexcept {}
+};
+
+struct IGattServiceProviderTriggerResult :
+    Windows::Foundation::IInspectable,
+    impl::consume<IGattServiceProviderTriggerResult>
+{
+    IGattServiceProviderTriggerResult(std::nullptr_t = nullptr) noexcept {}
+};
+
+struct IGattServiceProviderTriggerStatics :
+    Windows::Foundation::IInspectable,
+    impl::consume<IGattServiceProviderTriggerStatics>
+{
+    IGattServiceProviderTriggerStatics(std::nullptr_t = nullptr) noexcept {}
 };
 
 struct ILocationTrigger :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<ILocationTrigger>,
     impl::require<ILocationTrigger, Windows::ApplicationModel::Background::IBackgroundTrigger>
 {
     ILocationTrigger(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<ILocationTrigger>(m_ptr); }
 };
 
 struct ILocationTriggerFactory :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<ILocationTriggerFactory>
 {
     ILocationTriggerFactory(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<ILocationTriggerFactory>(m_ptr); }
 };
 
 struct IMaintenanceTrigger :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IMaintenanceTrigger>,
     impl::require<IMaintenanceTrigger, Windows::ApplicationModel::Background::IBackgroundTrigger>
 {
     IMaintenanceTrigger(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IMaintenanceTrigger>(m_ptr); }
 };
 
 struct IMaintenanceTriggerFactory :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IMaintenanceTriggerFactory>
 {
     IMaintenanceTriggerFactory(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IMaintenanceTriggerFactory>(m_ptr); }
 };
 
 struct IMediaProcessingTrigger :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IMediaProcessingTrigger>,
     impl::require<IMediaProcessingTrigger, Windows::ApplicationModel::Background::IBackgroundTrigger>
 {
     IMediaProcessingTrigger(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IMediaProcessingTrigger>(m_ptr); }
 };
 
 struct INetworkOperatorHotspotAuthenticationTrigger :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<INetworkOperatorHotspotAuthenticationTrigger>,
     impl::require<INetworkOperatorHotspotAuthenticationTrigger, Windows::ApplicationModel::Background::IBackgroundTrigger>
 {
     INetworkOperatorHotspotAuthenticationTrigger(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<INetworkOperatorHotspotAuthenticationTrigger>(m_ptr); }
 };
 
 struct INetworkOperatorNotificationTrigger :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<INetworkOperatorNotificationTrigger>,
     impl::require<INetworkOperatorNotificationTrigger, Windows::ApplicationModel::Background::IBackgroundTrigger>
 {
     INetworkOperatorNotificationTrigger(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<INetworkOperatorNotificationTrigger>(m_ptr); }
 };
 
 struct INetworkOperatorNotificationTriggerFactory :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<INetworkOperatorNotificationTriggerFactory>
 {
     INetworkOperatorNotificationTriggerFactory(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<INetworkOperatorNotificationTriggerFactory>(m_ptr); }
 };
 
 struct IPhoneTrigger :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IPhoneTrigger>,
     impl::require<IPhoneTrigger, Windows::ApplicationModel::Background::IBackgroundTrigger>
 {
     IPhoneTrigger(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IPhoneTrigger>(m_ptr); }
 };
 
 struct IPhoneTriggerFactory :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IPhoneTriggerFactory>
 {
     IPhoneTriggerFactory(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IPhoneTriggerFactory>(m_ptr); }
 };
 
 struct IPushNotificationTriggerFactory :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IPushNotificationTriggerFactory>
 {
     IPushNotificationTriggerFactory(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IPushNotificationTriggerFactory>(m_ptr); }
 };
 
 struct IRcsEndUserMessageAvailableTrigger :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IRcsEndUserMessageAvailableTrigger>,
     impl::require<IRcsEndUserMessageAvailableTrigger, Windows::ApplicationModel::Background::IBackgroundTrigger>
 {
     IRcsEndUserMessageAvailableTrigger(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IRcsEndUserMessageAvailableTrigger>(m_ptr); }
 };
 
 struct IRfcommConnectionTrigger :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IRfcommConnectionTrigger>,
     impl::require<IRfcommConnectionTrigger, Windows::ApplicationModel::Background::IBackgroundTrigger>
 {
     IRfcommConnectionTrigger(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IRfcommConnectionTrigger>(m_ptr); }
 };
 
 struct ISecondaryAuthenticationFactorAuthenticationTrigger :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<ISecondaryAuthenticationFactorAuthenticationTrigger>,
     impl::require<ISecondaryAuthenticationFactorAuthenticationTrigger, Windows::ApplicationModel::Background::IBackgroundTrigger>
 {
     ISecondaryAuthenticationFactorAuthenticationTrigger(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<ISecondaryAuthenticationFactorAuthenticationTrigger>(m_ptr); }
 };
 
 struct ISensorDataThresholdTrigger :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<ISensorDataThresholdTrigger>,
     impl::require<ISensorDataThresholdTrigger, Windows::ApplicationModel::Background::IBackgroundTrigger>
 {
     ISensorDataThresholdTrigger(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<ISensorDataThresholdTrigger>(m_ptr); }
 };
 
 struct ISensorDataThresholdTriggerFactory :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<ISensorDataThresholdTriggerFactory>
 {
     ISensorDataThresholdTriggerFactory(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<ISensorDataThresholdTriggerFactory>(m_ptr); }
 };
 
 struct ISmartCardTrigger :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<ISmartCardTrigger>,
     impl::require<ISmartCardTrigger, Windows::ApplicationModel::Background::IBackgroundTrigger>
 {
     ISmartCardTrigger(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<ISmartCardTrigger>(m_ptr); }
 };
 
 struct ISmartCardTriggerFactory :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<ISmartCardTriggerFactory>
 {
     ISmartCardTriggerFactory(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<ISmartCardTriggerFactory>(m_ptr); }
 };
 
 struct ISmsMessageReceivedTriggerFactory :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<ISmsMessageReceivedTriggerFactory>
 {
     ISmsMessageReceivedTriggerFactory(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<ISmsMessageReceivedTriggerFactory>(m_ptr); }
 };
 
 struct ISocketActivityTrigger :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<ISocketActivityTrigger>
 {
     ISocketActivityTrigger(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<ISocketActivityTrigger>(m_ptr); }
 };
 
 struct IStorageLibraryContentChangedTrigger :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IStorageLibraryContentChangedTrigger>,
     impl::require<IStorageLibraryContentChangedTrigger, Windows::ApplicationModel::Background::IBackgroundTrigger>
 {
     IStorageLibraryContentChangedTrigger(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IStorageLibraryContentChangedTrigger>(m_ptr); }
 };
 
 struct IStorageLibraryContentChangedTriggerStatics :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IStorageLibraryContentChangedTriggerStatics>
 {
     IStorageLibraryContentChangedTriggerStatics(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IStorageLibraryContentChangedTriggerStatics>(m_ptr); }
 };
 
 struct ISystemCondition :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<ISystemCondition>,
     impl::require<ISystemCondition, Windows::ApplicationModel::Background::IBackgroundCondition>
 {
     ISystemCondition(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<ISystemCondition>(m_ptr); }
 };
 
 struct ISystemConditionFactory :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<ISystemConditionFactory>
 {
     ISystemConditionFactory(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<ISystemConditionFactory>(m_ptr); }
 };
 
 struct ISystemTrigger :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<ISystemTrigger>,
     impl::require<ISystemTrigger, Windows::ApplicationModel::Background::IBackgroundTrigger>
 {
     ISystemTrigger(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<ISystemTrigger>(m_ptr); }
 };
 
 struct ISystemTriggerFactory :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<ISystemTriggerFactory>
 {
     ISystemTriggerFactory(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<ISystemTriggerFactory>(m_ptr); }
 };
 
 struct ITimeTrigger :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<ITimeTrigger>,
     impl::require<ITimeTrigger, Windows::ApplicationModel::Background::IBackgroundTrigger>
 {
     ITimeTrigger(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<ITimeTrigger>(m_ptr); }
 };
 
 struct ITimeTriggerFactory :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<ITimeTriggerFactory>
 {
     ITimeTriggerFactory(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<ITimeTriggerFactory>(m_ptr); }
 };
 
 struct IToastNotificationActionTriggerFactory :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IToastNotificationActionTriggerFactory>
 {
     IToastNotificationActionTriggerFactory(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IToastNotificationActionTriggerFactory>(m_ptr); }
 };
 
 struct IToastNotificationHistoryChangedTriggerFactory :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IToastNotificationHistoryChangedTriggerFactory>
 {
     IToastNotificationHistoryChangedTriggerFactory(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IToastNotificationHistoryChangedTriggerFactory>(m_ptr); }
 };
 
 struct IUserNotificationChangedTriggerFactory :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IUserNotificationChangedTriggerFactory>
 {
     IUserNotificationChangedTriggerFactory(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IUserNotificationChangedTriggerFactory>(m_ptr); }
 };
 
 }

@@ -36,5 +36,5 @@ cx::SpiDevice^ SpiExtensions::Connect(int busNumber, int chipSelectLine, cx::Spi
 	// C++/WinRT End -------------------------------------------------------------
 
 	// TODO: Remove result conversion when C++/WinRT supports components
-	return reinterpret_cast<cx::SpiDevice^>(winrt::get(device));
+	return reinterpret_cast<cx::SpiDevice^>(winrt::get_abi(device));
 }

@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -17,20 +17,27 @@ struct IBarcodeScannerErrorOccurredEventArgs;
 struct IBarcodeScannerImagePreviewReceivedEventArgs;
 struct IBarcodeScannerReport;
 struct IBarcodeScannerStatics;
+struct IBarcodeScannerStatics2;
 struct IBarcodeScannerStatusUpdatedEventArgs;
 struct IBarcodeSymbologiesStatics;
+struct IBarcodeSymbologiesStatics2;
+struct IBarcodeSymbologyAttributes;
 struct ICashDrawer;
 struct ICashDrawerCapabilities;
 struct ICashDrawerCloseAlarm;
 struct ICashDrawerEventSource;
 struct ICashDrawerEventSourceEventArgs;
 struct ICashDrawerStatics;
+struct ICashDrawerStatics2;
 struct ICashDrawerStatus;
 struct ICashDrawerStatusUpdatedEventArgs;
 struct IClaimedBarcodeScanner;
 struct IClaimedBarcodeScanner1;
+struct IClaimedBarcodeScanner2;
 struct IClaimedCashDrawer;
 struct IClaimedJournalPrinter;
+struct IClaimedLineDisplay;
+struct IClaimedLineDisplayStatics;
 struct IClaimedMagneticStripeReader;
 struct IClaimedPosPrinter;
 struct IClaimedReceiptPrinter;
@@ -39,6 +46,10 @@ struct ICommonClaimedPosPrinterStation;
 struct ICommonPosPrintStationCapabilities;
 struct ICommonReceiptSlipCapabilities;
 struct IJournalPrinterCapabilities;
+struct ILineDisplay;
+struct ILineDisplayCapabilities;
+struct ILineDisplayStatics;
+struct ILineDisplayWindow;
 struct IMagneticStripeReader;
 struct IMagneticStripeReaderAamvaCardDataReceivedEventArgs;
 struct IMagneticStripeReaderBankCardDataReceivedEventArgs;
@@ -48,6 +59,7 @@ struct IMagneticStripeReaderEncryptionAlgorithmsStatics;
 struct IMagneticStripeReaderErrorOccurredEventArgs;
 struct IMagneticStripeReaderReport;
 struct IMagneticStripeReaderStatics;
+struct IMagneticStripeReaderStatics2;
 struct IMagneticStripeReaderStatusUpdatedEventArgs;
 struct IMagneticStripeReaderTrackData;
 struct IMagneticStripeReaderVendorSpecificCardDataReceivedEventArgs;
@@ -57,6 +69,7 @@ struct IPosPrinterCharacterSetIdsStatics;
 struct IPosPrinterJob;
 struct IPosPrinterReleaseDeviceRequestedEventArgs;
 struct IPosPrinterStatics;
+struct IPosPrinterStatics2;
 struct IPosPrinterStatus;
 struct IPosPrinterStatusUpdatedEventArgs;
 struct IReceiptOrSlipJob;
@@ -71,6 +84,7 @@ struct BarcodeScannerErrorOccurredEventArgs;
 struct BarcodeScannerImagePreviewReceivedEventArgs;
 struct BarcodeScannerReport;
 struct BarcodeScannerStatusUpdatedEventArgs;
+struct BarcodeSymbologyAttributes;
 struct CashDrawer;
 struct CashDrawerCapabilities;
 struct CashDrawerCloseAlarm;
@@ -82,12 +96,16 @@ struct CashDrawerStatusUpdatedEventArgs;
 struct ClaimedBarcodeScanner;
 struct ClaimedCashDrawer;
 struct ClaimedJournalPrinter;
+struct ClaimedLineDisplay;
 struct ClaimedMagneticStripeReader;
 struct ClaimedPosPrinter;
 struct ClaimedReceiptPrinter;
 struct ClaimedSlipPrinter;
 struct JournalPrintJob;
 struct JournalPrinterCapabilities;
+struct LineDisplay;
+struct LineDisplayCapabilities;
+struct LineDisplayWindow;
 struct MagneticStripeReader;
 struct MagneticStripeReaderAamvaCardDataReceivedEventArgs;
 struct MagneticStripeReaderBankCardDataReceivedEventArgs;
@@ -121,20 +139,27 @@ struct IBarcodeScannerErrorOccurredEventArgs;
 struct IBarcodeScannerImagePreviewReceivedEventArgs;
 struct IBarcodeScannerReport;
 struct IBarcodeScannerStatics;
+struct IBarcodeScannerStatics2;
 struct IBarcodeScannerStatusUpdatedEventArgs;
 struct IBarcodeSymbologiesStatics;
+struct IBarcodeSymbologiesStatics2;
+struct IBarcodeSymbologyAttributes;
 struct ICashDrawer;
 struct ICashDrawerCapabilities;
 struct ICashDrawerCloseAlarm;
 struct ICashDrawerEventSource;
 struct ICashDrawerEventSourceEventArgs;
 struct ICashDrawerStatics;
+struct ICashDrawerStatics2;
 struct ICashDrawerStatus;
 struct ICashDrawerStatusUpdatedEventArgs;
 struct IClaimedBarcodeScanner;
 struct IClaimedBarcodeScanner1;
+struct IClaimedBarcodeScanner2;
 struct IClaimedCashDrawer;
 struct IClaimedJournalPrinter;
+struct IClaimedLineDisplay;
+struct IClaimedLineDisplayStatics;
 struct IClaimedMagneticStripeReader;
 struct IClaimedPosPrinter;
 struct IClaimedReceiptPrinter;
@@ -143,6 +168,10 @@ struct ICommonClaimedPosPrinterStation;
 struct ICommonPosPrintStationCapabilities;
 struct ICommonReceiptSlipCapabilities;
 struct IJournalPrinterCapabilities;
+struct ILineDisplay;
+struct ILineDisplayCapabilities;
+struct ILineDisplayStatics;
+struct ILineDisplayWindow;
 struct IMagneticStripeReader;
 struct IMagneticStripeReaderAamvaCardDataReceivedEventArgs;
 struct IMagneticStripeReaderBankCardDataReceivedEventArgs;
@@ -152,6 +181,7 @@ struct IMagneticStripeReaderEncryptionAlgorithmsStatics;
 struct IMagneticStripeReaderErrorOccurredEventArgs;
 struct IMagneticStripeReaderReport;
 struct IMagneticStripeReaderStatics;
+struct IMagneticStripeReaderStatics2;
 struct IMagneticStripeReaderStatusUpdatedEventArgs;
 struct IMagneticStripeReaderTrackData;
 struct IMagneticStripeReaderVendorSpecificCardDataReceivedEventArgs;
@@ -161,6 +191,7 @@ struct IPosPrinterCharacterSetIdsStatics;
 struct IPosPrinterJob;
 struct IPosPrinterReleaseDeviceRequestedEventArgs;
 struct IPosPrinterStatics;
+struct IPosPrinterStatics2;
 struct IPosPrinterStatus;
 struct IPosPrinterStatusUpdatedEventArgs;
 struct IReceiptOrSlipJob;
@@ -176,6 +207,7 @@ struct BarcodeScannerImagePreviewReceivedEventArgs;
 struct BarcodeScannerReport;
 struct BarcodeScannerStatusUpdatedEventArgs;
 struct BarcodeSymbologies;
+struct BarcodeSymbologyAttributes;
 struct CashDrawer;
 struct CashDrawerCapabilities;
 struct CashDrawerCloseAlarm;
@@ -187,12 +219,16 @@ struct CashDrawerStatusUpdatedEventArgs;
 struct ClaimedBarcodeScanner;
 struct ClaimedCashDrawer;
 struct ClaimedJournalPrinter;
+struct ClaimedLineDisplay;
 struct ClaimedMagneticStripeReader;
 struct ClaimedPosPrinter;
 struct ClaimedReceiptPrinter;
 struct ClaimedSlipPrinter;
 struct JournalPrintJob;
 struct JournalPrinterCapabilities;
+struct LineDisplay;
+struct LineDisplayCapabilities;
+struct LineDisplayWindow;
 struct MagneticStripeReader;
 struct MagneticStripeReaderAamvaCardDataReceivedEventArgs;
 struct MagneticStripeReaderBankCardDataReceivedEventArgs;
@@ -220,6 +256,80 @@ struct UnifiedPosErrorData;
 
 namespace Windows::Devices::PointOfService {
 
+template <typename T> struct impl_IBarcodeScanner;
+template <typename T> struct impl_IBarcodeScanner2;
+template <typename T> struct impl_IBarcodeScannerCapabilities;
+template <typename T> struct impl_IBarcodeScannerCapabilities1;
+template <typename T> struct impl_IBarcodeScannerDataReceivedEventArgs;
+template <typename T> struct impl_IBarcodeScannerErrorOccurredEventArgs;
+template <typename T> struct impl_IBarcodeScannerImagePreviewReceivedEventArgs;
+template <typename T> struct impl_IBarcodeScannerReport;
+template <typename T> struct impl_IBarcodeScannerStatics;
+template <typename T> struct impl_IBarcodeScannerStatics2;
+template <typename T> struct impl_IBarcodeScannerStatusUpdatedEventArgs;
+template <typename T> struct impl_IBarcodeSymbologiesStatics;
+template <typename T> struct impl_IBarcodeSymbologiesStatics2;
+template <typename T> struct impl_IBarcodeSymbologyAttributes;
+template <typename T> struct impl_ICashDrawer;
+template <typename T> struct impl_ICashDrawerCapabilities;
+template <typename T> struct impl_ICashDrawerCloseAlarm;
+template <typename T> struct impl_ICashDrawerEventSource;
+template <typename T> struct impl_ICashDrawerEventSourceEventArgs;
+template <typename T> struct impl_ICashDrawerStatics;
+template <typename T> struct impl_ICashDrawerStatics2;
+template <typename T> struct impl_ICashDrawerStatus;
+template <typename T> struct impl_ICashDrawerStatusUpdatedEventArgs;
+template <typename T> struct impl_IClaimedBarcodeScanner;
+template <typename T> struct impl_IClaimedBarcodeScanner1;
+template <typename T> struct impl_IClaimedBarcodeScanner2;
+template <typename T> struct impl_IClaimedCashDrawer;
+template <typename T> struct impl_IClaimedJournalPrinter;
+template <typename T> struct impl_IClaimedLineDisplay;
+template <typename T> struct impl_IClaimedLineDisplayStatics;
+template <typename T> struct impl_IClaimedMagneticStripeReader;
+template <typename T> struct impl_IClaimedPosPrinter;
+template <typename T> struct impl_IClaimedReceiptPrinter;
+template <typename T> struct impl_IClaimedSlipPrinter;
+template <typename T> struct impl_ICommonClaimedPosPrinterStation;
+template <typename T> struct impl_ICommonPosPrintStationCapabilities;
+template <typename T> struct impl_ICommonReceiptSlipCapabilities;
+template <typename T> struct impl_IJournalPrinterCapabilities;
+template <typename T> struct impl_ILineDisplay;
+template <typename T> struct impl_ILineDisplayCapabilities;
+template <typename T> struct impl_ILineDisplayStatics;
+template <typename T> struct impl_ILineDisplayWindow;
+template <typename T> struct impl_IMagneticStripeReader;
+template <typename T> struct impl_IMagneticStripeReaderAamvaCardDataReceivedEventArgs;
+template <typename T> struct impl_IMagneticStripeReaderBankCardDataReceivedEventArgs;
+template <typename T> struct impl_IMagneticStripeReaderCapabilities;
+template <typename T> struct impl_IMagneticStripeReaderCardTypesStatics;
+template <typename T> struct impl_IMagneticStripeReaderEncryptionAlgorithmsStatics;
+template <typename T> struct impl_IMagneticStripeReaderErrorOccurredEventArgs;
+template <typename T> struct impl_IMagneticStripeReaderReport;
+template <typename T> struct impl_IMagneticStripeReaderStatics;
+template <typename T> struct impl_IMagneticStripeReaderStatics2;
+template <typename T> struct impl_IMagneticStripeReaderStatusUpdatedEventArgs;
+template <typename T> struct impl_IMagneticStripeReaderTrackData;
+template <typename T> struct impl_IMagneticStripeReaderVendorSpecificCardDataReceivedEventArgs;
+template <typename T> struct impl_IPosPrinter;
+template <typename T> struct impl_IPosPrinterCapabilities;
+template <typename T> struct impl_IPosPrinterCharacterSetIdsStatics;
+template <typename T> struct impl_IPosPrinterJob;
+template <typename T> struct impl_IPosPrinterReleaseDeviceRequestedEventArgs;
+template <typename T> struct impl_IPosPrinterStatics;
+template <typename T> struct impl_IPosPrinterStatics2;
+template <typename T> struct impl_IPosPrinterStatus;
+template <typename T> struct impl_IPosPrinterStatusUpdatedEventArgs;
+template <typename T> struct impl_IReceiptOrSlipJob;
+template <typename T> struct impl_IReceiptPrintJob;
+template <typename T> struct impl_IReceiptPrinterCapabilities;
+template <typename T> struct impl_ISlipPrinterCapabilities;
+template <typename T> struct impl_IUnifiedPosErrorData;
+
+}
+
+namespace Windows::Devices::PointOfService {
+
 enum class BarcodeScannerStatus
 {
     Online = 0,
@@ -229,6 +339,13 @@ enum class BarcodeScannerStatus
     Extended = 4,
 };
 
+enum class BarcodeSymbologyDecodeLengthKind
+{
+    AnyLength = 0,
+    Discrete = 1,
+    Range = 2,
+};
+
 enum class CashDrawerStatusKind
 {
     Online = 0,
@@ -236,6 +353,29 @@ enum class CashDrawerStatusKind
     Offline = 2,
     OffOrOffline = 3,
     Extended = 4,
+};
+
+enum class LineDisplayScrollDirection
+{
+    Up = 0,
+    Down = 1,
+    Left = 2,
+    Right = 3,
+};
+
+enum class LineDisplayTextAttribute
+{
+    Normal = 0,
+    Blink = 1,
+    Reverse = 2,
+    ReverseBlink = 3,
+};
+
+enum class LineDisplayTextAttributeGranularity
+{
+    NotSupported = 0,
+    EntireDisplay = 1,
+    PerCharacter = 2,
 };
 
 enum class MagneticStripeReaderAuthenticationLevel
@@ -282,6 +422,16 @@ enum class MagneticStripeReaderTrackIds
     Track3 = 4,
     Track4 = 8,
 };
+
+enum class PosConnectionTypes : unsigned
+{
+    Local = 0x1,
+    IP = 0x2,
+    Bluetooth = 0x4,
+    All = 0xFFFFFFFF,
+};
+
+DEFINE_ENUM_FLAG_OPERATORS(PosConnectionTypes)
 
 enum class PosPrinterAlignment
 {

@@ -1,11 +1,11 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
 #include "Windows.Media.Capture.1.h"
-#include "Windows.Foundation.2.h"
-#include "Windows.Storage.Streams.2.h"
+#include "Windows.Foundation.1.h"
+#include "Windows.Storage.Streams.1.h"
 
 WINRT_EXPORT namespace winrt {
 
@@ -16,14 +16,14 @@ namespace ABI::Windows::Foundation {
 template <> struct __declspec(uuid("513ef3af-e784-5325-a91e-97c2b8111cf3")) __declspec(novtable) IReference<uint32_t> : impl_IReference<uint32_t> {};
 #endif
 
-#ifndef WINRT_GENERIC_604d0c4c_91de_5c2a_935f_362f13eaf800
-#define WINRT_GENERIC_604d0c4c_91de_5c2a_935f_362f13eaf800
-template <> struct __declspec(uuid("604d0c4c-91de-5c2a-935f-362f13eaf800")) __declspec(novtable) IReference<Windows::Foundation::TimeSpan> : impl_IReference<Windows::Foundation::TimeSpan> {};
+#ifndef WINRT_GENERIC_83dc154d_bb6f_598e_a887_41ba1801f019
+#define WINRT_GENERIC_83dc154d_bb6f_598e_a887_41ba1801f019
+template <> struct __declspec(uuid("83dc154d-bb6f-598e-a887-41ba1801f019")) __declspec(novtable) TypedEventHandler<Windows::Media::Capture::ScreenCapture, Windows::Media::Capture::SourceSuspensionChangedEventArgs> : impl_TypedEventHandler<Windows::Media::Capture::ScreenCapture, Windows::Media::Capture::SourceSuspensionChangedEventArgs> {};
 #endif
 
-#ifndef WINRT_GENERIC_548cefbd_bc8a_5fa0_8df2_957440fc8bf4
-#define WINRT_GENERIC_548cefbd_bc8a_5fa0_8df2_957440fc8bf4
-template <> struct __declspec(uuid("548cefbd-bc8a-5fa0-8df2-957440fc8bf4")) __declspec(novtable) IReference<int32_t> : impl_IReference<int32_t> {};
+#ifndef WINRT_GENERIC_ef60385f_be78_584b_aaef_7829ada2b0de
+#define WINRT_GENERIC_ef60385f_be78_584b_aaef_7829ada2b0de
+template <> struct __declspec(uuid("ef60385f-be78-584b-aaef-7829ada2b0de")) __declspec(novtable) IAsyncOperation<uint32_t> : impl_IAsyncOperation<uint32_t> {};
 #endif
 
 #ifndef WINRT_GENERIC_2f2d6c29_5473_5f3e_92e7_96572bb990e2
@@ -31,19 +31,149 @@ template <> struct __declspec(uuid("548cefbd-bc8a-5fa0-8df2-957440fc8bf4")) __de
 template <> struct __declspec(uuid("2f2d6c29-5473-5f3e-92e7-96572bb990e2")) __declspec(novtable) IReference<double> : impl_IReference<double> {};
 #endif
 
-#ifndef WINRT_GENERIC_5e52f8ce_aced_5a42_95b4_f674dd84885e
-#define WINRT_GENERIC_5e52f8ce_aced_5a42_95b4_f674dd84885e
-template <> struct __declspec(uuid("5e52f8ce-aced-5a42-95b4-f674dd84885e")) __declspec(novtable) IAsyncOperation<Windows::Storage::StorageFile> : impl_IAsyncOperation<Windows::Storage::StorageFile> {};
+#ifndef WINRT_GENERIC_548cefbd_bc8a_5fa0_8df2_957440fc8bf4
+#define WINRT_GENERIC_548cefbd_bc8a_5fa0_8df2_957440fc8bf4
+template <> struct __declspec(uuid("548cefbd-bc8a-5fa0-8df2-957440fc8bf4")) __declspec(novtable) IReference<int32_t> : impl_IReference<int32_t> {};
 #endif
 
-#ifndef WINRT_GENERIC_f5cb24b5_ff00_58df_b460_17bbf2cd64d3
-#define WINRT_GENERIC_f5cb24b5_ff00_58df_b460_17bbf2cd64d3
-template <> struct __declspec(uuid("f5cb24b5-ff00-58df-b460-17bbf2cd64d3")) __declspec(novtable) TypedEventHandler<Windows::Media::Capture::AppCapture, Windows::IInspectable> : impl_TypedEventHandler<Windows::Media::Capture::AppCapture, Windows::IInspectable> {};
+#ifndef WINRT_GENERIC_e2672c1a_a3d9_56f3_8a77_20d30873ce87
+#define WINRT_GENERIC_e2672c1a_a3d9_56f3_8a77_20d30873ce87
+template <> struct __declspec(uuid("e2672c1a-a3d9-56f3-8a77-20d30873ce87")) __declspec(novtable) TypedEventHandler<Windows::Media::Capture::AppBroadcastBackgroundServiceSignInInfo, Windows::Media::Capture::AppBroadcastSignInStateChangedEventArgs> : impl_TypedEventHandler<Windows::Media::Capture::AppBroadcastBackgroundServiceSignInInfo, Windows::Media::Capture::AppBroadcastSignInStateChangedEventArgs> {};
+#endif
+
+#ifndef WINRT_GENERIC_0c110cb8_b08a_5c07_b295_229049a46c22
+#define WINRT_GENERIC_0c110cb8_b08a_5c07_b295_229049a46c22
+template <> struct __declspec(uuid("0c110cb8-b08a-5c07-b295-229049a46c22")) __declspec(novtable) TypedEventHandler<Windows::Media::Capture::AppBroadcastBackgroundServiceStreamInfo, Windows::Media::Capture::AppBroadcastStreamStateChangedEventArgs> : impl_TypedEventHandler<Windows::Media::Capture::AppBroadcastBackgroundServiceStreamInfo, Windows::Media::Capture::AppBroadcastStreamStateChangedEventArgs> {};
+#endif
+
+#ifndef WINRT_GENERIC_73c8ec4b_f104_5536_b8b4_4d9aad61c9b4
+#define WINRT_GENERIC_73c8ec4b_f104_5536_b8b4_4d9aad61c9b4
+template <> struct __declspec(uuid("73c8ec4b-f104-5536-b8b4-4d9aad61c9b4")) __declspec(novtable) TypedEventHandler<Windows::Media::Capture::AppBroadcastBackgroundServiceStreamInfo, Windows::Foundation::IInspectable> : impl_TypedEventHandler<Windows::Media::Capture::AppBroadcastBackgroundServiceStreamInfo, Windows::Foundation::IInspectable> {};
+#endif
+
+#ifndef WINRT_GENERIC_633c91ca_4fde_5160_9209_3fd3a403a917
+#define WINRT_GENERIC_633c91ca_4fde_5160_9209_3fd3a403a917
+template <> struct __declspec(uuid("633c91ca-4fde-5160-9209-3fd3a403a917")) __declspec(novtable) TypedEventHandler<Windows::Media::Capture::AppBroadcastBackgroundService, Windows::Media::Capture::AppBroadcastHeartbeatRequestedEventArgs> : impl_TypedEventHandler<Windows::Media::Capture::AppBroadcastBackgroundService, Windows::Media::Capture::AppBroadcastHeartbeatRequestedEventArgs> {};
+#endif
+
+#ifndef WINRT_GENERIC_66d1378b_0e04_5801_8bdd_feb1081bbecb
+#define WINRT_GENERIC_66d1378b_0e04_5801_8bdd_feb1081bbecb
+template <> struct __declspec(uuid("66d1378b-0e04-5801-8bdd-feb1081bbecb")) __declspec(novtable) TypedEventHandler<Windows::Media::Capture::AppBroadcastStreamReader, Windows::Foundation::IInspectable> : impl_TypedEventHandler<Windows::Media::Capture::AppBroadcastStreamReader, Windows::Foundation::IInspectable> {};
+#endif
+
+
+}
+
+namespace ABI::Windows::Foundation::Collections {
+
+#ifndef WINRT_GENERIC_05afee04_1168_5677_a05e_9854b46b319b
+#define WINRT_GENERIC_05afee04_1168_5677_a05e_9854b46b319b
+template <> struct __declspec(uuid("05afee04-1168-5677-a05e-9854b46b319b")) __declspec(novtable) IVectorView<Windows::Media::Capture::AppBroadcastPlugIn> : impl_IVectorView<Windows::Media::Capture::AppBroadcastPlugIn> {};
+#endif
+
+
+}
+
+namespace ABI::Windows::Foundation {
+
+#ifndef WINRT_GENERIC_16a22a27_61c2_56c2_93e5_18d6681ceeb4
+#define WINRT_GENERIC_16a22a27_61c2_56c2_93e5_18d6681ceeb4
+template <> struct __declspec(uuid("16a22a27-61c2-56c2-93e5-18d6681ceeb4")) __declspec(novtable) TypedEventHandler<Windows::Media::Capture::AppBroadcastState, Windows::Media::Capture::AppBroadcastViewerCountChangedEventArgs> : impl_TypedEventHandler<Windows::Media::Capture::AppBroadcastState, Windows::Media::Capture::AppBroadcastViewerCountChangedEventArgs> {};
+#endif
+
+#ifndef WINRT_GENERIC_f64d996a_3859_5174_97b1_e33d56dfca3a
+#define WINRT_GENERIC_f64d996a_3859_5174_97b1_e33d56dfca3a
+template <> struct __declspec(uuid("f64d996a-3859-5174-97b1-e33d56dfca3a")) __declspec(novtable) TypedEventHandler<Windows::Media::Capture::AppBroadcastState, Windows::Media::Capture::AppBroadcastMicrophoneCaptureStateChangedEventArgs> : impl_TypedEventHandler<Windows::Media::Capture::AppBroadcastState, Windows::Media::Capture::AppBroadcastMicrophoneCaptureStateChangedEventArgs> {};
+#endif
+
+#ifndef WINRT_GENERIC_b59aa695_b324_5b43_815b_8ffda6013816
+#define WINRT_GENERIC_b59aa695_b324_5b43_815b_8ffda6013816
+template <> struct __declspec(uuid("b59aa695-b324-5b43-815b-8ffda6013816")) __declspec(novtable) TypedEventHandler<Windows::Media::Capture::AppBroadcastState, Windows::Media::Capture::AppBroadcastCameraCaptureStateChangedEventArgs> : impl_TypedEventHandler<Windows::Media::Capture::AppBroadcastState, Windows::Media::Capture::AppBroadcastCameraCaptureStateChangedEventArgs> {};
+#endif
+
+#ifndef WINRT_GENERIC_373d850e_045b_52a5_92da_c22f924b79fb
+#define WINRT_GENERIC_373d850e_045b_52a5_92da_c22f924b79fb
+template <> struct __declspec(uuid("373d850e-045b-52a5-92da-c22f924b79fb")) __declspec(novtable) TypedEventHandler<Windows::Media::Capture::AppBroadcastState, Windows::Media::Capture::AppBroadcastPlugInStateChangedEventArgs> : impl_TypedEventHandler<Windows::Media::Capture::AppBroadcastState, Windows::Media::Capture::AppBroadcastPlugInStateChangedEventArgs> {};
+#endif
+
+#ifndef WINRT_GENERIC_2545fbd2_3fb6_5004_a475_56c059f3d75a
+#define WINRT_GENERIC_2545fbd2_3fb6_5004_a475_56c059f3d75a
+template <> struct __declspec(uuid("2545fbd2-3fb6-5004-a475-56c059f3d75a")) __declspec(novtable) TypedEventHandler<Windows::Media::Capture::AppBroadcastState, Windows::Media::Capture::AppBroadcastStreamStateChangedEventArgs> : impl_TypedEventHandler<Windows::Media::Capture::AppBroadcastState, Windows::Media::Capture::AppBroadcastStreamStateChangedEventArgs> {};
+#endif
+
+#ifndef WINRT_GENERIC_a9b0513c_d638_5c5f_8051_791d7aa2d566
+#define WINRT_GENERIC_a9b0513c_d638_5c5f_8051_791d7aa2d566
+template <> struct __declspec(uuid("a9b0513c-d638-5c5f-8051-791d7aa2d566")) __declspec(novtable) TypedEventHandler<Windows::Media::Capture::AppBroadcastState, Windows::Foundation::IInspectable> : impl_TypedEventHandler<Windows::Media::Capture::AppBroadcastState, Windows::Foundation::IInspectable> {};
+#endif
+
+#ifndef WINRT_GENERIC_41d8b8e1_dce7_5ebc_940f_de7dd2a62ab5
+#define WINRT_GENERIC_41d8b8e1_dce7_5ebc_940f_de7dd2a62ab5
+template <> struct __declspec(uuid("41d8b8e1-dce7-5ebc-940f-de7dd2a62ab5")) __declspec(novtable) TypedEventHandler<Windows::Media::Capture::AppBroadcastPreview, Windows::Media::Capture::AppBroadcastPreviewStateChangedEventArgs> : impl_TypedEventHandler<Windows::Media::Capture::AppBroadcastPreview, Windows::Media::Capture::AppBroadcastPreviewStateChangedEventArgs> {};
+#endif
+
+#ifndef WINRT_GENERIC_7918f32c_187f_5f0f_b80e_6fcaaa5e14b9
+#define WINRT_GENERIC_7918f32c_187f_5f0f_b80e_6fcaaa5e14b9
+template <> struct __declspec(uuid("7918f32c-187f-5f0f-b80e-6fcaaa5e14b9")) __declspec(novtable) TypedEventHandler<Windows::Media::Capture::AppBroadcastPreviewStreamReader, Windows::Foundation::IInspectable> : impl_TypedEventHandler<Windows::Media::Capture::AppBroadcastPreviewStreamReader, Windows::Foundation::IInspectable> {};
+#endif
+
+#ifndef WINRT_GENERIC_0b28a1a3_372e_50e9_a613_37b97cfd7a68
+#define WINRT_GENERIC_0b28a1a3_372e_50e9_a613_37b97cfd7a68
+template <> struct __declspec(uuid("0b28a1a3-372e-50e9-a613-37b97cfd7a68")) __declspec(novtable) TypedEventHandler<Windows::Media::Capture::AppCaptureState, Windows::Media::Capture::AppCaptureMicrophoneCaptureStateChangedEventArgs> : impl_TypedEventHandler<Windows::Media::Capture::AppCaptureState, Windows::Media::Capture::AppCaptureMicrophoneCaptureStateChangedEventArgs> {};
+#endif
+
+#ifndef WINRT_GENERIC_b74ae481_777b_5bc9_83da_562d905a43f1
+#define WINRT_GENERIC_b74ae481_777b_5bc9_83da_562d905a43f1
+template <> struct __declspec(uuid("b74ae481-777b-5bc9-83da-562d905a43f1")) __declspec(novtable) TypedEventHandler<Windows::Media::Capture::AppCaptureState, Windows::Foundation::IInspectable> : impl_TypedEventHandler<Windows::Media::Capture::AppCaptureState, Windows::Foundation::IInspectable> {};
+#endif
+
+#ifndef WINRT_GENERIC_604d0c4c_91de_5c2a_935f_362f13eaf800
+#define WINRT_GENERIC_604d0c4c_91de_5c2a_935f_362f13eaf800
+template <> struct __declspec(uuid("604d0c4c-91de-5c2a-935f-362f13eaf800")) __declspec(novtable) IReference<Windows::Foundation::TimeSpan> : impl_IReference<Windows::Foundation::TimeSpan> {};
 #endif
 
 #ifndef WINRT_GENERIC_3c00fd60_2950_5939_a21a_2d12c5a01b8a
 #define WINRT_GENERIC_3c00fd60_2950_5939_a21a_2d12c5a01b8a
 template <> struct __declspec(uuid("3c00fd60-2950-5939-a21a-2d12c5a01b8a")) __declspec(novtable) IReference<bool> : impl_IReference<bool> {};
+#endif
+
+#ifndef WINRT_GENERIC_227cbf02_2dfb_5425_85b1_0d62ce5d1243
+#define WINRT_GENERIC_227cbf02_2dfb_5425_85b1_0d62ce5d1243
+template <> struct __declspec(uuid("227cbf02-2dfb-5425-85b1-0d62ce5d1243")) __declspec(novtable) TypedEventHandler<Windows::Media::Capture::AppCaptureRecordOperation, Windows::Media::Capture::AppCaptureRecordingStateChangedEventArgs> : impl_TypedEventHandler<Windows::Media::Capture::AppCaptureRecordOperation, Windows::Media::Capture::AppCaptureRecordingStateChangedEventArgs> {};
+#endif
+
+#ifndef WINRT_GENERIC_ab6419b5_9917_5275_9876_9e46b9abada7
+#define WINRT_GENERIC_ab6419b5_9917_5275_9876_9e46b9abada7
+template <> struct __declspec(uuid("ab6419b5-9917-5275-9876-9e46b9abada7")) __declspec(novtable) TypedEventHandler<Windows::Media::Capture::AppCaptureRecordOperation, Windows::Media::Capture::AppCaptureDurationGeneratedEventArgs> : impl_TypedEventHandler<Windows::Media::Capture::AppCaptureRecordOperation, Windows::Media::Capture::AppCaptureDurationGeneratedEventArgs> {};
+#endif
+
+#ifndef WINRT_GENERIC_f00f69e5_9ee6_5119_9c39_f279f9ffd908
+#define WINRT_GENERIC_f00f69e5_9ee6_5119_9c39_f279f9ffd908
+template <> struct __declspec(uuid("f00f69e5-9ee6-5119-9c39-f279f9ffd908")) __declspec(novtable) TypedEventHandler<Windows::Media::Capture::AppCaptureRecordOperation, Windows::Media::Capture::AppCaptureFileGeneratedEventArgs> : impl_TypedEventHandler<Windows::Media::Capture::AppCaptureRecordOperation, Windows::Media::Capture::AppCaptureFileGeneratedEventArgs> {};
+#endif
+
+#ifndef WINRT_GENERIC_2f85b809_7d8b_5be4_9a69_81386d874c7f
+#define WINRT_GENERIC_2f85b809_7d8b_5be4_9a69_81386d874c7f
+template <> struct __declspec(uuid("2f85b809-7d8b-5be4-9a69-81386d874c7f")) __declspec(novtable) TypedEventHandler<Windows::Media::Capture::GameBarServicesManager, Windows::Media::Capture::GameBarServicesManagerGameBarServicesCreatedEventArgs> : impl_TypedEventHandler<Windows::Media::Capture::GameBarServicesManager, Windows::Media::Capture::GameBarServicesManagerGameBarServicesCreatedEventArgs> {};
+#endif
+
+#ifndef WINRT_GENERIC_0dab4f7e_bfec_59e1_82cf_ebf64b1db4f3
+#define WINRT_GENERIC_0dab4f7e_bfec_59e1_82cf_ebf64b1db4f3
+template <> struct __declspec(uuid("0dab4f7e-bfec-59e1-82cf-ebf64b1db4f3")) __declspec(novtable) TypedEventHandler<Windows::Media::Capture::GameBarServices, Windows::Media::Capture::GameBarServicesCommandEventArgs> : impl_TypedEventHandler<Windows::Media::Capture::GameBarServices, Windows::Media::Capture::GameBarServicesCommandEventArgs> {};
+#endif
+
+#ifndef WINRT_GENERIC_5e52f8ce_aced_5a42_95b4_f674dd84885e
+#define WINRT_GENERIC_5e52f8ce_aced_5a42_95b4_f674dd84885e
+template <> struct __declspec(uuid("5e52f8ce-aced-5a42-95b4-f674dd84885e")) __declspec(novtable) IAsyncOperation<Windows::Storage::StorageFile> : impl_IAsyncOperation<Windows::Storage::StorageFile> {};
+#endif
+
+#ifndef WINRT_GENERIC_719cc2ba_3e76_5def_9f1a_38d85a145ea8
+#define WINRT_GENERIC_719cc2ba_3e76_5def_9f1a_38d85a145ea8
+template <> struct __declspec(uuid("719cc2ba-3e76-5def-9f1a-38d85a145ea8")) __declspec(novtable) IReference<float> : impl_IReference<float> {};
+#endif
+
+#ifndef WINRT_GENERIC_f5cb24b5_ff00_58df_b460_17bbf2cd64d3
+#define WINRT_GENERIC_f5cb24b5_ff00_58df_b460_17bbf2cd64d3
+template <> struct __declspec(uuid("f5cb24b5-ff00-58df-b460-17bbf2cd64d3")) __declspec(novtable) TypedEventHandler<Windows::Media::Capture::AppCapture, Windows::Foundation::IInspectable> : impl_TypedEventHandler<Windows::Media::Capture::AppCapture, Windows::Foundation::IInspectable> {};
 #endif
 
 
@@ -103,7 +233,7 @@ template <> struct __declspec(uuid("f5cb3303-1c1f-5d30-b402-efa192e80c49")) __de
 
 #ifndef WINRT_GENERIC_44c588f1_1bb7_5e12_8413_3cf0373c0bc8
 #define WINRT_GENERIC_44c588f1_1bb7_5e12_8413_3cf0373c0bc8
-template <> struct __declspec(uuid("44c588f1-1bb7-5e12-8413-3cf0373c0bc8")) __declspec(novtable) TypedEventHandler<Windows::Media::Capture::MediaCapture, Windows::IInspectable> : impl_TypedEventHandler<Windows::Media::Capture::MediaCapture, Windows::IInspectable> {};
+template <> struct __declspec(uuid("44c588f1-1bb7-5e12-8413-3cf0373c0bc8")) __declspec(novtable) TypedEventHandler<Windows::Media::Capture::MediaCapture, Windows::Foundation::IInspectable> : impl_TypedEventHandler<Windows::Media::Capture::MediaCapture, Windows::Foundation::IInspectable> {};
 #endif
 
 #ifndef WINRT_GENERIC_f12e515d_ac45_5153_96b2_ce53ab594a57
@@ -146,6 +276,31 @@ namespace ABI::Windows::Foundation {
 template <> struct __declspec(uuid("a10cb14d-7935-5c87-9026-8abe792a3be5")) __declspec(novtable) IAsyncOperation<Windows::Media::Capture::Frames::MediaFrameReader> : impl_IAsyncOperation<Windows::Media::Capture::Frames::MediaFrameReader> {};
 #endif
 
+#ifndef WINRT_GENERIC_5c91f8ba_b379_53ff_a288_24e7883bf592
+#define WINRT_GENERIC_5c91f8ba_b379_53ff_a288_24e7883bf592
+template <> struct __declspec(uuid("5c91f8ba-b379-53ff-a288-24e7883bf592")) __declspec(novtable) TypedEventHandler<Windows::Media::Capture::MediaCapture, Windows::Media::Capture::MediaCaptureDeviceExclusiveControlStatusChangedEventArgs> : impl_TypedEventHandler<Windows::Media::Capture::MediaCapture, Windows::Media::Capture::MediaCaptureDeviceExclusiveControlStatusChangedEventArgs> {};
+#endif
+
+#ifndef WINRT_GENERIC_53d56be8_f110_5226_9ce1_a8c26a572576
+#define WINRT_GENERIC_53d56be8_f110_5226_9ce1_a8c26a572576
+template <> struct __declspec(uuid("53d56be8-f110-5226-9ce1-a8c26a572576")) __declspec(novtable) IAsyncOperation<Windows::Media::Capture::Frames::MultiSourceMediaFrameReader> : impl_IAsyncOperation<Windows::Media::Capture::Frames::MultiSourceMediaFrameReader> {};
+#endif
+
+
+}
+
+namespace ABI::Windows::Foundation::Collections {
+
+#ifndef WINRT_GENERIC_0d447be3_8c91_581d_8071_17984b8b5994
+#define WINRT_GENERIC_0d447be3_8c91_581d_8071_17984b8b5994
+template <> struct __declspec(uuid("0d447be3-8c91-581d-8071-17984b8b5994")) __declspec(novtable) IIterable<Windows::Media::Capture::Frames::MediaFrameSource> : impl_IIterable<Windows::Media::Capture::Frames::MediaFrameSource> {};
+#endif
+
+
+}
+
+namespace ABI::Windows::Foundation {
+
 #ifndef WINRT_GENERIC_af5235b1_4778_55e1_b49f_608048ea9bd9
 #define WINRT_GENERIC_af5235b1_4778_55e1_b49f_608048ea9bd9
 template <> struct __declspec(uuid("af5235b1-4778-55e1-b49f-608048ea9bd9")) __declspec(novtable) IAsyncOperation<Windows::Media::Capture::CapturedPhoto> : impl_IAsyncOperation<Windows::Media::Capture::CapturedPhoto> {};
@@ -163,7 +318,7 @@ template <> struct __declspec(uuid("843e69ba-5702-5d97-ab81-ef078de3f9b1")) __de
 
 #ifndef WINRT_GENERIC_5cb4a98f_abf1_5518_9094_26db326a5f4e
 #define WINRT_GENERIC_5cb4a98f_abf1_5518_9094_26db326a5f4e
-template <> struct __declspec(uuid("5cb4a98f-abf1-5518-9094-26db326a5f4e")) __declspec(novtable) TypedEventHandler<Windows::Media::Capture::AdvancedPhotoCapture, Windows::IInspectable> : impl_TypedEventHandler<Windows::Media::Capture::AdvancedPhotoCapture, Windows::IInspectable> {};
+template <> struct __declspec(uuid("5cb4a98f-abf1-5518-9094-26db326a5f4e")) __declspec(novtable) TypedEventHandler<Windows::Media::Capture::AdvancedPhotoCapture, Windows::Foundation::IInspectable> : impl_TypedEventHandler<Windows::Media::Capture::AdvancedPhotoCapture, Windows::Foundation::IInspectable> {};
 #endif
 
 #ifndef WINRT_GENERIC_80423f11_054f_5eac_afd3_63b6ce15e77b
@@ -174,11 +329,6 @@ template <> struct __declspec(uuid("80423f11-054f-5eac-afd3-63b6ce15e77b")) __de
 #ifndef WINRT_GENERIC_b98aab3a_fe80_5b27_88c3_e77ff585a96b
 #define WINRT_GENERIC_b98aab3a_fe80_5b27_88c3_e77ff585a96b
 template <> struct __declspec(uuid("b98aab3a-fe80-5b27-88c3-e77ff585a96b")) __declspec(novtable) TypedEventHandler<Windows::Media::Capture::LowLagPhotoSequenceCapture, Windows::Media::Capture::PhotoCapturedEventArgs> : impl_TypedEventHandler<Windows::Media::Capture::LowLagPhotoSequenceCapture, Windows::Media::Capture::PhotoCapturedEventArgs> {};
-#endif
-
-#ifndef WINRT_GENERIC_719cc2ba_3e76_5def_9f1a_38d85a145ea8
-#define WINRT_GENERIC_719cc2ba_3e76_5def_9f1a_38d85a145ea8
-template <> struct __declspec(uuid("719cc2ba-3e76-5def-9f1a-38d85a145ea8")) __declspec(novtable) IReference<float> : impl_IReference<float> {};
 #endif
 
 #ifndef WINRT_GENERIC_e20596aa_0bbe_5203_be6b_6b71ff5b0843
@@ -196,10 +346,35 @@ template <> struct __declspec(uuid("58820185-5da0-5faa-86da-9bd9f03974fa")) __de
 template <> struct __declspec(uuid("79c7838a-39e2-5287-ac3b-b118db251002")) __declspec(novtable) IReference<Windows::Media::Capture::WhiteBalanceGain> : impl_IReference<Windows::Media::Capture::WhiteBalanceGain> {};
 #endif
 
-#ifndef WINRT_GENERIC_83dc154d_bb6f_598e_a887_41ba1801f019
-#define WINRT_GENERIC_83dc154d_bb6f_598e_a887_41ba1801f019
-template <> struct __declspec(uuid("83dc154d-bb6f-598e-a887-41ba1801f019")) __declspec(novtable) TypedEventHandler<Windows::Media::Capture::ScreenCapture, Windows::Media::Capture::SourceSuspensionChangedEventArgs> : impl_TypedEventHandler<Windows::Media::Capture::ScreenCapture, Windows::Media::Capture::SourceSuspensionChangedEventArgs> {};
+#ifndef WINRT_GENERIC_9343b6e7_e3d2_5e4a_ab2d_2bce4919a6a4
+#define WINRT_GENERIC_9343b6e7_e3d2_5e4a_ab2d_2bce4919a6a4
+template <> struct __declspec(uuid("9343b6e7-e3d2-5e4a-ab2d-2bce4919a6a4")) __declspec(novtable) AsyncOperationCompletedHandler<uint32_t> : impl_AsyncOperationCompletedHandler<uint32_t> {};
 #endif
+
+
+}
+
+namespace ABI::Windows::Foundation::Collections {
+
+#ifndef WINRT_GENERIC_d05da08f_b7aa_58c3_bfaf_4c1e372444d4
+#define WINRT_GENERIC_d05da08f_b7aa_58c3_bfaf_4c1e372444d4
+template <> struct __declspec(uuid("d05da08f-b7aa-58c3-bfaf-4c1e372444d4")) __declspec(novtable) IVector<Windows::Media::Capture::AppBroadcastPlugIn> : impl_IVector<Windows::Media::Capture::AppBroadcastPlugIn> {};
+#endif
+
+#ifndef WINRT_GENERIC_cf667b1a_3bb9_57ce_a38b_1e81471f8cf8
+#define WINRT_GENERIC_cf667b1a_3bb9_57ce_a38b_1e81471f8cf8
+template <> struct __declspec(uuid("cf667b1a-3bb9-57ce-a38b-1e81471f8cf8")) __declspec(novtable) IIterator<Windows::Media::Capture::AppBroadcastPlugIn> : impl_IIterator<Windows::Media::Capture::AppBroadcastPlugIn> {};
+#endif
+
+#ifndef WINRT_GENERIC_c531c5b0_0223_5c9e_a8fb_20f52ea58d75
+#define WINRT_GENERIC_c531c5b0_0223_5c9e_a8fb_20f52ea58d75
+template <> struct __declspec(uuid("c531c5b0-0223-5c9e-a8fb-20f52ea58d75")) __declspec(novtable) IIterable<Windows::Media::Capture::AppBroadcastPlugIn> : impl_IIterable<Windows::Media::Capture::AppBroadcastPlugIn> {};
+#endif
+
+
+}
+
+namespace ABI::Windows::Foundation {
 
 #ifndef WINRT_GENERIC_e521c894_2c26_5946_9e61_2b5e188d01ed
 #define WINRT_GENERIC_e521c894_2c26_5946_9e61_2b5e188d01ed
@@ -211,6 +386,11 @@ template <> struct __declspec(uuid("e521c894-2c26-5946-9e61-2b5e188d01ed")) __de
 
 namespace ABI::Windows::Foundation::Collections {
 
+#ifndef WINRT_GENERIC_3850bc73_158f_5698_b1ad_3fbc81d37950
+#define WINRT_GENERIC_3850bc73_158f_5698_b1ad_3fbc81d37950
+template <> struct __declspec(uuid("3850bc73-158f-5698-b1ad-3fbc81d37950")) __declspec(novtable) IVector<Windows::Media::Capture::MediaCaptureVideoProfileMediaDescription> : impl_IVector<Windows::Media::Capture::MediaCaptureVideoProfileMediaDescription> {};
+#endif
+
 #ifndef WINRT_GENERIC_b3e8378f_710c_5126_a6c9_8f489f63e15e
 #define WINRT_GENERIC_b3e8378f_710c_5126_a6c9_8f489f63e15e
 template <> struct __declspec(uuid("b3e8378f-710c-5126-a6c9-8f489f63e15e")) __declspec(novtable) IIterator<Windows::Media::Capture::MediaCaptureVideoProfileMediaDescription> : impl_IIterator<Windows::Media::Capture::MediaCaptureVideoProfileMediaDescription> {};
@@ -219,6 +399,11 @@ template <> struct __declspec(uuid("b3e8378f-710c-5126-a6c9-8f489f63e15e")) __de
 #ifndef WINRT_GENERIC_0895e56d_fe1f_5364_ab67_c597d8970b89
 #define WINRT_GENERIC_0895e56d_fe1f_5364_ab67_c597d8970b89
 template <> struct __declspec(uuid("0895e56d-fe1f-5364-ab67-c597d8970b89")) __declspec(novtable) IIterable<Windows::Media::Capture::MediaCaptureVideoProfileMediaDescription> : impl_IIterable<Windows::Media::Capture::MediaCaptureVideoProfileMediaDescription> {};
+#endif
+
+#ifndef WINRT_GENERIC_b7b738b1_91a5_5d19_9a6d_87050a4ffb5b
+#define WINRT_GENERIC_b7b738b1_91a5_5d19_9a6d_87050a4ffb5b
+template <> struct __declspec(uuid("b7b738b1-91a5-5d19-9a6d-87050a4ffb5b")) __declspec(novtable) IVector<Windows::Media::Capture::MediaCaptureVideoProfile> : impl_IVector<Windows::Media::Capture::MediaCaptureVideoProfile> {};
 #endif
 
 #ifndef WINRT_GENERIC_a9bc95f8_b5c0_5108_b9ed_a902339366e9
@@ -291,6 +476,11 @@ namespace ABI::Windows::Foundation::Collections {
 template <> struct __declspec(uuid("29f35a95-7eae-55a7-bc19-ed87baed4869")) __declspec(novtable) IKeyValuePair<hstring, Windows::Media::Capture::Frames::MediaFrameSource> : impl_IKeyValuePair<hstring, Windows::Media::Capture::Frames::MediaFrameSource> {};
 #endif
 
+#ifndef WINRT_GENERIC_f49d3251_0a96_5cae_90f4_632c03f1057b
+#define WINRT_GENERIC_f49d3251_0a96_5cae_90f4_632c03f1057b
+template <> struct __declspec(uuid("f49d3251-0a96-5cae-90f4-632c03f1057b")) __declspec(novtable) IMap<hstring, Windows::Media::Capture::Frames::MediaFrameSource> : impl_IMap<hstring, Windows::Media::Capture::Frames::MediaFrameSource> {};
+#endif
+
 
 }
 
@@ -300,6 +490,36 @@ namespace ABI::Windows::Foundation {
 #define WINRT_GENERIC_a6214dad_b917_5c89_a068_e32c9a7037d3
 template <> struct __declspec(uuid("a6214dad-b917-5c89-a068-e32c9a7037d3")) __declspec(novtable) AsyncOperationCompletedHandler<Windows::Media::Capture::Frames::MediaFrameReader> : impl_AsyncOperationCompletedHandler<Windows::Media::Capture::Frames::MediaFrameReader> {};
 #endif
+
+#ifndef WINRT_GENERIC_69993778_a48c_50cc_a6f0_5368f58a297a
+#define WINRT_GENERIC_69993778_a48c_50cc_a6f0_5368f58a297a
+template <> struct __declspec(uuid("69993778-a48c-50cc-a6f0-5368f58a297a")) __declspec(novtable) AsyncOperationCompletedHandler<Windows::Media::Capture::Frames::MultiSourceMediaFrameReader> : impl_AsyncOperationCompletedHandler<Windows::Media::Capture::Frames::MultiSourceMediaFrameReader> {};
+#endif
+
+
+}
+
+namespace ABI::Windows::Foundation::Collections {
+
+#ifndef WINRT_GENERIC_c2ebcc97_d1f8_5bf2_bffd_ac43d71528ab
+#define WINRT_GENERIC_c2ebcc97_d1f8_5bf2_bffd_ac43d71528ab
+template <> struct __declspec(uuid("c2ebcc97-d1f8-5bf2-bffd-ac43d71528ab")) __declspec(novtable) IVector<Windows::Media::Capture::Frames::MediaFrameSource> : impl_IVector<Windows::Media::Capture::Frames::MediaFrameSource> {};
+#endif
+
+#ifndef WINRT_GENERIC_4d031014_6df9_59ab_bc9c_b2a5fc8b7f1c
+#define WINRT_GENERIC_4d031014_6df9_59ab_bc9c_b2a5fc8b7f1c
+template <> struct __declspec(uuid("4d031014-6df9-59ab-bc9c-b2a5fc8b7f1c")) __declspec(novtable) IVectorView<Windows::Media::Capture::Frames::MediaFrameSource> : impl_IVectorView<Windows::Media::Capture::Frames::MediaFrameSource> {};
+#endif
+
+#ifndef WINRT_GENERIC_d05e53cd_bbec_5fb7_8e4e_de86115b5e88
+#define WINRT_GENERIC_d05e53cd_bbec_5fb7_8e4e_de86115b5e88
+template <> struct __declspec(uuid("d05e53cd-bbec-5fb7-8e4e-de86115b5e88")) __declspec(novtable) IIterator<Windows::Media::Capture::Frames::MediaFrameSource> : impl_IIterator<Windows::Media::Capture::Frames::MediaFrameSource> {};
+#endif
+
+
+}
+
+namespace ABI::Windows::Foundation {
 
 #ifndef WINRT_GENERIC_fdb0aa78_04e1_56b3_b6fc_f4de79cd41a0
 #define WINRT_GENERIC_fdb0aa78_04e1_56b3_b6fc_f4de79cd41a0
@@ -331,610 +551,18 @@ template <> struct __declspec(uuid("a038e80f-0b3d-5cd4-849d-13036e1f506e")) __de
 
 namespace Windows::Media::Capture {
 
-template <typename D>
-struct WINRT_EBO impl_IAdvancedCapturedPhoto
-{
-    Windows::Media::Capture::CapturedFrame Frame() const;
-    Windows::Media::Devices::AdvancedPhotoMode Mode() const;
-    Windows::IInspectable Context() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IAdvancedCapturedPhoto2
-{
-    Windows::Foundation::IReference<Windows::Foundation::Rect> FrameBoundsRelativeToReferencePhoto() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IAdvancedPhotoCapture
-{
-    Windows::Foundation::IAsyncOperation<Windows::Media::Capture::AdvancedCapturedPhoto> CaptureAsync() const;
-    Windows::Foundation::IAsyncOperation<Windows::Media::Capture::AdvancedCapturedPhoto> CaptureAsync(const Windows::IInspectable & context) const;
-    event_token OptionalReferencePhotoCaptured(const Windows::Foundation::TypedEventHandler<Windows::Media::Capture::AdvancedPhotoCapture, Windows::Media::Capture::OptionalReferencePhotoCapturedEventArgs> & handler) const;
-    using OptionalReferencePhotoCaptured_revoker = event_revoker<IAdvancedPhotoCapture>;
-    OptionalReferencePhotoCaptured_revoker OptionalReferencePhotoCaptured(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::Media::Capture::AdvancedPhotoCapture, Windows::Media::Capture::OptionalReferencePhotoCapturedEventArgs> & handler) const;
-    void OptionalReferencePhotoCaptured(event_token token) const;
-    event_token AllPhotosCaptured(const Windows::Foundation::TypedEventHandler<Windows::Media::Capture::AdvancedPhotoCapture, Windows::IInspectable> & handler) const;
-    using AllPhotosCaptured_revoker = event_revoker<IAdvancedPhotoCapture>;
-    AllPhotosCaptured_revoker AllPhotosCaptured(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::Media::Capture::AdvancedPhotoCapture, Windows::IInspectable> & handler) const;
-    void AllPhotosCaptured(event_token token) const;
-    Windows::Foundation::IAsyncAction FinishAsync() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IAppCapture
-{
-    bool IsCapturingAudio() const;
-    bool IsCapturingVideo() const;
-    event_token CapturingChanged(const Windows::Foundation::TypedEventHandler<Windows::Media::Capture::AppCapture, Windows::IInspectable> & handler) const;
-    using CapturingChanged_revoker = event_revoker<IAppCapture>;
-    CapturingChanged_revoker CapturingChanged(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::Media::Capture::AppCapture, Windows::IInspectable> & handler) const;
-    void CapturingChanged(event_token token) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IAppCaptureAlternateShortcutKeys
-{
-    void ToggleGameBarKey(Windows::System::VirtualKey value) const;
-    Windows::System::VirtualKey ToggleGameBarKey() const;
-    void ToggleGameBarKeyModifiers(Windows::System::VirtualKeyModifiers value) const;
-    Windows::System::VirtualKeyModifiers ToggleGameBarKeyModifiers() const;
-    void SaveHistoricalVideoKey(Windows::System::VirtualKey value) const;
-    Windows::System::VirtualKey SaveHistoricalVideoKey() const;
-    void SaveHistoricalVideoKeyModifiers(Windows::System::VirtualKeyModifiers value) const;
-    Windows::System::VirtualKeyModifiers SaveHistoricalVideoKeyModifiers() const;
-    void ToggleRecordingKey(Windows::System::VirtualKey value) const;
-    Windows::System::VirtualKey ToggleRecordingKey() const;
-    void ToggleRecordingKeyModifiers(Windows::System::VirtualKeyModifiers value) const;
-    Windows::System::VirtualKeyModifiers ToggleRecordingKeyModifiers() const;
-    void TakeScreenshotKey(Windows::System::VirtualKey value) const;
-    Windows::System::VirtualKey TakeScreenshotKey() const;
-    void TakeScreenshotKeyModifiers(Windows::System::VirtualKeyModifiers value) const;
-    Windows::System::VirtualKeyModifiers TakeScreenshotKeyModifiers() const;
-    void ToggleRecordingIndicatorKey(Windows::System::VirtualKey value) const;
-    Windows::System::VirtualKey ToggleRecordingIndicatorKey() const;
-    void ToggleRecordingIndicatorKeyModifiers(Windows::System::VirtualKeyModifiers value) const;
-    Windows::System::VirtualKeyModifiers ToggleRecordingIndicatorKeyModifiers() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IAppCaptureAlternateShortcutKeys2
-{
-    void ToggleMicrophoneCaptureKey(Windows::System::VirtualKey value) const;
-    Windows::System::VirtualKey ToggleMicrophoneCaptureKey() const;
-    void ToggleMicrophoneCaptureKeyModifiers(Windows::System::VirtualKeyModifiers value) const;
-    Windows::System::VirtualKeyModifiers ToggleMicrophoneCaptureKeyModifiers() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IAppCaptureAlternateShortcutKeys3
-{
-    void ToggleCameraCaptureKey(Windows::System::VirtualKey value) const;
-    Windows::System::VirtualKey ToggleCameraCaptureKey() const;
-    void ToggleCameraCaptureKeyModifiers(Windows::System::VirtualKeyModifiers value) const;
-    Windows::System::VirtualKeyModifiers ToggleCameraCaptureKeyModifiers() const;
-    void ToggleBroadcastKey(Windows::System::VirtualKey value) const;
-    Windows::System::VirtualKey ToggleBroadcastKey() const;
-    void ToggleBroadcastKeyModifiers(Windows::System::VirtualKeyModifiers value) const;
-    Windows::System::VirtualKeyModifiers ToggleBroadcastKeyModifiers() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IAppCaptureManagerStatics
-{
-    Windows::Media::Capture::AppCaptureSettings GetCurrentSettings() const;
-    void ApplySettings(const Windows::Media::Capture::AppCaptureSettings & appCaptureSettings) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IAppCaptureSettings
-{
-    void AppCaptureDestinationFolder(const Windows::Storage::StorageFolder & value) const;
-    Windows::Storage::StorageFolder AppCaptureDestinationFolder() const;
-    void AudioEncodingBitrate(uint32_t value) const;
-    uint32_t AudioEncodingBitrate() const;
-    void IsAudioCaptureEnabled(bool value) const;
-    bool IsAudioCaptureEnabled() const;
-    void CustomVideoEncodingBitrate(uint32_t value) const;
-    uint32_t CustomVideoEncodingBitrate() const;
-    void CustomVideoEncodingHeight(uint32_t value) const;
-    uint32_t CustomVideoEncodingHeight() const;
-    void CustomVideoEncodingWidth(uint32_t value) const;
-    uint32_t CustomVideoEncodingWidth() const;
-    void HistoricalBufferLength(uint32_t value) const;
-    uint32_t HistoricalBufferLength() const;
-    void HistoricalBufferLengthUnit(Windows::Media::Capture::AppCaptureHistoricalBufferLengthUnit value) const;
-    Windows::Media::Capture::AppCaptureHistoricalBufferLengthUnit HistoricalBufferLengthUnit() const;
-    void IsHistoricalCaptureEnabled(bool value) const;
-    bool IsHistoricalCaptureEnabled() const;
-    void IsHistoricalCaptureOnBatteryAllowed(bool value) const;
-    bool IsHistoricalCaptureOnBatteryAllowed() const;
-    void IsHistoricalCaptureOnWirelessDisplayAllowed(bool value) const;
-    bool IsHistoricalCaptureOnWirelessDisplayAllowed() const;
-    void MaximumRecordLength(const Windows::Foundation::TimeSpan & value) const;
-    Windows::Foundation::TimeSpan MaximumRecordLength() const;
-    void ScreenshotDestinationFolder(const Windows::Storage::StorageFolder & value) const;
-    Windows::Storage::StorageFolder ScreenshotDestinationFolder() const;
-    void VideoEncodingBitrateMode(Windows::Media::Capture::AppCaptureVideoEncodingBitrateMode value) const;
-    Windows::Media::Capture::AppCaptureVideoEncodingBitrateMode VideoEncodingBitrateMode() const;
-    void VideoEncodingResolutionMode(Windows::Media::Capture::AppCaptureVideoEncodingResolutionMode value) const;
-    Windows::Media::Capture::AppCaptureVideoEncodingResolutionMode VideoEncodingResolutionMode() const;
-    void IsAppCaptureEnabled(bool value) const;
-    bool IsAppCaptureEnabled() const;
-    bool IsCpuConstrained() const;
-    bool IsDisabledByPolicy() const;
-    bool IsMemoryConstrained() const;
-    bool HasHardwareEncoder() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IAppCaptureSettings2
-{
-    bool IsGpuConstrained() const;
-    Windows::Media::Capture::AppCaptureAlternateShortcutKeys AlternateShortcutKeys() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IAppCaptureSettings3
-{
-    void IsMicrophoneCaptureEnabled(bool value) const;
-    bool IsMicrophoneCaptureEnabled() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IAppCaptureSettings4
-{
-    void IsMicrophoneCaptureEnabledByDefault(bool value) const;
-    bool IsMicrophoneCaptureEnabledByDefault() const;
-    void SystemAudioGain(double value) const;
-    double SystemAudioGain() const;
-    void MicrophoneGain(double value) const;
-    double MicrophoneGain() const;
-    void VideoEncodingFrameRateMode(Windows::Media::Capture::AppCaptureVideoEncodingFrameRateMode value) const;
-    Windows::Media::Capture::AppCaptureVideoEncodingFrameRateMode VideoEncodingFrameRateMode() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IAppCaptureStatics
-{
-    Windows::Media::Capture::AppCapture GetForCurrentView() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_ICameraCaptureUI
-{
-    Windows::Media::Capture::CameraCaptureUIPhotoCaptureSettings PhotoSettings() const;
-    Windows::Media::Capture::CameraCaptureUIVideoCaptureSettings VideoSettings() const;
-    Windows::Foundation::IAsyncOperation<Windows::Storage::StorageFile> CaptureFileAsync(Windows::Media::Capture::CameraCaptureUIMode mode) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_ICameraCaptureUIPhotoCaptureSettings
-{
-    Windows::Media::Capture::CameraCaptureUIPhotoFormat Format() const;
-    void Format(Windows::Media::Capture::CameraCaptureUIPhotoFormat value) const;
-    Windows::Media::Capture::CameraCaptureUIMaxPhotoResolution MaxResolution() const;
-    void MaxResolution(Windows::Media::Capture::CameraCaptureUIMaxPhotoResolution value) const;
-    Windows::Foundation::Size CroppedSizeInPixels() const;
-    void CroppedSizeInPixels(const Windows::Foundation::Size & value) const;
-    Windows::Foundation::Size CroppedAspectRatio() const;
-    void CroppedAspectRatio(const Windows::Foundation::Size & value) const;
-    bool AllowCropping() const;
-    void AllowCropping(bool value) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_ICameraCaptureUIVideoCaptureSettings
-{
-    Windows::Media::Capture::CameraCaptureUIVideoFormat Format() const;
-    void Format(Windows::Media::Capture::CameraCaptureUIVideoFormat value) const;
-    Windows::Media::Capture::CameraCaptureUIMaxVideoResolution MaxResolution() const;
-    void MaxResolution(Windows::Media::Capture::CameraCaptureUIMaxVideoResolution value) const;
-    float MaxDurationInSeconds() const;
-    void MaxDurationInSeconds(float value) const;
-    bool AllowTrimming() const;
-    void AllowTrimming(bool value) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_ICameraOptionsUIStatics
-{
-    void Show(const Windows::Media::Capture::MediaCapture & mediaCapture) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_ICapturedFrame
-{
-    uint32_t Width() const;
-    uint32_t Height() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_ICapturedFrameControlValues
-{
-    Windows::Foundation::IReference<Windows::Foundation::TimeSpan> Exposure() const;
-    Windows::Foundation::IReference<float> ExposureCompensation() const;
-    Windows::Foundation::IReference<uint32_t> IsoSpeed() const;
-    Windows::Foundation::IReference<uint32_t> Focus() const;
-    Windows::Foundation::IReference<winrt::Windows::Media::Devices::CaptureSceneMode> SceneMode() const;
-    Windows::Foundation::IReference<bool> Flashed() const;
-    Windows::Foundation::IReference<float> FlashPowerPercent() const;
-    Windows::Foundation::IReference<uint32_t> WhiteBalance() const;
-    Windows::Foundation::IReference<float> ZoomFactor() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_ICapturedFrameControlValues2
-{
-    Windows::Foundation::IReference<winrt::Windows::Media::Devices::MediaCaptureFocusState> FocusState() const;
-    Windows::Foundation::IReference<double> IsoDigitalGain() const;
-    Windows::Foundation::IReference<double> IsoAnalogGain() const;
-    Windows::Media::MediaProperties::MediaRatio SensorFrameRate() const;
-    Windows::Foundation::IReference<Windows::Media::Capture::WhiteBalanceGain> WhiteBalanceGain() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_ICapturedFrameWithSoftwareBitmap
-{
-    Windows::Graphics::Imaging::SoftwareBitmap SoftwareBitmap() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_ICapturedPhoto
-{
-    Windows::Media::Capture::CapturedFrame Frame() const;
-    Windows::Media::Capture::CapturedFrame Thumbnail() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_ILowLagMediaRecording
-{
-    Windows::Foundation::IAsyncAction StartAsync() const;
-    Windows::Foundation::IAsyncAction StopAsync() const;
-    Windows::Foundation::IAsyncAction FinishAsync() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_ILowLagMediaRecording2
-{
-    Windows::Foundation::IAsyncAction PauseAsync(Windows::Media::Devices::MediaCapturePauseBehavior behavior) const;
-    Windows::Foundation::IAsyncAction ResumeAsync() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_ILowLagMediaRecording3
-{
-    Windows::Foundation::IAsyncOperation<Windows::Media::Capture::MediaCapturePauseResult> PauseWithResultAsync(Windows::Media::Devices::MediaCapturePauseBehavior behavior) const;
-    Windows::Foundation::IAsyncOperation<Windows::Media::Capture::MediaCaptureStopResult> StopWithResultAsync() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_ILowLagPhotoCapture
-{
-    Windows::Foundation::IAsyncOperation<Windows::Media::Capture::CapturedPhoto> CaptureAsync() const;
-    Windows::Foundation::IAsyncAction FinishAsync() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_ILowLagPhotoSequenceCapture
-{
-    Windows::Foundation::IAsyncAction StartAsync() const;
-    Windows::Foundation::IAsyncAction StopAsync() const;
-    Windows::Foundation::IAsyncAction FinishAsync() const;
-    event_token PhotoCaptured(const Windows::Foundation::TypedEventHandler<Windows::Media::Capture::LowLagPhotoSequenceCapture, Windows::Media::Capture::PhotoCapturedEventArgs> & handler) const;
-    using PhotoCaptured_revoker = event_revoker<ILowLagPhotoSequenceCapture>;
-    PhotoCaptured_revoker PhotoCaptured(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::Media::Capture::LowLagPhotoSequenceCapture, Windows::Media::Capture::PhotoCapturedEventArgs> & handler) const;
-    void PhotoCaptured(event_token token) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IMediaCapture
-{
-    Windows::Foundation::IAsyncAction InitializeAsync() const;
-    Windows::Foundation::IAsyncAction InitializeAsync(const Windows::Media::Capture::MediaCaptureInitializationSettings & mediaCaptureInitializationSettings) const;
-    Windows::Foundation::IAsyncAction StartRecordToStorageFileAsync(const Windows::Media::MediaProperties::MediaEncodingProfile & encodingProfile, const Windows::Storage::IStorageFile & file) const;
-    Windows::Foundation::IAsyncAction StartRecordToStreamAsync(const Windows::Media::MediaProperties::MediaEncodingProfile & encodingProfile, const Windows::Storage::Streams::IRandomAccessStream & stream) const;
-    Windows::Foundation::IAsyncAction StartRecordToCustomSinkAsync(const Windows::Media::MediaProperties::MediaEncodingProfile & encodingProfile, const Windows::Media::IMediaExtension & customMediaSink) const;
-    Windows::Foundation::IAsyncAction StartRecordToCustomSinkAsync(const Windows::Media::MediaProperties::MediaEncodingProfile & encodingProfile, hstring_ref customSinkActivationId, const Windows::Foundation::Collections::IPropertySet & customSinkSettings) const;
-    Windows::Foundation::IAsyncAction StopRecordAsync() const;
-    Windows::Foundation::IAsyncAction CapturePhotoToStorageFileAsync(const Windows::Media::MediaProperties::ImageEncodingProperties & type, const Windows::Storage::IStorageFile & file) const;
-    Windows::Foundation::IAsyncAction CapturePhotoToStreamAsync(const Windows::Media::MediaProperties::ImageEncodingProperties & type, const Windows::Storage::Streams::IRandomAccessStream & stream) const;
-    Windows::Foundation::IAsyncAction AddEffectAsync(Windows::Media::Capture::MediaStreamType mediaStreamType, hstring_ref effectActivationID, const Windows::Foundation::Collections::IPropertySet & effectSettings) const;
-    Windows::Foundation::IAsyncAction ClearEffectsAsync(Windows::Media::Capture::MediaStreamType mediaStreamType) const;
-    void SetEncoderProperty(Windows::Media::Capture::MediaStreamType mediaStreamType, GUID propertyId, const Windows::IInspectable & propertyValue) const;
-    Windows::IInspectable GetEncoderProperty(Windows::Media::Capture::MediaStreamType mediaStreamType, GUID propertyId) const;
-    event_token Failed(const Windows::Media::Capture::MediaCaptureFailedEventHandler & errorEventHandler) const;
-    using Failed_revoker = event_revoker<IMediaCapture>;
-    Failed_revoker Failed(auto_revoke_t, const Windows::Media::Capture::MediaCaptureFailedEventHandler & errorEventHandler) const;
-    void Failed(event_token eventCookie) const;
-    event_token RecordLimitationExceeded(const Windows::Media::Capture::RecordLimitationExceededEventHandler & recordLimitationExceededEventHandler) const;
-    using RecordLimitationExceeded_revoker = event_revoker<IMediaCapture>;
-    RecordLimitationExceeded_revoker RecordLimitationExceeded(auto_revoke_t, const Windows::Media::Capture::RecordLimitationExceededEventHandler & recordLimitationExceededEventHandler) const;
-    void RecordLimitationExceeded(event_token eventCookie) const;
-    Windows::Media::Capture::MediaCaptureSettings MediaCaptureSettings() const;
-    Windows::Media::Devices::AudioDeviceController AudioDeviceController() const;
-    Windows::Media::Devices::VideoDeviceController VideoDeviceController() const;
-    void SetPreviewMirroring(bool value) const;
-    bool GetPreviewMirroring() const;
-    void SetPreviewRotation(Windows::Media::Capture::VideoRotation value) const;
-    Windows::Media::Capture::VideoRotation GetPreviewRotation() const;
-    void SetRecordRotation(Windows::Media::Capture::VideoRotation value) const;
-    Windows::Media::Capture::VideoRotation GetRecordRotation() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IMediaCapture2
-{
-    Windows::Foundation::IAsyncOperation<Windows::Media::Capture::LowLagMediaRecording> PrepareLowLagRecordToStorageFileAsync(const Windows::Media::MediaProperties::MediaEncodingProfile & encodingProfile, const Windows::Storage::IStorageFile & file) const;
-    Windows::Foundation::IAsyncOperation<Windows::Media::Capture::LowLagMediaRecording> PrepareLowLagRecordToStreamAsync(const Windows::Media::MediaProperties::MediaEncodingProfile & encodingProfile, const Windows::Storage::Streams::IRandomAccessStream & stream) const;
-    Windows::Foundation::IAsyncOperation<Windows::Media::Capture::LowLagMediaRecording> PrepareLowLagRecordToCustomSinkAsync(const Windows::Media::MediaProperties::MediaEncodingProfile & encodingProfile, const Windows::Media::IMediaExtension & customMediaSink) const;
-    Windows::Foundation::IAsyncOperation<Windows::Media::Capture::LowLagMediaRecording> PrepareLowLagRecordToCustomSinkAsync(const Windows::Media::MediaProperties::MediaEncodingProfile & encodingProfile, hstring_ref customSinkActivationId, const Windows::Foundation::Collections::IPropertySet & customSinkSettings) const;
-    Windows::Foundation::IAsyncOperation<Windows::Media::Capture::LowLagPhotoCapture> PrepareLowLagPhotoCaptureAsync(const Windows::Media::MediaProperties::ImageEncodingProperties & type) const;
-    Windows::Foundation::IAsyncOperation<Windows::Media::Capture::LowLagPhotoSequenceCapture> PrepareLowLagPhotoSequenceCaptureAsync(const Windows::Media::MediaProperties::ImageEncodingProperties & type) const;
-    Windows::Foundation::IAsyncAction SetEncodingPropertiesAsync(Windows::Media::Capture::MediaStreamType mediaStreamType, const Windows::Media::MediaProperties::IMediaEncodingProperties & mediaEncodingProperties, const Windows::Media::MediaProperties::MediaPropertySet & encoderProperties) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IMediaCapture3
-{
-    Windows::Foundation::IAsyncOperation<Windows::Media::Capture::Core::VariablePhotoSequenceCapture> PrepareVariablePhotoSequenceCaptureAsync(const Windows::Media::MediaProperties::ImageEncodingProperties & type) const;
-    event_token FocusChanged(const Windows::Foundation::TypedEventHandler<Windows::Media::Capture::MediaCapture, Windows::Media::Capture::MediaCaptureFocusChangedEventArgs> & handler) const;
-    using FocusChanged_revoker = event_revoker<IMediaCapture3>;
-    FocusChanged_revoker FocusChanged(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::Media::Capture::MediaCapture, Windows::Media::Capture::MediaCaptureFocusChangedEventArgs> & handler) const;
-    void FocusChanged(event_token token) const;
-    event_token PhotoConfirmationCaptured(const Windows::Foundation::TypedEventHandler<Windows::Media::Capture::MediaCapture, Windows::Media::Capture::PhotoConfirmationCapturedEventArgs> & handler) const;
-    using PhotoConfirmationCaptured_revoker = event_revoker<IMediaCapture3>;
-    PhotoConfirmationCaptured_revoker PhotoConfirmationCaptured(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::Media::Capture::MediaCapture, Windows::Media::Capture::PhotoConfirmationCapturedEventArgs> & handler) const;
-    void PhotoConfirmationCaptured(event_token token) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IMediaCapture4
-{
-    Windows::Foundation::IAsyncOperation<Windows::Media::IMediaExtension> AddAudioEffectAsync(const Windows::Media::Effects::IAudioEffectDefinition & definition) const;
-    Windows::Foundation::IAsyncOperation<Windows::Media::IMediaExtension> AddVideoEffectAsync(const Windows::Media::Effects::IVideoEffectDefinition & definition, Windows::Media::Capture::MediaStreamType mediaStreamType) const;
-    Windows::Foundation::IAsyncAction PauseRecordAsync(Windows::Media::Devices::MediaCapturePauseBehavior behavior) const;
-    Windows::Foundation::IAsyncAction ResumeRecordAsync() const;
-    event_token CameraStreamStateChanged(const Windows::Foundation::TypedEventHandler<Windows::Media::Capture::MediaCapture, Windows::IInspectable> & handler) const;
-    using CameraStreamStateChanged_revoker = event_revoker<IMediaCapture4>;
-    CameraStreamStateChanged_revoker CameraStreamStateChanged(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::Media::Capture::MediaCapture, Windows::IInspectable> & handler) const;
-    void CameraStreamStateChanged(event_token token) const;
-    Windows::Media::Devices::CameraStreamState CameraStreamState() const;
-    Windows::Foundation::IAsyncOperation<Windows::Media::VideoFrame> GetPreviewFrameAsync() const;
-    Windows::Foundation::IAsyncOperation<Windows::Media::VideoFrame> GetPreviewFrameAsync(const Windows::Media::VideoFrame & destination) const;
-    event_token ThermalStatusChanged(const Windows::Foundation::TypedEventHandler<Windows::Media::Capture::MediaCapture, Windows::IInspectable> & handler) const;
-    using ThermalStatusChanged_revoker = event_revoker<IMediaCapture4>;
-    ThermalStatusChanged_revoker ThermalStatusChanged(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::Media::Capture::MediaCapture, Windows::IInspectable> & handler) const;
-    void ThermalStatusChanged(event_token token) const;
-    Windows::Media::Capture::MediaCaptureThermalStatus ThermalStatus() const;
-    Windows::Foundation::IAsyncOperation<Windows::Media::Capture::AdvancedPhotoCapture> PrepareAdvancedPhotoCaptureAsync(const Windows::Media::MediaProperties::ImageEncodingProperties & encodingProperties) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IMediaCapture5
-{
-    Windows::Foundation::IAsyncAction RemoveEffectAsync(const Windows::Media::IMediaExtension & effect) const;
-    Windows::Foundation::IAsyncOperation<Windows::Media::Capture::MediaCapturePauseResult> PauseRecordWithResultAsync(Windows::Media::Devices::MediaCapturePauseBehavior behavior) const;
-    Windows::Foundation::IAsyncOperation<Windows::Media::Capture::MediaCaptureStopResult> StopRecordWithResultAsync() const;
-    Windows::Foundation::Collections::IMapView<hstring, Windows::Media::Capture::Frames::MediaFrameSource> FrameSources() const;
-    Windows::Foundation::IAsyncOperation<Windows::Media::Capture::Frames::MediaFrameReader> CreateFrameReaderAsync(const Windows::Media::Capture::Frames::MediaFrameSource & inputSource) const;
-    Windows::Foundation::IAsyncOperation<Windows::Media::Capture::Frames::MediaFrameReader> CreateFrameReaderAsync(const Windows::Media::Capture::Frames::MediaFrameSource & inputSource, hstring_ref outputSubtype) const;
-    Windows::Foundation::IAsyncOperation<Windows::Media::Capture::Frames::MediaFrameReader> CreateFrameReaderAsync(const Windows::Media::Capture::Frames::MediaFrameSource & inputSource, hstring_ref outputSubtype, const Windows::Graphics::Imaging::BitmapSize & outputSize) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IMediaCaptureFailedEventArgs
-{
-    hstring Message() const;
-    uint32_t Code() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IMediaCaptureFocusChangedEventArgs
-{
-    Windows::Media::Devices::MediaCaptureFocusState FocusState() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IMediaCaptureInitializationSettings
-{
-    void AudioDeviceId(hstring_ref value) const;
-    hstring AudioDeviceId() const;
-    void VideoDeviceId(hstring_ref value) const;
-    hstring VideoDeviceId() const;
-    void StreamingCaptureMode(Windows::Media::Capture::StreamingCaptureMode value) const;
-    Windows::Media::Capture::StreamingCaptureMode StreamingCaptureMode() const;
-    void PhotoCaptureSource(Windows::Media::Capture::PhotoCaptureSource value) const;
-    Windows::Media::Capture::PhotoCaptureSource PhotoCaptureSource() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IMediaCaptureInitializationSettings2
-{
-    void MediaCategory(Windows::Media::Capture::MediaCategory value) const;
-    Windows::Media::Capture::MediaCategory MediaCategory() const;
-    void AudioProcessing(Windows::Media::AudioProcessing value) const;
-    Windows::Media::AudioProcessing AudioProcessing() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IMediaCaptureInitializationSettings3
-{
-    void AudioSource(const Windows::Media::Core::IMediaSource & value) const;
-    Windows::Media::Core::IMediaSource AudioSource() const;
-    void VideoSource(const Windows::Media::Core::IMediaSource & value) const;
-    Windows::Media::Core::IMediaSource VideoSource() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IMediaCaptureInitializationSettings4
-{
-    Windows::Media::Capture::MediaCaptureVideoProfile VideoProfile() const;
-    void VideoProfile(const Windows::Media::Capture::MediaCaptureVideoProfile & value) const;
-    Windows::Media::Capture::MediaCaptureVideoProfileMediaDescription PreviewMediaDescription() const;
-    void PreviewMediaDescription(const Windows::Media::Capture::MediaCaptureVideoProfileMediaDescription & value) const;
-    Windows::Media::Capture::MediaCaptureVideoProfileMediaDescription RecordMediaDescription() const;
-    void RecordMediaDescription(const Windows::Media::Capture::MediaCaptureVideoProfileMediaDescription & value) const;
-    Windows::Media::Capture::MediaCaptureVideoProfileMediaDescription PhotoMediaDescription() const;
-    void PhotoMediaDescription(const Windows::Media::Capture::MediaCaptureVideoProfileMediaDescription & value) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IMediaCaptureInitializationSettings5
-{
-    Windows::Media::Capture::Frames::MediaFrameSourceGroup SourceGroup() const;
-    void SourceGroup(const Windows::Media::Capture::Frames::MediaFrameSourceGroup & value) const;
-    Windows::Media::Capture::MediaCaptureSharingMode SharingMode() const;
-    void SharingMode(Windows::Media::Capture::MediaCaptureSharingMode value) const;
-    Windows::Media::Capture::MediaCaptureMemoryPreference MemoryPreference() const;
-    void MemoryPreference(Windows::Media::Capture::MediaCaptureMemoryPreference value) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IMediaCapturePauseResult
-{
-    Windows::Media::VideoFrame LastFrame() const;
-    Windows::Foundation::TimeSpan RecordDuration() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IMediaCaptureSettings
-{
-    hstring AudioDeviceId() const;
-    hstring VideoDeviceId() const;
-    Windows::Media::Capture::StreamingCaptureMode StreamingCaptureMode() const;
-    Windows::Media::Capture::PhotoCaptureSource PhotoCaptureSource() const;
-    Windows::Media::Capture::VideoDeviceCharacteristic VideoDeviceCharacteristic() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IMediaCaptureSettings2
-{
-    bool ConcurrentRecordAndPhotoSupported() const;
-    bool ConcurrentRecordAndPhotoSequenceSupported() const;
-    bool CameraSoundRequiredForRegion() const;
-    Windows::Foundation::IReference<uint32_t> Horizontal35mmEquivalentFocalLength() const;
-    Windows::Foundation::IReference<int32_t> PitchOffsetDegrees() const;
-    Windows::Foundation::IReference<uint32_t> Vertical35mmEquivalentFocalLength() const;
-    Windows::Media::Capture::MediaCategory MediaCategory() const;
-    Windows::Media::AudioProcessing AudioProcessing() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IMediaCaptureStatics
-{
-    bool IsVideoProfileSupported(hstring_ref videoDeviceId) const;
-    Windows::Foundation::Collections::IVectorView<Windows::Media::Capture::MediaCaptureVideoProfile> FindAllVideoProfiles(hstring_ref videoDeviceId) const;
-    Windows::Foundation::Collections::IVectorView<Windows::Media::Capture::MediaCaptureVideoProfile> FindConcurrentProfiles(hstring_ref videoDeviceId) const;
-    Windows::Foundation::Collections::IVectorView<Windows::Media::Capture::MediaCaptureVideoProfile> FindKnownVideoProfiles(hstring_ref videoDeviceId, Windows::Media::Capture::KnownVideoProfile name) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IMediaCaptureStopResult
-{
-    Windows::Media::VideoFrame LastFrame() const;
-    Windows::Foundation::TimeSpan RecordDuration() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IMediaCaptureVideoPreview
-{
-    Windows::Foundation::IAsyncAction StartPreviewAsync() const;
-    Windows::Foundation::IAsyncAction StartPreviewToCustomSinkAsync(const Windows::Media::MediaProperties::MediaEncodingProfile & encodingProfile, const Windows::Media::IMediaExtension & customMediaSink) const;
-    Windows::Foundation::IAsyncAction StartPreviewToCustomSinkAsync(const Windows::Media::MediaProperties::MediaEncodingProfile & encodingProfile, hstring_ref customSinkActivationId, const Windows::Foundation::Collections::IPropertySet & customSinkSettings) const;
-    Windows::Foundation::IAsyncAction StopPreviewAsync() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IMediaCaptureVideoProfile
-{
-    hstring Id() const;
-    hstring VideoDeviceId() const;
-    Windows::Foundation::Collections::IVectorView<Windows::Media::Capture::MediaCaptureVideoProfileMediaDescription> SupportedPreviewMediaDescription() const;
-    Windows::Foundation::Collections::IVectorView<Windows::Media::Capture::MediaCaptureVideoProfileMediaDescription> SupportedRecordMediaDescription() const;
-    Windows::Foundation::Collections::IVectorView<Windows::Media::Capture::MediaCaptureVideoProfileMediaDescription> SupportedPhotoMediaDescription() const;
-    Windows::Foundation::Collections::IVectorView<Windows::Media::Capture::MediaCaptureVideoProfile> GetConcurrency() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IMediaCaptureVideoProfileMediaDescription
-{
-    uint32_t Width() const;
-    uint32_t Height() const;
-    double FrameRate() const;
-    bool IsVariablePhotoSequenceSupported() const;
-    bool IsHdrVideoSupported() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IOptionalReferencePhotoCapturedEventArgs
-{
-    Windows::Media::Capture::CapturedFrame Frame() const;
-    Windows::IInspectable Context() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IPhotoCapturedEventArgs
-{
-    Windows::Media::Capture::CapturedFrame Frame() const;
-    Windows::Media::Capture::CapturedFrame Thumbnail() const;
-    Windows::Foundation::TimeSpan CaptureTimeOffset() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IPhotoConfirmationCapturedEventArgs
-{
-    Windows::Media::Capture::CapturedFrame Frame() const;
-    Windows::Foundation::TimeSpan CaptureTimeOffset() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IScreenCapture
-{
-    Windows::Media::Core::IMediaSource AudioSource() const;
-    Windows::Media::Core::IMediaSource VideoSource() const;
-    bool IsAudioSuspended() const;
-    bool IsVideoSuspended() const;
-    event_token SourceSuspensionChanged(const Windows::Foundation::TypedEventHandler<Windows::Media::Capture::ScreenCapture, Windows::Media::Capture::SourceSuspensionChangedEventArgs> & handler) const;
-    using SourceSuspensionChanged_revoker = event_revoker<IScreenCapture>;
-    SourceSuspensionChanged_revoker SourceSuspensionChanged(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::Media::Capture::ScreenCapture, Windows::Media::Capture::SourceSuspensionChangedEventArgs> & handler) const;
-    void SourceSuspensionChanged(event_token token) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IScreenCaptureStatics
-{
-    Windows::Media::Capture::ScreenCapture GetForCurrentView() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_ISourceSuspensionChangedEventArgs
-{
-    bool IsAudioSuspended() const;
-    bool IsVideoSuspended() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IVideoStreamConfiguration
-{
-    Windows::Media::MediaProperties::VideoEncodingProperties InputProperties() const;
-    Windows::Media::MediaProperties::VideoEncodingProperties OutputProperties() const;
-};
-
-struct MediaCaptureFailedEventHandler : Windows::IUnknown
+struct MediaCaptureFailedEventHandler : Windows::Foundation::IUnknown
 {
     MediaCaptureFailedEventHandler(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<MediaCaptureFailedEventHandler>(m_ptr); }
     template <typename L> MediaCaptureFailedEventHandler(L lambda);
     template <typename F> MediaCaptureFailedEventHandler (F * function);
     template <typename O, typename M> MediaCaptureFailedEventHandler(O * object, M method);
     void operator()(const Windows::Media::Capture::MediaCapture & sender, const Windows::Media::Capture::MediaCaptureFailedEventArgs & errorEventArgs) const;
 };
 
-struct RecordLimitationExceededEventHandler : Windows::IUnknown
+struct RecordLimitationExceededEventHandler : Windows::Foundation::IUnknown
 {
     RecordLimitationExceededEventHandler(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<RecordLimitationExceededEventHandler>(m_ptr); }
     template <typename L> RecordLimitationExceededEventHandler(L lambda);
     template <typename F> RecordLimitationExceededEventHandler (F * function);
     template <typename O, typename M> RecordLimitationExceededEventHandler(O * object, M method);
@@ -942,436 +570,704 @@ struct RecordLimitationExceededEventHandler : Windows::IUnknown
 };
 
 struct IAdvancedCapturedPhoto :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IAdvancedCapturedPhoto>
 {
     IAdvancedCapturedPhoto(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IAdvancedCapturedPhoto>(m_ptr); }
 };
 
 struct IAdvancedCapturedPhoto2 :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IAdvancedCapturedPhoto2>
 {
     IAdvancedCapturedPhoto2(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IAdvancedCapturedPhoto2>(m_ptr); }
 };
 
 struct IAdvancedPhotoCapture :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IAdvancedPhotoCapture>
 {
     IAdvancedPhotoCapture(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IAdvancedPhotoCapture>(m_ptr); }
+};
+
+struct IAppBroadcastBackgroundService :
+    Windows::Foundation::IInspectable,
+    impl::consume<IAppBroadcastBackgroundService>
+{
+    IAppBroadcastBackgroundService(std::nullptr_t = nullptr) noexcept {}
+};
+
+struct IAppBroadcastBackgroundServiceSignInInfo :
+    Windows::Foundation::IInspectable,
+    impl::consume<IAppBroadcastBackgroundServiceSignInInfo>
+{
+    IAppBroadcastBackgroundServiceSignInInfo(std::nullptr_t = nullptr) noexcept {}
+};
+
+struct IAppBroadcastBackgroundServiceStreamInfo :
+    Windows::Foundation::IInspectable,
+    impl::consume<IAppBroadcastBackgroundServiceStreamInfo>
+{
+    IAppBroadcastBackgroundServiceStreamInfo(std::nullptr_t = nullptr) noexcept {}
+};
+
+struct IAppBroadcastCameraCaptureStateChangedEventArgs :
+    Windows::Foundation::IInspectable,
+    impl::consume<IAppBroadcastCameraCaptureStateChangedEventArgs>
+{
+    IAppBroadcastCameraCaptureStateChangedEventArgs(std::nullptr_t = nullptr) noexcept {}
+};
+
+struct IAppBroadcastGlobalSettings :
+    Windows::Foundation::IInspectable,
+    impl::consume<IAppBroadcastGlobalSettings>
+{
+    IAppBroadcastGlobalSettings(std::nullptr_t = nullptr) noexcept {}
+};
+
+struct IAppBroadcastHeartbeatRequestedEventArgs :
+    Windows::Foundation::IInspectable,
+    impl::consume<IAppBroadcastHeartbeatRequestedEventArgs>
+{
+    IAppBroadcastHeartbeatRequestedEventArgs(std::nullptr_t = nullptr) noexcept {}
+};
+
+struct IAppBroadcastManagerStatics :
+    Windows::Foundation::IInspectable,
+    impl::consume<IAppBroadcastManagerStatics>
+{
+    IAppBroadcastManagerStatics(std::nullptr_t = nullptr) noexcept {}
+};
+
+struct IAppBroadcastMicrophoneCaptureStateChangedEventArgs :
+    Windows::Foundation::IInspectable,
+    impl::consume<IAppBroadcastMicrophoneCaptureStateChangedEventArgs>
+{
+    IAppBroadcastMicrophoneCaptureStateChangedEventArgs(std::nullptr_t = nullptr) noexcept {}
+};
+
+struct IAppBroadcastPlugIn :
+    Windows::Foundation::IInspectable,
+    impl::consume<IAppBroadcastPlugIn>
+{
+    IAppBroadcastPlugIn(std::nullptr_t = nullptr) noexcept {}
+};
+
+struct IAppBroadcastPlugInManager :
+    Windows::Foundation::IInspectable,
+    impl::consume<IAppBroadcastPlugInManager>
+{
+    IAppBroadcastPlugInManager(std::nullptr_t = nullptr) noexcept {}
+};
+
+struct IAppBroadcastPlugInManagerStatics :
+    Windows::Foundation::IInspectable,
+    impl::consume<IAppBroadcastPlugInManagerStatics>
+{
+    IAppBroadcastPlugInManagerStatics(std::nullptr_t = nullptr) noexcept {}
+};
+
+struct IAppBroadcastPlugInStateChangedEventArgs :
+    Windows::Foundation::IInspectable,
+    impl::consume<IAppBroadcastPlugInStateChangedEventArgs>
+{
+    IAppBroadcastPlugInStateChangedEventArgs(std::nullptr_t = nullptr) noexcept {}
+};
+
+struct IAppBroadcastPreview :
+    Windows::Foundation::IInspectable,
+    impl::consume<IAppBroadcastPreview>
+{
+    IAppBroadcastPreview(std::nullptr_t = nullptr) noexcept {}
+};
+
+struct IAppBroadcastPreviewStateChangedEventArgs :
+    Windows::Foundation::IInspectable,
+    impl::consume<IAppBroadcastPreviewStateChangedEventArgs>
+{
+    IAppBroadcastPreviewStateChangedEventArgs(std::nullptr_t = nullptr) noexcept {}
+};
+
+struct IAppBroadcastPreviewStreamReader :
+    Windows::Foundation::IInspectable,
+    impl::consume<IAppBroadcastPreviewStreamReader>
+{
+    IAppBroadcastPreviewStreamReader(std::nullptr_t = nullptr) noexcept {}
+};
+
+struct IAppBroadcastPreviewStreamVideoFrame :
+    Windows::Foundation::IInspectable,
+    impl::consume<IAppBroadcastPreviewStreamVideoFrame>
+{
+    IAppBroadcastPreviewStreamVideoFrame(std::nullptr_t = nullptr) noexcept {}
+};
+
+struct IAppBroadcastPreviewStreamVideoHeader :
+    Windows::Foundation::IInspectable,
+    impl::consume<IAppBroadcastPreviewStreamVideoHeader>
+{
+    IAppBroadcastPreviewStreamVideoHeader(std::nullptr_t = nullptr) noexcept {}
+};
+
+struct IAppBroadcastProviderSettings :
+    Windows::Foundation::IInspectable,
+    impl::consume<IAppBroadcastProviderSettings>
+{
+    IAppBroadcastProviderSettings(std::nullptr_t = nullptr) noexcept {}
+};
+
+struct IAppBroadcastServices :
+    Windows::Foundation::IInspectable,
+    impl::consume<IAppBroadcastServices>
+{
+    IAppBroadcastServices(std::nullptr_t = nullptr) noexcept {}
+};
+
+struct IAppBroadcastSignInStateChangedEventArgs :
+    Windows::Foundation::IInspectable,
+    impl::consume<IAppBroadcastSignInStateChangedEventArgs>
+{
+    IAppBroadcastSignInStateChangedEventArgs(std::nullptr_t = nullptr) noexcept {}
+};
+
+struct IAppBroadcastState :
+    Windows::Foundation::IInspectable,
+    impl::consume<IAppBroadcastState>
+{
+    IAppBroadcastState(std::nullptr_t = nullptr) noexcept {}
+};
+
+struct IAppBroadcastStreamAudioFrame :
+    Windows::Foundation::IInspectable,
+    impl::consume<IAppBroadcastStreamAudioFrame>
+{
+    IAppBroadcastStreamAudioFrame(std::nullptr_t = nullptr) noexcept {}
+};
+
+struct IAppBroadcastStreamAudioHeader :
+    Windows::Foundation::IInspectable,
+    impl::consume<IAppBroadcastStreamAudioHeader>
+{
+    IAppBroadcastStreamAudioHeader(std::nullptr_t = nullptr) noexcept {}
+};
+
+struct IAppBroadcastStreamReader :
+    Windows::Foundation::IInspectable,
+    impl::consume<IAppBroadcastStreamReader>
+{
+    IAppBroadcastStreamReader(std::nullptr_t = nullptr) noexcept {}
+};
+
+struct IAppBroadcastStreamStateChangedEventArgs :
+    Windows::Foundation::IInspectable,
+    impl::consume<IAppBroadcastStreamStateChangedEventArgs>
+{
+    IAppBroadcastStreamStateChangedEventArgs(std::nullptr_t = nullptr) noexcept {}
+};
+
+struct IAppBroadcastStreamVideoFrame :
+    Windows::Foundation::IInspectable,
+    impl::consume<IAppBroadcastStreamVideoFrame>
+{
+    IAppBroadcastStreamVideoFrame(std::nullptr_t = nullptr) noexcept {}
+};
+
+struct IAppBroadcastStreamVideoHeader :
+    Windows::Foundation::IInspectable,
+    impl::consume<IAppBroadcastStreamVideoHeader>
+{
+    IAppBroadcastStreamVideoHeader(std::nullptr_t = nullptr) noexcept {}
+};
+
+struct IAppBroadcastTriggerDetails :
+    Windows::Foundation::IInspectable,
+    impl::consume<IAppBroadcastTriggerDetails>
+{
+    IAppBroadcastTriggerDetails(std::nullptr_t = nullptr) noexcept {}
+};
+
+struct IAppBroadcastViewerCountChangedEventArgs :
+    Windows::Foundation::IInspectable,
+    impl::consume<IAppBroadcastViewerCountChangedEventArgs>
+{
+    IAppBroadcastViewerCountChangedEventArgs(std::nullptr_t = nullptr) noexcept {}
 };
 
 struct IAppCapture :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IAppCapture>
 {
     IAppCapture(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IAppCapture>(m_ptr); }
 };
 
 struct IAppCaptureAlternateShortcutKeys :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IAppCaptureAlternateShortcutKeys>
 {
     IAppCaptureAlternateShortcutKeys(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IAppCaptureAlternateShortcutKeys>(m_ptr); }
 };
 
 struct IAppCaptureAlternateShortcutKeys2 :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IAppCaptureAlternateShortcutKeys2>
 {
     IAppCaptureAlternateShortcutKeys2(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IAppCaptureAlternateShortcutKeys2>(m_ptr); }
 };
 
 struct IAppCaptureAlternateShortcutKeys3 :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IAppCaptureAlternateShortcutKeys3>
 {
     IAppCaptureAlternateShortcutKeys3(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IAppCaptureAlternateShortcutKeys3>(m_ptr); }
+};
+
+struct IAppCaptureDurationGeneratedEventArgs :
+    Windows::Foundation::IInspectable,
+    impl::consume<IAppCaptureDurationGeneratedEventArgs>
+{
+    IAppCaptureDurationGeneratedEventArgs(std::nullptr_t = nullptr) noexcept {}
+};
+
+struct IAppCaptureFileGeneratedEventArgs :
+    Windows::Foundation::IInspectable,
+    impl::consume<IAppCaptureFileGeneratedEventArgs>
+{
+    IAppCaptureFileGeneratedEventArgs(std::nullptr_t = nullptr) noexcept {}
 };
 
 struct IAppCaptureManagerStatics :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IAppCaptureManagerStatics>
 {
     IAppCaptureManagerStatics(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IAppCaptureManagerStatics>(m_ptr); }
+};
+
+struct IAppCaptureMicrophoneCaptureStateChangedEventArgs :
+    Windows::Foundation::IInspectable,
+    impl::consume<IAppCaptureMicrophoneCaptureStateChangedEventArgs>
+{
+    IAppCaptureMicrophoneCaptureStateChangedEventArgs(std::nullptr_t = nullptr) noexcept {}
+};
+
+struct IAppCaptureRecordOperation :
+    Windows::Foundation::IInspectable,
+    impl::consume<IAppCaptureRecordOperation>
+{
+    IAppCaptureRecordOperation(std::nullptr_t = nullptr) noexcept {}
+};
+
+struct IAppCaptureRecordingStateChangedEventArgs :
+    Windows::Foundation::IInspectable,
+    impl::consume<IAppCaptureRecordingStateChangedEventArgs>
+{
+    IAppCaptureRecordingStateChangedEventArgs(std::nullptr_t = nullptr) noexcept {}
+};
+
+struct IAppCaptureServices :
+    Windows::Foundation::IInspectable,
+    impl::consume<IAppCaptureServices>
+{
+    IAppCaptureServices(std::nullptr_t = nullptr) noexcept {}
 };
 
 struct IAppCaptureSettings :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IAppCaptureSettings>
 {
     IAppCaptureSettings(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IAppCaptureSettings>(m_ptr); }
 };
 
 struct IAppCaptureSettings2 :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IAppCaptureSettings2>
 {
     IAppCaptureSettings2(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IAppCaptureSettings2>(m_ptr); }
 };
 
 struct IAppCaptureSettings3 :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IAppCaptureSettings3>
 {
     IAppCaptureSettings3(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IAppCaptureSettings3>(m_ptr); }
 };
 
 struct IAppCaptureSettings4 :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IAppCaptureSettings4>
 {
     IAppCaptureSettings4(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IAppCaptureSettings4>(m_ptr); }
+};
+
+struct IAppCaptureSettings5 :
+    Windows::Foundation::IInspectable,
+    impl::consume<IAppCaptureSettings5>
+{
+    IAppCaptureSettings5(std::nullptr_t = nullptr) noexcept {}
+};
+
+struct IAppCaptureState :
+    Windows::Foundation::IInspectable,
+    impl::consume<IAppCaptureState>
+{
+    IAppCaptureState(std::nullptr_t = nullptr) noexcept {}
 };
 
 struct IAppCaptureStatics :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IAppCaptureStatics>
 {
     IAppCaptureStatics(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IAppCaptureStatics>(m_ptr); }
 };
 
 struct ICameraCaptureUI :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<ICameraCaptureUI>
 {
     ICameraCaptureUI(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<ICameraCaptureUI>(m_ptr); }
 };
 
 struct ICameraCaptureUIPhotoCaptureSettings :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<ICameraCaptureUIPhotoCaptureSettings>
 {
     ICameraCaptureUIPhotoCaptureSettings(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<ICameraCaptureUIPhotoCaptureSettings>(m_ptr); }
 };
 
 struct ICameraCaptureUIVideoCaptureSettings :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<ICameraCaptureUIVideoCaptureSettings>
 {
     ICameraCaptureUIVideoCaptureSettings(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<ICameraCaptureUIVideoCaptureSettings>(m_ptr); }
 };
 
 struct ICameraOptionsUIStatics :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<ICameraOptionsUIStatics>
 {
     ICameraOptionsUIStatics(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<ICameraOptionsUIStatics>(m_ptr); }
 };
 
 struct ICapturedFrame :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<ICapturedFrame>,
     impl::require<ICapturedFrame, Windows::Foundation::IClosable, Windows::Storage::Streams::IContentTypeProvider, Windows::Storage::Streams::IInputStream, Windows::Storage::Streams::IOutputStream, Windows::Storage::Streams::IRandomAccessStream, Windows::Storage::Streams::IRandomAccessStreamWithContentType>
 {
     ICapturedFrame(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<ICapturedFrame>(m_ptr); }
 };
 
 struct ICapturedFrameControlValues :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<ICapturedFrameControlValues>
 {
     ICapturedFrameControlValues(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<ICapturedFrameControlValues>(m_ptr); }
 };
 
 struct ICapturedFrameControlValues2 :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<ICapturedFrameControlValues2>
 {
     ICapturedFrameControlValues2(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<ICapturedFrameControlValues2>(m_ptr); }
 };
 
 struct ICapturedFrameWithSoftwareBitmap :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<ICapturedFrameWithSoftwareBitmap>
 {
     ICapturedFrameWithSoftwareBitmap(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<ICapturedFrameWithSoftwareBitmap>(m_ptr); }
 };
 
 struct ICapturedPhoto :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<ICapturedPhoto>
 {
     ICapturedPhoto(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<ICapturedPhoto>(m_ptr); }
+};
+
+struct IGameBarServices :
+    Windows::Foundation::IInspectable,
+    impl::consume<IGameBarServices>
+{
+    IGameBarServices(std::nullptr_t = nullptr) noexcept {}
+};
+
+struct IGameBarServicesCommandEventArgs :
+    Windows::Foundation::IInspectable,
+    impl::consume<IGameBarServicesCommandEventArgs>
+{
+    IGameBarServicesCommandEventArgs(std::nullptr_t = nullptr) noexcept {}
+};
+
+struct IGameBarServicesManager :
+    Windows::Foundation::IInspectable,
+    impl::consume<IGameBarServicesManager>
+{
+    IGameBarServicesManager(std::nullptr_t = nullptr) noexcept {}
+};
+
+struct IGameBarServicesManagerGameBarServicesCreatedEventArgs :
+    Windows::Foundation::IInspectable,
+    impl::consume<IGameBarServicesManagerGameBarServicesCreatedEventArgs>
+{
+    IGameBarServicesManagerGameBarServicesCreatedEventArgs(std::nullptr_t = nullptr) noexcept {}
+};
+
+struct IGameBarServicesManagerStatics :
+    Windows::Foundation::IInspectable,
+    impl::consume<IGameBarServicesManagerStatics>
+{
+    IGameBarServicesManagerStatics(std::nullptr_t = nullptr) noexcept {}
+};
+
+struct IGameBarServicesTargetInfo :
+    Windows::Foundation::IInspectable,
+    impl::consume<IGameBarServicesTargetInfo>
+{
+    IGameBarServicesTargetInfo(std::nullptr_t = nullptr) noexcept {}
 };
 
 struct ILowLagMediaRecording :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<ILowLagMediaRecording>
 {
     ILowLagMediaRecording(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<ILowLagMediaRecording>(m_ptr); }
 };
 
 struct ILowLagMediaRecording2 :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<ILowLagMediaRecording2>
 {
     ILowLagMediaRecording2(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<ILowLagMediaRecording2>(m_ptr); }
 };
 
 struct ILowLagMediaRecording3 :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<ILowLagMediaRecording3>
 {
     ILowLagMediaRecording3(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<ILowLagMediaRecording3>(m_ptr); }
 };
 
 struct ILowLagPhotoCapture :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<ILowLagPhotoCapture>
 {
     ILowLagPhotoCapture(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<ILowLagPhotoCapture>(m_ptr); }
 };
 
 struct ILowLagPhotoSequenceCapture :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<ILowLagPhotoSequenceCapture>
 {
     ILowLagPhotoSequenceCapture(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<ILowLagPhotoSequenceCapture>(m_ptr); }
 };
 
 struct IMediaCapture :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IMediaCapture>
 {
     IMediaCapture(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IMediaCapture>(m_ptr); }
 };
 
 struct IMediaCapture2 :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IMediaCapture2>
 {
     IMediaCapture2(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IMediaCapture2>(m_ptr); }
 };
 
 struct IMediaCapture3 :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IMediaCapture3>
 {
     IMediaCapture3(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IMediaCapture3>(m_ptr); }
 };
 
 struct IMediaCapture4 :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IMediaCapture4>
 {
     IMediaCapture4(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IMediaCapture4>(m_ptr); }
 };
 
 struct IMediaCapture5 :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IMediaCapture5>
 {
     IMediaCapture5(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IMediaCapture5>(m_ptr); }
+};
+
+struct IMediaCapture6 :
+    Windows::Foundation::IInspectable,
+    impl::consume<IMediaCapture6>
+{
+    IMediaCapture6(std::nullptr_t = nullptr) noexcept {}
+};
+
+struct IMediaCaptureDeviceExclusiveControlStatusChangedEventArgs :
+    Windows::Foundation::IInspectable,
+    impl::consume<IMediaCaptureDeviceExclusiveControlStatusChangedEventArgs>
+{
+    IMediaCaptureDeviceExclusiveControlStatusChangedEventArgs(std::nullptr_t = nullptr) noexcept {}
 };
 
 struct IMediaCaptureFailedEventArgs :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IMediaCaptureFailedEventArgs>
 {
     IMediaCaptureFailedEventArgs(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IMediaCaptureFailedEventArgs>(m_ptr); }
 };
 
 struct IMediaCaptureFocusChangedEventArgs :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IMediaCaptureFocusChangedEventArgs>
 {
     IMediaCaptureFocusChangedEventArgs(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IMediaCaptureFocusChangedEventArgs>(m_ptr); }
 };
 
 struct IMediaCaptureInitializationSettings :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IMediaCaptureInitializationSettings>
 {
     IMediaCaptureInitializationSettings(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IMediaCaptureInitializationSettings>(m_ptr); }
 };
 
 struct IMediaCaptureInitializationSettings2 :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IMediaCaptureInitializationSettings2>
 {
     IMediaCaptureInitializationSettings2(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IMediaCaptureInitializationSettings2>(m_ptr); }
 };
 
 struct IMediaCaptureInitializationSettings3 :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IMediaCaptureInitializationSettings3>
 {
     IMediaCaptureInitializationSettings3(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IMediaCaptureInitializationSettings3>(m_ptr); }
 };
 
 struct IMediaCaptureInitializationSettings4 :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IMediaCaptureInitializationSettings4>
 {
     IMediaCaptureInitializationSettings4(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IMediaCaptureInitializationSettings4>(m_ptr); }
 };
 
 struct IMediaCaptureInitializationSettings5 :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IMediaCaptureInitializationSettings5>
 {
     IMediaCaptureInitializationSettings5(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IMediaCaptureInitializationSettings5>(m_ptr); }
+};
+
+struct IMediaCaptureInitializationSettings6 :
+    Windows::Foundation::IInspectable,
+    impl::consume<IMediaCaptureInitializationSettings6>
+{
+    IMediaCaptureInitializationSettings6(std::nullptr_t = nullptr) noexcept {}
 };
 
 struct IMediaCapturePauseResult :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IMediaCapturePauseResult>
 {
     IMediaCapturePauseResult(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IMediaCapturePauseResult>(m_ptr); }
 };
 
 struct IMediaCaptureSettings :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IMediaCaptureSettings>
 {
     IMediaCaptureSettings(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IMediaCaptureSettings>(m_ptr); }
 };
 
 struct IMediaCaptureSettings2 :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IMediaCaptureSettings2>
 {
     IMediaCaptureSettings2(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IMediaCaptureSettings2>(m_ptr); }
 };
 
 struct IMediaCaptureStatics :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IMediaCaptureStatics>
 {
     IMediaCaptureStatics(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IMediaCaptureStatics>(m_ptr); }
 };
 
 struct IMediaCaptureStopResult :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IMediaCaptureStopResult>
 {
     IMediaCaptureStopResult(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IMediaCaptureStopResult>(m_ptr); }
 };
 
 struct IMediaCaptureVideoPreview :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IMediaCaptureVideoPreview>
 {
     IMediaCaptureVideoPreview(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IMediaCaptureVideoPreview>(m_ptr); }
 };
 
 struct IMediaCaptureVideoProfile :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IMediaCaptureVideoProfile>
 {
     IMediaCaptureVideoProfile(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IMediaCaptureVideoProfile>(m_ptr); }
 };
 
 struct IMediaCaptureVideoProfileMediaDescription :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IMediaCaptureVideoProfileMediaDescription>
 {
     IMediaCaptureVideoProfileMediaDescription(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IMediaCaptureVideoProfileMediaDescription>(m_ptr); }
 };
 
 struct IOptionalReferencePhotoCapturedEventArgs :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IOptionalReferencePhotoCapturedEventArgs>
 {
     IOptionalReferencePhotoCapturedEventArgs(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IOptionalReferencePhotoCapturedEventArgs>(m_ptr); }
 };
 
 struct IPhotoCapturedEventArgs :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IPhotoCapturedEventArgs>
 {
     IPhotoCapturedEventArgs(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IPhotoCapturedEventArgs>(m_ptr); }
 };
 
 struct IPhotoConfirmationCapturedEventArgs :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IPhotoConfirmationCapturedEventArgs>
 {
     IPhotoConfirmationCapturedEventArgs(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IPhotoConfirmationCapturedEventArgs>(m_ptr); }
 };
 
 struct IScreenCapture :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IScreenCapture>
 {
     IScreenCapture(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IScreenCapture>(m_ptr); }
 };
 
 struct IScreenCaptureStatics :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IScreenCaptureStatics>
 {
     IScreenCaptureStatics(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IScreenCaptureStatics>(m_ptr); }
 };
 
 struct ISourceSuspensionChangedEventArgs :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<ISourceSuspensionChangedEventArgs>
 {
     ISourceSuspensionChangedEventArgs(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<ISourceSuspensionChangedEventArgs>(m_ptr); }
 };
 
 struct IVideoStreamConfiguration :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IVideoStreamConfiguration>
 {
     IVideoStreamConfiguration(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IVideoStreamConfiguration>(m_ptr); }
 };
 
 }

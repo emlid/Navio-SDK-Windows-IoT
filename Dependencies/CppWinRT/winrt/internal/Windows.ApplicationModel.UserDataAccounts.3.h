@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -11,9 +11,13 @@ namespace Windows::ApplicationModel::UserDataAccounts {
 
 struct WINRT_EBO UserDataAccount :
     Windows::ApplicationModel::UserDataAccounts::IUserDataAccount,
-    impl::require<UserDataAccount, Windows::ApplicationModel::UserDataAccounts::IUserDataAccount2, Windows::ApplicationModel::UserDataAccounts::IUserDataAccount3>
+    impl::require<UserDataAccount, Windows::ApplicationModel::UserDataAccounts::IUserDataAccount2, Windows::ApplicationModel::UserDataAccounts::IUserDataAccount3, Windows::ApplicationModel::UserDataAccounts::IUserDataAccount4>
 {
     UserDataAccount(std::nullptr_t) noexcept {}
+    using impl_IUserDataAccount::Icon;
+    using impl_IUserDataAccount2::IsProtectedUnderLock;
+    using impl_IUserDataAccount4::Icon;
+    using impl_IUserDataAccount4::IsProtectedUnderLock;
 };
 
 struct UserDataAccountManager
@@ -21,8 +25,8 @@ struct UserDataAccountManager
     UserDataAccountManager() = delete;
     static Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::UserDataAccounts::UserDataAccountStore> RequestStoreAsync(Windows::ApplicationModel::UserDataAccounts::UserDataAccountStoreAccessType storeAccessType);
     static Windows::Foundation::IAsyncOperation<hstring> ShowAddAccountAsync(Windows::ApplicationModel::UserDataAccounts::UserDataAccountContentKinds contentKinds);
-    static Windows::Foundation::IAsyncAction ShowAccountSettingsAsync(hstring_ref id);
-    static Windows::Foundation::IAsyncAction ShowAccountErrorResolverAsync(hstring_ref id);
+    static Windows::Foundation::IAsyncAction ShowAccountSettingsAsync(hstring_view id);
+    static Windows::Foundation::IAsyncAction ShowAccountErrorResolverAsync(hstring_view id);
     static Windows::ApplicationModel::UserDataAccounts::UserDataAccountManagerForUser GetForUser(const Windows::System::User & user);
 };
 
@@ -34,11 +38,12 @@ struct WINRT_EBO UserDataAccountManagerForUser :
 
 struct WINRT_EBO UserDataAccountStore :
     Windows::ApplicationModel::UserDataAccounts::IUserDataAccountStore,
-    impl::require<UserDataAccountStore, Windows::ApplicationModel::UserDataAccounts::IUserDataAccountStore2>
+    impl::require<UserDataAccountStore, Windows::ApplicationModel::UserDataAccounts::IUserDataAccountStore2, Windows::ApplicationModel::UserDataAccounts::IUserDataAccountStore3>
 {
     UserDataAccountStore(std::nullptr_t) noexcept {}
     using impl_IUserDataAccountStore::CreateAccountAsync;
     using impl_IUserDataAccountStore2::CreateAccountAsync;
+    using impl_IUserDataAccountStore3::CreateAccountAsync;
 };
 
 struct WINRT_EBO UserDataAccountStoreChangedEventArgs :

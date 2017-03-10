@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -46,17 +46,29 @@ struct IPointerPointTransform;
 struct IPointerVisualizationSettings;
 struct IPointerVisualizationSettingsStatics;
 struct IRadialController;
+struct IRadialController2;
 struct IRadialControllerButtonClickedEventArgs;
+struct IRadialControllerButtonClickedEventArgs2;
+struct IRadialControllerButtonHoldingEventArgs;
+struct IRadialControllerButtonPressedEventArgs;
+struct IRadialControllerButtonReleasedEventArgs;
 struct IRadialControllerConfiguration;
+struct IRadialControllerConfiguration2;
 struct IRadialControllerConfigurationStatics;
 struct IRadialControllerControlAcquiredEventArgs;
+struct IRadialControllerControlAcquiredEventArgs2;
 struct IRadialControllerMenu;
 struct IRadialControllerMenuItem;
 struct IRadialControllerMenuItemStatics;
+struct IRadialControllerMenuItemStatics2;
 struct IRadialControllerRotationChangedEventArgs;
+struct IRadialControllerRotationChangedEventArgs2;
 struct IRadialControllerScreenContact;
 struct IRadialControllerScreenContactContinuedEventArgs;
+struct IRadialControllerScreenContactContinuedEventArgs2;
+struct IRadialControllerScreenContactEndedEventArgs;
 struct IRadialControllerScreenContactStartedEventArgs;
+struct IRadialControllerScreenContactStartedEventArgs2;
 struct IRadialControllerStatics;
 struct IRightTappedEventArgs;
 struct ITappedEventArgs;
@@ -77,6 +89,9 @@ struct PointerPointProperties;
 struct PointerVisualizationSettings;
 struct RadialController;
 struct RadialControllerButtonClickedEventArgs;
+struct RadialControllerButtonHoldingEventArgs;
+struct RadialControllerButtonPressedEventArgs;
+struct RadialControllerButtonReleasedEventArgs;
 struct RadialControllerConfiguration;
 struct RadialControllerControlAcquiredEventArgs;
 struct RadialControllerMenu;
@@ -84,6 +99,7 @@ struct RadialControllerMenuItem;
 struct RadialControllerRotationChangedEventArgs;
 struct RadialControllerScreenContact;
 struct RadialControllerScreenContactContinuedEventArgs;
+struct RadialControllerScreenContactEndedEventArgs;
 struct RadialControllerScreenContactStartedEventArgs;
 struct RightTappedEventArgs;
 struct TappedEventArgs;
@@ -114,17 +130,29 @@ struct IPointerPointTransform;
 struct IPointerVisualizationSettings;
 struct IPointerVisualizationSettingsStatics;
 struct IRadialController;
+struct IRadialController2;
 struct IRadialControllerButtonClickedEventArgs;
+struct IRadialControllerButtonClickedEventArgs2;
+struct IRadialControllerButtonHoldingEventArgs;
+struct IRadialControllerButtonPressedEventArgs;
+struct IRadialControllerButtonReleasedEventArgs;
 struct IRadialControllerConfiguration;
+struct IRadialControllerConfiguration2;
 struct IRadialControllerConfigurationStatics;
 struct IRadialControllerControlAcquiredEventArgs;
+struct IRadialControllerControlAcquiredEventArgs2;
 struct IRadialControllerMenu;
 struct IRadialControllerMenuItem;
 struct IRadialControllerMenuItemStatics;
+struct IRadialControllerMenuItemStatics2;
 struct IRadialControllerRotationChangedEventArgs;
+struct IRadialControllerRotationChangedEventArgs2;
 struct IRadialControllerScreenContact;
 struct IRadialControllerScreenContactContinuedEventArgs;
+struct IRadialControllerScreenContactContinuedEventArgs2;
+struct IRadialControllerScreenContactEndedEventArgs;
 struct IRadialControllerScreenContactStartedEventArgs;
+struct IRadialControllerScreenContactStartedEventArgs2;
 struct IRadialControllerStatics;
 struct IRightTappedEventArgs;
 struct ITappedEventArgs;
@@ -145,6 +173,9 @@ struct PointerPointProperties;
 struct PointerVisualizationSettings;
 struct RadialController;
 struct RadialControllerButtonClickedEventArgs;
+struct RadialControllerButtonHoldingEventArgs;
+struct RadialControllerButtonPressedEventArgs;
+struct RadialControllerButtonReleasedEventArgs;
 struct RadialControllerConfiguration;
 struct RadialControllerControlAcquiredEventArgs;
 struct RadialControllerMenu;
@@ -152,9 +183,63 @@ struct RadialControllerMenuItem;
 struct RadialControllerRotationChangedEventArgs;
 struct RadialControllerScreenContact;
 struct RadialControllerScreenContactContinuedEventArgs;
+struct RadialControllerScreenContactEndedEventArgs;
 struct RadialControllerScreenContactStartedEventArgs;
 struct RightTappedEventArgs;
 struct TappedEventArgs;
+
+}
+
+namespace Windows::UI::Input {
+
+template <typename T> struct impl_ICrossSlidingEventArgs;
+template <typename T> struct impl_IDraggingEventArgs;
+template <typename T> struct impl_IEdgeGesture;
+template <typename T> struct impl_IEdgeGestureEventArgs;
+template <typename T> struct impl_IEdgeGestureStatics;
+template <typename T> struct impl_IGestureRecognizer;
+template <typename T> struct impl_IHoldingEventArgs;
+template <typename T> struct impl_IKeyboardDeliveryInterceptor;
+template <typename T> struct impl_IKeyboardDeliveryInterceptorStatics;
+template <typename T> struct impl_IManipulationCompletedEventArgs;
+template <typename T> struct impl_IManipulationInertiaStartingEventArgs;
+template <typename T> struct impl_IManipulationStartedEventArgs;
+template <typename T> struct impl_IManipulationUpdatedEventArgs;
+template <typename T> struct impl_IMouseWheelParameters;
+template <typename T> struct impl_IPointerPoint;
+template <typename T> struct impl_IPointerPointProperties;
+template <typename T> struct impl_IPointerPointProperties2;
+template <typename T> struct impl_IPointerPointStatics;
+template <typename T> struct impl_IPointerPointTransform;
+template <typename T> struct impl_IPointerVisualizationSettings;
+template <typename T> struct impl_IPointerVisualizationSettingsStatics;
+template <typename T> struct impl_IRadialController;
+template <typename T> struct impl_IRadialController2;
+template <typename T> struct impl_IRadialControllerButtonClickedEventArgs;
+template <typename T> struct impl_IRadialControllerButtonClickedEventArgs2;
+template <typename T> struct impl_IRadialControllerButtonHoldingEventArgs;
+template <typename T> struct impl_IRadialControllerButtonPressedEventArgs;
+template <typename T> struct impl_IRadialControllerButtonReleasedEventArgs;
+template <typename T> struct impl_IRadialControllerConfiguration;
+template <typename T> struct impl_IRadialControllerConfiguration2;
+template <typename T> struct impl_IRadialControllerConfigurationStatics;
+template <typename T> struct impl_IRadialControllerControlAcquiredEventArgs;
+template <typename T> struct impl_IRadialControllerControlAcquiredEventArgs2;
+template <typename T> struct impl_IRadialControllerMenu;
+template <typename T> struct impl_IRadialControllerMenuItem;
+template <typename T> struct impl_IRadialControllerMenuItemStatics;
+template <typename T> struct impl_IRadialControllerMenuItemStatics2;
+template <typename T> struct impl_IRadialControllerRotationChangedEventArgs;
+template <typename T> struct impl_IRadialControllerRotationChangedEventArgs2;
+template <typename T> struct impl_IRadialControllerScreenContact;
+template <typename T> struct impl_IRadialControllerScreenContactContinuedEventArgs;
+template <typename T> struct impl_IRadialControllerScreenContactContinuedEventArgs2;
+template <typename T> struct impl_IRadialControllerScreenContactEndedEventArgs;
+template <typename T> struct impl_IRadialControllerScreenContactStartedEventArgs;
+template <typename T> struct impl_IRadialControllerScreenContactStartedEventArgs2;
+template <typename T> struct impl_IRadialControllerStatics;
+template <typename T> struct impl_IRightTappedEventArgs;
+template <typename T> struct impl_ITappedEventArgs;
 
 }
 

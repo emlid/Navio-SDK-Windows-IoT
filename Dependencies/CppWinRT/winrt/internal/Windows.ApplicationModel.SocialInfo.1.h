@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -14,7 +14,7 @@ WINRT_EXPORT namespace winrt {
 
 namespace ABI::Windows::ApplicationModel::SocialInfo {
 
-struct __declspec(uuid("0b6a985a-d59d-40be-980c-488a2ab30a83")) __declspec(novtable) ISocialFeedChildItem : Windows::IInspectable
+struct __declspec(uuid("0b6a985a-d59d-40be-980c-488a2ab30a83")) __declspec(novtable) ISocialFeedChildItem : Windows::Foundation::IInspectable
 {
     virtual HRESULT __stdcall get_Author(Windows::ApplicationModel::SocialInfo::ISocialUserInfo ** value) = 0;
     virtual HRESULT __stdcall get_PrimaryContent(Windows::ApplicationModel::SocialInfo::ISocialFeedContent ** value) = 0;
@@ -28,7 +28,7 @@ struct __declspec(uuid("0b6a985a-d59d-40be-980c-488a2ab30a83")) __declspec(novta
     virtual HRESULT __stdcall put_SharedItem(Windows::ApplicationModel::SocialInfo::ISocialFeedSharedItem * value) = 0;
 };
 
-struct __declspec(uuid("a234e429-3e39-494d-a37c-f462a2494514")) __declspec(novtable) ISocialFeedContent : Windows::IInspectable
+struct __declspec(uuid("a234e429-3e39-494d-a37c-f462a2494514")) __declspec(novtable) ISocialFeedContent : Windows::Foundation::IInspectable
 {
     virtual HRESULT __stdcall get_Title(hstring * value) = 0;
     virtual HRESULT __stdcall put_Title(hstring value) = 0;
@@ -38,7 +38,7 @@ struct __declspec(uuid("a234e429-3e39-494d-a37c-f462a2494514")) __declspec(novta
     virtual HRESULT __stdcall put_TargetUri(Windows::Foundation::IUriRuntimeClass * value) = 0;
 };
 
-struct __declspec(uuid("4f1392ab-1f72-4d33-b695-de3e1db60317")) __declspec(novtable) ISocialFeedItem : Windows::IInspectable
+struct __declspec(uuid("4f1392ab-1f72-4d33-b695-de3e1db60317")) __declspec(novtable) ISocialFeedItem : Windows::Foundation::IInspectable
 {
     virtual HRESULT __stdcall get_Author(Windows::ApplicationModel::SocialInfo::ISocialUserInfo ** value) = 0;
     virtual HRESULT __stdcall get_PrimaryContent(Windows::ApplicationModel::SocialInfo::ISocialFeedContent ** value) = 0;
@@ -62,7 +62,7 @@ struct __declspec(uuid("4f1392ab-1f72-4d33-b695-de3e1db60317")) __declspec(novta
     virtual HRESULT __stdcall put_Style(winrt::Windows::ApplicationModel::SocialInfo::SocialFeedItemStyle value) = 0;
 };
 
-struct __declspec(uuid("7bfb9e40-a6aa-45a7-9ff6-54c42105dd1f")) __declspec(novtable) ISocialFeedSharedItem : Windows::IInspectable
+struct __declspec(uuid("7bfb9e40-a6aa-45a7-9ff6-54c42105dd1f")) __declspec(novtable) ISocialFeedSharedItem : Windows::Foundation::IInspectable
 {
     virtual HRESULT __stdcall get_OriginalSource(Windows::Foundation::IUriRuntimeClass ** value) = 0;
     virtual HRESULT __stdcall put_OriginalSource(Windows::Foundation::IUriRuntimeClass * value) = 0;
@@ -75,7 +75,7 @@ struct __declspec(uuid("7bfb9e40-a6aa-45a7-9ff6-54c42105dd1f")) __declspec(novta
     virtual HRESULT __stdcall get_Thumbnail(Windows::ApplicationModel::SocialInfo::ISocialItemThumbnail ** value) = 0;
 };
 
-struct __declspec(uuid("5cbf831a-3f08-497f-917f-57e09d84b141")) __declspec(novtable) ISocialItemThumbnail : Windows::IInspectable
+struct __declspec(uuid("5cbf831a-3f08-497f-917f-57e09d84b141")) __declspec(novtable) ISocialItemThumbnail : Windows::Foundation::IInspectable
 {
     virtual HRESULT __stdcall get_TargetUri(Windows::Foundation::IUriRuntimeClass ** value) = 0;
     virtual HRESULT __stdcall put_TargetUri(Windows::Foundation::IUriRuntimeClass * value) = 0;
@@ -86,7 +86,7 @@ struct __declspec(uuid("5cbf831a-3f08-497f-917f-57e09d84b141")) __declspec(novta
     virtual HRESULT __stdcall abi_SetImageAsync(Windows::Storage::Streams::IInputStream * image, Windows::Foundation::IAsyncAction ** operation) = 0;
 };
 
-struct __declspec(uuid("9e5e1bd1-90d0-4e1d-9554-844d46607f61")) __declspec(novtable) ISocialUserInfo : Windows::IInspectable
+struct __declspec(uuid("9e5e1bd1-90d0-4e1d-9554-844d46607f61")) __declspec(novtable) ISocialUserInfo : Windows::Foundation::IInspectable
 {
     virtual HRESULT __stdcall get_DisplayName(hstring * value) = 0;
     virtual HRESULT __stdcall put_DisplayName(hstring value) = 0;
@@ -113,12 +113,95 @@ template <> struct traits<Windows::ApplicationModel::SocialInfo::SocialUserInfo>
 
 namespace Windows::ApplicationModel::SocialInfo {
 
-template <typename T> struct impl_ISocialFeedChildItem;
-template <typename T> struct impl_ISocialFeedContent;
-template <typename T> struct impl_ISocialFeedItem;
-template <typename T> struct impl_ISocialFeedSharedItem;
-template <typename T> struct impl_ISocialItemThumbnail;
-template <typename T> struct impl_ISocialUserInfo;
+template <typename D>
+struct WINRT_EBO impl_ISocialFeedChildItem
+{
+    [[deprecated("ISocialFeedChildItem is deprecated and might not work on all platforms. For more info, see MSDN.")]] Windows::ApplicationModel::SocialInfo::SocialUserInfo Author() const;
+    [[deprecated("ISocialFeedChildItem is deprecated and might not work on all platforms. For more info, see MSDN.")]] Windows::ApplicationModel::SocialInfo::SocialFeedContent PrimaryContent() const;
+    [[deprecated("ISocialFeedChildItem is deprecated and might not work on all platforms. For more info, see MSDN.")]] Windows::ApplicationModel::SocialInfo::SocialFeedContent SecondaryContent() const;
+    [[deprecated("ISocialFeedChildItem is deprecated and might not work on all platforms. For more info, see MSDN.")]] Windows::Foundation::DateTime Timestamp() const;
+    [[deprecated("ISocialFeedChildItem is deprecated and might not work on all platforms. For more info, see MSDN.")]] void Timestamp(const Windows::Foundation::DateTime & value) const;
+    [[deprecated("ISocialFeedChildItem is deprecated and might not work on all platforms. For more info, see MSDN.")]] Windows::Foundation::Uri TargetUri() const;
+    [[deprecated("ISocialFeedChildItem is deprecated and might not work on all platforms. For more info, see MSDN.")]] void TargetUri(const Windows::Foundation::Uri & value) const;
+    [[deprecated("ISocialFeedChildItem is deprecated and might not work on all platforms. For more info, see MSDN.")]] Windows::Foundation::Collections::IVector<Windows::ApplicationModel::SocialInfo::SocialItemThumbnail> Thumbnails() const;
+    [[deprecated("ISocialFeedChildItem is deprecated and might not work on all platforms. For more info, see MSDN.")]] Windows::ApplicationModel::SocialInfo::SocialFeedSharedItem SharedItem() const;
+    [[deprecated("ISocialFeedChildItem is deprecated and might not work on all platforms. For more info, see MSDN.")]] void SharedItem(const Windows::ApplicationModel::SocialInfo::SocialFeedSharedItem & value) const;
+};
+
+template <typename D>
+struct WINRT_EBO impl_ISocialFeedContent
+{
+    [[deprecated("ISocialFeedContent is deprecated and might not work on all platforms. For more info, see MSDN.")]] hstring Title() const;
+    [[deprecated("ISocialFeedContent is deprecated and might not work on all platforms. For more info, see MSDN.")]] void Title(hstring_view value) const;
+    [[deprecated("ISocialFeedContent is deprecated and might not work on all platforms. For more info, see MSDN.")]] hstring Message() const;
+    [[deprecated("ISocialFeedContent is deprecated and might not work on all platforms. For more info, see MSDN.")]] void Message(hstring_view value) const;
+    [[deprecated("ISocialFeedContent is deprecated and might not work on all platforms. For more info, see MSDN.")]] Windows::Foundation::Uri TargetUri() const;
+    [[deprecated("ISocialFeedContent is deprecated and might not work on all platforms. For more info, see MSDN.")]] void TargetUri(const Windows::Foundation::Uri & value) const;
+};
+
+template <typename D>
+struct WINRT_EBO impl_ISocialFeedItem
+{
+    [[deprecated("ISocialFeedItem is deprecated and might not work on all platforms. For more info, see MSDN.")]] Windows::ApplicationModel::SocialInfo::SocialUserInfo Author() const;
+    [[deprecated("ISocialFeedItem is deprecated and might not work on all platforms. For more info, see MSDN.")]] Windows::ApplicationModel::SocialInfo::SocialFeedContent PrimaryContent() const;
+    [[deprecated("ISocialFeedItem is deprecated and might not work on all platforms. For more info, see MSDN.")]] Windows::ApplicationModel::SocialInfo::SocialFeedContent SecondaryContent() const;
+    [[deprecated("ISocialFeedItem is deprecated and might not work on all platforms. For more info, see MSDN.")]] Windows::Foundation::DateTime Timestamp() const;
+    [[deprecated("ISocialFeedItem is deprecated and might not work on all platforms. For more info, see MSDN.")]] void Timestamp(const Windows::Foundation::DateTime & value) const;
+    [[deprecated("ISocialFeedItem is deprecated and might not work on all platforms. For more info, see MSDN.")]] Windows::Foundation::Uri TargetUri() const;
+    [[deprecated("ISocialFeedItem is deprecated and might not work on all platforms. For more info, see MSDN.")]] void TargetUri(const Windows::Foundation::Uri & value) const;
+    [[deprecated("ISocialFeedItem is deprecated and might not work on all platforms. For more info, see MSDN.")]] Windows::Foundation::Collections::IVector<Windows::ApplicationModel::SocialInfo::SocialItemThumbnail> Thumbnails() const;
+    [[deprecated("ISocialFeedItem is deprecated and might not work on all platforms. For more info, see MSDN.")]] Windows::ApplicationModel::SocialInfo::SocialFeedSharedItem SharedItem() const;
+    [[deprecated("ISocialFeedItem is deprecated and might not work on all platforms. For more info, see MSDN.")]] void SharedItem(const Windows::ApplicationModel::SocialInfo::SocialFeedSharedItem & value) const;
+    [[deprecated("ISocialFeedItem is deprecated and might not work on all platforms. For more info, see MSDN.")]] Windows::ApplicationModel::SocialInfo::SocialItemBadgeStyle BadgeStyle() const;
+    [[deprecated("ISocialFeedItem is deprecated and might not work on all platforms. For more info, see MSDN.")]] void BadgeStyle(Windows::ApplicationModel::SocialInfo::SocialItemBadgeStyle value) const;
+    [[deprecated("ISocialFeedItem is deprecated and might not work on all platforms. For more info, see MSDN.")]] int32_t BadgeCountValue() const;
+    [[deprecated("ISocialFeedItem is deprecated and might not work on all platforms. For more info, see MSDN.")]] void BadgeCountValue(int32_t value) const;
+    [[deprecated("ISocialFeedItem is deprecated and might not work on all platforms. For more info, see MSDN.")]] hstring RemoteId() const;
+    [[deprecated("ISocialFeedItem is deprecated and might not work on all platforms. For more info, see MSDN.")]] void RemoteId(hstring_view value) const;
+    [[deprecated("ISocialFeedItem is deprecated and might not work on all platforms. For more info, see MSDN.")]] Windows::ApplicationModel::SocialInfo::SocialFeedChildItem ChildItem() const;
+    [[deprecated("ISocialFeedItem is deprecated and might not work on all platforms. For more info, see MSDN.")]] void ChildItem(const Windows::ApplicationModel::SocialInfo::SocialFeedChildItem & value) const;
+    [[deprecated("ISocialFeedItem is deprecated and might not work on all platforms. For more info, see MSDN.")]] Windows::ApplicationModel::SocialInfo::SocialFeedItemStyle Style() const;
+    [[deprecated("ISocialFeedItem is deprecated and might not work on all platforms. For more info, see MSDN.")]] void Style(Windows::ApplicationModel::SocialInfo::SocialFeedItemStyle value) const;
+};
+
+template <typename D>
+struct WINRT_EBO impl_ISocialFeedSharedItem
+{
+    [[deprecated("ISocialFeedSharedItem is deprecated and might not work on all platforms. For more info, see MSDN.")]] Windows::Foundation::Uri OriginalSource() const;
+    [[deprecated("ISocialFeedSharedItem is deprecated and might not work on all platforms. For more info, see MSDN.")]] void OriginalSource(const Windows::Foundation::Uri & value) const;
+    [[deprecated("ISocialFeedSharedItem is deprecated and might not work on all platforms. For more info, see MSDN.")]] Windows::ApplicationModel::SocialInfo::SocialFeedContent Content() const;
+    [[deprecated("ISocialFeedSharedItem is deprecated and might not work on all platforms. For more info, see MSDN.")]] Windows::Foundation::DateTime Timestamp() const;
+    [[deprecated("ISocialFeedSharedItem is deprecated and might not work on all platforms. For more info, see MSDN.")]] void Timestamp(const Windows::Foundation::DateTime & value) const;
+    [[deprecated("ISocialFeedSharedItem is deprecated and might not work on all platforms. For more info, see MSDN.")]] Windows::Foundation::Uri TargetUri() const;
+    [[deprecated("ISocialFeedSharedItem is deprecated and might not work on all platforms. For more info, see MSDN.")]] void TargetUri(const Windows::Foundation::Uri & value) const;
+    [[deprecated("ISocialFeedSharedItem is deprecated and might not work on all platforms. For more info, see MSDN.")]] void Thumbnail(const Windows::ApplicationModel::SocialInfo::SocialItemThumbnail & value) const;
+    [[deprecated("ISocialFeedSharedItem is deprecated and might not work on all platforms. For more info, see MSDN.")]] Windows::ApplicationModel::SocialInfo::SocialItemThumbnail Thumbnail() const;
+};
+
+template <typename D>
+struct WINRT_EBO impl_ISocialItemThumbnail
+{
+    [[deprecated("ISocialItemThumbnail is deprecated and might not work on all platforms. For more info, see MSDN.")]] Windows::Foundation::Uri TargetUri() const;
+    [[deprecated("ISocialItemThumbnail is deprecated and might not work on all platforms. For more info, see MSDN.")]] void TargetUri(const Windows::Foundation::Uri & value) const;
+    [[deprecated("ISocialItemThumbnail is deprecated and might not work on all platforms. For more info, see MSDN.")]] Windows::Foundation::Uri ImageUri() const;
+    [[deprecated("ISocialItemThumbnail is deprecated and might not work on all platforms. For more info, see MSDN.")]] void ImageUri(const Windows::Foundation::Uri & value) const;
+    [[deprecated("ISocialItemThumbnail is deprecated and might not work on all platforms. For more info, see MSDN.")]] Windows::Graphics::Imaging::BitmapSize BitmapSize() const;
+    [[deprecated("ISocialItemThumbnail is deprecated and might not work on all platforms. For more info, see MSDN.")]] void BitmapSize(const Windows::Graphics::Imaging::BitmapSize & value) const;
+    [[deprecated("ISocialItemThumbnail is deprecated and might not work on all platforms. For more info, see MSDN.")]] Windows::Foundation::IAsyncAction SetImageAsync(const Windows::Storage::Streams::IInputStream & image) const;
+};
+
+template <typename D>
+struct WINRT_EBO impl_ISocialUserInfo
+{
+    [[deprecated("ISocialUserInfo is deprecated and might not work on all platforms. For more info, see MSDN.")]] hstring DisplayName() const;
+    [[deprecated("ISocialUserInfo is deprecated and might not work on all platforms. For more info, see MSDN.")]] void DisplayName(hstring_view value) const;
+    [[deprecated("ISocialUserInfo is deprecated and might not work on all platforms. For more info, see MSDN.")]] hstring UserName() const;
+    [[deprecated("ISocialUserInfo is deprecated and might not work on all platforms. For more info, see MSDN.")]] void UserName(hstring_view value) const;
+    [[deprecated("ISocialUserInfo is deprecated and might not work on all platforms. For more info, see MSDN.")]] hstring RemoteId() const;
+    [[deprecated("ISocialUserInfo is deprecated and might not work on all platforms. For more info, see MSDN.")]] void RemoteId(hstring_view value) const;
+    [[deprecated("ISocialUserInfo is deprecated and might not work on all platforms. For more info, see MSDN.")]] Windows::Foundation::Uri TargetUri() const;
+    [[deprecated("ISocialUserInfo is deprecated and might not work on all platforms. For more info, see MSDN.")]] void TargetUri(const Windows::Foundation::Uri & value) const;
+};
 
 }
 

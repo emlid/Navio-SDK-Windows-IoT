@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -20,6 +20,8 @@ struct ISecondaryTileStatics;
 struct ISecondaryTileVisualElements;
 struct ISecondaryTileVisualElements2;
 struct ISecondaryTileVisualElements3;
+struct IStartScreenManager;
+struct IStartScreenManagerStatics;
 struct IVisualElementsRequest;
 struct IVisualElementsRequestDeferral;
 struct IVisualElementsRequestedEventArgs;
@@ -27,6 +29,7 @@ struct JumpList;
 struct JumpListItem;
 struct SecondaryTile;
 struct SecondaryTileVisualElements;
+struct StartScreenManager;
 struct VisualElementsRequest;
 struct VisualElementsRequestDeferral;
 struct VisualElementsRequestedEventArgs;
@@ -47,6 +50,8 @@ struct ISecondaryTileStatics;
 struct ISecondaryTileVisualElements;
 struct ISecondaryTileVisualElements2;
 struct ISecondaryTileVisualElements3;
+struct IStartScreenManager;
+struct IStartScreenManagerStatics;
 struct IVisualElementsRequest;
 struct IVisualElementsRequestDeferral;
 struct IVisualElementsRequestedEventArgs;
@@ -54,9 +59,32 @@ struct JumpList;
 struct JumpListItem;
 struct SecondaryTile;
 struct SecondaryTileVisualElements;
+struct StartScreenManager;
 struct VisualElementsRequest;
 struct VisualElementsRequestDeferral;
 struct VisualElementsRequestedEventArgs;
+
+}
+
+namespace Windows::UI::StartScreen {
+
+template <typename T> struct impl_IJumpList;
+template <typename T> struct impl_IJumpListItem;
+template <typename T> struct impl_IJumpListItemStatics;
+template <typename T> struct impl_IJumpListStatics;
+template <typename T> struct impl_ISecondaryTile;
+template <typename T> struct impl_ISecondaryTile2;
+template <typename T> struct impl_ISecondaryTileFactory;
+template <typename T> struct impl_ISecondaryTileFactory2;
+template <typename T> struct impl_ISecondaryTileStatics;
+template <typename T> struct impl_ISecondaryTileVisualElements;
+template <typename T> struct impl_ISecondaryTileVisualElements2;
+template <typename T> struct impl_ISecondaryTileVisualElements3;
+template <typename T> struct impl_IStartScreenManager;
+template <typename T> struct impl_IStartScreenManagerStatics;
+template <typename T> struct impl_IVisualElementsRequest;
+template <typename T> struct impl_IVisualElementsRequestDeferral;
+template <typename T> struct impl_IVisualElementsRequestedEventArgs;
 
 }
 
@@ -94,8 +122,8 @@ DEFINE_ENUM_FLAG_OPERATORS(TileOptions)
 enum class TileSize
 {
     Default = 0,
-    Square30x30 = 1,
-    Square70x70 = 2,
+    Square30x30 [[deprecated("TileSize.Square30x30 may be altered or unavailable for release after Windows 10.")]] = 1,
+    Square70x70 [[deprecated("TileSize.Square70x70 may be altered or unavailable for release after Windows Phone 8.1.")]] = 2,
     Square150x150 = 3,
     Wide310x150 = 4,
     Square310x310 = 5,

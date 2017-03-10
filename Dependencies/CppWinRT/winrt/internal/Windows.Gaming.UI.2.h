@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -11,7 +11,12 @@ namespace ABI::Windows::Foundation {
 
 #ifndef WINRT_GENERIC_c50898f6_c536_5f47_8583_8b2c2438a13b
 #define WINRT_GENERIC_c50898f6_c536_5f47_8583_8b2c2438a13b
-template <> struct __declspec(uuid("c50898f6-c536-5f47-8583-8b2c2438a13b")) __declspec(novtable) EventHandler<Windows::IInspectable> : impl_EventHandler<Windows::IInspectable> {};
+template <> struct __declspec(uuid("c50898f6-c536-5f47-8583-8b2c2438a13b")) __declspec(novtable) EventHandler<Windows::Foundation::IInspectable> : impl_EventHandler<Windows::Foundation::IInspectable> {};
+#endif
+
+#ifndef WINRT_GENERIC_fe4f13bf_689c_5fe3_b7ad_55bc57f92466
+#define WINRT_GENERIC_fe4f13bf_689c_5fe3_b7ad_55bc57f92466
+template <> struct __declspec(uuid("fe4f13bf-689c-5fe3-b7ad-55bc57f92466")) __declspec(novtable) TypedEventHandler<Windows::Gaming::UI::GameChatOverlayMessageSource, Windows::Gaming::UI::GameChatMessageReceivedEventArgs> : impl_TypedEventHandler<Windows::Gaming::UI::GameChatOverlayMessageSource, Windows::Gaming::UI::GameChatMessageReceivedEventArgs> {};
 #endif
 
 
@@ -19,27 +24,39 @@ template <> struct __declspec(uuid("c50898f6-c536-5f47-8583-8b2c2438a13b")) __de
 
 namespace Windows::Gaming::UI {
 
-template <typename D>
-struct WINRT_EBO impl_IGameBarStatics
-{
-    event_token VisibilityChanged(const Windows::Foundation::EventHandler<Windows::IInspectable> & handler) const;
-    using VisibilityChanged_revoker = event_revoker<IGameBarStatics>;
-    VisibilityChanged_revoker VisibilityChanged(auto_revoke_t, const Windows::Foundation::EventHandler<Windows::IInspectable> & handler) const;
-    void VisibilityChanged(event_token token) const;
-    event_token IsInputRedirectedChanged(const Windows::Foundation::EventHandler<Windows::IInspectable> & handler) const;
-    using IsInputRedirectedChanged_revoker = event_revoker<IGameBarStatics>;
-    IsInputRedirectedChanged_revoker IsInputRedirectedChanged(auto_revoke_t, const Windows::Foundation::EventHandler<Windows::IInspectable> & handler) const;
-    void IsInputRedirectedChanged(event_token token) const;
-    bool Visible() const;
-    bool IsInputRedirected() const;
-};
-
 struct IGameBarStatics :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IGameBarStatics>
 {
     IGameBarStatics(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IGameBarStatics>(m_ptr); }
+};
+
+struct IGameChatMessageReceivedEventArgs :
+    Windows::Foundation::IInspectable,
+    impl::consume<IGameChatMessageReceivedEventArgs>
+{
+    IGameChatMessageReceivedEventArgs(std::nullptr_t = nullptr) noexcept {}
+};
+
+struct IGameChatOverlay :
+    Windows::Foundation::IInspectable,
+    impl::consume<IGameChatOverlay>
+{
+    IGameChatOverlay(std::nullptr_t = nullptr) noexcept {}
+};
+
+struct IGameChatOverlayMessageSource :
+    Windows::Foundation::IInspectable,
+    impl::consume<IGameChatOverlayMessageSource>
+{
+    IGameChatOverlayMessageSource(std::nullptr_t = nullptr) noexcept {}
+};
+
+struct IGameChatOverlayStatics :
+    Windows::Foundation::IInspectable,
+    impl::consume<IGameChatOverlayStatics>
+{
+    IGameChatOverlayStatics(std::nullptr_t = nullptr) noexcept {}
 };
 
 }

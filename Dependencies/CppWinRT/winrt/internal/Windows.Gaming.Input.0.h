@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -9,6 +9,7 @@ WINRT_EXPORT namespace winrt {
 namespace ABI::Windows::Gaming::Input {
 
 struct ArcadeStickReading;
+struct FlightStickReading;
 struct GamepadReading;
 struct GamepadVibration;
 struct RacingWheelReading;
@@ -19,6 +20,7 @@ struct UINavigationReading;
 namespace Windows::Gaming::Input {
 
 using ArcadeStickReading = ABI::Windows::Gaming::Input::ArcadeStickReading;
+using FlightStickReading = ABI::Windows::Gaming::Input::FlightStickReading;
 using GamepadReading = ABI::Windows::Gaming::Input::GamepadReading;
 using GamepadVibration = ABI::Windows::Gaming::Input::GamepadVibration;
 using RacingWheelReading = ABI::Windows::Gaming::Input::RacingWheelReading;
@@ -30,19 +32,30 @@ namespace ABI::Windows::Gaming::Input {
 
 struct IArcadeStick;
 struct IArcadeStickStatics;
+struct IArcadeStickStatics2;
+struct IFlightStick;
+struct IFlightStickStatics;
 struct IGameController;
+struct IGameControllerBatteryInfo;
 struct IGamepad;
 struct IGamepad2;
 struct IGamepadStatics;
+struct IGamepadStatics2;
 struct IHeadset;
 struct IRacingWheel;
 struct IRacingWheelStatics;
+struct IRacingWheelStatics2;
+struct IRawGameController;
+struct IRawGameControllerStatics;
 struct IUINavigationController;
 struct IUINavigationControllerStatics;
+struct IUINavigationControllerStatics2;
 struct ArcadeStick;
+struct FlightStick;
 struct Gamepad;
 struct Headset;
 struct RacingWheel;
+struct RawGameController;
 struct UINavigationController;
 
 }
@@ -51,20 +64,56 @@ namespace Windows::Gaming::Input {
 
 struct IArcadeStick;
 struct IArcadeStickStatics;
+struct IArcadeStickStatics2;
+struct IFlightStick;
+struct IFlightStickStatics;
 struct IGameController;
+struct IGameControllerBatteryInfo;
 struct IGamepad;
 struct IGamepad2;
 struct IGamepadStatics;
+struct IGamepadStatics2;
 struct IHeadset;
 struct IRacingWheel;
 struct IRacingWheelStatics;
+struct IRacingWheelStatics2;
+struct IRawGameController;
+struct IRawGameControllerStatics;
 struct IUINavigationController;
 struct IUINavigationControllerStatics;
+struct IUINavigationControllerStatics2;
 struct ArcadeStick;
+struct FlightStick;
 struct Gamepad;
 struct Headset;
 struct RacingWheel;
+struct RawGameController;
 struct UINavigationController;
+
+}
+
+namespace Windows::Gaming::Input {
+
+template <typename T> struct impl_IArcadeStick;
+template <typename T> struct impl_IArcadeStickStatics;
+template <typename T> struct impl_IArcadeStickStatics2;
+template <typename T> struct impl_IFlightStick;
+template <typename T> struct impl_IFlightStickStatics;
+template <typename T> struct impl_IGameController;
+template <typename T> struct impl_IGameControllerBatteryInfo;
+template <typename T> struct impl_IGamepad;
+template <typename T> struct impl_IGamepad2;
+template <typename T> struct impl_IGamepadStatics;
+template <typename T> struct impl_IGamepadStatics2;
+template <typename T> struct impl_IHeadset;
+template <typename T> struct impl_IRacingWheel;
+template <typename T> struct impl_IRacingWheelStatics;
+template <typename T> struct impl_IRacingWheelStatics2;
+template <typename T> struct impl_IRawGameController;
+template <typename T> struct impl_IRawGameControllerStatics;
+template <typename T> struct impl_IUINavigationController;
+template <typename T> struct impl_IUINavigationControllerStatics;
+template <typename T> struct impl_IUINavigationControllerStatics2;
 
 }
 
@@ -88,6 +137,15 @@ enum class ArcadeStickButtons : unsigned
 };
 
 DEFINE_ENUM_FLAG_OPERATORS(ArcadeStickButtons)
+
+enum class FlightStickButtons : unsigned
+{
+    None = 0x0,
+    FirePrimary = 0x1,
+    FireSecondary = 0x2,
+};
+
+DEFINE_ENUM_FLAG_OPERATORS(FlightStickButtons)
 
 enum class GameControllerButtonLabel
 {
@@ -160,6 +218,26 @@ enum class GameControllerButtonLabel
     DialLeft = 66,
     DialRight = 67,
     Suspension = 68,
+};
+
+enum class GameControllerSwitchKind
+{
+    TwoWay = 0,
+    FourWay = 1,
+    EightWay = 2,
+};
+
+enum class GameControllerSwitchPosition
+{
+    Center = 0,
+    Up = 1,
+    UpRight = 2,
+    Right = 3,
+    DownRight = 4,
+    Down = 5,
+    DownLeft = 6,
+    Left = 7,
+    UpLeft = 8,
 };
 
 enum class GamepadButtons : unsigned

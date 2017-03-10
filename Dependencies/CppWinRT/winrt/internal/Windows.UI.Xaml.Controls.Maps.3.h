@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -25,7 +25,7 @@ struct WINRT_EBO HttpMapTileDataSource :
 {
     HttpMapTileDataSource(std::nullptr_t) noexcept {}
     HttpMapTileDataSource();
-    HttpMapTileDataSource(hstring_ref uriFormatString);
+    HttpMapTileDataSource(hstring_view uriFormatString);
 };
 
 struct WINRT_EBO LocalMapTileDataSource :
@@ -35,7 +35,7 @@ struct WINRT_EBO LocalMapTileDataSource :
 {
     LocalMapTileDataSource(std::nullptr_t) noexcept {}
     LocalMapTileDataSource();
-    LocalMapTileDataSource(hstring_ref uriFormatString);
+    LocalMapTileDataSource(hstring_view uriFormatString);
 };
 
 struct WINRT_EBO MapActualCameraChangedEventArgs :
@@ -54,6 +54,18 @@ struct WINRT_EBO MapActualCameraChangingEventArgs :
     MapActualCameraChangingEventArgs();
 };
 
+struct WINRT_EBO MapBillboard :
+    Windows::UI::Xaml::Controls::Maps::IMapBillboard,
+    impl::bases<MapBillboard, Windows::UI::Xaml::DependencyObject, Windows::UI::Xaml::Controls::Maps::MapElement>,
+    impl::require<MapBillboard, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2, Windows::UI::Xaml::Controls::Maps::IMapElement, Windows::UI::Xaml::Controls::Maps::IMapElement2>
+{
+    MapBillboard(std::nullptr_t) noexcept {}
+    MapBillboard(const Windows::UI::Xaml::Controls::Maps::MapCamera & camera);
+    static Windows::UI::Xaml::DependencyProperty LocationProperty();
+    static Windows::UI::Xaml::DependencyProperty NormalizedAnchorPointProperty();
+    static Windows::UI::Xaml::DependencyProperty CollisionBehaviorDesiredProperty();
+};
+
 struct WINRT_EBO MapCamera :
     Windows::UI::Xaml::Controls::Maps::IMapCamera,
     impl::bases<MapCamera, Windows::UI::Xaml::DependencyObject>,
@@ -66,15 +78,26 @@ struct WINRT_EBO MapCamera :
     MapCamera(const Windows::Devices::Geolocation::Geopoint & location, double headingInDegrees, double pitchInDegrees, double rollInDegrees, double fieldOfViewInDegrees);
 };
 
+struct WINRT_EBO MapContextRequestedEventArgs :
+    Windows::UI::Xaml::Controls::Maps::IMapContextRequestedEventArgs
+{
+    MapContextRequestedEventArgs(std::nullptr_t) noexcept {}
+    MapContextRequestedEventArgs();
+};
+
 struct WINRT_EBO MapControl :
     Windows::UI::Xaml::Controls::Maps::IMapControl,
     impl::bases<MapControl, Windows::UI::Xaml::DependencyObject, Windows::UI::Xaml::UIElement, Windows::UI::Xaml::FrameworkElement, Windows::UI::Xaml::Controls::Control>,
-    impl::require<MapControl, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2, Windows::UI::Xaml::IUIElement, Windows::UI::Xaml::IUIElementOverrides, Windows::UI::Xaml::IUIElement2, Windows::UI::Xaml::IUIElement3, Windows::UI::Xaml::IUIElement4, Windows::UI::Xaml::IFrameworkElement, Windows::UI::Xaml::IFrameworkElementOverrides, Windows::UI::Xaml::IFrameworkElement2, Windows::UI::Xaml::IFrameworkElementOverrides2, Windows::UI::Xaml::IFrameworkElement3, Windows::UI::Xaml::IFrameworkElement4, Windows::UI::Xaml::Controls::IControl, Windows::UI::Xaml::Controls::IControlOverrides, Windows::UI::Xaml::Controls::IControl2, Windows::UI::Xaml::Controls::IControl3, Windows::UI::Xaml::Controls::IControl4, Windows::UI::Xaml::Controls::Maps::IMapControl2, Windows::UI::Xaml::Controls::Maps::IMapControl3, Windows::UI::Xaml::Controls::Maps::IMapControl4>
+    impl::require<MapControl, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2, Windows::UI::Xaml::IUIElement, Windows::UI::Xaml::IUIElementOverrides, Windows::UI::Xaml::IUIElement2, Windows::UI::Xaml::IUIElement3, Windows::UI::Xaml::IUIElement4, Windows::UI::Xaml::IUIElement5, Windows::UI::Xaml::IFrameworkElement, Windows::UI::Xaml::IFrameworkElementOverrides, Windows::UI::Xaml::IFrameworkElement2, Windows::UI::Xaml::IFrameworkElementOverrides2, Windows::UI::Xaml::IFrameworkElement3, Windows::UI::Xaml::IFrameworkElement4, Windows::UI::Xaml::Controls::IControl, Windows::UI::Xaml::Controls::IControlOverrides, Windows::UI::Xaml::Controls::IControl2, Windows::UI::Xaml::Controls::IControl3, Windows::UI::Xaml::Controls::IControl4, Windows::UI::Xaml::Controls::IControl5, Windows::UI::Xaml::Controls::Maps::IMapControl2, Windows::UI::Xaml::Controls::Maps::IMapControl3, Windows::UI::Xaml::Controls::Maps::IMapControl4, Windows::UI::Xaml::Controls::Maps::IMapControl5>
 {
     MapControl(std::nullptr_t) noexcept {}
     MapControl();
     using impl_IFrameworkElement::Style;
+    using impl_IMapControl::FindMapElementsAtOffset;
+    using impl_IMapControl::GetLocationFromOffset;
     using impl_IMapControl::Style;
+    using impl_IMapControl5::FindMapElementsAtOffset;
+    using impl_IMapControl5::GetLocationFromOffset;
     static Windows::UI::Xaml::DependencyProperty CenterProperty();
     static Windows::UI::Xaml::DependencyProperty ChildrenProperty();
     static Windows::UI::Xaml::DependencyProperty ColorSchemeProperty();
@@ -110,6 +133,9 @@ struct WINRT_EBO MapControl :
     static Windows::UI::Xaml::DependencyProperty SceneProperty();
     static Windows::UI::Xaml::DependencyProperty BusinessLandmarksEnabledProperty();
     static Windows::UI::Xaml::DependencyProperty TransitFeaturesEnabledProperty();
+    static Windows::UI::Xaml::DependencyProperty MapProjectionProperty();
+    static Windows::UI::Xaml::DependencyProperty StyleSheetProperty();
+    static Windows::UI::Xaml::DependencyProperty ViewPaddingProperty();
 };
 
 struct WINRT_EBO MapControlBusinessLandmarkClickEventArgs :
@@ -143,7 +169,7 @@ struct WINRT_EBO MapControlBusinessLandmarkRightTappedEventArgs :
 struct WINRT_EBO MapControlDataHelper :
     Windows::UI::Xaml::Controls::Maps::IMapControlDataHelper,
     impl::bases<MapControlDataHelper, Windows::UI::Xaml::DependencyObject>,
-    impl::require<MapControlDataHelper, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2, Windows::UI::Xaml::Controls::Maps::IMapControlDataHelper2>
+    impl::require<MapControlDataHelper, Windows::UI::Xaml::Controls::Maps::IMapControlDataHelper2, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>
 {
     MapControlDataHelper(std::nullptr_t) noexcept {}
     MapControlDataHelper(const Windows::UI::Xaml::Controls::Maps::MapControl & map);
@@ -312,8 +338,25 @@ struct WINRT_EBO MapScene :
     static Windows::UI::Xaml::Controls::Maps::MapScene CreateFromLocation(const Windows::Devices::Geolocation::Geopoint & location, double headingInDegrees, double pitchInDegrees);
     static Windows::UI::Xaml::Controls::Maps::MapScene CreateFromLocationAndRadius(const Windows::Devices::Geolocation::Geopoint & location, double radiusInMeters);
     static Windows::UI::Xaml::Controls::Maps::MapScene CreateFromLocationAndRadius(const Windows::Devices::Geolocation::Geopoint & location, double radiusInMeters, double headingInDegrees, double pitchInDegrees);
-    static Windows::UI::Xaml::Controls::Maps::MapScene CreateFromLocations(const Windows::Foundation::Collections::IIterable<Windows::Devices::Geolocation::Geopoint> & locations);
-    static Windows::UI::Xaml::Controls::Maps::MapScene CreateFromLocations(const Windows::Foundation::Collections::IIterable<Windows::Devices::Geolocation::Geopoint> & locations, double headingInDegrees, double pitchInDegrees);
+    static Windows::UI::Xaml::Controls::Maps::MapScene CreateFromLocations(iterable<Windows::Devices::Geolocation::Geopoint> locations);
+    static Windows::UI::Xaml::Controls::Maps::MapScene CreateFromLocations(iterable<Windows::Devices::Geolocation::Geopoint> locations, double headingInDegrees, double pitchInDegrees);
+};
+
+struct WINRT_EBO MapStyleSheet :
+    Windows::UI::Xaml::Controls::Maps::IMapStyleSheet,
+    impl::bases<MapStyleSheet, Windows::UI::Xaml::DependencyObject>,
+    impl::require<MapStyleSheet, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>
+{
+    MapStyleSheet(std::nullptr_t) noexcept {}
+    static Windows::UI::Xaml::Controls::Maps::MapStyleSheet Aerial();
+    static Windows::UI::Xaml::Controls::Maps::MapStyleSheet AerialWithOverlay();
+    static Windows::UI::Xaml::Controls::Maps::MapStyleSheet RoadLight();
+    static Windows::UI::Xaml::Controls::Maps::MapStyleSheet RoadDark();
+    static Windows::UI::Xaml::Controls::Maps::MapStyleSheet RoadHighContrastLight();
+    static Windows::UI::Xaml::Controls::Maps::MapStyleSheet RoadHighContrastDark();
+    static Windows::UI::Xaml::Controls::Maps::MapStyleSheet Combine(iterable<Windows::UI::Xaml::Controls::Maps::MapStyleSheet> styleSheets);
+    static Windows::UI::Xaml::Controls::Maps::MapStyleSheet ParseFromJson(hstring_view styleAsJson);
+    static bool TryParseFromJson(hstring_view styleAsJson, Windows::UI::Xaml::Controls::Maps::MapStyleSheet & styleSheet);
 };
 
 struct WINRT_EBO MapTargetCameraChangedEventArgs :

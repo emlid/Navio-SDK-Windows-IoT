@@ -46,7 +46,11 @@
     <ClInclude Include="Protocols\SerialWireDebug\SwdResponseBits.h">
       <Filter>Protocols\SerialWireDebug</Filter>
     </ClInclude>
-    <ClInclude Include="Protocols\SerialWireDebug\SwdDebugPortIdRegisterBits.h" />
-    <ClInclude Include="Protocols\SerialWireDebug\SwdRegisterAddresses.h" />
+    <ClInclude Include="Protocols\SerialWireDebug\SwdDebugPortIdRegisterBits.h">
+      <Filter>Protocols\SerialWireDebug</Filter>
+    </ClInclude>
+    <ClInclude Include="Protocols\SerialWireDebug\SwdRegisterAddresses.h">
+      <Filter>Protocols\SerialWireDebug</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

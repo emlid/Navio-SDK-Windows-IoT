@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -11,7 +11,7 @@ namespace Windows::Media::MediaProperties {
 
 struct WINRT_EBO AudioEncodingProperties :
     Windows::Media::MediaProperties::IAudioEncodingProperties,
-    impl::require<AudioEncodingProperties, Windows::Media::MediaProperties::IAudioEncodingPropertiesWithFormatUserData>
+    impl::require<AudioEncodingProperties, Windows::Media::MediaProperties::IAudioEncodingPropertiesWithFormatUserData, Windows::Media::MediaProperties::IAudioEncodingProperties2>
 {
     AudioEncodingProperties(std::nullptr_t) noexcept {}
     AudioEncodingProperties();
@@ -20,6 +20,8 @@ struct WINRT_EBO AudioEncodingProperties :
     static Windows::Media::MediaProperties::AudioEncodingProperties CreateMp3(uint32_t sampleRate, uint32_t channelCount, uint32_t bitrate);
     static Windows::Media::MediaProperties::AudioEncodingProperties CreatePcm(uint32_t sampleRate, uint32_t channelCount, uint32_t bitsPerSample);
     static Windows::Media::MediaProperties::AudioEncodingProperties CreateWma(uint32_t sampleRate, uint32_t channelCount, uint32_t bitrate);
+    static Windows::Media::MediaProperties::AudioEncodingProperties CreateAlac(uint32_t sampleRate, uint32_t channelCount, uint32_t bitsPerSample);
+    static Windows::Media::MediaProperties::AudioEncodingProperties CreateFlac(uint32_t sampleRate, uint32_t channelCount, uint32_t bitsPerSample);
 };
 
 struct WINRT_EBO ContainerEncodingProperties :
@@ -70,6 +72,9 @@ struct WINRT_EBO MediaEncodingProfile :
     static Windows::Foundation::IAsyncOperation<Windows::Media::MediaProperties::MediaEncodingProfile> CreateFromStreamAsync(const Windows::Storage::Streams::IRandomAccessStream & stream);
     static Windows::Media::MediaProperties::MediaEncodingProfile CreateWav(Windows::Media::MediaProperties::AudioEncodingQuality quality);
     static Windows::Media::MediaProperties::MediaEncodingProfile CreateAvi(Windows::Media::MediaProperties::VideoEncodingQuality quality);
+    static Windows::Media::MediaProperties::MediaEncodingProfile CreateAlac(Windows::Media::MediaProperties::AudioEncodingQuality quality);
+    static Windows::Media::MediaProperties::MediaEncodingProfile CreateFlac(Windows::Media::MediaProperties::AudioEncodingQuality quality);
+    static Windows::Media::MediaProperties::MediaEncodingProfile CreateHevc(Windows::Media::MediaProperties::VideoEncodingQuality quality);
 };
 
 struct MediaEncodingSubtypes
@@ -115,10 +120,16 @@ struct MediaEncodingSubtypes
     static hstring Wvc1();
     static hstring Yuy2();
     static hstring Yv12();
+    static hstring Vp9();
+    static hstring L8();
+    static hstring L16();
+    static hstring D16();
+    static hstring Alac();
+    static hstring Flac();
 };
 
 struct WINRT_EBO MediaPropertySet :
-    Windows::Foundation::Collections::IMap<GUID, Windows::IInspectable>
+    Windows::Foundation::Collections::IMap<GUID, Windows::Foundation::IInspectable>
 {
     MediaPropertySet(std::nullptr_t) noexcept {}
     MediaPropertySet();
@@ -142,13 +153,14 @@ struct Mpeg2ProfileIds
 
 struct WINRT_EBO VideoEncodingProperties :
     Windows::Media::MediaProperties::IVideoEncodingProperties,
-    impl::require<VideoEncodingProperties, Windows::Media::MediaProperties::IVideoEncodingProperties2, Windows::Media::MediaProperties::IVideoEncodingProperties3>
+    impl::require<VideoEncodingProperties, Windows::Media::MediaProperties::IVideoEncodingProperties2, Windows::Media::MediaProperties::IVideoEncodingProperties3, Windows::Media::MediaProperties::IVideoEncodingProperties4>
 {
     VideoEncodingProperties(std::nullptr_t) noexcept {}
     VideoEncodingProperties();
     static Windows::Media::MediaProperties::VideoEncodingProperties CreateH264();
     static Windows::Media::MediaProperties::VideoEncodingProperties CreateMpeg2();
-    static Windows::Media::MediaProperties::VideoEncodingProperties CreateUncompressed(hstring_ref subtype, uint32_t width, uint32_t height);
+    static Windows::Media::MediaProperties::VideoEncodingProperties CreateUncompressed(hstring_view subtype, uint32_t width, uint32_t height);
+    static Windows::Media::MediaProperties::VideoEncodingProperties CreateHevc();
 };
 
 }

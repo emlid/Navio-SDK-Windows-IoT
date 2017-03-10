@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -13,11 +13,11 @@ template <typename H> struct impl_ActivatedEventHandler : implements<impl_Activa
 {
     impl_ActivatedEventHandler(H && handler) : H(std::forward<H>(handler)) {}
 
-    HRESULT __stdcall abi_Invoke(abi_arg_in<Windows::IInspectable> sender, abi_arg_in<Windows::ApplicationModel::Activation::IActivatedEventArgs> eventArgs) noexcept override
+    HRESULT __stdcall abi_Invoke(impl::abi_arg_in<Windows::Foundation::IInspectable> sender, impl::abi_arg_in<Windows::ApplicationModel::Activation::IActivatedEventArgs> eventArgs) noexcept override
     {
         try
         {
-            (*this)(*reinterpret_cast<const Windows::IInspectable *>(&sender), *reinterpret_cast<const Windows::ApplicationModel::Activation::IActivatedEventArgs *>(&eventArgs));
+            (*this)(*reinterpret_cast<const Windows::Foundation::IInspectable *>(&sender), *reinterpret_cast<const Windows::ApplicationModel::Activation::IActivatedEventArgs *>(&eventArgs));
             return S_OK;
         }
         catch (...)
@@ -31,11 +31,11 @@ template <typename H> struct impl_EnteredBackgroundEventHandler : implements<imp
 {
     impl_EnteredBackgroundEventHandler(H && handler) : H(std::forward<H>(handler)) {}
 
-    HRESULT __stdcall abi_Invoke(abi_arg_in<Windows::IInspectable> sender, abi_arg_in<Windows::ApplicationModel::IEnteredBackgroundEventArgs> e) noexcept override
+    HRESULT __stdcall abi_Invoke(impl::abi_arg_in<Windows::Foundation::IInspectable> sender, impl::abi_arg_in<Windows::ApplicationModel::IEnteredBackgroundEventArgs> e) noexcept override
     {
         try
         {
-            (*this)(*reinterpret_cast<const Windows::IInspectable *>(&sender), *reinterpret_cast<const Windows::ApplicationModel::IEnteredBackgroundEventArgs *>(&e));
+            (*this)(*reinterpret_cast<const Windows::Foundation::IInspectable *>(&sender), *reinterpret_cast<const Windows::ApplicationModel::IEnteredBackgroundEventArgs *>(&e));
             return S_OK;
         }
         catch (...)
@@ -49,11 +49,11 @@ template <typename H> struct impl_LeavingBackgroundEventHandler : implements<imp
 {
     impl_LeavingBackgroundEventHandler(H && handler) : H(std::forward<H>(handler)) {}
 
-    HRESULT __stdcall abi_Invoke(abi_arg_in<Windows::IInspectable> sender, abi_arg_in<Windows::ApplicationModel::ILeavingBackgroundEventArgs> e) noexcept override
+    HRESULT __stdcall abi_Invoke(impl::abi_arg_in<Windows::Foundation::IInspectable> sender, impl::abi_arg_in<Windows::ApplicationModel::ILeavingBackgroundEventArgs> e) noexcept override
     {
         try
         {
-            (*this)(*reinterpret_cast<const Windows::IInspectable *>(&sender), *reinterpret_cast<const Windows::ApplicationModel::ILeavingBackgroundEventArgs *>(&e));
+            (*this)(*reinterpret_cast<const Windows::Foundation::IInspectable *>(&sender), *reinterpret_cast<const Windows::ApplicationModel::ILeavingBackgroundEventArgs *>(&e));
             return S_OK;
         }
         catch (...)
@@ -67,11 +67,11 @@ template <typename H> struct impl_NavigatedEventHandler : implements<impl_Naviga
 {
     impl_NavigatedEventHandler(H && handler) : H(std::forward<H>(handler)) {}
 
-    HRESULT __stdcall abi_Invoke(abi_arg_in<Windows::IInspectable> sender, abi_arg_in<Windows::UI::WebUI::IWebUINavigatedEventArgs> e) noexcept override
+    HRESULT __stdcall abi_Invoke(impl::abi_arg_in<Windows::Foundation::IInspectable> sender, impl::abi_arg_in<Windows::UI::WebUI::IWebUINavigatedEventArgs> e) noexcept override
     {
         try
         {
-            (*this)(*reinterpret_cast<const Windows::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::WebUI::IWebUINavigatedEventArgs *>(&e));
+            (*this)(*reinterpret_cast<const Windows::Foundation::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::WebUI::IWebUINavigatedEventArgs *>(&e));
             return S_OK;
         }
         catch (...)
@@ -85,11 +85,11 @@ template <typename H> struct impl_ResumingEventHandler : implements<impl_Resumin
 {
     impl_ResumingEventHandler(H && handler) : H(std::forward<H>(handler)) {}
 
-    HRESULT __stdcall abi_Invoke(abi_arg_in<Windows::IInspectable> sender) noexcept override
+    HRESULT __stdcall abi_Invoke(impl::abi_arg_in<Windows::Foundation::IInspectable> sender) noexcept override
     {
         try
         {
-            (*this)(*reinterpret_cast<const Windows::IInspectable *>(&sender));
+            (*this)(*reinterpret_cast<const Windows::Foundation::IInspectable *>(&sender));
             return S_OK;
         }
         catch (...)
@@ -103,11 +103,11 @@ template <typename H> struct impl_SuspendingEventHandler : implements<impl_Suspe
 {
     impl_SuspendingEventHandler(H && handler) : H(std::forward<H>(handler)) {}
 
-    HRESULT __stdcall abi_Invoke(abi_arg_in<Windows::IInspectable> sender, abi_arg_in<Windows::ApplicationModel::ISuspendingEventArgs> e) noexcept override
+    HRESULT __stdcall abi_Invoke(impl::abi_arg_in<Windows::Foundation::IInspectable> sender, impl::abi_arg_in<Windows::ApplicationModel::ISuspendingEventArgs> e) noexcept override
     {
         try
         {
-            (*this)(*reinterpret_cast<const Windows::IInspectable *>(&sender), *reinterpret_cast<const Windows::ApplicationModel::ISuspendingEventArgs *>(&e));
+            (*this)(*reinterpret_cast<const Windows::Foundation::IInspectable *>(&sender), *reinterpret_cast<const Windows::ApplicationModel::ISuspendingEventArgs *>(&e));
             return S_OK;
         }
         catch (...)
@@ -283,6 +283,13 @@ struct WINRT_EBO WebUIContactMessageActivatedEventArgs :
     WebUIContactMessageActivatedEventArgs(std::nullptr_t) noexcept {}
 };
 
+struct WINRT_EBO WebUIContactPanelActivatedEventArgs :
+    Windows::ApplicationModel::Activation::IContactPanelActivatedEventArgs,
+    impl::require<WebUIContactPanelActivatedEventArgs, Windows::ApplicationModel::Activation::IActivatedEventArgs, Windows::ApplicationModel::Activation::IActivatedEventArgsWithUser, Windows::UI::WebUI::IActivatedEventArgsDeferral>
+{
+    WebUIContactPanelActivatedEventArgs(std::nullptr_t) noexcept {}
+};
+
 struct WINRT_EBO WebUIContactPickerActivatedEventArgs :
     Windows::ApplicationModel::Activation::IContactPickerActivatedEventArgs,
     impl::require<WebUIContactPickerActivatedEventArgs, Windows::UI::WebUI::IActivatedEventArgsDeferral>
@@ -388,6 +395,13 @@ struct WINRT_EBO WebUILockScreenCallActivatedEventArgs :
     WebUILockScreenCallActivatedEventArgs(std::nullptr_t) noexcept {}
 };
 
+struct WINRT_EBO WebUILockScreenComponentActivatedEventArgs :
+    Windows::ApplicationModel::Activation::IActivatedEventArgs,
+    impl::require<WebUILockScreenComponentActivatedEventArgs, Windows::UI::WebUI::IActivatedEventArgsDeferral>
+{
+    WebUILockScreenComponentActivatedEventArgs(std::nullptr_t) noexcept {}
+};
+
 struct WINRT_EBO WebUINavigatedDeferral :
     Windows::UI::WebUI::IWebUINavigatedDeferral
 {
@@ -418,6 +432,13 @@ struct WINRT_EBO WebUIPrintTaskSettingsActivatedEventArgs :
     impl::require<WebUIPrintTaskSettingsActivatedEventArgs, Windows::UI::WebUI::IActivatedEventArgsDeferral>
 {
     WebUIPrintTaskSettingsActivatedEventArgs(std::nullptr_t) noexcept {}
+};
+
+struct WINRT_EBO WebUIPrintWorkflowForegroundTaskActivatedEventArgs :
+    Windows::ApplicationModel::Activation::IActivatedEventArgs,
+    impl::require<WebUIPrintWorkflowForegroundTaskActivatedEventArgs, Windows::UI::WebUI::IActivatedEventArgsDeferral>
+{
+    WebUIPrintWorkflowForegroundTaskActivatedEventArgs(std::nullptr_t) noexcept {}
 };
 
 struct WINRT_EBO WebUIProtocolActivatedEventArgs :

@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -8,6 +8,8 @@ WINRT_EXPORT namespace winrt {
 
 namespace ABI::Windows::System {
 
+struct IAppDiagnosticInfo;
+struct IAppDiagnosticInfoStatics;
 struct IAppMemoryReport;
 struct IAppMemoryUsageLimitChangingEventArgs;
 struct IFolderLauncherOptions;
@@ -16,6 +18,7 @@ struct ILaunchUriResult;
 struct ILauncherOptions;
 struct ILauncherOptions2;
 struct ILauncherOptions3;
+struct ILauncherOptions4;
 struct ILauncherStatics;
 struct ILauncherStatics2;
 struct ILauncherStatics3;
@@ -33,6 +36,7 @@ struct IProtocolForResultsOperation;
 struct IRemoteLauncherOptions;
 struct IRemoteLauncherStatics;
 struct IShutdownManagerStatics;
+struct IShutdownManagerStatics2;
 struct ITimeZoneSettingsStatics;
 struct IUser;
 struct IUserAuthenticationStatusChangeDeferral;
@@ -44,6 +48,7 @@ struct IUserPicker;
 struct IUserPickerStatics;
 struct IUserStatics;
 struct IUserWatcher;
+struct AppDiagnosticInfo;
 struct AppMemoryReport;
 struct AppMemoryUsageLimitChangingEventArgs;
 struct FolderLauncherOptions;
@@ -67,6 +72,8 @@ struct UserWatcher;
 
 namespace Windows::System {
 
+struct IAppDiagnosticInfo;
+struct IAppDiagnosticInfoStatics;
 struct IAppMemoryReport;
 struct IAppMemoryUsageLimitChangingEventArgs;
 struct IFolderLauncherOptions;
@@ -75,6 +82,7 @@ struct ILaunchUriResult;
 struct ILauncherOptions;
 struct ILauncherOptions2;
 struct ILauncherOptions3;
+struct ILauncherOptions4;
 struct ILauncherStatics;
 struct ILauncherStatics2;
 struct ILauncherStatics3;
@@ -92,6 +100,7 @@ struct IProtocolForResultsOperation;
 struct IRemoteLauncherOptions;
 struct IRemoteLauncherStatics;
 struct IShutdownManagerStatics;
+struct IShutdownManagerStatics2;
 struct ITimeZoneSettingsStatics;
 struct IUser;
 struct IUserAuthenticationStatusChangeDeferral;
@@ -103,6 +112,7 @@ struct IUserPicker;
 struct IUserPickerStatics;
 struct IUserStatics;
 struct IUserWatcher;
+struct AppDiagnosticInfo;
 struct AppMemoryReport;
 struct AppMemoryUsageLimitChangingEventArgs;
 struct FolderLauncherOptions;
@@ -129,6 +139,51 @@ struct UserDeviceAssociation;
 struct UserDeviceAssociationChangedEventArgs;
 struct UserPicker;
 struct UserWatcher;
+
+}
+
+namespace Windows::System {
+
+template <typename T> struct impl_IAppDiagnosticInfo;
+template <typename T> struct impl_IAppDiagnosticInfoStatics;
+template <typename T> struct impl_IAppMemoryReport;
+template <typename T> struct impl_IAppMemoryUsageLimitChangingEventArgs;
+template <typename T> struct impl_IFolderLauncherOptions;
+template <typename T> struct impl_IKnownUserPropertiesStatics;
+template <typename T> struct impl_ILaunchUriResult;
+template <typename T> struct impl_ILauncherOptions;
+template <typename T> struct impl_ILauncherOptions2;
+template <typename T> struct impl_ILauncherOptions3;
+template <typename T> struct impl_ILauncherOptions4;
+template <typename T> struct impl_ILauncherStatics;
+template <typename T> struct impl_ILauncherStatics2;
+template <typename T> struct impl_ILauncherStatics3;
+template <typename T> struct impl_ILauncherStatics4;
+template <typename T> struct impl_ILauncherUIOptions;
+template <typename T> struct impl_ILauncherViewOptions;
+template <typename T> struct impl_IMemoryManagerStatics;
+template <typename T> struct impl_IMemoryManagerStatics2;
+template <typename T> struct impl_IMemoryManagerStatics3;
+template <typename T> struct impl_IProcessLauncherOptions;
+template <typename T> struct impl_IProcessLauncherResult;
+template <typename T> struct impl_IProcessLauncherStatics;
+template <typename T> struct impl_IProcessMemoryReport;
+template <typename T> struct impl_IProtocolForResultsOperation;
+template <typename T> struct impl_IRemoteLauncherOptions;
+template <typename T> struct impl_IRemoteLauncherStatics;
+template <typename T> struct impl_IShutdownManagerStatics;
+template <typename T> struct impl_IShutdownManagerStatics2;
+template <typename T> struct impl_ITimeZoneSettingsStatics;
+template <typename T> struct impl_IUser;
+template <typename T> struct impl_IUserAuthenticationStatusChangeDeferral;
+template <typename T> struct impl_IUserAuthenticationStatusChangingEventArgs;
+template <typename T> struct impl_IUserChangedEventArgs;
+template <typename T> struct impl_IUserDeviceAssociationChangedEventArgs;
+template <typename T> struct impl_IUserDeviceAssociationStatics;
+template <typename T> struct impl_IUserPicker;
+template <typename T> struct impl_IUserPickerStatics;
+template <typename T> struct impl_IUserStatics;
+template <typename T> struct impl_IUserWatcher;
 
 }
 
@@ -172,6 +227,12 @@ enum class LaunchUriStatus
     AppUnavailable = 1,
     ProtocolUnavailable = 2,
     Unknown = 3,
+};
+
+enum class PowerState
+{
+    ConnectedStandby = 0,
+    SleepS3 = 1,
 };
 
 enum class ProcessorArchitecture

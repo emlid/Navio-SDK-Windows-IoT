@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -11,12 +11,13 @@ namespace Windows::Devices::PointOfService {
 
 struct WINRT_EBO BarcodeScanner :
     Windows::Devices::PointOfService::IBarcodeScanner,
-    impl::require<BarcodeScanner, Windows::Devices::PointOfService::IBarcodeScanner2>
+    impl::require<BarcodeScanner, Windows::Foundation::IClosable, Windows::Devices::PointOfService::IBarcodeScanner2>
 {
     BarcodeScanner(std::nullptr_t) noexcept {}
     static Windows::Foundation::IAsyncOperation<Windows::Devices::PointOfService::BarcodeScanner> GetDefaultAsync();
-    static Windows::Foundation::IAsyncOperation<Windows::Devices::PointOfService::BarcodeScanner> FromIdAsync(hstring_ref deviceId);
+    static Windows::Foundation::IAsyncOperation<Windows::Devices::PointOfService::BarcodeScanner> FromIdAsync(hstring_view deviceId);
     static hstring GetDeviceSelector();
+    static hstring GetDeviceSelector(Windows::Devices::PointOfService::PosConnectionTypes connectionTypes);
 };
 
 struct WINRT_EBO BarcodeScannerCapabilities :
@@ -153,15 +154,24 @@ struct BarcodeSymbologies
     static uint32_t Micr();
     static uint32_t ExtendedBase();
     static hstring GetName(uint32_t scanDataType);
+    static uint32_t Gs1DWCode();
+};
+
+struct WINRT_EBO BarcodeSymbologyAttributes :
+    Windows::Devices::PointOfService::IBarcodeSymbologyAttributes
+{
+    BarcodeSymbologyAttributes(std::nullptr_t) noexcept {}
 };
 
 struct WINRT_EBO CashDrawer :
-    Windows::Devices::PointOfService::ICashDrawer
+    Windows::Devices::PointOfService::ICashDrawer,
+    impl::require<CashDrawer, Windows::Foundation::IClosable>
 {
     CashDrawer(std::nullptr_t) noexcept {}
     static Windows::Foundation::IAsyncOperation<Windows::Devices::PointOfService::CashDrawer> GetDefaultAsync();
-    static Windows::Foundation::IAsyncOperation<Windows::Devices::PointOfService::CashDrawer> FromIdAsync(hstring_ref deviceId);
+    static Windows::Foundation::IAsyncOperation<Windows::Devices::PointOfService::CashDrawer> FromIdAsync(hstring_view deviceId);
     static hstring GetDeviceSelector();
+    static hstring GetDeviceSelector(Windows::Devices::PointOfService::PosConnectionTypes connectionTypes);
 };
 
 struct WINRT_EBO CashDrawerCapabilities :
@@ -208,7 +218,7 @@ struct WINRT_EBO CashDrawerStatusUpdatedEventArgs :
 
 struct WINRT_EBO ClaimedBarcodeScanner :
     Windows::Devices::PointOfService::IClaimedBarcodeScanner,
-    impl::require<ClaimedBarcodeScanner, Windows::Devices::PointOfService::IClaimedBarcodeScanner1>
+    impl::require<ClaimedBarcodeScanner, Windows::Devices::PointOfService::IClaimedBarcodeScanner1, Windows::Devices::PointOfService::IClaimedBarcodeScanner2>
 {
     ClaimedBarcodeScanner(std::nullptr_t) noexcept {}
 };
@@ -223,6 +233,15 @@ struct WINRT_EBO ClaimedJournalPrinter :
     Windows::Devices::PointOfService::IClaimedJournalPrinter
 {
     ClaimedJournalPrinter(std::nullptr_t) noexcept {}
+};
+
+struct WINRT_EBO ClaimedLineDisplay :
+    Windows::Devices::PointOfService::IClaimedLineDisplay
+{
+    ClaimedLineDisplay(std::nullptr_t) noexcept {}
+    static Windows::Foundation::IAsyncOperation<Windows::Devices::PointOfService::ClaimedLineDisplay> FromIdAsync(hstring_view deviceId);
+    static hstring GetDeviceSelector();
+    static hstring GetDeviceSelector(Windows::Devices::PointOfService::PosConnectionTypes connectionTypes);
 };
 
 struct WINRT_EBO ClaimedMagneticStripeReader :
@@ -261,13 +280,37 @@ struct WINRT_EBO JournalPrinterCapabilities :
     JournalPrinterCapabilities(std::nullptr_t) noexcept {}
 };
 
+struct WINRT_EBO LineDisplay :
+    Windows::Devices::PointOfService::ILineDisplay
+{
+    LineDisplay(std::nullptr_t) noexcept {}
+    static Windows::Foundation::IAsyncOperation<Windows::Devices::PointOfService::LineDisplay> FromIdAsync(hstring_view deviceId);
+    static Windows::Foundation::IAsyncOperation<Windows::Devices::PointOfService::LineDisplay> GetDefaultAsync();
+    static hstring GetDeviceSelector();
+    static hstring GetDeviceSelector(Windows::Devices::PointOfService::PosConnectionTypes connectionTypes);
+};
+
+struct WINRT_EBO LineDisplayCapabilities :
+    Windows::Devices::PointOfService::ILineDisplayCapabilities
+{
+    LineDisplayCapabilities(std::nullptr_t) noexcept {}
+};
+
+struct WINRT_EBO LineDisplayWindow :
+    Windows::Devices::PointOfService::ILineDisplayWindow
+{
+    LineDisplayWindow(std::nullptr_t) noexcept {}
+};
+
 struct WINRT_EBO MagneticStripeReader :
-    Windows::Devices::PointOfService::IMagneticStripeReader
+    Windows::Devices::PointOfService::IMagneticStripeReader,
+    impl::require<MagneticStripeReader, Windows::Foundation::IClosable>
 {
     MagneticStripeReader(std::nullptr_t) noexcept {}
     static Windows::Foundation::IAsyncOperation<Windows::Devices::PointOfService::MagneticStripeReader> GetDefaultAsync();
-    static Windows::Foundation::IAsyncOperation<Windows::Devices::PointOfService::MagneticStripeReader> FromIdAsync(hstring_ref deviceId);
+    static Windows::Foundation::IAsyncOperation<Windows::Devices::PointOfService::MagneticStripeReader> FromIdAsync(hstring_view deviceId);
     static hstring GetDeviceSelector();
+    static hstring GetDeviceSelector(Windows::Devices::PointOfService::PosConnectionTypes connectionTypes);
 };
 
 struct WINRT_EBO MagneticStripeReaderAamvaCardDataReceivedEventArgs :
@@ -336,12 +379,14 @@ struct WINRT_EBO MagneticStripeReaderVendorSpecificCardDataReceivedEventArgs :
 };
 
 struct WINRT_EBO PosPrinter :
-    Windows::Devices::PointOfService::IPosPrinter
+    Windows::Devices::PointOfService::IPosPrinter,
+    impl::require<PosPrinter, Windows::Foundation::IClosable>
 {
     PosPrinter(std::nullptr_t) noexcept {}
     static Windows::Foundation::IAsyncOperation<Windows::Devices::PointOfService::PosPrinter> GetDefaultAsync();
-    static Windows::Foundation::IAsyncOperation<Windows::Devices::PointOfService::PosPrinter> FromIdAsync(hstring_ref deviceId);
+    static Windows::Foundation::IAsyncOperation<Windows::Devices::PointOfService::PosPrinter> FromIdAsync(hstring_view deviceId);
     static hstring GetDeviceSelector();
+    static hstring GetDeviceSelector(Windows::Devices::PointOfService::PosConnectionTypes connectionTypes);
 };
 
 struct WINRT_EBO PosPrinterCapabilities :

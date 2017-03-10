@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -14,6 +14,9 @@ struct BackgroundTaskProgressEventHandler;
 struct IActivitySensorTrigger;
 struct IActivitySensorTriggerFactory;
 struct IAlarmApplicationManagerStatics;
+struct IAppBroadcastTrigger;
+struct IAppBroadcastTriggerFactory;
+struct IAppBroadcastTriggerProviderInfo;
 struct IApplicationTrigger;
 struct IApplicationTriggerDetails;
 struct IAppointmentStoreNotificationTrigger;
@@ -23,6 +26,7 @@ struct IBackgroundTask;
 struct IBackgroundTaskBuilder;
 struct IBackgroundTaskBuilder2;
 struct IBackgroundTaskBuilder3;
+struct IBackgroundTaskBuilder4;
 struct IBackgroundTaskCompletedEventArgs;
 struct IBackgroundTaskDeferral;
 struct IBackgroundTaskInstance;
@@ -31,7 +35,11 @@ struct IBackgroundTaskInstance4;
 struct IBackgroundTaskProgressEventArgs;
 struct IBackgroundTaskRegistration;
 struct IBackgroundTaskRegistration2;
+struct IBackgroundTaskRegistration3;
+struct IBackgroundTaskRegistrationGroup;
+struct IBackgroundTaskRegistrationGroupFactory;
 struct IBackgroundTaskRegistrationStatics;
+struct IBackgroundTaskRegistrationStatics2;
 struct IBackgroundTrigger;
 struct IBackgroundWorkCostStatics;
 struct IBluetoothLEAdvertisementPublisherTrigger;
@@ -53,7 +61,12 @@ struct IDeviceUseTrigger;
 struct IDeviceWatcherTrigger;
 struct IEmailStoreNotificationTrigger;
 struct IGattCharacteristicNotificationTrigger;
+struct IGattCharacteristicNotificationTrigger2;
 struct IGattCharacteristicNotificationTriggerFactory;
+struct IGattCharacteristicNotificationTriggerFactory2;
+struct IGattServiceProviderTrigger;
+struct IGattServiceProviderTriggerResult;
+struct IGattServiceProviderTriggerStatics;
 struct ILocationTrigger;
 struct ILocationTriggerFactory;
 struct IMaintenanceTrigger;
@@ -86,6 +99,8 @@ struct IToastNotificationActionTriggerFactory;
 struct IToastNotificationHistoryChangedTriggerFactory;
 struct IUserNotificationChangedTriggerFactory;
 struct ActivitySensorTrigger;
+struct AppBroadcastTrigger;
+struct AppBroadcastTriggerProviderInfo;
 struct ApplicationTrigger;
 struct ApplicationTriggerDetails;
 struct AppointmentStoreNotificationTrigger;
@@ -94,6 +109,7 @@ struct BackgroundTaskCompletedEventArgs;
 struct BackgroundTaskDeferral;
 struct BackgroundTaskProgressEventArgs;
 struct BackgroundTaskRegistration;
+struct BackgroundTaskRegistrationGroup;
 struct BluetoothLEAdvertisementPublisherTrigger;
 struct BluetoothLEAdvertisementWatcherTrigger;
 struct CachedFileUpdaterTrigger;
@@ -110,6 +126,8 @@ struct DeviceUseTrigger;
 struct DeviceWatcherTrigger;
 struct EmailStoreNotificationTrigger;
 struct GattCharacteristicNotificationTrigger;
+struct GattServiceProviderTrigger;
+struct GattServiceProviderTriggerResult;
 struct LocationTrigger;
 struct MaintenanceTrigger;
 struct MediaProcessingTrigger;
@@ -146,6 +164,9 @@ struct BackgroundTaskProgressEventHandler;
 struct IActivitySensorTrigger;
 struct IActivitySensorTriggerFactory;
 struct IAlarmApplicationManagerStatics;
+struct IAppBroadcastTrigger;
+struct IAppBroadcastTriggerFactory;
+struct IAppBroadcastTriggerProviderInfo;
 struct IApplicationTrigger;
 struct IApplicationTriggerDetails;
 struct IAppointmentStoreNotificationTrigger;
@@ -155,6 +176,7 @@ struct IBackgroundTask;
 struct IBackgroundTaskBuilder;
 struct IBackgroundTaskBuilder2;
 struct IBackgroundTaskBuilder3;
+struct IBackgroundTaskBuilder4;
 struct IBackgroundTaskCompletedEventArgs;
 struct IBackgroundTaskDeferral;
 struct IBackgroundTaskInstance;
@@ -163,7 +185,11 @@ struct IBackgroundTaskInstance4;
 struct IBackgroundTaskProgressEventArgs;
 struct IBackgroundTaskRegistration;
 struct IBackgroundTaskRegistration2;
+struct IBackgroundTaskRegistration3;
+struct IBackgroundTaskRegistrationGroup;
+struct IBackgroundTaskRegistrationGroupFactory;
 struct IBackgroundTaskRegistrationStatics;
+struct IBackgroundTaskRegistrationStatics2;
 struct IBackgroundTrigger;
 struct IBackgroundWorkCostStatics;
 struct IBluetoothLEAdvertisementPublisherTrigger;
@@ -185,7 +211,12 @@ struct IDeviceUseTrigger;
 struct IDeviceWatcherTrigger;
 struct IEmailStoreNotificationTrigger;
 struct IGattCharacteristicNotificationTrigger;
+struct IGattCharacteristicNotificationTrigger2;
 struct IGattCharacteristicNotificationTriggerFactory;
+struct IGattCharacteristicNotificationTriggerFactory2;
+struct IGattServiceProviderTrigger;
+struct IGattServiceProviderTriggerResult;
+struct IGattServiceProviderTriggerStatics;
 struct ILocationTrigger;
 struct ILocationTriggerFactory;
 struct IMaintenanceTrigger;
@@ -219,6 +250,8 @@ struct IToastNotificationHistoryChangedTriggerFactory;
 struct IUserNotificationChangedTriggerFactory;
 struct ActivitySensorTrigger;
 struct AlarmApplicationManager;
+struct AppBroadcastTrigger;
+struct AppBroadcastTriggerProviderInfo;
 struct ApplicationTrigger;
 struct ApplicationTriggerDetails;
 struct AppointmentStoreNotificationTrigger;
@@ -228,6 +261,7 @@ struct BackgroundTaskCompletedEventArgs;
 struct BackgroundTaskDeferral;
 struct BackgroundTaskProgressEventArgs;
 struct BackgroundTaskRegistration;
+struct BackgroundTaskRegistrationGroup;
 struct BackgroundWorkCost;
 struct BluetoothLEAdvertisementPublisherTrigger;
 struct BluetoothLEAdvertisementWatcherTrigger;
@@ -245,6 +279,8 @@ struct DeviceUseTrigger;
 struct DeviceWatcherTrigger;
 struct EmailStoreNotificationTrigger;
 struct GattCharacteristicNotificationTrigger;
+struct GattServiceProviderTrigger;
+struct GattServiceProviderTriggerResult;
 struct LocationTrigger;
 struct MaintenanceTrigger;
 struct MediaProcessingTrigger;
@@ -275,6 +311,101 @@ struct UserNotificationChangedTrigger;
 
 namespace Windows::ApplicationModel::Background {
 
+template <typename T> struct impl_IActivitySensorTrigger;
+template <typename T> struct impl_IActivitySensorTriggerFactory;
+template <typename T> struct impl_IAlarmApplicationManagerStatics;
+template <typename T> struct impl_IAppBroadcastTrigger;
+template <typename T> struct impl_IAppBroadcastTriggerFactory;
+template <typename T> struct impl_IAppBroadcastTriggerProviderInfo;
+template <typename T> struct impl_IApplicationTrigger;
+template <typename T> struct impl_IApplicationTriggerDetails;
+template <typename T> struct impl_IAppointmentStoreNotificationTrigger;
+template <typename T> struct impl_IBackgroundCondition;
+template <typename T> struct impl_IBackgroundExecutionManagerStatics;
+template <typename T> struct impl_IBackgroundTask;
+template <typename T> struct impl_IBackgroundTaskBuilder;
+template <typename T> struct impl_IBackgroundTaskBuilder2;
+template <typename T> struct impl_IBackgroundTaskBuilder3;
+template <typename T> struct impl_IBackgroundTaskBuilder4;
+template <typename T> struct impl_IBackgroundTaskCompletedEventArgs;
+template <typename T> struct impl_IBackgroundTaskDeferral;
+template <typename T> struct impl_IBackgroundTaskInstance;
+template <typename T> struct impl_IBackgroundTaskInstance2;
+template <typename T> struct impl_IBackgroundTaskInstance4;
+template <typename T> struct impl_IBackgroundTaskProgressEventArgs;
+template <typename T> struct impl_IBackgroundTaskRegistration;
+template <typename T> struct impl_IBackgroundTaskRegistration2;
+template <typename T> struct impl_IBackgroundTaskRegistration3;
+template <typename T> struct impl_IBackgroundTaskRegistrationGroup;
+template <typename T> struct impl_IBackgroundTaskRegistrationGroupFactory;
+template <typename T> struct impl_IBackgroundTaskRegistrationStatics;
+template <typename T> struct impl_IBackgroundTaskRegistrationStatics2;
+template <typename T> struct impl_IBackgroundTrigger;
+template <typename T> struct impl_IBackgroundWorkCostStatics;
+template <typename T> struct impl_IBluetoothLEAdvertisementPublisherTrigger;
+template <typename T> struct impl_IBluetoothLEAdvertisementWatcherTrigger;
+template <typename T> struct impl_ICachedFileUpdaterTrigger;
+template <typename T> struct impl_ICachedFileUpdaterTriggerDetails;
+template <typename T> struct impl_IChatMessageNotificationTrigger;
+template <typename T> struct impl_IChatMessageReceivedNotificationTrigger;
+template <typename T> struct impl_ICommunicationBlockingAppSetAsActiveTrigger;
+template <typename T> struct impl_IContactStoreNotificationTrigger;
+template <typename T> struct impl_IContentPrefetchTrigger;
+template <typename T> struct impl_IContentPrefetchTriggerFactory;
+template <typename T> struct impl_IDeviceConnectionChangeTrigger;
+template <typename T> struct impl_IDeviceConnectionChangeTriggerStatics;
+template <typename T> struct impl_IDeviceManufacturerNotificationTrigger;
+template <typename T> struct impl_IDeviceManufacturerNotificationTriggerFactory;
+template <typename T> struct impl_IDeviceServicingTrigger;
+template <typename T> struct impl_IDeviceUseTrigger;
+template <typename T> struct impl_IDeviceWatcherTrigger;
+template <typename T> struct impl_IEmailStoreNotificationTrigger;
+template <typename T> struct impl_IGattCharacteristicNotificationTrigger;
+template <typename T> struct impl_IGattCharacteristicNotificationTrigger2;
+template <typename T> struct impl_IGattCharacteristicNotificationTriggerFactory;
+template <typename T> struct impl_IGattCharacteristicNotificationTriggerFactory2;
+template <typename T> struct impl_IGattServiceProviderTrigger;
+template <typename T> struct impl_IGattServiceProviderTriggerResult;
+template <typename T> struct impl_IGattServiceProviderTriggerStatics;
+template <typename T> struct impl_ILocationTrigger;
+template <typename T> struct impl_ILocationTriggerFactory;
+template <typename T> struct impl_IMaintenanceTrigger;
+template <typename T> struct impl_IMaintenanceTriggerFactory;
+template <typename T> struct impl_IMediaProcessingTrigger;
+template <typename T> struct impl_INetworkOperatorHotspotAuthenticationTrigger;
+template <typename T> struct impl_INetworkOperatorNotificationTrigger;
+template <typename T> struct impl_INetworkOperatorNotificationTriggerFactory;
+template <typename T> struct impl_IPhoneTrigger;
+template <typename T> struct impl_IPhoneTriggerFactory;
+template <typename T> struct impl_IPushNotificationTriggerFactory;
+template <typename T> struct impl_IRcsEndUserMessageAvailableTrigger;
+template <typename T> struct impl_IRfcommConnectionTrigger;
+template <typename T> struct impl_ISecondaryAuthenticationFactorAuthenticationTrigger;
+template <typename T> struct impl_ISensorDataThresholdTrigger;
+template <typename T> struct impl_ISensorDataThresholdTriggerFactory;
+template <typename T> struct impl_ISmartCardTrigger;
+template <typename T> struct impl_ISmartCardTriggerFactory;
+template <typename T> struct impl_ISmsMessageReceivedTriggerFactory;
+template <typename T> struct impl_ISocketActivityTrigger;
+template <typename T> struct impl_IStorageLibraryContentChangedTrigger;
+template <typename T> struct impl_IStorageLibraryContentChangedTriggerStatics;
+template <typename T> struct impl_ISystemCondition;
+template <typename T> struct impl_ISystemConditionFactory;
+template <typename T> struct impl_ISystemTrigger;
+template <typename T> struct impl_ISystemTriggerFactory;
+template <typename T> struct impl_ITimeTrigger;
+template <typename T> struct impl_ITimeTriggerFactory;
+template <typename T> struct impl_IToastNotificationActionTriggerFactory;
+template <typename T> struct impl_IToastNotificationHistoryChangedTriggerFactory;
+template <typename T> struct impl_IUserNotificationChangedTriggerFactory;
+template <typename T> struct impl_BackgroundTaskCanceledEventHandler;
+template <typename T> struct impl_BackgroundTaskCompletedEventHandler;
+template <typename T> struct impl_BackgroundTaskProgressEventHandler;
+
+}
+
+namespace Windows::ApplicationModel::Background {
+
 enum class AlarmAccessStatus
 {
     Unspecified = 0,
@@ -294,9 +425,9 @@ enum class ApplicationTriggerResult
 enum class BackgroundAccessStatus
 {
     Unspecified = 0,
-    AllowedWithAlwaysOnRealTimeConnectivity = 1,
-    AllowedMayUseActiveRealTimeConnectivity = 2,
-    Denied = 3,
+    AllowedWithAlwaysOnRealTimeConnectivity [[deprecated("Use AlwaysAllowed or AllowedSubjectToSystemPolicy instead of AllowedWithAlwaysOnRealTimeConnectivity. For more info, see MSDN.")]] = 1,
+    AllowedMayUseActiveRealTimeConnectivity [[deprecated("Use AlwaysAllowed or AllowedSubjectToSystemPolicy instead of AllowedMayUseActiveRealTimeConnectivity. For more info, see MSDN.")]] = 2,
+    Denied [[deprecated("Use DeniedByUser or DeniedBySystemPolicy instead of Denied. For more info, see MSDN.")]] = 3,
     AlwaysAllowed = 4,
     AllowedSubjectToSystemPolicy = 5,
     DeniedBySystemPolicy = 6,
@@ -313,7 +444,7 @@ enum class BackgroundTaskCancellationReason
     Uninstall = 5,
     ConditionLoss = 6,
     SystemPolicy = 7,
-    QuietHoursEntered = 8,
+    QuietHoursEntered [[deprecated("QuietHoursEntered is deprecated after Windows 8.1")]] = 8,
     ExecutionTimeExceeded = 9,
     ResourceRevocation = 10,
     EnergySaver = 11,

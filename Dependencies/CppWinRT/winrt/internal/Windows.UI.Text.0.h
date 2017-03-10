@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -25,10 +25,12 @@ struct IFontWeightsStatics;
 struct ITextCharacterFormat;
 struct ITextConstantsStatics;
 struct ITextDocument;
+struct ITextDocument2;
 struct ITextParagraphFormat;
 struct ITextRange;
 struct ITextSelection;
 struct FontWeights;
+struct RichEditTextDocument;
 
 }
 
@@ -39,11 +41,27 @@ struct IFontWeightsStatics;
 struct ITextCharacterFormat;
 struct ITextConstantsStatics;
 struct ITextDocument;
+struct ITextDocument2;
 struct ITextParagraphFormat;
 struct ITextRange;
 struct ITextSelection;
 struct FontWeights;
+struct RichEditTextDocument;
 struct TextConstants;
+
+}
+
+namespace Windows::UI::Text {
+
+template <typename T> struct impl_IFontWeights;
+template <typename T> struct impl_IFontWeightsStatics;
+template <typename T> struct impl_ITextCharacterFormat;
+template <typename T> struct impl_ITextConstantsStatics;
+template <typename T> struct impl_ITextDocument;
+template <typename T> struct impl_ITextDocument2;
+template <typename T> struct impl_ITextParagraphFormat;
+template <typename T> struct impl_ITextRange;
+template <typename T> struct impl_ITextSelection;
 
 }
 
@@ -266,6 +284,15 @@ enum class TabLeader
     Equals = 5,
 };
 
+enum class TextDecorations : unsigned
+{
+    None = 0x0,
+    Underline = 0x1,
+    Strikethrough = 0x2,
+};
+
+DEFINE_ENUM_FLAG_OPERATORS(TextDecorations)
+
 enum class TextGetOptions : unsigned
 {
     None = 0x0,
@@ -276,6 +303,7 @@ enum class TextGetOptions : unsigned
     NoHidden = 0x20,
     IncludeNumbering = 0x40,
     FormatRtf = 0x2000,
+    UseLf = 0x1000000,
 };
 
 DEFINE_ENUM_FLAG_OPERATORS(TextGetOptions)

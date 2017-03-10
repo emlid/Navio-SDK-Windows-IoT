@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -20,6 +20,14 @@ struct WINRT_EBO AdvertisingManagerForUser :
     Windows::System::UserProfile::IAdvertisingManagerForUser
 {
     AdvertisingManagerForUser(std::nullptr_t) noexcept {}
+};
+
+struct WINRT_EBO DiagnosticsSettings :
+    Windows::System::UserProfile::IDiagnosticsSettings
+{
+    DiagnosticsSettings(std::nullptr_t) noexcept {}
+    static Windows::System::UserProfile::DiagnosticsSettings GetDefault();
+    static Windows::System::UserProfile::DiagnosticsSettings GetForUser(const Windows::System::User & user);
 };
 
 struct WINRT_EBO FirstSignInSettings :
@@ -61,9 +69,9 @@ struct UserInformation
     static Windows::Foundation::IAsyncOperation<winrt::Windows::System::UserProfile::SetAccountPictureResult> SetAccountPicturesAsync(const Windows::Storage::IStorageFile & smallImage, const Windows::Storage::IStorageFile & largeImage, const Windows::Storage::IStorageFile & video);
     static Windows::Foundation::IAsyncOperation<winrt::Windows::System::UserProfile::SetAccountPictureResult> SetAccountPictureFromStreamAsync(const Windows::Storage::Streams::IRandomAccessStream & image);
     static Windows::Foundation::IAsyncOperation<winrt::Windows::System::UserProfile::SetAccountPictureResult> SetAccountPicturesFromStreamsAsync(const Windows::Storage::Streams::IRandomAccessStream & smallImage, const Windows::Storage::Streams::IRandomAccessStream & largeImage, const Windows::Storage::Streams::IRandomAccessStream & video);
-    static event_token AccountPictureChanged(const Windows::Foundation::EventHandler<Windows::IInspectable> & changeHandler);
+    static event_token AccountPictureChanged(const Windows::Foundation::EventHandler<Windows::Foundation::IInspectable> & changeHandler);
     using AccountPictureChanged_revoker = factory_event_revoker<IUserInformationStatics>;
-    static AccountPictureChanged_revoker AccountPictureChanged(auto_revoke_t, const Windows::Foundation::EventHandler<Windows::IInspectable> & changeHandler);
+    static AccountPictureChanged_revoker AccountPictureChanged(auto_revoke_t, const Windows::Foundation::EventHandler<Windows::Foundation::IInspectable> & changeHandler);
     static void AccountPictureChanged(event_token token);
     static Windows::Foundation::IAsyncOperation<hstring> GetDisplayNameAsync();
     static Windows::Foundation::IAsyncOperation<hstring> GetFirstNameAsync();

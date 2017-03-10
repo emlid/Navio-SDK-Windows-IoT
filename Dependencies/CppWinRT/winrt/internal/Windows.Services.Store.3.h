@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -40,7 +40,8 @@ struct WINRT_EBO StoreConsumableResult :
 };
 
 struct WINRT_EBO StoreContext :
-    Windows::Services::Store::IStoreContext
+    Windows::Services::Store::IStoreContext,
+    impl::require<StoreContext, Windows::Services::Store::IStoreContext2>
 {
     StoreContext(std::nullptr_t) noexcept {}
     static Windows::Services::Store::StoreContext GetDefault();
@@ -112,7 +113,7 @@ struct WINRT_EBO StorePurchaseProperties :
 {
     StorePurchaseProperties(std::nullptr_t) noexcept {}
     StorePurchaseProperties();
-    StorePurchaseProperties(hstring_ref name);
+    StorePurchaseProperties(hstring_view name);
 };
 
 struct WINRT_EBO StorePurchaseResult :
@@ -124,11 +125,12 @@ struct WINRT_EBO StorePurchaseResult :
 struct StoreRequestHelper
 {
     StoreRequestHelper() = delete;
-    static Windows::Foundation::IAsyncOperation<Windows::Services::Store::StoreSendRequestResult> SendRequestAsync(const Windows::Services::Store::StoreContext & context, uint32_t requestKind, hstring_ref parametersAsJson);
+    static Windows::Foundation::IAsyncOperation<Windows::Services::Store::StoreSendRequestResult> SendRequestAsync(const Windows::Services::Store::StoreContext & context, uint32_t requestKind, hstring_view parametersAsJson);
 };
 
 struct WINRT_EBO StoreSendRequestResult :
-    Windows::Services::Store::IStoreSendRequestResult
+    Windows::Services::Store::IStoreSendRequestResult,
+    impl::require<StoreSendRequestResult, Windows::Services::Store::IStoreSendRequestResult2>
 {
     StoreSendRequestResult(std::nullptr_t) noexcept {}
 };

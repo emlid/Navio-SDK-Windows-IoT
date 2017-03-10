@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -30,12 +30,17 @@ struct IMapActualCameraChangedEventArgs;
 struct IMapActualCameraChangedEventArgs2;
 struct IMapActualCameraChangingEventArgs;
 struct IMapActualCameraChangingEventArgs2;
+struct IMapBillboard;
+struct IMapBillboardFactory;
+struct IMapBillboardStatics;
 struct IMapCamera;
 struct IMapCameraFactory;
+struct IMapContextRequestedEventArgs;
 struct IMapControl;
 struct IMapControl2;
 struct IMapControl3;
 struct IMapControl4;
+struct IMapControl5;
 struct IMapControlBusinessLandmarkClickEventArgs;
 struct IMapControlBusinessLandmarkPointerEnteredEventArgs;
 struct IMapControlBusinessLandmarkPointerExitedEventArgs;
@@ -46,6 +51,7 @@ struct IMapControlDataHelperFactory;
 struct IMapControlStatics;
 struct IMapControlStatics2;
 struct IMapControlStatics4;
+struct IMapControlStatics5;
 struct IMapControlTransitFeatureClickEventArgs;
 struct IMapControlTransitFeaturePointerEnteredEventArgs;
 struct IMapControlTransitFeaturePointerExitedEventArgs;
@@ -78,6 +84,8 @@ struct IMapRouteView;
 struct IMapRouteViewFactory;
 struct IMapScene;
 struct IMapSceneStatics;
+struct IMapStyleSheet;
+struct IMapStyleSheetStatics;
 struct IMapTargetCameraChangedEventArgs;
 struct IMapTargetCameraChangedEventArgs2;
 struct IMapTileBitmapRequest;
@@ -100,7 +108,9 @@ struct HttpMapTileDataSource;
 struct LocalMapTileDataSource;
 struct MapActualCameraChangedEventArgs;
 struct MapActualCameraChangingEventArgs;
+struct MapBillboard;
 struct MapCamera;
+struct MapContextRequestedEventArgs;
 struct MapControl;
 struct MapControlBusinessLandmarkClickEventArgs;
 struct MapControlBusinessLandmarkPointerEnteredEventArgs;
@@ -125,6 +135,7 @@ struct MapPolyline;
 struct MapRightTappedEventArgs;
 struct MapRouteView;
 struct MapScene;
+struct MapStyleSheet;
 struct MapTargetCameraChangedEventArgs;
 struct MapTileBitmapRequest;
 struct MapTileBitmapRequestDeferral;
@@ -151,12 +162,17 @@ struct IMapActualCameraChangedEventArgs;
 struct IMapActualCameraChangedEventArgs2;
 struct IMapActualCameraChangingEventArgs;
 struct IMapActualCameraChangingEventArgs2;
+struct IMapBillboard;
+struct IMapBillboardFactory;
+struct IMapBillboardStatics;
 struct IMapCamera;
 struct IMapCameraFactory;
+struct IMapContextRequestedEventArgs;
 struct IMapControl;
 struct IMapControl2;
 struct IMapControl3;
 struct IMapControl4;
+struct IMapControl5;
 struct IMapControlBusinessLandmarkClickEventArgs;
 struct IMapControlBusinessLandmarkPointerEnteredEventArgs;
 struct IMapControlBusinessLandmarkPointerExitedEventArgs;
@@ -167,6 +183,7 @@ struct IMapControlDataHelperFactory;
 struct IMapControlStatics;
 struct IMapControlStatics2;
 struct IMapControlStatics4;
+struct IMapControlStatics5;
 struct IMapControlTransitFeatureClickEventArgs;
 struct IMapControlTransitFeaturePointerEnteredEventArgs;
 struct IMapControlTransitFeaturePointerExitedEventArgs;
@@ -199,6 +216,8 @@ struct IMapRouteView;
 struct IMapRouteViewFactory;
 struct IMapScene;
 struct IMapSceneStatics;
+struct IMapStyleSheet;
+struct IMapStyleSheetStatics;
 struct IMapTargetCameraChangedEventArgs;
 struct IMapTargetCameraChangedEventArgs2;
 struct IMapTileBitmapRequest;
@@ -221,7 +240,9 @@ struct HttpMapTileDataSource;
 struct LocalMapTileDataSource;
 struct MapActualCameraChangedEventArgs;
 struct MapActualCameraChangingEventArgs;
+struct MapBillboard;
 struct MapCamera;
+struct MapContextRequestedEventArgs;
 struct MapControl;
 struct MapControlBusinessLandmarkClickEventArgs;
 struct MapControlBusinessLandmarkPointerEnteredEventArgs;
@@ -246,6 +267,7 @@ struct MapPolyline;
 struct MapRightTappedEventArgs;
 struct MapRouteView;
 struct MapScene;
+struct MapStyleSheet;
 struct MapTargetCameraChangedEventArgs;
 struct MapTileBitmapRequest;
 struct MapTileBitmapRequestDeferral;
@@ -257,6 +279,94 @@ struct MapTileUriRequestDeferral;
 struct MapTileUriRequestedEventArgs;
 struct StreetsideExperience;
 struct StreetsidePanorama;
+
+}
+
+namespace Windows::UI::Xaml::Controls::Maps {
+
+template <typename T> struct impl_ICustomMapTileDataSource;
+template <typename T> struct impl_ICustomMapTileDataSourceFactory;
+template <typename T> struct impl_IHttpMapTileDataSource;
+template <typename T> struct impl_IHttpMapTileDataSourceFactory;
+template <typename T> struct impl_ILocalMapTileDataSource;
+template <typename T> struct impl_ILocalMapTileDataSourceFactory;
+template <typename T> struct impl_IMapActualCameraChangedEventArgs;
+template <typename T> struct impl_IMapActualCameraChangedEventArgs2;
+template <typename T> struct impl_IMapActualCameraChangingEventArgs;
+template <typename T> struct impl_IMapActualCameraChangingEventArgs2;
+template <typename T> struct impl_IMapBillboard;
+template <typename T> struct impl_IMapBillboardFactory;
+template <typename T> struct impl_IMapBillboardStatics;
+template <typename T> struct impl_IMapCamera;
+template <typename T> struct impl_IMapCameraFactory;
+template <typename T> struct impl_IMapContextRequestedEventArgs;
+template <typename T> struct impl_IMapControl;
+template <typename T> struct impl_IMapControl2;
+template <typename T> struct impl_IMapControl3;
+template <typename T> struct impl_IMapControl4;
+template <typename T> struct impl_IMapControl5;
+template <typename T> struct impl_IMapControlBusinessLandmarkClickEventArgs;
+template <typename T> struct impl_IMapControlBusinessLandmarkPointerEnteredEventArgs;
+template <typename T> struct impl_IMapControlBusinessLandmarkPointerExitedEventArgs;
+template <typename T> struct impl_IMapControlBusinessLandmarkRightTappedEventArgs;
+template <typename T> struct impl_IMapControlDataHelper;
+template <typename T> struct impl_IMapControlDataHelper2;
+template <typename T> struct impl_IMapControlDataHelperFactory;
+template <typename T> struct impl_IMapControlStatics;
+template <typename T> struct impl_IMapControlStatics2;
+template <typename T> struct impl_IMapControlStatics4;
+template <typename T> struct impl_IMapControlStatics5;
+template <typename T> struct impl_IMapControlTransitFeatureClickEventArgs;
+template <typename T> struct impl_IMapControlTransitFeaturePointerEnteredEventArgs;
+template <typename T> struct impl_IMapControlTransitFeaturePointerExitedEventArgs;
+template <typename T> struct impl_IMapControlTransitFeatureRightTappedEventArgs;
+template <typename T> struct impl_IMapCustomExperience;
+template <typename T> struct impl_IMapCustomExperienceChangedEventArgs;
+template <typename T> struct impl_IMapCustomExperienceFactory;
+template <typename T> struct impl_IMapElement;
+template <typename T> struct impl_IMapElement2;
+template <typename T> struct impl_IMapElementClickEventArgs;
+template <typename T> struct impl_IMapElementFactory;
+template <typename T> struct impl_IMapElementPointerEnteredEventArgs;
+template <typename T> struct impl_IMapElementPointerExitedEventArgs;
+template <typename T> struct impl_IMapElementStatics;
+template <typename T> struct impl_IMapElementStatics2;
+template <typename T> struct impl_IMapIcon;
+template <typename T> struct impl_IMapIcon2;
+template <typename T> struct impl_IMapIconStatics;
+template <typename T> struct impl_IMapIconStatics2;
+template <typename T> struct impl_IMapInputEventArgs;
+template <typename T> struct impl_IMapItemsControl;
+template <typename T> struct impl_IMapItemsControlStatics;
+template <typename T> struct impl_IMapPolygon;
+template <typename T> struct impl_IMapPolygon2;
+template <typename T> struct impl_IMapPolygonStatics;
+template <typename T> struct impl_IMapPolyline;
+template <typename T> struct impl_IMapPolylineStatics;
+template <typename T> struct impl_IMapRightTappedEventArgs;
+template <typename T> struct impl_IMapRouteView;
+template <typename T> struct impl_IMapRouteViewFactory;
+template <typename T> struct impl_IMapScene;
+template <typename T> struct impl_IMapSceneStatics;
+template <typename T> struct impl_IMapStyleSheet;
+template <typename T> struct impl_IMapStyleSheetStatics;
+template <typename T> struct impl_IMapTargetCameraChangedEventArgs;
+template <typename T> struct impl_IMapTargetCameraChangedEventArgs2;
+template <typename T> struct impl_IMapTileBitmapRequest;
+template <typename T> struct impl_IMapTileBitmapRequestDeferral;
+template <typename T> struct impl_IMapTileBitmapRequestedEventArgs;
+template <typename T> struct impl_IMapTileDataSource;
+template <typename T> struct impl_IMapTileDataSourceFactory;
+template <typename T> struct impl_IMapTileSource;
+template <typename T> struct impl_IMapTileSourceFactory;
+template <typename T> struct impl_IMapTileSourceStatics;
+template <typename T> struct impl_IMapTileUriRequest;
+template <typename T> struct impl_IMapTileUriRequestDeferral;
+template <typename T> struct impl_IMapTileUriRequestedEventArgs;
+template <typename T> struct impl_IStreetsideExperience;
+template <typename T> struct impl_IStreetsideExperienceFactory;
+template <typename T> struct impl_IStreetsidePanorama;
+template <typename T> struct impl_IStreetsidePanoramaStatics;
 
 }
 
@@ -314,6 +424,12 @@ enum class MapPanInteractionMode
     Disabled = 1,
 };
 
+enum class MapProjection
+{
+    WebMercator = 0,
+    Globe = 1,
+};
+
 enum class MapStyle
 {
     None = 0,
@@ -323,6 +439,7 @@ enum class MapStyle
     Terrain = 4,
     Aerial3D = 5,
     Aerial3DWithRoads = 6,
+    Custom = 7,
 };
 
 enum class MapTileLayer

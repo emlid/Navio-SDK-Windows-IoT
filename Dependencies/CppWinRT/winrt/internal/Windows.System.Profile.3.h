@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -20,6 +20,12 @@ struct WINRT_EBO AnalyticsVersionInfo :
     Windows::System::Profile::IAnalyticsVersionInfo
 {
     AnalyticsVersionInfo(std::nullptr_t) noexcept {}
+};
+
+struct EducationSettings
+{
+    EducationSettings() = delete;
+    static bool IsEducationEnvironment();
 };
 
 struct HardwareIdentification
@@ -65,9 +71,9 @@ struct PlatformDiagnosticsAndUsageDataSettings
 {
     PlatformDiagnosticsAndUsageDataSettings() = delete;
     static Windows::System::Profile::PlatformDataCollectionLevel CollectionLevel();
-    static event_token CollectionLevelChanged(const Windows::Foundation::EventHandler<Windows::IInspectable> & handler);
+    static event_token CollectionLevelChanged(const Windows::Foundation::EventHandler<Windows::Foundation::IInspectable> & handler);
     using CollectionLevelChanged_revoker = factory_event_revoker<IPlatformDiagnosticsAndUsageDataSettingsStatics>;
-    static CollectionLevelChanged_revoker CollectionLevelChanged(auto_revoke_t, const Windows::Foundation::EventHandler<Windows::IInspectable> & handler);
+    static CollectionLevelChanged_revoker CollectionLevelChanged(auto_revoke_t, const Windows::Foundation::EventHandler<Windows::Foundation::IInspectable> & handler);
     static void CollectionLevelChanged(event_token token);
     static bool CanCollectDiagnostics(Windows::System::Profile::PlatformDataCollectionLevel level);
 };
@@ -76,13 +82,14 @@ struct RetailInfo
 {
     RetailInfo() = delete;
     static bool IsDemoModeEnabled();
-    static Windows::Foundation::Collections::IMapView<hstring, Windows::IInspectable> Properties();
+    static Windows::Foundation::Collections::IMapView<hstring, Windows::Foundation::IInspectable> Properties();
 };
 
 struct SharedModeSettings
 {
     SharedModeSettings() = delete;
     static bool IsEnabled();
+    static bool ShouldAvoidLocalStorage();
 };
 
 struct SystemIdentification

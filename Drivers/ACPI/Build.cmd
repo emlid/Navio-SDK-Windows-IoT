@@ -1,4 +1,14 @@
-call "%VS140COMNTOOLS%vsvars32"
+@echo off
+setlocal
+
+rem * Initialize environment
+echo Initializing Visual Studio tools...
+pushd "%~dp0"
+call "%VS150ComnTools%VsDevCmd.bat"
+if %errorlevel% neq 0 goto error
+popd
+
+rem * Compile ACPI ASL
 cd /d "%~dp0"
 "%WindowsSdkDir%Tools\x64\AcpiVerify\asl.exe" /Fo=ACPITABL.DAT Navio.asl
 if %errorlevel% neq 0 goto error

@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -15,6 +15,9 @@ struct WINRT_EBO PwmController :
     PwmController(std::nullptr_t) noexcept {}
     static Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::Devices::Pwm::PwmController>> GetControllersAsync(const Windows::Devices::Pwm::Provider::IPwmProvider & provider);
     static Windows::Foundation::IAsyncOperation<Windows::Devices::Pwm::PwmController> GetDefaultAsync();
+    static hstring GetDeviceSelector();
+    static hstring GetDeviceSelector(hstring_view friendlyName);
+    static Windows::Foundation::IAsyncOperation<Windows::Devices::Pwm::PwmController> FromIdAsync(hstring_view deviceId);
 };
 
 struct WINRT_EBO PwmPin :

@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -10,16 +10,21 @@ namespace ABI::Windows::ApplicationModel::Store::Preview::InstallControl {
 
 struct IAppInstallItem;
 struct IAppInstallItem2;
+struct IAppInstallItem3;
 struct IAppInstallManager;
 struct IAppInstallManager2;
 struct IAppInstallManager3;
+struct IAppInstallManager4;
+struct IAppInstallManager5;
 struct IAppInstallManagerItemEventArgs;
 struct IAppInstallStatus;
 struct IAppInstallStatus2;
+struct IGetEntitlementResult;
 struct AppInstallItem;
 struct AppInstallManager;
 struct AppInstallManagerItemEventArgs;
 struct AppInstallStatus;
+struct GetEntitlementResult;
 
 }
 
@@ -27,16 +32,38 @@ namespace Windows::ApplicationModel::Store::Preview::InstallControl {
 
 struct IAppInstallItem;
 struct IAppInstallItem2;
+struct IAppInstallItem3;
 struct IAppInstallManager;
 struct IAppInstallManager2;
 struct IAppInstallManager3;
+struct IAppInstallManager4;
+struct IAppInstallManager5;
 struct IAppInstallManagerItemEventArgs;
 struct IAppInstallStatus;
 struct IAppInstallStatus2;
+struct IGetEntitlementResult;
 struct AppInstallItem;
 struct AppInstallManager;
 struct AppInstallManagerItemEventArgs;
 struct AppInstallStatus;
+struct GetEntitlementResult;
+
+}
+
+namespace Windows::ApplicationModel::Store::Preview::InstallControl {
+
+template <typename T> struct impl_IAppInstallItem;
+template <typename T> struct impl_IAppInstallItem2;
+template <typename T> struct impl_IAppInstallItem3;
+template <typename T> struct impl_IAppInstallManager;
+template <typename T> struct impl_IAppInstallManager2;
+template <typename T> struct impl_IAppInstallManager3;
+template <typename T> struct impl_IAppInstallManager4;
+template <typename T> struct impl_IAppInstallManager5;
+template <typename T> struct impl_IAppInstallManagerItemEventArgs;
+template <typename T> struct impl_IAppInstallStatus;
+template <typename T> struct impl_IAppInstallStatus2;
+template <typename T> struct impl_IGetEntitlementResult;
 
 }
 
@@ -73,6 +100,14 @@ enum class AutoUpdateSetting
     Enabled = 1,
     DisabledByPolicy = 2,
     EnabledByPolicy = 3,
+};
+
+enum class GetEntitlementStatus
+{
+    Succeeded = 0,
+    NoStoreAccount = 1,
+    NetworkError = 2,
+    ServerError = 3,
 };
 
 }

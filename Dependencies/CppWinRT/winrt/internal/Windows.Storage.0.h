@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -170,6 +170,62 @@ struct SystemVideoProperties;
 
 namespace Windows::Storage {
 
+template <typename T> struct impl_IApplicationData;
+template <typename T> struct impl_IApplicationData2;
+template <typename T> struct impl_IApplicationData3;
+template <typename T> struct impl_IApplicationDataContainer;
+template <typename T> struct impl_IApplicationDataStatics;
+template <typename T> struct impl_IApplicationDataStatics2;
+template <typename T> struct impl_ICachedFileManagerStatics;
+template <typename T> struct impl_IDownloadsFolderStatics;
+template <typename T> struct impl_IDownloadsFolderStatics2;
+template <typename T> struct impl_IFileIOStatics;
+template <typename T> struct impl_IKnownFoldersCameraRollStatics;
+template <typename T> struct impl_IKnownFoldersPlaylistsStatics;
+template <typename T> struct impl_IKnownFoldersSavedPicturesStatics;
+template <typename T> struct impl_IKnownFoldersStatics;
+template <typename T> struct impl_IKnownFoldersStatics2;
+template <typename T> struct impl_IKnownFoldersStatics3;
+template <typename T> struct impl_IPathIOStatics;
+template <typename T> struct impl_ISetVersionDeferral;
+template <typename T> struct impl_ISetVersionRequest;
+template <typename T> struct impl_IStorageFile;
+template <typename T> struct impl_IStorageFile2;
+template <typename T> struct impl_IStorageFilePropertiesWithAvailability;
+template <typename T> struct impl_IStorageFileStatics;
+template <typename T> struct impl_IStorageFolder;
+template <typename T> struct impl_IStorageFolder2;
+template <typename T> struct impl_IStorageFolderStatics;
+template <typename T> struct impl_IStorageItem;
+template <typename T> struct impl_IStorageItem2;
+template <typename T> struct impl_IStorageItemProperties;
+template <typename T> struct impl_IStorageItemProperties2;
+template <typename T> struct impl_IStorageItemPropertiesWithProvider;
+template <typename T> struct impl_IStorageLibrary;
+template <typename T> struct impl_IStorageLibrary2;
+template <typename T> struct impl_IStorageLibraryChange;
+template <typename T> struct impl_IStorageLibraryChangeReader;
+template <typename T> struct impl_IStorageLibraryChangeTracker;
+template <typename T> struct impl_IStorageLibraryStatics;
+template <typename T> struct impl_IStorageLibraryStatics2;
+template <typename T> struct impl_IStorageProvider;
+template <typename T> struct impl_IStorageStreamTransaction;
+template <typename T> struct impl_IStreamedFileDataRequest;
+template <typename T> struct impl_ISystemAudioProperties;
+template <typename T> struct impl_ISystemGPSProperties;
+template <typename T> struct impl_ISystemImageProperties;
+template <typename T> struct impl_ISystemMediaProperties;
+template <typename T> struct impl_ISystemMusicProperties;
+template <typename T> struct impl_ISystemPhotoProperties;
+template <typename T> struct impl_ISystemProperties;
+template <typename T> struct impl_ISystemVideoProperties;
+template <typename T> struct impl_ApplicationDataSetVersionHandler;
+template <typename T> struct impl_StreamedFileDataRequestedHandler;
+
+}
+
+namespace Windows::Storage {
+
 enum class ApplicationDataCreateDisposition
 {
     Always = 0,
@@ -226,6 +282,8 @@ enum class KnownFolderId
     SavedPictures = 11,
     Screenshots = 12,
     VideosLibrary = 13,
+    AllAppMods = 14,
+    CurrentAppMods = 15,
 };
 
 enum class KnownLibraryId
@@ -276,6 +334,7 @@ enum class StorageOpenOptions : unsigned
 {
     None = 0x0,
     AllowOnlyReaders = 0x1,
+    AllowReadersAndWriters = 0x2,
 };
 
 DEFINE_ENUM_FLAG_OPERATORS(StorageOpenOptions)

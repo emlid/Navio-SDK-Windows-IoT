@@ -1,6 +1,5 @@
 @echo off
 setlocal
-call "%vs140comntools%vsvars32.bat"
 
 echo Install Visual Studio Temporary Key
 echo ===================================
@@ -27,7 +26,15 @@ rem * Parse parameters
 if "%~1" == "" goto syntax
 set VSKeyContainerName=%~1
 
+rem * Initialize environment
+echo Initializing Visual Studio tools...
+pushd "%~dp0"
+call "%VS150ComnTools%VsDevCmd.bat"
+if %errorlevel% neq 0 goto error
+popd
+
 rem * Install key
+echo Source: %~dp0
 sn -i "%~dp0TemporaryKey.pfx" %VSKeyContainerName%
 if %errorlevel% neq 0 goto error
 

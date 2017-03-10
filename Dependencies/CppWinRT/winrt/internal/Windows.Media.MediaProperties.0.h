@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -9,7 +9,9 @@ WINRT_EXPORT namespace winrt {
 namespace ABI::Windows::Media::MediaProperties {
 
 struct IAudioEncodingProperties;
+struct IAudioEncodingProperties2;
 struct IAudioEncodingPropertiesStatics;
+struct IAudioEncodingPropertiesStatics2;
 struct IAudioEncodingPropertiesWithFormatUserData;
 struct IContainerEncodingProperties;
 struct IH264ProfileIdsStatics;
@@ -19,14 +21,19 @@ struct IImageEncodingPropertiesStatics2;
 struct IMediaEncodingProfile;
 struct IMediaEncodingProfileStatics;
 struct IMediaEncodingProfileStatics2;
+struct IMediaEncodingProfileStatics3;
 struct IMediaEncodingProperties;
 struct IMediaEncodingSubtypesStatics;
+struct IMediaEncodingSubtypesStatics2;
+struct IMediaEncodingSubtypesStatics3;
 struct IMediaRatio;
 struct IMpeg2ProfileIdsStatics;
 struct IVideoEncodingProperties;
 struct IVideoEncodingProperties2;
 struct IVideoEncodingProperties3;
+struct IVideoEncodingProperties4;
 struct IVideoEncodingPropertiesStatics;
+struct IVideoEncodingPropertiesStatics2;
 struct AudioEncodingProperties;
 struct ContainerEncodingProperties;
 struct ImageEncodingProperties;
@@ -40,7 +47,9 @@ struct VideoEncodingProperties;
 namespace Windows::Media::MediaProperties {
 
 struct IAudioEncodingProperties;
+struct IAudioEncodingProperties2;
 struct IAudioEncodingPropertiesStatics;
+struct IAudioEncodingPropertiesStatics2;
 struct IAudioEncodingPropertiesWithFormatUserData;
 struct IContainerEncodingProperties;
 struct IH264ProfileIdsStatics;
@@ -50,14 +59,19 @@ struct IImageEncodingPropertiesStatics2;
 struct IMediaEncodingProfile;
 struct IMediaEncodingProfileStatics;
 struct IMediaEncodingProfileStatics2;
+struct IMediaEncodingProfileStatics3;
 struct IMediaEncodingProperties;
 struct IMediaEncodingSubtypesStatics;
+struct IMediaEncodingSubtypesStatics2;
+struct IMediaEncodingSubtypesStatics3;
 struct IMediaRatio;
 struct IMpeg2ProfileIdsStatics;
 struct IVideoEncodingProperties;
 struct IVideoEncodingProperties2;
 struct IVideoEncodingProperties3;
+struct IVideoEncodingProperties4;
 struct IVideoEncodingPropertiesStatics;
+struct IVideoEncodingPropertiesStatics2;
 struct AudioEncodingProperties;
 struct ContainerEncodingProperties;
 struct H264ProfileIds;
@@ -68,6 +82,37 @@ struct MediaPropertySet;
 struct MediaRatio;
 struct Mpeg2ProfileIds;
 struct VideoEncodingProperties;
+
+}
+
+namespace Windows::Media::MediaProperties {
+
+template <typename T> struct impl_IAudioEncodingProperties;
+template <typename T> struct impl_IAudioEncodingProperties2;
+template <typename T> struct impl_IAudioEncodingPropertiesStatics;
+template <typename T> struct impl_IAudioEncodingPropertiesStatics2;
+template <typename T> struct impl_IAudioEncodingPropertiesWithFormatUserData;
+template <typename T> struct impl_IContainerEncodingProperties;
+template <typename T> struct impl_IH264ProfileIdsStatics;
+template <typename T> struct impl_IImageEncodingProperties;
+template <typename T> struct impl_IImageEncodingPropertiesStatics;
+template <typename T> struct impl_IImageEncodingPropertiesStatics2;
+template <typename T> struct impl_IMediaEncodingProfile;
+template <typename T> struct impl_IMediaEncodingProfileStatics;
+template <typename T> struct impl_IMediaEncodingProfileStatics2;
+template <typename T> struct impl_IMediaEncodingProfileStatics3;
+template <typename T> struct impl_IMediaEncodingProperties;
+template <typename T> struct impl_IMediaEncodingSubtypesStatics;
+template <typename T> struct impl_IMediaEncodingSubtypesStatics2;
+template <typename T> struct impl_IMediaEncodingSubtypesStatics3;
+template <typename T> struct impl_IMediaRatio;
+template <typename T> struct impl_IMpeg2ProfileIdsStatics;
+template <typename T> struct impl_IVideoEncodingProperties;
+template <typename T> struct impl_IVideoEncodingProperties2;
+template <typename T> struct impl_IVideoEncodingProperties3;
+template <typename T> struct impl_IVideoEncodingProperties4;
+template <typename T> struct impl_IVideoEncodingPropertiesStatics;
+template <typename T> struct impl_IVideoEncodingPropertiesStatics2;
 
 }
 
@@ -110,6 +155,13 @@ enum class MediaThumbnailFormat
     Bgra8 = 1,
 };
 
+enum class SphericalVideoFrameFormat
+{
+    None = 0,
+    Unsupported = 1,
+    Equirectangular = 2,
+};
+
 enum class StereoscopicVideoPackingMode
 {
     None = 0,
@@ -127,6 +179,8 @@ enum class VideoEncodingQuality
     Pal = 5,
     Vga = 6,
     Qvga = 7,
+    Uhd2160p = 8,
+    Uhd4320p = 9,
 };
 
 }

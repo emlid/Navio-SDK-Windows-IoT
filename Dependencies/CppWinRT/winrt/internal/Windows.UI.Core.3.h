@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -31,7 +31,7 @@ template <typename H> struct impl_IdleDispatchedHandler : implements<impl_IdleDi
 {
     impl_IdleDispatchedHandler(H && handler) : H(std::forward<H>(handler)) {}
 
-    HRESULT __stdcall abi_Invoke(abi_arg_in<Windows::UI::Core::IIdleDispatchedHandlerArgs> e) noexcept override
+    HRESULT __stdcall abi_Invoke(impl::abi_arg_in<Windows::UI::Core::IIdleDispatchedHandlerArgs> e) noexcept override
     {
         try
         {
@@ -116,7 +116,7 @@ struct WINRT_EBO CoreIndependentInputSource :
 
 struct WINRT_EBO CoreWindow :
     Windows::UI::Core::ICoreWindow,
-    impl::require<CoreWindow, Windows::UI::Core::ICoreWindow2, Windows::UI::Core::ICoreWindow3, Windows::UI::Core::ICorePointerRedirector>
+    impl::require<CoreWindow, Windows::UI::Core::ICoreWindow2, Windows::UI::Core::ICoreWindow3, Windows::UI::Core::ICoreWindow4, Windows::UI::Core::ICorePointerRedirector>
 {
     CoreWindow(std::nullptr_t) noexcept {}
     using impl_ICoreWindow::PointerPosition;
@@ -129,7 +129,7 @@ struct WINRT_EBO CoreWindowDialog :
 {
     CoreWindowDialog(std::nullptr_t) noexcept {}
     CoreWindowDialog();
-    CoreWindowDialog(hstring_ref title);
+    CoreWindowDialog(hstring_view title);
 };
 
 struct WINRT_EBO CoreWindowEventArgs :
@@ -143,7 +143,7 @@ struct WINRT_EBO CoreWindowFlyout :
 {
     CoreWindowFlyout(std::nullptr_t) noexcept {}
     CoreWindowFlyout(const Windows::Foundation::Point & position);
-    CoreWindowFlyout(const Windows::Foundation::Point & position, hstring_ref title);
+    CoreWindowFlyout(const Windows::Foundation::Point & position, hstring_view title);
 };
 
 struct WINRT_EBO CoreWindowPopupShowingEventArgs :
@@ -185,9 +185,15 @@ struct WINRT_EBO PointerEventArgs :
     PointerEventArgs(std::nullptr_t) noexcept {}
 };
 
+struct WINRT_EBO SystemNavigationCloseRequestedEventArgs :
+    Windows::UI::Core::ISystemNavigationCloseRequestedEventArgs
+{
+    SystemNavigationCloseRequestedEventArgs(std::nullptr_t) noexcept {}
+};
+
 struct WINRT_EBO SystemNavigationManager :
     Windows::UI::Core::ISystemNavigationManager,
-    impl::require<SystemNavigationManager, Windows::UI::Core::ISystemNavigationManager2>
+    impl::require<SystemNavigationManager, Windows::UI::Core::ISystemNavigationManager2, Windows::UI::Core::ISystemNavigationManager3>
 {
     SystemNavigationManager(std::nullptr_t) noexcept {}
     static Windows::UI::Core::SystemNavigationManager GetForCurrentView();

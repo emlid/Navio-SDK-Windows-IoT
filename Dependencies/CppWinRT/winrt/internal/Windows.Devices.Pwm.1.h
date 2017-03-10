@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -13,27 +13,34 @@ WINRT_EXPORT namespace winrt {
 
 namespace ABI::Windows::Devices::Pwm {
 
-struct __declspec(uuid("c45f5c85-d2e8-42cf-9bd6-cf5ed029e6a7")) __declspec(novtable) IPwmController : Windows::IInspectable
+struct __declspec(uuid("c45f5c85-d2e8-42cf-9bd6-cf5ed029e6a7")) __declspec(novtable) IPwmController : Windows::Foundation::IInspectable
 {
     virtual HRESULT __stdcall get_PinCount(int32_t * value) = 0;
     virtual HRESULT __stdcall get_ActualFrequency(double * value) = 0;
-    virtual HRESULT __stdcall abi_SetDesiredFrequency(double desiredFrequency, double * value) = 0;
+    virtual HRESULT __stdcall abi_SetDesiredFrequency(double desiredFrequency, double * result) = 0;
     virtual HRESULT __stdcall get_MinFrequency(double * value) = 0;
     virtual HRESULT __stdcall get_MaxFrequency(double * value) = 0;
     virtual HRESULT __stdcall abi_OpenPin(int32_t pinNumber, Windows::Devices::Pwm::IPwmPin ** pin) = 0;
 };
 
-struct __declspec(uuid("4263bda1-8946-4404-bd48-81dd124af4d9")) __declspec(novtable) IPwmControllerStatics : Windows::IInspectable
+struct __declspec(uuid("4263bda1-8946-4404-bd48-81dd124af4d9")) __declspec(novtable) IPwmControllerStatics : Windows::Foundation::IInspectable
 {
     virtual HRESULT __stdcall abi_GetControllersAsync(Windows::Devices::Pwm::Provider::IPwmProvider * provider, Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::Devices::Pwm::PwmController>> ** operation) = 0;
 };
 
-struct __declspec(uuid("44fc5b1f-f119-4bdd-97ad-f76ef986736d")) __declspec(novtable) IPwmControllerStatics2 : Windows::IInspectable
+struct __declspec(uuid("44fc5b1f-f119-4bdd-97ad-f76ef986736d")) __declspec(novtable) IPwmControllerStatics2 : Windows::Foundation::IInspectable
 {
     virtual HRESULT __stdcall abi_GetDefaultAsync(Windows::Foundation::IAsyncOperation<Windows::Devices::Pwm::PwmController> ** operation) = 0;
 };
 
-struct __declspec(uuid("22972dc8-c6cf-4821-b7f9-c6454fb6af79")) __declspec(novtable) IPwmPin : Windows::IInspectable
+struct __declspec(uuid("b2581871-0229-4344-ae3f-9b7cd0e66b94")) __declspec(novtable) IPwmControllerStatics3 : Windows::Foundation::IInspectable
+{
+    virtual HRESULT __stdcall abi_GetDeviceSelector(hstring * result) = 0;
+    virtual HRESULT __stdcall abi_GetDeviceSelectorFromFriendlyName(hstring friendlyName, hstring * result) = 0;
+    virtual HRESULT __stdcall abi_FromIdAsync(hstring deviceId, Windows::Foundation::IAsyncOperation<Windows::Devices::Pwm::PwmController> ** operation) = 0;
+};
+
+struct __declspec(uuid("22972dc8-c6cf-4821-b7f9-c6454fb6af79")) __declspec(novtable) IPwmPin : Windows::Foundation::IInspectable
 {
     virtual HRESULT __stdcall get_Controller(Windows::Devices::Pwm::IPwmController ** value) = 0;
     virtual HRESULT __stdcall abi_GetActiveDutyCyclePercentage(double * result) = 0;
@@ -56,10 +63,49 @@ template <> struct traits<Windows::Devices::Pwm::PwmPin> { using default_interfa
 
 namespace Windows::Devices::Pwm {
 
-template <typename T> struct impl_IPwmController;
-template <typename T> struct impl_IPwmControllerStatics;
-template <typename T> struct impl_IPwmControllerStatics2;
-template <typename T> struct impl_IPwmPin;
+template <typename D>
+struct WINRT_EBO impl_IPwmController
+{
+    int32_t PinCount() const;
+    double ActualFrequency() const;
+    double SetDesiredFrequency(double desiredFrequency) const;
+    double MinFrequency() const;
+    double MaxFrequency() const;
+    Windows::Devices::Pwm::PwmPin OpenPin(int32_t pinNumber) const;
+};
+
+template <typename D>
+struct WINRT_EBO impl_IPwmControllerStatics
+{
+    Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::Devices::Pwm::PwmController>> GetControllersAsync(const Windows::Devices::Pwm::Provider::IPwmProvider & provider) const;
+};
+
+template <typename D>
+struct WINRT_EBO impl_IPwmControllerStatics2
+{
+    Windows::Foundation::IAsyncOperation<Windows::Devices::Pwm::PwmController> GetDefaultAsync() const;
+};
+
+template <typename D>
+struct WINRT_EBO impl_IPwmControllerStatics3
+{
+    hstring GetDeviceSelector() const;
+    hstring GetDeviceSelector(hstring_view friendlyName) const;
+    Windows::Foundation::IAsyncOperation<Windows::Devices::Pwm::PwmController> FromIdAsync(hstring_view deviceId) const;
+};
+
+template <typename D>
+struct WINRT_EBO impl_IPwmPin
+{
+    Windows::Devices::Pwm::PwmController Controller() const;
+    double GetActiveDutyCyclePercentage() const;
+    void SetActiveDutyCyclePercentage(double dutyCyclePercentage) const;
+    Windows::Devices::Pwm::PwmPulsePolarity Polarity() const;
+    void Polarity(Windows::Devices::Pwm::PwmPulsePolarity value) const;
+    void Start() const;
+    void Stop() const;
+    bool IsStarted() const;
+};
 
 }
 
@@ -81,6 +127,12 @@ template <> struct traits<Windows::Devices::Pwm::IPwmControllerStatics2>
 {
     using abi = ABI::Windows::Devices::Pwm::IPwmControllerStatics2;
     template <typename D> using consume = Windows::Devices::Pwm::impl_IPwmControllerStatics2<D>;
+};
+
+template <> struct traits<Windows::Devices::Pwm::IPwmControllerStatics3>
+{
+    using abi = ABI::Windows::Devices::Pwm::IPwmControllerStatics3;
+    template <typename D> using consume = Windows::Devices::Pwm::impl_IPwmControllerStatics3<D>;
 };
 
 template <> struct traits<Windows::Devices::Pwm::IPwmPin>

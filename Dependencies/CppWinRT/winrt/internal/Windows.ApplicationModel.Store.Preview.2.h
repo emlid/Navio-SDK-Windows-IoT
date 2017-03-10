@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -12,6 +12,11 @@ namespace ABI::Windows::Foundation {
 #ifndef WINRT_GENERIC_513ef3af_e784_5325_a91e_97c2b8111cf3
 #define WINRT_GENERIC_513ef3af_e784_5325_a91e_97c2b8111cf3
 template <> struct __declspec(uuid("513ef3af-e784-5325-a91e-97c2b8111cf3")) __declspec(novtable) IReference<uint32_t> : impl_IReference<uint32_t> {};
+#endif
+
+#ifndef WINRT_GENERIC_65178d50_e6a2_5d16_b244_65e9725e5a0c
+#define WINRT_GENERIC_65178d50_e6a2_5d16_b244_65e9725e5a0c
+template <> struct __declspec(uuid("65178d50-e6a2-5d16-b244-65e9725e5a0c")) __declspec(novtable) IAsyncOperation<Windows::Storage::Streams::IRandomAccessStreamReference> : impl_IAsyncOperation<Windows::Storage::Streams::IRandomAccessStreamReference> {};
 #endif
 
 
@@ -59,15 +64,25 @@ template <> struct __declspec(uuid("98a8577a-b128-5400-8d3d-58654eaaf957")) __de
 
 namespace ABI::Windows::Foundation {
 
-#ifndef WINRT_GENERIC_65178d50_e6a2_5d16_b244_65e9725e5a0c
-#define WINRT_GENERIC_65178d50_e6a2_5d16_b244_65e9725e5a0c
-template <> struct __declspec(uuid("65178d50-e6a2-5d16-b244-65e9725e5a0c")) __declspec(novtable) IAsyncOperation<Windows::Storage::Streams::IRandomAccessStreamReference> : impl_IAsyncOperation<Windows::Storage::Streams::IRandomAccessStreamReference> {};
+#ifndef WINRT_GENERIC_0a815852_7c44_5674_b3d2_fa2e4c1e46c9
+#define WINRT_GENERIC_0a815852_7c44_5674_b3d2_fa2e4c1e46c9
+template <> struct __declspec(uuid("0a815852-7c44-5674-b3d2-fa2e4c1e46c9")) __declspec(novtable) IAsyncOperation<Windows::Security::Authentication::Web::Core::WebTokenRequestResult> : impl_IAsyncOperation<Windows::Security::Authentication::Web::Core::WebTokenRequestResult> {};
+#endif
+
+#ifndef WINRT_GENERIC_60847289_ea0b_5df6_89df_f2c62cba9693
+#define WINRT_GENERIC_60847289_ea0b_5df6_89df_f2c62cba9693
+template <> struct __declspec(uuid("60847289-ea0b-5df6-89df-f2c62cba9693")) __declspec(novtable) AsyncOperationCompletedHandler<Windows::Storage::Streams::IRandomAccessStreamReference> : impl_AsyncOperationCompletedHandler<Windows::Storage::Streams::IRandomAccessStreamReference> {};
 #endif
 
 
 }
 
 namespace ABI::Windows::Foundation::Collections {
+
+#ifndef WINRT_GENERIC_dd153cd9_8ee7_556b_bee4_0c0b8b080106
+#define WINRT_GENERIC_dd153cd9_8ee7_556b_bee4_0c0b8b080106
+template <> struct __declspec(uuid("dd153cd9-8ee7-556b-bee4-0c0b8b080106")) __declspec(novtable) IVector<Windows::ApplicationModel::Store::Preview::StorePreviewSkuInfo> : impl_IVector<Windows::ApplicationModel::Store::Preview::StorePreviewSkuInfo> {};
+#endif
 
 #ifndef WINRT_GENERIC_b6f9b421_7f54_5d26_9c37_9f9d7ac893eb
 #define WINRT_GENERIC_b6f9b421_7f54_5d26_9c37_9f9d7ac893eb
@@ -94,6 +109,11 @@ template <> struct __declspec(uuid("b1ea16e7-8268-51ff-8129-dcefd493f35f")) __de
 
 namespace ABI::Windows::Foundation::Collections {
 
+#ifndef WINRT_GENERIC_961229cc_34b1_5c6f_af21_80149a07ace1
+#define WINRT_GENERIC_961229cc_34b1_5c6f_af21_80149a07ace1
+template <> struct __declspec(uuid("961229cc-34b1-5c6f-af21-80149a07ace1")) __declspec(novtable) IVector<Windows::ApplicationModel::Store::Preview::StorePreviewProductInfo> : impl_IVector<Windows::ApplicationModel::Store::Preview::StorePreviewProductInfo> {};
+#endif
+
 #ifndef WINRT_GENERIC_3fb16dec_73f1_5cfa_80e6_67fa232d1bef
 #define WINRT_GENERIC_3fb16dec_73f1_5cfa_80e6_67fa232d1bef
 template <> struct __declspec(uuid("3fb16dec-73f1-5cfa-80e6-67fa232d1bef")) __declspec(novtable) IIterator<Windows::ApplicationModel::Store::Preview::StorePreviewProductInfo> : impl_IIterator<Windows::ApplicationModel::Store::Preview::StorePreviewProductInfo> {};
@@ -102,6 +122,11 @@ template <> struct __declspec(uuid("3fb16dec-73f1-5cfa-80e6-67fa232d1bef")) __de
 #ifndef WINRT_GENERIC_a9cb4860_67d1_53c2_a621_3074b0344d49
 #define WINRT_GENERIC_a9cb4860_67d1_53c2_a621_3074b0344d49
 template <> struct __declspec(uuid("a9cb4860-67d1-53c2-a621-3074b0344d49")) __declspec(novtable) IIterable<Windows::ApplicationModel::Store::Preview::StorePreviewProductInfo> : impl_IIterable<Windows::ApplicationModel::Store::Preview::StorePreviewProductInfo> {};
+#endif
+
+#ifndef WINRT_GENERIC_4e414afb_6e1e_58bc_80e6_010b40e05093
+#define WINRT_GENERIC_4e414afb_6e1e_58bc_80e6_010b40e05093
+template <> struct __declspec(uuid("4e414afb-6e1e-58bc-80e6-010b40e05093")) __declspec(novtable) IVector<winrt::Windows::ApplicationModel::Store::Preview::StoreSystemFeature> : impl_IVector<winrt::Windows::ApplicationModel::Store::Preview::StoreSystemFeature> {};
 #endif
 
 #ifndef WINRT_GENERIC_d0455b2d_d8aa_557e_89a3_63c33e8cee99
@@ -114,9 +139,9 @@ template <> struct __declspec(uuid("d0455b2d-d8aa-557e-89a3-63c33e8cee99")) __de
 
 namespace ABI::Windows::Foundation {
 
-#ifndef WINRT_GENERIC_60847289_ea0b_5df6_89df_f2c62cba9693
-#define WINRT_GENERIC_60847289_ea0b_5df6_89df_f2c62cba9693
-template <> struct __declspec(uuid("60847289-ea0b-5df6-89df-f2c62cba9693")) __declspec(novtable) AsyncOperationCompletedHandler<Windows::Storage::Streams::IRandomAccessStreamReference> : impl_AsyncOperationCompletedHandler<Windows::Storage::Streams::IRandomAccessStreamReference> {};
+#ifndef WINRT_GENERIC_deb54b22_70f2_55ab_97c0_6cbdc5ddb6f0
+#define WINRT_GENERIC_deb54b22_70f2_55ab_97c0_6cbdc5ddb6f0
+template <> struct __declspec(uuid("deb54b22-70f2-55ab-97c0-6cbdc5ddb6f0")) __declspec(novtable) AsyncOperationCompletedHandler<Windows::Security::Authentication::Web::Core::WebTokenRequestResult> : impl_AsyncOperationCompletedHandler<Windows::Security::Authentication::Web::Core::WebTokenRequestResult> {};
 #endif
 
 #ifndef WINRT_GENERIC_49c36a66_3908_51b3_8402_eb8e94c68864
@@ -144,144 +169,74 @@ template <> struct __declspec(uuid("7e7946ef-f8f0-53fd-9613-7261cb35daf4")) __de
 
 namespace Windows::ApplicationModel::Store::Preview {
 
-template <typename D>
-struct WINRT_EBO impl_IStoreConfigurationStatics
-{
-    void SetSystemConfiguration(hstring_ref catalogHardwareManufacturerId, hstring_ref catalogStoreContentModifierId, const Windows::Foundation::DateTime & systemConfigurationExpiration, hstring_ref catalogHardwareDescriptor) const;
-    void SetMobileOperatorConfiguration(hstring_ref mobileOperatorId, uint32_t appDownloadLimitInMegabytes, uint32_t updateDownloadLimitInMegabytes) const;
-    void SetStoreWebAccountId(hstring_ref webAccountId) const;
-    bool IsStoreWebAccountId(hstring_ref webAccountId) const;
-    Windows::ApplicationModel::Store::Preview::StoreHardwareManufacturerInfo HardwareManufacturerInfo() const;
-    Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<winrt::Windows::ApplicationModel::Store::Preview::StoreSystemFeature>> FilterUnsupportedSystemFeaturesAsync(const Windows::Foundation::Collections::IIterable<winrt::Windows::ApplicationModel::Store::Preview::StoreSystemFeature> & systemFeatures) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IStoreConfigurationStatics2
-{
-    Windows::Foundation::IReference<uint32_t> PurchasePromptingPolicy() const;
-    void PurchasePromptingPolicy(const Windows::Foundation::IReference<uint32_t> & value) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IStoreConfigurationStatics3
-{
-    bool HasStoreWebAccount() const;
-    bool HasStoreWebAccountForUser(const Windows::System::User & user) const;
-    Windows::Foundation::IAsyncOperation<Windows::Storage::Streams::IRandomAccessStreamReference> GetStoreLogDataAsync(Windows::ApplicationModel::Store::Preview::StoreLogOptions options) const;
-    void SetStoreWebAccountIdForUser(const Windows::System::User & user, hstring_ref webAccountId) const;
-    bool IsStoreWebAccountIdForUser(const Windows::System::User & user, hstring_ref webAccountId) const;
-    Windows::Foundation::IReference<uint32_t> GetPurchasePromptingPolicyForUser(const Windows::System::User & user) const;
-    void SetPurchasePromptingPolicyForUser(const Windows::System::User & user, const Windows::Foundation::IReference<uint32_t> & value) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IStoreHardwareManufacturerInfo
-{
-    hstring HardwareManufacturerId() const;
-    hstring StoreContentModifierId() const;
-    hstring ModelName() const;
-    hstring ManufacturerName() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IStorePreview
-{
-    Windows::Foundation::IAsyncOperation<Windows::ApplicationModel::Store::Preview::StorePreviewPurchaseResults> RequestProductPurchaseByProductIdAndSkuIdAsync(hstring_ref productId, hstring_ref skuId) const;
-    Windows::Foundation::IAsyncOperation<Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Store::Preview::StorePreviewProductInfo>> LoadAddOnProductInfosAsync() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IStorePreviewProductInfo
-{
-    hstring ProductId() const;
-    hstring ProductType() const;
-    hstring Title() const;
-    hstring Description() const;
-    Windows::Foundation::Collections::IVectorView<Windows::ApplicationModel::Store::Preview::StorePreviewSkuInfo> SkuInfoList() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IStorePreviewPurchaseResults
-{
-    Windows::ApplicationModel::Store::Preview::StorePreviewProductPurchaseStatus ProductPurchaseStatus() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IStorePreviewSkuInfo
-{
-    hstring ProductId() const;
-    hstring SkuId() const;
-    hstring SkuType() const;
-    hstring Title() const;
-    hstring Description() const;
-    hstring CustomDeveloperData() const;
-    hstring CurrencyCode() const;
-    hstring FormattedListPrice() const;
-    hstring ExtendedData() const;
-};
-
 struct IStoreConfigurationStatics :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IStoreConfigurationStatics>
 {
     IStoreConfigurationStatics(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IStoreConfigurationStatics>(m_ptr); }
 };
 
 struct IStoreConfigurationStatics2 :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IStoreConfigurationStatics2>
 {
     IStoreConfigurationStatics2(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IStoreConfigurationStatics2>(m_ptr); }
 };
 
 struct IStoreConfigurationStatics3 :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IStoreConfigurationStatics3>
 {
     IStoreConfigurationStatics3(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IStoreConfigurationStatics3>(m_ptr); }
+};
+
+struct IStoreConfigurationStatics4 :
+    Windows::Foundation::IInspectable,
+    impl::consume<IStoreConfigurationStatics4>
+{
+    IStoreConfigurationStatics4(std::nullptr_t = nullptr) noexcept {}
 };
 
 struct IStoreHardwareManufacturerInfo :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IStoreHardwareManufacturerInfo>
 {
     IStoreHardwareManufacturerInfo(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IStoreHardwareManufacturerInfo>(m_ptr); }
 };
 
 struct IStorePreview :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IStorePreview>
 {
     IStorePreview(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IStorePreview>(m_ptr); }
 };
 
 struct IStorePreviewProductInfo :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IStorePreviewProductInfo>
 {
     IStorePreviewProductInfo(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IStorePreviewProductInfo>(m_ptr); }
 };
 
 struct IStorePreviewPurchaseResults :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IStorePreviewPurchaseResults>
 {
     IStorePreviewPurchaseResults(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IStorePreviewPurchaseResults>(m_ptr); }
 };
 
 struct IStorePreviewSkuInfo :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<IStorePreviewSkuInfo>
 {
     IStorePreviewSkuInfo(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<IStorePreviewSkuInfo>(m_ptr); }
+};
+
+struct IWebAuthenticationCoreManagerHelper :
+    Windows::Foundation::IInspectable,
+    impl::consume<IWebAuthenticationCoreManagerHelper>
+{
+    IWebAuthenticationCoreManagerHelper(std::nullptr_t = nullptr) noexcept {}
 };
 
 }

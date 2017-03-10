@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -9,26 +9,27 @@ WINRT_EXPORT namespace winrt {
 
 namespace Windows::Media::Playback {
 
-struct BackgroundMediaPlayer
+struct [[deprecated("Use MediaPlayer instead of BackgroundMediaPlayer.  For more info, see MSDN.")]] BackgroundMediaPlayer
 {
     BackgroundMediaPlayer() = delete;
-    static Windows::Media::Playback::MediaPlayer Current();
-    static event_token MessageReceivedFromBackground(const Windows::Foundation::EventHandler<Windows::Media::Playback::MediaPlayerDataReceivedEventArgs> & value);
+    [[deprecated("Use MediaPlayer instead of BackgroundMediaPlayer.  For more info, see MSDN.")]] static Windows::Media::Playback::MediaPlayer Current();
+    [[deprecated("Use MediaPlayer instead of BackgroundMediaPlayer.  For more info, see MSDN.")]] static event_token MessageReceivedFromBackground(const Windows::Foundation::EventHandler<Windows::Media::Playback::MediaPlayerDataReceivedEventArgs> & value);
     using MessageReceivedFromBackground_revoker = factory_event_revoker<IBackgroundMediaPlayerStatics>;
-    static MessageReceivedFromBackground_revoker MessageReceivedFromBackground(auto_revoke_t, const Windows::Foundation::EventHandler<Windows::Media::Playback::MediaPlayerDataReceivedEventArgs> & value);
-    static void MessageReceivedFromBackground(event_token token);
-    static event_token MessageReceivedFromForeground(const Windows::Foundation::EventHandler<Windows::Media::Playback::MediaPlayerDataReceivedEventArgs> & value);
+    [[deprecated("Use MediaPlayer instead of BackgroundMediaPlayer.  For more info, see MSDN.")]] static MessageReceivedFromBackground_revoker MessageReceivedFromBackground(auto_revoke_t, const Windows::Foundation::EventHandler<Windows::Media::Playback::MediaPlayerDataReceivedEventArgs> & value);
+    [[deprecated("Use MediaPlayer instead of BackgroundMediaPlayer.  For more info, see MSDN.")]] static void MessageReceivedFromBackground(event_token token);
+    [[deprecated("Use MediaPlayer instead of BackgroundMediaPlayer.  For more info, see MSDN.")]] static event_token MessageReceivedFromForeground(const Windows::Foundation::EventHandler<Windows::Media::Playback::MediaPlayerDataReceivedEventArgs> & value);
     using MessageReceivedFromForeground_revoker = factory_event_revoker<IBackgroundMediaPlayerStatics>;
-    static MessageReceivedFromForeground_revoker MessageReceivedFromForeground(auto_revoke_t, const Windows::Foundation::EventHandler<Windows::Media::Playback::MediaPlayerDataReceivedEventArgs> & value);
-    static void MessageReceivedFromForeground(event_token token);
-    static void SendMessageToBackground(const Windows::Foundation::Collections::ValueSet & value);
-    static void SendMessageToForeground(const Windows::Foundation::Collections::ValueSet & value);
-    static bool IsMediaPlaying();
-    static void Shutdown();
+    [[deprecated("Use MediaPlayer instead of BackgroundMediaPlayer.  For more info, see MSDN.")]] static MessageReceivedFromForeground_revoker MessageReceivedFromForeground(auto_revoke_t, const Windows::Foundation::EventHandler<Windows::Media::Playback::MediaPlayerDataReceivedEventArgs> & value);
+    [[deprecated("Use MediaPlayer instead of BackgroundMediaPlayer.  For more info, see MSDN.")]] static void MessageReceivedFromForeground(event_token token);
+    [[deprecated("Use MediaPlayer instead of BackgroundMediaPlayer.  For more info, see MSDN.")]] static void SendMessageToBackground(const Windows::Foundation::Collections::ValueSet & value);
+    [[deprecated("Use MediaPlayer instead of BackgroundMediaPlayer.  For more info, see MSDN.")]] static void SendMessageToForeground(const Windows::Foundation::Collections::ValueSet & value);
+    [[deprecated("Use MediaPlayer instead of BackgroundMediaPlayer.  For more info, see MSDN.")]] static bool IsMediaPlaying();
+    [[deprecated("Use MediaPlayer instead of BackgroundMediaPlayer.  For more info, see MSDN.")]] static void Shutdown();
 };
 
 struct WINRT_EBO CurrentMediaPlaybackItemChangedEventArgs :
-    Windows::Media::Playback::ICurrentMediaPlaybackItemChangedEventArgs
+    Windows::Media::Playback::ICurrentMediaPlaybackItemChangedEventArgs,
+    impl::require<CurrentMediaPlaybackItemChangedEventArgs, Windows::Media::Playback::ICurrentMediaPlaybackItemChangedEventArgs2>
 {
     CurrentMediaPlaybackItemChangedEventArgs(std::nullptr_t) noexcept {}
 };
@@ -164,7 +165,7 @@ struct WINRT_EBO MediaPlaybackCommandManagerShuffleReceivedEventArgs :
 
 struct WINRT_EBO MediaPlaybackItem :
     Windows::Media::Playback::IMediaPlaybackItem,
-    impl::require<MediaPlaybackItem, Windows::Media::Playback::IMediaPlaybackItem2>
+    impl::require<MediaPlaybackItem, Windows::Media::Playback::IMediaPlaybackItem2, Windows::Media::Playback::IMediaPlaybackItem3>
 {
     MediaPlaybackItem(std::nullptr_t) noexcept {}
     MediaPlaybackItem(const Windows::Media::Core::MediaSource & source);
@@ -193,16 +194,23 @@ struct WINRT_EBO MediaPlaybackItemOpenedEventArgs :
 
 struct WINRT_EBO MediaPlaybackList :
     Windows::Media::Playback::IMediaPlaybackList,
-    impl::require<MediaPlaybackList, Windows::Media::Playback::IMediaPlaybackList2>
+    impl::require<MediaPlaybackList, Windows::Media::Playback::IMediaPlaybackList2, Windows::Media::Playback::IMediaPlaybackList3>
 {
     MediaPlaybackList(std::nullptr_t) noexcept {}
     MediaPlaybackList();
 };
 
 struct WINRT_EBO MediaPlaybackSession :
-    Windows::Media::Playback::IMediaPlaybackSession
+    Windows::Media::Playback::IMediaPlaybackSession,
+    impl::require<MediaPlaybackSession, Windows::Media::Playback::IMediaPlaybackSession2>
 {
     MediaPlaybackSession(std::nullptr_t) noexcept {}
+};
+
+struct WINRT_EBO MediaPlaybackSphericalVideoProjection :
+    Windows::Media::Playback::IMediaPlaybackSphericalVideoProjection
+{
+    MediaPlaybackSphericalVideoProjection(std::nullptr_t) noexcept {}
 };
 
 struct WINRT_EBO MediaPlaybackTimedMetadataTrackList :
@@ -221,7 +229,7 @@ struct WINRT_EBO MediaPlaybackVideoTrackList :
 
 struct WINRT_EBO MediaPlayer :
     Windows::Media::Playback::IMediaPlayer,
-    impl::require<MediaPlayer, Windows::Foundation::IClosable, Windows::Media::Playback::IMediaPlayer2, Windows::Media::Playback::IMediaPlayer3, Windows::Media::Playback::IMediaPlayer4, Windows::Media::Playback::IMediaPlayerSource, Windows::Media::Playback::IMediaPlayerSource2, Windows::Media::Playback::IMediaPlayerEffects, Windows::Media::Playback::IMediaPlayerEffects2>
+    impl::require<MediaPlayer, Windows::Foundation::IClosable, Windows::Media::Playback::IMediaPlayer2, Windows::Media::Playback::IMediaPlayer3, Windows::Media::Playback::IMediaPlayer4, Windows::Media::Playback::IMediaPlayer5, Windows::Media::Playback::IMediaPlayerSource, Windows::Media::Playback::IMediaPlayerSource2, Windows::Media::Playback::IMediaPlayerEffects, Windows::Media::Playback::IMediaPlayerEffects2>
 {
     MediaPlayer(std::nullptr_t) noexcept {}
     MediaPlayer();
@@ -257,7 +265,7 @@ struct WINRT_EBO PlaybackMediaMarker :
 {
     PlaybackMediaMarker(std::nullptr_t) noexcept {}
     PlaybackMediaMarker(const Windows::Foundation::TimeSpan & value);
-    PlaybackMediaMarker(const Windows::Foundation::TimeSpan & value, hstring_ref mediaMarketType, hstring_ref text);
+    PlaybackMediaMarker(const Windows::Foundation::TimeSpan & value, hstring_view mediaMarketType, hstring_view text);
 };
 
 struct WINRT_EBO PlaybackMediaMarkerReachedEventArgs :

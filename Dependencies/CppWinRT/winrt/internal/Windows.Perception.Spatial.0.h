@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -36,21 +36,38 @@ struct ISpatialAnchorTransferManagerStatics;
 struct ISpatialBoundingVolume;
 struct ISpatialBoundingVolumeStatics;
 struct ISpatialCoordinateSystem;
+struct ISpatialEntity;
+struct ISpatialEntityAddedEventArgs;
+struct ISpatialEntityFactory;
+struct ISpatialEntityRemovedEventArgs;
+struct ISpatialEntityStore;
+struct ISpatialEntityStoreStatics;
+struct ISpatialEntityUpdatedEventArgs;
+struct ISpatialEntityWatcher;
 struct ISpatialLocation;
 struct ISpatialLocator;
 struct ISpatialLocatorAttachedFrameOfReference;
 struct ISpatialLocatorPositionalTrackingDeactivatingEventArgs;
 struct ISpatialLocatorStatics;
+struct ISpatialStageFrameOfReference;
+struct ISpatialStageFrameOfReferenceStatics;
 struct ISpatialStationaryFrameOfReference;
 struct SpatialAnchor;
 struct SpatialAnchorRawCoordinateSystemAdjustedEventArgs;
 struct SpatialAnchorStore;
 struct SpatialBoundingVolume;
 struct SpatialCoordinateSystem;
+struct SpatialEntity;
+struct SpatialEntityAddedEventArgs;
+struct SpatialEntityRemovedEventArgs;
+struct SpatialEntityStore;
+struct SpatialEntityUpdatedEventArgs;
+struct SpatialEntityWatcher;
 struct SpatialLocation;
 struct SpatialLocator;
 struct SpatialLocatorAttachedFrameOfReference;
 struct SpatialLocatorPositionalTrackingDeactivatingEventArgs;
+struct SpatialStageFrameOfReference;
 struct SpatialStationaryFrameOfReference;
 
 }
@@ -67,11 +84,21 @@ struct ISpatialAnchorTransferManagerStatics;
 struct ISpatialBoundingVolume;
 struct ISpatialBoundingVolumeStatics;
 struct ISpatialCoordinateSystem;
+struct ISpatialEntity;
+struct ISpatialEntityAddedEventArgs;
+struct ISpatialEntityFactory;
+struct ISpatialEntityRemovedEventArgs;
+struct ISpatialEntityStore;
+struct ISpatialEntityStoreStatics;
+struct ISpatialEntityUpdatedEventArgs;
+struct ISpatialEntityWatcher;
 struct ISpatialLocation;
 struct ISpatialLocator;
 struct ISpatialLocatorAttachedFrameOfReference;
 struct ISpatialLocatorPositionalTrackingDeactivatingEventArgs;
 struct ISpatialLocatorStatics;
+struct ISpatialStageFrameOfReference;
+struct ISpatialStageFrameOfReferenceStatics;
 struct ISpatialStationaryFrameOfReference;
 struct SpatialAnchor;
 struct SpatialAnchorManager;
@@ -80,15 +107,63 @@ struct SpatialAnchorStore;
 struct SpatialAnchorTransferManager;
 struct SpatialBoundingVolume;
 struct SpatialCoordinateSystem;
+struct SpatialEntity;
+struct SpatialEntityAddedEventArgs;
+struct SpatialEntityRemovedEventArgs;
+struct SpatialEntityStore;
+struct SpatialEntityUpdatedEventArgs;
+struct SpatialEntityWatcher;
 struct SpatialLocation;
 struct SpatialLocator;
 struct SpatialLocatorAttachedFrameOfReference;
 struct SpatialLocatorPositionalTrackingDeactivatingEventArgs;
+struct SpatialStageFrameOfReference;
 struct SpatialStationaryFrameOfReference;
 
 }
 
 namespace Windows::Perception::Spatial {
+
+template <typename T> struct impl_ISpatialAnchor;
+template <typename T> struct impl_ISpatialAnchor2;
+template <typename T> struct impl_ISpatialAnchorManagerStatics;
+template <typename T> struct impl_ISpatialAnchorRawCoordinateSystemAdjustedEventArgs;
+template <typename T> struct impl_ISpatialAnchorStatics;
+template <typename T> struct impl_ISpatialAnchorStore;
+template <typename T> struct impl_ISpatialAnchorTransferManagerStatics;
+template <typename T> struct impl_ISpatialBoundingVolume;
+template <typename T> struct impl_ISpatialBoundingVolumeStatics;
+template <typename T> struct impl_ISpatialCoordinateSystem;
+template <typename T> struct impl_ISpatialEntity;
+template <typename T> struct impl_ISpatialEntityAddedEventArgs;
+template <typename T> struct impl_ISpatialEntityFactory;
+template <typename T> struct impl_ISpatialEntityRemovedEventArgs;
+template <typename T> struct impl_ISpatialEntityStore;
+template <typename T> struct impl_ISpatialEntityStoreStatics;
+template <typename T> struct impl_ISpatialEntityUpdatedEventArgs;
+template <typename T> struct impl_ISpatialEntityWatcher;
+template <typename T> struct impl_ISpatialLocation;
+template <typename T> struct impl_ISpatialLocator;
+template <typename T> struct impl_ISpatialLocatorAttachedFrameOfReference;
+template <typename T> struct impl_ISpatialLocatorPositionalTrackingDeactivatingEventArgs;
+template <typename T> struct impl_ISpatialLocatorStatics;
+template <typename T> struct impl_ISpatialStageFrameOfReference;
+template <typename T> struct impl_ISpatialStageFrameOfReferenceStatics;
+template <typename T> struct impl_ISpatialStationaryFrameOfReference;
+
+}
+
+namespace Windows::Perception::Spatial {
+
+enum class SpatialEntityWatcherStatus
+{
+    Created = 0,
+    Started = 1,
+    EnumerationCompleted = 2,
+    Stopping = 3,
+    Stopped = 4,
+    Aborted = 5,
+};
 
 enum class SpatialLocatability
 {
@@ -97,6 +172,18 @@ enum class SpatialLocatability
     PositionalTrackingActivating = 2,
     PositionalTrackingActive = 3,
     PositionalTrackingInhibited = 4,
+};
+
+enum class SpatialLookDirectionRange
+{
+    ForwardOnly = 0,
+    Omnidirectional = 1,
+};
+
+enum class SpatialMovementRange
+{
+    NoMovement = 0,
+    Bounded = 1,
 };
 
 enum class SpatialPerceptionAccessStatus

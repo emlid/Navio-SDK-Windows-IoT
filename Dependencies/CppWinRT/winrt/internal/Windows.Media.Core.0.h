@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -8,21 +8,21 @@ WINRT_EXPORT namespace winrt {
 
 namespace ABI::Windows::Media::Core {
 
-struct MseTimeRange;
 struct TimedTextPadding;
 struct TimedTextSize;
 struct TimedTextDouble;
 struct TimedTextPoint;
+struct MseTimeRange;
 
 }
 
 namespace Windows::Media::Core {
 
-using MseTimeRange = ABI::Windows::Media::Core::MseTimeRange;
 using TimedTextPadding = ABI::Windows::Media::Core::TimedTextPadding;
 using TimedTextSize = ABI::Windows::Media::Core::TimedTextSize;
 using TimedTextDouble = ABI::Windows::Media::Core::TimedTextDouble;
 using TimedTextPoint = ABI::Windows::Media::Core::TimedTextPoint;
+using MseTimeRange = ABI::Windows::Media::Core::MseTimeRange;
 
 }
 
@@ -34,20 +34,28 @@ struct IAudioStreamDescriptorFactory;
 struct IAudioTrack;
 struct IAudioTrackOpenFailedEventArgs;
 struct IAudioTrackSupportInfo;
+struct IChapterCue;
+struct ICodecInfo;
+struct ICodecQuery;
+struct ICodecSubtypesStatics;
 struct IDataCue;
+struct IDataCue2;
 struct IFaceDetectedEventArgs;
 struct IFaceDetectionEffect;
 struct IFaceDetectionEffectDefinition;
 struct IFaceDetectionEffectFrame;
 struct IHighDynamicRangeControl;
 struct IHighDynamicRangeOutput;
+struct IImageCue;
 struct IMediaBinder;
 struct IMediaBindingEventArgs;
+struct IMediaBindingEventArgs2;
 struct IMediaCue;
 struct IMediaCueEventArgs;
 struct IMediaSource;
 struct IMediaSource2;
 struct IMediaSource3;
+struct IMediaSource4;
 struct IMediaSourceError;
 struct IMediaSourceOpenOperationCompletedEventArgs;
 struct IMediaSourceStateChangedEventArgs;
@@ -59,6 +67,7 @@ struct IMediaStreamSampleProtectionProperties;
 struct IMediaStreamSampleStatics;
 struct IMediaStreamSource;
 struct IMediaStreamSource2;
+struct IMediaStreamSource3;
 struct IMediaStreamSourceClosedEventArgs;
 struct IMediaStreamSourceClosedRequest;
 struct IMediaStreamSourceFactory;
@@ -81,18 +90,22 @@ struct ISceneAnalysisEffect;
 struct ISceneAnalysisEffectFrame;
 struct ISceneAnalyzedEventArgs;
 struct ISingleSelectMediaTrackList;
+struct ISpeechCue;
 struct ITimedMetadataTrack;
 struct ITimedMetadataTrack2;
 struct ITimedMetadataTrackError;
 struct ITimedMetadataTrackFactory;
 struct ITimedMetadataTrackFailedEventArgs;
+struct ITimedMetadataTrackProvider;
 struct ITimedTextCue;
 struct ITimedTextLine;
 struct ITimedTextRegion;
 struct ITimedTextSource;
 struct ITimedTextSourceResolveResultEventArgs;
 struct ITimedTextSourceStatics;
+struct ITimedTextSourceStatics2;
 struct ITimedTextStyle;
+struct ITimedTextStyle2;
 struct ITimedTextSubformat;
 struct IVideoStabilizationEffect;
 struct IVideoStabilizationEffectEnabledChangedEventArgs;
@@ -105,6 +118,9 @@ struct AudioStreamDescriptor;
 struct AudioTrack;
 struct AudioTrackOpenFailedEventArgs;
 struct AudioTrackSupportInfo;
+struct ChapterCue;
+struct CodecInfo;
+struct CodecQuery;
 struct DataCue;
 struct FaceDetectedEventArgs;
 struct FaceDetectionEffect;
@@ -112,6 +128,7 @@ struct FaceDetectionEffectDefinition;
 struct FaceDetectionEffectFrame;
 struct HighDynamicRangeControl;
 struct HighDynamicRangeOutput;
+struct ImageCue;
 struct MediaBinder;
 struct MediaBindingEventArgs;
 struct MediaCueEventArgs;
@@ -142,6 +159,7 @@ struct SceneAnalysisEffect;
 struct SceneAnalysisEffectDefinition;
 struct SceneAnalysisEffectFrame;
 struct SceneAnalyzedEventArgs;
+struct SpeechCue;
 struct TimedMetadataTrack;
 struct TimedMetadataTrackError;
 struct TimedMetadataTrackFailedEventArgs;
@@ -170,20 +188,28 @@ struct IAudioStreamDescriptorFactory;
 struct IAudioTrack;
 struct IAudioTrackOpenFailedEventArgs;
 struct IAudioTrackSupportInfo;
+struct IChapterCue;
+struct ICodecInfo;
+struct ICodecQuery;
+struct ICodecSubtypesStatics;
 struct IDataCue;
+struct IDataCue2;
 struct IFaceDetectedEventArgs;
 struct IFaceDetectionEffect;
 struct IFaceDetectionEffectDefinition;
 struct IFaceDetectionEffectFrame;
 struct IHighDynamicRangeControl;
 struct IHighDynamicRangeOutput;
+struct IImageCue;
 struct IMediaBinder;
 struct IMediaBindingEventArgs;
+struct IMediaBindingEventArgs2;
 struct IMediaCue;
 struct IMediaCueEventArgs;
 struct IMediaSource;
 struct IMediaSource2;
 struct IMediaSource3;
+struct IMediaSource4;
 struct IMediaSourceError;
 struct IMediaSourceOpenOperationCompletedEventArgs;
 struct IMediaSourceStateChangedEventArgs;
@@ -195,6 +221,7 @@ struct IMediaStreamSampleProtectionProperties;
 struct IMediaStreamSampleStatics;
 struct IMediaStreamSource;
 struct IMediaStreamSource2;
+struct IMediaStreamSource3;
 struct IMediaStreamSourceClosedEventArgs;
 struct IMediaStreamSourceClosedRequest;
 struct IMediaStreamSourceFactory;
@@ -217,18 +244,22 @@ struct ISceneAnalysisEffect;
 struct ISceneAnalysisEffectFrame;
 struct ISceneAnalyzedEventArgs;
 struct ISingleSelectMediaTrackList;
+struct ISpeechCue;
 struct ITimedMetadataTrack;
 struct ITimedMetadataTrack2;
 struct ITimedMetadataTrackError;
 struct ITimedMetadataTrackFactory;
 struct ITimedMetadataTrackFailedEventArgs;
+struct ITimedMetadataTrackProvider;
 struct ITimedTextCue;
 struct ITimedTextLine;
 struct ITimedTextRegion;
 struct ITimedTextSource;
 struct ITimedTextSourceResolveResultEventArgs;
 struct ITimedTextSourceStatics;
+struct ITimedTextSourceStatics2;
 struct ITimedTextStyle;
+struct ITimedTextStyle2;
 struct ITimedTextSubformat;
 struct IVideoStabilizationEffect;
 struct IVideoStabilizationEffectEnabledChangedEventArgs;
@@ -241,6 +272,10 @@ struct AudioStreamDescriptor;
 struct AudioTrack;
 struct AudioTrackOpenFailedEventArgs;
 struct AudioTrackSupportInfo;
+struct ChapterCue;
+struct CodecInfo;
+struct CodecQuery;
+struct CodecSubtypes;
 struct DataCue;
 struct FaceDetectedEventArgs;
 struct FaceDetectionEffect;
@@ -248,6 +283,7 @@ struct FaceDetectionEffectDefinition;
 struct FaceDetectionEffectFrame;
 struct HighDynamicRangeControl;
 struct HighDynamicRangeOutput;
+struct ImageCue;
 struct MediaBinder;
 struct MediaBindingEventArgs;
 struct MediaCueEventArgs;
@@ -278,6 +314,7 @@ struct SceneAnalysisEffect;
 struct SceneAnalysisEffectDefinition;
 struct SceneAnalysisEffectFrame;
 struct SceneAnalyzedEventArgs;
+struct SpeechCue;
 struct TimedMetadataTrack;
 struct TimedMetadataTrackError;
 struct TimedMetadataTrackFailedEventArgs;
@@ -295,6 +332,97 @@ struct VideoStreamDescriptor;
 struct VideoTrack;
 struct VideoTrackOpenFailedEventArgs;
 struct VideoTrackSupportInfo;
+
+}
+
+namespace Windows::Media::Core {
+
+template <typename T> struct impl_IAudioStreamDescriptor;
+template <typename T> struct impl_IAudioStreamDescriptor2;
+template <typename T> struct impl_IAudioStreamDescriptorFactory;
+template <typename T> struct impl_IAudioTrack;
+template <typename T> struct impl_IAudioTrackOpenFailedEventArgs;
+template <typename T> struct impl_IAudioTrackSupportInfo;
+template <typename T> struct impl_IChapterCue;
+template <typename T> struct impl_ICodecInfo;
+template <typename T> struct impl_ICodecQuery;
+template <typename T> struct impl_ICodecSubtypesStatics;
+template <typename T> struct impl_IDataCue;
+template <typename T> struct impl_IDataCue2;
+template <typename T> struct impl_IFaceDetectedEventArgs;
+template <typename T> struct impl_IFaceDetectionEffect;
+template <typename T> struct impl_IFaceDetectionEffectDefinition;
+template <typename T> struct impl_IFaceDetectionEffectFrame;
+template <typename T> struct impl_IHighDynamicRangeControl;
+template <typename T> struct impl_IHighDynamicRangeOutput;
+template <typename T> struct impl_IImageCue;
+template <typename T> struct impl_IMediaBinder;
+template <typename T> struct impl_IMediaBindingEventArgs;
+template <typename T> struct impl_IMediaBindingEventArgs2;
+template <typename T> struct impl_IMediaCue;
+template <typename T> struct impl_IMediaCueEventArgs;
+template <typename T> struct impl_IMediaSource;
+template <typename T> struct impl_IMediaSource2;
+template <typename T> struct impl_IMediaSource3;
+template <typename T> struct impl_IMediaSource4;
+template <typename T> struct impl_IMediaSourceError;
+template <typename T> struct impl_IMediaSourceOpenOperationCompletedEventArgs;
+template <typename T> struct impl_IMediaSourceStateChangedEventArgs;
+template <typename T> struct impl_IMediaSourceStatics;
+template <typename T> struct impl_IMediaSourceStatics2;
+template <typename T> struct impl_IMediaStreamDescriptor;
+template <typename T> struct impl_IMediaStreamSample;
+template <typename T> struct impl_IMediaStreamSampleProtectionProperties;
+template <typename T> struct impl_IMediaStreamSampleStatics;
+template <typename T> struct impl_IMediaStreamSource;
+template <typename T> struct impl_IMediaStreamSource2;
+template <typename T> struct impl_IMediaStreamSource3;
+template <typename T> struct impl_IMediaStreamSourceClosedEventArgs;
+template <typename T> struct impl_IMediaStreamSourceClosedRequest;
+template <typename T> struct impl_IMediaStreamSourceFactory;
+template <typename T> struct impl_IMediaStreamSourceSampleRenderedEventArgs;
+template <typename T> struct impl_IMediaStreamSourceSampleRequest;
+template <typename T> struct impl_IMediaStreamSourceSampleRequestDeferral;
+template <typename T> struct impl_IMediaStreamSourceSampleRequestedEventArgs;
+template <typename T> struct impl_IMediaStreamSourceStartingEventArgs;
+template <typename T> struct impl_IMediaStreamSourceStartingRequest;
+template <typename T> struct impl_IMediaStreamSourceStartingRequestDeferral;
+template <typename T> struct impl_IMediaStreamSourceSwitchStreamsRequest;
+template <typename T> struct impl_IMediaStreamSourceSwitchStreamsRequestDeferral;
+template <typename T> struct impl_IMediaStreamSourceSwitchStreamsRequestedEventArgs;
+template <typename T> struct impl_IMediaTrack;
+template <typename T> struct impl_IMseSourceBuffer;
+template <typename T> struct impl_IMseSourceBufferList;
+template <typename T> struct impl_IMseStreamSource;
+template <typename T> struct impl_IMseStreamSourceStatics;
+template <typename T> struct impl_ISceneAnalysisEffect;
+template <typename T> struct impl_ISceneAnalysisEffectFrame;
+template <typename T> struct impl_ISceneAnalyzedEventArgs;
+template <typename T> struct impl_ISingleSelectMediaTrackList;
+template <typename T> struct impl_ISpeechCue;
+template <typename T> struct impl_ITimedMetadataTrack;
+template <typename T> struct impl_ITimedMetadataTrack2;
+template <typename T> struct impl_ITimedMetadataTrackError;
+template <typename T> struct impl_ITimedMetadataTrackFactory;
+template <typename T> struct impl_ITimedMetadataTrackFailedEventArgs;
+template <typename T> struct impl_ITimedMetadataTrackProvider;
+template <typename T> struct impl_ITimedTextCue;
+template <typename T> struct impl_ITimedTextLine;
+template <typename T> struct impl_ITimedTextRegion;
+template <typename T> struct impl_ITimedTextSource;
+template <typename T> struct impl_ITimedTextSourceResolveResultEventArgs;
+template <typename T> struct impl_ITimedTextSourceStatics;
+template <typename T> struct impl_ITimedTextSourceStatics2;
+template <typename T> struct impl_ITimedTextStyle;
+template <typename T> struct impl_ITimedTextStyle2;
+template <typename T> struct impl_ITimedTextSubformat;
+template <typename T> struct impl_IVideoStabilizationEffect;
+template <typename T> struct impl_IVideoStabilizationEffectEnabledChangedEventArgs;
+template <typename T> struct impl_IVideoStreamDescriptor;
+template <typename T> struct impl_IVideoStreamDescriptorFactory;
+template <typename T> struct impl_IVideoTrack;
+template <typename T> struct impl_IVideoTrackOpenFailedEventArgs;
+template <typename T> struct impl_IVideoTrackSupportInfo;
 
 }
 
@@ -312,6 +440,19 @@ enum class AudioDecoderDegradationReason
 {
     None = 0,
     LicensingRequirement = 1,
+    SpatialAudioNotSupported = 2,
+};
+
+enum class CodecCategory
+{
+    Encoder = 0,
+    Decoder = 1,
+};
+
+enum class CodecKind
+{
+    Audio = 0,
+    Video = 1,
 };
 
 enum class FaceDetectionMode
@@ -403,6 +544,8 @@ enum class TimedMetadataKind
     Data = 3,
     Description = 4,
     Subtitle = 5,
+    ImageSubtitle = 6,
+    Speech = 7,
 };
 
 enum class TimedMetadataTrackErrorCode
@@ -424,6 +567,13 @@ enum class TimedTextFlowDirection
 {
     LeftToRight = 0,
     RightToLeft = 1,
+};
+
+enum class TimedTextFontStyle
+{
+    Normal = 0,
+    Oblique = 1,
+    Italic = 2,
 };
 
 enum class TimedTextLineAlignment

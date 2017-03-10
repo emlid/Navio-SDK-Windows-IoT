@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -8,9 +8,12 @@ WINRT_EXPORT namespace winrt {
 
 namespace ABI::Windows::UI::Composition::Interactions {
 
+struct ICompositionConditionalValue;
+struct ICompositionConditionalValueStatics;
 struct ICompositionInteractionSource;
 struct ICompositionInteractionSourceCollection;
 struct IInteractionTracker;
+struct IInteractionTracker2;
 struct IInteractionTrackerCustomAnimationStateEnteredArgs;
 struct IInteractionTrackerIdleStateEnteredArgs;
 struct IInteractionTrackerInertiaModifier;
@@ -26,7 +29,10 @@ struct IInteractionTrackerRequestIgnoredArgs;
 struct IInteractionTrackerStatics;
 struct IInteractionTrackerValuesChangedArgs;
 struct IVisualInteractionSource;
+struct IVisualInteractionSource2;
+struct IVisualInteractionSourceObjectFactory;
 struct IVisualInteractionSourceStatics;
+struct CompositionConditionalValue;
 struct CompositionInteractionSourceCollection;
 struct InteractionTracker;
 struct InteractionTrackerCustomAnimationStateEnteredArgs;
@@ -44,9 +50,12 @@ struct VisualInteractionSource;
 
 namespace Windows::UI::Composition::Interactions {
 
+struct ICompositionConditionalValue;
+struct ICompositionConditionalValueStatics;
 struct ICompositionInteractionSource;
 struct ICompositionInteractionSourceCollection;
 struct IInteractionTracker;
+struct IInteractionTracker2;
 struct IInteractionTrackerCustomAnimationStateEnteredArgs;
 struct IInteractionTrackerIdleStateEnteredArgs;
 struct IInteractionTrackerInertiaModifier;
@@ -62,7 +71,10 @@ struct IInteractionTrackerRequestIgnoredArgs;
 struct IInteractionTrackerStatics;
 struct IInteractionTrackerValuesChangedArgs;
 struct IVisualInteractionSource;
+struct IVisualInteractionSource2;
+struct IVisualInteractionSourceObjectFactory;
 struct IVisualInteractionSourceStatics;
+struct CompositionConditionalValue;
 struct CompositionInteractionSourceCollection;
 struct InteractionTracker;
 struct InteractionTrackerCustomAnimationStateEnteredArgs;
@@ -75,6 +87,35 @@ struct InteractionTrackerInteractingStateEnteredArgs;
 struct InteractionTrackerRequestIgnoredArgs;
 struct InteractionTrackerValuesChangedArgs;
 struct VisualInteractionSource;
+
+}
+
+namespace Windows::UI::Composition::Interactions {
+
+template <typename T> struct impl_ICompositionConditionalValue;
+template <typename T> struct impl_ICompositionConditionalValueStatics;
+template <typename T> struct impl_ICompositionInteractionSource;
+template <typename T> struct impl_ICompositionInteractionSourceCollection;
+template <typename T> struct impl_IInteractionTracker;
+template <typename T> struct impl_IInteractionTracker2;
+template <typename T> struct impl_IInteractionTrackerCustomAnimationStateEnteredArgs;
+template <typename T> struct impl_IInteractionTrackerIdleStateEnteredArgs;
+template <typename T> struct impl_IInteractionTrackerInertiaModifier;
+template <typename T> struct impl_IInteractionTrackerInertiaModifierFactory;
+template <typename T> struct impl_IInteractionTrackerInertiaMotion;
+template <typename T> struct impl_IInteractionTrackerInertiaMotionStatics;
+template <typename T> struct impl_IInteractionTrackerInertiaRestingValue;
+template <typename T> struct impl_IInteractionTrackerInertiaRestingValueStatics;
+template <typename T> struct impl_IInteractionTrackerInertiaStateEnteredArgs;
+template <typename T> struct impl_IInteractionTrackerInteractingStateEnteredArgs;
+template <typename T> struct impl_IInteractionTrackerOwner;
+template <typename T> struct impl_IInteractionTrackerRequestIgnoredArgs;
+template <typename T> struct impl_IInteractionTrackerStatics;
+template <typename T> struct impl_IInteractionTrackerValuesChangedArgs;
+template <typename T> struct impl_IVisualInteractionSource;
+template <typename T> struct impl_IVisualInteractionSource2;
+template <typename T> struct impl_IVisualInteractionSourceObjectFactory;
+template <typename T> struct impl_IVisualInteractionSourceStatics;
 
 }
 

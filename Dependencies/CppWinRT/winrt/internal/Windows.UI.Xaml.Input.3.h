@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -13,11 +13,11 @@ template <typename H> struct impl_DoubleTappedEventHandler : implements<impl_Dou
 {
     impl_DoubleTappedEventHandler(H && handler) : H(std::forward<H>(handler)) {}
 
-    HRESULT __stdcall abi_Invoke(abi_arg_in<Windows::IInspectable> sender, abi_arg_in<Windows::UI::Xaml::Input::IDoubleTappedRoutedEventArgs> e) noexcept override
+    HRESULT __stdcall abi_Invoke(impl::abi_arg_in<Windows::Foundation::IInspectable> sender, impl::abi_arg_in<Windows::UI::Xaml::Input::IDoubleTappedRoutedEventArgs> e) noexcept override
     {
         try
         {
-            (*this)(*reinterpret_cast<const Windows::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Xaml::Input::DoubleTappedRoutedEventArgs *>(&e));
+            (*this)(*reinterpret_cast<const Windows::Foundation::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Xaml::Input::DoubleTappedRoutedEventArgs *>(&e));
             return S_OK;
         }
         catch (...)
@@ -31,11 +31,11 @@ template <typename H> struct impl_HoldingEventHandler : implements<impl_HoldingE
 {
     impl_HoldingEventHandler(H && handler) : H(std::forward<H>(handler)) {}
 
-    HRESULT __stdcall abi_Invoke(abi_arg_in<Windows::IInspectable> sender, abi_arg_in<Windows::UI::Xaml::Input::IHoldingRoutedEventArgs> e) noexcept override
+    HRESULT __stdcall abi_Invoke(impl::abi_arg_in<Windows::Foundation::IInspectable> sender, impl::abi_arg_in<Windows::UI::Xaml::Input::IHoldingRoutedEventArgs> e) noexcept override
     {
         try
         {
-            (*this)(*reinterpret_cast<const Windows::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Xaml::Input::HoldingRoutedEventArgs *>(&e));
+            (*this)(*reinterpret_cast<const Windows::Foundation::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Xaml::Input::HoldingRoutedEventArgs *>(&e));
             return S_OK;
         }
         catch (...)
@@ -49,11 +49,11 @@ template <typename H> struct impl_KeyEventHandler : implements<impl_KeyEventHand
 {
     impl_KeyEventHandler(H && handler) : H(std::forward<H>(handler)) {}
 
-    HRESULT __stdcall abi_Invoke(abi_arg_in<Windows::IInspectable> sender, abi_arg_in<Windows::UI::Xaml::Input::IKeyRoutedEventArgs> e) noexcept override
+    HRESULT __stdcall abi_Invoke(impl::abi_arg_in<Windows::Foundation::IInspectable> sender, impl::abi_arg_in<Windows::UI::Xaml::Input::IKeyRoutedEventArgs> e) noexcept override
     {
         try
         {
-            (*this)(*reinterpret_cast<const Windows::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Xaml::Input::KeyRoutedEventArgs *>(&e));
+            (*this)(*reinterpret_cast<const Windows::Foundation::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Xaml::Input::KeyRoutedEventArgs *>(&e));
             return S_OK;
         }
         catch (...)
@@ -67,11 +67,11 @@ template <typename H> struct impl_ManipulationCompletedEventHandler : implements
 {
     impl_ManipulationCompletedEventHandler(H && handler) : H(std::forward<H>(handler)) {}
 
-    HRESULT __stdcall abi_Invoke(abi_arg_in<Windows::IInspectable> sender, abi_arg_in<Windows::UI::Xaml::Input::IManipulationCompletedRoutedEventArgs> e) noexcept override
+    HRESULT __stdcall abi_Invoke(impl::abi_arg_in<Windows::Foundation::IInspectable> sender, impl::abi_arg_in<Windows::UI::Xaml::Input::IManipulationCompletedRoutedEventArgs> e) noexcept override
     {
         try
         {
-            (*this)(*reinterpret_cast<const Windows::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Xaml::Input::ManipulationCompletedRoutedEventArgs *>(&e));
+            (*this)(*reinterpret_cast<const Windows::Foundation::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Xaml::Input::ManipulationCompletedRoutedEventArgs *>(&e));
             return S_OK;
         }
         catch (...)
@@ -85,11 +85,11 @@ template <typename H> struct impl_ManipulationDeltaEventHandler : implements<imp
 {
     impl_ManipulationDeltaEventHandler(H && handler) : H(std::forward<H>(handler)) {}
 
-    HRESULT __stdcall abi_Invoke(abi_arg_in<Windows::IInspectable> sender, abi_arg_in<Windows::UI::Xaml::Input::IManipulationDeltaRoutedEventArgs> e) noexcept override
+    HRESULT __stdcall abi_Invoke(impl::abi_arg_in<Windows::Foundation::IInspectable> sender, impl::abi_arg_in<Windows::UI::Xaml::Input::IManipulationDeltaRoutedEventArgs> e) noexcept override
     {
         try
         {
-            (*this)(*reinterpret_cast<const Windows::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Xaml::Input::ManipulationDeltaRoutedEventArgs *>(&e));
+            (*this)(*reinterpret_cast<const Windows::Foundation::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Xaml::Input::ManipulationDeltaRoutedEventArgs *>(&e));
             return S_OK;
         }
         catch (...)
@@ -103,11 +103,11 @@ template <typename H> struct impl_ManipulationInertiaStartingEventHandler : impl
 {
     impl_ManipulationInertiaStartingEventHandler(H && handler) : H(std::forward<H>(handler)) {}
 
-    HRESULT __stdcall abi_Invoke(abi_arg_in<Windows::IInspectable> sender, abi_arg_in<Windows::UI::Xaml::Input::IManipulationInertiaStartingRoutedEventArgs> e) noexcept override
+    HRESULT __stdcall abi_Invoke(impl::abi_arg_in<Windows::Foundation::IInspectable> sender, impl::abi_arg_in<Windows::UI::Xaml::Input::IManipulationInertiaStartingRoutedEventArgs> e) noexcept override
     {
         try
         {
-            (*this)(*reinterpret_cast<const Windows::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Xaml::Input::ManipulationInertiaStartingRoutedEventArgs *>(&e));
+            (*this)(*reinterpret_cast<const Windows::Foundation::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Xaml::Input::ManipulationInertiaStartingRoutedEventArgs *>(&e));
             return S_OK;
         }
         catch (...)
@@ -121,11 +121,11 @@ template <typename H> struct impl_ManipulationStartedEventHandler : implements<i
 {
     impl_ManipulationStartedEventHandler(H && handler) : H(std::forward<H>(handler)) {}
 
-    HRESULT __stdcall abi_Invoke(abi_arg_in<Windows::IInspectable> sender, abi_arg_in<Windows::UI::Xaml::Input::IManipulationStartedRoutedEventArgs> e) noexcept override
+    HRESULT __stdcall abi_Invoke(impl::abi_arg_in<Windows::Foundation::IInspectable> sender, impl::abi_arg_in<Windows::UI::Xaml::Input::IManipulationStartedRoutedEventArgs> e) noexcept override
     {
         try
         {
-            (*this)(*reinterpret_cast<const Windows::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Xaml::Input::ManipulationStartedRoutedEventArgs *>(&e));
+            (*this)(*reinterpret_cast<const Windows::Foundation::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Xaml::Input::ManipulationStartedRoutedEventArgs *>(&e));
             return S_OK;
         }
         catch (...)
@@ -139,11 +139,11 @@ template <typename H> struct impl_ManipulationStartingEventHandler : implements<
 {
     impl_ManipulationStartingEventHandler(H && handler) : H(std::forward<H>(handler)) {}
 
-    HRESULT __stdcall abi_Invoke(abi_arg_in<Windows::IInspectable> sender, abi_arg_in<Windows::UI::Xaml::Input::IManipulationStartingRoutedEventArgs> e) noexcept override
+    HRESULT __stdcall abi_Invoke(impl::abi_arg_in<Windows::Foundation::IInspectable> sender, impl::abi_arg_in<Windows::UI::Xaml::Input::IManipulationStartingRoutedEventArgs> e) noexcept override
     {
         try
         {
-            (*this)(*reinterpret_cast<const Windows::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Xaml::Input::ManipulationStartingRoutedEventArgs *>(&e));
+            (*this)(*reinterpret_cast<const Windows::Foundation::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Xaml::Input::ManipulationStartingRoutedEventArgs *>(&e));
             return S_OK;
         }
         catch (...)
@@ -157,11 +157,11 @@ template <typename H> struct impl_PointerEventHandler : implements<impl_PointerE
 {
     impl_PointerEventHandler(H && handler) : H(std::forward<H>(handler)) {}
 
-    HRESULT __stdcall abi_Invoke(abi_arg_in<Windows::IInspectable> sender, abi_arg_in<Windows::UI::Xaml::Input::IPointerRoutedEventArgs> e) noexcept override
+    HRESULT __stdcall abi_Invoke(impl::abi_arg_in<Windows::Foundation::IInspectable> sender, impl::abi_arg_in<Windows::UI::Xaml::Input::IPointerRoutedEventArgs> e) noexcept override
     {
         try
         {
-            (*this)(*reinterpret_cast<const Windows::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Xaml::Input::PointerRoutedEventArgs *>(&e));
+            (*this)(*reinterpret_cast<const Windows::Foundation::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Xaml::Input::PointerRoutedEventArgs *>(&e));
             return S_OK;
         }
         catch (...)
@@ -175,11 +175,11 @@ template <typename H> struct impl_RightTappedEventHandler : implements<impl_Righ
 {
     impl_RightTappedEventHandler(H && handler) : H(std::forward<H>(handler)) {}
 
-    HRESULT __stdcall abi_Invoke(abi_arg_in<Windows::IInspectable> sender, abi_arg_in<Windows::UI::Xaml::Input::IRightTappedRoutedEventArgs> e) noexcept override
+    HRESULT __stdcall abi_Invoke(impl::abi_arg_in<Windows::Foundation::IInspectable> sender, impl::abi_arg_in<Windows::UI::Xaml::Input::IRightTappedRoutedEventArgs> e) noexcept override
     {
         try
         {
-            (*this)(*reinterpret_cast<const Windows::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Xaml::Input::RightTappedRoutedEventArgs *>(&e));
+            (*this)(*reinterpret_cast<const Windows::Foundation::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Xaml::Input::RightTappedRoutedEventArgs *>(&e));
             return S_OK;
         }
         catch (...)
@@ -193,11 +193,11 @@ template <typename H> struct impl_TappedEventHandler : implements<impl_TappedEve
 {
     impl_TappedEventHandler(H && handler) : H(std::forward<H>(handler)) {}
 
-    HRESULT __stdcall abi_Invoke(abi_arg_in<Windows::IInspectable> sender, abi_arg_in<Windows::UI::Xaml::Input::ITappedRoutedEventArgs> e) noexcept override
+    HRESULT __stdcall abi_Invoke(impl::abi_arg_in<Windows::Foundation::IInspectable> sender, impl::abi_arg_in<Windows::UI::Xaml::Input::ITappedRoutedEventArgs> e) noexcept override
     {
         try
         {
-            (*this)(*reinterpret_cast<const Windows::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Xaml::Input::TappedRoutedEventArgs *>(&e));
+            (*this)(*reinterpret_cast<const Windows::Foundation::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Xaml::Input::TappedRoutedEventArgs *>(&e));
             return S_OK;
         }
         catch (...)
@@ -237,11 +237,13 @@ struct WINRT_EBO AccessKeyManager :
 {
     AccessKeyManager(std::nullptr_t) noexcept {}
     static bool IsDisplayModeEnabled();
-    static event_token IsDisplayModeEnabledChanged(const Windows::Foundation::TypedEventHandler<Windows::IInspectable, Windows::IInspectable> & value);
+    static event_token IsDisplayModeEnabledChanged(const Windows::Foundation::TypedEventHandler<Windows::Foundation::IInspectable, Windows::Foundation::IInspectable> & value);
     using IsDisplayModeEnabledChanged_revoker = factory_event_revoker<IAccessKeyManagerStatics>;
-    static IsDisplayModeEnabledChanged_revoker IsDisplayModeEnabledChanged(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::IInspectable, Windows::IInspectable> & value);
+    static IsDisplayModeEnabledChanged_revoker IsDisplayModeEnabledChanged(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::Foundation::IInspectable, Windows::Foundation::IInspectable> & value);
     static void IsDisplayModeEnabledChanged(event_token token);
     static void ExitDisplayMode();
+    static bool AreKeyTipsEnabled();
+    static void AreKeyTipsEnabled(bool value);
 };
 
 struct WINRT_EBO ContextRequestedEventArgs :
@@ -262,14 +264,34 @@ struct WINRT_EBO DoubleTappedRoutedEventArgs :
     DoubleTappedRoutedEventArgs();
 };
 
+struct WINRT_EBO FindNextElementOptions :
+    Windows::UI::Xaml::Input::IFindNextElementOptions
+{
+    FindNextElementOptions(std::nullptr_t) noexcept {}
+    FindNextElementOptions();
+};
+
 struct WINRT_EBO FocusManager :
     Windows::UI::Xaml::Input::IFocusManager
 {
     FocusManager(std::nullptr_t) noexcept {}
-    static Windows::IInspectable GetFocusedElement();
+    static Windows::Foundation::IInspectable GetFocusedElement();
     static bool TryMoveFocus(Windows::UI::Xaml::Input::FocusNavigationDirection focusNavigationDirection);
     static Windows::UI::Xaml::UIElement FindNextFocusableElement(Windows::UI::Xaml::Input::FocusNavigationDirection focusNavigationDirection);
     static Windows::UI::Xaml::UIElement FindNextFocusableElement(Windows::UI::Xaml::Input::FocusNavigationDirection focusNavigationDirection, const Windows::Foundation::Rect & hintRect);
+    static bool TryMoveFocus(Windows::UI::Xaml::Input::FocusNavigationDirection focusNavigationDirection, const Windows::UI::Xaml::Input::FindNextElementOptions & focusNavigationOptions);
+    static Windows::UI::Xaml::DependencyObject FindNextElement(Windows::UI::Xaml::Input::FocusNavigationDirection focusNavigationDirection);
+    static Windows::UI::Xaml::DependencyObject FindFirstFocusableElement(const Windows::UI::Xaml::DependencyObject & searchScope);
+    static Windows::UI::Xaml::DependencyObject FindLastFocusableElement(const Windows::UI::Xaml::DependencyObject & searchScope);
+    static Windows::UI::Xaml::DependencyObject FindNextElement(Windows::UI::Xaml::Input::FocusNavigationDirection focusNavigationDirection, const Windows::UI::Xaml::Input::FindNextElementOptions & focusNavigationOptions);
+};
+
+struct WINRT_EBO GettingFocusEventArgs :
+    Windows::UI::Xaml::Input::IGettingFocusEventArgs,
+    impl::bases<GettingFocusEventArgs, Windows::UI::Xaml::RoutedEventArgs>,
+    impl::require<GettingFocusEventArgs, Windows::UI::Xaml::IRoutedEventArgs>
+{
+    GettingFocusEventArgs(std::nullptr_t) noexcept {}
 };
 
 struct WINRT_EBO HoldingRoutedEventArgs :
@@ -326,6 +348,14 @@ struct WINRT_EBO KeyRoutedEventArgs :
     KeyRoutedEventArgs(std::nullptr_t) noexcept {}
 };
 
+struct WINRT_EBO LosingFocusEventArgs :
+    Windows::UI::Xaml::Input::ILosingFocusEventArgs,
+    impl::bases<LosingFocusEventArgs, Windows::UI::Xaml::RoutedEventArgs>,
+    impl::require<LosingFocusEventArgs, Windows::UI::Xaml::IRoutedEventArgs>
+{
+    LosingFocusEventArgs(std::nullptr_t) noexcept {}
+};
+
 struct WINRT_EBO ManipulationCompletedRoutedEventArgs :
     Windows::UI::Xaml::Input::IManipulationCompletedRoutedEventArgs,
     impl::bases<ManipulationCompletedRoutedEventArgs, Windows::UI::Xaml::RoutedEventArgs>,
@@ -377,6 +407,14 @@ struct WINRT_EBO ManipulationStartingRoutedEventArgs :
 {
     ManipulationStartingRoutedEventArgs(std::nullptr_t) noexcept {}
     ManipulationStartingRoutedEventArgs();
+};
+
+struct WINRT_EBO NoFocusCandidateFoundEventArgs :
+    Windows::UI::Xaml::Input::INoFocusCandidateFoundEventArgs,
+    impl::bases<NoFocusCandidateFoundEventArgs, Windows::UI::Xaml::RoutedEventArgs>,
+    impl::require<NoFocusCandidateFoundEventArgs, Windows::UI::Xaml::IRoutedEventArgs>
+{
+    NoFocusCandidateFoundEventArgs(std::nullptr_t) noexcept {}
 };
 
 struct WINRT_EBO Pointer :

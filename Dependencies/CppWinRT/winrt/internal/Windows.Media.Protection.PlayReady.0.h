@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -41,11 +41,14 @@ struct IPlayReadyDomainLeaveServiceRequest;
 struct IPlayReadyITADataGenerator;
 struct IPlayReadyIndividualizationServiceRequest;
 struct IPlayReadyLicense;
+struct IPlayReadyLicense2;
 struct IPlayReadyLicenseAcquisitionServiceRequest;
 struct IPlayReadyLicenseAcquisitionServiceRequest2;
+struct IPlayReadyLicenseAcquisitionServiceRequest3;
 struct IPlayReadyLicenseIterableFactory;
 struct IPlayReadyLicenseManagement;
 struct IPlayReadyLicenseSession;
+struct IPlayReadyLicenseSession2;
 struct IPlayReadyLicenseSessionFactory;
 struct IPlayReadyMeteringReportServiceRequest;
 struct IPlayReadyRevocationServiceRequest;
@@ -122,11 +125,14 @@ struct IPlayReadyDomainLeaveServiceRequest;
 struct IPlayReadyITADataGenerator;
 struct IPlayReadyIndividualizationServiceRequest;
 struct IPlayReadyLicense;
+struct IPlayReadyLicense2;
 struct IPlayReadyLicenseAcquisitionServiceRequest;
 struct IPlayReadyLicenseAcquisitionServiceRequest2;
+struct IPlayReadyLicenseAcquisitionServiceRequest3;
 struct IPlayReadyLicenseIterableFactory;
 struct IPlayReadyLicenseManagement;
 struct IPlayReadyLicenseSession;
+struct IPlayReadyLicenseSession2;
 struct IPlayReadyLicenseSessionFactory;
 struct IPlayReadyMeteringReportServiceRequest;
 struct IPlayReadyRevocationServiceRequest;
@@ -173,7 +179,65 @@ struct PlayReadyStatics;
 
 namespace Windows::Media::Protection::PlayReady {
 
-enum class NDCertificateFeature
+template <typename T> struct impl_INDClient;
+template <typename T> struct impl_INDClientFactory;
+template <typename T> struct impl_INDClosedCaptionDataReceivedEventArgs;
+template <typename T> struct impl_INDCustomData;
+template <typename T> struct impl_INDCustomDataFactory;
+template <typename T> struct impl_INDDownloadEngine;
+template <typename T> struct impl_INDDownloadEngineNotifier;
+template <typename T> struct impl_INDLicenseFetchCompletedEventArgs;
+template <typename T> struct impl_INDLicenseFetchDescriptor;
+template <typename T> struct impl_INDLicenseFetchDescriptorFactory;
+template <typename T> struct impl_INDLicenseFetchResult;
+template <typename T> struct impl_INDMessenger;
+template <typename T> struct impl_INDProximityDetectionCompletedEventArgs;
+template <typename T> struct impl_INDRegistrationCompletedEventArgs;
+template <typename T> struct impl_INDSendResult;
+template <typename T> struct impl_INDStartResult;
+template <typename T> struct impl_INDStorageFileHelper;
+template <typename T> struct impl_INDStreamParser;
+template <typename T> struct impl_INDStreamParserNotifier;
+template <typename T> struct impl_INDTCPMessengerFactory;
+template <typename T> struct impl_INDTransmitterProperties;
+template <typename T> struct impl_IPlayReadyContentHeader;
+template <typename T> struct impl_IPlayReadyContentHeader2;
+template <typename T> struct impl_IPlayReadyContentHeaderFactory;
+template <typename T> struct impl_IPlayReadyContentHeaderFactory2;
+template <typename T> struct impl_IPlayReadyContentResolver;
+template <typename T> struct impl_IPlayReadyDomain;
+template <typename T> struct impl_IPlayReadyDomainIterableFactory;
+template <typename T> struct impl_IPlayReadyDomainJoinServiceRequest;
+template <typename T> struct impl_IPlayReadyDomainLeaveServiceRequest;
+template <typename T> struct impl_IPlayReadyITADataGenerator;
+template <typename T> struct impl_IPlayReadyIndividualizationServiceRequest;
+template <typename T> struct impl_IPlayReadyLicense;
+template <typename T> struct impl_IPlayReadyLicense2;
+template <typename T> struct impl_IPlayReadyLicenseAcquisitionServiceRequest;
+template <typename T> struct impl_IPlayReadyLicenseAcquisitionServiceRequest2;
+template <typename T> struct impl_IPlayReadyLicenseAcquisitionServiceRequest3;
+template <typename T> struct impl_IPlayReadyLicenseIterableFactory;
+template <typename T> struct impl_IPlayReadyLicenseManagement;
+template <typename T> struct impl_IPlayReadyLicenseSession;
+template <typename T> struct impl_IPlayReadyLicenseSession2;
+template <typename T> struct impl_IPlayReadyLicenseSessionFactory;
+template <typename T> struct impl_IPlayReadyMeteringReportServiceRequest;
+template <typename T> struct impl_IPlayReadyRevocationServiceRequest;
+template <typename T> struct impl_IPlayReadySecureStopIterableFactory;
+template <typename T> struct impl_IPlayReadySecureStopServiceRequest;
+template <typename T> struct impl_IPlayReadySecureStopServiceRequestFactory;
+template <typename T> struct impl_IPlayReadyServiceRequest;
+template <typename T> struct impl_IPlayReadySoapMessage;
+template <typename T> struct impl_IPlayReadyStatics;
+template <typename T> struct impl_IPlayReadyStatics2;
+template <typename T> struct impl_IPlayReadyStatics3;
+template <typename T> struct impl_IPlayReadyStatics4;
+
+}
+
+namespace Windows::Media::Protection::PlayReady {
+
+enum class [[deprecated("NDCertificateFeature is deprecated and might not work on all platforms. For more info, see MSDN.")]] NDCertificateFeature
 {
     Transmitter = 1,
     Receiver = 2,
@@ -184,7 +248,7 @@ enum class NDCertificateFeature
     PlayReady3Features = 13,
 };
 
-enum class NDCertificatePlatformID
+enum class [[deprecated("NDCertificatePlatformID is deprecated and might not work on all platforms. For more info, see MSDN.")]] NDCertificatePlatformID
 {
     Windows = 0,
     OSX = 1,
@@ -200,7 +264,7 @@ enum class NDCertificatePlatformID
     WindowsPhone81OnX86 = 13,
 };
 
-enum class NDCertificateType
+enum class [[deprecated("NDCertificateType is deprecated and might not work on all platforms. For more info, see MSDN.")]] NDCertificateType
 {
     Unknown = 0,
     PC = 1,
@@ -217,34 +281,34 @@ enum class NDCertificateType
     LicenseSigner = 12,
 };
 
-enum class NDClosedCaptionFormat
+enum class [[deprecated("NDClosedCaptionFormat is deprecated and might not work on all platforms. For more info, see MSDN.")]] NDClosedCaptionFormat
 {
     ATSC = 0,
     SCTE20 = 1,
     Unknown = 2,
 };
 
-enum class NDContentIDType
+enum class [[deprecated("NDContentIDType is deprecated and might not work on all platforms. For more info, see MSDN.")]] NDContentIDType
 {
     KeyID = 1,
     PlayReadyObject = 2,
     Custom = 3,
 };
 
-enum class NDMediaStreamType
+enum class [[deprecated("NDMediaStreamType is deprecated and might not work on all platforms. For more info, see MSDN.")]] NDMediaStreamType
 {
     Audio = 1,
     Video = 2,
 };
 
-enum class NDProximityDetectionType
+enum class [[deprecated("NDProximityDetectionType is deprecated and might not work on all platforms. For more info, see MSDN.")]] NDProximityDetectionType
 {
     UDP = 1,
     TCP = 2,
     TransportAgnostic = 4,
 };
 
-enum class NDStartAsyncOptions
+enum class [[deprecated("NDStartAsyncOptions is deprecated and might not work on all platforms. For more info, see MSDN.")]] NDStartAsyncOptions
 {
     MutualAuthentication = 1,
     WaitForLicenseDescriptor = 2,

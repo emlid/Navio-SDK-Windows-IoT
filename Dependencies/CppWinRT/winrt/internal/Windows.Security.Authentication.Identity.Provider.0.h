@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -13,7 +13,9 @@ struct ISecondaryAuthenticationFactorAuthenticationResult;
 struct ISecondaryAuthenticationFactorAuthenticationStageChangedEventArgs;
 struct ISecondaryAuthenticationFactorAuthenticationStageInfo;
 struct ISecondaryAuthenticationFactorAuthenticationStatics;
+struct ISecondaryAuthenticationFactorDevicePresenceMonitoringRegistrationStatics;
 struct ISecondaryAuthenticationFactorInfo;
+struct ISecondaryAuthenticationFactorInfo2;
 struct ISecondaryAuthenticationFactorRegistration;
 struct ISecondaryAuthenticationFactorRegistrationResult;
 struct ISecondaryAuthenticationFactorRegistrationStatics;
@@ -34,7 +36,9 @@ struct ISecondaryAuthenticationFactorAuthenticationResult;
 struct ISecondaryAuthenticationFactorAuthenticationStageChangedEventArgs;
 struct ISecondaryAuthenticationFactorAuthenticationStageInfo;
 struct ISecondaryAuthenticationFactorAuthenticationStatics;
+struct ISecondaryAuthenticationFactorDevicePresenceMonitoringRegistrationStatics;
 struct ISecondaryAuthenticationFactorInfo;
+struct ISecondaryAuthenticationFactorInfo2;
 struct ISecondaryAuthenticationFactorRegistration;
 struct ISecondaryAuthenticationFactorRegistrationResult;
 struct ISecondaryAuthenticationFactorRegistrationStatics;
@@ -45,6 +49,22 @@ struct SecondaryAuthenticationFactorAuthenticationStageInfo;
 struct SecondaryAuthenticationFactorInfo;
 struct SecondaryAuthenticationFactorRegistration;
 struct SecondaryAuthenticationFactorRegistrationResult;
+
+}
+
+namespace Windows::Security::Authentication::Identity::Provider {
+
+template <typename T> struct impl_ISecondaryAuthenticationFactorAuthentication;
+template <typename T> struct impl_ISecondaryAuthenticationFactorAuthenticationResult;
+template <typename T> struct impl_ISecondaryAuthenticationFactorAuthenticationStageChangedEventArgs;
+template <typename T> struct impl_ISecondaryAuthenticationFactorAuthenticationStageInfo;
+template <typename T> struct impl_ISecondaryAuthenticationFactorAuthenticationStatics;
+template <typename T> struct impl_ISecondaryAuthenticationFactorDevicePresenceMonitoringRegistrationStatics;
+template <typename T> struct impl_ISecondaryAuthenticationFactorInfo;
+template <typename T> struct impl_ISecondaryAuthenticationFactorInfo2;
+template <typename T> struct impl_ISecondaryAuthenticationFactorRegistration;
+template <typename T> struct impl_ISecondaryAuthenticationFactorRegistrationResult;
+template <typename T> struct impl_ISecondaryAuthenticationFactorRegistrationStatics;
 
 }
 
@@ -90,6 +110,7 @@ enum class SecondaryAuthenticationFactorAuthenticationStage
     CredentialAuthenticated = 5,
     StoppingAuthentication = 6,
     ReadyForLock = 7,
+    CheckingDevicePresence = 8,
 };
 
 enum class SecondaryAuthenticationFactorAuthenticationStatus
@@ -110,6 +131,7 @@ enum class SecondaryAuthenticationFactorDeviceCapabilities : unsigned
     SupportSecureUserPresenceCheck = 0x8,
     TransmittedDataIsEncrypted = 0x10,
     HMacSha256 = 0x20,
+    CloseRangeDataTransmission = 0x40,
 };
 
 DEFINE_ENUM_FLAG_OPERATORS(SecondaryAuthenticationFactorDeviceCapabilities)
@@ -118,6 +140,26 @@ enum class SecondaryAuthenticationFactorDeviceFindScope
 {
     User = 0,
     AllUsers = 1,
+};
+
+enum class SecondaryAuthenticationFactorDevicePresence
+{
+    Absent = 0,
+    Present = 1,
+};
+
+enum class SecondaryAuthenticationFactorDevicePresenceMonitoringMode
+{
+    Unsupported = 0,
+    AppManaged = 1,
+    SystemManaged = 2,
+};
+
+enum class SecondaryAuthenticationFactorDevicePresenceMonitoringRegistrationStatus
+{
+    Unsupported = 0,
+    Succeeded = 1,
+    DisabledByPolicy = 2,
 };
 
 enum class SecondaryAuthenticationFactorFinishAuthenticationStatus

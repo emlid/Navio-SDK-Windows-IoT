@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -161,7 +161,53 @@ struct PerceptionVideoProfile;
 
 namespace Windows::Devices::Perception {
 
-enum class PerceptionFrameSourceAccessStatus
+template <typename T> struct impl_IKnownCameraIntrinsicsPropertiesStatics;
+template <typename T> struct impl_IKnownPerceptionColorFrameSourcePropertiesStatics;
+template <typename T> struct impl_IKnownPerceptionDepthFrameSourcePropertiesStatics;
+template <typename T> struct impl_IKnownPerceptionFrameSourcePropertiesStatics;
+template <typename T> struct impl_IKnownPerceptionFrameSourcePropertiesStatics2;
+template <typename T> struct impl_IKnownPerceptionInfraredFrameSourcePropertiesStatics;
+template <typename T> struct impl_IKnownPerceptionVideoFrameSourcePropertiesStatics;
+template <typename T> struct impl_IKnownPerceptionVideoProfilePropertiesStatics;
+template <typename T> struct impl_IPerceptionColorFrame;
+template <typename T> struct impl_IPerceptionColorFrameArrivedEventArgs;
+template <typename T> struct impl_IPerceptionColorFrameReader;
+template <typename T> struct impl_IPerceptionColorFrameSource;
+template <typename T> struct impl_IPerceptionColorFrameSource2;
+template <typename T> struct impl_IPerceptionColorFrameSourceAddedEventArgs;
+template <typename T> struct impl_IPerceptionColorFrameSourceRemovedEventArgs;
+template <typename T> struct impl_IPerceptionColorFrameSourceStatics;
+template <typename T> struct impl_IPerceptionColorFrameSourceWatcher;
+template <typename T> struct impl_IPerceptionControlSession;
+template <typename T> struct impl_IPerceptionDepthCorrelatedCameraIntrinsics;
+template <typename T> struct impl_IPerceptionDepthCorrelatedCoordinateMapper;
+template <typename T> struct impl_IPerceptionDepthFrame;
+template <typename T> struct impl_IPerceptionDepthFrameArrivedEventArgs;
+template <typename T> struct impl_IPerceptionDepthFrameReader;
+template <typename T> struct impl_IPerceptionDepthFrameSource;
+template <typename T> struct impl_IPerceptionDepthFrameSource2;
+template <typename T> struct impl_IPerceptionDepthFrameSourceAddedEventArgs;
+template <typename T> struct impl_IPerceptionDepthFrameSourceRemovedEventArgs;
+template <typename T> struct impl_IPerceptionDepthFrameSourceStatics;
+template <typename T> struct impl_IPerceptionDepthFrameSourceWatcher;
+template <typename T> struct impl_IPerceptionFrameSourcePropertiesChangedEventArgs;
+template <typename T> struct impl_IPerceptionFrameSourcePropertyChangeResult;
+template <typename T> struct impl_IPerceptionInfraredFrame;
+template <typename T> struct impl_IPerceptionInfraredFrameArrivedEventArgs;
+template <typename T> struct impl_IPerceptionInfraredFrameReader;
+template <typename T> struct impl_IPerceptionInfraredFrameSource;
+template <typename T> struct impl_IPerceptionInfraredFrameSource2;
+template <typename T> struct impl_IPerceptionInfraredFrameSourceAddedEventArgs;
+template <typename T> struct impl_IPerceptionInfraredFrameSourceRemovedEventArgs;
+template <typename T> struct impl_IPerceptionInfraredFrameSourceStatics;
+template <typename T> struct impl_IPerceptionInfraredFrameSourceWatcher;
+template <typename T> struct impl_IPerceptionVideoProfile;
+
+}
+
+namespace Windows::Devices::Perception {
+
+enum class [[deprecated("PerceptionFrameSourceAccessStatus may be unavailable after Windows Creator Update.  Please refer to Windows.Media.Capture.Frames APIs on MSDN.")]] PerceptionFrameSourceAccessStatus
 {
     Unspecified = 0,
     Allowed = 1,
@@ -169,7 +215,7 @@ enum class PerceptionFrameSourceAccessStatus
     DeniedBySystem = 3,
 };
 
-enum class PerceptionFrameSourcePropertyChangeStatus
+enum class [[deprecated("PerceptionFrameSourcePropertyChangeStatus may be unavailable after Windows Creator Update.  Please refer to Windows.Media.Capture.Frames APIs on MSDN.")]] PerceptionFrameSourcePropertyChangeStatus
 {
     Unknown = 0,
     Accepted = 1,

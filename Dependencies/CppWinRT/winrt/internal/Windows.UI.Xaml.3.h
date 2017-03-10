@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -13,7 +13,7 @@ template <typename H> struct impl_ApplicationInitializationCallback : implements
 {
     impl_ApplicationInitializationCallback(H && handler) : H(std::forward<H>(handler)) {}
 
-    HRESULT __stdcall abi_Invoke(abi_arg_in<Windows::UI::Xaml::IApplicationInitializationCallbackParams> p) noexcept override
+    HRESULT __stdcall abi_Invoke(impl::abi_arg_in<Windows::UI::Xaml::IApplicationInitializationCallbackParams> p) noexcept override
     {
         try
         {
@@ -31,11 +31,11 @@ template <typename H> struct impl_BindingFailedEventHandler : implements<impl_Bi
 {
     impl_BindingFailedEventHandler(H && handler) : H(std::forward<H>(handler)) {}
 
-    HRESULT __stdcall abi_Invoke(abi_arg_in<Windows::IInspectable> sender, abi_arg_in<Windows::UI::Xaml::IBindingFailedEventArgs> e) noexcept override
+    HRESULT __stdcall abi_Invoke(impl::abi_arg_in<Windows::Foundation::IInspectable> sender, impl::abi_arg_in<Windows::UI::Xaml::IBindingFailedEventArgs> e) noexcept override
     {
         try
         {
-            (*this)(*reinterpret_cast<const Windows::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Xaml::BindingFailedEventArgs *>(&e));
+            (*this)(*reinterpret_cast<const Windows::Foundation::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Xaml::BindingFailedEventArgs *>(&e));
             return S_OK;
         }
         catch (...)
@@ -49,11 +49,11 @@ template <typename H> struct impl_CreateDefaultValueCallback : implements<impl_C
 {
     impl_CreateDefaultValueCallback(H && handler) : H(std::forward<H>(handler)) {}
 
-    HRESULT __stdcall abi_Invoke(abi_arg_out<Windows::IInspectable> value) noexcept override
+    HRESULT __stdcall abi_Invoke(impl::abi_arg_out<Windows::Foundation::IInspectable> value) noexcept override
     {
         try
         {
-            *value = detach((*this)());
+            *value = detach_abi((*this)());
             return S_OK;
         }
         catch (...)
@@ -68,7 +68,7 @@ template <typename H> struct impl_DependencyPropertyChangedCallback : implements
 {
     impl_DependencyPropertyChangedCallback(H && handler) : H(std::forward<H>(handler)) {}
 
-    HRESULT __stdcall abi_Invoke(abi_arg_in<Windows::UI::Xaml::IDependencyObject> sender, abi_arg_in<Windows::UI::Xaml::IDependencyProperty> dp) noexcept override
+    HRESULT __stdcall abi_Invoke(impl::abi_arg_in<Windows::UI::Xaml::IDependencyObject> sender, impl::abi_arg_in<Windows::UI::Xaml::IDependencyProperty> dp) noexcept override
     {
         try
         {
@@ -86,11 +86,11 @@ template <typename H> struct impl_DependencyPropertyChangedEventHandler : implem
 {
     impl_DependencyPropertyChangedEventHandler(H && handler) : H(std::forward<H>(handler)) {}
 
-    HRESULT __stdcall abi_Invoke(abi_arg_in<Windows::IInspectable> sender, abi_arg_in<Windows::UI::Xaml::IDependencyPropertyChangedEventArgs> e) noexcept override
+    HRESULT __stdcall abi_Invoke(impl::abi_arg_in<Windows::Foundation::IInspectable> sender, impl::abi_arg_in<Windows::UI::Xaml::IDependencyPropertyChangedEventArgs> e) noexcept override
     {
         try
         {
-            (*this)(*reinterpret_cast<const Windows::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Xaml::DependencyPropertyChangedEventArgs *>(&e));
+            (*this)(*reinterpret_cast<const Windows::Foundation::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Xaml::DependencyPropertyChangedEventArgs *>(&e));
             return S_OK;
         }
         catch (...)
@@ -104,11 +104,11 @@ template <typename H> struct impl_DragEventHandler : implements<impl_DragEventHa
 {
     impl_DragEventHandler(H && handler) : H(std::forward<H>(handler)) {}
 
-    HRESULT __stdcall abi_Invoke(abi_arg_in<Windows::IInspectable> sender, abi_arg_in<Windows::UI::Xaml::IDragEventArgs> e) noexcept override
+    HRESULT __stdcall abi_Invoke(impl::abi_arg_in<Windows::Foundation::IInspectable> sender, impl::abi_arg_in<Windows::UI::Xaml::IDragEventArgs> e) noexcept override
     {
         try
         {
-            (*this)(*reinterpret_cast<const Windows::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Xaml::DragEventArgs *>(&e));
+            (*this)(*reinterpret_cast<const Windows::Foundation::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Xaml::DragEventArgs *>(&e));
             return S_OK;
         }
         catch (...)
@@ -122,11 +122,11 @@ template <typename H> struct impl_EnteredBackgroundEventHandler : implements<imp
 {
     impl_EnteredBackgroundEventHandler(H && handler) : H(std::forward<H>(handler)) {}
 
-    HRESULT __stdcall abi_Invoke(abi_arg_in<Windows::IInspectable> sender, abi_arg_in<Windows::ApplicationModel::IEnteredBackgroundEventArgs> e) noexcept override
+    HRESULT __stdcall abi_Invoke(impl::abi_arg_in<Windows::Foundation::IInspectable> sender, impl::abi_arg_in<Windows::ApplicationModel::IEnteredBackgroundEventArgs> e) noexcept override
     {
         try
         {
-            (*this)(*reinterpret_cast<const Windows::IInspectable *>(&sender), *reinterpret_cast<const Windows::ApplicationModel::EnteredBackgroundEventArgs *>(&e));
+            (*this)(*reinterpret_cast<const Windows::Foundation::IInspectable *>(&sender), *reinterpret_cast<const Windows::ApplicationModel::EnteredBackgroundEventArgs *>(&e));
             return S_OK;
         }
         catch (...)
@@ -140,11 +140,11 @@ template <typename H> struct impl_ExceptionRoutedEventHandler : implements<impl_
 {
     impl_ExceptionRoutedEventHandler(H && handler) : H(std::forward<H>(handler)) {}
 
-    HRESULT __stdcall abi_Invoke(abi_arg_in<Windows::IInspectable> sender, abi_arg_in<Windows::UI::Xaml::IExceptionRoutedEventArgs> e) noexcept override
+    HRESULT __stdcall abi_Invoke(impl::abi_arg_in<Windows::Foundation::IInspectable> sender, impl::abi_arg_in<Windows::UI::Xaml::IExceptionRoutedEventArgs> e) noexcept override
     {
         try
         {
-            (*this)(*reinterpret_cast<const Windows::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Xaml::ExceptionRoutedEventArgs *>(&e));
+            (*this)(*reinterpret_cast<const Windows::Foundation::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Xaml::ExceptionRoutedEventArgs *>(&e));
             return S_OK;
         }
         catch (...)
@@ -158,11 +158,11 @@ template <typename H> struct impl_LeavingBackgroundEventHandler : implements<imp
 {
     impl_LeavingBackgroundEventHandler(H && handler) : H(std::forward<H>(handler)) {}
 
-    HRESULT __stdcall abi_Invoke(abi_arg_in<Windows::IInspectable> sender, abi_arg_in<Windows::ApplicationModel::ILeavingBackgroundEventArgs> e) noexcept override
+    HRESULT __stdcall abi_Invoke(impl::abi_arg_in<Windows::Foundation::IInspectable> sender, impl::abi_arg_in<Windows::ApplicationModel::ILeavingBackgroundEventArgs> e) noexcept override
     {
         try
         {
-            (*this)(*reinterpret_cast<const Windows::IInspectable *>(&sender), *reinterpret_cast<const Windows::ApplicationModel::LeavingBackgroundEventArgs *>(&e));
+            (*this)(*reinterpret_cast<const Windows::Foundation::IInspectable *>(&sender), *reinterpret_cast<const Windows::ApplicationModel::LeavingBackgroundEventArgs *>(&e));
             return S_OK;
         }
         catch (...)
@@ -176,7 +176,7 @@ template <typename H> struct impl_PropertyChangedCallback : implements<impl_Prop
 {
     impl_PropertyChangedCallback(H && handler) : H(std::forward<H>(handler)) {}
 
-    HRESULT __stdcall abi_Invoke(abi_arg_in<Windows::UI::Xaml::IDependencyObject> d, abi_arg_in<Windows::UI::Xaml::IDependencyPropertyChangedEventArgs> e) noexcept override
+    HRESULT __stdcall abi_Invoke(impl::abi_arg_in<Windows::UI::Xaml::IDependencyObject> d, impl::abi_arg_in<Windows::UI::Xaml::IDependencyPropertyChangedEventArgs> e) noexcept override
     {
         try
         {
@@ -194,11 +194,11 @@ template <typename H> struct impl_RoutedEventHandler : implements<impl_RoutedEve
 {
     impl_RoutedEventHandler(H && handler) : H(std::forward<H>(handler)) {}
 
-    HRESULT __stdcall abi_Invoke(abi_arg_in<Windows::IInspectable> sender, abi_arg_in<Windows::UI::Xaml::IRoutedEventArgs> e) noexcept override
+    HRESULT __stdcall abi_Invoke(impl::abi_arg_in<Windows::Foundation::IInspectable> sender, impl::abi_arg_in<Windows::UI::Xaml::IRoutedEventArgs> e) noexcept override
     {
         try
         {
-            (*this)(*reinterpret_cast<const Windows::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Xaml::RoutedEventArgs *>(&e));
+            (*this)(*reinterpret_cast<const Windows::Foundation::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Xaml::RoutedEventArgs *>(&e));
             return S_OK;
         }
         catch (...)
@@ -212,11 +212,11 @@ template <typename H> struct impl_SizeChangedEventHandler : implements<impl_Size
 {
     impl_SizeChangedEventHandler(H && handler) : H(std::forward<H>(handler)) {}
 
-    HRESULT __stdcall abi_Invoke(abi_arg_in<Windows::IInspectable> sender, abi_arg_in<Windows::UI::Xaml::ISizeChangedEventArgs> e) noexcept override
+    HRESULT __stdcall abi_Invoke(impl::abi_arg_in<Windows::Foundation::IInspectable> sender, impl::abi_arg_in<Windows::UI::Xaml::ISizeChangedEventArgs> e) noexcept override
     {
         try
         {
-            (*this)(*reinterpret_cast<const Windows::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Xaml::SizeChangedEventArgs *>(&e));
+            (*this)(*reinterpret_cast<const Windows::Foundation::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Xaml::SizeChangedEventArgs *>(&e));
             return S_OK;
         }
         catch (...)
@@ -230,11 +230,11 @@ template <typename H> struct impl_SuspendingEventHandler : implements<impl_Suspe
 {
     impl_SuspendingEventHandler(H && handler) : H(std::forward<H>(handler)) {}
 
-    HRESULT __stdcall abi_Invoke(abi_arg_in<Windows::IInspectable> sender, abi_arg_in<Windows::ApplicationModel::ISuspendingEventArgs> e) noexcept override
+    HRESULT __stdcall abi_Invoke(impl::abi_arg_in<Windows::Foundation::IInspectable> sender, impl::abi_arg_in<Windows::ApplicationModel::ISuspendingEventArgs> e) noexcept override
     {
         try
         {
-            (*this)(*reinterpret_cast<const Windows::IInspectable *>(&sender), *reinterpret_cast<const Windows::ApplicationModel::SuspendingEventArgs *>(&e));
+            (*this)(*reinterpret_cast<const Windows::Foundation::IInspectable *>(&sender), *reinterpret_cast<const Windows::ApplicationModel::SuspendingEventArgs *>(&e));
             return S_OK;
         }
         catch (...)
@@ -248,11 +248,11 @@ template <typename H> struct impl_UnhandledExceptionEventHandler : implements<im
 {
     impl_UnhandledExceptionEventHandler(H && handler) : H(std::forward<H>(handler)) {}
 
-    HRESULT __stdcall abi_Invoke(abi_arg_in<Windows::IInspectable> sender, abi_arg_in<Windows::UI::Xaml::IUnhandledExceptionEventArgs> e) noexcept override
+    HRESULT __stdcall abi_Invoke(impl::abi_arg_in<Windows::Foundation::IInspectable> sender, impl::abi_arg_in<Windows::UI::Xaml::IUnhandledExceptionEventArgs> e) noexcept override
     {
         try
         {
-            (*this)(*reinterpret_cast<const Windows::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Xaml::UnhandledExceptionEventArgs *>(&e));
+            (*this)(*reinterpret_cast<const Windows::Foundation::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Xaml::UnhandledExceptionEventArgs *>(&e));
             return S_OK;
         }
         catch (...)
@@ -266,11 +266,11 @@ template <typename H> struct impl_VisualStateChangedEventHandler : implements<im
 {
     impl_VisualStateChangedEventHandler(H && handler) : H(std::forward<H>(handler)) {}
 
-    HRESULT __stdcall abi_Invoke(abi_arg_in<Windows::IInspectable> sender, abi_arg_in<Windows::UI::Xaml::IVisualStateChangedEventArgs> e) noexcept override
+    HRESULT __stdcall abi_Invoke(impl::abi_arg_in<Windows::Foundation::IInspectable> sender, impl::abi_arg_in<Windows::UI::Xaml::IVisualStateChangedEventArgs> e) noexcept override
     {
         try
         {
-            (*this)(*reinterpret_cast<const Windows::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Xaml::VisualStateChangedEventArgs *>(&e));
+            (*this)(*reinterpret_cast<const Windows::Foundation::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Xaml::VisualStateChangedEventArgs *>(&e));
             return S_OK;
         }
         catch (...)
@@ -284,11 +284,11 @@ template <typename H> struct impl_WindowActivatedEventHandler : implements<impl_
 {
     impl_WindowActivatedEventHandler(H && handler) : H(std::forward<H>(handler)) {}
 
-    HRESULT __stdcall abi_Invoke(abi_arg_in<Windows::IInspectable> sender, abi_arg_in<Windows::UI::Core::IWindowActivatedEventArgs> e) noexcept override
+    HRESULT __stdcall abi_Invoke(impl::abi_arg_in<Windows::Foundation::IInspectable> sender, impl::abi_arg_in<Windows::UI::Core::IWindowActivatedEventArgs> e) noexcept override
     {
         try
         {
-            (*this)(*reinterpret_cast<const Windows::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Core::WindowActivatedEventArgs *>(&e));
+            (*this)(*reinterpret_cast<const Windows::Foundation::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Core::WindowActivatedEventArgs *>(&e));
             return S_OK;
         }
         catch (...)
@@ -302,11 +302,11 @@ template <typename H> struct impl_WindowClosedEventHandler : implements<impl_Win
 {
     impl_WindowClosedEventHandler(H && handler) : H(std::forward<H>(handler)) {}
 
-    HRESULT __stdcall abi_Invoke(abi_arg_in<Windows::IInspectable> sender, abi_arg_in<Windows::UI::Core::ICoreWindowEventArgs> e) noexcept override
+    HRESULT __stdcall abi_Invoke(impl::abi_arg_in<Windows::Foundation::IInspectable> sender, impl::abi_arg_in<Windows::UI::Core::ICoreWindowEventArgs> e) noexcept override
     {
         try
         {
-            (*this)(*reinterpret_cast<const Windows::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Core::CoreWindowEventArgs *>(&e));
+            (*this)(*reinterpret_cast<const Windows::Foundation::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Core::CoreWindowEventArgs *>(&e));
             return S_OK;
         }
         catch (...)
@@ -320,11 +320,11 @@ template <typename H> struct impl_WindowSizeChangedEventHandler : implements<imp
 {
     impl_WindowSizeChangedEventHandler(H && handler) : H(std::forward<H>(handler)) {}
 
-    HRESULT __stdcall abi_Invoke(abi_arg_in<Windows::IInspectable> sender, abi_arg_in<Windows::UI::Core::IWindowSizeChangedEventArgs> e) noexcept override
+    HRESULT __stdcall abi_Invoke(impl::abi_arg_in<Windows::Foundation::IInspectable> sender, impl::abi_arg_in<Windows::UI::Core::IWindowSizeChangedEventArgs> e) noexcept override
     {
         try
         {
-            (*this)(*reinterpret_cast<const Windows::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Core::WindowSizeChangedEventArgs *>(&e));
+            (*this)(*reinterpret_cast<const Windows::Foundation::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Core::WindowSizeChangedEventArgs *>(&e));
             return S_OK;
         }
         catch (...)
@@ -338,11 +338,11 @@ template <typename H> struct impl_WindowVisibilityChangedEventHandler : implemen
 {
     impl_WindowVisibilityChangedEventHandler(H && handler) : H(std::forward<H>(handler)) {}
 
-    HRESULT __stdcall abi_Invoke(abi_arg_in<Windows::IInspectable> sender, abi_arg_in<Windows::UI::Core::IVisibilityChangedEventArgs> e) noexcept override
+    HRESULT __stdcall abi_Invoke(impl::abi_arg_in<Windows::Foundation::IInspectable> sender, impl::abi_arg_in<Windows::UI::Core::IVisibilityChangedEventArgs> e) noexcept override
     {
         try
         {
-            (*this)(*reinterpret_cast<const Windows::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Core::VisibilityChangedEventArgs *>(&e));
+            (*this)(*reinterpret_cast<const Windows::Foundation::IInspectable *>(&sender), *reinterpret_cast<const Windows::UI::Core::VisibilityChangedEventArgs *>(&e));
             return S_OK;
         }
         catch (...)
@@ -369,14 +369,14 @@ struct WINRT_EBO AdaptiveTrigger :
 
 struct WINRT_EBO Application :
     Windows::UI::Xaml::IApplication,
-    impl::require<Application, Windows::UI::Xaml::IApplicationOverrides, Windows::UI::Xaml::IApplication2, Windows::UI::Xaml::IApplicationOverrides2>
+    impl::require<Application, Windows::UI::Xaml::IApplicationOverrides, Windows::UI::Xaml::IApplication2, Windows::UI::Xaml::IApplicationOverrides2, Windows::UI::Xaml::IApplication3>
 {
     Application(std::nullptr_t) noexcept {}
     Application();
     static Windows::UI::Xaml::Application Current();
     static void Start(const Windows::UI::Xaml::ApplicationInitializationCallback & callback);
-    static void LoadComponent(const Windows::IInspectable & component, const Windows::Foundation::Uri & resourceLocator);
-    static void LoadComponent(const Windows::IInspectable & component, const Windows::Foundation::Uri & resourceLocator, Windows::UI::Xaml::Controls::Primitives::ComponentResourceLocation componentResourceLocation);
+    static void LoadComponent(const Windows::Foundation::IInspectable & component, const Windows::Foundation::Uri & resourceLocator);
+    static void LoadComponent(const Windows::Foundation::IInspectable & component, const Windows::Foundation::Uri & resourceLocator, Windows::UI::Xaml::Controls::Primitives::ComponentResourceLocation componentResourceLocation);
 };
 
 struct WINRT_EBO ApplicationInitializationCallbackParams :
@@ -389,6 +389,13 @@ struct WINRT_EBO BindingFailedEventArgs :
     Windows::UI::Xaml::IBindingFailedEventArgs
 {
     BindingFailedEventArgs(std::nullptr_t) noexcept {}
+};
+
+struct WINRT_EBO BringIntoViewOptions :
+    Windows::UI::Xaml::IBringIntoViewOptions
+{
+    BringIntoViewOptions(std::nullptr_t) noexcept {}
+    BringIntoViewOptions();
 };
 
 struct WINRT_EBO CornerRadiusHelper :
@@ -422,7 +429,7 @@ struct WINRT_EBO DataTemplateKey :
 {
     DataTemplateKey(std::nullptr_t) noexcept {}
     DataTemplateKey();
-    DataTemplateKey(const Windows::IInspectable & dataType);
+    DataTemplateKey(const Windows::Foundation::IInspectable & dataType);
 };
 
 struct WINRT_EBO DebugSettings :
@@ -452,9 +459,9 @@ struct WINRT_EBO DependencyProperty :
     Windows::UI::Xaml::IDependencyProperty
 {
     DependencyProperty(std::nullptr_t) noexcept {}
-    static Windows::IInspectable UnsetValue();
-    static Windows::UI::Xaml::DependencyProperty Register(hstring_ref name, const Windows::UI::Xaml::Interop::TypeName & propertyType, const Windows::UI::Xaml::Interop::TypeName & ownerType, const Windows::UI::Xaml::PropertyMetadata & typeMetadata);
-    static Windows::UI::Xaml::DependencyProperty RegisterAttached(hstring_ref name, const Windows::UI::Xaml::Interop::TypeName & propertyType, const Windows::UI::Xaml::Interop::TypeName & ownerType, const Windows::UI::Xaml::PropertyMetadata & defaultMetadata);
+    static Windows::Foundation::IInspectable UnsetValue();
+    static Windows::UI::Xaml::DependencyProperty Register(hstring_view name, const Windows::UI::Xaml::Interop::TypeName & propertyType, const Windows::UI::Xaml::Interop::TypeName & ownerType, const Windows::UI::Xaml::PropertyMetadata & typeMetadata);
+    static Windows::UI::Xaml::DependencyProperty RegisterAttached(hstring_view name, const Windows::UI::Xaml::Interop::TypeName & propertyType, const Windows::UI::Xaml::Interop::TypeName & ownerType, const Windows::UI::Xaml::PropertyMetadata & defaultMetadata);
 };
 
 struct WINRT_EBO DependencyPropertyChangedEventArgs :
@@ -557,7 +564,7 @@ struct WINRT_EBO ExceptionRoutedEventArgs :
 struct WINRT_EBO FrameworkElement :
     Windows::UI::Xaml::IFrameworkElement,
     impl::bases<FrameworkElement, Windows::UI::Xaml::DependencyObject, Windows::UI::Xaml::UIElement>,
-    impl::require<FrameworkElement, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2, Windows::UI::Xaml::IUIElement, Windows::UI::Xaml::IUIElementOverrides, Windows::UI::Xaml::IUIElement2, Windows::UI::Xaml::IUIElement3, Windows::UI::Xaml::IUIElement4, Windows::UI::Xaml::IFrameworkElementOverrides, Windows::UI::Xaml::IFrameworkElement2, Windows::UI::Xaml::IFrameworkElementOverrides2, Windows::UI::Xaml::IFrameworkElement3, Windows::UI::Xaml::IFrameworkElement4>
+    impl::require<FrameworkElement, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2, Windows::UI::Xaml::IUIElement, Windows::UI::Xaml::IUIElementOverrides, Windows::UI::Xaml::IUIElement2, Windows::UI::Xaml::IUIElement3, Windows::UI::Xaml::IUIElement4, Windows::UI::Xaml::IUIElement5, Windows::UI::Xaml::IFrameworkElementOverrides, Windows::UI::Xaml::IFrameworkElement2, Windows::UI::Xaml::IFrameworkElementOverrides2, Windows::UI::Xaml::IFrameworkElement3, Windows::UI::Xaml::IFrameworkElement4>
 {
     FrameworkElement(std::nullptr_t) noexcept {}
     static Windows::UI::Xaml::DependencyProperty TagProperty();
@@ -585,6 +592,7 @@ struct WINRT_EBO FrameworkElement :
     static Windows::UI::Xaml::DependencyProperty FocusVisualSecondaryBrushProperty();
     static Windows::UI::Xaml::DependencyProperty FocusVisualPrimaryBrushProperty();
     static Windows::UI::Xaml::DependencyProperty AllowFocusWhenDisabledProperty();
+    static void DeferTree(const Windows::UI::Xaml::DependencyObject & element);
 };
 
 struct WINRT_EBO FrameworkTemplate :
@@ -643,10 +651,10 @@ struct WINRT_EBO PropertyMetadata :
     Windows::UI::Xaml::IPropertyMetadata
 {
     PropertyMetadata(std::nullptr_t) noexcept {}
-    PropertyMetadata(const Windows::IInspectable & defaultValue);
-    PropertyMetadata(const Windows::IInspectable & defaultValue, const Windows::UI::Xaml::PropertyChangedCallback & propertyChangedCallback);
-    static Windows::UI::Xaml::PropertyMetadata Create(const Windows::IInspectable & defaultValue);
-    static Windows::UI::Xaml::PropertyMetadata Create(const Windows::IInspectable & defaultValue, const Windows::UI::Xaml::PropertyChangedCallback & propertyChangedCallback);
+    PropertyMetadata(const Windows::Foundation::IInspectable & defaultValue);
+    PropertyMetadata(const Windows::Foundation::IInspectable & defaultValue, const Windows::UI::Xaml::PropertyChangedCallback & propertyChangedCallback);
+    static Windows::UI::Xaml::PropertyMetadata Create(const Windows::Foundation::IInspectable & defaultValue);
+    static Windows::UI::Xaml::PropertyMetadata Create(const Windows::Foundation::IInspectable & defaultValue, const Windows::UI::Xaml::PropertyChangedCallback & propertyChangedCallback);
     static Windows::UI::Xaml::PropertyMetadata Create(const Windows::UI::Xaml::CreateDefaultValueCallback & createDefaultValueCallback);
     static Windows::UI::Xaml::PropertyMetadata Create(const Windows::UI::Xaml::CreateDefaultValueCallback & createDefaultValueCallback, const Windows::UI::Xaml::PropertyChangedCallback & propertyChangedCallback);
 };
@@ -657,7 +665,7 @@ struct WINRT_EBO PropertyPath :
     impl::require<PropertyPath, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>
 {
     PropertyPath(std::nullptr_t) noexcept {}
-    PropertyPath(hstring_ref path);
+    PropertyPath(hstring_view path);
 };
 
 struct WINRT_EBO RectHelper :
@@ -683,7 +691,7 @@ struct WINRT_EBO RectHelper :
 struct WINRT_EBO ResourceDictionary :
     Windows::UI::Xaml::IResourceDictionary,
     impl::bases<ResourceDictionary, Windows::UI::Xaml::DependencyObject>,
-    impl::require<ResourceDictionary, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2, Windows::Foundation::Collections::IMap<Windows::IInspectable, Windows::IInspectable>, Windows::Foundation::Collections::IIterable<Windows::Foundation::Collections::IKeyValuePair<Windows::IInspectable, Windows::IInspectable>>>
+    impl::require<ResourceDictionary, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2, Windows::Foundation::Collections::IMap<Windows::Foundation::IInspectable, Windows::Foundation::IInspectable>, Windows::Foundation::Collections::IIterable<Windows::Foundation::Collections::IKeyValuePair<Windows::Foundation::IInspectable, Windows::Foundation::IInspectable>>>
 {
     ResourceDictionary(std::nullptr_t) noexcept {}
     ResourceDictionary();
@@ -709,7 +717,7 @@ struct WINRT_EBO Setter :
 {
     Setter(std::nullptr_t) noexcept {}
     Setter();
-    Setter(const Windows::UI::Xaml::DependencyProperty & targetProperty, const Windows::IInspectable & value);
+    Setter(const Windows::UI::Xaml::DependencyProperty & targetProperty, const Windows::Foundation::IInspectable & value);
 };
 
 struct WINRT_EBO SetterBase :
@@ -821,7 +829,7 @@ struct WINRT_EBO TriggerCollection :
 struct WINRT_EBO UIElement :
     Windows::UI::Xaml::IUIElement,
     impl::bases<UIElement, Windows::UI::Xaml::DependencyObject>,
-    impl::require<UIElement, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2, Windows::UI::Xaml::IUIElementOverrides, Windows::UI::Xaml::IUIElement2, Windows::UI::Xaml::IUIElement3, Windows::UI::Xaml::IUIElement4>
+    impl::require<UIElement, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2, Windows::UI::Xaml::IUIElementOverrides, Windows::UI::Xaml::IUIElement2, Windows::UI::Xaml::IUIElement3, Windows::UI::Xaml::IUIElement4, Windows::UI::Xaml::IUIElement5>
 {
     UIElement(std::nullptr_t) noexcept {}
     static Windows::UI::Xaml::RoutedEvent KeyDownEvent();
@@ -873,6 +881,20 @@ struct WINRT_EBO UIElement :
     static Windows::UI::Xaml::DependencyProperty IsAccessKeyScopeProperty();
     static Windows::UI::Xaml::DependencyProperty AccessKeyScopeOwnerProperty();
     static Windows::UI::Xaml::DependencyProperty AccessKeyProperty();
+    static Windows::UI::Xaml::DependencyProperty LightsProperty();
+    static Windows::UI::Xaml::DependencyProperty KeyTipPlacementModeProperty();
+    static Windows::UI::Xaml::DependencyProperty KeyTipHorizontalOffsetProperty();
+    static Windows::UI::Xaml::DependencyProperty KeyTipVerticalOffsetProperty();
+    static Windows::UI::Xaml::DependencyProperty XYFocusKeyboardNavigationProperty();
+    static Windows::UI::Xaml::DependencyProperty XYFocusUpNavigationStrategyProperty();
+    static Windows::UI::Xaml::DependencyProperty XYFocusDownNavigationStrategyProperty();
+    static Windows::UI::Xaml::DependencyProperty XYFocusLeftNavigationStrategyProperty();
+    static Windows::UI::Xaml::DependencyProperty XYFocusRightNavigationStrategyProperty();
+    static Windows::UI::Xaml::DependencyProperty HighContrastAdjustmentProperty();
+    static Windows::UI::Xaml::DependencyProperty TabFocusNavigationProperty();
+    static Windows::UI::Xaml::RoutedEvent GettingFocusEvent();
+    static Windows::UI::Xaml::RoutedEvent LosingFocusEvent();
+    static Windows::UI::Xaml::RoutedEvent NoFocusCandidateFoundEvent();
 };
 
 struct WINRT_EBO UnhandledExceptionEventArgs :
@@ -917,7 +939,7 @@ struct WINRT_EBO VisualStateManager :
     static Windows::UI::Xaml::DependencyProperty CustomVisualStateManagerProperty();
     static Windows::UI::Xaml::VisualStateManager GetCustomVisualStateManager(const Windows::UI::Xaml::FrameworkElement & obj);
     static void SetCustomVisualStateManager(const Windows::UI::Xaml::FrameworkElement & obj, const Windows::UI::Xaml::VisualStateManager & value);
-    static bool GoToState(const Windows::UI::Xaml::Controls::Control & control, hstring_ref stateName, bool useTransitions);
+    static bool GoToState(const Windows::UI::Xaml::Controls::Control & control, hstring_view stateName, bool useTransitions);
 };
 
 struct WINRT_EBO VisualTransition :
@@ -931,7 +953,7 @@ struct WINRT_EBO VisualTransition :
 
 struct WINRT_EBO Window :
     Windows::UI::Xaml::IWindow,
-    impl::require<Window, Windows::UI::Xaml::IWindow2>
+    impl::require<Window, Windows::UI::Xaml::IWindow2, Windows::UI::Xaml::IWindow3>
 {
     Window(std::nullptr_t) noexcept {}
     static Windows::UI::Xaml::Window Current();

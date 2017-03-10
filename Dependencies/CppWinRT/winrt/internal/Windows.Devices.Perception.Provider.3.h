@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -13,11 +13,11 @@ template <typename H> struct impl_PerceptionStartFaceAuthenticationHandler : imp
 {
     impl_PerceptionStartFaceAuthenticationHandler(H && handler) : H(std::forward<H>(handler)) {}
 
-    HRESULT __stdcall abi_Invoke(abi_arg_in<Windows::Devices::Perception::Provider::IPerceptionFaceAuthenticationGroup> sender, bool * result) noexcept override
+    HRESULT __stdcall abi_Invoke(impl::abi_arg_in<Windows::Devices::Perception::Provider::IPerceptionFaceAuthenticationGroup> sender, bool * result) noexcept override
     {
         try
         {
-            *result = detach((*this)(*reinterpret_cast<const Windows::Devices::Perception::Provider::PerceptionFaceAuthenticationGroup *>(&sender)));
+            *result = detach_abi((*this)(*reinterpret_cast<const Windows::Devices::Perception::Provider::PerceptionFaceAuthenticationGroup *>(&sender)));
             return S_OK;
         }
         catch (...)
@@ -31,7 +31,7 @@ template <typename H> struct impl_PerceptionStopFaceAuthenticationHandler : impl
 {
     impl_PerceptionStopFaceAuthenticationHandler(H && handler) : H(std::forward<H>(handler)) {}
 
-    HRESULT __stdcall abi_Invoke(abi_arg_in<Windows::Devices::Perception::Provider::IPerceptionFaceAuthenticationGroup> sender) noexcept override
+    HRESULT __stdcall abi_Invoke(impl::abi_arg_in<Windows::Devices::Perception::Provider::IPerceptionFaceAuthenticationGroup> sender) noexcept override
     {
         try
         {
@@ -49,77 +49,77 @@ template <typename H> struct impl_PerceptionStopFaceAuthenticationHandler : impl
 
 namespace Windows::Devices::Perception::Provider {
 
-struct KnownPerceptionFrameKind
+struct [[deprecated("KnownPerceptionFrameKind may be unavailable after Windows Creator Update. Please refer to AVStream on MSDN.")]] KnownPerceptionFrameKind
 {
     KnownPerceptionFrameKind() = delete;
-    static hstring Color();
-    static hstring Depth();
-    static hstring Infrared();
+    [[deprecated("KnownPerceptionFrameKind may be unavailable after Windows Creator Update. Please refer to AVStream on MSDN.")]] static hstring Color();
+    [[deprecated("KnownPerceptionFrameKind may be unavailable after Windows Creator Update. Please refer to AVStream on MSDN.")]] static hstring Depth();
+    [[deprecated("KnownPerceptionFrameKind may be unavailable after Windows Creator Update. Please refer to AVStream on MSDN.")]] static hstring Infrared();
 };
 
-struct WINRT_EBO PerceptionControlGroup :
+struct [[deprecated("PerceptionControlGroup may be unavailable after Windows Creator Update. Please refer to AVStream on MSDN.")]] WINRT_EBO PerceptionControlGroup :
     Windows::Devices::Perception::Provider::IPerceptionControlGroup
 {
     PerceptionControlGroup(std::nullptr_t) noexcept {}
-    PerceptionControlGroup(const Windows::Foundation::Collections::IIterable<hstring> & ids);
+    PerceptionControlGroup(iterable<hstring> ids);
 };
 
-struct WINRT_EBO PerceptionCorrelation :
+struct [[deprecated("PerceptionCorrelation may be unavailable after Windows Creator Update. Please refer to AVStream on MSDN.")]] WINRT_EBO PerceptionCorrelation :
     Windows::Devices::Perception::Provider::IPerceptionCorrelation
 {
     PerceptionCorrelation(std::nullptr_t) noexcept {}
-    PerceptionCorrelation(hstring_ref targetId, const Windows::Foundation::Numerics::float3 & position, const Windows::Foundation::Numerics::quaternion & orientation);
+    PerceptionCorrelation(hstring_view targetId, const Windows::Foundation::Numerics::float3 & position, const Windows::Foundation::Numerics::quaternion & orientation);
 };
 
-struct WINRT_EBO PerceptionCorrelationGroup :
+struct [[deprecated("PerceptionCorrelationGroup may be unavailable after Windows Creator Update. Please refer to AVStream on MSDN.")]] WINRT_EBO PerceptionCorrelationGroup :
     Windows::Devices::Perception::Provider::IPerceptionCorrelationGroup
 {
     PerceptionCorrelationGroup(std::nullptr_t) noexcept {}
-    PerceptionCorrelationGroup(const Windows::Foundation::Collections::IIterable<Windows::Devices::Perception::Provider::PerceptionCorrelation> & relativeLocations);
+    PerceptionCorrelationGroup(iterable<Windows::Devices::Perception::Provider::PerceptionCorrelation> relativeLocations);
 };
 
-struct WINRT_EBO PerceptionFaceAuthenticationGroup :
+struct [[deprecated("PerceptionFaceAuthenticationGroup may be unavailable after Windows Creator Update. Please refer to AVStream on MSDN.")]] WINRT_EBO PerceptionFaceAuthenticationGroup :
     Windows::Devices::Perception::Provider::IPerceptionFaceAuthenticationGroup
 {
     PerceptionFaceAuthenticationGroup(std::nullptr_t) noexcept {}
-    PerceptionFaceAuthenticationGroup(const Windows::Foundation::Collections::IIterable<hstring> & ids, const Windows::Devices::Perception::Provider::PerceptionStartFaceAuthenticationHandler & startHandler, const Windows::Devices::Perception::Provider::PerceptionStopFaceAuthenticationHandler & stopHandler);
+    PerceptionFaceAuthenticationGroup(iterable<hstring> ids, const Windows::Devices::Perception::Provider::PerceptionStartFaceAuthenticationHandler & startHandler, const Windows::Devices::Perception::Provider::PerceptionStopFaceAuthenticationHandler & stopHandler);
 };
 
-struct WINRT_EBO PerceptionFrame :
+struct [[deprecated("PerceptionFrame may be unavailable after Windows Creator Update. Please refer to AVStream on MSDN.")]] WINRT_EBO PerceptionFrame :
     Windows::Devices::Perception::Provider::IPerceptionFrame
 {
     PerceptionFrame(std::nullptr_t) noexcept {}
 };
 
-struct WINRT_EBO PerceptionFrameProviderInfo :
+struct [[deprecated("PerceptionFrameProviderInfo may be unavailable after Windows Creator Update. Please refer to AVStream on MSDN.")]] WINRT_EBO PerceptionFrameProviderInfo :
     Windows::Devices::Perception::Provider::IPerceptionFrameProviderInfo
 {
     PerceptionFrameProviderInfo(std::nullptr_t) noexcept {}
     PerceptionFrameProviderInfo();
 };
 
-struct PerceptionFrameProviderManagerService
+struct [[deprecated("PerceptionFrameProviderManagerService may be unavailable after Windows Creator Update. Please refer to AVStream on MSDN.")]] PerceptionFrameProviderManagerService
 {
     PerceptionFrameProviderManagerService() = delete;
-    static void RegisterFrameProviderInfo(const Windows::Devices::Perception::Provider::IPerceptionFrameProviderManager & manager, const Windows::Devices::Perception::Provider::PerceptionFrameProviderInfo & frameProviderInfo);
-    static void UnregisterFrameProviderInfo(const Windows::Devices::Perception::Provider::IPerceptionFrameProviderManager & manager, const Windows::Devices::Perception::Provider::PerceptionFrameProviderInfo & frameProviderInfo);
-    static void RegisterFaceAuthenticationGroup(const Windows::Devices::Perception::Provider::IPerceptionFrameProviderManager & manager, const Windows::Devices::Perception::Provider::PerceptionFaceAuthenticationGroup & faceAuthenticationGroup);
-    static void UnregisterFaceAuthenticationGroup(const Windows::Devices::Perception::Provider::IPerceptionFrameProviderManager & manager, const Windows::Devices::Perception::Provider::PerceptionFaceAuthenticationGroup & faceAuthenticationGroup);
-    static void RegisterControlGroup(const Windows::Devices::Perception::Provider::IPerceptionFrameProviderManager & manager, const Windows::Devices::Perception::Provider::PerceptionControlGroup & controlGroup);
-    static void UnregisterControlGroup(const Windows::Devices::Perception::Provider::IPerceptionFrameProviderManager & manager, const Windows::Devices::Perception::Provider::PerceptionControlGroup & controlGroup);
-    static void RegisterCorrelationGroup(const Windows::Devices::Perception::Provider::IPerceptionFrameProviderManager & manager, const Windows::Devices::Perception::Provider::PerceptionCorrelationGroup & correlationGroup);
-    static void UnregisterCorrelationGroup(const Windows::Devices::Perception::Provider::IPerceptionFrameProviderManager & manager, const Windows::Devices::Perception::Provider::PerceptionCorrelationGroup & correlationGroup);
-    static void UpdateAvailabilityForProvider(const Windows::Devices::Perception::Provider::IPerceptionFrameProvider & provider, bool available);
-    static void PublishFrameForProvider(const Windows::Devices::Perception::Provider::IPerceptionFrameProvider & provider, const Windows::Devices::Perception::Provider::PerceptionFrame & frame);
+    [[deprecated("PerceptionFrameProviderManagerService may be unavailable after Windows Creator Update. Please refer to AVStream on MSDN.")]] static void RegisterFrameProviderInfo(const Windows::Devices::Perception::Provider::IPerceptionFrameProviderManager & manager, const Windows::Devices::Perception::Provider::PerceptionFrameProviderInfo & frameProviderInfo);
+    [[deprecated("PerceptionFrameProviderManagerService may be unavailable after Windows Creator Update. Please refer to AVStream on MSDN.")]] static void UnregisterFrameProviderInfo(const Windows::Devices::Perception::Provider::IPerceptionFrameProviderManager & manager, const Windows::Devices::Perception::Provider::PerceptionFrameProviderInfo & frameProviderInfo);
+    [[deprecated("PerceptionFrameProviderManagerService may be unavailable after Windows Creator Update. Please refer to AVStream on MSDN.")]] static void RegisterFaceAuthenticationGroup(const Windows::Devices::Perception::Provider::IPerceptionFrameProviderManager & manager, const Windows::Devices::Perception::Provider::PerceptionFaceAuthenticationGroup & faceAuthenticationGroup);
+    [[deprecated("PerceptionFrameProviderManagerService may be unavailable after Windows Creator Update. Please refer to AVStream on MSDN.")]] static void UnregisterFaceAuthenticationGroup(const Windows::Devices::Perception::Provider::IPerceptionFrameProviderManager & manager, const Windows::Devices::Perception::Provider::PerceptionFaceAuthenticationGroup & faceAuthenticationGroup);
+    [[deprecated("PerceptionFrameProviderManagerService may be unavailable after Windows Creator Update. Please refer to AVStream on MSDN.")]] static void RegisterControlGroup(const Windows::Devices::Perception::Provider::IPerceptionFrameProviderManager & manager, const Windows::Devices::Perception::Provider::PerceptionControlGroup & controlGroup);
+    [[deprecated("PerceptionFrameProviderManagerService may be unavailable after Windows Creator Update. Please refer to AVStream on MSDN.")]] static void UnregisterControlGroup(const Windows::Devices::Perception::Provider::IPerceptionFrameProviderManager & manager, const Windows::Devices::Perception::Provider::PerceptionControlGroup & controlGroup);
+    [[deprecated("PerceptionFrameProviderManagerService may be unavailable after Windows Creator Update. Please refer to AVStream on MSDN.")]] static void RegisterCorrelationGroup(const Windows::Devices::Perception::Provider::IPerceptionFrameProviderManager & manager, const Windows::Devices::Perception::Provider::PerceptionCorrelationGroup & correlationGroup);
+    [[deprecated("PerceptionFrameProviderManagerService may be unavailable after Windows Creator Update. Please refer to AVStream on MSDN.")]] static void UnregisterCorrelationGroup(const Windows::Devices::Perception::Provider::IPerceptionFrameProviderManager & manager, const Windows::Devices::Perception::Provider::PerceptionCorrelationGroup & correlationGroup);
+    [[deprecated("PerceptionFrameProviderManagerService may be unavailable after Windows Creator Update. Please refer to AVStream on MSDN.")]] static void UpdateAvailabilityForProvider(const Windows::Devices::Perception::Provider::IPerceptionFrameProvider & provider, bool available);
+    [[deprecated("PerceptionFrameProviderManagerService may be unavailable after Windows Creator Update. Please refer to AVStream on MSDN.")]] static void PublishFrameForProvider(const Windows::Devices::Perception::Provider::IPerceptionFrameProvider & provider, const Windows::Devices::Perception::Provider::PerceptionFrame & frame);
 };
 
-struct WINRT_EBO PerceptionPropertyChangeRequest :
+struct [[deprecated("PerceptionPropertyChangeRequest may be unavailable after Windows Creator Update. Please refer to AVStream on MSDN.")]] WINRT_EBO PerceptionPropertyChangeRequest :
     Windows::Devices::Perception::Provider::IPerceptionPropertyChangeRequest
 {
     PerceptionPropertyChangeRequest(std::nullptr_t) noexcept {}
 };
 
-struct WINRT_EBO PerceptionVideoFrameAllocator :
+struct [[deprecated("PerceptionVideoFrameAllocator may be unavailable after Windows Creator Update. Please refer to AVStream on MSDN.")]] WINRT_EBO PerceptionVideoFrameAllocator :
     Windows::Devices::Perception::Provider::IPerceptionVideoFrameAllocator
 {
     PerceptionVideoFrameAllocator(std::nullptr_t) noexcept {}

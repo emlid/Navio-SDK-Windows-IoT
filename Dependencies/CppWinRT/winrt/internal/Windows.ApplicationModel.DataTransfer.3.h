@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -13,11 +13,29 @@ template <typename H> struct impl_DataProviderHandler : implements<impl_DataProv
 {
     impl_DataProviderHandler(H && handler) : H(std::forward<H>(handler)) {}
 
-    HRESULT __stdcall abi_Invoke(abi_arg_in<Windows::ApplicationModel::DataTransfer::IDataProviderRequest> request) noexcept override
+    HRESULT __stdcall abi_Invoke(impl::abi_arg_in<Windows::ApplicationModel::DataTransfer::IDataProviderRequest> request) noexcept override
     {
         try
         {
             (*this)(*reinterpret_cast<const Windows::ApplicationModel::DataTransfer::DataProviderRequest *>(&request));
+            return S_OK;
+        }
+        catch (...)
+        {
+            return impl::to_hresult();
+        }
+    }
+};
+
+template <typename H> struct impl_ShareProviderHandler : implements<impl_ShareProviderHandler<H>, abi<ShareProviderHandler>>, H
+{
+    impl_ShareProviderHandler(H && handler) : H(std::forward<H>(handler)) {}
+
+    HRESULT __stdcall abi_Invoke(impl::abi_arg_in<Windows::ApplicationModel::DataTransfer::IShareProviderOperation> operation) noexcept override
+    {
+        try
+        {
+            (*this)(*reinterpret_cast<const Windows::ApplicationModel::DataTransfer::ShareProviderOperation *>(&operation));
             return S_OK;
         }
         catch (...)
@@ -38,15 +56,15 @@ struct Clipboard
     static void SetContent(const Windows::ApplicationModel::DataTransfer::DataPackage & content);
     static void Flush();
     static void Clear();
-    static event_token ContentChanged(const Windows::Foundation::EventHandler<Windows::IInspectable> & changeHandler);
+    static event_token ContentChanged(const Windows::Foundation::EventHandler<Windows::Foundation::IInspectable> & changeHandler);
     using ContentChanged_revoker = factory_event_revoker<IClipboardStatics>;
-    static ContentChanged_revoker ContentChanged(auto_revoke_t, const Windows::Foundation::EventHandler<Windows::IInspectable> & changeHandler);
+    static ContentChanged_revoker ContentChanged(auto_revoke_t, const Windows::Foundation::EventHandler<Windows::Foundation::IInspectable> & changeHandler);
     static void ContentChanged(event_token token);
 };
 
 struct WINRT_EBO DataPackage :
     Windows::ApplicationModel::DataTransfer::IDataPackage,
-    impl::require<DataPackage, Windows::ApplicationModel::DataTransfer::IDataPackage2>
+    impl::require<DataPackage, Windows::ApplicationModel::DataTransfer::IDataPackage2, Windows::ApplicationModel::DataTransfer::IDataPackage3>
 {
     DataPackage(std::nullptr_t) noexcept {}
     DataPackage();
@@ -104,7 +122,8 @@ struct WINRT_EBO DataRequestedEventArgs :
 };
 
 struct WINRT_EBO DataTransferManager :
-    Windows::ApplicationModel::DataTransfer::IDataTransferManager
+    Windows::ApplicationModel::DataTransfer::IDataTransferManager,
+    impl::require<DataTransferManager, Windows::ApplicationModel::DataTransfer::IDataTransferManager2>
 {
     DataTransferManager(std::nullptr_t) noexcept {}
     static void ShowShareUI();
@@ -115,8 +134,8 @@ struct WINRT_EBO DataTransferManager :
 struct HtmlFormatHelper
 {
     HtmlFormatHelper() = delete;
-    static hstring GetStaticFragment(hstring_ref htmlFormat);
-    static hstring CreateHtmlFormat(hstring_ref htmlFragment);
+    static hstring GetStaticFragment(hstring_view htmlFormat);
+    static hstring CreateHtmlFormat(hstring_view htmlFragment);
 };
 
 struct WINRT_EBO OperationCompletedEventArgs :
@@ -126,19 +145,50 @@ struct WINRT_EBO OperationCompletedEventArgs :
     OperationCompletedEventArgs(std::nullptr_t) noexcept {}
 };
 
+struct WINRT_EBO ShareCompletedEventArgs :
+    Windows::ApplicationModel::DataTransfer::IShareCompletedEventArgs
+{
+    ShareCompletedEventArgs(std::nullptr_t) noexcept {}
+};
+
+struct WINRT_EBO ShareProvider :
+    Windows::ApplicationModel::DataTransfer::IShareProvider
+{
+    ShareProvider(std::nullptr_t) noexcept {}
+    ShareProvider(hstring_view title, const Windows::Storage::Streams::RandomAccessStreamReference & displayIcon, const Windows::UI::Color & backgroundColor, const Windows::ApplicationModel::DataTransfer::ShareProviderHandler & handler);
+};
+
+struct WINRT_EBO ShareProviderOperation :
+    Windows::ApplicationModel::DataTransfer::IShareProviderOperation
+{
+    ShareProviderOperation(std::nullptr_t) noexcept {}
+};
+
+struct WINRT_EBO ShareProvidersRequestedEventArgs :
+    Windows::ApplicationModel::DataTransfer::IShareProvidersRequestedEventArgs
+{
+    ShareProvidersRequestedEventArgs(std::nullptr_t) noexcept {}
+};
+
+struct WINRT_EBO ShareTargetInfo :
+    Windows::ApplicationModel::DataTransfer::IShareTargetInfo
+{
+    ShareTargetInfo(std::nullptr_t) noexcept {}
+};
+
 struct SharedStorageAccessManager
 {
     SharedStorageAccessManager() = delete;
     static hstring AddFile(const Windows::Storage::IStorageFile & file);
-    static Windows::Foundation::IAsyncOperation<Windows::Storage::StorageFile> RedeemTokenForFileAsync(hstring_ref token);
-    static void RemoveFile(hstring_ref token);
+    static Windows::Foundation::IAsyncOperation<Windows::Storage::StorageFile> RedeemTokenForFileAsync(hstring_view token);
+    static void RemoveFile(hstring_view token);
 };
 
 struct StandardDataFormats
 {
     StandardDataFormats() = delete;
     static hstring Text();
-    static hstring Uri();
+    [[deprecated("Uri may be altered or unavailable for releases after Windows Phone 'OSVersion' (TBD). Instead, use WebLink or ApplicationLink.")]] static hstring Uri();
     static hstring Html();
     static hstring Rtf();
     static hstring Bitmap();

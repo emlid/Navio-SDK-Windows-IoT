@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -26,8 +26,33 @@ struct WINRT_EBO OnlineIdServiceTicketRequest :
     Windows::Security::Authentication::OnlineId::IOnlineIdServiceTicketRequest
 {
     OnlineIdServiceTicketRequest(std::nullptr_t) noexcept {}
-    OnlineIdServiceTicketRequest(hstring_ref service, hstring_ref policy);
-    OnlineIdServiceTicketRequest(hstring_ref service);
+    OnlineIdServiceTicketRequest(hstring_view service, hstring_view policy);
+    OnlineIdServiceTicketRequest(hstring_view service);
+};
+
+struct OnlineIdSystemAuthenticator
+{
+    OnlineIdSystemAuthenticator() = delete;
+    static Windows::Security::Authentication::OnlineId::OnlineIdSystemAuthenticatorForUser Default();
+    static Windows::Security::Authentication::OnlineId::OnlineIdSystemAuthenticatorForUser GetForUser(const Windows::System::User & user);
+};
+
+struct WINRT_EBO OnlineIdSystemAuthenticatorForUser :
+    Windows::Security::Authentication::OnlineId::IOnlineIdSystemAuthenticatorForUser
+{
+    OnlineIdSystemAuthenticatorForUser(std::nullptr_t) noexcept {}
+};
+
+struct WINRT_EBO OnlineIdSystemIdentity :
+    Windows::Security::Authentication::OnlineId::IOnlineIdSystemIdentity
+{
+    OnlineIdSystemIdentity(std::nullptr_t) noexcept {}
+};
+
+struct WINRT_EBO OnlineIdSystemTicketResult :
+    Windows::Security::Authentication::OnlineId::IOnlineIdSystemTicketResult
+{
+    OnlineIdSystemTicketResult(std::nullptr_t) noexcept {}
 };
 
 struct WINRT_EBO SignOutUserOperation :

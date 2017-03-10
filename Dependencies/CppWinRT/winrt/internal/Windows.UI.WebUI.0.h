@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -44,6 +44,7 @@ struct WebUICameraSettingsActivatedEventArgs;
 struct WebUIContactCallActivatedEventArgs;
 struct WebUIContactMapActivatedEventArgs;
 struct WebUIContactMessageActivatedEventArgs;
+struct WebUIContactPanelActivatedEventArgs;
 struct WebUIContactPickerActivatedEventArgs;
 struct WebUIContactPostActivatedEventArgs;
 struct WebUIContactVideoCallActivatedEventArgs;
@@ -59,11 +60,13 @@ struct WebUIFolderPickerContinuationEventArgs;
 struct WebUILaunchActivatedEventArgs;
 struct WebUILockScreenActivatedEventArgs;
 struct WebUILockScreenCallActivatedEventArgs;
+struct WebUILockScreenComponentActivatedEventArgs;
 struct WebUINavigatedDeferral;
 struct WebUINavigatedEventArgs;
 struct WebUINavigatedOperation;
 struct WebUIPrint3DWorkflowActivatedEventArgs;
 struct WebUIPrintTaskSettingsActivatedEventArgs;
+struct WebUIPrintWorkflowForegroundTaskActivatedEventArgs;
 struct WebUIProtocolActivatedEventArgs;
 struct WebUIProtocolForResultsActivatedEventArgs;
 struct WebUIRestrictedLaunchActivatedEventArgs;
@@ -118,6 +121,7 @@ struct WebUICameraSettingsActivatedEventArgs;
 struct WebUIContactCallActivatedEventArgs;
 struct WebUIContactMapActivatedEventArgs;
 struct WebUIContactMessageActivatedEventArgs;
+struct WebUIContactPanelActivatedEventArgs;
 struct WebUIContactPickerActivatedEventArgs;
 struct WebUIContactPostActivatedEventArgs;
 struct WebUIContactVideoCallActivatedEventArgs;
@@ -133,11 +137,13 @@ struct WebUIFolderPickerContinuationEventArgs;
 struct WebUILaunchActivatedEventArgs;
 struct WebUILockScreenActivatedEventArgs;
 struct WebUILockScreenCallActivatedEventArgs;
+struct WebUILockScreenComponentActivatedEventArgs;
 struct WebUINavigatedDeferral;
 struct WebUINavigatedEventArgs;
 struct WebUINavigatedOperation;
 struct WebUIPrint3DWorkflowActivatedEventArgs;
 struct WebUIPrintTaskSettingsActivatedEventArgs;
+struct WebUIPrintWorkflowForegroundTaskActivatedEventArgs;
 struct WebUIProtocolActivatedEventArgs;
 struct WebUIProtocolForResultsActivatedEventArgs;
 struct WebUIRestrictedLaunchActivatedEventArgs;
@@ -149,6 +155,28 @@ struct WebUIVoiceCommandActivatedEventArgs;
 struct WebUIWalletActionActivatedEventArgs;
 struct WebUIWebAccountProviderActivatedEventArgs;
 struct WebUIWebAuthenticationBrokerContinuationEventArgs;
+
+}
+
+namespace Windows::UI::WebUI {
+
+template <typename T> struct impl_IActivatedDeferral;
+template <typename T> struct impl_IActivatedEventArgsDeferral;
+template <typename T> struct impl_IActivatedOperation;
+template <typename T> struct impl_IHtmlPrintDocumentSource;
+template <typename T> struct impl_IWebUIActivationStatics;
+template <typename T> struct impl_IWebUIActivationStatics2;
+template <typename T> struct impl_IWebUIBackgroundTaskInstance;
+template <typename T> struct impl_IWebUIBackgroundTaskInstanceStatics;
+template <typename T> struct impl_IWebUINavigatedDeferral;
+template <typename T> struct impl_IWebUINavigatedEventArgs;
+template <typename T> struct impl_IWebUINavigatedOperation;
+template <typename T> struct impl_ActivatedEventHandler;
+template <typename T> struct impl_EnteredBackgroundEventHandler;
+template <typename T> struct impl_LeavingBackgroundEventHandler;
+template <typename T> struct impl_NavigatedEventHandler;
+template <typename T> struct impl_ResumingEventHandler;
+template <typename T> struct impl_SuspendingEventHandler;
 
 }
 

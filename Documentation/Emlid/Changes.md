@@ -1,14 +1,21 @@
 ## Change Log
 
-*2017.02.XX* v1.0.10 **PRIVATE WORK IN PROGRESS**
+*2017.02.XX* v1.0.10 **Visual Studio 2017 RTM**
 
-1. Removed Lightning providers. Microsoft clearly stopped developing and supporting it. It does not work properly anymore. Either we get a new converged driver from them soon or finish writing our own.
-2. Second SPI bus access solved. Works with new transisional "HardwarePlus" C++ Windows Runtime Component (doesn't work with .NET component).
-3. Navio 2 RCIO device and it's PX4IO based protocol implemented. Still integrating RC support as the first tested use case.
+1. Updated solution to Visual Studio 2017 RTM, Windows Insider Preview 10.0.15042.0.
+2. Removed Lightning providers. Microsoft clearly stopped developing and supporting it. It does not work properly anymore. Either we get a new converged driver from them soon or finish writing our own.
+3. Second SPI bus access solved. Works with new transisional "HardwarePlus" C++ Windows Runtime Component (doesn't work with .NET component).
+4. Navio 2 RCIO device and it's PX4IO based protocol implemented. Still integrating RC support as the first tested use case.
+5. Updated .NET Core SDK package to latest stable version 5.3.1.
+6. C++/WinRT headers updated to latest 10.0.15042.0 release.
 
-*2017.01.09* v1.0.9 **PUBLIC RELEASE ON NUGET**
+Start of the migration to C++ low level components. Drivers not necessary at this time, they will continue development as soon as a functioning WDK toolset (with VS2017) is released.
+Visual Studio 2015 and Windows RTM are no longer supported. The SDK and WDK build 15042 are required and the OS must be the same build to open any of the XAML projects.
 
-1. Tested with latest insider preview 10.0.14993.1000.
+
+*2017.01.09* v1.0.9
+
+1. Tested with latest insider preview 10.0.14393.1000.
 2. Updated and cleaned various solution and project issues caused by previous updates and betas.
 3. Updated .NET Core SDK package to latest preview 5.3.0-beta2.
 4. Major refactor of the API to support multiple hardware models (Navio, Navio+ and Navio 2) with hardware detection.

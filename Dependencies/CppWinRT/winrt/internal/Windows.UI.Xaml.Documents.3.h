@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -12,7 +12,7 @@ namespace Windows::UI::Xaml::Documents {
 struct WINRT_EBO Block :
     Windows::UI::Xaml::Documents::IBlock,
     impl::bases<Block, Windows::UI::Xaml::DependencyObject, Windows::UI::Xaml::Documents::TextElement>,
-    impl::require<Block, Windows::UI::Xaml::Documents::ITextElement, Windows::UI::Xaml::Documents::ITextElementOverrides, Windows::UI::Xaml::Documents::ITextElement2, Windows::UI::Xaml::Documents::ITextElement3, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>
+    impl::require<Block, Windows::UI::Xaml::Documents::ITextElement, Windows::UI::Xaml::Documents::ITextElementOverrides, Windows::UI::Xaml::Documents::ITextElement2, Windows::UI::Xaml::Documents::ITextElement3, Windows::UI::Xaml::Documents::ITextElement4, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>
 {
     Block(std::nullptr_t) noexcept {}
     static Windows::UI::Xaml::DependencyProperty TextAlignmentProperty();
@@ -30,7 +30,7 @@ struct WINRT_EBO BlockCollection :
 struct WINRT_EBO Bold :
     Windows::UI::Xaml::Documents::IBold,
     impl::bases<Bold, Windows::UI::Xaml::DependencyObject, Windows::UI::Xaml::Documents::TextElement, Windows::UI::Xaml::Documents::Inline, Windows::UI::Xaml::Documents::Span>,
-    impl::require<Bold, Windows::UI::Xaml::Documents::ITextElement, Windows::UI::Xaml::Documents::ITextElementOverrides, Windows::UI::Xaml::Documents::ITextElement2, Windows::UI::Xaml::Documents::ITextElement3, Windows::UI::Xaml::Documents::IInline, Windows::UI::Xaml::Documents::ISpan, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>
+    impl::require<Bold, Windows::UI::Xaml::Documents::ITextElement, Windows::UI::Xaml::Documents::ITextElementOverrides, Windows::UI::Xaml::Documents::ITextElement2, Windows::UI::Xaml::Documents::ITextElement3, Windows::UI::Xaml::Documents::ITextElement4, Windows::UI::Xaml::Documents::IInline, Windows::UI::Xaml::Documents::ISpan, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>
 {
     Bold(std::nullptr_t) noexcept {}
     Bold();
@@ -39,7 +39,7 @@ struct WINRT_EBO Bold :
 struct WINRT_EBO Glyphs :
     Windows::UI::Xaml::Documents::IGlyphs,
     impl::bases<Glyphs, Windows::UI::Xaml::DependencyObject, Windows::UI::Xaml::UIElement, Windows::UI::Xaml::FrameworkElement>,
-    impl::require<Glyphs, Windows::UI::Xaml::Documents::IGlyphs2, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2, Windows::UI::Xaml::IUIElement, Windows::UI::Xaml::IUIElementOverrides, Windows::UI::Xaml::IUIElement2, Windows::UI::Xaml::IUIElement3, Windows::UI::Xaml::IUIElement4, Windows::UI::Xaml::IFrameworkElement, Windows::UI::Xaml::IFrameworkElementOverrides, Windows::UI::Xaml::IFrameworkElement2, Windows::UI::Xaml::IFrameworkElementOverrides2, Windows::UI::Xaml::IFrameworkElement3, Windows::UI::Xaml::IFrameworkElement4>
+    impl::require<Glyphs, Windows::UI::Xaml::Documents::IGlyphs2, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2, Windows::UI::Xaml::IUIElement, Windows::UI::Xaml::IUIElementOverrides, Windows::UI::Xaml::IUIElement2, Windows::UI::Xaml::IUIElement3, Windows::UI::Xaml::IUIElement4, Windows::UI::Xaml::IUIElement5, Windows::UI::Xaml::IFrameworkElement, Windows::UI::Xaml::IFrameworkElementOverrides, Windows::UI::Xaml::IFrameworkElement2, Windows::UI::Xaml::IFrameworkElementOverrides2, Windows::UI::Xaml::IFrameworkElement3, Windows::UI::Xaml::IFrameworkElement4>
 {
     Glyphs(std::nullptr_t) noexcept {}
     Glyphs();
@@ -58,7 +58,7 @@ struct WINRT_EBO Glyphs :
 struct WINRT_EBO Hyperlink :
     Windows::UI::Xaml::Documents::IHyperlink,
     impl::bases<Hyperlink, Windows::UI::Xaml::DependencyObject, Windows::UI::Xaml::Documents::TextElement, Windows::UI::Xaml::Documents::Inline, Windows::UI::Xaml::Documents::Span>,
-    impl::require<Hyperlink, Windows::UI::Xaml::Documents::ITextElement, Windows::UI::Xaml::Documents::ITextElementOverrides, Windows::UI::Xaml::Documents::ITextElement2, Windows::UI::Xaml::Documents::ITextElement3, Windows::UI::Xaml::Documents::IInline, Windows::UI::Xaml::Documents::ISpan, Windows::UI::Xaml::Documents::IHyperlink2, Windows::UI::Xaml::Documents::IHyperlink3, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>
+    impl::require<Hyperlink, Windows::UI::Xaml::Documents::ITextElement, Windows::UI::Xaml::Documents::ITextElementOverrides, Windows::UI::Xaml::Documents::ITextElement2, Windows::UI::Xaml::Documents::ITextElement3, Windows::UI::Xaml::Documents::ITextElement4, Windows::UI::Xaml::Documents::IInline, Windows::UI::Xaml::Documents::ISpan, Windows::UI::Xaml::Documents::IHyperlink2, Windows::UI::Xaml::Documents::IHyperlink3, Windows::UI::Xaml::Documents::IHyperlink4, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>
 {
     Hyperlink(std::nullptr_t) noexcept {}
     Hyperlink();
@@ -69,6 +69,11 @@ struct WINRT_EBO Hyperlink :
     static Windows::UI::Xaml::DependencyProperty XYFocusUpProperty();
     static Windows::UI::Xaml::DependencyProperty XYFocusDownProperty();
     static Windows::UI::Xaml::DependencyProperty ElementSoundModeProperty();
+    static Windows::UI::Xaml::DependencyProperty FocusStateProperty();
+    static Windows::UI::Xaml::DependencyProperty XYFocusUpNavigationStrategyProperty();
+    static Windows::UI::Xaml::DependencyProperty XYFocusDownNavigationStrategyProperty();
+    static Windows::UI::Xaml::DependencyProperty XYFocusLeftNavigationStrategyProperty();
+    static Windows::UI::Xaml::DependencyProperty XYFocusRightNavigationStrategyProperty();
 };
 
 struct WINRT_EBO HyperlinkClickEventArgs :
@@ -82,7 +87,7 @@ struct WINRT_EBO HyperlinkClickEventArgs :
 struct WINRT_EBO Inline :
     Windows::UI::Xaml::Documents::IInline,
     impl::bases<Inline, Windows::UI::Xaml::DependencyObject, Windows::UI::Xaml::Documents::TextElement>,
-    impl::require<Inline, Windows::UI::Xaml::Documents::ITextElement, Windows::UI::Xaml::Documents::ITextElementOverrides, Windows::UI::Xaml::Documents::ITextElement2, Windows::UI::Xaml::Documents::ITextElement3, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>
+    impl::require<Inline, Windows::UI::Xaml::Documents::ITextElement, Windows::UI::Xaml::Documents::ITextElementOverrides, Windows::UI::Xaml::Documents::ITextElement2, Windows::UI::Xaml::Documents::ITextElement3, Windows::UI::Xaml::Documents::ITextElement4, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>
 {
     Inline(std::nullptr_t) noexcept {}
 };
@@ -96,7 +101,7 @@ struct WINRT_EBO InlineCollection :
 struct WINRT_EBO InlineUIContainer :
     Windows::UI::Xaml::Documents::IInlineUIContainer,
     impl::bases<InlineUIContainer, Windows::UI::Xaml::DependencyObject, Windows::UI::Xaml::Documents::TextElement, Windows::UI::Xaml::Documents::Inline>,
-    impl::require<InlineUIContainer, Windows::UI::Xaml::Documents::ITextElement, Windows::UI::Xaml::Documents::ITextElementOverrides, Windows::UI::Xaml::Documents::ITextElement2, Windows::UI::Xaml::Documents::ITextElement3, Windows::UI::Xaml::Documents::IInline, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>
+    impl::require<InlineUIContainer, Windows::UI::Xaml::Documents::ITextElement, Windows::UI::Xaml::Documents::ITextElementOverrides, Windows::UI::Xaml::Documents::ITextElement2, Windows::UI::Xaml::Documents::ITextElement3, Windows::UI::Xaml::Documents::ITextElement4, Windows::UI::Xaml::Documents::IInline, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>
 {
     InlineUIContainer(std::nullptr_t) noexcept {}
     InlineUIContainer();
@@ -105,7 +110,7 @@ struct WINRT_EBO InlineUIContainer :
 struct WINRT_EBO Italic :
     Windows::UI::Xaml::Documents::IItalic,
     impl::bases<Italic, Windows::UI::Xaml::DependencyObject, Windows::UI::Xaml::Documents::TextElement, Windows::UI::Xaml::Documents::Inline, Windows::UI::Xaml::Documents::Span>,
-    impl::require<Italic, Windows::UI::Xaml::Documents::ITextElement, Windows::UI::Xaml::Documents::ITextElementOverrides, Windows::UI::Xaml::Documents::ITextElement2, Windows::UI::Xaml::Documents::ITextElement3, Windows::UI::Xaml::Documents::IInline, Windows::UI::Xaml::Documents::ISpan, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>
+    impl::require<Italic, Windows::UI::Xaml::Documents::ITextElement, Windows::UI::Xaml::Documents::ITextElementOverrides, Windows::UI::Xaml::Documents::ITextElement2, Windows::UI::Xaml::Documents::ITextElement3, Windows::UI::Xaml::Documents::ITextElement4, Windows::UI::Xaml::Documents::IInline, Windows::UI::Xaml::Documents::ISpan, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>
 {
     Italic(std::nullptr_t) noexcept {}
     Italic();
@@ -114,7 +119,7 @@ struct WINRT_EBO Italic :
 struct WINRT_EBO LineBreak :
     Windows::UI::Xaml::Documents::ILineBreak,
     impl::bases<LineBreak, Windows::UI::Xaml::DependencyObject, Windows::UI::Xaml::Documents::TextElement, Windows::UI::Xaml::Documents::Inline>,
-    impl::require<LineBreak, Windows::UI::Xaml::Documents::ITextElement, Windows::UI::Xaml::Documents::ITextElementOverrides, Windows::UI::Xaml::Documents::ITextElement2, Windows::UI::Xaml::Documents::ITextElement3, Windows::UI::Xaml::Documents::IInline, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>
+    impl::require<LineBreak, Windows::UI::Xaml::Documents::ITextElement, Windows::UI::Xaml::Documents::ITextElementOverrides, Windows::UI::Xaml::Documents::ITextElement2, Windows::UI::Xaml::Documents::ITextElement3, Windows::UI::Xaml::Documents::ITextElement4, Windows::UI::Xaml::Documents::IInline, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>
 {
     LineBreak(std::nullptr_t) noexcept {}
     LineBreak();
@@ -123,7 +128,7 @@ struct WINRT_EBO LineBreak :
 struct WINRT_EBO Paragraph :
     Windows::UI::Xaml::Documents::IParagraph,
     impl::bases<Paragraph, Windows::UI::Xaml::DependencyObject, Windows::UI::Xaml::Documents::TextElement, Windows::UI::Xaml::Documents::Block>,
-    impl::require<Paragraph, Windows::UI::Xaml::Documents::ITextElement, Windows::UI::Xaml::Documents::ITextElementOverrides, Windows::UI::Xaml::Documents::ITextElement2, Windows::UI::Xaml::Documents::ITextElement3, Windows::UI::Xaml::Documents::IBlock, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>
+    impl::require<Paragraph, Windows::UI::Xaml::Documents::ITextElement, Windows::UI::Xaml::Documents::ITextElementOverrides, Windows::UI::Xaml::Documents::ITextElement2, Windows::UI::Xaml::Documents::ITextElement3, Windows::UI::Xaml::Documents::ITextElement4, Windows::UI::Xaml::Documents::IBlock, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>
 {
     Paragraph(std::nullptr_t) noexcept {}
     Paragraph();
@@ -133,7 +138,7 @@ struct WINRT_EBO Paragraph :
 struct WINRT_EBO Run :
     Windows::UI::Xaml::Documents::IRun,
     impl::bases<Run, Windows::UI::Xaml::DependencyObject, Windows::UI::Xaml::Documents::TextElement, Windows::UI::Xaml::Documents::Inline>,
-    impl::require<Run, Windows::UI::Xaml::Documents::ITextElement, Windows::UI::Xaml::Documents::ITextElementOverrides, Windows::UI::Xaml::Documents::ITextElement2, Windows::UI::Xaml::Documents::ITextElement3, Windows::UI::Xaml::Documents::IInline, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>
+    impl::require<Run, Windows::UI::Xaml::Documents::ITextElement, Windows::UI::Xaml::Documents::ITextElementOverrides, Windows::UI::Xaml::Documents::ITextElement2, Windows::UI::Xaml::Documents::ITextElement3, Windows::UI::Xaml::Documents::ITextElement4, Windows::UI::Xaml::Documents::IInline, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>
 {
     Run(std::nullptr_t) noexcept {}
     Run();
@@ -143,7 +148,7 @@ struct WINRT_EBO Run :
 struct WINRT_EBO Span :
     Windows::UI::Xaml::Documents::ISpan,
     impl::bases<Span, Windows::UI::Xaml::DependencyObject, Windows::UI::Xaml::Documents::TextElement, Windows::UI::Xaml::Documents::Inline>,
-    impl::require<Span, Windows::UI::Xaml::Documents::ITextElement, Windows::UI::Xaml::Documents::ITextElementOverrides, Windows::UI::Xaml::Documents::ITextElement2, Windows::UI::Xaml::Documents::ITextElement3, Windows::UI::Xaml::Documents::IInline, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>
+    impl::require<Span, Windows::UI::Xaml::Documents::ITextElement, Windows::UI::Xaml::Documents::ITextElementOverrides, Windows::UI::Xaml::Documents::ITextElement2, Windows::UI::Xaml::Documents::ITextElement3, Windows::UI::Xaml::Documents::ITextElement4, Windows::UI::Xaml::Documents::IInline, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>
 {
     Span(std::nullptr_t) noexcept {}
     Span();
@@ -152,7 +157,7 @@ struct WINRT_EBO Span :
 struct WINRT_EBO TextElement :
     Windows::UI::Xaml::Documents::ITextElement,
     impl::bases<TextElement, Windows::UI::Xaml::DependencyObject>,
-    impl::require<TextElement, Windows::UI::Xaml::Documents::ITextElementOverrides, Windows::UI::Xaml::Documents::ITextElement2, Windows::UI::Xaml::Documents::ITextElement3, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>
+    impl::require<TextElement, Windows::UI::Xaml::Documents::ITextElementOverrides, Windows::UI::Xaml::Documents::ITextElement2, Windows::UI::Xaml::Documents::ITextElement3, Windows::UI::Xaml::Documents::ITextElement4, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>
 {
     TextElement(std::nullptr_t) noexcept {}
     static Windows::UI::Xaml::DependencyProperty FontSizeProperty();
@@ -167,6 +172,12 @@ struct WINRT_EBO TextElement :
     static Windows::UI::Xaml::DependencyProperty AllowFocusOnInteractionProperty();
     static Windows::UI::Xaml::DependencyProperty AccessKeyProperty();
     static Windows::UI::Xaml::DependencyProperty ExitDisplayModeOnAccessKeyInvokedProperty();
+    static Windows::UI::Xaml::DependencyProperty TextDecorationsProperty();
+    static Windows::UI::Xaml::DependencyProperty IsAccessKeyScopeProperty();
+    static Windows::UI::Xaml::DependencyProperty AccessKeyScopeOwnerProperty();
+    static Windows::UI::Xaml::DependencyProperty KeyTipPlacementModeProperty();
+    static Windows::UI::Xaml::DependencyProperty KeyTipHorizontalOffsetProperty();
+    static Windows::UI::Xaml::DependencyProperty KeyTipVerticalOffsetProperty();
 };
 
 struct WINRT_EBO TextPointer :
@@ -313,7 +324,7 @@ struct WINRT_EBO Typography :
 struct WINRT_EBO Underline :
     Windows::UI::Xaml::Documents::IUnderline,
     impl::bases<Underline, Windows::UI::Xaml::DependencyObject, Windows::UI::Xaml::Documents::TextElement, Windows::UI::Xaml::Documents::Inline, Windows::UI::Xaml::Documents::Span>,
-    impl::require<Underline, Windows::UI::Xaml::Documents::ITextElement, Windows::UI::Xaml::Documents::ITextElementOverrides, Windows::UI::Xaml::Documents::ITextElement2, Windows::UI::Xaml::Documents::ITextElement3, Windows::UI::Xaml::Documents::IInline, Windows::UI::Xaml::Documents::ISpan, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>
+    impl::require<Underline, Windows::UI::Xaml::Documents::ITextElement, Windows::UI::Xaml::Documents::ITextElementOverrides, Windows::UI::Xaml::Documents::ITextElement2, Windows::UI::Xaml::Documents::ITextElement3, Windows::UI::Xaml::Documents::ITextElement4, Windows::UI::Xaml::Documents::IInline, Windows::UI::Xaml::Documents::ISpan, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2>
 {
     Underline(std::nullptr_t) noexcept {}
     Underline();

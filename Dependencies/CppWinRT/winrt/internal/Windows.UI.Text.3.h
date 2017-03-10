@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -24,6 +24,13 @@ struct WINRT_EBO FontWeights :
     static Windows::UI::Text::FontWeight SemiBold();
     static Windows::UI::Text::FontWeight SemiLight();
     static Windows::UI::Text::FontWeight Thin();
+};
+
+struct WINRT_EBO RichEditTextDocument :
+    Windows::UI::Text::ITextDocument,
+    impl::require<RichEditTextDocument, Windows::UI::Text::ITextDocument2>
+{
+    RichEditTextDocument(std::nullptr_t) noexcept {}
 };
 
 struct TextConstants

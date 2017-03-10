@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -22,6 +22,16 @@ namespace ABI::Windows::Foundation::Collections {
 #ifndef WINRT_GENERIC_e2fcc7c1_3bfc_5a0b_b2b0_72e769d1cb7e
 #define WINRT_GENERIC_e2fcc7c1_3bfc_5a0b_b2b0_72e769d1cb7e
 template <> struct __declspec(uuid("e2fcc7c1-3bfc-5a0b-b2b0-72e769d1cb7e")) __declspec(novtable) IIterable<hstring> : impl_IIterable<hstring> {};
+#endif
+
+#ifndef WINRT_GENERIC_2f13c006_a03a_5f69_b090_75a43e33423e
+#define WINRT_GENERIC_2f13c006_a03a_5f69_b090_75a43e33423e
+template <> struct __declspec(uuid("2f13c006-a03a-5f69-b090-75a43e33423e")) __declspec(novtable) IVectorView<hstring> : impl_IVectorView<hstring> {};
+#endif
+
+#ifndef WINRT_GENERIC_98b9acc1_4b56_532e_ac73_03d5291cca90
+#define WINRT_GENERIC_98b9acc1_4b56_532e_ac73_03d5291cca90
+template <> struct __declspec(uuid("98b9acc1-4b56-532e-ac73-03d5291cca90")) __declspec(novtable) IVector<hstring> : impl_IVector<hstring> {};
 #endif
 
 
@@ -49,53 +59,26 @@ template <> struct __declspec(uuid("8c304ebb-6615-50a4-8829-879ecd443236")) __de
 
 namespace Windows::ApplicationModel::CommunicationBlocking {
 
-template <typename D>
-struct WINRT_EBO impl_ICommunicationBlockingAccessManagerStatics
-{
-    bool IsBlockingActive() const;
-    Windows::Foundation::IAsyncOperation<bool> IsBlockedNumberAsync(hstring_ref number) const;
-    bool ShowBlockNumbersUI(const Windows::Foundation::Collections::IIterable<hstring> & phoneNumbers) const;
-    bool ShowUnblockNumbersUI(const Windows::Foundation::Collections::IIterable<hstring> & phoneNumbers) const;
-    void ShowBlockedCallsUI() const;
-    void ShowBlockedMessagesUI() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_ICommunicationBlockingAppManagerStatics
-{
-    bool IsCurrentAppActiveBlockingApp() const;
-    void ShowCommunicationBlockingSettingsUI() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_ICommunicationBlockingAppManagerStatics2
-{
-    Windows::Foundation::IAsyncOperation<bool> RequestSetAsActiveBlockingAppAsync() const;
-};
-
 struct ICommunicationBlockingAccessManagerStatics :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<ICommunicationBlockingAccessManagerStatics>
 {
     ICommunicationBlockingAccessManagerStatics(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<ICommunicationBlockingAccessManagerStatics>(m_ptr); }
 };
 
 struct ICommunicationBlockingAppManagerStatics :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<ICommunicationBlockingAppManagerStatics>
 {
     ICommunicationBlockingAppManagerStatics(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<ICommunicationBlockingAppManagerStatics>(m_ptr); }
 };
 
 struct ICommunicationBlockingAppManagerStatics2 :
-    Windows::IInspectable,
+    Windows::Foundation::IInspectable,
     impl::consume<ICommunicationBlockingAppManagerStatics2>,
     impl::require<ICommunicationBlockingAppManagerStatics2, Windows::ApplicationModel::CommunicationBlocking::ICommunicationBlockingAppManagerStatics>
 {
     ICommunicationBlockingAppManagerStatics2(std::nullptr_t = nullptr) noexcept {}
-    auto operator->() const noexcept { return ptr<ICommunicationBlockingAppManagerStatics2>(m_ptr); }
 };
 
 }

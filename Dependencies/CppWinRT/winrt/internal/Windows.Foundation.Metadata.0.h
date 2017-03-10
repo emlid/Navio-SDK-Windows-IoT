@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -20,6 +20,20 @@ struct ApiInformation;
 }
 
 namespace Windows::Foundation::Metadata {
+
+template <typename T> struct impl_IApiInformationStatics;
+
+}
+
+namespace Windows::Foundation::Metadata {
+
+enum class FeatureStage
+{
+    AlwaysDisabled = 0,
+    DisabledByDefault = 1,
+    EnabledByDefault = 2,
+    AlwaysEnabled = 3,
+};
 
 enum class GCPressureAmount
 {

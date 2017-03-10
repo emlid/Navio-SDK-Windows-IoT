@@ -37,7 +37,7 @@ cx::I2cDevice^ I2cExtensions::Connect(int busNumber, int address, cx::I2cBusSpee
 	// C++/WinRT End -------------------------------------------------------------
 
 	// Return connected device
-	return reinterpret_cast<cx::I2cDevice^>(winrt::get(device));
+	return reinterpret_cast<cx::I2cDevice^>(winrt::get_abi(device));
 }
 
 #pragma endregion

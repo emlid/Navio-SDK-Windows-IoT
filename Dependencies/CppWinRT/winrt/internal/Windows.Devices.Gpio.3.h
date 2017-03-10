@@ -1,5 +1,5 @@
-// C++ for the Windows Runtime v1.0.161012.5
-// Copyright (c) 2016 Microsoft Corporation. All rights reserved.
+// C++ for the Windows Runtime vv1.0.170303.6
+// Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
 
@@ -8,6 +8,21 @@
 WINRT_EXPORT namespace winrt {
 
 namespace Windows::Devices::Gpio {
+
+struct WINRT_EBO GpioChangeCounter :
+    Windows::Devices::Gpio::IGpioChangeCounter
+{
+    GpioChangeCounter(std::nullptr_t) noexcept {}
+    GpioChangeCounter(const Windows::Devices::Gpio::GpioPin & pin);
+};
+
+struct WINRT_EBO GpioChangeReader :
+    Windows::Devices::Gpio::IGpioChangeReader
+{
+    GpioChangeReader(std::nullptr_t) noexcept {}
+    GpioChangeReader(const Windows::Devices::Gpio::GpioPin & pin);
+    GpioChangeReader(const Windows::Devices::Gpio::GpioPin & pin, int32_t minCapacity);
+};
 
 struct WINRT_EBO GpioController :
     Windows::Devices::Gpio::IGpioController
