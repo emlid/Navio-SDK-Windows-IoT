@@ -27,7 +27,7 @@
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\ARM\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE;WINDOWS_UAP;NETFX_CORE;WINDOWS_APP</DefineConstants>
-    <NoWarn>;2008</NoWarn>
+    <NoWarn>2008</NoWarn>
     <DebugType>full</DebugType>
     <PlatformTarget>ARM</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
@@ -35,7 +35,7 @@
     <Prefer32Bit>true</Prefer32Bit>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <DocumentationFile>bin\ARM\Debug\Emlid.WindowsIot.Hardware.xml</DocumentationFile>
-    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <GenerateLibraryLayout>false</GenerateLibraryLayout>
   </PropertyGroup>
@@ -44,7 +44,7 @@
     <OutputPath>bin\ARM\Release\</OutputPath>
     <DefineConstants>TRACE;WINDOWS_UAP;NETFX_CORE;WINDOWS_APP</DefineConstants>
     <Optimize>true</Optimize>
-    <NoWarn>;2008</NoWarn>
+    <NoWarn>2008</NoWarn>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>ARM</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
@@ -52,12 +52,16 @@
     <Prefer32Bit>true</Prefer32Bit>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <DocumentationFile>bin\ARM\Release\Emlid.WindowsIot.Hardware.xml</DocumentationFile>
-    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <None Include="Emlid.WindowsIoT.Hardware.nuspec" />
+    <None Include="Emlid.WindowsIot.Hardware.nuget.props" />
+    <None Include="Emlid.WindowsIot.Hardware.nuget.targets">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Emlid.WindowsIot.Hardware.nuspec" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
@@ -81,31 +85,31 @@
     <Compile Include="Components\Px4io\Data\Px4ioConfigRegisters.cs" />
     <Compile Include="Components\Px4io\Data\Px4ioControlGroupsValidFlags.cs" />
     <Compile Include="Components\Px4io\Data\Px4ioControlRegisters.cs" />
-    <Compile Include="Components\Px4io\Data\Px4ioControlRegisterOffsets.cs" />
+    <Compile Include="Components\Px4io\Data\Px4ioControlRegisterOffset.cs" />
     <Compile Include="Components\Px4io\Data\Px4ioRCConfigOptions.cs" />
     <Compile Include="Components\Px4io\Data\Px4ioTestRegisters.cs" />
-    <Compile Include="Components\Px4io\Data\Px4ioTestRegisterOffsets.cs" />
+    <Compile Include="Components\Px4io\Data\Px4ioTestRegisterOffset.cs" />
     <Compile Include="Components\Px4io\Data\Px4ioSensorRegisters.cs" />
-    <Compile Include="Components\Px4io\Data\Px4ioSensorRegisterOffsets.cs" />
+    <Compile Include="Components\Px4io\Data\Px4ioSensorRegisterOffset.cs" />
     <Compile Include="Components\Px4io\Data\Px4ioRCConfigRegisters.cs" />
-    <Compile Include="Components\Px4io\Data\Px4ioRCConfigRegisterOffsets.cs" />
+    <Compile Include="Components\Px4io\Data\Px4ioRCConfigRegisterOffset.cs" />
     <Compile Include="Components\Px4io\Data\Px4ioRCInputRegisters.cs" />
-    <Compile Include="Components\Px4io\Data\Px4ioRCInputRegisterOffsets.cs" />
+    <Compile Include="Components\Px4io\Data\Px4ioRCInputRegisterOffset.cs" />
     <Compile Include="Components\Px4io\Data\Px4ioRCInputRawRegisters.cs" />
-    <Compile Include="Components\Px4io\Data\Px4ioRCInputRawRegisterOffsets.cs" />
+    <Compile Include="Components\Px4io\Data\Px4ioRCInputRawRegisterOffset.cs" />
     <Compile Include="Components\Px4io\Data\Px4ioRCInputRawStatusFlags.cs" />
     <Compile Include="Components\Px4io\Data\Px4ioSetupArmingFlags.cs" />
     <Compile Include="Components\Px4io\Data\Px4ioSetupDsmBindState.cs" />
     <Compile Include="Components\Px4io\Data\Px4ioSetupFeatureFlags.cs" />
     <Compile Include="Components\Px4io\Data\Px4ioSetupRegisters.cs" />
-    <Compile Include="Components\Px4io\Data\Px4ioSetupRegisterOffsets.cs" />
+    <Compile Include="Components\Px4io\Data\Px4ioSetupRegisterOffset.cs" />
     <Compile Include="Components\Px4io\Data\Px4ioSetupRelayFlags.cs" />
     <Compile Include="Components\Px4io\Data\Px4ioStatusAlarmFlags.cs" />
     <Compile Include="Components\Px4io\Data\Px4ioStatusMixerFlags.cs" />
     <Compile Include="Components\Px4io\Data\Px4ioStatusMonitoringFlags.cs" />
     <Compile Include="Components\Px4io\Px4ioDevice.cs" />
     <Compile Include="Components\Px4io\Px4ioPacket.cs" />
-    <Compile Include="Components\Px4io\Data\Px4ioConfigRegisterOffsets.cs" />
+    <Compile Include="Components\Px4io\Data\Px4ioConfigRegisterOffset.cs" />
     <Compile Include="Components\Px4io\Px4ioResponseCode.cs" />
     <Compile Include="Components\Px4io\Data\Px4ioPage.cs" />
     <Compile Include="Components\Px4io\Px4ioRequestCode.cs" />
@@ -138,7 +142,7 @@
     <Compile Include="Components\Pca9685\Pca9685Mode2Bits.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Components\Px4io\Data\Px4ioStatusRegisters.cs" />
-    <Compile Include="Components\Px4io\Data\Px4ioStatusRegisterOffsets.cs" />
+    <Compile Include="Components\Px4io\Data\Px4ioStatusRegisterOffset.cs" />
     <Compile Include="Resources\Resources.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -151,13 +155,14 @@
     </PRIResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\Common\CustomDictionary.xml">
+    <CodeAnalysisDictionary Include="..\..\Common\CustomDictionary.xml">
       <Link>CustomDictionary.xml</Link>
-    </Content>
-    <Content Include="Resources\Resources.tt">
+    </CodeAnalysisDictionary>
+    <None Include="project.lock.json" />
+    <None Include="Resources\Resources.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Resources.cs</LastGenOutput>
-    </Content>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

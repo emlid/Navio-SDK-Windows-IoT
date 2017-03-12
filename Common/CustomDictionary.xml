@@ -4,7 +4,13 @@
     <Recognized>
       <Word>ADC</Word>
       <Word>ASCII</Word>
+      <Word>CPPM</Word>
+      <Word>CPU</Word>
+      <Word>CRC</Word>
+      <Word>CSB</Word>
+      <Word>DSM</Word>
       <Word>Emlid</Word>
+      <Word>FMU</Word>
       <Word>FRAM</Word>
       <Word>GPIO</Word>
       <Word>GPS</Word>
@@ -17,8 +23,19 @@
       <Word>NXP</Word>
       <Word>OSR</Word>
       <Word>PCA</Word>
+      <Word>Prescale</Word>
       <Word>PWM</Word>
+      <Word>PX4</Word>
+      <Word>PX4IO</Word>
       <Word>RCIO</Word>
+      <Word>RCV</Word>
+      <Word>RGB</Word>
+      <Word>RSSI</Word>
+      <Word>SBUS</Word>
+      <Word>SPI</Word>
+      <Word>SUMD</Word>
+      <Word>SWD</Word>
+      <Word>UART</Word>
     </Recognized>
     <Deprecated>
       <Term PreferredAlternate="Login">Logon</Term>
@@ -39,8 +56,13 @@
     <CasingExceptions>
       <Acronym>I2C</Acronym>
       <Acronym>IoT</Acronym>
+      <Acronym>Mb85rcv</Acronym>
+      <Acronym>Mb85rc04v</Acronym>
+      <Acronym>Mb85rc256v</Acronym>
       <Acronym>Ms</Acronym>
+      <Acronym>Ms5611</Acronym>
+      <Acronym>Pca9685</Acronym>
+      <Acronym>Px4io</Acronym>
     </CasingExceptions>
   </Acronyms>
 </Dictionary>
-

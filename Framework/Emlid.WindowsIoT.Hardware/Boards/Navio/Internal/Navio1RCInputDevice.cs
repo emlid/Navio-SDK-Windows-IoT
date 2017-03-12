@@ -105,7 +105,11 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
             //_inputPin.StopInterruptBuffer();
 
             // Stop background tasks
-            _stop?.Cancel();
+            if (_stop != null)
+            {
+                _stop.Cancel();
+                _stop.Dispose();
+            }
 
             // Stop events
             _pulseTrigger?.Dispose();

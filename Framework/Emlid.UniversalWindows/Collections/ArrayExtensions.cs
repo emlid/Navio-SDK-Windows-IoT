@@ -10,7 +10,7 @@ namespace Emlid.UniversalWindows.Collections
     /// </summary>
     public static class ArrayExtensions
     {
-       #region Public Methods
+        #region Public Methods
 
         /// <summary>
         /// Compares two list based arrays by value.
@@ -175,6 +175,6 @@ namespace Emlid.UniversalWindows.Collections
             }
         }
 
-        #endregion
+        #endregion Public Methods
     }
 }

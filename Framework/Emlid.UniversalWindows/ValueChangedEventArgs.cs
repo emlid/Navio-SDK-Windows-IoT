@@ -20,7 +20,7 @@ namespace Emlid.UniversalWindows
             NewValue = newValue;
         }
 
-        #endregion
+        #endregion Lifetime
 
         #region Properties
 
@@ -34,6 +34,6 @@ namespace Emlid.UniversalWindows
         /// </summary>
         public T NewValue { get; set; }
 
-        #endregion
+        #endregion Properties
     }
 }

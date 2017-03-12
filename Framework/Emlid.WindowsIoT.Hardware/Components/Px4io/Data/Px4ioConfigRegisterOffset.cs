@@ -7,7 +7,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io.Data
     /// </summary>
     /// <see href="https://github.com/emlid/navio-rcio-linux-driver/blob/master/protocol.h"/>
     [CLSCompliant(false)]
-    public enum Px4ioConfigRegisterOffsets : byte
+    public enum Px4ioConfigRegisterOffset : byte
     {
         /// <summary>
         /// Protocol version.
@@ -47,7 +47,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io.Data
         /// <summary>
         /// Hard coded max ADC inputs.
         /// </summary>
-        AdcInputcount = 7,
+        AdcInputCount = 7,
 
         /// <summary>
         /// Hard coded # of relay outputs.

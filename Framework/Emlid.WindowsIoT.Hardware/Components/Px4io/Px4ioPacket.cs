@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Emlid.UniversalWindows.Collections;
+using System;
 using System.Runtime.InteropServices;
 
 namespace Emlid.WindowsIot.Hardware.Components.Px4io
@@ -42,8 +43,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io
     /// </para>
     /// </remarks>
     [CLSCompliant(false)]
-    [StructLayout(LayoutKind.Explicit)]
-    public struct Px4ioPacket
+    public class Px4ioPacket
     {
         #region Constants
 
@@ -115,8 +115,11 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io
         /// Creates an instance with the specified values.
         /// </summary>
         public Px4ioPacket(byte code, byte page, byte offset, ushort[] values)
-            : this(code, page, offset, (byte)values.Length)
+            : this(code, page, offset, (byte)(values?.Length ?? 0))
         {
+            // Validate
+            if (values == null) throw new ArgumentNullException(nameof(values));
+
             // Copy register values
             Array.Copy(values, Registers, values.Length);
         }
@@ -147,12 +150,77 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io
 
         #endregion
 
+        #region Operators
+
+        /// <summary>
+        /// Tests two objects of this type for equality by value.
+        /// </summary>
+        public static bool operator ==(Px4ioPacket left, Px4ioPacket right)
+        {
+            return !ReferenceEquals(left, null)
+                ? left.Equals(right)
+                : ReferenceEquals(right, null);
+        }
+
+        /// <summary>
+        /// Tests two objects of this type for inequality by value.
+        /// </summary>
+        public static bool operator !=(Px4ioPacket left, Px4ioPacket right)
+        {
+            return !ReferenceEquals(left, null)
+                ? !left.Equals(right)
+                : !ReferenceEquals(right, null);
+        }
+
+        /// <summary>
+        /// Compares this object with another by value.
+        /// </summary>
+        /// <param name="value">Object with which to compare by value.</param>
+        public override bool Equals(object value)
+        {
+            // Call overloaded method
+            return Equals(value as Px4ioPacket);
+        }
+
+        /// <summary>
+        /// Compares this object with another of the same type by value.
+        /// </summary>
+        /// <param name="value">Object with which to compare by value.</param>
+        public bool Equals(Px4ioPacket value)
+        {
+            // Check null
+            if (ReferenceEquals(value, null))
+                return false;
+
+            // Compare values
+            return
+                value.CountCode == CountCode &&
+                value.Crc == Crc &&
+                value.Offset == Offset &&
+                value.Page == Page &&
+                ArrayExtensions.AreEqual(value.Registers, Registers);
+        }
+
+        /// <summary>
+        /// Returns a hash-code based on the current value of this object.
+        /// </summary>
+        public override int GetHashCode()
+        {
+            return
+                CountCode.GetHashCode() ^
+                Crc.GetHashCode() ^
+                Offset.GetHashCode() ^
+                Page.GetHashCode() ^
+                ArrayExtensions.GetHashCode(Registers);
+        }
+
+        #endregion
+
         #region Public Properties
 
         /// <summary>
         /// Count and code.
         /// </summary>
-        [FieldOffset(0)]
         public byte CountCode;
 
         /// <summary>
@@ -168,26 +236,22 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io
         /// <summary>
         /// CRC checksum.
         /// </summary>
-        [FieldOffset(1)]
         public byte Crc;
 
         /// <summary>
         /// Page number.
         /// </summary>
-        [FieldOffset(2)]
         public byte Page;
 
         /// <summary>
         /// Register offset.
         /// </summary>
-        [FieldOffset(3)]
         public byte Offset;
 
         /// <summary>
         /// Register values.
         /// </summary>
         [CLSCompliant(false)]
-        [FieldOffset(4)]
         public readonly ushort[] Registers;
 
         #endregion
@@ -242,6 +306,9 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io
         /// </summary>
         public static byte CalculateCrc(Px4ioPacket packet)
         {
+            // Validate
+            if (packet == null) throw new ArgumentNullException(nameof(packet));
+
             // Calculate header CRC
             byte crc = 0;
             crc = _crcTable[crc ^ packet.CountCode];

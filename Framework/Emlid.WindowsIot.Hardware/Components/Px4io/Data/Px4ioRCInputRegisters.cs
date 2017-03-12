@@ -36,7 +36,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io.Data
             Valid = data[0];
             var count = data.Length - 1;
             Controls = new ushort[count];
-            Array.ConstrainedCopy(data, (int)Px4ioRCInputRegisterOffsets.ControlsStart, Controls, 0, count);
+            Array.ConstrainedCopy(data, (int)Px4ioRCInputRegisterOffset.ControlsStart, Controls, 0, count);
         }
 
         #endregion

@@ -55,7 +55,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Pca9685
             // Extract values from byte array
             var on = BitConverter.ToUInt16(data, offset);
             var off = BitConverter.ToUInt16(data, offset + sizeof(ushort));
-            _width = CalculateWidth(On, Off);
+            _width = CalculateWidth(on, off);
         }
 
         #endregion
@@ -130,7 +130,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Pca9685
 
                 // Validate
                 if (value < 0 || value > Always)
-                    throw new ArgumentNullException(nameof(Off));
+                    throw new ArgumentNullException(nameof(On));
 
                 // Set value
                 _on = value;

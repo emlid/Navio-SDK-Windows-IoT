@@ -103,10 +103,11 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io
         /// </summary>
         public Px4ioStatusRegisters Status { get; private set; }
 
-        /// <summary>
-        /// <see cref="Px4ioPage.Test"/> registers.
-        /// </summary>
-        public Px4ioTestRegisters Test { get; private set; }
+        // TODO: Investigate RCIO test registers. Doesn't work on Navio 2 original firmware.
+        ///// <summary>
+        ///// <see cref="Px4ioPage.Test"/> registers.
+        ///// </summary>
+        //public Px4ioTestRegisters Test { get; private set; }
 
         #endregion
 
@@ -136,10 +137,11 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io
         /// </summary>
         public Px4ioControlRegisters Controls { get; private set; }
 
-        /// <summary>
-        /// <see cref="Px4ioPage.MixerLoad"/> registers.
-        /// </summary>
-        public ReadOnlyCollection<ushort> MixerLoad { get; private set; }
+        // TODO: Investigate mixer load, is it readable at all? Doesn't work on Navio 2 original firmware.
+        ///// <summary>
+        ///// <see cref="Px4ioPage.MixerLoad"/> registers.
+        ///// </summary>
+        //public ReadOnlyCollection<ushort> MixerLoad { get; private set; }
         //private ushort[] _mixerLoad;
 
         #endregion
@@ -212,10 +214,11 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io
 
         #region Sensors
 
-        /// <summary>
-        /// <see cref="Px4ioPage.Sensors"/> registers.
-        /// </summary>
-        public Px4ioSensorRegisters Sensors { get; private set; }
+        // TODO: Investigate RCIO sensors. Doesn't work on Navio 2 original firmware.
+        ///// <summary>
+        ///// <see cref="Px4ioPage.Sensors"/> registers.
+        ///// </summary>
+        //public Px4ioSensorRegisters Sensors { get; private set; }
 
         #endregion
 
@@ -345,7 +348,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io
                     if (requireCount)
                     {
                         // Error when same count required
-                        throw new ArgumentOutOfRangeException(nameof(request));
+                        throw new ArgumentOutOfRangeException(nameof(requireCount));
                     }
 
                     // Okay to exit with less data
@@ -368,14 +371,15 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io
         /// <param name="page"><see cref="Px4ioPage"/> index.</param>
         /// <param name="offset"><see cref="Px4ioPage"/> register offset.</param>
         /// <param name="values">Data values to write.</param>
-        public void WriteRegister(byte page, byte offset, ushort[] values)
+        /// <returns>Response packet with data read and validated after request.</returns>
+        public Px4ioPacket WriteRegister(byte page, byte offset, ushort[] values)
         {
             // Create write request packet
             var request = new Px4ioPacket((byte)Px4ioRequestCode.Write, page, offset, values);
             request.CalculateCrc();
 
             // Transfer and return result
-            var response = Transfer(request);
+            return Transfer(request);
         }
 
         /// <summary>
@@ -388,6 +392,9 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io
         /// <exception cref="ArgumentOutOfRangeException">Thrown when the returned register count doesn't match the requested count.</exception>
         public Px4ioPacket Transfer(Px4ioPacket request)
         {
+            // Validate
+            if (request == null) throw new ArgumentNullException(nameof(request));
+
             // Wait a bit
             // TODO: Wait for data ready interrupt from STM32 before reading.
             Task.Delay(TimeSpanExtensions.FromMicroseconds(150)).Wait();

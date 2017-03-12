@@ -10,7 +10,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io.Data
     /// Offset 8 is undefined.
     /// </remarks>
     [CLSCompliant(false)]
-    public enum Px4ioSetupRegisterOffsets : byte
+    public enum Px4ioSetupRegisterOffset : byte
     {
         /// <summary>
         /// Features.

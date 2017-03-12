@@ -98,10 +98,11 @@ namespace Emlid.WindowsIot.Hardware.Components.Ms5611
             I2cBusSpeed speed = I2cBusSpeed.FastMode, I2cSharingMode sharingMode = I2cSharingMode.Exclusive)
         {
             // Get address
-            var address = GetI2cAddress(csb);
+            ChipSelectBit = csb;
+            Address = GetI2cAddress(csb);
 
             // Connect to hardware
-            _hardware = I2cExtensions.Connect(busNumber, address, speed, sharingMode);
+            _hardware = I2cExtensions.Connect(busNumber, Address, speed, sharingMode);
 
             // Initialize members
             Prom = new Ms5611PromData();
@@ -139,10 +140,15 @@ namespace Emlid.WindowsIot.Hardware.Components.Ms5611
         #region Public Properties
 
         /// <summary>
+        /// I2C address of the current chip.
+        /// </summary>
+        public int Address { get; private set; }
+
+        /// <summary>
         /// Chip Select Bit (CSB).
         /// </summary>
         /// <remarks>
-        /// False is the first chip, true is an optional second chip.
+        /// False when connected to the first/only chip, true when connected to an optional second chip.
         /// </remarks>
         public bool ChipSelectBit { get; private set; }
 
@@ -245,7 +251,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Ms5611
                 ReadPromCoefficient(coefficient, buffer, Ms5611PromData.CoefficientSize * coefficient);
 
             // Validate and update properties
-            return Prom.Read(buffer);
+            return Prom.Update(buffer);
         }
 
         /// <summary>
@@ -259,8 +265,11 @@ namespace Emlid.WindowsIot.Hardware.Components.Ms5611
         /// </remarks>
         private void ReadPromCoefficient(int index, byte[] buffer, int offset)
         {
+            // Calculate address
             var coefficientOffset = (byte)(index * Ms5611PromData.CoefficientSize);
             var address = (byte)(Ms5611Command.PromRead + coefficientOffset);
+
+            // Read from hardware return value
             var coefficient = I2cExtensions.WriteReadBytes(_hardware, address, Ms5611PromData.CoefficientSize);
             Array.ConstrainedCopy(coefficient, 0, buffer, offset, Ms5611PromData.CoefficientSize);
         }
@@ -303,7 +312,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Ms5611
         /// Waits for conversion at the specified OSR.
         /// </summary>
         /// <param name="rate">Over-Sampling Rate to wait for.</param>
-        private void WaitForConversion(Ms5611Osr rate)
+        private static void WaitForConversion(Ms5611Osr rate)
         {
             var delay = TimeSpanExtensions.FromMicroseconds(GetConvertDelay(rate));
             Task.Delay(delay).Wait();

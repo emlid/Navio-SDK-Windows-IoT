@@ -35,7 +35,7 @@
         /// <remarks>
         /// Only called once after the <see cref="Reset"/> command.
         /// A sequence of 8 reads must be made to read all coefficient values and checksum.
-        /// Each read returns a 2 byte (16 bit) result. See <see cref="Ms5611PromData.Read(byte[])"/>.
+        /// Each read returns a 2 byte (16 bit) result. See <see cref="Ms5611PromData.Update(byte[])"/>.
         /// </remarks>
         PromRead = 0xa0,
 

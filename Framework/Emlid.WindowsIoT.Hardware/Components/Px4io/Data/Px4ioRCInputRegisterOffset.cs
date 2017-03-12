@@ -7,7 +7,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io.Data
     /// </summary>
     /// <see href="https://github.com/emlid/navio-rcio-linux-driver/blob/master/protocol.h"/>
     [CLSCompliant(false)]
-    public enum Px4ioRCInputRegisterOffsets : byte
+    public enum Px4ioRCInputRegisterOffset : byte
     {
         /// <summary>
         /// Bitmask of valid controls.

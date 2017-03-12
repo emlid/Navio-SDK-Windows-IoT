@@ -1,4 +1,5 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
+using System.Collections.Concurrent;
 using System.Threading;
 
 namespace Emlid.WindowsIot.Hardware.Protocols.Ppm
@@ -10,7 +11,7 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Ppm
     /// <para>
     /// A complete CPPM frame is about 22.5 ms (can vary between manufacturer).
     /// Signal low state is about 0.3 ms but sometimes a bit longer (<see cref="LowLimit"/>).
-    /// It begins with a start pulse (state high for more than 2 ms <see cref="SyncLengthMinium"/>).
+    /// It begins with a start pulse (state high for more than 2 ms <see cref="SyncLengthMinimum"/>).
     /// Each channel (up to 8) is encoded by the time of the high state
     /// (CPPM high state + 0.3 x (PPM low state) = servo PPM pulse width).
     /// </para>
@@ -28,7 +29,7 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Ppm
         /// <summary>
         /// Minimum sync (PPM cycle) length in microseconds.
         /// </summary>
-        public const int SyncLengthMinium = 4000;
+        public const int SyncLengthMinimum = 4000;
 
         /// <summary>
         /// Maximum time in microseconds which a PPM signal may be low before it is considered invalid for CPPM.
@@ -96,14 +97,19 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Ppm
         public void DecodePulse(ConcurrentQueue<PpmPulse> inputBuffer, AutoResetEvent inputTrigger,
             ConcurrentQueue<PpmFrame> outputBuffer, AutoResetEvent outputTrigger, CancellationToken stop)
         {
+            // Validate
+            if (inputBuffer == null) throw new ArgumentNullException(nameof(inputBuffer));
+            if (inputTrigger == null) throw new ArgumentNullException(nameof(inputTrigger));
+            if (outputBuffer == null) throw new ArgumentNullException(nameof(outputBuffer));
+            if (outputTrigger == null) throw new ArgumentNullException(nameof(outputTrigger));
+            
             // Decode until stopped...
             while (!stop.IsCancellationRequested)
             {
                 // Wait for value in queue...
-                PpmPulse value;
-                if (!inputBuffer.TryDequeue(out value))
+                if (!inputBuffer.TryDequeue(out PpmPulse value))
                 {
-                    inputTrigger.WaitOne(SyncLengthMinium * 2);
+                    inputTrigger.WaitOne(SyncLengthMinimum * 2);
                     continue;
                 }
 
@@ -154,7 +160,7 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Ppm
             }
 
             // Detect start frame
-            if (cycle.HighLength >= SyncLengthMinium)
+            if (cycle.HighLength >= SyncLengthMinimum)
             {
                 // Start decoding from channel 0 at next pulse
                 _channel = 0;

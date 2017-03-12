@@ -63,7 +63,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io.Data
         /// <summary>
         /// Initialization of the IO completed without error.
         /// </summary>
-        IoInititalized = (1 << 10),
+        IOInitialized = (1 << 10),
 
         /// <summary>
         /// Failsafe is active.

@@ -64,7 +64,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
         /// Bit mask for the memory upper address code.
         /// </summary>
         /// <remarks>
-        /// This bit is not the setting bit for the slave address, but the upper 1-bit setting bit for the memory address.
+        /// This bit is not the setting bit for another chip/slave address, but the upper 1-bit setting bit for the memory address.
         /// Shifted down 1 bit because the <see cref="I2cDevice"/> handles the read/write flag automatically (a.k.a. 7-bit addressing).
         /// </remarks>
         public const int MemoryUpperAddressBitmask = 0x02 >> 1;
@@ -97,7 +97,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
         {
             // Check device addresses
             var lowerAddress = GetDataI2cAddress(chipNumber, false);
-            var upperAddress = GetDataI2cAddress(chipNumber, false);
+            var upperAddress = GetDataI2cAddress(chipNumber, true);
 
             // Connect to devices
             try
@@ -105,11 +105,14 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
                 Hardware = I2cExtensions.Connect(busNumber, lowerAddress, speed, sharingMode);
                 HardwareUpper = I2cExtensions.Connect(busNumber, upperAddress, speed, sharingMode);
             }
-            finally
+            catch
             {
                 // Free resources on initialization error
                 Hardware?.Dispose();
                 HardwareUpper?.Dispose();
+               
+                // Continue error
+                throw;
             }
         }
 
@@ -185,7 +188,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
             var dataAddress = GetDataI2cAddress(chipNumber, false);
 
             // Call overloaded method
-            return GetDeviceId(busNumber, idAddress, dataAddress);
+            return GetDeviceId(busNumber, idAddress, dataAddress, speed, sharingMode);
         }
 
         #endregion
@@ -207,7 +210,9 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
                 throw new ArgumentOutOfRangeException(nameof(chipNumber));
 
             // Calculate and return address
-            return (byte)(DataI2cAddress + (chipNumber << 1));
+            var address = (byte)(DataI2cAddress + (chipNumber << 1));
+            if (upper) address |= MemoryUpperAddressBitmask;
+            return address;
         }
 
         /// <summary>

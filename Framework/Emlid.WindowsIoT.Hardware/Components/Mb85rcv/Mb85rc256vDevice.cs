@@ -119,7 +119,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
             var dataAddress = GetDataI2cAddress(chipNumber);
 
             // Call overloaded method
-            return GetDeviceId(busNumber, idAddress, dataAddress);
+            return GetDeviceId(busNumber, idAddress, dataAddress, speed, sharingMode);
         }
 
         /// <summary>

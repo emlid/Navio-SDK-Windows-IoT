@@ -41,7 +41,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io.Data
             FrameCounter = data[4];
             FrameLostCounter = data[5];
             Channels = new ushort[count];
-            Array.ConstrainedCopy(data, (int)Px4ioRCInputRawRegisterOffsets.ChannelsStart, Channels, 0, count);
+            Array.ConstrainedCopy(data, (int)Px4ioRCInputRawRegisterOffset.ChannelsStart, Channels, 0, count);
         }
 
         #endregion

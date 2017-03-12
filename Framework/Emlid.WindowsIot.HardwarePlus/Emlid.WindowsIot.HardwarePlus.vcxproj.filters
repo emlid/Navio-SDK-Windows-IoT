@@ -49,7 +49,10 @@
     <ClInclude Include="Protocols\SerialWireDebug\SwdDebugPortIdRegisterBits.h">
       <Filter>Protocols\SerialWireDebug</Filter>
     </ClInclude>
-    <ClInclude Include="Protocols\SerialWireDebug\SwdRegisterAddresses.h">
+    <ClInclude Include="Protocols\SerialWireDebug\SwdRegisterReadAddress.h">
+      <Filter>Protocols\SerialWireDebug</Filter>
+    </ClInclude>
+    <ClInclude Include="Protocols\SerialWireDebug\SwdRegisterWriteAddress.h">
       <Filter>Protocols\SerialWireDebug</Filter>
     </ClInclude>
   </ItemGroup>

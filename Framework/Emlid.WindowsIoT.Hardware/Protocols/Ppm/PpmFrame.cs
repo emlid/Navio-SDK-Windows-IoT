@@ -30,12 +30,8 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Ppm
         /// </summary>
         public PpmFrame(long sequence, int[] channels)
         {
-            // Validate
-            if (channels == null) throw new ArgumentNullException(nameof(channels));
-
-            // Initialize
             Time = sequence;
-            Channels = channels;
+            Channels = channels ?? throw new ArgumentNullException(nameof(channels));
         }
 
         #endregion

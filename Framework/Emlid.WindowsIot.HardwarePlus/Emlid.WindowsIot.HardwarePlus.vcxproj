@@ -19,7 +19,7 @@
     <AppContainerApplication>true</AppContainerApplication>
     <ApplicationType>Windows Store</ApplicationType>
     <WindowsTargetPlatformVersion>10.0.15042.0</WindowsTargetPlatformVersion>
-    <WindowsTargetPlatformMinVersion>10.0.15042.0</WindowsTargetPlatformMinVersion>
+    <WindowsTargetPlatformMinVersion>10.0.14393.0</WindowsTargetPlatformMinVersion>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
     <Unicode>true</Unicode>
   </PropertyGroup>
@@ -51,15 +51,15 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
-    <OutDir>$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>$(Configuration)\$(Platform)\Temp\</IntDir>
+    <OutDir>bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>obj\$(Platform)\$(Configuration)\</IntDir>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <WindowsMetadataLinkKeyFile>$(SolutionDir)Common\TemporaryKey.pfx</WindowsMetadataLinkKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
-    <OutDir>$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>$(Configuration)\$(Platform)\Temp\</IntDir>
+    <OutDir>bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>obj\$(Platform)\$(Configuration)\</IntDir>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <WindowsMetadataLinkKeyFile>$(SolutionDir)Common\TemporaryKey.pfx</WindowsMetadataLinkKeyFile>
@@ -113,7 +113,8 @@
     <ClInclude Include="Buses\GpioSwdPort.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Protocols\SerialWireDebug\SwdDebugPortIdRegisterBits.h" />
-    <ClInclude Include="Protocols\SerialWireDebug\SwdRegisterAddresses.h" />
+    <ClInclude Include="Protocols\SerialWireDebug\SwdRegisterReadAddress.h" />
+    <ClInclude Include="Protocols\SerialWireDebug\SwdRegisterWriteAddress.h" />
     <ClInclude Include="Protocols\SerialWireDebug\SwdRequestBits.h" />
     <ClInclude Include="Protocols\SerialWireDebug\SwdResponseBits.h" />
   </ItemGroup>

@@ -81,6 +81,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{703F
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{6637C7B9-0DFD-410A-89F1-C1DD8E2D01EC}"
 	ProjectSection(SolutionItems) = preProject
+		Tools\NuGet\NuGet Package Explorer.appref-ms = Tools\NuGet\NuGet Package Explorer.appref-ms
 		Tools\NuGet\nuget.exe = Tools\NuGet\nuget.exe
 		Tools\NuGet\Package.cmd = Tools\NuGet\Package.cmd
 	EndProjectSection

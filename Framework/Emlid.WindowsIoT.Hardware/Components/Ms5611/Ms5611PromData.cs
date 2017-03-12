@@ -38,7 +38,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Ms5611
         /// <remarks>
         /// 2 bytes (16 bit) unsigned data.
         /// </remarks>
-        public const int C1SensOffset = 0x02;
+        public const int C1SensitivityOffset = 0x02;
 
         /// <summary>
         /// PROM read coefficient 2 (pressure offset / OFF) offset.
@@ -46,7 +46,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Ms5611
         /// <remarks>
         /// 2 bytes (16 bit) unsigned data.
         /// </remarks>
-        public const int C2OffOffset = 0x04;
+        public const int C2TemperatureOffsetOffset = 0x04;
 
         /// <summary>
         /// PROM read coefficient 3 (temperature coefficient of pressure sensitivity / TCS) offset.
@@ -54,7 +54,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Ms5611
         /// <remarks>
         /// 2 bytes (16 bit) unsigned data.
         /// </remarks>
-        public const int C3TcsOffset = 0x06;
+        public const int C3TemperatureCoefficientOffset = 0x06;
 
         /// <summary>
         /// PROM read coefficient 4 (temperature coefficient of pressure offset / TCO) offset.
@@ -62,7 +62,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Ms5611
         /// <remarks>
         /// 2 bytes (16 bit) unsigned data.
         /// </remarks>
-        public const int C4TcoOffset = 0x08;
+        public const int C4TemperatureCoefficientOffset = 0x08;
 
         /// <summary>
         /// PROM read coefficient 5 (reference temperature / TREF) offset.
@@ -70,7 +70,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Ms5611
         /// <remarks>
         /// 2 bytes (16 bit) unsigned data.
         /// </remarks>
-        public const int C5TRefOffset = 0x0a;
+        public const int C5TReferenceOffset = 0x0a;
 
         /// <summary>
         /// PROM read coefficient 6 (temperature coefficient of the temperature / TEMPSENS) offset.
@@ -78,7 +78,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Ms5611
         /// <remarks>
         /// 2 bytes (16 bit) unsigned data.
         /// </remarks>
-        public const int C6TempSensOffset = 0x0c;
+        public const int C6TemperatureSensitivityOffset = 0x0c;
 
         /// <summary>
         /// PROM coefficient 7 (serial and CRC) offset.
@@ -106,7 +106,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Ms5611
         /// Pressure sensitivity (SENS).
         /// </summary>
         /// <remarks>
-        /// Stored in memory at the <see cref="C1SensOffset"/>.
+        /// Stored in memory at the <see cref="C1SensitivityOffset"/>.
         /// </remarks>
         public int C1PressureSensitivity { get; private set; }
 
@@ -114,7 +114,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Ms5611
         /// Pressure offset (OFF).
         /// </summary>
         /// <remarks>
-        /// Stored in memory at the <see cref="C2OffOffset"/>.
+        /// Stored in memory at the <see cref="C2TemperatureOffsetOffset"/>.
         /// </remarks>
         public int C2PressureOffset { get; private set; }
 
@@ -122,7 +122,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Ms5611
         /// Temperature coefficient of pressure sensitivity (TCS).
         /// </summary>
         /// <remarks>
-        /// Stored in memory at the <see cref="C3TcsOffset"/>.
+        /// Stored in memory at the <see cref="C3TemperatureCoefficientOffset"/>.
         /// </remarks>
         public int C3TemperatureFromPressureSensitivity { get; private set; }
 
@@ -130,7 +130,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Ms5611
         /// Temperature coefficient of pressure offset (TCO).
         /// </summary>
         /// <remarks>
-        /// Stored in memory at the <see cref="C4TcoOffset"/>.
+        /// Stored in memory at the <see cref="C4TemperatureCoefficientOffset"/>.
         /// </remarks>
         public int C4TemperatureFromPressureOffset { get; private set; }
 
@@ -138,7 +138,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Ms5611
         /// Reference temperature (TREF).
         /// </summary>
         /// <remarks>
-        /// Stored in memory at the <see cref="C5TRefOffset"/>.
+        /// Stored in memory at the <see cref="C5TReferenceOffset"/>.
         /// </remarks>
         public int C5TemperatureReference { get; private set; }
 
@@ -146,7 +146,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Ms5611
         /// Temperature sensitivity (TEMPSENS).
         /// </summary>
         /// <remarks>
-        /// Stored in memory at the <see cref="C6TempSensOffset"/>.
+        /// Stored in memory at the <see cref="C6TemperatureSensitivityOffset"/>.
         /// </remarks>
         public int C6TemperatureSensitivity { get; private set; }
 
@@ -179,6 +179,10 @@ namespace Emlid.WindowsIot.Hardware.Components.Ms5611
         /// </returns>
         public static bool Validate(byte[] buffer)
         {
+            // Validate parameters
+            if (buffer == null) throw new ArgumentNullException(nameof(buffer));
+            if (buffer.Length < MemorySize) throw new ArgumentOutOfRangeException(nameof(buffer));
+
             // Get hardware calculated 4 bit CRC from buffer
             var crc = buffer[C7SerialCrcOffset + 1] & 0x0f;
 
@@ -216,42 +220,45 @@ namespace Emlid.WindowsIot.Hardware.Components.Ms5611
         }
 
         /// <summary>
-        /// Extracts a single coefficient value from a PROM data set (bytes read from all coefficients/memory).
-        /// </summary>
-        /// <param name="buffer">PROM data buffer to read.</param>
-        /// <param name="offset">Coefficient offset at which to read.</param>
-        [CLSCompliant(false)]
-        public static ushort ReadCoefficient(byte[] buffer, int offset)
-        {
-            return (ushort)(buffer[offset] << 8 | buffer[offset + 1]);
-        }
-
-        /// <summary>
         /// Validates then reads properties from a PROM data set (bytes read from all coefficients/memory). 
         /// </summary>
         /// <param name="buffer">PROM data buffer to read.</param>
         /// <returns>
         /// True when the CRC check passed, false when failed.
         /// </returns>
-        public bool Read(byte[] buffer)
+        public bool Update(byte[] buffer)
         {
             // Validate
             if (!Validate(buffer)) return false;
 
             // Extract properties from data
-            C0Manufacturer = ReadCoefficient(buffer, C0ManufacturerOffset);
-            C1PressureSensitivity = ReadCoefficient(buffer, C1SensOffset);
-            C2PressureOffset = ReadCoefficient(buffer, C2OffOffset);
-            C3TemperatureFromPressureSensitivity = ReadCoefficient(buffer, C3TcsOffset);
-            C4TemperatureFromPressureOffset = ReadCoefficient(buffer, C4TcoOffset);
-            C5TemperatureReference = ReadCoefficient(buffer, C5TRefOffset);
-            C6TemperatureSensitivity = ReadCoefficient(buffer, C6TempSensOffset);
-            var serialCrc = ReadCoefficient(buffer, C7SerialCrcOffset);
+            C0Manufacturer = GetCoefficient(buffer, C0ManufacturerOffset);
+            C1PressureSensitivity = GetCoefficient(buffer, C1SensitivityOffset);
+            C2PressureOffset = GetCoefficient(buffer, C2TemperatureOffsetOffset);
+            C3TemperatureFromPressureSensitivity = GetCoefficient(buffer, C3TemperatureCoefficientOffset);
+            C4TemperatureFromPressureOffset = GetCoefficient(buffer, C4TemperatureCoefficientOffset);
+            C5TemperatureReference = GetCoefficient(buffer, C5TReferenceOffset);
+            C6TemperatureSensitivity = GetCoefficient(buffer, C6TemperatureSensitivityOffset);
+            var serialCrc = GetCoefficient(buffer, C7SerialCrcOffset);
             C7SerialNumber = serialCrc >> 4;
             C7Crc = serialCrc & 0x000f;
 
             // Return successful
             return true;
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        /// <summary>
+        /// Extracts a single coefficient value from a PROM data set (bytes read from all coefficients/memory).
+        /// </summary>
+        /// <param name="buffer">PROM data buffer to read.</param>
+        /// <param name="offset">Coefficient offset at which to read.</param>
+        private static ushort GetCoefficient(byte[] buffer, int offset)
+        {
+            return (ushort)(buffer[offset] << 8 | buffer[offset + 1]);
         }
 
         #endregion

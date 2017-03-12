@@ -7,7 +7,7 @@ namespace Emlid.WindowsIot.Hardware.Resources  {
 	/// <summary>
 	/// Strings.
 	/// </summary>
-	public class Strings {
+	public static class Strings {
 		
 		private static Windows.ApplicationModel.Resources.ResourceLoader resourceLoader;
 		internal static Windows.ApplicationModel.Resources.ResourceLoader ResourceLoader

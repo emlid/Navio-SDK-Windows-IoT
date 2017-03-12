@@ -1,13 +1,13 @@
 @echo off
 setlocal
 
-rem NuGet Package Script
-rem ====================
-rem Creates a release build then generates the NuGet package into the output directory.
-rem Remember to update the version number and release notes in the "nuspec" file before each release.
+echo NuGet Package Script
+echo ====================
+echo Creates a release build then generates the NuGet package into the output directory.
+echo Remember to update the version number and release notes in the "nuspec" file before each release.
+echo.
 
-rem * Initialize environment
-echo Initializing Visual Studio tools...
+echo Initializing environment...
 pushd "%~dp0"
 call "%VS150ComnTools%VsDevCmd.bat"
 if %errorlevel% neq 0 goto error
@@ -20,8 +20,10 @@ if %errorlevel% neq 0 goto error
 
 echo.
 echo Creating NuGet Package...
-"%~dp0nuget.exe" pack "%~dp0..\..\Framework\Emlid.WindowsIot.Hardware\Emlid.WindowsIot.Hardware.csproj" -Prop Configuration=Release -OutputDirectory "%~dp0Release" -ForceEnglishOutput
+pushd "%~dp0..\..\Framework\Emlid.WindowsIot.Hardware"
+"%~dp0nuget.exe" pack "Emlid.WindowsIot.Hardware.nuspec" -Properties Configuration=Release;Platform=ARM -BasePath "bin\ARM\Release" -OutputDirectory "%~dp0Release" -ForceEnglishOutput
 if %errorlevel% neq 0 goto error
+popd
 
 echo.
 echo Packaging successful.

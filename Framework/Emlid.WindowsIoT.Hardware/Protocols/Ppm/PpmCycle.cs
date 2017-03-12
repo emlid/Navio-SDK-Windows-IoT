@@ -14,7 +14,7 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Ppm
         /// </summary>
         public PpmCycle(long lowTime)
         {
-            LowTime = 0;
+            LowTime = lowTime;
             HighTime = 0;
             LowLength = 0;
             HighLength = 0;

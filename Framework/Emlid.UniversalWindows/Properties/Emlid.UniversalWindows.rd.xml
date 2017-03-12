@@ -28,6 +28,5 @@
   <Library Name="Emlid.UniversalWindows">
 
   	<!-- add directives for your library here -->
-
   </Library>
 </Directives>

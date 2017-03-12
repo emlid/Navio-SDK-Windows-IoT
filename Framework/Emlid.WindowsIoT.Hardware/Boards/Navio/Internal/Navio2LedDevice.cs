@@ -234,7 +234,8 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         /// </summary>
         /// <param name="value">LED component value.</param>
         /// <returns>GPIO pin value.</returns>
-        internal static GpioPinValue ConvertToGpioValue(int value)
+        [CLSCompliant(false)]
+        public static GpioPinValue ConvertToGpioValue(int value)
         {
             return value > 0 ? GpioPinValue.Low : GpioPinValue.High;
         }
@@ -244,7 +245,8 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         /// </summary>
         /// <param name="edge">GPIO event edge.</param>
         /// <returns>LED component value.</returns>
-        internal static int ConvertToLedValue(GpioPinEdge edge)
+        [CLSCompliant(false)]
+        public static int ConvertToLedValue(GpioPinEdge edge)
         {
             return edge == GpioPinEdge.RisingEdge ? 0 : 1;
         }
@@ -254,7 +256,8 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         /// </summary>
         /// <param name="value">GPIO pin value.</param>
         /// <returns>LED component value.</returns>
-        internal static int ConvertToLedValue(GpioPinValue value)
+        [CLSCompliant(false)]
+        public static int ConvertToLedValue(GpioPinValue value)
         {
             return value == GpioPinValue.High ? 0 : 1;
         }

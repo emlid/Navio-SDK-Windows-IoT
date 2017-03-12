@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
-<package >
+<package>
   <metadata>
     <id>Emlid.WindowsIot.Hardware</id>
-    <version>1.0.9-Alpha</version>
+    <version>1.0.10-Alpha</version>
     <title>Emlid Windows IoT Hardware</title>
-    <authors>Emlid</authors>
+    <authors>Tony Wall</authors>
     <owners>Emlid</owners>
     <language>en-US</language>
     <licenseUrl>http://opensource.org/licenses/Apache-2.0</licenseUrl>
@@ -21,11 +21,24 @@
       The "Core SDK" is not finished, be prepared for breaking changes on each release until the framework has stabilized.
     </releaseNotes>
     <dependencies>
-      <dependency id="Microsoft.NETCore.UniversalWindowsPlatform" version="5.3.0-beta2" />
-      <dependency id="Microsoft.IoT.Lightning.Providers" version="1.1.0" />
+      <dependency id="Microsoft.NETCore.UniversalWindowsPlatform" version="5.3.1" />
     </dependencies>
-    <references>
-      <reference file="Emlid.WindowsIot.Hardware.dll" />
-    </references>
   </metadata>
+  <files>
+    <!-- WinMd and IntelliSense -->
+    <file src="Emlid.UniversalWindows.xml" target="lib\uap10.0" />
+    <file src="Emlid.WindowsIot.Hardware.xml" target="lib\uap10.0" />
+    <file src="Emlid.WindowsIot.HardwarePlus.winmd" target="lib\uap10.0" />
+    <file src="Emlid.WindowsIot.HardwarePlus.xml" target="lib\uap10.0" />
+
+    <!-- DLLs and resources -->
+    <file src="Emlid.UniversalWindows.dll" target="runtimes\win10-arm\native" />
+    <file src="Emlid.UniversalWindows.pri" target="runtimes\win10-arm\native" />
+    <file src="Emlid.WindowsIot.Hardware.dll" target="runtimes\win10-arm\native" />
+    <file src="Emlid.WindowsIot.Hardware.pri" target="runtimes\win10-arm\native" />
+    <file src="Emlid.WindowsIot.HardwarePlus.pri" target="runtimes\win10-arm\native" />
+
+    <!-- Targets -->
+    <file src="Emlid.WindowsIot.Hardware.nuget.targets" target="build\native" />
+  </files>
 </package>

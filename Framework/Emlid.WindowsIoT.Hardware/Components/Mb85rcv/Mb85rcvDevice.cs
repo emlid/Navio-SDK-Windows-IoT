@@ -277,7 +277,6 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
             do
             {
                 var addressBytes = GetMemoryAddressBytes(address);
-                var addressBytesLength = addressBytes.Length;
 
                 // Check transfer size and reduce when necessary
                 var transferSize = remaining;
@@ -318,6 +317,9 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
         /// </summary>
         public void WritePage(int address, byte[] data)
         {
+            // Validate
+            if (data == null) throw new ArgumentNullException(nameof(data));
+
             // Call overloaded method
             WritePage(address, data, 0, data.Length);
         }

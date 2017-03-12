@@ -54,7 +54,7 @@ namespace <#= resourcesNamespace #>  {
 	/// <summary>
 	/// <#= item.Key #>.
 	/// </summary>
-	public class <#= item.Key #> {
+	public static class <#= item.Key #> {
 		
 		private static Windows.ApplicationModel.Resources.ResourceLoader resourceLoader;
 		internal static Windows.ApplicationModel.Resources.ResourceLoader ResourceLoader

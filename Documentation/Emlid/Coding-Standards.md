@@ -7,8 +7,11 @@ This section, once complete, will detail the coding standards used to produce al
 
 * Clean code practice = easy to maintain = less bugs = robust.
 * Long descriptive names, some common abbreviations okay.
-* Should "read like a book". The compiler works for us with optimizations. It's not a crossword puzzle! Never i,x,y,z,a,b,c variables. That is dumb practice, not smart because you may be good at puzzles! Less stress with clean logical code.
+* Should "read like a book". The compiler works for us optimizing the names into registers and memory locations. Never single letters (e.g. i,x,y,z,a,b,c) or self-invented abbreviations variables. That is bad practice because it takes longer to read and understand than meaningful words, leading to misunderstanding or delays and stress working with the code. Complete abbreviations are an exception, e.g. "hex" is okay instead of hexadecimal, but not "ins" instead of "insert". So no need for a crossword puzzles, then you're confusing others and maybe yourself a while later.
 * Whitespace, brackets and indentation is good! Your brain sees patterns and is slower looking through a mash of text.
+* Naming standards for object models/frameworks follow the Microsoft naming standards. Pascal case for visible (public or protected) objects, types and fields with additional restrictions of 2 letter acronyms being uppercase (e.g. IO = IO but SSD = Ssd), compound words cased (Toolbar = ToolBar, Filename = FileName) and abbreviations not confused with acronyms (e.g. ID = Id as short for identifier).
+* Naming standards for private and local fields follow the coding standards of the language, e.g. Microsoft's C# naming standard specifies private fields in "camel-case" (i.e. lower first work then Pascal rest, e.g. camelsHump) and prefixed with an underscore, e.g. "_myFieldName". Language specific standards are not used for public types and members which make-up part of a cross-platform or cross-language object model/framework.
+
 
 
 ### Compiler

@@ -33,6 +33,6 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io.Data
         /// <summary>
         /// RC reception okay.
         /// </summary>
-        ReceptionOK = (1 << 4)
+        ReceptionOk = (1 << 4)
     }
 }

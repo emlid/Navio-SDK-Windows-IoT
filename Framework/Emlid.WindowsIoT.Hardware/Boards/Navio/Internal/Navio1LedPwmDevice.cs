@@ -515,8 +515,8 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
                     if (wasEnabled)
                         _enablePin.Write(GpioPinValue.High);
 
-                    // Set the hardware frequency and resolve the actual value
-                    var actualFrequency = _device.WriteFrequency(value);
+                    // Set the hardware frequency
+                    _device.WriteFrequency(value);
 
                     // Update properties
                     Read();
@@ -659,6 +659,8 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
                 // Validate
                 if (number < 1 || number > PwmChannelCount)
                     throw new ArgumentOutOfRangeException(nameof(number));
+                if (values == null)
+                    throw new ArgumentNullException(nameof(values));
                 if (count < 1 || number + count > PwmChannelCount)
                     throw new ArgumentOutOfRangeException(nameof(count));
 
