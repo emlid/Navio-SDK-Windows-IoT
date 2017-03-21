@@ -15034,19 +15034,19 @@
   },
   "project": {
     "restore": {
-      "projectUniqueName": "C:\\Users\\tony\\Source\\GitHub\\Emlid\\Navio-SDK-Windows-IoT\\Samples\\CS\\Navio Barometer\\Navio Barometer CS Sample.csproj",
+      "projectUniqueName": "D:\\Data\\Tony\\Source\\GitHub\\Emlid\\Navio-SDK-Windows-IoT\\Samples\\CS\\Navio Barometer\\Navio Barometer CS Sample.csproj",
       "projectName": "Navio Barometer CS Sample",
-      "projectPath": "C:\\Users\\tony\\Source\\GitHub\\Emlid\\Navio-SDK-Windows-IoT\\Samples\\CS\\Navio Barometer\\Navio Barometer CS Sample.csproj",
-      "projectJsonPath": "C:\\Users\\tony\\Source\\GitHub\\Emlid\\Navio-SDK-Windows-IoT\\Samples\\CS\\Navio Barometer\\project.json",
+      "projectPath": "D:\\Data\\Tony\\Source\\GitHub\\Emlid\\Navio-SDK-Windows-IoT\\Samples\\CS\\Navio Barometer\\Navio Barometer CS Sample.csproj",
+      "projectJsonPath": "D:\\Data\\Tony\\Source\\GitHub\\Emlid\\Navio-SDK-Windows-IoT\\Samples\\CS\\Navio Barometer\\project.json",
       "projectStyle": "ProjectJson",
       "frameworks": {
         "uap10.0": {
           "projectReferences": {
-            "C:\\Users\\tony\\Source\\GitHub\\Emlid\\Navio-SDK-Windows-IoT\\Framework\\Emlid.WindowsIot.HardwarePlus\\Emlid.WindowsIot.HardwarePlus.vcxproj": {
-              "projectPath": "C:\\Users\\tony\\Source\\GitHub\\Emlid\\Navio-SDK-Windows-IoT\\Framework\\Emlid.WindowsIot.HardwarePlus\\Emlid.WindowsIot.HardwarePlus.vcxproj"
+            "D:\\Data\\Tony\\Source\\GitHub\\Emlid\\Navio-SDK-Windows-IoT\\Framework\\Emlid.WindowsIot.HardwarePlus\\Emlid.WindowsIot.HardwarePlus.vcxproj": {
+              "projectPath": "D:\\Data\\Tony\\Source\\GitHub\\Emlid\\Navio-SDK-Windows-IoT\\Framework\\Emlid.WindowsIot.HardwarePlus\\Emlid.WindowsIot.HardwarePlus.vcxproj"
             },
-            "C:\\Users\\tony\\Source\\GitHub\\Emlid\\Navio-SDK-Windows-IoT\\Framework\\Emlid.WindowsIoT.Hardware\\Emlid.WindowsIot.Hardware.csproj": {
-              "projectPath": "C:\\Users\\tony\\Source\\GitHub\\Emlid\\Navio-SDK-Windows-IoT\\Framework\\Emlid.WindowsIoT.Hardware\\Emlid.WindowsIot.Hardware.csproj"
+            "D:\\Data\\Tony\\Source\\GitHub\\Emlid\\Navio-SDK-Windows-IoT\\Framework\\Emlid.WindowsIoT.Hardware\\Emlid.WindowsIot.Hardware.csproj": {
+              "projectPath": "D:\\Data\\Tony\\Source\\GitHub\\Emlid\\Navio-SDK-Windows-IoT\\Framework\\Emlid.WindowsIoT.Hardware\\Emlid.WindowsIot.Hardware.csproj"
             }
           }
         }

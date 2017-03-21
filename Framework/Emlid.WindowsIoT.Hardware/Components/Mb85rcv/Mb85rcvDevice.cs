@@ -151,14 +151,14 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
         /// <param name="busNumber">I2C bus controller number (zero based).</param>
         /// <param name="speed">Bus speed.</param>
         /// <param name="sharingMode">Sharing mode.</param>
-        /// <returns>Device ID.</returns>
+        /// <returns>Device ID or null when no chip exists at the address.</returns>
         /// <remarks>
         /// It is not possible to get the identifier of other devices until the device
         /// density is known, because one bit of the device address code is used
         /// for the higher address commands with lower densities.
         /// </remarks>
         [CLSCompliant(false)]
-        public static Mb85rcvDeviceId GetDeviceId(int busNumber,
+        public static Mb85rcvDeviceId? GetDeviceId(int busNumber,
             I2cBusSpeed speed = I2cBusSpeed.FastMode, I2cSharingMode sharingMode = I2cSharingMode.Exclusive)
         {
             // Call overloaded method
@@ -181,19 +181,25 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
         /// </param>
         /// <param name="speed">Bus speed.</param>
         /// <param name="sharingMode">Sharing mode.</param>
-        /// <returns>Device ID.</returns>
+        /// <returns>Device ID or null when no chip exists at the address.</returns>
         [CLSCompliant(false)]
-        public static Mb85rcvDeviceId GetDeviceId(int busNumber, byte idAddress, byte dataAddress,
+        public static Mb85rcvDeviceId? GetDeviceId(int busNumber, byte idAddress, byte dataAddress,
             I2cBusSpeed speed = I2cBusSpeed.FastMode, I2cSharingMode sharingMode = I2cSharingMode.Exclusive)
         {
             // Connect to ID device
-            using (var framId = I2cExtensions.Connect(busNumber, idAddress, speed, sharingMode))
+            using (var framIdRegister = I2cExtensions.Connect(busNumber, idAddress, speed, sharingMode))
             {
                 // Send ID command sequence, returning device ID bytes
                 var dataAddress8bit = (byte)(dataAddress << 1);
-                var data = I2cExtensions.WriteReadBytes(framId, dataAddress8bit, Mb85rcvDeviceId.Size);
+                var data = new byte[Mb85rcvDeviceId.Size];
+                var transfer = framIdRegister.WriteReadPartial(new[] { dataAddress8bit }, data);
+                if (transfer.Status == I2cTransferStatus.SlaveAddressNotAcknowledged)       // Any other error must throw
+                {
+                    // Return null when not found
+                    return null;
+                }
 
-                // Return data structure
+                // Decode and return ID when found
                 return new Mb85rcvDeviceId(data);
             }
         }

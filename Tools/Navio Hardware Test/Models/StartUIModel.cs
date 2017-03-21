@@ -1,5 +1,6 @@
 ﻿using Emlid.UniversalWindows.UI.Models;
 using Emlid.WindowsIot.Hardware.Boards.Navio;
+using System.Threading.Tasks;
 
 namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models
 {
@@ -84,11 +85,8 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models
         /// </summary>
         public void Detect()
         {
-            // Call application method
-            Application.Detect();
-
-            // Fire property changed event
-            DoPropertyChanged(nameof(Model));
+            // Call application method on background thread
+            Task.Run(() => Application.Detect());
         }
 
         #endregion

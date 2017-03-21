@@ -35,9 +35,7 @@ namespace Emlid.WindowsIot.Tools.Navio2RcioTerminal.Models
             {
                 // Dispose resources when possible
                 if (disposing)
-                {
                     Rcio?.Dispose();
-                }
             }
             finally
             {

@@ -1,16 +1,17 @@
 ## Change Log
 
-*2017.02.XX* v1.0.10 **Visual Studio 2017 RTM**
+*2017.03.21* v1.0.11
 
-1. Updated solution to Visual Studio 2017 RTM, Windows Insider Preview 10.0.15042.0.
+1. Updated solution to Visual Studio 2017 RTM + "Update Preview", Windows Insider Preview/SDK/WDK 10.0.15052.0.
 2. Removed Lightning providers. Microsoft clearly stopped developing and supporting it. It does not work properly anymore. Either we get a new converged driver from them soon or finish writing our own.
 3. Second SPI bus access solved. Works with new transisional "HardwarePlus" C++ Windows Runtime Component (doesn't work with .NET component).
 4. Navio 2 RCIO device and it's PX4IO based protocol implemented. Still integrating RC support as the first tested use case.
 5. Updated .NET Core SDK package to latest stable version 5.3.1.
-6. C++/WinRT headers updated to latest 10.0.15042.0 release.
+6. C++/WinRT headers updated to latest 10.0.15042.0 "Creators Update" release (most likely to change again until final "Creators Update" build number is fixed by Microsoft).
+7. Hardware detection less obtrusive, i.e. try not throw in normal paths.
 
 Start of the migration to C++ low level components. Drivers not necessary at this time, they will continue development as soon as a functioning WDK toolset (with VS2017) is released.
-Visual Studio 2015 and Windows RTM are no longer supported. The SDK and WDK build 15042 are required and the OS must be the same build to open any of the XAML projects.
+Visual Studio 2015 and Windows RTM are no longer supported. The SDK and WDK build 15052 are required and the OS must be the same build to open any of the XAML projects.
 
 
 *2017.01.09* v1.0.9

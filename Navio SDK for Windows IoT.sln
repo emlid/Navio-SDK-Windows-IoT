@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.4
+VisualStudioVersion = 15.0.26315.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{101AF3F7-293E-46CF-8C37-EAA61DFDF0A5}"
 	ProjectSection(SolutionItems) = preProject
@@ -41,8 +41,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{E2AC6B
 	ProjectSection(SolutionItems) = preProject
 		Common\AssemblyInfoGlobal.cs = Common\AssemblyInfoGlobal.cs
 		Common\CustomDictionary.xml = Common\CustomDictionary.xml
-		Common\TemporaryKey Install.cmd = Common\TemporaryKey Install.cmd
-		Common\TemporaryKey Remove.cmd = Common\TemporaryKey Remove.cmd
 		Common\TemporaryKey.pfx = Common\TemporaryKey.pfx
 	EndProjectSection
 EndProject
@@ -77,6 +75,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{703F
 		Tools\Scripts\Setup Local.ps1 = Tools\Scripts\Setup Local.ps1
 		Tools\Scripts\Setup Remote.cmd = Tools\Scripts\Setup Remote.cmd
 		Tools\Scripts\Setup Remote.ps1 = Tools\Scripts\Setup Remote.ps1
+		Tools\Scripts\TemporaryKey Install.cmd = Tools\Scripts\TemporaryKey Install.cmd
+		Tools\Scripts\TemporaryKey Remove.cmd = Tools\Scripts\TemporaryKey Remove.cmd
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{6637C7B9-0DFD-410A-89F1-C1DD8E2D01EC}"
@@ -134,11 +134,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Navio 2 RCIO Terminal", "Tools\Navio 2 RCIO Terminal\Navio 2 RCIO Terminal.csproj", "{7B09FA7C-9385-4AA0-A659-4A55ACBE3B37}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Emlid.WindowsIot.HardwarePlus", "Framework\Emlid.WindowsIot.HardwarePlus\Emlid.WindowsIot.HardwarePlus.vcxproj", "{2C5DF7F8-8E4F-451B-88E2-B9C879C923E6}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CPP", "CPP", "{2A7B48B2-0AE6-4B76-A48B-BD26F5EA7448}"
-	ProjectSection(SolutionItems) = preProject
-		Common\CPP\Macros.h = Common\CPP\Macros.h
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencies", "{59AC22D9-5AB2-42B0-BFCE-4E3D1C63E8E0}"
 	ProjectSection(SolutionItems) = preProject
@@ -247,7 +242,6 @@ Global
 		{E431A011-C230-4CF5-8321-C47E07AE7683} = {24C4538B-C6A4-4D47-80C9-4249164C222F}
 		{7B09FA7C-9385-4AA0-A659-4A55ACBE3B37} = {C1B9EF36-2E1E-4BCB-A85F-E85DF75F737A}
 		{2C5DF7F8-8E4F-451B-88E2-B9C879C923E6} = {24C4538B-C6A4-4D47-80C9-4249164C222F}
-		{2A7B48B2-0AE6-4B76-A48B-BD26F5EA7448} = {E2AC6BB4-4B51-4E37-8401-DBE2EB7D8116}
 		{45D41ACC-2C3C-43D2-BC10-02AA73FFC7C7} = {59AC22D9-5AB2-42B0-BFCE-4E3D1C63E8E0}
 		{243E8ED0-58CF-4322-BB7D-D52E70352608} = {175F3EA8-E13A-41F9-81E9-EFE31813D8F0}
 	EndGlobalSection

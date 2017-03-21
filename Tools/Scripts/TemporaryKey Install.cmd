@@ -35,7 +35,7 @@ popd
 
 rem * Install key
 echo Source: %~dp0
-sn -i "%~dp0TemporaryKey.pfx" %VSKeyContainerName%
+sn -i "%~dp0..\..\Common\TemporaryKey.pfx" %VSKeyContainerName%
 if %errorlevel% neq 0 goto error
 
 rem * Exit successfully

@@ -11,8 +11,8 @@
     <AssemblyName>Emlid.WindowsIot.Tools.NavioHardwareTest</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.15042.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.15042.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.15052.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.15052.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>15.0</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -191,10 +191,10 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <SDKReference Include="WindowsDesktop, Version=10.0.15042.0">
+    <SDKReference Include="WindowsDesktop, Version=10.0.15052.0">
       <Name>Windows Desktop Extensions for the UWP</Name>
     </SDKReference>
-    <SDKReference Include="WindowsIoT, Version=10.0.15042.0">
+    <SDKReference Include="WindowsIoT, Version=10.0.15052.0">
       <Name>Windows IoT Extensions for the UWP</Name>
     </SDKReference>
   </ItemGroup>

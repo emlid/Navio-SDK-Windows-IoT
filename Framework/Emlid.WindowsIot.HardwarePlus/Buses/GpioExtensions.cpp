@@ -33,5 +33,5 @@ cx::GpioPin^ GpioExtensions::Connect(int busNumber, int pinNumber, cx::GpioPinDr
 	// C++/WinRT End -------------------------------------------------------------
 
 	// TODO: Remove result conversion when C++/WinRT supports components
-	return reinterpret_cast<cx::GpioPin^>(winrt::get_abi(pin));
+	return reinterpret_cast<cx::GpioPin^>(winrt::detach_abi(pin));
 }

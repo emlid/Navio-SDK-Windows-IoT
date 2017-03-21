@@ -18,7 +18,6 @@ cx::I2cDevice^ I2cExtensions::Connect(int busNumber, int address, cx::I2cBusSpee
 	if (address < 0 || address > 0x7f) throw winrt::hresult_invalid_argument(L"address");
 
 	// Query bus information
-	//WINRT_DEBUG("Querying I2C bus information.");
 	auto query = winrt::I2cDevice::GetDeviceSelector();
 	auto busInformation = winrt::DeviceInformation::FindAllAsync(query).get();
 	if (busInformation.Size() < 1)
@@ -26,7 +25,6 @@ cx::I2cDevice^ I2cExtensions::Connect(int busNumber, int address, cx::I2cBusSpee
 
 	// Configure connection
 	auto id = busInformation.GetAt(busNumber).Id();
-	//WINRT_DEBUG("Bus ID %s.", id);
 	auto settings = winrt::I2cConnectionSettings(address);
 	settings.BusSpeed(speed);
 	settings.SharingMode(sharingMode);
@@ -37,7 +35,7 @@ cx::I2cDevice^ I2cExtensions::Connect(int busNumber, int address, cx::I2cBusSpee
 	// C++/WinRT End -------------------------------------------------------------
 
 	// Return connected device
-	return reinterpret_cast<cx::I2cDevice^>(winrt::get_abi(device));
+	return reinterpret_cast<cx::I2cDevice^>(winrt::detach_abi(device));
 }
 
 #pragma endregion

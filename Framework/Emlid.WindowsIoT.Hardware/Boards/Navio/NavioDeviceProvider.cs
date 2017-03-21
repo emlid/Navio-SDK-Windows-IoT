@@ -56,38 +56,35 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
                 {
                     // Connect to FRAM I2C device and read FRAM model
                     var framId = Mb85rcvDevice.GetDeviceId(Navio1FramDevice.I2cControllerIndex);
-
-                    // Return Navio model for known FRAM IDs
-                    if (framId == Navio1FramDevice.Navio1PlusDeviceId)
+                    if (framId != null)
                     {
-                        // Must be a Navio 1+
-                        return NavioHardwareModel.Navio1Plus;
-                    }
-                    if (framId == Navio1FramDevice.Navio1DeviceId)
-                    {
-                        // Must be a Navio 1
-                        return NavioHardwareModel.Navio1;
+                        // Return Navio model for known FRAM IDs
+                        if (framId == Navio1FramDevice.Navio1PlusDeviceId)
+                        {
+                            // Must be a Navio 1+
+                            return NavioHardwareModel.Navio1Plus;
+                        }
+                        if (framId == Navio1FramDevice.Navio1DeviceId)
+                        {
+                            // Must be a Navio 1
+                            return NavioHardwareModel.Navio1;
+                        }
+
+                        // Unsupported FRAM device ID
+                        return null;
                     }
 
-                    // Unsupported FRAM device ID
-                    return null;
+                    // Try to detect a Navio 2 RCIO co-processor
+                    using (var rcio = new Navio2RcioDevice())
+                    {
+                        // Must be a Navio 2
+                        return NavioHardwareModel.Navio2;
+                    }
                 }
                 catch
                 {
-                    // Try to detect a Navio 2 RCIO co-processor
-                    try
-                    {
-                        using (var rcio = new Navio2RcioDevice())
-                        {
-                            // Must be a Navio 2
-                            return NavioHardwareModel.Navio2;
-                        }
-                    }
-                    catch
-                    {
-                        // No Navio hardware found
-                        return null;
-                    }
+                    // No Navio hardware found
+                    return null;
                 }
             }
         }

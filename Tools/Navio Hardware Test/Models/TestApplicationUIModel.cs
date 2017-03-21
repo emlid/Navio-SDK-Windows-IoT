@@ -34,9 +34,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models
             {
                 // Dispose resources when possible
                 if (disposing)
-                {
                     Board?.Dispose();
-                }
             }
             finally
             {

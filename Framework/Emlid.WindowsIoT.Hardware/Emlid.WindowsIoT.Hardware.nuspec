@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>Emlid.WindowsIot.Hardware</id>
-    <version>1.0.10-Alpha</version>
+    <version>1.0.11-Alpha</version>
     <title>Emlid Windows IoT Hardware</title>
     <authors>Tony Wall</authors>
     <owners>Emlid</owners>

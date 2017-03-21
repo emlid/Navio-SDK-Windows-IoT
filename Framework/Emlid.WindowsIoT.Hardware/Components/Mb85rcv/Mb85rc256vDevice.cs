@@ -105,9 +105,9 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
         /// </param>
         /// <param name="speed">Bus speed.</param>
         /// <param name="sharingMode">Sharing mode.</param>
-        /// <returns>Device ID.</returns>
+        /// <returns>Device ID or null when no chip exists at the address.</returns>
         [CLSCompliant(false)]
-        public static Mb85rcvDeviceId GetDeviceId(int busNumber, byte chipNumber,
+        public static Mb85rcvDeviceId? GetDeviceId(int busNumber, byte chipNumber,
             I2cBusSpeed speed = I2cBusSpeed.FastMode, I2cSharingMode sharingMode = I2cSharingMode.Exclusive)
         {
             // Validate

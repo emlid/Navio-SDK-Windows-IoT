@@ -13,7 +13,7 @@ Compatible IoT boards may also work, but are not directly supported.
 ### Development Hardware:
 
 * Workstation or laptop powerful enough to use as a [Visual Studio development system](https://www.visualstudio.com/en-us/productinfo/vs2015-sysrequirements-vs).
-* Optional WiFi network adapter (recommended).
+* Optional WiFi network adapter or LAN connection to WiFi router (recommended).
 
 ### Software
 
@@ -21,7 +21,7 @@ This section describes the software tools and applications required to deploy im
 
 #### Running Applications
 
-The IoT device must be running the "Insider Preview" build **15043** or later is required to run the current SDK, which is rolled-out by Microsoft as a update to the latest available image, e.g. 15043 from early 2017.
+The IoT device must be running the "Insider Preview" build **15053** or later is required to run the current SDK, which is rolled-out by Microsoft as a update to the latest available image, e.g. 15053 from early 2017.
 
 The "IoT Dashboard" tool eases the process of downloading the OS image to the Raspberry Pi 2, then helps you connect and configure devices over the network. End-users need only install the dashboard, or you could provide them with a preloaded SD card.
 
@@ -33,7 +33,7 @@ Alternatively you can download the ISO image and release notes here:
 
 Adding the SDK to your solution is easy as it is officially released and updated as a standard Microsoft Visual Studio NuGet package. Search for "Emlid.WindowsIot.Hardware" in the NuGet Package Manager with the "pre-release" option set.
 
-The development PC must be running Visual Studio 2017 (Community edition or greater) on top of the latest "Insider Preview" OS release, greater than build 10.0.**15042**. Similarly, the latest Insider Preview SDK is required, currently build **15042** from early 2017.
+The development PC must be running Visual Studio 2017 (Community edition or greater) on top of the latest "Insider Preview" OS release, greater than build 10.0.**15052**. Similarly, the latest Insider Preview SDK is required, currently build **15052** from early 2017.
 
 Links to download the development tools and basic instructions what to install are provided by Microsoft here:
 
