@@ -36,6 +36,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         /// Navio hardware model when detected, or null when failed.
         /// </returns>
         /// <remarks>
+        /// Returns the existing model once initialized (it would not be safe to detect with hardware already in use).
         /// As the EEPROM ID is not accessible in Windows IoT, the FRAM device is used as
         /// the next best and safe probe for the hardware model. It is different in all current versions.
         /// In Navio 2 it doesn't exist.
@@ -48,6 +49,12 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         /// </remarks>
         public static NavioHardwareModel? Detect()
         {
+            // Return existing board model when present
+            // We cannot interact with hardware which may already have been used.
+            // It would either be locked exclusively, cause interferance or fail in an indetermined state.
+            if (_board != null)
+                return _board.Model;
+
             // Thread-safe lock
             lock (_lock)
             {
@@ -141,8 +148,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
         /// <summary>
         /// Returns the current <see cref="INavioBoard"/> or performs hardware detection then creates it the first time.
         /// </summary>
-        /// <returns>Hardware interface for the detected model when successful.</returns>
-        /// <exception cref="NotSupportedException">Thrown when supported hardware could not be detected.</exception>
+        /// <returns>Hardware interface for the detected model when successful or null when none found.</returns>
         public static INavioBoard Connect()
         {
             // Thread-safe lock
@@ -155,7 +161,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio
                 // Detect model
                 var model = Detect();
                 if (!model.HasValue)
-                    throw new NotSupportedException("No supported Navio hardware detected.");
+                    return null;
 
                 // Create and return interface
                 return Connect(model.Value);

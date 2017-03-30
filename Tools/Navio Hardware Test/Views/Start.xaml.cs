@@ -10,7 +10,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Views
     /// <summary>
     /// Start page of the application.
     /// </summary>
-    public sealed partial class StartPage : StartPageBase
+    public partial class StartPage : StartPageBase
     {
         #region Lifetime
 
@@ -65,7 +65,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Views
         {
             switch (arguments.PropertyName)
             {
-                case nameof(Model.Model):
+                case nameof(Model.Application):
                     Bindings.Update();
                     break;
             }

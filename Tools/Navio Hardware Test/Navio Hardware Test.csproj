@@ -11,8 +11,8 @@
     <AssemblyName>Emlid.WindowsIot.Tools.NavioHardwareTest</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.15052.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.15052.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.15063.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.15063.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>15.0</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -76,7 +76,7 @@
     <Compile Include="Models\StartUIModel.cs" />
     <Compile Include="Models\Tests\RCInputTestUIModel.cs" />
     <Compile Include="Models\Tests\TestUIModel.cs" />
-    <Compile Include="StartPageBase.cs">
+    <Compile Include="Views\StartPageBase.cs">
       <DependentUpon>Start.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Tests\BarometerTestPageBase.cs">
@@ -102,7 +102,7 @@
     </Compile>
     <Compile Include="Models\Tests\PwmTestUIModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Start.xaml.cs">
+    <Compile Include="Views\Start.xaml.cs">
       <DependentUpon>Start.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Tests\BarometerTest.xaml.cs">
@@ -160,10 +160,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Start.xaml">
+    <Page Include="Views\Start.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <None Include="..\..\Common\TemporaryKey.pfx">
+      <Link>TemporaryKey.pfx</Link>
+    </None>
+    <None Include="project.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="WindowsIoT, Version=10.0.15063.0">
+      <Name>Windows IoT Extensions for the UWP</Name>
+    </SDKReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Framework\Emlid.UniversalWindows.UI\Emlid.UniversalWindows.UI.csproj">
@@ -182,21 +194,6 @@
       <Project>{fe8e8830-ee45-46f0-88a5-4a14ad02ee50}</Project>
       <Name>Emlid.WindowsIot.Hardware</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <None Include="..\..\Common\TemporaryKey.pfx">
-      <Link>TemporaryKey.pfx</Link>
-    </None>
-    <None Include="project.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <SDKReference Include="WindowsDesktop, Version=10.0.15052.0">
-      <Name>Windows Desktop Extensions for the UWP</Name>
-    </SDKReference>
-    <SDKReference Include="WindowsIoT, Version=10.0.15052.0">
-      <Name>Windows IoT Extensions for the UWP</Name>
-    </SDKReference>
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

@@ -63,23 +63,16 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models
         /// </summary>
         public void Detect()
         {
-            // Clear existing model
-            if (Board != null)
-            {
-                Board.Dispose();
-                Board = null;
-            }
-
             // Detect model
             var model = NavioDeviceProvider.Detect();
-            if (model.HasValue)
+            if (model.HasValue && Board?.Model != model)
             {
-                // Create model when found
+                // Connect to hardware when found and not already connected
                 Board = NavioDeviceProvider.Connect(model.Value);
-            }
 
-            // Fire changed event
-            DoPropertyChanged(nameof(Board));
+                // Fire changed event
+                DoPropertyChanged(nameof(Board));
+            }
         }
 
         #endregion

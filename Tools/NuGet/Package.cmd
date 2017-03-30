@@ -8,10 +8,8 @@ echo Remember to update the version number and release notes in the "nuspec" fil
 echo.
 
 echo Initializing environment...
-pushd "%~dp0"
-call "%VS150ComnTools%VsDevCmd.bat"
+call "%~dp0..\Scripts\VSWhereDev.cmd"
 if %errorlevel% neq 0 goto error
-popd
 
 echo.
 echo Creating release build...

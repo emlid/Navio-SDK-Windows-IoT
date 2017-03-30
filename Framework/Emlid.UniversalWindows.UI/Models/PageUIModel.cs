@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Emlid.UniversalWindows.UI.Models
+﻿namespace Emlid.UniversalWindows.UI.Models
 {
     /// <summary>
     /// Base class for all page UI models

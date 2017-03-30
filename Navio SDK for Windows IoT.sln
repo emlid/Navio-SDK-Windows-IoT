@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26315.0
+VisualStudioVersion = 15.0.26323.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{101AF3F7-293E-46CF-8C37-EAA61DFDF0A5}"
 	ProjectSection(SolutionItems) = preProject
@@ -77,6 +77,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{703F
 		Tools\Scripts\Setup Remote.ps1 = Tools\Scripts\Setup Remote.ps1
 		Tools\Scripts\TemporaryKey Install.cmd = Tools\Scripts\TemporaryKey Install.cmd
 		Tools\Scripts\TemporaryKey Remove.cmd = Tools\Scripts\TemporaryKey Remove.cmd
+		Tools\Scripts\VSWhereDev.cmd = Tools\Scripts\VSWhereDev.cmd
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{6637C7B9-0DFD-410A-89F1-C1DD8E2D01EC}"
@@ -143,6 +144,12 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CppWinRT", "Dependencies\CppWinRT\CppWinRT.vcxitems", "{45D41ACC-2C3C-43D2-BC10-02AA73FFC7C7}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Navio RC Input CPP Sample", "Samples\CPP\Navio RC Input CPP Sample\Navio RC Input CPP Sample.vcxproj", "{243E8ED0-58CF-4322-BB7D-D52E70352608}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "VSWhere", "VSWhere", "{672010BA-4AE0-4794-A2B5-B53FC758D61F}"
+	ProjectSection(SolutionItems) = preProject
+		Dependencies\VSWhere\VSWhere Releases.url = Dependencies\VSWhere\VSWhere Releases.url
+		Dependencies\VSWhere\vswhere.exe = Dependencies\VSWhere\vswhere.exe
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -244,5 +251,6 @@ Global
 		{2C5DF7F8-8E4F-451B-88E2-B9C879C923E6} = {24C4538B-C6A4-4D47-80C9-4249164C222F}
 		{45D41ACC-2C3C-43D2-BC10-02AA73FFC7C7} = {59AC22D9-5AB2-42B0-BFCE-4E3D1C63E8E0}
 		{243E8ED0-58CF-4322-BB7D-D52E70352608} = {175F3EA8-E13A-41F9-81E9-EFE31813D8F0}
+		{672010BA-4AE0-4794-A2B5-B53FC758D61F} = {59AC22D9-5AB2-42B0-BFCE-4E3D1C63E8E0}
 	EndGlobalSection
 EndGlobal

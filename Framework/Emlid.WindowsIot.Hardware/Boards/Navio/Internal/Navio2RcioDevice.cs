@@ -23,7 +23,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         #region Constants
 
         /// <summary>
-        /// SPI bus controller number.
+        /// SPI bus controller number, zero based.
         /// </summary>
         public const int SpiBusNumber = 1;
 
@@ -53,9 +53,9 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         public const int RcInputChannelsMaximum = 16;
 
         /// <summary>
-        /// GPIO bus controller number.
+        /// GPIO bus controller number, zero based.
         /// </summary>
-        public const int GpioBusNumber = 1;
+        public const int GpioBusNumber = 0;
 
         /// <summary>
         /// GPIO pin for the RCIO "PC11" interrupt pin.
@@ -81,15 +81,28 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         /// </summary>
         public Navio2RcioDevice()
         {
-            // Create device
-            _chip = new Px4ioDevice(SpiBusNumber, SpiChipSelectLine, SpiOperationMode, SpiBitsPerWord, SpiFrequency, SpiSharingMode.Exclusive);
-            _interruptPin = GpioExtensions.Connect(GpioBusNumber, GpioInterruptPinNumber, GpioPinDriveMode.Input, GpioSharingMode.Exclusive);
-            _interruptPin.ValueChanged += OnInterruptPinValueChanged;
-            _swdPort = new GpioSwdPort(GpioBusNumber, GpioSwdClockPinNumber, GpioSwdIoPinNumber);
+            try
+            {
+                // Create device
+                _chip = new Px4ioDevice(SpiBusNumber, SpiChipSelectLine, SpiOperationMode, SpiBitsPerWord, SpiFrequency, SpiSharingMode.Exclusive);
+                _swdPort = new GpioSwdPort(GpioBusNumber, GpioSwdClockPinNumber, GpioSwdIoPinNumber);
+                _interruptPin = GpioExtensions.Connect(GpioBusNumber, GpioInterruptPinNumber, GpioPinDriveMode.Input, GpioSharingMode.Exclusive);
+                _interruptPin.ValueChanged += OnInterruptPinValueChanged;
 
-            // Initialize members
-            _channels = new int[_chip.Configuration.RCInputCount];
-            _channelsReadOnly = new ReadOnlyCollection<int>(_channels);
+                // Initialize members
+                _channels = new int[_chip.Configuration.RCInputCount];
+                _channelsReadOnly = new ReadOnlyCollection<int>(_channels);
+            }
+            catch
+            {
+                // Close devices in case partially initialized
+                _interruptPin.Dispose();
+                _swdPort?.Dispose();
+                _chip?.Dispose();
+
+                // Continue error
+                throw;
+            }
         }
 
         #region IDisposable
@@ -106,14 +119,14 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
             if (!disposing)
                 return;
 
-            //  Release devices
-            _chip?.Dispose();
+            // Close devices
             if (_interruptPin != null)
             {
                 _interruptPin.ValueChanged -= OnInterruptPinValueChanged;
                 _interruptPin.Dispose();
             }
             _swdPort?.Dispose();
+            _chip?.Dispose();
         }
 
         #endregion

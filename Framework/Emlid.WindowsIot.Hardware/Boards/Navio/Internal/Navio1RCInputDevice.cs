@@ -45,41 +45,52 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         /// </summary>
         public Navio1RCInputDevice()
         {
-            // Initialize buffers
-            _pulseBuffer = new ConcurrentQueue<PpmPulse>();
-            _pulseTrigger = new AutoResetEvent(false);
-            _frameBuffer = new ConcurrentQueue<PpmFrame>();
-            _frameTrigger = new AutoResetEvent(false);
-
-            // Configure GPIO
-            _inputPin = GpioExtensions.Connect(GpioControllerIndex, GpioInputPinNumber, GpioPinDriveMode.Input, GpioSharingMode.Exclusive);
-            if (_inputPin == null)
+            try
             {
-                // Initialization error
-                throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture,
-                    Resources.Strings.GpioErrorDeviceNotFound, GpioInputPinNumber, GpioControllerIndex));
+                // Initialize buffers
+                _pulseBuffer = new ConcurrentQueue<PpmPulse>();
+                _pulseTrigger = new AutoResetEvent(false);
+                _frameBuffer = new ConcurrentQueue<PpmFrame>();
+                _frameTrigger = new AutoResetEvent(false);
+
+                // Configure GPIO
+                _inputPin = GpioExtensions.Connect(GpioControllerIndex, GpioInputPinNumber, GpioPinDriveMode.Input, GpioSharingMode.Exclusive);
+                if (_inputPin == null)
+                {
+                    // Initialization error
+                    throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture,
+                        Resources.Strings.GpioErrorDeviceNotFound, GpioInputPinNumber, GpioControllerIndex));
+                }
+                if (_inputPin.DebounceTimeout != TimeSpan.Zero)
+                    _inputPin.DebounceTimeout = TimeSpan.Zero;
+
+                // Create decoder thread (CPPM only to start with, SBus desired)
+                _decoder = new CppmDecoder();
+                _stop = new CancellationTokenSource();
+                _channels = new int[_decoder.MaximumChannels];
+                Channels = new ReadOnlyCollection<int>(_channels);
+                _decoderTask = Task.Factory.StartNew(() => { _decoder.DecodePulse(_pulseBuffer, _pulseTrigger, _frameBuffer, _frameTrigger, _stop.Token); });
+
+                // Create receiver thread
+                _receiverTask = Task.Factory.StartNew(() => { Receiver(); });
+
+                // Hook events
+                _inputPin.ValueChanged += OnInputPinValueChanged;
+
+                // Start buffered event handling
+                // TODO: Support buffered GPIO when possible
+                //_inputPin.CreateInterruptBuffer();
+                //_inputPin.StartInterruptBuffer();
+                //_inputPin.StopInterruptCount();
             }
-            if (_inputPin.DebounceTimeout != TimeSpan.Zero)
-                _inputPin.DebounceTimeout = TimeSpan.Zero;
+            catch
+            {
+                // Close device in case partially initialized
+                _inputPin?.Dispose();
 
-            // Create decoder thread (CPPM only to start with, SBus desired)
-            _decoder = new CppmDecoder();
-            _stop = new CancellationTokenSource();
-            _channels = new int[_decoder.MaximumChannels];
-            Channels = new ReadOnlyCollection<int>(_channels);
-            _decoderTask = Task.Factory.StartNew(() => { _decoder.DecodePulse(_pulseBuffer, _pulseTrigger, _frameBuffer, _frameTrigger, _stop.Token); });
-
-            // Create receiver thread
-            _receiverTask = Task.Factory.StartNew(() => { Receiver(); });
-
-            // Hook events
-            _inputPin.ValueChanged += OnInputPinValueChanged;
-
-            // Start buffered event handling
-            // TODO: Support buffered GPIO when possible
-            //_inputPin.CreateInterruptBuffer();
-            //_inputPin.StartInterruptBuffer();
-            //_inputPin.StopInterruptCount();
+                // Continue error
+                throw;
+            }
         }
 
         #region IDisposable

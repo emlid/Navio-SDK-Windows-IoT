@@ -1,5 +1,13 @@
 ## Change Log
 
+*2017.03.29* v1.0.12
+
+1. Updated solution to Windows Insider Preview "Creators Update" SDK/WDK 10.0.15063.0.
+2. Avoid hardware detection after initialization (return running hardware model). Also fixes errors in test GUI after clicking "Detect" a second time.
+3. All composite devices clean-up when failures occur during initialization. Boards and devices with more than one pin/chip must close them should a failure occur in their constructor, e.g. corrupt data or use of wrong hardware model.
+4. Integrated VSWhere tool dependency and created VSWhereDev.cmd script to correctly initialize Visual Studio 2017 environment variables after the new limitation that Microsoft no longer set the %VS###COMNTOOLS% variable during installation. See: https://developercommunity.visualstudio.com/content/problem/26780/vsdevcmdbat-changes-the-current-working-directory.html
+
+
 *2017.03.21* v1.0.11
 
 1. Updated solution to Visual Studio 2017 RTM + "Update Preview", Windows Insider Preview/SDK/WDK 10.0.15052.0.

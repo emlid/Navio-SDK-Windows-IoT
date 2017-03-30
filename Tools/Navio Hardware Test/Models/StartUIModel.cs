@@ -1,6 +1,8 @@
 ﻿using Emlid.UniversalWindows.UI.Models;
 using Emlid.WindowsIot.Hardware.Boards.Navio;
 using System.Threading.Tasks;
+using System;
+using System.ComponentModel;
 
 namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models
 {
@@ -20,6 +22,8 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models
         /// </summary>
         public StartUIModel(TestApplicationUIModel application) : base(application)
         {
+            // Hook events
+            Application.PropertyChanged += OnApplicationPropertyChanged;
         }
 
         #endregion
@@ -87,6 +91,26 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models
         {
             // Call application method on background thread
             Task.Run(() => Application.Detect());
+        }
+
+        #endregion
+
+        #region Events
+
+        /// <summary>
+        /// Fires the <see cref="UIModel.PropertyChanged"/> event when the <see cref="TestApplicationUIModel.Board"/> changes.
+        /// </summary>
+        private void OnApplicationPropertyChanged(object sender, PropertyChangedEventArgs arguments)
+        {
+            switch (arguments.PropertyName)
+            {
+                case nameof(TestApplicationUIModel.Board):
+                    {
+                        // All properties changed when board detected
+                        DoPropertyChanged(null);
+                        break;
+                    }
+            }
         }
 
         #endregion

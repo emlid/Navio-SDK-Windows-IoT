@@ -20,11 +20,9 @@ if "%~1" == "" goto syntax
 set VSKeyContainerName=%~1
 
 rem * Initialize environment
-echo Initializing Visual Studio tools...
-pushd "%~dp0"
-call "%VS150ComnTools%VsDevCmd.bat"
+echo Initializing environment...
+call "%~dp0VSWhereDev.cmd"
 if %errorlevel% neq 0 goto error
-popd
 
 rem * Remove key
 sn -d %VSKeyContainerName%

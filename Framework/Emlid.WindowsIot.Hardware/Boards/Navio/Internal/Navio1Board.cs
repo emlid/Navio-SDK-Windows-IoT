@@ -18,11 +18,25 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         /// </summary>
         public Navio1Board()
         {
-            // Initialize components
-            _barometerDevice = new NavioBarometerDevice();
-            _framDevice = new Navio1FramDevice(NavioHardwareModel.Navio1);
-            _ledPwmDevice = new Navio1LedPwmDevice();
-            _rcInputDevice = new Navio1RCInputDevice();
+            try
+            {
+                // Initialize components
+                _barometerDevice = new NavioBarometerDevice();
+                _framDevice = new Navio1FramDevice(NavioHardwareModel.Navio1);
+                _ledPwmDevice = new Navio1LedPwmDevice();
+                _rcInputDevice = new Navio1RCInputDevice();
+            }
+            catch
+            {
+                // Close devices in case partially initialized
+                _barometerDevice?.Dispose();
+                _framDevice?.Dispose();
+                _ledPwmDevice?.Dispose();
+                _rcInputDevice?.Dispose();
+
+                // Continue error
+                throw;
+            }
         }
 
         #region IDisposable

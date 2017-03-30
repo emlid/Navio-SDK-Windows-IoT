@@ -41,13 +41,26 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         /// </summary>
         public Navio2LedDevice()
         {
-            // Open pins
-            _redPin = GpioExtensions.Connect(GpioControllerIndex, 4, GpioPinDriveMode.Output, GpioSharingMode.Exclusive);
-            _greenPin = GpioExtensions.Connect(GpioControllerIndex, 27, GpioPinDriveMode.Output, GpioSharingMode.Exclusive);
-            _bluePin = GpioExtensions.Connect(GpioControllerIndex, 6, GpioPinDriveMode.Output, GpioSharingMode.Exclusive);
+            try
+            {
+                // Open pins
+                _redPin = GpioExtensions.Connect(GpioControllerIndex, 4, GpioPinDriveMode.Output, GpioSharingMode.Exclusive);
+                _greenPin = GpioExtensions.Connect(GpioControllerIndex, 27, GpioPinDriveMode.Output, GpioSharingMode.Exclusive);
+                _bluePin = GpioExtensions.Connect(GpioControllerIndex, 6, GpioPinDriveMode.Output, GpioSharingMode.Exclusive);
 
-            // Read current values
-            Read();
+                // Read current values
+                Read();
+            }
+            catch
+            {
+                // Close devices in case partially intialized
+                _redPin?.Dispose();
+                _greenPin?.Dispose();
+                _bluePin?.Dispose();
+
+                // Continue error
+                throw;
+            }
         }
 
         #region IDisposable

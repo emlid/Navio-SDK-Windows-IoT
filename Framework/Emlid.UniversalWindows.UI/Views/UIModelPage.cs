@@ -1,5 +1,6 @@
-﻿using Emlid.UniversalWindows.UI.Models;
-using System.Threading.Tasks;
+﻿using System;
+using System.ComponentModel;
+using Emlid.UniversalWindows.UI.Models;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -27,9 +28,18 @@ namespace Emlid.UniversalWindows.UI.Views
         #region Public Properties
 
         /// <summary>
+        /// <see cref="Model"/> <see cref="DependencyProperty"/>.
+        /// </summary>
+        public static readonly DependencyProperty ModelProperty = DependencyProperty.Register(nameof(Model), typeof(TPageUIModel), typeof(UIModelPage<TApplicationUIModel, TPageUIModel>), null);
+
+        /// <summary>
         /// Page UI model.
         /// </summary>
-        public TPageUIModel Model { get; private set; }
+        public TPageUIModel Model
+        {
+            get { return (TPageUIModel)GetValue(ModelProperty); }
+            private set { SetValue(ModelProperty, value); }
+        }
 
         #endregion
 

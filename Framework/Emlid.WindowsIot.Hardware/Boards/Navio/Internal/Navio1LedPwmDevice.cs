@@ -91,17 +91,29 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         /// </remarks>
         public Navio1LedPwmDevice()
         {
-            // Initialize members
-            _pwmChannels = new PwmPulse[PwmChannelCount];
-            _pwmChannelsReadOnly = new ReadOnlyCollection<PwmPulse>(_pwmChannels);
+            try
+            {
+                // Initialize members
+                _pwmChannels = new PwmPulse[PwmChannelCount];
+                _pwmChannelsReadOnly = new ReadOnlyCollection<PwmPulse>(_pwmChannels);
 
-            // Connect to hardware
-            _device = new Pca9685Device(I2cControllerIndex, ChipNumber, ExternalClockSpeed);
-            _enablePin = GpioExtensions.Connect(GpioControllerIndex, OutputEnableGpioPin,
-                GpioPinDriveMode.Output, GpioSharingMode.Exclusive);
+                // Connect to hardware
+                _device = new Pca9685Device(I2cControllerIndex, ChipNumber, ExternalClockSpeed);
+                _enablePin = GpioExtensions.Connect(GpioControllerIndex, OutputEnableGpioPin,
+                    GpioPinDriveMode.Output, GpioSharingMode.Exclusive);
 
-            // Read properties
-            Read();
+                // Read properties
+                Read();
+            }
+            catch
+            {
+                // Close devices in case partially initialized
+                _device?.Dispose();
+                _enablePin?.Dispose();
+
+                // Continue error
+                throw;
+            }
         }
 
         #region IDisposable
