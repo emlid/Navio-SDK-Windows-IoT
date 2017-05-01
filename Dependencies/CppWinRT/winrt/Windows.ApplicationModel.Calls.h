@@ -1,4 +1,4 @@
-// C++ for the Windows Runtime vv1.0.170303.6
+// C++ for the Windows Runtime v1.0.170406.6
 // Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
@@ -3244,76 +3244,6 @@ template <typename D> Windows::Foundation::IAsyncOperation<bool> impl_IPhoneCall
     return result;
 }
 
-template <typename D> void impl_ILockScreenCallEndCallDeferral<D>::Complete() const
-{
-    check_hresult(WINRT_SHIM(ILockScreenCallEndCallDeferral)->abi_Complete());
-}
-
-template <typename D> Windows::ApplicationModel::Calls::LockScreenCallEndCallDeferral impl_ILockScreenCallEndRequestedEventArgs<D>::GetDeferral() const
-{
-    Windows::ApplicationModel::Calls::LockScreenCallEndCallDeferral value { nullptr };
-    check_hresult(WINRT_SHIM(ILockScreenCallEndRequestedEventArgs)->abi_GetDeferral(put_abi(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::DateTime impl_ILockScreenCallEndRequestedEventArgs<D>::Deadline() const
-{
-    Windows::Foundation::DateTime value {};
-    check_hresult(WINRT_SHIM(ILockScreenCallEndRequestedEventArgs)->get_Deadline(put_abi(value)));
-    return value;
-}
-
-template <typename D> void impl_ILockScreenCallUI<D>::Dismiss() const
-{
-    check_hresult(WINRT_SHIM(ILockScreenCallUI)->abi_Dismiss());
-}
-
-template <typename D> event_token impl_ILockScreenCallUI<D>::EndRequested(const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::LockScreenCallUI, Windows::ApplicationModel::Calls::LockScreenCallEndRequestedEventArgs> & handler) const
-{
-    event_token token {};
-    check_hresult(WINRT_SHIM(ILockScreenCallUI)->add_EndRequested(get_abi(handler), &token));
-    return token;
-}
-
-template <typename D> event_revoker<ILockScreenCallUI> impl_ILockScreenCallUI<D>::EndRequested(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::LockScreenCallUI, Windows::ApplicationModel::Calls::LockScreenCallEndRequestedEventArgs> & handler) const
-{
-    return impl::make_event_revoker<D, ILockScreenCallUI>(this, &ABI::Windows::ApplicationModel::Calls::ILockScreenCallUI::remove_EndRequested, EndRequested(handler));
-}
-
-template <typename D> void impl_ILockScreenCallUI<D>::EndRequested(event_token token) const
-{
-    check_hresult(WINRT_SHIM(ILockScreenCallUI)->remove_EndRequested(token));
-}
-
-template <typename D> event_token impl_ILockScreenCallUI<D>::Closed(const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::LockScreenCallUI, Windows::Foundation::IInspectable> & handler) const
-{
-    event_token token {};
-    check_hresult(WINRT_SHIM(ILockScreenCallUI)->add_Closed(get_abi(handler), &token));
-    return token;
-}
-
-template <typename D> event_revoker<ILockScreenCallUI> impl_ILockScreenCallUI<D>::Closed(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::LockScreenCallUI, Windows::Foundation::IInspectable> & handler) const
-{
-    return impl::make_event_revoker<D, ILockScreenCallUI>(this, &ABI::Windows::ApplicationModel::Calls::ILockScreenCallUI::remove_Closed, Closed(handler));
-}
-
-template <typename D> void impl_ILockScreenCallUI<D>::Closed(event_token token) const
-{
-    check_hresult(WINRT_SHIM(ILockScreenCallUI)->remove_Closed(token));
-}
-
-template <typename D> hstring impl_ILockScreenCallUI<D>::CallTitle() const
-{
-    hstring value;
-    check_hresult(WINRT_SHIM(ILockScreenCallUI)->get_CallTitle(put_abi(value)));
-    return value;
-}
-
-template <typename D> void impl_ILockScreenCallUI<D>::CallTitle(hstring_view value) const
-{
-    check_hresult(WINRT_SHIM(ILockScreenCallUI)->put_CallTitle(get_abi(value)));
-}
-
 template <typename D> Windows::ApplicationModel::Calls::VoipPhoneCallState impl_ICallStateChangeEventArgs<D>::State() const
 {
     Windows::ApplicationModel::Calls::VoipPhoneCallState value {};
@@ -3560,6 +3490,76 @@ template <typename D> Windows::ApplicationModel::Calls::VoipCallCoordinator impl
     Windows::ApplicationModel::Calls::VoipCallCoordinator coordinator { nullptr };
     check_hresult(WINRT_SHIM(IVoipCallCoordinatorStatics)->abi_GetDefault(put_abi(coordinator)));
     return coordinator;
+}
+
+template <typename D> void impl_ILockScreenCallEndCallDeferral<D>::Complete() const
+{
+    check_hresult(WINRT_SHIM(ILockScreenCallEndCallDeferral)->abi_Complete());
+}
+
+template <typename D> Windows::ApplicationModel::Calls::LockScreenCallEndCallDeferral impl_ILockScreenCallEndRequestedEventArgs<D>::GetDeferral() const
+{
+    Windows::ApplicationModel::Calls::LockScreenCallEndCallDeferral value { nullptr };
+    check_hresult(WINRT_SHIM(ILockScreenCallEndRequestedEventArgs)->abi_GetDeferral(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::DateTime impl_ILockScreenCallEndRequestedEventArgs<D>::Deadline() const
+{
+    Windows::Foundation::DateTime value {};
+    check_hresult(WINRT_SHIM(ILockScreenCallEndRequestedEventArgs)->get_Deadline(put_abi(value)));
+    return value;
+}
+
+template <typename D> void impl_ILockScreenCallUI<D>::Dismiss() const
+{
+    check_hresult(WINRT_SHIM(ILockScreenCallUI)->abi_Dismiss());
+}
+
+template <typename D> event_token impl_ILockScreenCallUI<D>::EndRequested(const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::LockScreenCallUI, Windows::ApplicationModel::Calls::LockScreenCallEndRequestedEventArgs> & handler) const
+{
+    event_token token {};
+    check_hresult(WINRT_SHIM(ILockScreenCallUI)->add_EndRequested(get_abi(handler), &token));
+    return token;
+}
+
+template <typename D> event_revoker<ILockScreenCallUI> impl_ILockScreenCallUI<D>::EndRequested(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::LockScreenCallUI, Windows::ApplicationModel::Calls::LockScreenCallEndRequestedEventArgs> & handler) const
+{
+    return impl::make_event_revoker<D, ILockScreenCallUI>(this, &ABI::Windows::ApplicationModel::Calls::ILockScreenCallUI::remove_EndRequested, EndRequested(handler));
+}
+
+template <typename D> void impl_ILockScreenCallUI<D>::EndRequested(event_token token) const
+{
+    check_hresult(WINRT_SHIM(ILockScreenCallUI)->remove_EndRequested(token));
+}
+
+template <typename D> event_token impl_ILockScreenCallUI<D>::Closed(const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::LockScreenCallUI, Windows::Foundation::IInspectable> & handler) const
+{
+    event_token token {};
+    check_hresult(WINRT_SHIM(ILockScreenCallUI)->add_Closed(get_abi(handler), &token));
+    return token;
+}
+
+template <typename D> event_revoker<ILockScreenCallUI> impl_ILockScreenCallUI<D>::Closed(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::Calls::LockScreenCallUI, Windows::Foundation::IInspectable> & handler) const
+{
+    return impl::make_event_revoker<D, ILockScreenCallUI>(this, &ABI::Windows::ApplicationModel::Calls::ILockScreenCallUI::remove_Closed, Closed(handler));
+}
+
+template <typename D> void impl_ILockScreenCallUI<D>::Closed(event_token token) const
+{
+    check_hresult(WINRT_SHIM(ILockScreenCallUI)->remove_Closed(token));
+}
+
+template <typename D> hstring impl_ILockScreenCallUI<D>::CallTitle() const
+{
+    hstring value;
+    check_hresult(WINRT_SHIM(ILockScreenCallUI)->get_CallTitle(put_abi(value)));
+    return value;
+}
+
+template <typename D> void impl_ILockScreenCallUI<D>::CallTitle(hstring_view value) const
+{
+    check_hresult(WINRT_SHIM(ILockScreenCallUI)->put_CallTitle(get_abi(value)));
 }
 
 template <typename D> hstring impl_IPhoneCallHistoryEntry<D>::Id() const

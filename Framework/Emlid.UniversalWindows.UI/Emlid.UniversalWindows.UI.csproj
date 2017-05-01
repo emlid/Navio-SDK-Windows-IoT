@@ -79,10 +79,6 @@
       <Project>{d8f241c6-29cb-4aa6-ad34-398cba6d1c16}</Project>
       <Name>Emlid.UniversalWindows</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Emlid.WindowsIot.HardwarePlus\Emlid.WindowsIot.HardwarePlus.vcxproj">
-      <Project>{2c5df7f8-8e4f-451b-88e2-b9c879c923e6}</Project>
-      <Name>Emlid.WindowsIot.HardwarePlus</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Emlid.WindowsIoT.Hardware\Emlid.WindowsIot.Hardware.csproj">
       <Project>{fe8e8830-ee45-46f0-88a5-4a14ad02ee50}</Project>
       <Name>Emlid.WindowsIot.Hardware</Name>
@@ -90,7 +86,7 @@
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\..\Common\CustomDictionary.xml">
-      <Link>CustomDictionary.xml</Link>
+      <Link>Views\CustomDictionary.xml</Link>
     </CodeAnalysisDictionary>
   </ItemGroup>
   <ItemGroup>

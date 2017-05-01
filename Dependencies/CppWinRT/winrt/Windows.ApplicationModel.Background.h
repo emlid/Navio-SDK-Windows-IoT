@@ -1,4 +1,4 @@
-// C++ for the Windows Runtime vv1.0.170303.6
+// C++ for the Windows Runtime v1.0.170406.6
 // Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
@@ -6,9 +6,9 @@
 #include "base.h"
 WINRT_WARNING_PUSH
 
+#include "internal/Windows.Foundation.3.h"
 #include "internal/Windows.ApplicationModel.Calls.Background.3.h"
 #include "internal/Windows.Devices.SmartCards.3.h"
-#include "internal/Windows.Foundation.3.h"
 #include "internal/Windows.Foundation.Collections.3.h"
 #include "internal/Windows.Storage.Provider.3.h"
 #include "internal/Windows.System.3.h"
@@ -2709,6 +2709,20 @@ struct produce<D, Windows::ApplicationModel::Background::IUserNotificationChange
 
 namespace Windows::ApplicationModel::Background {
 
+template <typename D> Windows::Foundation::IAsyncOperation<winrt::Windows::ApplicationModel::Background::AlarmAccessStatus> impl_IAlarmApplicationManagerStatics<D>::RequestAccessAsync() const
+{
+    Windows::Foundation::IAsyncOperation<winrt::Windows::ApplicationModel::Background::AlarmAccessStatus> operation;
+    check_hresult(WINRT_SHIM(IAlarmApplicationManagerStatics)->abi_RequestAccessAsync(put_abi(operation)));
+    return operation;
+}
+
+template <typename D> Windows::ApplicationModel::Background::AlarmAccessStatus impl_IAlarmApplicationManagerStatics<D>::GetAccessStatus() const
+{
+    Windows::ApplicationModel::Background::AlarmAccessStatus status {};
+    check_hresult(WINRT_SHIM(IAlarmApplicationManagerStatics)->abi_GetAccessStatus(&status));
+    return status;
+}
+
 template <typename D> Windows::ApplicationModel::Background::PhoneTrigger impl_IPhoneTriggerFactory<D>::Create(Windows::ApplicationModel::Calls::Background::PhoneTriggerType type, bool oneShot) const
 {
     Windows::ApplicationModel::Background::PhoneTrigger result { nullptr };
@@ -2742,111 +2756,6 @@ template <typename D> Windows::Devices::SmartCards::SmartCardTriggerType impl_IS
     Windows::Devices::SmartCards::SmartCardTriggerType triggerType {};
     check_hresult(WINRT_SHIM(ISmartCardTrigger)->get_TriggerType(&triggerType));
     return triggerType;
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<winrt::Windows::ApplicationModel::Background::AlarmAccessStatus> impl_IAlarmApplicationManagerStatics<D>::RequestAccessAsync() const
-{
-    Windows::Foundation::IAsyncOperation<winrt::Windows::ApplicationModel::Background::AlarmAccessStatus> operation;
-    check_hresult(WINRT_SHIM(IAlarmApplicationManagerStatics)->abi_RequestAccessAsync(put_abi(operation)));
-    return operation;
-}
-
-template <typename D> Windows::ApplicationModel::Background::AlarmAccessStatus impl_IAlarmApplicationManagerStatics<D>::GetAccessStatus() const
-{
-    Windows::ApplicationModel::Background::AlarmAccessStatus status {};
-    check_hresult(WINRT_SHIM(IAlarmApplicationManagerStatics)->abi_GetAccessStatus(&status));
-    return status;
-}
-
-template <typename D> void impl_IAppBroadcastTriggerProviderInfo<D>::DisplayNameResource(hstring_view value) const
-{
-    check_hresult(WINRT_SHIM(IAppBroadcastTriggerProviderInfo)->put_DisplayNameResource(get_abi(value)));
-}
-
-template <typename D> hstring impl_IAppBroadcastTriggerProviderInfo<D>::DisplayNameResource() const
-{
-    hstring value;
-    check_hresult(WINRT_SHIM(IAppBroadcastTriggerProviderInfo)->get_DisplayNameResource(put_abi(value)));
-    return value;
-}
-
-template <typename D> void impl_IAppBroadcastTriggerProviderInfo<D>::LogoResource(hstring_view value) const
-{
-    check_hresult(WINRT_SHIM(IAppBroadcastTriggerProviderInfo)->put_LogoResource(get_abi(value)));
-}
-
-template <typename D> hstring impl_IAppBroadcastTriggerProviderInfo<D>::LogoResource() const
-{
-    hstring value;
-    check_hresult(WINRT_SHIM(IAppBroadcastTriggerProviderInfo)->get_LogoResource(put_abi(value)));
-    return value;
-}
-
-template <typename D> void impl_IAppBroadcastTriggerProviderInfo<D>::VideoKeyFrameInterval(const Windows::Foundation::TimeSpan & value) const
-{
-    check_hresult(WINRT_SHIM(IAppBroadcastTriggerProviderInfo)->put_VideoKeyFrameInterval(get_abi(value)));
-}
-
-template <typename D> Windows::Foundation::TimeSpan impl_IAppBroadcastTriggerProviderInfo<D>::VideoKeyFrameInterval() const
-{
-    Windows::Foundation::TimeSpan value {};
-    check_hresult(WINRT_SHIM(IAppBroadcastTriggerProviderInfo)->get_VideoKeyFrameInterval(put_abi(value)));
-    return value;
-}
-
-template <typename D> void impl_IAppBroadcastTriggerProviderInfo<D>::MaxVideoBitrate(uint32_t value) const
-{
-    check_hresult(WINRT_SHIM(IAppBroadcastTriggerProviderInfo)->put_MaxVideoBitrate(value));
-}
-
-template <typename D> uint32_t impl_IAppBroadcastTriggerProviderInfo<D>::MaxVideoBitrate() const
-{
-    uint32_t value {};
-    check_hresult(WINRT_SHIM(IAppBroadcastTriggerProviderInfo)->get_MaxVideoBitrate(&value));
-    return value;
-}
-
-template <typename D> void impl_IAppBroadcastTriggerProviderInfo<D>::MaxVideoWidth(uint32_t value) const
-{
-    check_hresult(WINRT_SHIM(IAppBroadcastTriggerProviderInfo)->put_MaxVideoWidth(value));
-}
-
-template <typename D> uint32_t impl_IAppBroadcastTriggerProviderInfo<D>::MaxVideoWidth() const
-{
-    uint32_t value {};
-    check_hresult(WINRT_SHIM(IAppBroadcastTriggerProviderInfo)->get_MaxVideoWidth(&value));
-    return value;
-}
-
-template <typename D> void impl_IAppBroadcastTriggerProviderInfo<D>::MaxVideoHeight(uint32_t value) const
-{
-    check_hresult(WINRT_SHIM(IAppBroadcastTriggerProviderInfo)->put_MaxVideoHeight(value));
-}
-
-template <typename D> uint32_t impl_IAppBroadcastTriggerProviderInfo<D>::MaxVideoHeight() const
-{
-    uint32_t value {};
-    check_hresult(WINRT_SHIM(IAppBroadcastTriggerProviderInfo)->get_MaxVideoHeight(&value));
-    return value;
-}
-
-template <typename D> Windows::ApplicationModel::Background::AppBroadcastTrigger impl_IAppBroadcastTriggerFactory<D>::CreateAppBroadcastTrigger(hstring_view providerKey) const
-{
-    Windows::ApplicationModel::Background::AppBroadcastTrigger broadcastTrigger { nullptr };
-    check_hresult(WINRT_SHIM(IAppBroadcastTriggerFactory)->abi_CreateAppBroadcastTrigger(get_abi(providerKey), put_abi(broadcastTrigger)));
-    return broadcastTrigger;
-}
-
-template <typename D> void impl_IAppBroadcastTrigger<D>::ProviderInfo(const Windows::ApplicationModel::Background::AppBroadcastTriggerProviderInfo & value) const
-{
-    check_hresult(WINRT_SHIM(IAppBroadcastTrigger)->put_ProviderInfo(get_abi(value)));
-}
-
-template <typename D> Windows::ApplicationModel::Background::AppBroadcastTriggerProviderInfo impl_IAppBroadcastTrigger<D>::ProviderInfo() const
-{
-    Windows::ApplicationModel::Background::AppBroadcastTriggerProviderInfo value { nullptr };
-    check_hresult(WINRT_SHIM(IAppBroadcastTrigger)->get_ProviderInfo(put_abi(value)));
-    return value;
 }
 
 template <typename D> Windows::Foundation::Collections::ValueSet impl_IApplicationTriggerDetails<D>::Arguments() const
@@ -3762,6 +3671,97 @@ template <typename D> Windows::ApplicationModel::Background::UserNotificationCha
     Windows::ApplicationModel::Background::UserNotificationChangedTrigger trigger { nullptr };
     check_hresult(WINRT_SHIM(IUserNotificationChangedTriggerFactory)->abi_Create(notificationKinds, put_abi(trigger)));
     return trigger;
+}
+
+template <typename D> void impl_IAppBroadcastTriggerProviderInfo<D>::DisplayNameResource(hstring_view value) const
+{
+    check_hresult(WINRT_SHIM(IAppBroadcastTriggerProviderInfo)->put_DisplayNameResource(get_abi(value)));
+}
+
+template <typename D> hstring impl_IAppBroadcastTriggerProviderInfo<D>::DisplayNameResource() const
+{
+    hstring value;
+    check_hresult(WINRT_SHIM(IAppBroadcastTriggerProviderInfo)->get_DisplayNameResource(put_abi(value)));
+    return value;
+}
+
+template <typename D> void impl_IAppBroadcastTriggerProviderInfo<D>::LogoResource(hstring_view value) const
+{
+    check_hresult(WINRT_SHIM(IAppBroadcastTriggerProviderInfo)->put_LogoResource(get_abi(value)));
+}
+
+template <typename D> hstring impl_IAppBroadcastTriggerProviderInfo<D>::LogoResource() const
+{
+    hstring value;
+    check_hresult(WINRT_SHIM(IAppBroadcastTriggerProviderInfo)->get_LogoResource(put_abi(value)));
+    return value;
+}
+
+template <typename D> void impl_IAppBroadcastTriggerProviderInfo<D>::VideoKeyFrameInterval(const Windows::Foundation::TimeSpan & value) const
+{
+    check_hresult(WINRT_SHIM(IAppBroadcastTriggerProviderInfo)->put_VideoKeyFrameInterval(get_abi(value)));
+}
+
+template <typename D> Windows::Foundation::TimeSpan impl_IAppBroadcastTriggerProviderInfo<D>::VideoKeyFrameInterval() const
+{
+    Windows::Foundation::TimeSpan value {};
+    check_hresult(WINRT_SHIM(IAppBroadcastTriggerProviderInfo)->get_VideoKeyFrameInterval(put_abi(value)));
+    return value;
+}
+
+template <typename D> void impl_IAppBroadcastTriggerProviderInfo<D>::MaxVideoBitrate(uint32_t value) const
+{
+    check_hresult(WINRT_SHIM(IAppBroadcastTriggerProviderInfo)->put_MaxVideoBitrate(value));
+}
+
+template <typename D> uint32_t impl_IAppBroadcastTriggerProviderInfo<D>::MaxVideoBitrate() const
+{
+    uint32_t value {};
+    check_hresult(WINRT_SHIM(IAppBroadcastTriggerProviderInfo)->get_MaxVideoBitrate(&value));
+    return value;
+}
+
+template <typename D> void impl_IAppBroadcastTriggerProviderInfo<D>::MaxVideoWidth(uint32_t value) const
+{
+    check_hresult(WINRT_SHIM(IAppBroadcastTriggerProviderInfo)->put_MaxVideoWidth(value));
+}
+
+template <typename D> uint32_t impl_IAppBroadcastTriggerProviderInfo<D>::MaxVideoWidth() const
+{
+    uint32_t value {};
+    check_hresult(WINRT_SHIM(IAppBroadcastTriggerProviderInfo)->get_MaxVideoWidth(&value));
+    return value;
+}
+
+template <typename D> void impl_IAppBroadcastTriggerProviderInfo<D>::MaxVideoHeight(uint32_t value) const
+{
+    check_hresult(WINRT_SHIM(IAppBroadcastTriggerProviderInfo)->put_MaxVideoHeight(value));
+}
+
+template <typename D> uint32_t impl_IAppBroadcastTriggerProviderInfo<D>::MaxVideoHeight() const
+{
+    uint32_t value {};
+    check_hresult(WINRT_SHIM(IAppBroadcastTriggerProviderInfo)->get_MaxVideoHeight(&value));
+    return value;
+}
+
+template <typename D> Windows::ApplicationModel::Background::AppBroadcastTrigger impl_IAppBroadcastTriggerFactory<D>::CreateAppBroadcastTrigger(hstring_view providerKey) const
+{
+    Windows::ApplicationModel::Background::AppBroadcastTrigger broadcastTrigger { nullptr };
+    check_hresult(WINRT_SHIM(IAppBroadcastTriggerFactory)->abi_CreateAppBroadcastTrigger(get_abi(providerKey), put_abi(broadcastTrigger)));
+    return broadcastTrigger;
+}
+
+template <typename D> void impl_IAppBroadcastTrigger<D>::ProviderInfo(const Windows::ApplicationModel::Background::AppBroadcastTriggerProviderInfo & value) const
+{
+    check_hresult(WINRT_SHIM(IAppBroadcastTrigger)->put_ProviderInfo(get_abi(value)));
+}
+
+template <typename D> Windows::ApplicationModel::Background::AppBroadcastTriggerProviderInfo impl_IAppBroadcastTrigger<D>::ProviderInfo() const
+{
+    Windows::ApplicationModel::Background::AppBroadcastTriggerProviderInfo value { nullptr };
+    check_hresult(WINRT_SHIM(IAppBroadcastTrigger)->get_ProviderInfo(put_abi(value)));
+    return value;
 }
 
 inline ActivitySensorTrigger::ActivitySensorTrigger(uint32_t reportIntervalInMilliseconds) :

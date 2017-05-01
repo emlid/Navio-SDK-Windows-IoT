@@ -1,5 +1,15 @@
 ## Change Log
 
+*2017.05.01* v1.0.13
+
+Minor code update but significant in that all development tools are now release builds.
+
+1. Updated solution to Visual Studio 2017 Update 1 and Windows Creators Update SDK/WDK 10.0.15063 release.
+2. Microsoft .NET Core package/dependency updated to v5.3.3.
+3. Application UI model initialization is no longer asynchronous by default, instead hardware initialization code is invoked on a background thread only where required.
+4. RCIO test tool initialization work and clean error message for wrong model.
+
+
 *2017.03.29* v1.0.12
 
 1. Updated solution to Windows Insider Preview "Creators Update" SDK/WDK 10.0.15063.0.

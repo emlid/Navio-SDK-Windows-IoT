@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>Emlid.WindowsIot.Hardware</id>
-    <version>1.0.12-Alpha</version>
+    <version>1.0.13</version>
     <title>Emlid Windows IoT Hardware</title>
     <authors>Tony Wall</authors>
     <owners>Emlid</owners>
@@ -18,11 +18,11 @@
     </description>
     <tags>Emlid Hardware SDK IoT Navio Autopilot UAV</tags>
     <releaseNotes>
-      Updated release for the Windows Creators Update preview build 15063.
+      Updated release for the Windows Creators Update release build 15063. Alpha NuGet status removed as all tools are now released.
       The "Core SDK" is not finished, be prepared for breaking changes on each release until the framework has stabilized.
     </releaseNotes>
     <dependencies>
-      <dependency id="Microsoft.NETCore.UniversalWindowsPlatform" version="5.3.1" />
+      <dependency id="Microsoft.NETCore.UniversalWindowsPlatform" version="5.3.3" />
     </dependencies>
   </metadata>
   <files>

@@ -1,8 +1,7 @@
 ﻿using Emlid.UniversalWindows.UI.Models;
 using Emlid.WindowsIot.Hardware.Boards.Navio;
-using System.Threading.Tasks;
-using System;
 using System.ComponentModel;
+using System.Threading.Tasks;
 
 namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models
 {

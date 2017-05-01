@@ -1,4 +1,4 @@
-// C++ for the Windows Runtime vv1.0.170303.6
+// C++ for the Windows Runtime v1.0.170406.6
 // Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
@@ -1970,11 +1970,6 @@ struct produce<D, Windows::ApplicationModel::ISuspendingOperation> : produce_bas
 
 namespace Windows::ApplicationModel {
 
-template <typename D> void impl_ICameraApplicationManagerStatics<D>::ShowInstalledApplicationsUI() const
-{
-    check_hresult(WINRT_SHIM(ICameraApplicationManagerStatics)->abi_ShowInstalledApplicationsUI());
-}
-
 template <typename D> Windows::Foundation::IAsyncAction impl_IFullTrustProcessLauncherStatics<D>::LaunchFullTrustProcessForCurrentAppAsync() const
 {
     Windows::Foundation::IAsyncAction asyncAction;
@@ -2853,6 +2848,11 @@ template <typename D> Windows::Foundation::Deferral impl_IEnteredBackgroundEvent
     Windows::Foundation::Deferral value { nullptr };
     check_hresult(WINRT_SHIM(IEnteredBackgroundEventArgs)->abi_GetDeferral(put_abi(value)));
     return value;
+}
+
+template <typename D> void impl_ICameraApplicationManagerStatics<D>::ShowInstalledApplicationsUI() const
+{
+    check_hresult(WINRT_SHIM(ICameraApplicationManagerStatics)->abi_ShowInstalledApplicationsUI());
 }
 
 inline void CameraApplicationManager::ShowInstalledApplicationsUI()

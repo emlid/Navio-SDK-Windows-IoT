@@ -29,8 +29,8 @@
 	var rootNameSpace = project.Properties.Item("RootNamespace").Value.ToString();
 
 	// *****
-	// Replace resourcesNamespace to specify your own namespace
-	string resourcesNamespace = rootNameSpace + ".Resources"; 
+	// Replace resourceNamespace to specify your own namespace
+	var resourceNamespace = rootNameSpace + ".Resources"; 
 	
 	var items = new List<ReswInformation>();
 	dteHelper.GetAllProjectItems()
@@ -46,7 +46,7 @@
 	var reswItems = items.GroupBy(c => c.ResourceFileName);
 
 #>
-namespace <#= resourcesNamespace #>  {
+namespace <#= resourceNamespace #>  {
 <#
 	foreach (var item in reswItems) {					
 #>

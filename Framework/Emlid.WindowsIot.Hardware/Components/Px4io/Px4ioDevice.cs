@@ -347,8 +347,8 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io
                 {
                     if (requireCount)
                     {
-                        // Error when same count required
-                        throw new ArgumentOutOfRangeException(nameof(requireCount));
+                        // Error when exact size required
+                        throw new ArgumentOutOfRangeException(nameof(count));
                     }
 
                     // Okay to exit with less data

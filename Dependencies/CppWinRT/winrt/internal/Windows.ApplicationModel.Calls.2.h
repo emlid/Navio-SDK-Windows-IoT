@@ -1,4 +1,4 @@
-// C++ for the Windows Runtime vv1.0.170303.6
+// C++ for the Windows Runtime v1.0.170406.6
 // Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
@@ -79,55 +79,10 @@ namespace ABI::Windows::Foundation::Collections {
 template <> struct __declspec(uuid("e2fcc7c1-3bfc-5a0b-b2b0-72e769d1cb7e")) __declspec(novtable) IIterable<hstring> : impl_IIterable<hstring> {};
 #endif
 
-#ifndef WINRT_GENERIC_2f13c006_a03a_5f69_b090_75a43e33423e
-#define WINRT_GENERIC_2f13c006_a03a_5f69_b090_75a43e33423e
-template <> struct __declspec(uuid("2f13c006-a03a-5f69-b090-75a43e33423e")) __declspec(novtable) IVectorView<hstring> : impl_IVectorView<hstring> {};
-#endif
-
-#ifndef WINRT_GENERIC_1b0d3570_0877_5ec2_8a2c_3b9539506aca
-#define WINRT_GENERIC_1b0d3570_0877_5ec2_8a2c_3b9539506aca
-template <> struct __declspec(uuid("1b0d3570-0877-5ec2-8a2c-3b9539506aca")) __declspec(novtable) IMap<hstring, Windows::Foundation::IInspectable> : impl_IMap<hstring, Windows::Foundation::IInspectable> {};
-#endif
-
 
 }
 
 namespace ABI::Windows::Foundation {
-
-#ifndef WINRT_GENERIC_ef60385f_be78_584b_aaef_7829ada2b0de
-#define WINRT_GENERIC_ef60385f_be78_584b_aaef_7829ada2b0de
-template <> struct __declspec(uuid("ef60385f-be78-584b-aaef-7829ada2b0de")) __declspec(novtable) IAsyncOperation<uint32_t> : impl_IAsyncOperation<uint32_t> {};
-#endif
-
-
-}
-
-namespace ABI::Windows::Foundation::Collections {
-
-#ifndef WINRT_GENERIC_98b9acc1_4b56_532e_ac73_03d5291cca90
-#define WINRT_GENERIC_98b9acc1_4b56_532e_ac73_03d5291cca90
-template <> struct __declspec(uuid("98b9acc1-4b56-532e-ac73-03d5291cca90")) __declspec(novtable) IVector<hstring> : impl_IVector<hstring> {};
-#endif
-
-
-}
-
-namespace ABI::Windows::Foundation {
-
-#ifndef WINRT_GENERIC_92f7c40e_e7b9_5f68_98f0_56fb89015806
-#define WINRT_GENERIC_92f7c40e_e7b9_5f68_98f0_56fb89015806
-template <> struct __declspec(uuid("92f7c40e-e7b9-5f68-98f0-56fb89015806")) __declspec(novtable) TypedEventHandler<Windows::ApplicationModel::Calls::LockScreenCallUI, Windows::ApplicationModel::Calls::LockScreenCallEndRequestedEventArgs> : impl_TypedEventHandler<Windows::ApplicationModel::Calls::LockScreenCallUI, Windows::ApplicationModel::Calls::LockScreenCallEndRequestedEventArgs> {};
-#endif
-
-#ifndef WINRT_GENERIC_addada2a_e5a7_5921_b7e0_17323adf7382
-#define WINRT_GENERIC_addada2a_e5a7_5921_b7e0_17323adf7382
-template <> struct __declspec(uuid("addada2a-e5a7-5921-b7e0-17323adf7382")) __declspec(novtable) TypedEventHandler<Windows::ApplicationModel::Calls::LockScreenCallUI, Windows::Foundation::IInspectable> : impl_TypedEventHandler<Windows::ApplicationModel::Calls::LockScreenCallUI, Windows::Foundation::IInspectable> {};
-#endif
-
-#ifndef WINRT_GENERIC_604d0c4c_91de_5c2a_935f_362f13eaf800
-#define WINRT_GENERIC_604d0c4c_91de_5c2a_935f_362f13eaf800
-template <> struct __declspec(uuid("604d0c4c-91de-5c2a-935f-362f13eaf800")) __declspec(novtable) IReference<Windows::Foundation::TimeSpan> : impl_IReference<Windows::Foundation::TimeSpan> {};
-#endif
 
 #ifndef WINRT_GENERIC_1e00c6cc_e14c_51ce_93f3_0a0a9a3f3eec
 #define WINRT_GENERIC_1e00c6cc_e14c_51ce_93f3_0a0a9a3f3eec
@@ -154,15 +109,60 @@ template <> struct __declspec(uuid("8528be80-7ce9-5668-8e48-469ae5ba9ead")) __de
 template <> struct __declspec(uuid("ecafec77-4bf6-57b7-86c6-e2feca5b5aee")) __declspec(novtable) TypedEventHandler<Windows::ApplicationModel::Calls::VoipCallCoordinator, Windows::ApplicationModel::Calls::MuteChangeEventArgs> : impl_TypedEventHandler<Windows::ApplicationModel::Calls::VoipCallCoordinator, Windows::ApplicationModel::Calls::MuteChangeEventArgs> {};
 #endif
 
+#ifndef WINRT_GENERIC_92f7c40e_e7b9_5f68_98f0_56fb89015806
+#define WINRT_GENERIC_92f7c40e_e7b9_5f68_98f0_56fb89015806
+template <> struct __declspec(uuid("92f7c40e-e7b9-5f68-98f0-56fb89015806")) __declspec(novtable) TypedEventHandler<Windows::ApplicationModel::Calls::LockScreenCallUI, Windows::ApplicationModel::Calls::LockScreenCallEndRequestedEventArgs> : impl_TypedEventHandler<Windows::ApplicationModel::Calls::LockScreenCallUI, Windows::ApplicationModel::Calls::LockScreenCallEndRequestedEventArgs> {};
+#endif
+
+#ifndef WINRT_GENERIC_addada2a_e5a7_5921_b7e0_17323adf7382
+#define WINRT_GENERIC_addada2a_e5a7_5921_b7e0_17323adf7382
+template <> struct __declspec(uuid("addada2a-e5a7-5921-b7e0-17323adf7382")) __declspec(novtable) TypedEventHandler<Windows::ApplicationModel::Calls::LockScreenCallUI, Windows::Foundation::IInspectable> : impl_TypedEventHandler<Windows::ApplicationModel::Calls::LockScreenCallUI, Windows::Foundation::IInspectable> {};
+#endif
+
+#ifndef WINRT_GENERIC_ef60385f_be78_584b_aaef_7829ada2b0de
+#define WINRT_GENERIC_ef60385f_be78_584b_aaef_7829ada2b0de
+template <> struct __declspec(uuid("ef60385f-be78-584b-aaef-7829ada2b0de")) __declspec(novtable) IAsyncOperation<uint32_t> : impl_IAsyncOperation<uint32_t> {};
+#endif
+
 
 }
 
 namespace ABI::Windows::Foundation::Collections {
 
+#ifndef WINRT_GENERIC_1b0d3570_0877_5ec2_8a2c_3b9539506aca
+#define WINRT_GENERIC_1b0d3570_0877_5ec2_8a2c_3b9539506aca
+template <> struct __declspec(uuid("1b0d3570-0877-5ec2-8a2c-3b9539506aca")) __declspec(novtable) IMap<hstring, Windows::Foundation::IInspectable> : impl_IMap<hstring, Windows::Foundation::IInspectable> {};
+#endif
+
 #ifndef WINRT_GENERIC_09335560_6c6b_5a26_9348_97b781132b20
 #define WINRT_GENERIC_09335560_6c6b_5a26_9348_97b781132b20
 template <> struct __declspec(uuid("09335560-6c6b-5a26-9348-97b781132b20")) __declspec(novtable) IKeyValuePair<hstring, Windows::Foundation::IInspectable> : impl_IKeyValuePair<hstring, Windows::Foundation::IInspectable> {};
 #endif
+
+#ifndef WINRT_GENERIC_2f13c006_a03a_5f69_b090_75a43e33423e
+#define WINRT_GENERIC_2f13c006_a03a_5f69_b090_75a43e33423e
+template <> struct __declspec(uuid("2f13c006-a03a-5f69-b090-75a43e33423e")) __declspec(novtable) IVectorView<hstring> : impl_IVectorView<hstring> {};
+#endif
+
+#ifndef WINRT_GENERIC_98b9acc1_4b56_532e_ac73_03d5291cca90
+#define WINRT_GENERIC_98b9acc1_4b56_532e_ac73_03d5291cca90
+template <> struct __declspec(uuid("98b9acc1-4b56-532e-ac73-03d5291cca90")) __declspec(novtable) IVector<hstring> : impl_IVector<hstring> {};
+#endif
+
+
+}
+
+namespace ABI::Windows::Foundation {
+
+#ifndef WINRT_GENERIC_604d0c4c_91de_5c2a_935f_362f13eaf800
+#define WINRT_GENERIC_604d0c4c_91de_5c2a_935f_362f13eaf800
+template <> struct __declspec(uuid("604d0c4c-91de-5c2a-935f-362f13eaf800")) __declspec(novtable) IReference<Windows::Foundation::TimeSpan> : impl_IReference<Windows::Foundation::TimeSpan> {};
+#endif
+
+
+}
+
+namespace ABI::Windows::Foundation::Collections {
 
 #ifndef WINRT_GENERIC_452ce6ed_a06d_58fb_be06_cb4330b7f5c7
 #define WINRT_GENERIC_452ce6ed_a06d_58fb_be06_cb4330b7f5c7
@@ -239,14 +239,14 @@ template <> struct __declspec(uuid("8c304ebb-6615-50a4-8829-879ecd443236")) __de
 
 namespace ABI::Windows::Foundation {
 
-#ifndef WINRT_GENERIC_9343b6e7_e3d2_5e4a_ab2d_2bce4919a6a4
-#define WINRT_GENERIC_9343b6e7_e3d2_5e4a_ab2d_2bce4919a6a4
-template <> struct __declspec(uuid("9343b6e7-e3d2-5e4a-ab2d-2bce4919a6a4")) __declspec(novtable) AsyncOperationCompletedHandler<uint32_t> : impl_AsyncOperationCompletedHandler<uint32_t> {};
-#endif
-
 #ifndef WINRT_GENERIC_7a27b20f_647a_53fc_80f0_a79d083ce531
 #define WINRT_GENERIC_7a27b20f_647a_53fc_80f0_a79d083ce531
 template <> struct __declspec(uuid("7a27b20f-647a-53fc-80f0-a79d083ce531")) __declspec(novtable) AsyncOperationCompletedHandler<winrt::Windows::ApplicationModel::Calls::VoipPhoneCallResourceReservationStatus> : impl_AsyncOperationCompletedHandler<winrt::Windows::ApplicationModel::Calls::VoipPhoneCallResourceReservationStatus> {};
+#endif
+
+#ifndef WINRT_GENERIC_9343b6e7_e3d2_5e4a_ab2d_2bce4919a6a4
+#define WINRT_GENERIC_9343b6e7_e3d2_5e4a_ab2d_2bce4919a6a4
+template <> struct __declspec(uuid("9343b6e7-e3d2-5e4a-ab2d-2bce4919a6a4")) __declspec(novtable) AsyncOperationCompletedHandler<uint32_t> : impl_AsyncOperationCompletedHandler<uint32_t> {};
 #endif
 
 

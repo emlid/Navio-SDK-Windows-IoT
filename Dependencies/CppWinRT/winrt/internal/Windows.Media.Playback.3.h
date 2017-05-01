@@ -1,4 +1,4 @@
-// C++ for the Windows Runtime vv1.0.170303.6
+// C++ for the Windows Runtime v1.0.170406.6
 // Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
@@ -168,9 +168,9 @@ struct WINRT_EBO MediaPlaybackItem :
     impl::require<MediaPlaybackItem, Windows::Media::Playback::IMediaPlaybackItem2, Windows::Media::Playback::IMediaPlaybackItem3>
 {
     MediaPlaybackItem(std::nullptr_t) noexcept {}
-    MediaPlaybackItem(const Windows::Media::Core::MediaSource & source);
     MediaPlaybackItem(const Windows::Media::Core::MediaSource & source, const Windows::Foundation::TimeSpan & startTime);
     MediaPlaybackItem(const Windows::Media::Core::MediaSource & source, const Windows::Foundation::TimeSpan & startTime, const Windows::Foundation::TimeSpan & durationLimit);
+    MediaPlaybackItem(const Windows::Media::Core::MediaSource & source);
     static Windows::Media::Playback::MediaPlaybackItem FindFromMediaSource(const Windows::Media::Core::MediaSource & source);
 };
 

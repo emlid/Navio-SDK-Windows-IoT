@@ -1,4 +1,4 @@
-// C++ for the Windows Runtime vv1.0.170303.6
+// C++ for the Windows Runtime v1.0.170406.6
 // Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
@@ -57,9 +57,9 @@ struct WINRT_EBO LoggingChannel :
     impl::require<LoggingChannel, Windows::Foundation::Diagnostics::ILoggingTarget, Windows::Foundation::Diagnostics::ILoggingChannel2>
 {
     LoggingChannel(std::nullptr_t) noexcept {}
+    LoggingChannel(hstring_view name);
     LoggingChannel(hstring_view name, const Windows::Foundation::Diagnostics::LoggingChannelOptions & options);
     LoggingChannel(hstring_view name, const Windows::Foundation::Diagnostics::LoggingChannelOptions & options, GUID id);
-    LoggingChannel(hstring_view name);
 };
 
 struct WINRT_EBO LoggingChannelOptions :

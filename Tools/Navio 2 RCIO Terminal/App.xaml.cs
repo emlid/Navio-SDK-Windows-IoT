@@ -29,13 +29,10 @@ namespace Emlid.WindowsIot.Tools.Navio2RcioTerminal
         /// <summary>
         /// Creates an application specific model at runtime.
         /// </summary>
-        protected override async Task<RcioTerminalApplicationUIModel> CreateModel(TaskScheduler scheduler)
+        protected override RcioTerminalApplicationUIModel CreateModel(TaskFactory uiTaskFactory)
         {
-            return await Task.Run(() =>
-            {
-                // Create UI model
-                return new RcioTerminalApplicationUIModel(new TaskFactory(scheduler));
-            });
+            // Create UI model
+            return new RcioTerminalApplicationUIModel(uiTaskFactory);
         }
 
         #endregion

@@ -1,4 +1,4 @@
-// C++ for the Windows Runtime vv1.0.170303.6
+// C++ for the Windows Runtime v1.0.170406.6
 // Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
@@ -7,10 +7,10 @@
 WINRT_WARNING_PUSH
 
 #include "internal/Windows.Foundation.3.h"
-#include "internal/Windows.Foundation.Collections.3.h"
-#include "internal/Windows.UI.Popups.3.h"
 #include "internal/Windows.System.3.h"
 #include "internal/Windows.UI.Input.3.h"
+#include "internal/Windows.Foundation.Collections.3.h"
+#include "internal/Windows.UI.Popups.3.h"
 #include "internal/Windows.UI.Core.3.h"
 #include "Windows.UI.h"
 
@@ -2880,53 +2880,6 @@ struct produce<D, Windows::UI::Core::IPointerEventArgs> : produce_base<D, Window
 };
 
 template <typename D>
-struct produce<D, Windows::UI::Core::ISystemNavigationCloseRequestedEventArgs> : produce_base<D, Windows::UI::Core::ISystemNavigationCloseRequestedEventArgs>
-{
-    HRESULT __stdcall get_Handled(bool * value) noexcept override
-    {
-        try
-        {
-            typename D::abi_guard guard(this->shim());
-            *value = detach_abi(this->shim().Handled());
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall put_Handled(bool value) noexcept override
-    {
-        try
-        {
-            typename D::abi_guard guard(this->shim());
-            this->shim().Handled(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall abi_GetDeferral(impl::abi_arg_out<Windows::Foundation::IDeferral> result) noexcept override
-    {
-        try
-        {
-            typename D::abi_guard guard(this->shim());
-            *result = detach_abi(this->shim().GetDeferral());
-            return S_OK;
-        }
-        catch (...)
-        {
-            *result = nullptr;
-            return impl::to_hresult();
-        }
-    }
-};
-
-template <typename D>
 struct produce<D, Windows::UI::Core::ISystemNavigationManager> : produce_base<D, Windows::UI::Core::ISystemNavigationManager>
 {
     HRESULT __stdcall add_BackRequested(impl::abi_arg_in<Windows::Foundation::EventHandler<Windows::UI::Core::BackRequestedEventArgs>> handler, event_token * token) noexcept override
@@ -2981,38 +2934,6 @@ struct produce<D, Windows::UI::Core::ISystemNavigationManager2> : produce_base<D
         {
             typename D::abi_guard guard(this->shim());
             this->shim().AppViewBackButtonVisibility(value);
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-};
-
-template <typename D>
-struct produce<D, Windows::UI::Core::ISystemNavigationManager3> : produce_base<D, Windows::UI::Core::ISystemNavigationManager3>
-{
-    HRESULT __stdcall add_CloseRequested(impl::abi_arg_in<Windows::Foundation::TypedEventHandler<Windows::UI::Core::SystemNavigationManager, Windows::UI::Core::SystemNavigationCloseRequestedEventArgs>> handler, event_token * token) noexcept override
-    {
-        try
-        {
-            typename D::abi_guard guard(this->shim());
-            *token = detach_abi(this->shim().CloseRequested(*reinterpret_cast<const Windows::Foundation::TypedEventHandler<Windows::UI::Core::SystemNavigationManager, Windows::UI::Core::SystemNavigationCloseRequestedEventArgs> *>(&handler)));
-            return S_OK;
-        }
-        catch (...)
-        {
-            return impl::to_hresult();
-        }
-    }
-
-    HRESULT __stdcall remove_CloseRequested(event_token token) noexcept override
-    {
-        try
-        {
-            typename D::abi_guard guard(this->shim());
-            this->shim().CloseRequested(token);
             return S_OK;
         }
         catch (...)
@@ -3187,230 +3108,6 @@ struct produce<D, Windows::UI::Core::IWindowSizeChangedEventArgs> : produce_base
 
 namespace Windows::UI::Core {
 
-template <typename D> void impl_ICoreWindowPopupShowingEventArgs<D>::SetDesiredSize(const Windows::Foundation::Size & value) const
-{
-    check_hresult(WINRT_SHIM(ICoreWindowPopupShowingEventArgs)->abi_SetDesiredSize(get_abi(value)));
-}
-
-template <typename D> event_token impl_ICoreWindowDialog<D>::Showing(const Windows::Foundation::TypedEventHandler<Windows::UI::Core::CoreWindow, Windows::UI::Core::CoreWindowPopupShowingEventArgs> & handler) const
-{
-    event_token cookie {};
-    check_hresult(WINRT_SHIM(ICoreWindowDialog)->add_Showing(get_abi(handler), &cookie));
-    return cookie;
-}
-
-template <typename D> event_revoker<ICoreWindowDialog> impl_ICoreWindowDialog<D>::Showing(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::UI::Core::CoreWindow, Windows::UI::Core::CoreWindowPopupShowingEventArgs> & handler) const
-{
-    return impl::make_event_revoker<D, ICoreWindowDialog>(this, &ABI::Windows::UI::Core::ICoreWindowDialog::remove_Showing, Showing(handler));
-}
-
-template <typename D> void impl_ICoreWindowDialog<D>::Showing(event_token cookie) const
-{
-    check_hresult(WINRT_SHIM(ICoreWindowDialog)->remove_Showing(cookie));
-}
-
-template <typename D> Windows::Foundation::Size impl_ICoreWindowDialog<D>::MaxSize() const
-{
-    Windows::Foundation::Size value {};
-    check_hresult(WINRT_SHIM(ICoreWindowDialog)->get_MaxSize(put_abi(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Size impl_ICoreWindowDialog<D>::MinSize() const
-{
-    Windows::Foundation::Size value {};
-    check_hresult(WINRT_SHIM(ICoreWindowDialog)->get_MinSize(put_abi(value)));
-    return value;
-}
-
-template <typename D> hstring impl_ICoreWindowDialog<D>::Title() const
-{
-    hstring value;
-    check_hresult(WINRT_SHIM(ICoreWindowDialog)->get_Title(put_abi(value)));
-    return value;
-}
-
-template <typename D> void impl_ICoreWindowDialog<D>::Title(hstring_view value) const
-{
-    check_hresult(WINRT_SHIM(ICoreWindowDialog)->put_Title(get_abi(value)));
-}
-
-template <typename D> int32_t impl_ICoreWindowDialog<D>::IsInteractionDelayed() const
-{
-    int32_t value {};
-    check_hresult(WINRT_SHIM(ICoreWindowDialog)->get_IsInteractionDelayed(&value));
-    return value;
-}
-
-template <typename D> void impl_ICoreWindowDialog<D>::IsInteractionDelayed(int32_t value) const
-{
-    check_hresult(WINRT_SHIM(ICoreWindowDialog)->put_IsInteractionDelayed(value));
-}
-
-template <typename D> Windows::Foundation::Collections::IVector<Windows::UI::Popups::IUICommand> impl_ICoreWindowDialog<D>::Commands() const
-{
-    Windows::Foundation::Collections::IVector<Windows::UI::Popups::IUICommand> value;
-    check_hresult(WINRT_SHIM(ICoreWindowDialog)->get_Commands(put_abi(value)));
-    return value;
-}
-
-template <typename D> uint32_t impl_ICoreWindowDialog<D>::DefaultCommandIndex() const
-{
-    uint32_t value {};
-    check_hresult(WINRT_SHIM(ICoreWindowDialog)->get_DefaultCommandIndex(&value));
-    return value;
-}
-
-template <typename D> void impl_ICoreWindowDialog<D>::DefaultCommandIndex(uint32_t value) const
-{
-    check_hresult(WINRT_SHIM(ICoreWindowDialog)->put_DefaultCommandIndex(value));
-}
-
-template <typename D> uint32_t impl_ICoreWindowDialog<D>::CancelCommandIndex() const
-{
-    uint32_t value {};
-    check_hresult(WINRT_SHIM(ICoreWindowDialog)->get_CancelCommandIndex(&value));
-    return value;
-}
-
-template <typename D> void impl_ICoreWindowDialog<D>::CancelCommandIndex(uint32_t value) const
-{
-    check_hresult(WINRT_SHIM(ICoreWindowDialog)->put_CancelCommandIndex(value));
-}
-
-template <typename D> Windows::UI::Popups::UICommandInvokedHandler impl_ICoreWindowDialog<D>::BackButtonCommand() const
-{
-    Windows::UI::Popups::UICommandInvokedHandler value {};
-    check_hresult(WINRT_SHIM(ICoreWindowDialog)->get_BackButtonCommand(put_abi(value)));
-    return value;
-}
-
-template <typename D> void impl_ICoreWindowDialog<D>::BackButtonCommand(const Windows::UI::Popups::UICommandInvokedHandler & value) const
-{
-    check_hresult(WINRT_SHIM(ICoreWindowDialog)->put_BackButtonCommand(get_abi(value)));
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::UI::Popups::IUICommand> impl_ICoreWindowDialog<D>::ShowAsync() const
-{
-    Windows::Foundation::IAsyncOperation<Windows::UI::Popups::IUICommand> asyncInfo;
-    check_hresult(WINRT_SHIM(ICoreWindowDialog)->abi_ShowAsync(put_abi(asyncInfo)));
-    return asyncInfo;
-}
-
-template <typename D> Windows::UI::Core::CoreWindowDialog impl_ICoreWindowDialogFactory<D>::CreateWithTitle(hstring_view title) const
-{
-    Windows::UI::Core::CoreWindowDialog coreWindowDialog { nullptr };
-    check_hresult(WINRT_SHIM(ICoreWindowDialogFactory)->abi_CreateWithTitle(get_abi(title), put_abi(coreWindowDialog)));
-    return coreWindowDialog;
-}
-
-template <typename D> event_token impl_ICoreWindowFlyout<D>::Showing(const Windows::Foundation::TypedEventHandler<Windows::UI::Core::CoreWindow, Windows::UI::Core::CoreWindowPopupShowingEventArgs> & handler) const
-{
-    event_token cookie {};
-    check_hresult(WINRT_SHIM(ICoreWindowFlyout)->add_Showing(get_abi(handler), &cookie));
-    return cookie;
-}
-
-template <typename D> event_revoker<ICoreWindowFlyout> impl_ICoreWindowFlyout<D>::Showing(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::UI::Core::CoreWindow, Windows::UI::Core::CoreWindowPopupShowingEventArgs> & handler) const
-{
-    return impl::make_event_revoker<D, ICoreWindowFlyout>(this, &ABI::Windows::UI::Core::ICoreWindowFlyout::remove_Showing, Showing(handler));
-}
-
-template <typename D> void impl_ICoreWindowFlyout<D>::Showing(event_token cookie) const
-{
-    check_hresult(WINRT_SHIM(ICoreWindowFlyout)->remove_Showing(cookie));
-}
-
-template <typename D> Windows::Foundation::Size impl_ICoreWindowFlyout<D>::MaxSize() const
-{
-    Windows::Foundation::Size value {};
-    check_hresult(WINRT_SHIM(ICoreWindowFlyout)->get_MaxSize(put_abi(value)));
-    return value;
-}
-
-template <typename D> Windows::Foundation::Size impl_ICoreWindowFlyout<D>::MinSize() const
-{
-    Windows::Foundation::Size value {};
-    check_hresult(WINRT_SHIM(ICoreWindowFlyout)->get_MinSize(put_abi(value)));
-    return value;
-}
-
-template <typename D> hstring impl_ICoreWindowFlyout<D>::Title() const
-{
-    hstring value;
-    check_hresult(WINRT_SHIM(ICoreWindowFlyout)->get_Title(put_abi(value)));
-    return value;
-}
-
-template <typename D> void impl_ICoreWindowFlyout<D>::Title(hstring_view value) const
-{
-    check_hresult(WINRT_SHIM(ICoreWindowFlyout)->put_Title(get_abi(value)));
-}
-
-template <typename D> int32_t impl_ICoreWindowFlyout<D>::IsInteractionDelayed() const
-{
-    int32_t value {};
-    check_hresult(WINRT_SHIM(ICoreWindowFlyout)->get_IsInteractionDelayed(&value));
-    return value;
-}
-
-template <typename D> void impl_ICoreWindowFlyout<D>::IsInteractionDelayed(int32_t value) const
-{
-    check_hresult(WINRT_SHIM(ICoreWindowFlyout)->put_IsInteractionDelayed(value));
-}
-
-template <typename D> Windows::Foundation::Collections::IVector<Windows::UI::Popups::IUICommand> impl_ICoreWindowFlyout<D>::Commands() const
-{
-    Windows::Foundation::Collections::IVector<Windows::UI::Popups::IUICommand> value;
-    check_hresult(WINRT_SHIM(ICoreWindowFlyout)->get_Commands(put_abi(value)));
-    return value;
-}
-
-template <typename D> uint32_t impl_ICoreWindowFlyout<D>::DefaultCommandIndex() const
-{
-    uint32_t value {};
-    check_hresult(WINRT_SHIM(ICoreWindowFlyout)->get_DefaultCommandIndex(&value));
-    return value;
-}
-
-template <typename D> void impl_ICoreWindowFlyout<D>::DefaultCommandIndex(uint32_t value) const
-{
-    check_hresult(WINRT_SHIM(ICoreWindowFlyout)->put_DefaultCommandIndex(value));
-}
-
-template <typename D> Windows::UI::Popups::UICommandInvokedHandler impl_ICoreWindowFlyout<D>::BackButtonCommand() const
-{
-    Windows::UI::Popups::UICommandInvokedHandler value {};
-    check_hresult(WINRT_SHIM(ICoreWindowFlyout)->get_BackButtonCommand(put_abi(value)));
-    return value;
-}
-
-template <typename D> void impl_ICoreWindowFlyout<D>::BackButtonCommand(const Windows::UI::Popups::UICommandInvokedHandler & value) const
-{
-    check_hresult(WINRT_SHIM(ICoreWindowFlyout)->put_BackButtonCommand(get_abi(value)));
-}
-
-template <typename D> Windows::Foundation::IAsyncOperation<Windows::UI::Popups::IUICommand> impl_ICoreWindowFlyout<D>::ShowAsync() const
-{
-    Windows::Foundation::IAsyncOperation<Windows::UI::Popups::IUICommand> asyncInfo;
-    check_hresult(WINRT_SHIM(ICoreWindowFlyout)->abi_ShowAsync(put_abi(asyncInfo)));
-    return asyncInfo;
-}
-
-template <typename D> Windows::UI::Core::CoreWindowFlyout impl_ICoreWindowFlyoutFactory<D>::Create(const Windows::Foundation::Point & position) const
-{
-    Windows::UI::Core::CoreWindowFlyout coreWindowFlyout { nullptr };
-    check_hresult(WINRT_SHIM(ICoreWindowFlyoutFactory)->abi_Create(get_abi(position), put_abi(coreWindowFlyout)));
-    return coreWindowFlyout;
-}
-
-template <typename D> Windows::UI::Core::CoreWindowFlyout impl_ICoreWindowFlyoutFactory<D>::CreateWithTitle(const Windows::Foundation::Point & position, hstring_view title) const
-{
-    Windows::UI::Core::CoreWindowFlyout coreWindowFlyout { nullptr };
-    check_hresult(WINRT_SHIM(ICoreWindowFlyoutFactory)->abi_CreateWithTitle(get_abi(position), get_abi(title), put_abi(coreWindowFlyout)));
-    return coreWindowFlyout;
-}
-
 template <typename D> event_token impl_ISystemNavigationManager<D>::BackRequested(const Windows::Foundation::EventHandler<Windows::UI::Core::BackRequestedEventArgs> & handler) const
 {
     event_token token {};
@@ -3440,23 +3137,6 @@ template <typename D> void impl_ISystemNavigationManager2<D>::AppViewBackButtonV
     check_hresult(WINRT_SHIM(ISystemNavigationManager2)->put_AppViewBackButtonVisibility(value));
 }
 
-template <typename D> event_token impl_ISystemNavigationManager3<D>::CloseRequested(const Windows::Foundation::TypedEventHandler<Windows::UI::Core::SystemNavigationManager, Windows::UI::Core::SystemNavigationCloseRequestedEventArgs> & handler) const
-{
-    event_token token {};
-    check_hresult(WINRT_SHIM(ISystemNavigationManager3)->add_CloseRequested(get_abi(handler), &token));
-    return token;
-}
-
-template <typename D> event_revoker<ISystemNavigationManager3> impl_ISystemNavigationManager3<D>::CloseRequested(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::UI::Core::SystemNavigationManager, Windows::UI::Core::SystemNavigationCloseRequestedEventArgs> & handler) const
-{
-    return impl::make_event_revoker<D, ISystemNavigationManager3>(this, &ABI::Windows::UI::Core::ISystemNavigationManager3::remove_CloseRequested, CloseRequested(handler));
-}
-
-template <typename D> void impl_ISystemNavigationManager3<D>::CloseRequested(event_token token) const
-{
-    check_hresult(WINRT_SHIM(ISystemNavigationManager3)->remove_CloseRequested(token));
-}
-
 template <typename D> Windows::UI::Core::SystemNavigationManager impl_ISystemNavigationManagerStatics<D>::GetForCurrentView() const
 {
     Windows::UI::Core::SystemNavigationManager loader { nullptr };
@@ -3474,25 +3154,6 @@ template <typename D> bool impl_IBackRequestedEventArgs<D>::Handled() const
 template <typename D> void impl_IBackRequestedEventArgs<D>::Handled(bool value) const
 {
     check_hresult(WINRT_SHIM(IBackRequestedEventArgs)->put_Handled(value));
-}
-
-template <typename D> bool impl_ISystemNavigationCloseRequestedEventArgs<D>::Handled() const
-{
-    bool value {};
-    check_hresult(WINRT_SHIM(ISystemNavigationCloseRequestedEventArgs)->get_Handled(&value));
-    return value;
-}
-
-template <typename D> void impl_ISystemNavigationCloseRequestedEventArgs<D>::Handled(bool value) const
-{
-    check_hresult(WINRT_SHIM(ISystemNavigationCloseRequestedEventArgs)->put_Handled(value));
-}
-
-template <typename D> Windows::Foundation::Deferral impl_ISystemNavigationCloseRequestedEventArgs<D>::GetDeferral() const
-{
-    Windows::Foundation::Deferral result { nullptr };
-    check_hresult(WINRT_SHIM(ISystemNavigationCloseRequestedEventArgs)->abi_GetDeferral(put_abi(result)));
-    return result;
 }
 
 template <typename D> bool impl_ICoreWindowEventArgs<D>::Handled() const
@@ -4695,6 +4356,230 @@ template <typename D> void impl_ICorePointerRedirector<D>::PointerRoutedReleased
     check_hresult(WINRT_SHIM(ICorePointerRedirector)->remove_PointerRoutedReleased(cookie));
 }
 
+template <typename D> void impl_ICoreWindowPopupShowingEventArgs<D>::SetDesiredSize(const Windows::Foundation::Size & value) const
+{
+    check_hresult(WINRT_SHIM(ICoreWindowPopupShowingEventArgs)->abi_SetDesiredSize(get_abi(value)));
+}
+
+template <typename D> event_token impl_ICoreWindowDialog<D>::Showing(const Windows::Foundation::TypedEventHandler<Windows::UI::Core::CoreWindow, Windows::UI::Core::CoreWindowPopupShowingEventArgs> & handler) const
+{
+    event_token cookie {};
+    check_hresult(WINRT_SHIM(ICoreWindowDialog)->add_Showing(get_abi(handler), &cookie));
+    return cookie;
+}
+
+template <typename D> event_revoker<ICoreWindowDialog> impl_ICoreWindowDialog<D>::Showing(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::UI::Core::CoreWindow, Windows::UI::Core::CoreWindowPopupShowingEventArgs> & handler) const
+{
+    return impl::make_event_revoker<D, ICoreWindowDialog>(this, &ABI::Windows::UI::Core::ICoreWindowDialog::remove_Showing, Showing(handler));
+}
+
+template <typename D> void impl_ICoreWindowDialog<D>::Showing(event_token cookie) const
+{
+    check_hresult(WINRT_SHIM(ICoreWindowDialog)->remove_Showing(cookie));
+}
+
+template <typename D> Windows::Foundation::Size impl_ICoreWindowDialog<D>::MaxSize() const
+{
+    Windows::Foundation::Size value {};
+    check_hresult(WINRT_SHIM(ICoreWindowDialog)->get_MaxSize(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Size impl_ICoreWindowDialog<D>::MinSize() const
+{
+    Windows::Foundation::Size value {};
+    check_hresult(WINRT_SHIM(ICoreWindowDialog)->get_MinSize(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring impl_ICoreWindowDialog<D>::Title() const
+{
+    hstring value;
+    check_hresult(WINRT_SHIM(ICoreWindowDialog)->get_Title(put_abi(value)));
+    return value;
+}
+
+template <typename D> void impl_ICoreWindowDialog<D>::Title(hstring_view value) const
+{
+    check_hresult(WINRT_SHIM(ICoreWindowDialog)->put_Title(get_abi(value)));
+}
+
+template <typename D> int32_t impl_ICoreWindowDialog<D>::IsInteractionDelayed() const
+{
+    int32_t value {};
+    check_hresult(WINRT_SHIM(ICoreWindowDialog)->get_IsInteractionDelayed(&value));
+    return value;
+}
+
+template <typename D> void impl_ICoreWindowDialog<D>::IsInteractionDelayed(int32_t value) const
+{
+    check_hresult(WINRT_SHIM(ICoreWindowDialog)->put_IsInteractionDelayed(value));
+}
+
+template <typename D> Windows::Foundation::Collections::IVector<Windows::UI::Popups::IUICommand> impl_ICoreWindowDialog<D>::Commands() const
+{
+    Windows::Foundation::Collections::IVector<Windows::UI::Popups::IUICommand> value;
+    check_hresult(WINRT_SHIM(ICoreWindowDialog)->get_Commands(put_abi(value)));
+    return value;
+}
+
+template <typename D> uint32_t impl_ICoreWindowDialog<D>::DefaultCommandIndex() const
+{
+    uint32_t value {};
+    check_hresult(WINRT_SHIM(ICoreWindowDialog)->get_DefaultCommandIndex(&value));
+    return value;
+}
+
+template <typename D> void impl_ICoreWindowDialog<D>::DefaultCommandIndex(uint32_t value) const
+{
+    check_hresult(WINRT_SHIM(ICoreWindowDialog)->put_DefaultCommandIndex(value));
+}
+
+template <typename D> uint32_t impl_ICoreWindowDialog<D>::CancelCommandIndex() const
+{
+    uint32_t value {};
+    check_hresult(WINRT_SHIM(ICoreWindowDialog)->get_CancelCommandIndex(&value));
+    return value;
+}
+
+template <typename D> void impl_ICoreWindowDialog<D>::CancelCommandIndex(uint32_t value) const
+{
+    check_hresult(WINRT_SHIM(ICoreWindowDialog)->put_CancelCommandIndex(value));
+}
+
+template <typename D> Windows::UI::Popups::UICommandInvokedHandler impl_ICoreWindowDialog<D>::BackButtonCommand() const
+{
+    Windows::UI::Popups::UICommandInvokedHandler value {};
+    check_hresult(WINRT_SHIM(ICoreWindowDialog)->get_BackButtonCommand(put_abi(value)));
+    return value;
+}
+
+template <typename D> void impl_ICoreWindowDialog<D>::BackButtonCommand(const Windows::UI::Popups::UICommandInvokedHandler & value) const
+{
+    check_hresult(WINRT_SHIM(ICoreWindowDialog)->put_BackButtonCommand(get_abi(value)));
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::UI::Popups::IUICommand> impl_ICoreWindowDialog<D>::ShowAsync() const
+{
+    Windows::Foundation::IAsyncOperation<Windows::UI::Popups::IUICommand> asyncInfo;
+    check_hresult(WINRT_SHIM(ICoreWindowDialog)->abi_ShowAsync(put_abi(asyncInfo)));
+    return asyncInfo;
+}
+
+template <typename D> Windows::UI::Core::CoreWindowDialog impl_ICoreWindowDialogFactory<D>::CreateWithTitle(hstring_view title) const
+{
+    Windows::UI::Core::CoreWindowDialog coreWindowDialog { nullptr };
+    check_hresult(WINRT_SHIM(ICoreWindowDialogFactory)->abi_CreateWithTitle(get_abi(title), put_abi(coreWindowDialog)));
+    return coreWindowDialog;
+}
+
+template <typename D> event_token impl_ICoreWindowFlyout<D>::Showing(const Windows::Foundation::TypedEventHandler<Windows::UI::Core::CoreWindow, Windows::UI::Core::CoreWindowPopupShowingEventArgs> & handler) const
+{
+    event_token cookie {};
+    check_hresult(WINRT_SHIM(ICoreWindowFlyout)->add_Showing(get_abi(handler), &cookie));
+    return cookie;
+}
+
+template <typename D> event_revoker<ICoreWindowFlyout> impl_ICoreWindowFlyout<D>::Showing(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::UI::Core::CoreWindow, Windows::UI::Core::CoreWindowPopupShowingEventArgs> & handler) const
+{
+    return impl::make_event_revoker<D, ICoreWindowFlyout>(this, &ABI::Windows::UI::Core::ICoreWindowFlyout::remove_Showing, Showing(handler));
+}
+
+template <typename D> void impl_ICoreWindowFlyout<D>::Showing(event_token cookie) const
+{
+    check_hresult(WINRT_SHIM(ICoreWindowFlyout)->remove_Showing(cookie));
+}
+
+template <typename D> Windows::Foundation::Size impl_ICoreWindowFlyout<D>::MaxSize() const
+{
+    Windows::Foundation::Size value {};
+    check_hresult(WINRT_SHIM(ICoreWindowFlyout)->get_MaxSize(put_abi(value)));
+    return value;
+}
+
+template <typename D> Windows::Foundation::Size impl_ICoreWindowFlyout<D>::MinSize() const
+{
+    Windows::Foundation::Size value {};
+    check_hresult(WINRT_SHIM(ICoreWindowFlyout)->get_MinSize(put_abi(value)));
+    return value;
+}
+
+template <typename D> hstring impl_ICoreWindowFlyout<D>::Title() const
+{
+    hstring value;
+    check_hresult(WINRT_SHIM(ICoreWindowFlyout)->get_Title(put_abi(value)));
+    return value;
+}
+
+template <typename D> void impl_ICoreWindowFlyout<D>::Title(hstring_view value) const
+{
+    check_hresult(WINRT_SHIM(ICoreWindowFlyout)->put_Title(get_abi(value)));
+}
+
+template <typename D> int32_t impl_ICoreWindowFlyout<D>::IsInteractionDelayed() const
+{
+    int32_t value {};
+    check_hresult(WINRT_SHIM(ICoreWindowFlyout)->get_IsInteractionDelayed(&value));
+    return value;
+}
+
+template <typename D> void impl_ICoreWindowFlyout<D>::IsInteractionDelayed(int32_t value) const
+{
+    check_hresult(WINRT_SHIM(ICoreWindowFlyout)->put_IsInteractionDelayed(value));
+}
+
+template <typename D> Windows::Foundation::Collections::IVector<Windows::UI::Popups::IUICommand> impl_ICoreWindowFlyout<D>::Commands() const
+{
+    Windows::Foundation::Collections::IVector<Windows::UI::Popups::IUICommand> value;
+    check_hresult(WINRT_SHIM(ICoreWindowFlyout)->get_Commands(put_abi(value)));
+    return value;
+}
+
+template <typename D> uint32_t impl_ICoreWindowFlyout<D>::DefaultCommandIndex() const
+{
+    uint32_t value {};
+    check_hresult(WINRT_SHIM(ICoreWindowFlyout)->get_DefaultCommandIndex(&value));
+    return value;
+}
+
+template <typename D> void impl_ICoreWindowFlyout<D>::DefaultCommandIndex(uint32_t value) const
+{
+    check_hresult(WINRT_SHIM(ICoreWindowFlyout)->put_DefaultCommandIndex(value));
+}
+
+template <typename D> Windows::UI::Popups::UICommandInvokedHandler impl_ICoreWindowFlyout<D>::BackButtonCommand() const
+{
+    Windows::UI::Popups::UICommandInvokedHandler value {};
+    check_hresult(WINRT_SHIM(ICoreWindowFlyout)->get_BackButtonCommand(put_abi(value)));
+    return value;
+}
+
+template <typename D> void impl_ICoreWindowFlyout<D>::BackButtonCommand(const Windows::UI::Popups::UICommandInvokedHandler & value) const
+{
+    check_hresult(WINRT_SHIM(ICoreWindowFlyout)->put_BackButtonCommand(get_abi(value)));
+}
+
+template <typename D> Windows::Foundation::IAsyncOperation<Windows::UI::Popups::IUICommand> impl_ICoreWindowFlyout<D>::ShowAsync() const
+{
+    Windows::Foundation::IAsyncOperation<Windows::UI::Popups::IUICommand> asyncInfo;
+    check_hresult(WINRT_SHIM(ICoreWindowFlyout)->abi_ShowAsync(put_abi(asyncInfo)));
+    return asyncInfo;
+}
+
+template <typename D> Windows::UI::Core::CoreWindowFlyout impl_ICoreWindowFlyoutFactory<D>::Create(const Windows::Foundation::Point & position) const
+{
+    Windows::UI::Core::CoreWindowFlyout coreWindowFlyout { nullptr };
+    check_hresult(WINRT_SHIM(ICoreWindowFlyoutFactory)->abi_Create(get_abi(position), put_abi(coreWindowFlyout)));
+    return coreWindowFlyout;
+}
+
+template <typename D> Windows::UI::Core::CoreWindowFlyout impl_ICoreWindowFlyoutFactory<D>::CreateWithTitle(const Windows::Foundation::Point & position, hstring_view title) const
+{
+    Windows::UI::Core::CoreWindowFlyout coreWindowFlyout { nullptr };
+    check_hresult(WINRT_SHIM(ICoreWindowFlyoutFactory)->abi_CreateWithTitle(get_abi(position), get_abi(title), put_abi(coreWindowFlyout)));
+    return coreWindowFlyout;
+}
+
 inline CoreCursor::CoreCursor(Windows::UI::Core::CoreCursorType type, uint32_t id) :
     CoreCursor(get_activation_factory<CoreCursor, ICoreCursorFactory>().CreateCursor(type, id))
 {}
@@ -5095,15 +4980,6 @@ struct std::hash<winrt::Windows::UI::Core::IPointerEventArgs>
 };
 
 template<>
-struct std::hash<winrt::Windows::UI::Core::ISystemNavigationCloseRequestedEventArgs>
-{
-    size_t operator()(const winrt::Windows::UI::Core::ISystemNavigationCloseRequestedEventArgs & value) const noexcept
-    {
-        return winrt::impl::hash_unknown(value);
-    }
-};
-
-template<>
 struct std::hash<winrt::Windows::UI::Core::ISystemNavigationManager>
 {
     size_t operator()(const winrt::Windows::UI::Core::ISystemNavigationManager & value) const noexcept
@@ -5116,15 +4992,6 @@ template<>
 struct std::hash<winrt::Windows::UI::Core::ISystemNavigationManager2>
 {
     size_t operator()(const winrt::Windows::UI::Core::ISystemNavigationManager2 & value) const noexcept
-    {
-        return winrt::impl::hash_unknown(value);
-    }
-};
-
-template<>
-struct std::hash<winrt::Windows::UI::Core::ISystemNavigationManager3>
-{
-    size_t operator()(const winrt::Windows::UI::Core::ISystemNavigationManager3 & value) const noexcept
     {
         return winrt::impl::hash_unknown(value);
     }
@@ -5350,15 +5217,6 @@ template<>
 struct std::hash<winrt::Windows::UI::Core::PointerEventArgs>
 {
     size_t operator()(const winrt::Windows::UI::Core::PointerEventArgs & value) const noexcept
-    {
-        return winrt::impl::hash_unknown(value);
-    }
-};
-
-template<>
-struct std::hash<winrt::Windows::UI::Core::SystemNavigationCloseRequestedEventArgs>
-{
-    size_t operator()(const winrt::Windows::UI::Core::SystemNavigationCloseRequestedEventArgs & value) const noexcept
     {
         return winrt::impl::hash_unknown(value);
     }

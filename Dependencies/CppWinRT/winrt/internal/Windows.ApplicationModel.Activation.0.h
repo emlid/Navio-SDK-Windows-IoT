@@ -1,4 +1,4 @@
-// C++ for the Windows Runtime vv1.0.170303.6
+// C++ for the Windows Runtime v1.0.170406.6
 // Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
@@ -51,7 +51,6 @@ struct IPickerReturnedActivatedEventArgs;
 struct IPrelaunchActivatedEventArgs;
 struct IPrint3DWorkflowActivatedEventArgs;
 struct IPrintTaskSettingsActivatedEventArgs;
-struct IPrintWorkflowForegroundTaskActivatedEventArgs;
 struct IProtocolActivatedEventArgs;
 struct IProtocolActivatedEventArgsWithCallerPackageFamilyNameAndData;
 struct IProtocolForResultsActivatedEventArgs;
@@ -99,7 +98,6 @@ struct LockScreenComponentActivatedEventArgs;
 struct PickerReturnedActivatedEventArgs;
 struct Print3DWorkflowActivatedEventArgs;
 struct PrintTaskSettingsActivatedEventArgs;
-struct PrintWorkflowForegroundTaskActivatedEventArgs;
 struct ProtocolActivatedEventArgs;
 struct ProtocolForResultsActivatedEventArgs;
 struct RestrictedLaunchActivatedEventArgs;
@@ -161,7 +159,6 @@ struct IPickerReturnedActivatedEventArgs;
 struct IPrelaunchActivatedEventArgs;
 struct IPrint3DWorkflowActivatedEventArgs;
 struct IPrintTaskSettingsActivatedEventArgs;
-struct IPrintWorkflowForegroundTaskActivatedEventArgs;
 struct IProtocolActivatedEventArgs;
 struct IProtocolActivatedEventArgsWithCallerPackageFamilyNameAndData;
 struct IProtocolForResultsActivatedEventArgs;
@@ -209,7 +206,6 @@ struct LockScreenComponentActivatedEventArgs;
 struct PickerReturnedActivatedEventArgs;
 struct Print3DWorkflowActivatedEventArgs;
 struct PrintTaskSettingsActivatedEventArgs;
-struct PrintWorkflowForegroundTaskActivatedEventArgs;
 struct ProtocolActivatedEventArgs;
 struct ProtocolForResultsActivatedEventArgs;
 struct RestrictedLaunchActivatedEventArgs;
@@ -271,7 +267,6 @@ template <typename T> struct impl_IPickerReturnedActivatedEventArgs;
 template <typename T> struct impl_IPrelaunchActivatedEventArgs;
 template <typename T> struct impl_IPrint3DWorkflowActivatedEventArgs;
 template <typename T> struct impl_IPrintTaskSettingsActivatedEventArgs;
-template <typename T> struct impl_IPrintWorkflowForegroundTaskActivatedEventArgs;
 template <typename T> struct impl_IProtocolActivatedEventArgs;
 template <typename T> struct impl_IProtocolActivatedEventArgsWithCallerPackageFamilyNameAndData;
 template <typename T> struct impl_IProtocolForResultsActivatedEventArgs;
@@ -330,7 +325,6 @@ enum class ActivationKind
     FilePickerExperience = 1015,
     LockScreenComponent = 1016,
     ContactPanel = 1017,
-    PrintWorkflowForegroundTask = 1018,
 };
 
 enum class ApplicationExecutionState

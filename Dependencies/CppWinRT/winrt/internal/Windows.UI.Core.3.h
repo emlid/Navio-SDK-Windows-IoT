@@ -1,4 +1,4 @@
-// C++ for the Windows Runtime vv1.0.170303.6
+// C++ for the Windows Runtime v1.0.170406.6
 // Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
@@ -185,15 +185,9 @@ struct WINRT_EBO PointerEventArgs :
     PointerEventArgs(std::nullptr_t) noexcept {}
 };
 
-struct WINRT_EBO SystemNavigationCloseRequestedEventArgs :
-    Windows::UI::Core::ISystemNavigationCloseRequestedEventArgs
-{
-    SystemNavigationCloseRequestedEventArgs(std::nullptr_t) noexcept {}
-};
-
 struct WINRT_EBO SystemNavigationManager :
     Windows::UI::Core::ISystemNavigationManager,
-    impl::require<SystemNavigationManager, Windows::UI::Core::ISystemNavigationManager2, Windows::UI::Core::ISystemNavigationManager3>
+    impl::require<SystemNavigationManager, Windows::UI::Core::ISystemNavigationManager2>
 {
     SystemNavigationManager(std::nullptr_t) noexcept {}
     static Windows::UI::Core::SystemNavigationManager GetForCurrentView();

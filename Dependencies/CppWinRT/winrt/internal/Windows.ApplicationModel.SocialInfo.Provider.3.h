@@ -1,4 +1,4 @@
-// C++ for the Windows Runtime vv1.0.170303.6
+// C++ for the Windows Runtime v1.0.170406.6
 // Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
@@ -9,17 +9,19 @@ WINRT_EXPORT namespace winrt {
 
 namespace Windows::ApplicationModel::SocialInfo::Provider {
 
-struct [[deprecated("SocialDashboardItemUpdater is deprecated and might not work on all platforms. For more info, see MSDN.")]] WINRT_EBO SocialDashboardItemUpdater :
+struct WINRT_EBO SocialDashboardItemUpdater :
     Windows::ApplicationModel::SocialInfo::Provider::ISocialDashboardItemUpdater
 {
     SocialDashboardItemUpdater(std::nullptr_t) noexcept {}
 };
+struct [[deprecated("SocialDashboardItemUpdater is deprecated and might not work on all platforms. For more info, see MSDN.")]] SocialDashboardItemUpdater;
 
-struct [[deprecated("SocialFeedUpdater is deprecated and might not work on all platforms. For more info, see MSDN.")]] WINRT_EBO SocialFeedUpdater :
+struct WINRT_EBO SocialFeedUpdater :
     Windows::ApplicationModel::SocialInfo::Provider::ISocialFeedUpdater
 {
     SocialFeedUpdater(std::nullptr_t) noexcept {}
 };
+struct [[deprecated("SocialFeedUpdater is deprecated and might not work on all platforms. For more info, see MSDN.")]] SocialFeedUpdater;
 
 struct [[deprecated("SocialInfoProviderManager is deprecated and might not work on all platforms. For more info, see MSDN.")]] SocialInfoProviderManager
 {

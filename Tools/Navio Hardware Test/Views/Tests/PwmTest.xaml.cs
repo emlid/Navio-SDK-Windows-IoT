@@ -152,8 +152,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Views.Tests
             var frequencyText = FrequencyTextBox.Text;
 
             // Reset value when invalid
-            int frequency;
-            if (!int.TryParse(frequencyText, out frequency) ||
+            if (!int.TryParse(frequencyText, out int frequency) ||
                 frequency < Model.Device.FrequencyMinimum ||
                 frequency > Model.Device.FrequencyMaximum)
             {

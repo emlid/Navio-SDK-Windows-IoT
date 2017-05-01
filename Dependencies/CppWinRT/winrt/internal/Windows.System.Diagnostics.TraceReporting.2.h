@@ -1,4 +1,4 @@
-// C++ for the Windows Runtime vv1.0.170303.6
+// C++ for the Windows Runtime v1.0.170406.6
 // Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
@@ -9,14 +9,14 @@ WINRT_EXPORT namespace winrt {
 
 namespace ABI::Windows::Foundation::Collections {
 
-#ifndef WINRT_GENERIC_9520e64b_15b2_52a6_98ed_3191fa6cf68a
-#define WINRT_GENERIC_9520e64b_15b2_52a6_98ed_3191fa6cf68a
-template <> struct __declspec(uuid("9520e64b-15b2-52a6-98ed-3191fa6cf68a")) __declspec(novtable) IVectorView<GUID> : impl_IVectorView<GUID> {};
-#endif
-
 #ifndef WINRT_GENERIC_ac7f26f2_feb7_5b2a_8ac4_345bc62caede
 #define WINRT_GENERIC_ac7f26f2_feb7_5b2a_8ac4_345bc62caede
 template <> struct __declspec(uuid("ac7f26f2-feb7-5b2a-8ac4-345bc62caede")) __declspec(novtable) IMapView<hstring, hstring> : impl_IMapView<hstring, hstring> {};
+#endif
+
+#ifndef WINRT_GENERIC_9520e64b_15b2_52a6_98ed_3191fa6cf68a
+#define WINRT_GENERIC_9520e64b_15b2_52a6_98ed_3191fa6cf68a
+template <> struct __declspec(uuid("9520e64b-15b2-52a6-98ed-3191fa6cf68a")) __declspec(novtable) IVectorView<GUID> : impl_IVectorView<GUID> {};
 #endif
 
 #ifndef WINRT_GENERIC_f6d1f700_49c2_52ae_8154_826f9908773c

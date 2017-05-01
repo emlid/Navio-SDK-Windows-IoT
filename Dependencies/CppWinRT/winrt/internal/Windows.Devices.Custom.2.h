@@ -1,4 +1,4 @@
-// C++ for the Windows Runtime vv1.0.170303.6
+// C++ for the Windows Runtime v1.0.170406.6
 // Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
@@ -14,14 +14,14 @@ namespace ABI::Windows::Foundation {
 template <> struct __declspec(uuid("cdb5efb3-5788-509d-9be1-71ccb8a3362a")) __declspec(novtable) IAsyncOperation<bool> : impl_IAsyncOperation<bool> {};
 #endif
 
-#ifndef WINRT_GENERIC_ef60385f_be78_584b_aaef_7829ada2b0de
-#define WINRT_GENERIC_ef60385f_be78_584b_aaef_7829ada2b0de
-template <> struct __declspec(uuid("ef60385f-be78-584b-aaef-7829ada2b0de")) __declspec(novtable) IAsyncOperation<uint32_t> : impl_IAsyncOperation<uint32_t> {};
-#endif
-
 #ifndef WINRT_GENERIC_2a6344aa_0568_548e_a1a2_b6bb451d228c
 #define WINRT_GENERIC_2a6344aa_0568_548e_a1a2_b6bb451d228c
 template <> struct __declspec(uuid("2a6344aa-0568-548e-a1a2-b6bb451d228c")) __declspec(novtable) IAsyncOperation<Windows::Devices::Custom::CustomDevice> : impl_IAsyncOperation<Windows::Devices::Custom::CustomDevice> {};
+#endif
+
+#ifndef WINRT_GENERIC_ef60385f_be78_584b_aaef_7829ada2b0de
+#define WINRT_GENERIC_ef60385f_be78_584b_aaef_7829ada2b0de
+template <> struct __declspec(uuid("ef60385f-be78-584b-aaef-7829ada2b0de")) __declspec(novtable) IAsyncOperation<uint32_t> : impl_IAsyncOperation<uint32_t> {};
 #endif
 
 #ifndef WINRT_GENERIC_c1d3d1a2_ae17_5a5f_b5a2_bdcc8844889a
@@ -29,14 +29,14 @@ template <> struct __declspec(uuid("2a6344aa-0568-548e-a1a2-b6bb451d228c")) __de
 template <> struct __declspec(uuid("c1d3d1a2-ae17-5a5f-b5a2-bdcc8844889a")) __declspec(novtable) AsyncOperationCompletedHandler<bool> : impl_AsyncOperationCompletedHandler<bool> {};
 #endif
 
-#ifndef WINRT_GENERIC_9343b6e7_e3d2_5e4a_ab2d_2bce4919a6a4
-#define WINRT_GENERIC_9343b6e7_e3d2_5e4a_ab2d_2bce4919a6a4
-template <> struct __declspec(uuid("9343b6e7-e3d2-5e4a-ab2d-2bce4919a6a4")) __declspec(novtable) AsyncOperationCompletedHandler<uint32_t> : impl_AsyncOperationCompletedHandler<uint32_t> {};
-#endif
-
 #ifndef WINRT_GENERIC_1fdd39b0_e0e5_5c59_b27d_a549b1075ce9
 #define WINRT_GENERIC_1fdd39b0_e0e5_5c59_b27d_a549b1075ce9
 template <> struct __declspec(uuid("1fdd39b0-e0e5-5c59-b27d-a549b1075ce9")) __declspec(novtable) AsyncOperationCompletedHandler<Windows::Devices::Custom::CustomDevice> : impl_AsyncOperationCompletedHandler<Windows::Devices::Custom::CustomDevice> {};
+#endif
+
+#ifndef WINRT_GENERIC_9343b6e7_e3d2_5e4a_ab2d_2bce4919a6a4
+#define WINRT_GENERIC_9343b6e7_e3d2_5e4a_ab2d_2bce4919a6a4
+template <> struct __declspec(uuid("9343b6e7-e3d2-5e4a-ab2d-2bce4919a6a4")) __declspec(novtable) AsyncOperationCompletedHandler<uint32_t> : impl_AsyncOperationCompletedHandler<uint32_t> {};
 #endif
 
 

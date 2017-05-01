@@ -45,10 +45,9 @@ Do not continue to use the source, download or work with the products unless you
 
 ## Known Issues
 
-1. The "Insider Preview" (beta) IoT images, development tools and workstation OS are required because the Microsoft tools and APIs from those versions are required. Once stable RTM releases are available of the Microsoft framework and IoT images it is preferred to keep the SDK running only on RTM versions.
-2. Software RC input, required on older Navio and Navio+ models, is not currently usable because of limitations of both the standard Microsoft "inbox" and "lightning" GPIO providers. Microsoft are providing new features in an upcoming release which may make this possible. Remote control should be achieved via other methods, e.g. wireless joystick or ground station commands.
-3. Hardware RC input, possible on Navio 2, is not currently implemented. So RC input can only be tested on Navio and Navio+ models.
-4. Driver development is currently lowest priority as it is no longer necessary to achieve a first working solution. For the Navio and Navio+ models Microsoft will provide buffered IO to solve the RC input problem. On the current Navio 2 model, it doesn't need faster IO because it has a dedicated co-processor to remove the burden off the CPU for RC input decoding, PWM encoding and ADC. The WDK required to develop drivers also has limitations which hinder development. Hence the goal is to focus on core SDK functionality before re-working into lower level code.
+1. Software RC input, required on older Navio and Navio+ models, is not currently usable because of limitations of both the standard Microsoft "inbox" and "lightning" GPIO providers. Microsoft are providing new features in an upcoming release which may make this possible. Remote control should be achieved via other methods, e.g. wireless joystick or ground station commands.
+2. Hardware RC input, possible on Navio 2, is not currently implemented. So RC input can only be tested on Navio and Navio+ models.
+3. Driver development is currently lowest priority as it is no longer necessary to achieve a first working solution. For the Navio and Navio+ models Microsoft will provide buffered IO to solve the RC input problem. On the current Navio 2 model, it doesn't need faster IO because it has a dedicated co-processor to remove the burden off the CPU for RC input decoding, PWM encoding and ADC. The WDK required to develop drivers also has limitations which hinder development. Hence the goal is to focus on core SDK functionality before re-working into lower level code.
 
 ## Documentation
 

@@ -1,4 +1,4 @@
-// C++ for the Windows Runtime vv1.0.170303.6
+// C++ for the Windows Runtime v1.0.170406.6
 // Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
@@ -7985,16 +7985,16 @@ inline MediaBreak::MediaBreak(Windows::Media::Playback::MediaBreakInsertionMetho
     MediaBreak(get_activation_factory<MediaBreak, IMediaBreakFactory>().CreateWithPresentationPosition(insertionMethod, presentationPosition))
 {}
 
-inline MediaPlaybackItem::MediaPlaybackItem(const Windows::Media::Core::MediaSource & source) :
-    MediaPlaybackItem(get_activation_factory<MediaPlaybackItem, IMediaPlaybackItemFactory>().Create(source))
-{}
-
 inline MediaPlaybackItem::MediaPlaybackItem(const Windows::Media::Core::MediaSource & source, const Windows::Foundation::TimeSpan & startTime) :
     MediaPlaybackItem(get_activation_factory<MediaPlaybackItem, IMediaPlaybackItemFactory2>().CreateWithStartTime(source, startTime))
 {}
 
 inline MediaPlaybackItem::MediaPlaybackItem(const Windows::Media::Core::MediaSource & source, const Windows::Foundation::TimeSpan & startTime, const Windows::Foundation::TimeSpan & durationLimit) :
     MediaPlaybackItem(get_activation_factory<MediaPlaybackItem, IMediaPlaybackItemFactory2>().CreateWithStartTimeAndDurationLimit(source, startTime, durationLimit))
+{}
+
+inline MediaPlaybackItem::MediaPlaybackItem(const Windows::Media::Core::MediaSource & source) :
+    MediaPlaybackItem(get_activation_factory<MediaPlaybackItem, IMediaPlaybackItemFactory>().Create(source))
 {}
 
 inline Windows::Media::Playback::MediaPlaybackItem MediaPlaybackItem::FindFromMediaSource(const Windows::Media::Core::MediaSource & source)

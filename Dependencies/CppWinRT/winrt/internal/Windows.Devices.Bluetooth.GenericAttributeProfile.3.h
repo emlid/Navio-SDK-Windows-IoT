@@ -1,4 +1,4 @@
-// C++ for the Windows Runtime vv1.0.170303.6
+// C++ for the Windows Runtime v1.0.170406.6
 // Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
@@ -16,6 +16,7 @@ struct WINRT_EBO GattCharacteristic :
     GattCharacteristic(std::nullptr_t) noexcept {}
     [[deprecated("Use BluetoothUuidHelper instead of ConvertShortIdToUuid.  For more information, see MSDN.")]] static GUID ConvertShortIdToUuid(uint16_t shortId);
 };
+struct [[deprecated("Use BluetoothUuidHelper instead of ConvertShortIdToUuid.  For more information, see MSDN.")]] GattCharacteristic;
 
 struct GattCharacteristicUuids
 {
@@ -122,6 +123,7 @@ struct WINRT_EBO GattDescriptor :
     GattDescriptor(std::nullptr_t) noexcept {}
     [[deprecated("Use BluetoothUuidHelper instead of ConvertShortIdToUuid.  For more information, see MSDN.")]] static GUID ConvertShortIdToUuid(uint16_t shortId);
 };
+struct [[deprecated("Use BluetoothUuidHelper instead of ConvertShortIdToUuid.  For more information, see MSDN.")]] GattDescriptor;
 
 struct GattDescriptorUuids
 {

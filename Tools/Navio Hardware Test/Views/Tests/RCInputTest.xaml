@@ -1,13 +1,12 @@
 ﻿<views:RCInputTestPageBase
     x:Name="PageRoot"
     x:Class="Emlid.WindowsIot.Tools.NavioHardwareTest.Views.Tests.RCInputTestPage"
-    xmlns:views="using:Emlid.WindowsIot.Tools.NavioHardwareTest.Views.Tests"
-    xmlns:models="using:Emlid.WindowsIot.Tools.NavioHardwareTest.Models.Tests"
-    xmlns:converters="using:Emlid.UniversalWindows.UI.Converters"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="using:Emlid.UniversalWindows.UI.Converters"
+    xmlns:views="using:Emlid.WindowsIot.Tools.NavioHardwareTest.Views.Tests"
     mc:Ignorable="d">
     <Page.Resources>
         <Style x:Key="ChannelSlider" TargetType="Slider">

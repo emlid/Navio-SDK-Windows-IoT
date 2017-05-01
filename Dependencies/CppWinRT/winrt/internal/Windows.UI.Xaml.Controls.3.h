@@ -1,4 +1,4 @@
-// C++ for the Windows Runtime vv1.0.170303.6
+// C++ for the Windows Runtime v1.0.170406.6
 // Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
@@ -1229,6 +1229,7 @@ struct WINRT_EBO Image :
     static Windows::UI::Xaml::DependencyProperty NineGridProperty();
     [[deprecated("PlayToSource may be altered or unavailable for releases after Windows 10.0. Instead, use GetAsCastingSource.")]] static Windows::UI::Xaml::DependencyProperty PlayToSourceProperty();
 };
+struct [[deprecated("PlayToSource may be altered or unavailable for releases after Windows 10.0. Instead, use GetAsCastingSource.")]] Image;
 
 struct WINRT_EBO InkCanvas :
     Windows::UI::Xaml::Controls::IInkCanvas,
@@ -1383,7 +1384,7 @@ struct WINRT_EBO InkToolbarPencilButton :
     InkToolbarPencilButton();
 };
 
-struct [[deprecated("InkToolbarRulerButton is deprecated starting from Windows 10 Creators Update. Please use InkToolbarStencilButton going forward. For more info, see MSDN.")]] WINRT_EBO InkToolbarRulerButton :
+struct WINRT_EBO InkToolbarRulerButton :
     Windows::UI::Xaml::Controls::IInkToolbarRulerButton,
     impl::bases<InkToolbarRulerButton, Windows::UI::Xaml::DependencyObject, Windows::UI::Xaml::UIElement, Windows::UI::Xaml::FrameworkElement, Windows::UI::Xaml::Controls::Control, Windows::UI::Xaml::Controls::ContentControl, Windows::UI::Xaml::Controls::Primitives::ButtonBase, Windows::UI::Xaml::Controls::Primitives::ToggleButton, Windows::UI::Xaml::Controls::CheckBox, Windows::UI::Xaml::Controls::InkToolbarToggleButton>,
     impl::require<InkToolbarRulerButton, Windows::UI::Xaml::Controls::IContentControl, Windows::UI::Xaml::Controls::IContentControlOverrides, Windows::UI::Xaml::Controls::IContentControl2, Windows::UI::Xaml::Controls::ICheckBox, Windows::UI::Xaml::Controls::Primitives::IButtonBase, Windows::UI::Xaml::Controls::Primitives::IToggleButton, Windows::UI::Xaml::Controls::Primitives::IToggleButtonOverrides, Windows::UI::Xaml::IDependencyObject, Windows::UI::Xaml::IDependencyObject2, Windows::UI::Xaml::IUIElement, Windows::UI::Xaml::IUIElementOverrides, Windows::UI::Xaml::IUIElement2, Windows::UI::Xaml::IUIElement3, Windows::UI::Xaml::IUIElement4, Windows::UI::Xaml::IUIElement5, Windows::UI::Xaml::IFrameworkElement, Windows::UI::Xaml::IFrameworkElementOverrides, Windows::UI::Xaml::IFrameworkElement2, Windows::UI::Xaml::IFrameworkElementOverrides2, Windows::UI::Xaml::IFrameworkElement3, Windows::UI::Xaml::IFrameworkElement4, Windows::UI::Xaml::Controls::IControl, Windows::UI::Xaml::Controls::IControlOverrides, Windows::UI::Xaml::Controls::IControl2, Windows::UI::Xaml::Controls::IControl3, Windows::UI::Xaml::Controls::IControl4, Windows::UI::Xaml::Controls::IControl5, Windows::UI::Xaml::Controls::IInkToolbarToggleButton>
@@ -1392,6 +1393,7 @@ struct [[deprecated("InkToolbarRulerButton is deprecated starting from Windows 1
     InkToolbarRulerButton();
     [[deprecated("InkToolbarRulerButton is deprecated starting from Windows 10 Creators Update. Please use InkToolbarStencilButton going forward. For more info, see MSDN.")]] static Windows::UI::Xaml::DependencyProperty RulerProperty();
 };
+struct [[deprecated("InkToolbarRulerButton is deprecated starting from Windows 10 Creators Update. Please use InkToolbarStencilButton going forward. For more info, see MSDN.")]] InkToolbarRulerButton;
 
 struct WINRT_EBO InkToolbarStencilButton :
     Windows::UI::Xaml::Controls::IInkToolbarStencilButton,
@@ -1693,6 +1695,7 @@ struct WINRT_EBO MediaElement :
     static Windows::UI::Xaml::DependencyProperty IsFullWindowProperty();
     [[deprecated("PlayToPreferredSourceUri may be altered or unavailable for releases after Windows 10.0. Instead, use GetAsCastingSource().PreferredSourceUri.")]] static Windows::UI::Xaml::DependencyProperty PlayToPreferredSourceUriProperty();
 };
+struct [[deprecated("PlayToPreferredSourceUri may be altered or unavailable for releases after Windows 10.0. Instead, use GetAsCastingSource().PreferredSourceUri.")]] MediaElement;
 
 struct WINRT_EBO MediaPlayerElement :
     Windows::UI::Xaml::Controls::IMediaPlayerElement,

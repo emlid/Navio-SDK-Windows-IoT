@@ -96,7 +96,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
             catch
             {
                 // Close devices in case partially initialized
-                _interruptPin.Dispose();
+                _interruptPin?.Dispose();
                 _swdPort?.Dispose();
                 _chip?.Dispose();
 

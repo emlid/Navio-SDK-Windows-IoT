@@ -1,4 +1,4 @@
-// C++ for the Windows Runtime vv1.0.170303.6
+// C++ for the Windows Runtime v1.0.170406.6
 // Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
@@ -14,34 +14,14 @@ namespace ABI::Windows::Foundation::Collections {
 template <> struct __declspec(uuid("e2fcc7c1-3bfc-5a0b-b2b0-72e769d1cb7e")) __declspec(novtable) IIterable<hstring> : impl_IIterable<hstring> {};
 #endif
 
-#ifndef WINRT_GENERIC_2f13c006_a03a_5f69_b090_75a43e33423e
-#define WINRT_GENERIC_2f13c006_a03a_5f69_b090_75a43e33423e
-template <> struct __declspec(uuid("2f13c006-a03a-5f69-b090-75a43e33423e")) __declspec(novtable) IVectorView<hstring> : impl_IVectorView<hstring> {};
-#endif
-
-#ifndef WINRT_GENERIC_98b9acc1_4b56_532e_ac73_03d5291cca90
-#define WINRT_GENERIC_98b9acc1_4b56_532e_ac73_03d5291cca90
-template <> struct __declspec(uuid("98b9acc1-4b56-532e-ac73-03d5291cca90")) __declspec(novtable) IVector<hstring> : impl_IVector<hstring> {};
-#endif
-
-
-}
-
-namespace ABI::Windows::Foundation {
-
-#ifndef WINRT_GENERIC_548cefbd_bc8a_5fa0_8df2_957440fc8bf4
-#define WINRT_GENERIC_548cefbd_bc8a_5fa0_8df2_957440fc8bf4
-template <> struct __declspec(uuid("548cefbd-bc8a-5fa0-8df2-957440fc8bf4")) __declspec(novtable) IReference<int32_t> : impl_IReference<int32_t> {};
-#endif
-
-
-}
-
-namespace ABI::Windows::Foundation::Collections {
-
 #ifndef WINRT_GENERIC_ac7f26f2_feb7_5b2a_8ac4_345bc62caede
 #define WINRT_GENERIC_ac7f26f2_feb7_5b2a_8ac4_345bc62caede
 template <> struct __declspec(uuid("ac7f26f2-feb7-5b2a-8ac4-345bc62caede")) __declspec(novtable) IMapView<hstring, hstring> : impl_IMapView<hstring, hstring> {};
+#endif
+
+#ifndef WINRT_GENERIC_8d720cdf_3934_5d3f_9a55_40e8063b086a
+#define WINRT_GENERIC_8d720cdf_3934_5d3f_9a55_40e8063b086a
+template <> struct __declspec(uuid("8d720cdf-3934-5d3f-9a55-40e8063b086a")) __declspec(novtable) IVectorView<int32_t> : impl_IVectorView<int32_t> {};
 #endif
 
 #ifndef WINRT_GENERIC_6ea176ea_99ea_5c79_876a_f4c437b83df6
@@ -84,11 +64,6 @@ template <> struct __declspec(uuid("ab710de1-fcbb-5bd6-9f2f-285fa9fb44e8")) __de
 
 namespace ABI::Windows::Foundation::Collections {
 
-#ifndef WINRT_GENERIC_8d720cdf_3934_5d3f_9a55_40e8063b086a
-#define WINRT_GENERIC_8d720cdf_3934_5d3f_9a55_40e8063b086a
-template <> struct __declspec(uuid("8d720cdf-3934-5d3f-9a55-40e8063b086a")) __declspec(novtable) IVectorView<int32_t> : impl_IVectorView<int32_t> {};
-#endif
-
 #ifndef WINRT_GENERIC_f6d1f700_49c2_52ae_8154_826f9908773c
 #define WINRT_GENERIC_f6d1f700_49c2_52ae_8154_826f9908773c
 template <> struct __declspec(uuid("f6d1f700-49c2-52ae-8154-826f9908773c")) __declspec(novtable) IMap<hstring, hstring> : impl_IMap<hstring, hstring> {};
@@ -99,10 +74,25 @@ template <> struct __declspec(uuid("f6d1f700-49c2-52ae-8154-826f9908773c")) __de
 template <> struct __declspec(uuid("60310303-49c5-52e6-abc6-a9b36eccc716")) __declspec(novtable) IKeyValuePair<hstring, hstring> : impl_IKeyValuePair<hstring, hstring> {};
 #endif
 
+#ifndef WINRT_GENERIC_2f13c006_a03a_5f69_b090_75a43e33423e
+#define WINRT_GENERIC_2f13c006_a03a_5f69_b090_75a43e33423e
+template <> struct __declspec(uuid("2f13c006-a03a-5f69-b090-75a43e33423e")) __declspec(novtable) IVectorView<hstring> : impl_IVectorView<hstring> {};
+#endif
+
+#ifndef WINRT_GENERIC_98b9acc1_4b56_532e_ac73_03d5291cca90
+#define WINRT_GENERIC_98b9acc1_4b56_532e_ac73_03d5291cca90
+template <> struct __declspec(uuid("98b9acc1-4b56-532e-ac73-03d5291cca90")) __declspec(novtable) IVector<hstring> : impl_IVector<hstring> {};
+#endif
+
 
 }
 
 namespace ABI::Windows::Foundation {
+
+#ifndef WINRT_GENERIC_548cefbd_bc8a_5fa0_8df2_957440fc8bf4
+#define WINRT_GENERIC_548cefbd_bc8a_5fa0_8df2_957440fc8bf4
+template <> struct __declspec(uuid("548cefbd-bc8a-5fa0-8df2-957440fc8bf4")) __declspec(novtable) IReference<int32_t> : impl_IReference<int32_t> {};
+#endif
 
 #ifndef WINRT_GENERIC_fc0a0b0f_4dcc_5257_bc61_3435e302ce1f
 #define WINRT_GENERIC_fc0a0b0f_4dcc_5257_bc61_3435e302ce1f
@@ -159,6 +149,16 @@ namespace ABI::Windows::Foundation::Collections {
 template <> struct __declspec(uuid("8c304ebb-6615-50a4-8829-879ecd443236")) __declspec(novtable) IIterator<hstring> : impl_IIterator<hstring> {};
 #endif
 
+#ifndef WINRT_GENERIC_bfea7f78_50c2_5f1d_a6ea_9e978d2699ff
+#define WINRT_GENERIC_bfea7f78_50c2_5f1d_a6ea_9e978d2699ff
+template <> struct __declspec(uuid("bfea7f78-50c2-5f1d-a6ea-9e978d2699ff")) __declspec(novtable) IIterator<int32_t> : impl_IIterator<int32_t> {};
+#endif
+
+#ifndef WINRT_GENERIC_81a643fb_f51c_5565_83c4_f96425777b66
+#define WINRT_GENERIC_81a643fb_f51c_5565_83c4_f96425777b66
+template <> struct __declspec(uuid("81a643fb-f51c-5565-83c4-f96425777b66")) __declspec(novtable) IIterable<int32_t> : impl_IIterable<int32_t> {};
+#endif
+
 #ifndef WINRT_GENERIC_d9904edc_5391_51f8_9bd8_db81e5763766
 #define WINRT_GENERIC_d9904edc_5391_51f8_9bd8_db81e5763766
 template <> struct __declspec(uuid("d9904edc-5391-51f8-9bd8-db81e5763766")) __declspec(novtable) IVector<Windows::Devices::Sms::ISmsBinaryMessage> : impl_IVector<Windows::Devices::Sms::ISmsBinaryMessage> {};
@@ -213,26 +213,6 @@ namespace ABI::Windows::Foundation {
 #define WINRT_GENERIC_44aa5484_43d0_5893_a4ee_7db00113ae60
 template <> struct __declspec(uuid("44aa5484-43d0-5893-a4ee-7db00113ae60")) __declspec(novtable) AsyncOperationCompletedHandler<Windows::Devices::Sms::SmsDevice> : impl_AsyncOperationCompletedHandler<Windows::Devices::Sms::SmsDevice> {};
 #endif
-
-
-}
-
-namespace ABI::Windows::Foundation::Collections {
-
-#ifndef WINRT_GENERIC_bfea7f78_50c2_5f1d_a6ea_9e978d2699ff
-#define WINRT_GENERIC_bfea7f78_50c2_5f1d_a6ea_9e978d2699ff
-template <> struct __declspec(uuid("bfea7f78-50c2-5f1d-a6ea-9e978d2699ff")) __declspec(novtable) IIterator<int32_t> : impl_IIterator<int32_t> {};
-#endif
-
-#ifndef WINRT_GENERIC_81a643fb_f51c_5565_83c4_f96425777b66
-#define WINRT_GENERIC_81a643fb_f51c_5565_83c4_f96425777b66
-template <> struct __declspec(uuid("81a643fb-f51c-5565-83c4-f96425777b66")) __declspec(novtable) IIterable<int32_t> : impl_IIterable<int32_t> {};
-#endif
-
-
-}
-
-namespace ABI::Windows::Foundation {
 
 #ifndef WINRT_GENERIC_c7d5c6fe_9206_5eb1_abc1_c1bc21804eeb
 #define WINRT_GENERIC_c7d5c6fe_9206_5eb1_abc1_c1bc21804eeb

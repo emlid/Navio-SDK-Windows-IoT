@@ -1,6 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-using Emlid.UniversalWindows.UI.Models;
+﻿using Emlid.UniversalWindows.UI.Models;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -30,7 +28,8 @@ namespace Emlid.UniversalWindows.UI.Views
         /// <summary>
         /// <see cref="Model"/> <see cref="DependencyProperty"/>.
         /// </summary>
-        public static readonly DependencyProperty ModelProperty = DependencyProperty.Register(nameof(Model), typeof(TPageUIModel), typeof(UIModelPage<TApplicationUIModel, TPageUIModel>), null);
+        public static readonly DependencyProperty ModelProperty = DependencyProperty.Register(
+            nameof(Model), typeof(TPageUIModel), typeof(UIModelPage<TApplicationUIModel, TPageUIModel>), null);
 
         /// <summary>
         /// Page UI model.

@@ -1,4 +1,4 @@
-// C++ for the Windows Runtime vv1.0.170303.6
+// C++ for the Windows Runtime v1.0.170406.6
 // Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
@@ -195,11 +195,6 @@ template <> struct __declspec(uuid("2cab81a8-3c29-50d1-9761-5f3927c96dca")) __de
 template <> struct __declspec(uuid("001a0095-2adc-54c2-8594-3a36ba16fd86")) __declspec(novtable) IAsyncOperation<Windows::Devices::SmartCards::SmartCardCryptogramGetAllCryptogramMaterialCharacteristicsResult> : impl_IAsyncOperation<Windows::Devices::SmartCards::SmartCardCryptogramGetAllCryptogramMaterialCharacteristicsResult> {};
 #endif
 
-#ifndef WINRT_GENERIC_3e1fe603_f897_5263_b328_0806426b8a79
-#define WINRT_GENERIC_3e1fe603_f897_5263_b328_0806426b8a79
-template <> struct __declspec(uuid("3e1fe603-f897-5263-b328-0806426b8a79")) __declspec(novtable) IAsyncOperation<hstring> : impl_IAsyncOperation<hstring> {};
-#endif
-
 #ifndef WINRT_GENERIC_036a830d_bbca_5cb9_977f_b29ea3042149
 #define WINRT_GENERIC_036a830d_bbca_5cb9_977f_b29ea3042149
 template <> struct __declspec(uuid("036a830d-bbca-5cb9-977f-b29ea3042149")) __declspec(novtable) IAsyncOperation<Windows::Devices::SmartCards::SmartCardReader> : impl_IAsyncOperation<Windows::Devices::SmartCards::SmartCardReader> {};
@@ -248,6 +243,11 @@ template <> struct __declspec(uuid("3bee8834-b9a7-5a80-a746-5ef097227878")) __de
 #ifndef WINRT_GENERIC_6184fc80_b752_5ce8_a136_f57174bb9309
 #define WINRT_GENERIC_6184fc80_b752_5ce8_a136_f57174bb9309
 template <> struct __declspec(uuid("6184fc80-b752-5ce8-a136-f57174bb9309")) __declspec(novtable) IAsyncOperation<Windows::Devices::SmartCards::SmartCardProvisioning> : impl_IAsyncOperation<Windows::Devices::SmartCards::SmartCardProvisioning> {};
+#endif
+
+#ifndef WINRT_GENERIC_3e1fe603_f897_5263_b328_0806426b8a79
+#define WINRT_GENERIC_3e1fe603_f897_5263_b328_0806426b8a79
+template <> struct __declspec(uuid("3e1fe603-f897-5263-b328-0806426b8a79")) __declspec(novtable) IAsyncOperation<hstring> : impl_IAsyncOperation<hstring> {};
 #endif
 
 #ifndef WINRT_GENERIC_1c650663_3f68_599b_b9d4_c350f13ee4e4
@@ -560,11 +560,6 @@ template <> struct __declspec(uuid("cd50ac04-e836-5525-9edb-066d6205a2a7")) __de
 template <> struct __declspec(uuid("45cffa0a-b354-50c3-8f24-3dd4f1677fbe")) __declspec(novtable) AsyncOperationCompletedHandler<Windows::Devices::SmartCards::SmartCardCryptogramGetAllCryptogramMaterialCharacteristicsResult> : impl_AsyncOperationCompletedHandler<Windows::Devices::SmartCards::SmartCardCryptogramGetAllCryptogramMaterialCharacteristicsResult> {};
 #endif
 
-#ifndef WINRT_GENERIC_b79a741f_7fb5_50ae_9e99_911201ec3d41
-#define WINRT_GENERIC_b79a741f_7fb5_50ae_9e99_911201ec3d41
-template <> struct __declspec(uuid("b79a741f-7fb5-50ae-9e99-911201ec3d41")) __declspec(novtable) AsyncOperationCompletedHandler<hstring> : impl_AsyncOperationCompletedHandler<hstring> {};
-#endif
-
 #ifndef WINRT_GENERIC_20d3244d_375a_5f7d_8944_164fdfed4239
 #define WINRT_GENERIC_20d3244d_375a_5f7d_8944_164fdfed4239
 template <> struct __declspec(uuid("20d3244d-375a-5f7d-8944-164fdfed4239")) __declspec(novtable) AsyncOperationCompletedHandler<Windows::Devices::SmartCards::SmartCardReader> : impl_AsyncOperationCompletedHandler<Windows::Devices::SmartCards::SmartCardReader> {};
@@ -613,6 +608,11 @@ template <> struct __declspec(uuid("51c3d2fd-b8a1-5620-b746-7ee6d533aca3")) __de
 #ifndef WINRT_GENERIC_7a2e58dc_22ee_5cb8_83cc_a7a61b9dcd2c
 #define WINRT_GENERIC_7a2e58dc_22ee_5cb8_83cc_a7a61b9dcd2c
 template <> struct __declspec(uuid("7a2e58dc-22ee-5cb8-83cc-a7a61b9dcd2c")) __declspec(novtable) AsyncOperationCompletedHandler<Windows::Devices::SmartCards::SmartCardProvisioning> : impl_AsyncOperationCompletedHandler<Windows::Devices::SmartCards::SmartCardProvisioning> {};
+#endif
+
+#ifndef WINRT_GENERIC_b79a741f_7fb5_50ae_9e99_911201ec3d41
+#define WINRT_GENERIC_b79a741f_7fb5_50ae_9e99_911201ec3d41
+template <> struct __declspec(uuid("b79a741f-7fb5-50ae-9e99-911201ec3d41")) __declspec(novtable) AsyncOperationCompletedHandler<hstring> : impl_AsyncOperationCompletedHandler<hstring> {};
 #endif
 
 #ifndef WINRT_GENERIC_96b172f6_dedb_5f3e_af90_7b0f10219352

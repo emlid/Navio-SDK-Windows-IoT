@@ -29,10 +29,10 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest
         /// <summary>
         /// Creates an application specific model at runtime.
         /// </summary>
-        protected override Task<TestApplicationUIModel> CreateModel(TaskScheduler scheduler)
+        protected override TestApplicationUIModel CreateModel(TaskFactory uiTaskFactory)
         {
             // Create UI model
-            return Task.Run(() => new TestApplicationUIModel(new TaskFactory(scheduler)));
+            return new TestApplicationUIModel(uiTaskFactory);
         }
 
         #endregion

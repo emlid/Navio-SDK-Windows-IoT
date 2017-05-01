@@ -1,4 +1,4 @@
-// C++ for the Windows Runtime vv1.0.170303.6
+// C++ for the Windows Runtime v1.0.170406.6
 // Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
@@ -11,9 +11,9 @@
 #include "Windows.UI.Input.0.h"
 #include "Windows.UI.Popups.0.h"
 #include "Windows.Foundation.1.h"
-#include "Windows.UI.Popups.1.h"
-#include "Windows.Foundation.Collections.1.h"
 #include "Windows.UI.Input.1.h"
+#include "Windows.Foundation.Collections.1.h"
+#include "Windows.UI.Popups.1.h"
 
 WINRT_EXPORT namespace winrt {
 
@@ -399,13 +399,6 @@ struct __declspec(uuid("920d9cb1-a5fc-4a21-8c09-49dfe6ffe25f")) __declspec(novta
     virtual HRESULT __stdcall abi_GetIntermediatePoints(Windows::Foundation::Collections::IVector<Windows::UI::Input::PointerPoint> ** value) = 0;
 };
 
-struct __declspec(uuid("27f4a54b-22d3-4187-a876-2dc211b56bd8")) __declspec(novtable) ISystemNavigationCloseRequestedEventArgs : Windows::Foundation::IInspectable
-{
-    virtual HRESULT __stdcall get_Handled(bool * value) = 0;
-    virtual HRESULT __stdcall put_Handled(bool value) = 0;
-    virtual HRESULT __stdcall abi_GetDeferral(Windows::Foundation::IDeferral ** result) = 0;
-};
-
 struct __declspec(uuid("93023118-cf50-42a6-9706-69107fa122e1")) __declspec(novtable) ISystemNavigationManager : Windows::Foundation::IInspectable
 {
     virtual HRESULT __stdcall add_BackRequested(Windows::Foundation::EventHandler<Windows::UI::Core::BackRequestedEventArgs> * handler, event_token * token) = 0;
@@ -416,12 +409,6 @@ struct __declspec(uuid("8c510401-67be-49ae-9509-671c1e54a389")) __declspec(novta
 {
     virtual HRESULT __stdcall get_AppViewBackButtonVisibility(winrt::Windows::UI::Core::AppViewBackButtonVisibility * value) = 0;
     virtual HRESULT __stdcall put_AppViewBackButtonVisibility(winrt::Windows::UI::Core::AppViewBackButtonVisibility value) = 0;
-};
-
-struct __declspec(uuid("5abc5694-75d2-45ef-8a42-52d3de6c5867")) __declspec(novtable) ISystemNavigationManager3 : Windows::Foundation::IInspectable
-{
-    virtual HRESULT __stdcall add_CloseRequested(Windows::Foundation::TypedEventHandler<Windows::UI::Core::SystemNavigationManager, Windows::UI::Core::SystemNavigationCloseRequestedEventArgs> * handler, event_token * token) = 0;
-    virtual HRESULT __stdcall remove_CloseRequested(event_token token) = 0;
 };
 
 struct __declspec(uuid("dc52b5ce-bee0-4305-8c54-68228ed683b5")) __declspec(novtable) ISystemNavigationManagerStatics : Windows::Foundation::IInspectable
@@ -483,7 +470,6 @@ template <> struct traits<Windows::UI::Core::IdleDispatchedHandlerArgs> { using 
 template <> struct traits<Windows::UI::Core::InputEnabledEventArgs> { using default_interface = Windows::UI::Core::IInputEnabledEventArgs; };
 template <> struct traits<Windows::UI::Core::KeyEventArgs> { using default_interface = Windows::UI::Core::IKeyEventArgs; };
 template <> struct traits<Windows::UI::Core::PointerEventArgs> { using default_interface = Windows::UI::Core::IPointerEventArgs; };
-template <> struct traits<Windows::UI::Core::SystemNavigationCloseRequestedEventArgs> { using default_interface = Windows::UI::Core::ISystemNavigationCloseRequestedEventArgs; };
 template <> struct traits<Windows::UI::Core::SystemNavigationManager> { using default_interface = Windows::UI::Core::ISystemNavigationManager; };
 template <> struct traits<Windows::UI::Core::TouchHitTestingEventArgs> { using default_interface = Windows::UI::Core::ITouchHitTestingEventArgs; };
 template <> struct traits<Windows::UI::Core::VisibilityChangedEventArgs> { using default_interface = Windows::UI::Core::IVisibilityChangedEventArgs; };
@@ -965,14 +951,6 @@ struct WINRT_EBO impl_IPointerEventArgs
 };
 
 template <typename D>
-struct WINRT_EBO impl_ISystemNavigationCloseRequestedEventArgs
-{
-    bool Handled() const;
-    void Handled(bool value) const;
-    Windows::Foundation::Deferral GetDeferral() const;
-};
-
-template <typename D>
 struct WINRT_EBO impl_ISystemNavigationManager
 {
     event_token BackRequested(const Windows::Foundation::EventHandler<Windows::UI::Core::BackRequestedEventArgs> & handler) const;
@@ -986,15 +964,6 @@ struct WINRT_EBO impl_ISystemNavigationManager2
 {
     Windows::UI::Core::AppViewBackButtonVisibility AppViewBackButtonVisibility() const;
     void AppViewBackButtonVisibility(Windows::UI::Core::AppViewBackButtonVisibility value) const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_ISystemNavigationManager3
-{
-    event_token CloseRequested(const Windows::Foundation::TypedEventHandler<Windows::UI::Core::SystemNavigationManager, Windows::UI::Core::SystemNavigationCloseRequestedEventArgs> & handler) const;
-    using CloseRequested_revoker = event_revoker<ISystemNavigationManager3>;
-    CloseRequested_revoker CloseRequested(auto_revoke_t, const Windows::Foundation::TypedEventHandler<Windows::UI::Core::SystemNavigationManager, Windows::UI::Core::SystemNavigationCloseRequestedEventArgs> & handler) const;
-    void CloseRequested(event_token token) const;
 };
 
 template <typename D>
@@ -1281,12 +1250,6 @@ template <> struct traits<Windows::UI::Core::IPointerEventArgs>
     template <typename D> using consume = Windows::UI::Core::impl_IPointerEventArgs<D>;
 };
 
-template <> struct traits<Windows::UI::Core::ISystemNavigationCloseRequestedEventArgs>
-{
-    using abi = ABI::Windows::UI::Core::ISystemNavigationCloseRequestedEventArgs;
-    template <typename D> using consume = Windows::UI::Core::impl_ISystemNavigationCloseRequestedEventArgs<D>;
-};
-
 template <> struct traits<Windows::UI::Core::ISystemNavigationManager>
 {
     using abi = ABI::Windows::UI::Core::ISystemNavigationManager;
@@ -1297,12 +1260,6 @@ template <> struct traits<Windows::UI::Core::ISystemNavigationManager2>
 {
     using abi = ABI::Windows::UI::Core::ISystemNavigationManager2;
     template <typename D> using consume = Windows::UI::Core::impl_ISystemNavigationManager2<D>;
-};
-
-template <> struct traits<Windows::UI::Core::ISystemNavigationManager3>
-{
-    using abi = ABI::Windows::UI::Core::ISystemNavigationManager3;
-    template <typename D> using consume = Windows::UI::Core::impl_ISystemNavigationManager3<D>;
 };
 
 template <> struct traits<Windows::UI::Core::ISystemNavigationManagerStatics>
@@ -1458,12 +1415,6 @@ template <> struct traits<Windows::UI::Core::PointerEventArgs>
 {
     using abi = ABI::Windows::UI::Core::PointerEventArgs;
     static constexpr const wchar_t * name() noexcept { return L"Windows.UI.Core.PointerEventArgs"; }
-};
-
-template <> struct traits<Windows::UI::Core::SystemNavigationCloseRequestedEventArgs>
-{
-    using abi = ABI::Windows::UI::Core::SystemNavigationCloseRequestedEventArgs;
-    static constexpr const wchar_t * name() noexcept { return L"Windows.UI.Core.SystemNavigationCloseRequestedEventArgs"; }
 };
 
 template <> struct traits<Windows::UI::Core::SystemNavigationManager>

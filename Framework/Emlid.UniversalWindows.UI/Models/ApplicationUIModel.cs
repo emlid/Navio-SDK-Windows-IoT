@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace Emlid.UniversalWindows.UI.Models
 {
@@ -17,32 +16,6 @@ namespace Emlid.UniversalWindows.UI.Models
             : base(uiTaskFactory)
         {
         }
-
-        #region IDisposable
-
-        /// <summary>
-        /// Frees resources owned by this instance.
-        /// </summary>
-        /// <param name="disposing">
-        /// True when called via <see cref="IDisposable.Dispose()"/>, false when called during finalization.
-        /// </param>
-        protected override void Dispose(bool disposing)
-        {
-            try
-            {
-                // Dispose resources when possible
-                if (disposing)
-                {
-                }
-            }
-            finally
-            {
-                // Dispose base class
-                base.Dispose(disposing);
-            }
-        }
-
-        #endregion
 
         #endregion
     }

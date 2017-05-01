@@ -1,4 +1,4 @@
-// C++ for the Windows Runtime vv1.0.170303.6
+// C++ for the Windows Runtime v1.0.170406.6
 // Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
@@ -271,11 +271,6 @@ struct __declspec(uuid("ee30a0c9-ce56-4865-ba8e-8954ac271107")) __declspec(novta
     virtual HRESULT __stdcall get_Configuration(Windows::Devices::Printers::Extensions::IPrintTaskConfiguration ** value) = 0;
 };
 
-struct __declspec(uuid("d6310029-b1e3-4657-aab1-6a9968229592")) __declspec(novtable) IPrintWorkflowForegroundTaskActivatedEventArgs : Windows::Foundation::IInspectable
-{
-    virtual HRESULT __stdcall get_PrintWorkflowSession(Windows::Foundation::IInspectable ** value) = 0;
-};
-
 struct __declspec(uuid("6095f4dd-b7c0-46ab-81fe-d90f36d00d24")) __declspec(novtable) IProtocolActivatedEventArgs : Windows::Foundation::IInspectable
 {
     virtual HRESULT __stdcall get_Uri(Windows::Foundation::IUriRuntimeClass ** value) = 0;
@@ -398,7 +393,6 @@ template <> struct traits<Windows::ApplicationModel::Activation::LockScreenCompo
 template <> struct traits<Windows::ApplicationModel::Activation::PickerReturnedActivatedEventArgs> { using default_interface = Windows::ApplicationModel::Activation::IPickerReturnedActivatedEventArgs; };
 template <> struct traits<Windows::ApplicationModel::Activation::Print3DWorkflowActivatedEventArgs> { using default_interface = Windows::ApplicationModel::Activation::IPrint3DWorkflowActivatedEventArgs; };
 template <> struct traits<Windows::ApplicationModel::Activation::PrintTaskSettingsActivatedEventArgs> { using default_interface = Windows::ApplicationModel::Activation::IPrintTaskSettingsActivatedEventArgs; };
-template <> struct traits<Windows::ApplicationModel::Activation::PrintWorkflowForegroundTaskActivatedEventArgs> { using default_interface = Windows::ApplicationModel::Activation::IPrintWorkflowForegroundTaskActivatedEventArgs; };
 template <> struct traits<Windows::ApplicationModel::Activation::ProtocolActivatedEventArgs> { using default_interface = Windows::ApplicationModel::Activation::IProtocolActivatedEventArgs; };
 template <> struct traits<Windows::ApplicationModel::Activation::ProtocolForResultsActivatedEventArgs> { using default_interface = Windows::ApplicationModel::Activation::IProtocolForResultsActivatedEventArgs; };
 template <> struct traits<Windows::ApplicationModel::Activation::RestrictedLaunchActivatedEventArgs> { using default_interface = Windows::ApplicationModel::Activation::IRestrictedLaunchActivatedEventArgs; };
@@ -693,12 +687,6 @@ template <typename D>
 struct WINRT_EBO impl_IPrintTaskSettingsActivatedEventArgs
 {
     Windows::Devices::Printers::Extensions::PrintTaskConfiguration Configuration() const;
-};
-
-template <typename D>
-struct WINRT_EBO impl_IPrintWorkflowForegroundTaskActivatedEventArgs
-{
-    Windows::Foundation::IInspectable PrintWorkflowSession() const;
 };
 
 template <typename D>
@@ -1068,12 +1056,6 @@ template <> struct traits<Windows::ApplicationModel::Activation::IPrintTaskSetti
     template <typename D> using consume = Windows::ApplicationModel::Activation::impl_IPrintTaskSettingsActivatedEventArgs<D>;
 };
 
-template <> struct traits<Windows::ApplicationModel::Activation::IPrintWorkflowForegroundTaskActivatedEventArgs>
-{
-    using abi = ABI::Windows::ApplicationModel::Activation::IPrintWorkflowForegroundTaskActivatedEventArgs;
-    template <typename D> using consume = Windows::ApplicationModel::Activation::impl_IPrintWorkflowForegroundTaskActivatedEventArgs<D>;
-};
-
 template <> struct traits<Windows::ApplicationModel::Activation::IProtocolActivatedEventArgs>
 {
     using abi = ABI::Windows::ApplicationModel::Activation::IProtocolActivatedEventArgs;
@@ -1354,12 +1336,6 @@ template <> struct traits<Windows::ApplicationModel::Activation::PrintTaskSettin
 {
     using abi = ABI::Windows::ApplicationModel::Activation::PrintTaskSettingsActivatedEventArgs;
     static constexpr const wchar_t * name() noexcept { return L"Windows.ApplicationModel.Activation.PrintTaskSettingsActivatedEventArgs"; }
-};
-
-template <> struct traits<Windows::ApplicationModel::Activation::PrintWorkflowForegroundTaskActivatedEventArgs>
-{
-    using abi = ABI::Windows::ApplicationModel::Activation::PrintWorkflowForegroundTaskActivatedEventArgs;
-    static constexpr const wchar_t * name() noexcept { return L"Windows.ApplicationModel.Activation.PrintWorkflowForegroundTaskActivatedEventArgs"; }
 };
 
 template <> struct traits<Windows::ApplicationModel::Activation::ProtocolActivatedEventArgs>

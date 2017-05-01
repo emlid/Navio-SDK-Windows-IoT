@@ -49,7 +49,7 @@ namespace Emlid.UniversalWindows.UI.Views
         /// <summary>
         /// Creates the application model when it is started.
         /// </summary>
-        protected abstract Task<TApplicationUIModel> CreateModel(TaskScheduler scheduler);
+        protected abstract TApplicationUIModel CreateModel(TaskFactory factory);
 
         /// <summary>
         /// Loads saved state when the application is launched.
@@ -103,8 +103,11 @@ namespace Emlid.UniversalWindows.UI.Views
                 }
 
                 // Create UI model
-                Model = await CreateModel(TaskScheduler.FromCurrentSynchronizationContext());
+                var scheduler = TaskScheduler.FromCurrentSynchronizationContext();
+                var factory = new TaskFactory(scheduler);
+                Model = CreateModel(factory);
 
+                // Create and navigate to start page when no content
                 if (rootFrame.Content == null)
                 {
                     // When the navigation stack isn't restored navigate to the first page,

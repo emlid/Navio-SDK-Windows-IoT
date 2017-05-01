@@ -1,4 +1,4 @@
-// C++ for the Windows Runtime vv1.0.170303.6
+// C++ for the Windows Runtime v1.0.170406.6
 // Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
@@ -63,10 +63,8 @@ struct IInputEnabledEventArgs;
 struct IKeyEventArgs;
 struct IKeyEventArgs2;
 struct IPointerEventArgs;
-struct ISystemNavigationCloseRequestedEventArgs;
 struct ISystemNavigationManager;
 struct ISystemNavigationManager2;
-struct ISystemNavigationManager3;
 struct ISystemNavigationManagerStatics;
 struct ITouchHitTestingEventArgs;
 struct IVisibilityChangedEventArgs;
@@ -93,7 +91,6 @@ struct IdleDispatchedHandlerArgs;
 struct InputEnabledEventArgs;
 struct KeyEventArgs;
 struct PointerEventArgs;
-struct SystemNavigationCloseRequestedEventArgs;
 struct SystemNavigationManager;
 struct TouchHitTestingEventArgs;
 struct VisibilityChangedEventArgs;
@@ -146,10 +143,8 @@ struct IInputEnabledEventArgs;
 struct IKeyEventArgs;
 struct IKeyEventArgs2;
 struct IPointerEventArgs;
-struct ISystemNavigationCloseRequestedEventArgs;
 struct ISystemNavigationManager;
 struct ISystemNavigationManager2;
-struct ISystemNavigationManager3;
 struct ISystemNavigationManagerStatics;
 struct ITouchHitTestingEventArgs;
 struct IVisibilityChangedEventArgs;
@@ -175,7 +170,6 @@ struct IdleDispatchedHandlerArgs;
 struct InputEnabledEventArgs;
 struct KeyEventArgs;
 struct PointerEventArgs;
-struct SystemNavigationCloseRequestedEventArgs;
 struct SystemNavigationManager;
 struct TouchHitTestingEventArgs;
 struct VisibilityChangedEventArgs;
@@ -226,10 +220,8 @@ template <typename T> struct impl_IInputEnabledEventArgs;
 template <typename T> struct impl_IKeyEventArgs;
 template <typename T> struct impl_IKeyEventArgs2;
 template <typename T> struct impl_IPointerEventArgs;
-template <typename T> struct impl_ISystemNavigationCloseRequestedEventArgs;
 template <typename T> struct impl_ISystemNavigationManager;
 template <typename T> struct impl_ISystemNavigationManager2;
-template <typename T> struct impl_ISystemNavigationManager3;
 template <typename T> struct impl_ISystemNavigationManagerStatics;
 template <typename T> struct impl_ITouchHitTestingEventArgs;
 template <typename T> struct impl_IVisibilityChangedEventArgs;

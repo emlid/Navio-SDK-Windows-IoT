@@ -1,4 +1,4 @@
-// C++ for the Windows Runtime vv1.0.170303.6
+// C++ for the Windows Runtime v1.0.170406.6
 // Copyright (c) 2017 Microsoft Corporation. All rights reserved.
 
 #pragma once
@@ -24,9 +24,9 @@ struct WINRT_EBO Calendar :
 {
     Calendar(std::nullptr_t) noexcept {}
     Calendar();
-    Calendar(iterable<hstring> languages, hstring_view calendar, hstring_view clock, hstring_view timeZoneId);
     Calendar(iterable<hstring> languages);
     Calendar(iterable<hstring> languages, hstring_view calendar, hstring_view clock);
+    Calendar(iterable<hstring> languages, hstring_view calendar, hstring_view clock, hstring_view timeZoneId);
 };
 
 struct CalendarIdentifiers
