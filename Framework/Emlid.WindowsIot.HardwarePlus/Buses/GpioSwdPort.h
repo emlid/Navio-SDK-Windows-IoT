@@ -34,18 +34,6 @@ namespace Emlid
 
 					#pragma endregion
 
-					#pragma region IO
-
-					static byte CalcOpcode(bool read, bool ap, byte register)
-					{
-						byte opcode = 0x00;
-						if (read) opcode |= 0x20;
-						if (ap) opcode |= 0x40;
-						return opcode;
-					}
-
-					#pragma endregion
-
 					#pragma region Private Mehods
 
 					/// <summary>
