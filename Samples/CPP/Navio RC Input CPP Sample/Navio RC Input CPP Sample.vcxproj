@@ -28,7 +28,7 @@
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
     <ContainsStartupTask>true</ContainsStartupTask>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
-    <PackageCertificateKeyFile>TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>$(SolutionDir)Common\Temporary Key.pfx</PackageCertificateKeyFile>
     <PackageCertificateThumbprint>044F4EA553040203085A351BD80A7910C3788B6A</PackageCertificateThumbprint>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -151,9 +151,6 @@
     <Image Include="Assets\SmallLogo.scale-100.png" />
     <Image Include="Assets\SplashScreen.scale-100.png" />
     <Image Include="Assets\StoreLogo.scale-100.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="TemporaryKey.pfx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

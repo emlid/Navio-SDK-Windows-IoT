@@ -23,35 +23,37 @@ echo ***************************************************************************
 echo.
 
 rem * Parse parameters
-if "%~1" == "" goto syntax
+if "%~1" == "" goto Syntax
 set VSKeyContainerName=%~1
 
 rem * Initialize environment
 echo Initializing environment...
 call "%~dp0VSWhereDev.cmd"
-if %errorlevel% neq 0 goto error
+if %errorlevel% neq 0 goto Error
 
 rem * Install key
 echo Source: %~dp0
-sn -i "%~dp0..\..\Common\TemporaryKey.pfx" %VSKeyContainerName%
-if %errorlevel% neq 0 goto error
+sn -i "%~dp0..\..\Common\Temporary Key.pfx" %VSKeyContainerName%
+if %errorlevel% neq 0 goto Error
 
 rem * Exit successfully
 echo Completed successfully.
 endlocal
 exit /b 0
 
-:error
-set result=%errorlevel%
-echo.
-echo Error %result%
-endlocal
-exit /b %result%
-
-:syntax
-echo Syntax^: "TemporaryKey Install.cmd" VS_KEY_HHHHHHHHHHHHHHHH
+rem * Syntax Error
+:Syntax
+echo Syntax^: "Temporary Key Install.cmd" VS_KEY_HHHHHHHHHHHHHHHH
 echo.
 echo VS_KEY_... is your unique Visual Studio key container, displayed in
 echo the error message when the key is missing.
+endlocal
+exit /b 1
+
+rem * Error Handler
+:Error
+set Result=%errorlevel%
+echo.
+echo Error %Result%
 endlocal
 exit /b 1

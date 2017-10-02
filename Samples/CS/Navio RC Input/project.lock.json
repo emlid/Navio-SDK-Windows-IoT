@@ -15024,19 +15024,19 @@
     "UAP,Version=v10.0.15063": []
   },
   "packageFolders": {
-    "C:\\Users\\tony\\.nuget\\packages\\": {}
+    "C:\\Users\\tonyw\\.nuget\\packages\\": {}
   },
   "project": {
     "restore": {
-      "projectUniqueName": "D:\\Data\\Tony\\Source\\GitHub\\Emlid\\Navio-SDK-Windows-IoT\\Samples\\CS\\Navio RC Input\\Navio RC Input CS Sample.csproj",
+      "projectUniqueName": "C:\\Users\\tonyw\\Source\\GitHub\\Emlid\\Navio-SDK-Windows-IoT\\Samples\\CS\\Navio RC Input\\Navio RC Input CS Sample.csproj",
       "projectName": "Navio RC Input CS Sample",
-      "projectPath": "D:\\Data\\Tony\\Source\\GitHub\\Emlid\\Navio-SDK-Windows-IoT\\Samples\\CS\\Navio RC Input\\Navio RC Input CS Sample.csproj",
-      "projectJsonPath": "D:\\Data\\Tony\\Source\\GitHub\\Emlid\\Navio-SDK-Windows-IoT\\Samples\\CS\\Navio RC Input\\project.json",
-      "packagesPath": "C:\\Users\\tony\\.nuget\\packages\\",
-      "outputPath": "D:\\Data\\Tony\\Source\\GitHub\\Emlid\\Navio-SDK-Windows-IoT\\Samples\\CS\\Navio RC Input\\obj\\",
+      "projectPath": "C:\\Users\\tonyw\\Source\\GitHub\\Emlid\\Navio-SDK-Windows-IoT\\Samples\\CS\\Navio RC Input\\Navio RC Input CS Sample.csproj",
+      "projectJsonPath": "C:\\Users\\tonyw\\Source\\GitHub\\Emlid\\Navio-SDK-Windows-IoT\\Samples\\CS\\Navio RC Input\\project.json",
+      "packagesPath": "C:\\Users\\tonyw\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\tonyw\\Source\\GitHub\\Emlid\\Navio-SDK-Windows-IoT\\Samples\\CS\\Navio RC Input\\obj\\",
       "projectStyle": "ProjectJson",
       "configFilePaths": [
-        "C:\\Users\\tony\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\tonyw\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "sources": {
@@ -15046,11 +15046,11 @@
       "frameworks": {
         "uap10.0.15063": {
           "projectReferences": {
-            "D:\\Data\\Tony\\Source\\GitHub\\Emlid\\Navio-SDK-Windows-IoT\\Framework\\Emlid.WindowsIot.HardwarePlus\\Emlid.WindowsIot.HardwarePlus.vcxproj": {
-              "projectPath": "D:\\Data\\Tony\\Source\\GitHub\\Emlid\\Navio-SDK-Windows-IoT\\Framework\\Emlid.WindowsIot.HardwarePlus\\Emlid.WindowsIot.HardwarePlus.vcxproj"
+            "C:\\Users\\tonyw\\source\\GitHub\\Emlid\\Navio-SDK-Windows-IoT\\Framework\\Emlid.WindowsIot.HardwarePlus\\Emlid.WindowsIot.HardwarePlus.vcxproj": {
+              "projectPath": "C:\\Users\\tonyw\\source\\GitHub\\Emlid\\Navio-SDK-Windows-IoT\\Framework\\Emlid.WindowsIot.HardwarePlus\\Emlid.WindowsIot.HardwarePlus.vcxproj"
             },
-            "D:\\Data\\Tony\\Source\\GitHub\\Emlid\\Navio-SDK-Windows-IoT\\Framework\\Emlid.WindowsIoT.Hardware\\Emlid.WindowsIot.Hardware.csproj": {
-              "projectPath": "D:\\Data\\Tony\\Source\\GitHub\\Emlid\\Navio-SDK-Windows-IoT\\Framework\\Emlid.WindowsIoT.Hardware\\Emlid.WindowsIot.Hardware.csproj"
+            "C:\\Users\\tonyw\\Source\\GitHub\\Emlid\\Navio-SDK-Windows-IoT\\Framework\\Emlid.WindowsIoT.Hardware\\Emlid.WindowsIot.Hardware.csproj": {
+              "projectPath": "C:\\Users\\tonyw\\Source\\GitHub\\Emlid\\Navio-SDK-Windows-IoT\\Framework\\Emlid.WindowsIoT.Hardware\\Emlid.WindowsIot.Hardware.csproj"
             }
           }
         }

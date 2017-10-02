@@ -1,13 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26323.1
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{101AF3F7-293E-46CF-8C37-EAA61DFDF0A5}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
 		License = License
 		ReadMe.md = ReadMe.md
+		Setup.cmd = Setup.cmd
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{24C4538B-C6A4-4D47-80C9-4249164C222F}"
@@ -75,8 +76,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{703F
 		Tools\Scripts\Setup Local.ps1 = Tools\Scripts\Setup Local.ps1
 		Tools\Scripts\Setup Remote.cmd = Tools\Scripts\Setup Remote.cmd
 		Tools\Scripts\Setup Remote.ps1 = Tools\Scripts\Setup Remote.ps1
-		Tools\Scripts\TemporaryKey Install.cmd = Tools\Scripts\TemporaryKey Install.cmd
-		Tools\Scripts\TemporaryKey Remove.cmd = Tools\Scripts\TemporaryKey Remove.cmd
+		Tools\Scripts\Temporary Key Install.cmd = Tools\Scripts\Temporary Key Install.cmd
+		Tools\Scripts\Temporary Key Remove.cmd = Tools\Scripts\Temporary Key Remove.cmd
 		Tools\Scripts\VSWhereDev.cmd = Tools\Scripts\VSWhereDev.cmd
 	EndProjectSection
 EndProject
@@ -252,5 +253,8 @@ Global
 		{45D41ACC-2C3C-43D2-BC10-02AA73FFC7C7} = {59AC22D9-5AB2-42B0-BFCE-4E3D1C63E8E0}
 		{243E8ED0-58CF-4322-BB7D-D52E70352608} = {175F3EA8-E13A-41F9-81E9-EFE31813D8F0}
 		{672010BA-4AE0-4794-A2B5-B53FC758D61F} = {59AC22D9-5AB2-42B0-BFCE-4E3D1C63E8E0}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5D3C61DC-BF70-44F6-9F9B-7E1A85A720F1}
 	EndGlobalSection
 EndGlobal

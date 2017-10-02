@@ -57,6 +57,9 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <None Include="..\..\Common\Temporary Key.pfx">
+      <Link>Temporary Key.pfx</Link>
+    </None>
     <None Include="Emlid.WindowsIot.Hardware.nuget.props" />
     <None Include="Emlid.WindowsIot.Hardware.nuget.targets">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -170,9 +173,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="TemporaryKey.snk" />
-  </ItemGroup>
-  <ItemGroup>
     <SDKReference Include="WindowsIoT, Version=10.0.15063.0">
       <Name>Windows IoT Extensions for the UWP</Name>
     </SDKReference>
@@ -194,7 +194,7 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>TemporaryKey.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>..\..\Common\Temporary Key.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />

@@ -55,14 +55,14 @@
     <IntDir>obj\$(Platform)\$(Configuration)\</IntDir>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>true</RunCodeAnalysis>
-    <WindowsMetadataLinkKeyFile>$(SolutionDir)Common\TemporaryKey.pfx</WindowsMetadataLinkKeyFile>
+    <WindowsMetadataLinkKeyFile>$(SolutionDir)Common\Temporary Key.pfx</WindowsMetadataLinkKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <OutDir>bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>obj\$(Platform)\$(Configuration)\</IntDir>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>true</RunCodeAnalysis>
-    <WindowsMetadataLinkKeyFile>$(SolutionDir)Common\TemporaryKey.pfx</WindowsMetadataLinkKeyFile>
+    <WindowsMetadataLinkKeyFile>$(SolutionDir)Common\Temporary Key.pfx</WindowsMetadataLinkKeyFile>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <ClCompile>

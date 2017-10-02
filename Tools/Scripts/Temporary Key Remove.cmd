@@ -16,34 +16,36 @@ echo key container name.
 echo.
 
 rem * Parse parameters
-if "%~1" == "" goto syntax
+if "%~1" == "" goto Syntax
 set VSKeyContainerName=%~1
 
 rem * Initialize environment
 echo Initializing environment...
 call "%~dp0VSWhereDev.cmd"
-if %errorlevel% neq 0 goto error
+if %errorlevel% neq 0 goto Error
 
 rem * Remove key
 sn -d %VSKeyContainerName%
-if %errorlevel% neq 0 pause
+if %errorlevel% neq 0 goto Error
 
 rem * Exit successfully
 echo Completed successfully.
 endlocal
 exit /b 0
 
-:error
-set result=%errorlevel%
-echo.
-echo Error %result%
-endlocal
-exit /b %result%
-
-:syntax
-echo Syntax^: "TemporaryKey Remove.cmd" VS_KEY_HHHHHHHHHHHHHHHH
+rem * Syntax Error
+:Syntax
+echo Syntax^: "Temporary Key Install.cmd" VS_KEY_HHHHHHHHHHHHHHHH
 echo.
 echo VS_KEY_... is your unique Visual Studio key container, displayed in
 echo the error message when the key is missing.
+endlocal
+exit /b 1
+
+rem * Error Handler
+:Error
+set Result=%errorlevel%
+echo.
+echo Error %Result%
 endlocal
 exit /b 1

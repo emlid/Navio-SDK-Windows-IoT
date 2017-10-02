@@ -26,7 +26,4 @@
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="TemporaryKey.pfx" />
-  </ItemGroup>
 </Project>
