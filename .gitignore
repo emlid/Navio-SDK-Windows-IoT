@@ -6,6 +6,9 @@
 *.user
 *.userosscache
 *.sln.docstates
+project.lock.json
+*.db
+*.opendb
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -134,8 +137,9 @@ publish/
 
 # NuGet Packages
 # Packages must be checked-in to ensure same build on all targets, enable historc and offline builds (even after the NuGet packge is removed).
-!*.nupkg
 !**/packages/
+# Local pacakge state files must be ignored.
+*.nupkg
 
 # Windows Azure Build Output
 csx/
@@ -188,11 +192,6 @@ FakesAssemblies/
 
 # Visual Studio 6 workspace options file
 *.opt
-
-# Visual Studio 2015
-project.lock.json
-*.db
-*.opendb
 
 # Windows system files
 Thumbs.db
