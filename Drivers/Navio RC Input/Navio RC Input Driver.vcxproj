@@ -17,7 +17,7 @@
     <Configuration>Debug</Configuration>
     <Platform Condition="'$(Platform)' == ''">ARM</Platform>
     <RootNamespace>Navio_RC_Input_Driver</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.15042.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16288.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="Configuration">
@@ -28,7 +28,7 @@
     <DriverTargetPlatform>Universal</DriverTargetPlatform>
     <SupportsPackaging>true</SupportsPackaging>
     <KMDF_VERSION_MAJOR>1</KMDF_VERSION_MAJOR>
-    <KMDF_VERSION_MINOR>19</KMDF_VERSION_MINOR>
+    <KMDF_VERSION_MINOR>23</KMDF_VERSION_MINOR>
     <ALLOW_DATE_TIME>1</ALLOW_DATE_TIME>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -40,7 +40,7 @@
     <DriverTargetPlatform>Universal</DriverTargetPlatform>
     <SupportsPackaging>true</SupportsPackaging>
     <KMDF_VERSION_MAJOR>1</KMDF_VERSION_MAJOR>
-    <KMDF_VERSION_MINOR>19</KMDF_VERSION_MINOR>
+    <KMDF_VERSION_MINOR>23</KMDF_VERSION_MINOR>
     <ALLOW_DATE_TIME>1</ALLOW_DATE_TIME>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -54,20 +54,23 @@
   <PropertyGroup />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <DebuggerFlavor>DbgengKernelDebugger</DebuggerFlavor>
-    <IntDir>$(ProjectDir)$(Platform)\$(ConfigurationName)\</IntDir>
-    <CodeAnalysisRuleSet>C:\Program Files (x86)\Windows Kits\10\CodeAnalysis\DriverMinimumRules.ruleset</CodeAnalysisRuleSet>
-    <OutDir>$(ProjectDir)$(Platform)\$(ConfigurationName)\</OutDir>
+    <IntDir>$(ProjectDir)Build\$(Platform)\$(Configuration)\Temp\</IntDir>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <OutDir>$(ProjectDir)Build\$(Platform)\$(Configuration)\</OutDir>
     <TargetName>NavioRCInput</TargetName>
     <LinkIncremental>false</LinkIncremental>
     <EnablePkgGen>false</EnablePkgGen>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <DebuggerFlavor>DbgengKernelDebugger</DebuggerFlavor>
-    <IntDir>$(ProjectDir)$(Platform)\$(ConfigurationName)\</IntDir>
-    <OutDir>$(ProjectDir)$(Platform)\$(ConfigurationName)\</OutDir>
+    <IntDir>$(ProjectDir)Build\$(Platform)\$(Configuration)\Temp\</IntDir>
+    <OutDir>$(ProjectDir)Build\$(Platform)\$(Configuration)\</OutDir>
     <TargetName>NavioRCInput</TargetName>
     <LinkIncremental>false</LinkIncremental>
     <EnablePkgGen>false</EnablePkgGen>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <PkgGen />
@@ -76,6 +79,7 @@
       <WppRecorderEnabled>true</WppRecorderEnabled>
       <WppScanConfigurationData>Trace.h</WppScanConfigurationData>
       <WppKernelMode>true</WppKernelMode>
+      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)Public.h" "$(SolutionDir)Drivers\Include\NavioRCInputDriver.h" /d /y</Command>
@@ -87,6 +91,7 @@
       <WppRecorderEnabled>true</WppRecorderEnabled>
       <WppScanConfigurationData>Trace.h</WppScanConfigurationData>
       <WppKernelMode>true</WppKernelMode>
+      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)Public.h" "$(SolutionDir)Drivers\Include\NavioRCInputDriver.h" /d /y</Command>

@@ -52,7 +52,8 @@ byte I2cExtensions::ReadByte(cx::I2cDevice^ device)
 cx::Array<byte>^ I2cExtensions::ReadBytes(cx::I2cDevice^ device, int size)
 {
 	// Create buffer
-	auto readBuffer = ref new cx::Array<byte>(size);
+#pragma warning(suppress: 6001)
+	auto readBuffer = ref new cx::Array<byte>(0, size);
 
 	// Call extended device method
 	device->Read(readBuffer);
@@ -64,6 +65,7 @@ cx::Array<byte>^ I2cExtensions::ReadBytes(cx::I2cDevice^ device, int size)
 byte I2cExtensions::WriteReadByte(cx::I2cDevice^ device, byte writeData)
 {
 	// Cast argument to correct type
+#pragma warning(suppress: 6001)
 	auto writeBuffer = ref new cx::Array<byte>(&writeData, 1);
 
 	// Call overloaded method
@@ -73,6 +75,7 @@ byte I2cExtensions::WriteReadByte(cx::I2cDevice^ device, byte writeData)
 byte I2cExtensions::WriteReadByte(cx::I2cDevice^ device, const cx::Array<byte>^ writeData)
 {
 	// Call overloaded method
+#pragma warning(suppress: 6001)
 	auto readBuffer = WriteReadBytes(device, writeData, 1);
 
 	// Return first byte in buffer
@@ -82,6 +85,7 @@ byte I2cExtensions::WriteReadByte(cx::I2cDevice^ device, const cx::Array<byte>^ 
 cx::Array<byte>^ I2cExtensions::WriteReadBytes(cx::I2cDevice^ device, byte writeData, int size)
 {
 	// Cast data to correct type
+#pragma warning(suppress: 6001)
 	auto writeBuffer = ref new cx::Array<byte>(&writeData, 1);
 
 	// Call overloaded method
@@ -91,6 +95,7 @@ cx::Array<byte>^ I2cExtensions::WriteReadBytes(cx::I2cDevice^ device, byte write
 cx::Array<byte>^ I2cExtensions::WriteReadBytes(cx::I2cDevice^ device, const cx::Array<byte>^ writeData, int size)
 {
 	// Create buffer
+#pragma warning(suppress: 6001)
 	auto readBuffer = ref new cx::Array<byte>(size);
 
 	// Call extended device method
@@ -103,6 +108,7 @@ cx::Array<byte>^ I2cExtensions::WriteReadBytes(cx::I2cDevice^ device, const cx::
 bool I2cExtensions::WriteReadBit(cx::I2cDevice^ device, byte writeData, byte mask)
 {
 	// Cast data to correct type
+#pragma warning(suppress: 6001)
 	auto writeBuffer = ref new cx::Array<byte>(&writeData, 1);
 
 	// Call overloaded method and return result
@@ -125,6 +131,7 @@ bool I2cExtensions::WriteReadBit(cx::I2cDevice^ device, const cx::Array<byte>^ w
 void I2cExtensions::WriteByte(cx::I2cDevice^ device, byte writeData)
 {
 	// Cast data to correct type
+#pragma warning(suppress: 6001)
 	auto writeBuffer = ref new cx::Array<byte>(&writeData, 1);
 
 	// Call extended device function
@@ -166,6 +173,7 @@ void I2cExtensions::WriteJoinByte(cx::I2cDevice^ device, byte writeData1, byte w
 void I2cExtensions::WriteJoinByte(cx::I2cDevice^ device, const cx::Array<byte>^ writeData1, byte writeData2)
 {
 	// Cast data to correct type
+#pragma warning(suppress: 6001)
 	auto data2Array = ref new cx::Array<byte>(&writeData2, 1);
 
 	// Call overloaded method
@@ -181,6 +189,7 @@ void I2cExtensions::WriteJoinByte(cx::I2cDevice^ device, const cx::Array<byte>^ 
 void I2cExtensions::WriteJoinBytes(cx::I2cDevice^ device, byte writeData1, const cx::Array<byte>^ writeData2)
 {
 	// Cast data to correct type
+#pragma warning(suppress: 6001)
 	auto data1Array = ref new cx::Array<byte>(&writeData1, 1);
 
 	// Call overloaded method
@@ -198,7 +207,8 @@ void I2cExtensions::WriteJoinBytes(cx::I2cDevice^ device, const cx::Array<byte>^
 	// Join buffers
 	auto addressLength = writeData1->Length;
 	auto dataLength = writeData2->Length;
-	auto buffer = ref new cx::Array<byte>(addressLength + dataLength);
+#pragma warning(suppress: 6001)
+	auto buffer = ref new cx::Array<byte>(0, addressLength + dataLength);
 	std::memmove(buffer->Data, writeData1->Data, addressLength);
 	std::memmove(buffer->Data + addressLength, writeData2->Data, dataLength);
 

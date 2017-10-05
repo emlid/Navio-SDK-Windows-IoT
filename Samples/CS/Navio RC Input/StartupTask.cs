@@ -1,6 +1,7 @@
 ﻿using Emlid.WindowsIot.Hardware.Boards.Navio;
 using Emlid.WindowsIot.Hardware.Protocols.Ppm;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using Windows.ApplicationModel.Background;
 
 namespace Emlid.WindowsIot.Samples.NavioRCInput
@@ -30,6 +31,7 @@ namespace Emlid.WindowsIot.Samples.NavioRCInput
         /// Application start-up.
         /// </summary>
         /// <param name="taskInstance">Task instance.</param>
+        [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0")]
         public void Run(IBackgroundTaskInstance taskInstance)
         {
             // Initialize task
