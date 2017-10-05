@@ -1,5 +1,14 @@
 ## Change Log
 
+*2017.10.05* v1.0.14
+
+Full Visual Studio 2017 compatibility (drivers too).
+
+* Updated for preview WSDK/SDK supporting Device Driver development in Visual Studio 2017.
+* Windows Insider Preview SDK and WSDK build 16288 are now required, until the WDK is finally released.
+* Setup script to make first time development setup more intuitive.
+
+
 *2017.05.01* v1.0.13
 
 Minor code update but significant in that all development tools are now release builds.
