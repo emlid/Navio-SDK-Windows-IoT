@@ -24,19 +24,16 @@ Update the GitHub extension (menu "Tools - Extensions and Updates...").
 1. Click "Team Explorer" then the "Plug" icon (manage connections).
 2. Under "Local Git Repositories" click the "Clone" link then enter the URL of the GitHub project "[https://github.com/emlid/Navio-SDK-Windows-IoT](https://github.com/emlid/Navio-SDK-Windows-IoT)", choose a local path into which the files will be downloaded then the "Clone" button.
 3. Open the solution by selecting the "File - Open - Project/Solution..." menu option then the solution (.sln) file from the local repository directory you just cloned.
-4. In the Solution Explorer window, right-click the solution root then select "Power Commands - Open Command Prompt" and enter the commands:
+4. In the Solution Explorer window, right-click the solution root then select "Power Commands - Open Command Prompt" and enter the command:
   ```
-  cd Tools\Scripts
-  PowerShell.exe -File "Setup Local.ps1"
-  exit
+  Setup.cmd
   ```
 5. On the build toolbar, ensure that "Debug" configuration and "ARM" platform is selected.
 6. In the "Build" menu select "Rebuild Solution". 
 7. Some NuGet packages may be loaded, then the build will start.
-8. Once per workstation: Visual Studio requires that the temporary signing keys are installed in a per-machine unique "VS_KEY_HHHHHHHHHHHHHHHH" container. Copy the container name from the error message, open a command prompt at the solution folder then run the following commands (with your unique VS_KEY value):
+8. Once per workstation: Visual Studio requires that the temporary signing keys are installed in a per-machine unique "VS_KEY_HHHHHHHHHHHHHHHH" container. Copy the container name from the error message, open a command prompt at the solution folder then run the following command (with your unique VS_KEY value):
   ```
-  cd Common
-  "TemporaryKey Install.cmd" VS_KEY_HHHHHHHHHHHHHHHH
+  "Tools\Scripts\Temporary Key Install.cmd" VS_KEY_HHHHHHHHHHHHHHHH
   ```
 9. Rebuild the solution, it should now complete without any errors.
 

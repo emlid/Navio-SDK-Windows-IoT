@@ -60,10 +60,6 @@
     <None Include="..\..\Common\Temporary Key.pfx">
       <Link>Temporary Key.pfx</Link>
     </None>
-    <None Include="Emlid.WindowsIot.Hardware.nuget.props" />
-    <None Include="Emlid.WindowsIot.Hardware.nuget.targets">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="Emlid.WindowsIot.Hardware.nuspec">
       <SubType>Designer</SubType>
     </None>
