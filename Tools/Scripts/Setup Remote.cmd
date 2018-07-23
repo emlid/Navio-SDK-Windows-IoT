@@ -1,1 +1,0 @@
-@powershell -File "%~dp0Setup Remote.ps1"

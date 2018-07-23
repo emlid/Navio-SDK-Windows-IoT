@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>Emlid.WindowsIot.Hardware</id>
+    <version>1.0.15</version>
+    <title>Emlid Windows IoT Hardware</title>
+    <authors>Tony Wall</authors>
+    <owners>Emlid</owners>
+    <language>en-US</language>
+    <licenseUrl>http://opensource.org/licenses/Apache-2.0</licenseUrl>
+    <projectUrl>https://github.com/emlid/Navio-SDK-Windows-IoT</projectUrl>
+    <iconUrl>http://www.emlid.com/wp-content/uploads/2015/03/emlid_logo_no_text.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <copyright>Copyright Emlid, All Rights Reserved.</copyright>
+    <summary>Provides access to Emlid hardware on the Windows IoT platform.</summary>
+    <description>
+      Supports the Navio autopilot shield for Raspberry Pi 2, 3 and compatible hardware running the Microsoft Windows 10 IoT OS.
+    </description>
+    <tags>Emlid Hardware SDK IoT Navio Autopilot UAV</tags>
+    <releaseNotes>
+      *2018.07.23* v1.0.15
+
+      Tools, build scripts and packaging update.
+
+      1. Updated solution to Windows 1803 Creators Update SDK/WDK build 17134.
+      2. Directory structure separated into source and build directories to support new build scripts.
+      3. New build scripts producing all components, documentation, Windows Store AppX and NuGet packages in a central location. First version which is possible to deploy the tools and sample apps without building in Visual Studio.
+    </releaseNotes>
+    <dependencies>
+      <dependency id="Microsoft.NETCore.UniversalWindowsPlatform" version="6.1.5" />
+    </dependencies>
+  </metadata>
+  <files>
+
+    <!-- WinMd and IntelliSense -->
+    <file src="Emlid.UniversalWindows.xml" target="lib\uap10.0" />
+    <file src="Emlid.WindowsIot.Hardware.xml" target="lib\uap10.0" />
+    <file src="Emlid.WindowsIot.HardwarePlus.winmd" target="lib\uap10.0" />
+    <file src="Emlid.WindowsIot.HardwarePlus.xml" target="lib\uap10.0" />
+
+    <!-- DLLs and resources -->
+    <file src="Emlid.UniversalWindows.dll" target="runtimes\win10-arm\native" />
+    <file src="Emlid.UniversalWindows.pri" target="runtimes\win10-arm\native" />
+    <file src="Emlid.WindowsIot.Hardware.dll" target="runtimes\win10-arm\native" />
+    <file src="Emlid.WindowsIot.Hardware.pri" target="runtimes\win10-arm\native" />
+    <file src="Emlid.WindowsIot.HardwarePlus.winmd" target="runtimes\win10-arm\native" />
+    <file src="Emlid.WindowsIot.HardwarePlus.pri" target="runtimes\win10-arm\native" />
+
+  </files>
+</package>

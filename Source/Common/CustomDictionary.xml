@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dictionary>
+  <Words>
+    <Recognized>
+      <Word>ADC</Word>
+      <Word>ASCII</Word>
+      <Word>CPPM</Word>
+      <Word>CPU</Word>
+      <Word>CRC</Word>
+      <Word>CSB</Word>
+      <Word>DSM</Word>
+      <Word>Emlid</Word>
+      <Word>FMU</Word>
+      <Word>FRAM</Word>
+      <Word>GPIO</Word>
+      <Word>GPS</Word>
+      <Word>I2C</Word>
+      <Word>IMU</Word>
+      <Word>IoT</Word>
+      <Word>LED</Word>
+      <Word>Ms</Word>
+      <Word>Navio</Word>
+      <Word>NXP</Word>
+      <Word>OSR</Word>
+      <Word>PCA</Word>
+      <Word>Prescale</Word>
+      <Word>PWM</Word>
+      <Word>PX4</Word>
+      <Word>PX4IO</Word>
+      <Word>RCIO</Word>
+      <Word>RCV</Word>
+      <Word>RGB</Word>
+      <Word>RSSI</Word>
+      <Word>SBUS</Word>
+      <Word>SPI</Word>
+      <Word>SUMD</Word>
+      <Word>SWD</Word>
+      <Word>UART</Word>
+    </Recognized>
+    <Deprecated>
+      <Term PreferredAlternate="Login">Logon</Term>
+      <Term PreferredAlternate="Login">Log-on</Term>
+      <Term PreferredAlternate="Logout">Logoff</Term>
+      <Term PreferredAlternate="Logout">Log-off</Term>
+    </Deprecated>
+    <Compound>
+      <!--<Term CompoundAlternate=""></Term>-->
+    </Compound>
+    <DiscreteExceptions>
+      <Term>I2c</Term>
+      <Term>SubAddress</Term>
+      <Term>WebPage</Term>
+    </DiscreteExceptions>
+  </Words>
+  <Acronyms>
+    <CasingExceptions>
+      <Acronym>I2C</Acronym>
+      <Acronym>IoT</Acronym>
+      <Acronym>Mb85rcv</Acronym>
+      <Acronym>Mb85rc04v</Acronym>
+      <Acronym>Mb85rc256v</Acronym>
+      <Acronym>Ms</Acronym>
+      <Acronym>Ms5611</Acronym>
+      <Acronym>Pca9685</Acronym>
+      <Acronym>Px4io</Acronym>
+    </CasingExceptions>
+  </Acronyms>
+</Dictionary>

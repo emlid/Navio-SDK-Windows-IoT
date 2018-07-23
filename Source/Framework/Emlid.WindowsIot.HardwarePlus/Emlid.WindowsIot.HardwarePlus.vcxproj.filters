@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Buses">
+      <UniqueIdentifier>{12d85262-b852-4933-af61-bd3a1e29f65f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Protocols">
+      <UniqueIdentifier>{a56cb169-12d0-457a-a70e-b129425e03d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Protocols\SerialWireDebug">
+      <UniqueIdentifier>{a9e5318a-5c11-4ca0-970d-958f8f0145b9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="Buses\GpioExtensions.cpp">
+      <Filter>Buses</Filter>
+    </ClCompile>
+    <ClCompile Include="Buses\I2cExtensions.cpp">
+      <Filter>Buses</Filter>
+    </ClCompile>
+    <ClCompile Include="Buses\SpiExtensions.cpp">
+      <Filter>Buses</Filter>
+    </ClCompile>
+    <ClCompile Include="Buses\GpioSwdPort.cpp">
+      <Filter>Buses</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="Buses\GpioExtensions.h">
+      <Filter>Buses</Filter>
+    </ClInclude>
+    <ClInclude Include="Buses\I2cExtensions.h">
+      <Filter>Buses</Filter>
+    </ClInclude>
+    <ClInclude Include="Buses\SpiExtensions.h">
+      <Filter>Buses</Filter>
+    </ClInclude>
+    <ClInclude Include="Buses\GpioSwdPort.h">
+      <Filter>Buses</Filter>
+    </ClInclude>
+    <ClInclude Include="Protocols\SerialWireDebug\SwdRequestBits.h">
+      <Filter>Protocols\SerialWireDebug</Filter>
+    </ClInclude>
+    <ClInclude Include="Protocols\SerialWireDebug\SwdResponseBits.h">
+      <Filter>Protocols\SerialWireDebug</Filter>
+    </ClInclude>
+    <ClInclude Include="Protocols\SerialWireDebug\SwdDebugPortIdRegisterBits.h">
+      <Filter>Protocols\SerialWireDebug</Filter>
+    </ClInclude>
+    <ClInclude Include="Protocols\SerialWireDebug\SwdRegisterReadAddress.h">
+      <Filter>Protocols\SerialWireDebug</Filter>
+    </ClInclude>
+    <ClInclude Include="Protocols\SerialWireDebug\SwdRegisterWriteAddress.h">
+      <Filter>Protocols\SerialWireDebug</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,171 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Emlid.UniversalWindows</name>
+    </assembly>
+    <members>
+        <member name="T:Emlid.UniversalWindows.Collections.ArrayExtensions">
+            <summary>
+            Provides helper methods and extensions for working with arrays and collections.
+            </summary>
+        </member>
+        <member name="M:Emlid.UniversalWindows.Collections.ArrayExtensions.AreEqual(System.Collections.IList,System.Collections.IList)">
+            <summary>
+            Compares two list based arrays by value.
+            </summary>
+        </member>
+        <member name="M:Emlid.UniversalWindows.Collections.ArrayExtensions.AreEqual(System.Collections.IEnumerable,System.Collections.IEnumerable)">
+            <summary>
+            Compares two collections by value.
+            </summary>
+        </member>
+        <member name="M:Emlid.UniversalWindows.Collections.ArrayExtensions.AreEqual(System.Byte[],System.Int32,System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Compares part of two arrays for equality.
+            </summary>
+        </member>
+        <member name="M:Emlid.UniversalWindows.Collections.ArrayExtensions.Contains``1(System.Collections.Generic.IEnumerable{``0},``0)">
+            <summary>
+            Searches any array for a value, i.e. without having to create a list or collection.
+            </summary>
+            <typeparam name="T">Array type.</typeparam>
+            <param name="array">Array to search.</param>
+            <param name="value">Value to find.</param>
+            <returns>True when present.</returns>
+        </member>
+        <member name="M:Emlid.UniversalWindows.Collections.ArrayExtensions.Contains(System.Collections.Generic.IEnumerable{System.String},System.String,System.StringComparison)">
+            <summary>
+            Checks if the string array contains the specified value optionally ignoring case.
+            </summary>
+            <param name="array">Array to search.</param>
+            <param name="value">Value to search for.</param>
+            <param name="comparisonType">Comparison options, e.g. set to <see cref="F:System.StringComparison.OrdinalIgnoreCase"/> for a case insensitive comparison.</param>
+            <returns>True when found.</returns>
+        </member>
+        <member name="M:Emlid.UniversalWindows.Collections.ArrayExtensions.GetHashCode(System.Collections.IList)">
+            <summary>
+            Gets the hash code of all items in the array.
+            </summary>
+        </member>
+        <member name="M:Emlid.UniversalWindows.Collections.ArrayExtensions.Dispose(System.Collections.IList)">
+            <summary>
+            Disposes all members implementing <see cref="T:System.IDisposable"/>.
+            </summary>
+            <param name="list">List of items to dispose.</param>
+        </member>
+        <member name="T:Emlid.UniversalWindows.DisposableObject">
+            <summary>
+            Provides an <see cref="T:System.IDisposable"/> base class.
+            </summary>
+        </member>
+        <member name="P:Emlid.UniversalWindows.DisposableObject.IsDisposed">
+            <summary>
+            Indicates this instance has been disposed.
+            </summary>
+        </member>
+        <member name="M:Emlid.UniversalWindows.DisposableObject.Dispose(System.Boolean)">
+            <summary>
+            Frees resources owned by this instance.
+            </summary>
+            <param name="disposing">
+            True when called via <see cref="M:Emlid.UniversalWindows.DisposableObject.Dispose"/>, false when called from the finalizer.
+            </param>
+        </member>
+        <member name="M:Emlid.UniversalWindows.DisposableObject.Finalize">
+            <summary>
+            Finalizer which calls <see cref="M:Emlid.UniversalWindows.DisposableObject.Dispose(System.Boolean)"/> with false when it has not been disabled
+            by a proactive call to <see cref="M:Emlid.UniversalWindows.DisposableObject.Dispose"/>.
+            </summary>
+        </member>
+        <member name="M:Emlid.UniversalWindows.DisposableObject.Dispose">
+            <summary>
+            Pro-actively frees resources owned by this instance.
+            </summary>
+        </member>
+        <member name="T:Emlid.UniversalWindows.StopwatchExtensions">
+            <summary>
+            Extensions to the <see cref="T:System.Diagnostics.Stopwatch"/> class.
+            </summary>
+        </member>
+        <member name="F:Emlid.UniversalWindows.StopwatchExtensions.TicksPerMicrosecond">
+            <summary>
+            Number of <see cref="P:System.Diagnostics.Stopwatch.ElapsedTicks"/> in a microsecond.
+            </summary>
+        </member>
+        <member name="M:Emlid.UniversalWindows.StopwatchExtensions.ElapsedMicroseconds(System.Diagnostics.Stopwatch)">
+            <summary>
+            Gets the total elapsed time in microseconds.
+            </summary>
+        </member>
+        <member name="M:Emlid.UniversalWindows.StopwatchExtensions.GetTimestampInMicroseconds">
+            <summary>
+            Gets the total elapsed time in microseconds.
+            </summary>
+        </member>
+        <member name="T:Emlid.UniversalWindows.StringExtensions">
+            <summary>
+            <see cref="T:System.String"/> extensions.
+            </summary>
+        </member>
+        <member name="F:Emlid.UniversalWindows.StringExtensions.AsciiMinimumPrintable">
+            <summary>
+            Minimum ASCII character value which is printable (not a special character).
+            </summary>
+        </member>
+        <member name="F:Emlid.UniversalWindows.StringExtensions.AsciiMaximumPrintable">
+            <summary>
+            Minimum ASCII character value which is printable (not a special character).
+            </summary>
+        </member>
+        <member name="M:Emlid.UniversalWindows.StringExtensions.FilterSpecial(System.String,System.Nullable{System.Char})">
+            <summary>
+            Filters a string down to printable characters.
+            </summary>
+            <param name="value">Raw string to filter.</param>
+            <param name="placeholder">Optional place-holder to replace filtered characters with.</param>
+            <returns>Filtered string.</returns>
+        </member>
+        <member name="T:Emlid.UniversalWindows.TimeSpanExtensions">
+            <summary>
+            Extensions to the <see cref="T:System.TimeSpan"/> class.
+            </summary>
+        </member>
+        <member name="F:Emlid.UniversalWindows.TimeSpanExtensions.TicksPerMicrosecond">
+            <summary>
+            Number of <see cref="P:System.TimeSpan.Ticks"/> in a microsecond.
+            </summary>
+        </member>
+        <member name="M:Emlid.UniversalWindows.TimeSpanExtensions.FromMicroseconds(System.Int64)">
+            <summary>
+            Creates a <see cref="T:System.TimeSpan"/> from an interval specified in microseconds.
+            </summary>
+        </member>
+        <member name="M:Emlid.UniversalWindows.TimeSpanExtensions.TotalMicroseconds(System.TimeSpan)">
+            <summary>
+            Gets the total elapsed time in microseconds.
+            </summary>
+        </member>
+        <member name="T:Emlid.UniversalWindows.ValueChangedEventArgs`1">
+            <summary>
+            Event arguments for a changed value.
+            </summary>
+        </member>
+        <member name="M:Emlid.UniversalWindows.ValueChangedEventArgs`1.#ctor(`0,`0)">
+            <summary>
+            Creates an instance with the specified values.
+            </summary>
+            <param name="oldValue">Old value.</param>
+            <param name="newValue">New value.</param>
+        </member>
+        <member name="P:Emlid.UniversalWindows.ValueChangedEventArgs`1.OldValue">
+            <summary>
+            Old value.
+            </summary>
+        </member>
+        <member name="P:Emlid.UniversalWindows.ValueChangedEventArgs`1.NewValue">
+            <summary>
+            New value.
+            </summary>
+        </member>
+    </members>
+</doc>

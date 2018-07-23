@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">ARM</Platform>
+    <ProjectGuid>{FE8E8830-EE45-46F0-88A5-4A14AD02EE50}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Emlid.WindowsIot.Hardware</RootNamespace>
+    <AssemblyName>Emlid.WindowsIot.Hardware</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <MinimumVisualStudioVersion>15.0</MinimumVisualStudioVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion>10.0.17134.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.17134.0</TargetPlatformMinVersion>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <PlatformTarget>ARM</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;WINDOWS_UAP;NETFX_CORE;WINDOWS_APP</DefineConstants>
+    <NoWarn>2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DocumentationFile>bin\ARM\Debug\Emlid.WindowsIot.Hardware.xml</DocumentationFile>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <GenerateLibraryLayout>false</GenerateLibraryLayout>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <PlatformTarget>ARM</PlatformTarget>
+    <OutputPath>bin\ARM\Release\</OutputPath>
+    <DefineConstants>TRACE;WINDOWS_UAP;NETFX_CORE;WINDOWS_APP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DocumentationFile>bin\ARM\Release\Emlid.WindowsIot.Hardware.xml</DocumentationFile>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <None Include="..\..\Common\Temporary Key.snk">
+      <Link>Temporary Key.snk</Link>
+    </None>
+    <None Include="Emlid.WindowsIot.Hardware.nuspec">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\Common\AssemblyInfoGlobal.cs">
+      <Link>Properties\AssemblyInfoGlobal.cs</Link>
+    </Compile>
+    <Compile Include="Boards\Navio\INavioFramDevice.cs" />
+    <Compile Include="Boards\Navio\INavioBoard.cs" />
+    <Compile Include="Boards\Navio\INavioBarometerDevice.cs" />
+    <Compile Include="Boards\Navio\INavioAdcDevice.cs" />
+    <Compile Include="Boards\Navio\INavioImuDevice.cs" />
+    <Compile Include="Boards\Navio\INavioGpsDevice.cs" />
+    <Compile Include="Boards\Navio\INavioLedDevice.cs" />
+    <Compile Include="Boards\Navio\INavioRCInputDevice.cs" />
+    <Compile Include="Boards\Navio\INavioPwmDevice.cs" />
+    <Compile Include="Boards\Navio\Internal\Navio1Board.cs" />
+    <Compile Include="Boards\Navio\Internal\Navio2RcioDevice.cs" />
+    <Compile Include="Boards\Navio\Internal\Navio2Board.cs" />
+    <Compile Include="Boards\Navio\Internal\Navio1PlusBoard.cs" />
+    <Compile Include="Boards\Navio\Internal\Navio2LedDevice.cs" />
+    <Compile Include="Components\Px4io\Data\Px4ioConfigRegisters.cs" />
+    <Compile Include="Components\Px4io\Data\Px4ioControlGroupsValidFlags.cs" />
+    <Compile Include="Components\Px4io\Data\Px4ioControlRegisters.cs" />
+    <Compile Include="Components\Px4io\Data\Px4ioControlRegisterOffset.cs" />
+    <Compile Include="Components\Px4io\Data\Px4ioRCConfigOptions.cs" />
+    <Compile Include="Components\Px4io\Data\Px4ioTestRegisters.cs" />
+    <Compile Include="Components\Px4io\Data\Px4ioTestRegisterOffset.cs" />
+    <Compile Include="Components\Px4io\Data\Px4ioSensorRegisters.cs" />
+    <Compile Include="Components\Px4io\Data\Px4ioSensorRegisterOffset.cs" />
+    <Compile Include="Components\Px4io\Data\Px4ioRCConfigRegisters.cs" />
+    <Compile Include="Components\Px4io\Data\Px4ioRCConfigRegisterOffset.cs" />
+    <Compile Include="Components\Px4io\Data\Px4ioRCInputRegisters.cs" />
+    <Compile Include="Components\Px4io\Data\Px4ioRCInputRegisterOffset.cs" />
+    <Compile Include="Components\Px4io\Data\Px4ioRCInputRawRegisters.cs" />
+    <Compile Include="Components\Px4io\Data\Px4ioRCInputRawRegisterOffset.cs" />
+    <Compile Include="Components\Px4io\Data\Px4ioRCInputRawStatusFlags.cs" />
+    <Compile Include="Components\Px4io\Data\Px4ioSetupArmingFlags.cs" />
+    <Compile Include="Components\Px4io\Data\Px4ioSetupDsmBindState.cs" />
+    <Compile Include="Components\Px4io\Data\Px4ioSetupFeatureFlags.cs" />
+    <Compile Include="Components\Px4io\Data\Px4ioSetupRegisters.cs" />
+    <Compile Include="Components\Px4io\Data\Px4ioSetupRegisterOffset.cs" />
+    <Compile Include="Components\Px4io\Data\Px4ioSetupRelayFlags.cs" />
+    <Compile Include="Components\Px4io\Data\Px4ioStatusAlarmFlags.cs" />
+    <Compile Include="Components\Px4io\Data\Px4ioStatusMixerFlags.cs" />
+    <Compile Include="Components\Px4io\Data\Px4ioStatusMonitoringFlags.cs" />
+    <Compile Include="Components\Px4io\Px4ioDevice.cs" />
+    <Compile Include="Components\Px4io\Px4ioPacket.cs" />
+    <Compile Include="Components\Px4io\Data\Px4ioConfigRegisterOffset.cs" />
+    <Compile Include="Components\Px4io\Px4ioResponseCode.cs" />
+    <Compile Include="Components\Px4io\Data\Px4ioPage.cs" />
+    <Compile Include="Components\Px4io\Px4ioRequestCode.cs" />
+    <Compile Include="Boards\Navio\NavioDeviceProvider.cs" />
+    <Compile Include="Components\Mb85rcv\Mb85rcvDeviceId.cs" />
+    <Compile Include="Protocols\Barometer\BarometerMeasurement.cs" />
+    <Compile Include="Protocols\Ppm\CppmDecoder.cs" />
+    <Compile Include="Protocols\Pwm\PwmPulse.cs" />
+    <Compile Include="Components\Mb85rcv\Mb85rc04vDevice.cs" />
+    <Compile Include="Components\Mb85rcv\Mb85rcvDevice.cs" />
+    <Compile Include="Components\Mb85rcv\Mb85rc256vDevice.cs" />
+    <Compile Include="Components\Ms5611\Ms5611Device.cs" />
+    <Compile Include="Components\Ms5611\Ms5611Command.cs" />
+    <Compile Include="Components\Ms5611\Ms5611Osr.cs" />
+    <Compile Include="Components\Ms5611\Ms5611PromData.cs" />
+    <Compile Include="Boards\Navio\Internal\NavioBarometerDevice.cs" />
+    <Compile Include="Boards\Navio\Internal\Navio1FramDevice.cs" />
+    <Compile Include="Boards\Navio\NavioHardwareModel.cs" />
+    <Compile Include="Protocols\Ppm\PpmPulse.cs" />
+    <Compile Include="Protocols\Ppm\PpmCycle.cs" />
+    <Compile Include="Protocols\Ppm\PpmFrame.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Boards\Navio\Internal\Navio1LedPwmDevice.cs" />
+    <Compile Include="Protocols\Ppm\IPpmDecoder.cs" />
+    <Compile Include="Boards\Navio\Internal\Navio1RCInputDevice.cs" />
+    <Compile Include="Components\Pca9685\Pca9685ChannelValue.cs" />
+    <Compile Include="Components\Pca9685\Pca9685Device.cs" />
+    <Compile Include="Components\Pca9685\Pca9685Register.cs" />
+    <Compile Include="Components\Pca9685\Pca9685Mode1Bits.cs" />
+    <Compile Include="Components\Pca9685\Pca9685Mode2Bits.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Components\Px4io\Data\Px4ioStatusRegisters.cs" />
+    <Compile Include="Components\Px4io\Data\Px4ioStatusRegisterOffset.cs" />
+    <Compile Include="Resources\Resources.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="Resources\en-US\Strings.resw">
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </PRIResource>
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDictionary Include="..\..\Common\CustomDictionary.xml">
+      <Link>CustomDictionary.xml</Link>
+    </CodeAnalysisDictionary>
+    <None Include="Package.cmd" />
+    <None Include="Resources\Resources.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Resources.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Emlid.UniversalWindows\Emlid.UniversalWindows.csproj">
+      <Project>{d8f241c6-29cb-4aa6-ad34-398cba6d1c16}</Project>
+      <Name>Emlid.UniversalWindows</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Emlid.WindowsIot.HardwarePlus\Emlid.WindowsIot.HardwarePlus.vcxproj">
+      <Project>{2c5df7f8-8e4f-451b-88e2-b9c879c923e6}</Project>
+      <Name>Emlid.WindowsIot.HardwarePlus</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
+      <Version>6.1.5</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="WindowsIoT, Version=10.0.17134.0">
+      <Name>Windows IoT Extensions for the UWP</Name>
+    </SDKReference>
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '15.0' ">
+    <VisualStudioVersion>15.0</VisualStudioVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\..\Common\Temporary Key.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>@echo off
+
+echo Creating NuGet package...
+"$(SolutionDir)Dependencies\NuGet\nuget.exe" pack "$(ProjectDir)Emlid.WindowsIot.Hardware.nuspec" -Properties Configuration=$(ConfigurationName);Platform=$(PlatformName) -BasePath "$(TargetDir)." -OutputDirectory "$(TargetDir)NuGet"
+if %25errorlevel%25 neq 0 exit /b 1
+
+exit /b 0</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>@echo off
+
+echo Cleaning NuGet package...
+if exist "$(TargetDir)NuGet" rmdir "$(TargetDir)NuGet" /s /q
+if %25errorlevel%25 neq 0 exit /b 1
+
+exit /b 0</PreBuildEvent>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,360 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        "Emlid.WindowsIot.HardwarePlus"
+    </assembly>
+    <members>
+        <member name="M:Emlid.WindowsIot.HardwarePlus.Buses.SpiExtensions.Connect(System.Int32,System.Int32,Windows.Devices.Spi.SpiMode,System.Int32,System.Int32,Windows.Devices.Spi.SpiSharingMode)">
+            <summary>
+Connects to an SPI device if it exists.
+</summary>
+            <param name="busNumber">Bus controller number, zero based.</param>
+            <param name="chipSelectLine">Slave Chip Select Line.</param>
+            <param name="mode">Communication mode, i.e. clock polarity.</param>
+            <param name="dataBitLength">Data length in bits.</param>
+            <param name="clockFrequency">Frequency in Hz.</param>
+            <returns>Device when the bus controller and device exist, otherwise null.</returns>
+        </member>
+        <member name="T:Emlid.WindowsIot.HardwarePlus.Buses.SpiExtensions">
+            <summary>
+Extensions for work with SPI devices.
+</summary>
+        </member>
+        <member name="M:Emlid.WindowsIot.HardwarePlus.Buses.I2cExtensions.WriteReadWriteBit(Windows.Devices.I2c.I2cDevice,System.Byte,System.Byte,System.Boolean)">
+            <summary>
+Sets or clears one or more bits.
+</summary>
+            <param name="device">Device to use.</param>
+            <param name="writeData">Data to write.</param>
+            <param name="mask">
+Mask of the bit to set or clear according to value.
+Supports setting or clearing multiple bits.
+</param>
+            <param name="value">Value of the bits, i.e. set or clear.</param>
+            <returns>Value written.</returns>
+            <remarks>
+Commonly used to set register flags.
+Reads the current byte value, merges the positive or negative bit mask according to value,
+then writes the modified byte back.
+</remarks>
+            <summary>
+Sets or clears one or more bits.
+</summary>
+            <param name="device">Device to use.</param>
+            <param name="writeData">Data to write.</param>
+            <param name="mask">
+Mask of the bit to set or clear according to value.
+Supports setting or clearing multiple bits.
+</param>
+            <param name="value">Value of the bits, i.e. set or clear.</param>
+            <returns>Value written.</returns>
+            <remarks>
+Commonly used to set register flags.
+Reads the current byte value, merges the positive or negative bit mask according to value,
+then writes the modified byte back.
+</remarks>
+        </member>
+        <member name="M:Emlid.WindowsIot.HardwarePlus.Buses.I2cExtensions.WriteJoinBytes(Windows.Devices.I2c.I2cDevice,System.Byte[],System.Byte[])">
+            <summary>
+Joins two byte values then writes them.
+</summary>
+            <param name="device">Device to use.</param>
+            <param name="data1">First part of data to write.</param>
+            <param name="data2">Second part of data to write.</param>
+            <summary>
+Joins two byte values then writes them.
+</summary>
+            <param name="device">Device to use.</param>
+            <param name="data1">First part of data to write.</param>
+            <param name="data2">Second part of data to write.</param>
+        </member>
+        <member name="M:Emlid.WindowsIot.HardwarePlus.Buses.I2cExtensions.WriteJoinBytes(Windows.Devices.I2c.I2cDevice,System.Byte,System.Byte[])">
+            <summary>
+Joins two byte values then writes them.
+</summary>
+            <param name="device">Device to use.</param>
+            <param name="data1">First part of data to write.</param>
+            <param name="data2">Second part of data to write.</param>
+            <summary>
+Joins two byte values then writes them.
+</summary>
+            <param name="device">Device to use.</param>
+            <param name="data1">First part of data to write.</param>
+            <param name="data2">Second part of data to write.</param>
+        </member>
+        <member name="M:Emlid.WindowsIot.HardwarePlus.Buses.I2cExtensions.WriteJoinByte(Windows.Devices.I2c.I2cDevice,System.Byte[],System.Byte)">
+            <summary>
+Joins two byte values then writes them.
+</summary>
+            <param name="device">Device to use.</param>
+            <param name="data1">First part of data to write.</param>
+            <param name="data2">Second part of data to write.</param>
+            <summary>
+Joins two byte values then writes them.
+</summary>
+            <param name="device">Device to use.</param>
+            <param name="data1">First part of data to write.</param>
+            <param name="data2">Second part of data to write.</param>
+        </member>
+        <member name="M:Emlid.WindowsIot.HardwarePlus.Buses.I2cExtensions.WriteJoinByte(Windows.Devices.I2c.I2cDevice,System.Byte,System.Byte)">
+            <summary>
+Joins two byte values then writes them.
+</summary>
+            <param name="device">Device to use.</param>
+            <param name="data1">First part of data to write.</param>
+            <param name="data2">Second part of data to write.</param>
+            <summary>
+Joins two byte values then writes them.
+</summary>
+            <param name="device">Device to use.</param>
+            <param name="data1">First part of data to write.</param>
+            <param name="data2">Second part of data to write.</param>
+        </member>
+        <member name="M:Emlid.WindowsIot.HardwarePlus.Buses.I2cExtensions.WriteBytes(Windows.Devices.I2c.I2cDevice,System.Byte[])">
+            <summary>
+Writes one or more data bytes.
+</summary>
+            <param name="device">Device to use.</param>
+            <param name="data">Data to write.</param>
+            <summary>
+Writes one or more data bytes.
+</summary>
+            <param name="device">Device to use.</param>
+            <param name="data">Data to write.</param>
+        </member>
+        <member name="M:Emlid.WindowsIot.HardwarePlus.Buses.I2cExtensions.WriteByte(Windows.Devices.I2c.I2cDevice,System.Byte)">
+            <summary>
+Writes one data byte.
+</summary>
+            <param name="device">Device to use.</param>
+            <param name="data">Data to write.</param>
+        </member>
+        <member name="M:Emlid.WindowsIot.HardwarePlus.Buses.I2cExtensions.WriteReadBit(Windows.Devices.I2c.I2cDevice,System.Byte[],System.Byte)">
+            <summary>
+Writes data, reads a byte result then tests on or more bits.
+</summary>
+            <remarks>
+Commonly used to test register flags.
+</remarks>
+            <param name="device">Device to use.</param>
+            <param name="writeData">Data to write.</param>
+            <param name="mask">Index of the bit to read, zero based.</param>
+            <returns>True when the result was positive (any bits in the mask were set).</returns>
+        </member>
+        <member name="M:Emlid.WindowsIot.HardwarePlus.Buses.I2cExtensions.WriteReadBit(Windows.Devices.I2c.I2cDevice,System.Byte,System.Byte)">
+            <summary>
+Writes data, reads a byte result then tests on or more bits.
+</summary>
+            <remarks>
+Commonly used to test register flags.
+</remarks>
+            <param name="device">Device to use.</param>
+            <param name="writeData">Data to write.</param>
+            <param name="mask">Index of the bit to read, zero based.</param>
+            <returns>True when the result was positive (any bits in the mask were set).</returns>
+        </member>
+        <member name="M:Emlid.WindowsIot.HardwarePlus.Buses.I2cExtensions.WriteReadBytes(Windows.Devices.I2c.I2cDevice,System.Byte[],System.Int32)">
+            <summary>
+Writes data then reads one or more bytes.
+</summary>
+            <param name="device">Device to use.</param>
+            <param name="writeData">Data to write.</param>
+            <param name="size">Amount of data to read.</param>
+            <returns>Read data bytes.</returns>
+        </member>
+        <member name="M:Emlid.WindowsIot.HardwarePlus.Buses.I2cExtensions.WriteReadBytes(Windows.Devices.I2c.I2cDevice,System.Byte,System.Int32)">
+            <summary>
+Writes data then reads a single byte result.
+</summary>
+            <param name="device">Device to use.</param>
+            <param name="writeData">Data to write.</param>
+            <param name="size">Amount of data to read.</param>
+            <returns>Read data bytes.</returns>
+        </member>
+        <member name="M:Emlid.WindowsIot.HardwarePlus.Buses.I2cExtensions.WriteReadByte(Windows.Devices.I2c.I2cDevice,System.Byte[])">
+            <summary>
+Writes data then reads a single byte result.
+</summary>
+            <param name="device">Device to use.</param>
+            <param name="writeData">Data to write.</param>
+            <returns>Read data byte.</returns>
+        </member>
+        <member name="M:Emlid.WindowsIot.HardwarePlus.Buses.I2cExtensions.WriteReadByte(Windows.Devices.I2c.I2cDevice,System.Byte)">
+            <summary>
+Writes data then reads a single byte result.
+</summary>
+            <param name="device">Device to use.</param>
+            <param name="writeData">Data to write.</param>
+            <returns>Read data byte.</returns>
+        </member>
+        <member name="M:Emlid.WindowsIot.HardwarePlus.Buses.I2cExtensions.ReadBytes(Windows.Devices.I2c.I2cDevice,System.Int32)">
+            <summary>
+Reads one or more data bytes.
+</summary>
+            <param name="device">Device to use.</param>
+            <param name="size">Amount of data to read.</param>
+            <returns>Read data bytes.</returns>
+        </member>
+        <member name="M:Emlid.WindowsIot.HardwarePlus.Buses.I2cExtensions.ReadByte(Windows.Devices.I2c.I2cDevice)">
+            <summary>
+Reads one data byte.
+</summary>
+            <param name="device">Device to use.</param>
+            <returns>Read data byte.</returns>
+        </member>
+        <member name="M:Emlid.WindowsIot.HardwarePlus.Buses.I2cExtensions.Connect(System.Int32,System.Int32,Windows.Devices.I2c.I2cBusSpeed,Windows.Devices.I2c.I2cSharingMode)">
+            <summary>
+Connects to an I2C device if it exists.
+</summary>
+            <param name="busNumber">Bus controller number, zero based.</param>
+            <param name="address">7-bit I2C slave address (8 bit addresses must be shifted down to exclude the read/write bit).</param>
+            <param name="speed">Bus speed.</param>
+            <param name="sharingMode">Sharing mode.</param>
+            <returns>Device when the bus controller and device exist, otherwise null.</returns>
+        </member>
+        <member name="P:Emlid.WindowsIot.HardwarePlus.Buses.I2cExtensions.MaximumTransferSize">
+            <summary>
+Maximum transfer size for I2C requests on Windows IoT or Raspberry Pi 2.
+This is a confirmed soft limitation by Microsoft, it should be 64K.
+</summary>
+            <seealso href="https://social.msdn.microsoft.com/Forums/en-US/e938900f-b732-41dc-95f6-058a39dac31d/i2c-transfer-limit-of-16384-bytes-on-raspberry-pi-2?forum=WindowsIoT" />
+        </member>
+        <member name="T:Emlid.WindowsIot.HardwarePlus.Buses.I2cExtensions">
+            <summary>
+Extensions for work with I2C devices.
+</summary>
+        </member>
+        <member name="M:Emlid.WindowsIot.HardwarePlus.Buses.GpioExtensions.Connect(System.Int32,System.Int32,Windows.Devices.Gpio.GpioPinDriveMode,Windows.Devices.Gpio.GpioSharingMode)">
+            <summary>
+Connects to a GPIO pin if it exists.
+</summary>
+            <param name="busNumber">Bus controller number, zero based.</param>
+            <param name="pinNumber">Pin number.</param>
+            <param name="driveMode">Drive mode.</param>
+            <param name="sharingMode">Sharing mode.</param>
+            <returns>Pin when controller and device exist, otherwise null.</returns>
+        </member>
+        <member name="T:Emlid.WindowsIot.HardwarePlus.Buses.GpioExtensions">
+            <summary>
+Extensions for work with GPIO devices.
+</summary>
+        </member>
+        <member name="M:Emlid.WindowsIot.HardwarePlus.Buses.GpioSwdPort.WriteBytes(System.Byte[])">
+            <summary>
+Writes multiple bytes from the SWD port.
+</summary>
+            <summary>
+Writes multiple bytes from the SWD port.
+</summary>
+        </member>
+        <member name="M:Emlid.WindowsIot.HardwarePlus.Buses.GpioSwdPort.WriteByte(System.Byte)">
+            <summary>
+Writes one byte from the SWD port.
+</summary>
+            <summary>
+Writes one byte from the SWD port.
+</summary>
+        </member>
+        <member name="M:Emlid.WindowsIot.HardwarePlus.Buses.GpioSwdPort.ReadBytes">
+            <summary>
+Reads multiple bytes from the SWD port.
+</summary>
+            <summary>
+Reads multiple bytes from the SWD port.
+</summary>
+        </member>
+        <member name="M:Emlid.WindowsIot.HardwarePlus.Buses.GpioSwdPort.ReadByte">
+            <summary>
+Reads one byte from the SWD port.
+</summary>
+            <summary>
+Reads one byte from the SWD port.
+</summary>
+        </member>
+        <member name="M:Emlid.WindowsIot.HardwarePlus.Buses.GpioSwdPort.Reset">
+            <summary>
+Sends a reset sequence.
+Sets the SWD_IO pin high then cycles the SWD_CLK pin 50 times,
+then lowers the SWD_IO pin and performs another two SWD_CLK "idle" cycles.
+</summary>
+        </member>
+        <member name="M:Emlid.WindowsIot.HardwarePlus.Buses.GpioSwdPort.Dispose">
+            <summary>
+Frees resources owned by this instance.
+</summary>
+        </member>
+        <member name="M:Emlid.WindowsIot.HardwarePlus.Buses.GpioSwdPort.#ctor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+Creates an instance using the specified GPIO pins.
+</summary>
+        </member>
+        <member name="M:Emlid.WindowsIot.HardwarePlus.Buses.GpioSwdPort.WriteBitsWithParity(System.UInt32,System.Byte)">
+            <summary>
+Sends a squence of up to 32 bits and a parity bit.
+For each bit the SWD_IO pin is set according to the value then the SWD_CLK pin is cycled.
+Additionally a final parity bit is written, calculated whilst writing the data bits.
+</summary>
+        </member>
+        <member name="M:Emlid.WindowsIot.HardwarePlus.Buses.GpioSwdPort.WriteBits(System.UInt32,System.Byte)">
+            <summary>
+Sends a squence of up to 32 bits.
+For each bit the SWD_IO pin is set according to the value then the SWD_CLK pin is cycled.
+</summary>
+        </member>
+        <member name="M:Emlid.WindowsIot.HardwarePlus.Buses.GpioSwdPort.WriteBit(System.Boolean)">
+            <summary>
+Sends a single bit.
+The SWD_IO pin is set according to the value then the SWD_CLK pin is cycled.
+</summary>
+        </member>
+        <member name="M:Emlid.WindowsIot.HardwarePlus.Buses.GpioSwdPort.ReadBitsWithParity(System.UInt32*,System.Byte)">
+            <summary>
+Reads a sequence of up to 32 bits and checks the parity.
+For each bit the SWD_IO pin level is read as the value then the SWD_CLK pin is cycled.
+Additionally a final parity bit is read and compared against the calculated partity whilst reading the data bits.
+</summary>
+            <returns>
+Data read and true when the parity matches the data, or false when it is corrupt.
+</returns>
+        </member>
+        <member name="M:Emlid.WindowsIot.HardwarePlus.Buses.GpioSwdPort.ReadBits(System.Byte)">
+            <summary>
+Reads a sequence of up to 32 bits.
+For each bit the SWD_IO pin level is read as the value then the SWD_CLK pin is cycled.
+</summary>
+        </member>
+        <member name="M:Emlid.WindowsIot.HardwarePlus.Buses.GpioSwdPort.ReadBit">
+            <summary>
+Reads a single bit.
+The SWD_IO pin level is read as the value then the SWD_CLK pin is cycled.
+</summary>
+        </member>
+        <member name="M:Emlid.WindowsIot.HardwarePlus.Buses.GpioSwdPort.Turn(System.Boolean)">
+            <summary>
+Changes the SWD_IO pin direction if necessary.
+</summary>
+        </member>
+        <member name="M:Emlid.WindowsIot.HardwarePlus.Buses.GpioSwdPort.Clock">
+            <summary>
+Sends a clock cycle on the SWD_CLK pin (high then low).
+</summary>
+        </member>
+        <member name="F:Emlid.WindowsIot.HardwarePlus.Buses.GpioSwdPort._ioPin">
+            <summary>
+GPIO pin of connected to SWD-IO.
+</summary>
+        </member>
+        <member name="F:Emlid.WindowsIot.HardwarePlus.Buses.GpioSwdPort._clockPin">
+            <summary>
+GPIO pin connected to SWD-CLK.
+</summary>
+        </member>
+        <member name="T:Emlid.WindowsIot.HardwarePlus.Buses.GpioSwdPort">
+            <summary>
+ARM SW-DP (Serial Wire Debug Port) bus/protocol implementation over two GPIO pins (SWD_IO and SWD_CLK).
+</summary>
+            <see href="https://github.com/emlid/blackmagic/blob/feat/pi2/src/platforms/pi2/swdptap.c" />
+            <see href="https://github.com/disk91/PySWD/blob/master/RpiGPIO.py#L195" />
+        </member>
+    </members>
+</doc>

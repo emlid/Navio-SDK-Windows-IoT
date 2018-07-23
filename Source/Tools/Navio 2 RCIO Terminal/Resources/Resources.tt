@@ -1,0 +1,359 @@
+﻿<#@ template language="C#" debug="true" hostspecific="true" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Xml" #>
+<#@ assembly name="Microsoft.VisualStudio.Shell.Interop.8.0" #>
+<#@ assembly name="EnvDTE" #>
+<#@ assembly name="EnvDTE80" #>
+<#@ assembly name="VSLangProj" #>
+<#@ import namespace="EnvDTE" #>
+<#@ import namespace="EnvDTE80" #>
+<#@ import namespace="Microsoft.VisualStudio.Shell.Interop" #>
+<#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Xml" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Globalization" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Text.RegularExpressions" #>
+// PublicReswFileCodeGenerator for Windows 8.1 1.0.0
+// (c) Sébastien Ollivier - https://github.com/sebastieno/PublicResWFileCodeGenerator/
+// Updated by Tony Wall for Windows 10/IoT usage.
+
+<# 
+	var dteHelper = new DteHelper(this.Host);
+
+	var project = dteHelper.GetProject(dteHelper.GetCurrentProjectName());
+	var projectPath = System.IO.Path.GetDirectoryName(project.FileName);
+	var rootNameSpace = project.Properties.Item("RootNamespace").Value.ToString();
+
+	// *****
+	// Replace resourceNamespace to specify your own namespace
+	var resourceNamespace = rootNameSpace + ".Resources"; 
+	
+	var items = new List<ReswInformation>();
+	dteHelper.GetAllProjectItems()
+		.ToList()
+		.ForEach(item => {
+			var itemPath = item.Properties.Item("FullPath").Value.ToString();
+
+			if (itemPath.EndsWith(".resw")) {				
+				items.AddRange(ReswInformation.ConvertFromItemPath(itemPath));
+			}
+	});
+
+	var reswItems = items.GroupBy(c => c.ResourceFileName);
+
+#>
+namespace <#= resourceNamespace #>  {
+<#
+	foreach (var item in reswItems) {					
+#>
+		
+	/// <summary>
+	/// <#= item.Key #>.
+	/// </summary>
+	public static class <#= item.Key #> {
+		
+		private static Windows.ApplicationModel.Resources.ResourceLoader resourceLoader;
+		internal static Windows.ApplicationModel.Resources.ResourceLoader ResourceLoader
+		{
+			get
+			{
+				if(resourceLoader == null)
+				{
+					resourceLoader = Windows.ApplicationModel.Resources.ResourceLoader.GetForViewIndependentUse("<#= item.Key #>");
+				}
+
+				return resourceLoader;
+			}
+		}
+		<# 
+		foreach(var resource in item.Distinct())
+		{
+		 #>	
+		///<summary>
+		///<#= resource.Comment.Replace("\r", "").Replace("\n", " ")#>
+		///</summary>
+		public static string <#= resource.Key #> 
+		{ 
+			get { return ResourceLoader.GetString("<#=resource.Key#>"); }
+		}
+ <# } #>
+	}
+<#
+	} // END foreach
+#>
+}
+<#+
+	public class ReswInformation
+	{
+		public string ResourceFileName { get; set; }
+		public string Key { get; set; }
+		public string Comment { get; set; }
+
+		public override bool Equals(object obj)
+		{
+			ReswInformation information = obj as ReswInformation;
+
+			return information != null && this.ResourceFileName == information.ResourceFileName && this.Key == information.Key;
+		}
+
+		public override int GetHashCode()
+		{
+			return this.ResourceFileName.GetHashCode() ^ this.Key.GetHashCode();
+		}
+
+		public static IEnumerable<ReswInformation> ConvertFromItemPath(string itemPath)
+		{
+			List<ReswInformation> informations = new List<ReswInformation>();
+
+			var xml = new XmlDocument();
+			xml.Load(itemPath);
+
+			if (xml.DocumentElement != null)
+			{
+				var nodes = xml.DocumentElement.SelectNodes("//data");
+				if (nodes != null)
+				{
+					foreach (XmlElement element in nodes)
+					{
+						var keyElement = element.Attributes.GetNamedItem("name");
+						var commentElement = element.SelectSingleNode("comment");
+
+						informations.Add(new ReswInformation
+						{
+							ResourceFileName = System.IO.Path.GetFileNameWithoutExtension(itemPath),
+							Key = keyElement != null ? keyElement.Value : string.Empty,
+							Comment = commentElement != null ? commentElement.InnerText : string.Empty
+						});
+					}
+				}
+			}
+
+			return informations;
+		}
+	}
+	
+	#region TangibleT4 Helpers
+	public DteHelper T4Helper;   
+
+	/// <summary>
+	/// Collection of Visual Studio Automation-Helper methods.
+	/// </summary>
+	/// <returns></returns>
+	public class DteHelper 
+	{
+		public DteHelper(object host)
+		{
+			Host = host as ITextTemplatingEngineHost;
+		}
+	
+		public EnvDTE.DTE Dte
+		{
+			get
+			{
+				return GetHostServiceProvider();
+			}
+		}
+	
+		private readonly ITextTemplatingEngineHost Host;
+	
+		/// Functions requires hostspecific true
+		/// <summary>
+		/// Gets the solution name of the project.
+		/// </summary>
+		public string GetSolutionName()
+		{
+			return Path.GetFileNameWithoutExtension(Dte.Solution.FullName);
+		}
+	
+		public EnvDTE.Project GetProject(string projectName)
+		{
+			return GetAllProjects().First(p => p.Name == projectName);
+		}
+	
+		/// <summary>
+		/// Get all projects of the solution.
+		/// Works not with nested solutions folders.
+		/// </summary>
+		/// <returns></returns>
+		public IEnumerable<EnvDTE.Project> GetAllProjects()
+		{
+			var projectList = new List<EnvDTE.Project>();
+		
+			var folders = Dte.Solution.Projects.Cast<EnvDTE.Project>().Where(p => p.Kind == EnvDTE80.ProjectKinds.vsProjectKindSolutionFolder);
+
+			foreach (EnvDTE.Project folder in folders)
+			{
+				if (folder.ProjectItems == null) continue;
+			
+				foreach (EnvDTE.ProjectItem item in folder.ProjectItems)
+				{
+					if (item.Object is EnvDTE.Project)
+					{
+						projectList.Add(item.Object as EnvDTE.Project);
+					}
+				}
+			}
+		
+			var projects = Dte.Solution.Projects.Cast<EnvDTE.Project>().Where(p => p.Kind != EnvDTE80.ProjectKinds.vsProjectKindSolutionFolder);
+			if (projects.Any())
+			{
+				projectList.AddRange(projects);
+			}
+		
+			return projectList;
+		}
+
+		public IEnumerable<EnvDTE.ProjectItem> GetAllSolutionItems()
+		{
+			var itemList = new List<EnvDTE.ProjectItem>();
+			foreach (EnvDTE.Project item in GetAllProjects())
+			{
+				if (item == null || item.ProjectItems == null)
+				{
+					continue;
+				}
+			
+				itemList.AddRange(GetAllProjectItemsRecursive(item.ProjectItems));	 
+			}
+		
+			return itemList;
+		}
+	
+		public IEnumerable<EnvDTE.ProjectItem> GetAllProjectItems()
+		{
+			return GetAllProjectItemsRecursive(GetTemplateAsProjectItem(Dte).ContainingProject.ProjectItems);
+		}
+	
+		public IEnumerable<EnvDTE.ProjectItem> GetAllProjectItemsRecursive(EnvDTE.ProjectItems projectItems) 
+		{
+			foreach (EnvDTE.ProjectItem projectItem in projectItems) 
+			{
+				if (projectItem.ProjectItems == null)
+				{
+					continue;
+				}
+
+				foreach (EnvDTE.ProjectItem subItem in GetAllProjectItemsRecursive(projectItem.ProjectItems))
+				{
+					yield return subItem;
+				}
+			
+				yield return projectItem;
+			}
+		}
+	
+		public string GetProjectItemFullPath(EnvDTE.ProjectItem item)
+		{
+			return item.Properties.Item("FullPath").Value.ToString();
+		}
+	
+		/// <summary>
+		/// Gets the project name of the active template file.
+		/// </summary>
+		public string GetCurrentProjectName()
+		{
+			return Dte.ActiveDocument.ProjectItem.ContainingProject.Name;
+		}
+
+		/// <summary>
+		/// Sets the custom tool for generated item.
+		/// <param name="generatedFilename">Filename of the generated item</param>
+		/// <param name="customToolName">The name of the custom tool.</param>
+		/// <example>
+		/// 	SetCustomToolForGeneratedItem("Resource.resx", "ResXFileCodeGenerator");
+		/// </example>
+		/// </summary>
+		public void SetCustomToolForGeneratedItem(string generatedFilename, string customToolName)
+		{
+			EnvDTE.ProjectItem subItem = GetTemplateAsProjectItem(Dte).ProjectItems.Cast<EnvDTE.ProjectItem>().First(p => p.Name == generatedFilename);
+		
+			SetPropertyValue(subItem, "CustomTool", customToolName);
+		}
+
+		/// <summary>
+		/// Sets the custom tool for the first generated item.
+		/// <param name="customToolName">The name of the custom tool.</param>
+		/// <example>
+		/// 	SetCustomToolForFirstGeneratedItem("ResXFileCodeGenerator");
+		/// </example>
+		/// </summary>
+		public void SetCustomToolForFirstGeneratedItem(string customToolName)
+		{
+			EnvDTE.ProjectItem firstSubItem = GetTemplateAsProjectItem(Dte).ProjectItems.Cast<EnvDTE.ProjectItem>().First();
+
+			SetPropertyValue(firstSubItem, "CustomTool", customToolName);
+		}
+
+		/// <summary>
+		/// Sets a property value for the project item.
+		/// </summary>
+		public void SetPropertyValue(EnvDTE.ProjectItem item, string propertyName, object value)
+		{
+			EnvDTE.Property property = item.Properties.Item(propertyName);
+
+			if (property == null)
+			{
+				throw new ArgumentException(String.Format("The property {0} was not found.", propertyName));
+			}
+
+			property.Value = value;
+		}
+
+		/// <summary>
+		/// Gets the T4 template as vs projectitem.
+		/// </summary>
+		public EnvDTE.ProjectItem GetTemplateAsProjectItem(EnvDTE.DTE dte)
+		{
+			return dte.Solution.FindProjectItem(Host.TemplateFile);
+		}
+
+		/// <summary>
+		/// Adds a missing file to the t4 vs projectitem.
+		/// </summary>
+		public void AddMissingFileToProject(EnvDTE.ProjectItem pItem, string fileName)
+		{
+			var isMissing = !(from itm in pItem.ProjectItems.Cast<EnvDTE.ProjectItem>()
+							  where itm.Name == fileName
+							  select itm).Any();
+
+			if (isMissing)
+			{
+				pItem.ProjectItems.AddFromFile(GetPath(fileName));
+			}	
+		}
+
+		/// <summary>
+		/// Gets the vs automation object EnvDTE.DTE.
+		/// </summary>
+		public EnvDTE.DTE GetHostServiceProvider()
+		{
+			var hostServiceProvider = Host as IServiceProvider;
+			EnvDTE.DTE dte = null;
+			if (hostServiceProvider != null)
+			{
+				dte = hostServiceProvider.GetService(typeof(EnvDTE.DTE)) as EnvDTE.DTE;
+			}
+
+			return dte;
+		}
+	
+		/// <summary>
+		/// Gets the full path of the file.
+		/// </summary>
+		public string GetPath(string fileName)
+		{
+			string templateDirectory = Path.GetDirectoryName(Host.TemplateFile);
+			if (templateDirectory != null)
+			{
+				return Path.Combine(templateDirectory, fileName);
+			}
+
+			return null;
+		}
+	}
+	#endregion
+#>
