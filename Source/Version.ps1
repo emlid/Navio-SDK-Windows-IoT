@@ -5,7 +5,6 @@
 # applies the new version to all project files in the solution.
 # ==============================================================================
 
-
 # ==============================================================================
 # Globals
 # ------------------------------------------------------------------------------
@@ -16,18 +15,16 @@ $error.Clear()                    # Clear any errors from previous script runs
 $ErrorActionPreference = "Stop"   # All unhandled errors stop program
 $WarningPreference = "Stop"       # All warnings stop program
 
-
 # ==============================================================================
 # Modules
 # ------------------------------------------------------------------------------
 
 # Initialize module paths
 $env:PSModulePath = [Environment]::GetEnvironmentVariable("PSModulePath", "Machine");
-$env:PSModulePath = "$env:PSModulePath;$PSScriptRoot\Dependencies\PowerShell";
+$env:PSModulePath = "$env:PSModulePath;$PSScriptRoot\Dependencies\Code for PowerShell\Modules";
 
 # Import modules
 Import-Module CodeForPowerShell.VisualStudio;
-
 
 # ==============================================================================
 # Main Program

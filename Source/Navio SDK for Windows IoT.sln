@@ -133,20 +133,14 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Emlid.WindowsIot.HardwarePl
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencies", "{CFAF0940-2D3D-4370-8EFD-36E79B7C6565}"
 	ProjectSection(SolutionItems) = preProject
+		Dependencies\Code for .NET Release Notes.md = Dependencies\Code for .NET Release Notes.md
 		Dependencies\Code for PowerShell Release Notes.md = Dependencies\Code for PowerShell Release Notes.md
 		Dependencies\Code for Windows Release Notes.md = Dependencies\Code for Windows Release Notes.md
+		Dependencies\CodeForDotNet.Version.txt = Dependencies\CodeForDotNet.Version.txt
 		Dependencies\CodeForPowerShell.Version.txt = Dependencies\CodeForPowerShell.Version.txt
 		Dependencies\CodeForWindows.Version.txt = Dependencies\CodeForWindows.Version.txt
 		Dependencies\Update.cmd = Dependencies\Update.cmd
 		Dependencies\Variables.cmd = Dependencies\Variables.cmd
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PowerShell", "PowerShell", "{EDD811BD-BF30-447E-8798-97BBA1429BCB}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CodeForPowerShell.VisualStudio", "CodeForPowerShell.VisualStudio", "{47CF7E15-6B87-44A8-A327-CE701D2F29E5}"
-	ProjectSection(SolutionItems) = preProject
-		Dependencies\PowerShell\CodeForPowerShell.VisualStudio\CodeForPowerShell.VisualStudio.psd1 = Dependencies\PowerShell\CodeForPowerShell.VisualStudio\CodeForPowerShell.VisualStudio.psd1
-		Dependencies\PowerShell\CodeForPowerShell.VisualStudio\CodeForPowerShell.VisualStudio.Version.psm1 = Dependencies\PowerShell\CodeForPowerShell.VisualStudio\CodeForPowerShell.VisualStudio.Version.psm1
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Navio RC Input CPP Sample", "Samples\CPP\Navio RC Input\Navio RC Input CPP Sample.vcxproj", "{243E8ED0-58CF-4322-BB7D-D52E70352608}"
@@ -154,6 +148,85 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{1F55AFC7-66D6-4F09-946E-27745D0ABC0E}"
 	ProjectSection(SolutionItems) = preProject
 		Dependencies\NuGet\nuget.exe = Dependencies\NuGet\nuget.exe
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Code for .NET", "Code for .NET", "{E21BCE72-09BB-431A-A6A8-78B35849B772}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Components", "Components", "{C39A73F7-5858-4CA1-A4A4-EF33978290F1}"
+	ProjectSection(SolutionItems) = preProject
+		Dependencies\Code for .NET\Components\CodeForDotNet.dll = Dependencies\Code for .NET\Components\CodeForDotNet.dll
+		Dependencies\Code for .NET\Components\CodeForDotNet.Full.dll = Dependencies\Code for .NET\Components\CodeForDotNet.Full.dll
+		Dependencies\Code for .NET\Components\CodeForDotNet.Full.pdb = Dependencies\Code for .NET\Components\CodeForDotNet.Full.pdb
+		Dependencies\Code for .NET\Components\CodeForDotNet.Full.xml = Dependencies\Code for .NET\Components\CodeForDotNet.Full.xml
+		Dependencies\Code for .NET\Components\CodeForDotNet.pdb = Dependencies\Code for .NET\Components\CodeForDotNet.pdb
+		Dependencies\Code for .NET\Components\CodeForDotNet.Windows.dll = Dependencies\Code for .NET\Components\CodeForDotNet.Windows.dll
+		Dependencies\Code for .NET\Components\CodeForDotNet.Windows.pdb = Dependencies\Code for .NET\Components\CodeForDotNet.Windows.pdb
+		Dependencies\Code for .NET\Components\CodeForDotNet.Windows.xml = Dependencies\Code for .NET\Components\CodeForDotNet.Windows.xml
+		Dependencies\Code for .NET\Components\CodeForDotNet.WindowsUniversal.dll = Dependencies\Code for .NET\Components\CodeForDotNet.WindowsUniversal.dll
+		Dependencies\Code for .NET\Components\CodeForDotNet.WindowsUniversal.pdb = Dependencies\Code for .NET\Components\CodeForDotNet.WindowsUniversal.pdb
+		Dependencies\Code for .NET\Components\CodeForDotNet.WindowsUniversal.pri = Dependencies\Code for .NET\Components\CodeForDotNet.WindowsUniversal.pri
+		Dependencies\Code for .NET\Components\CodeForDotNet.WindowsUniversal.XML = Dependencies\Code for .NET\Components\CodeForDotNet.WindowsUniversal.XML
+		Dependencies\Code for .NET\Components\CodeForDotNet.WindowsUniversal.xr.xml = Dependencies\Code for .NET\Components\CodeForDotNet.WindowsUniversal.xr.xml
+		Dependencies\Code for .NET\Components\CodeForDotNet.xml = Dependencies\Code for .NET\Components\CodeForDotNet.xml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{D57B4CC5-160E-480F-ACD2-FE8C163EB3B3}"
+	ProjectSection(SolutionItems) = preProject
+		Dependencies\Code for .NET\Documentation\Release Notes.md = Dependencies\Code for .NET\Documentation\Release Notes.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Version", "Version", "{801CA432-7292-4040-8E50-D40A683F773F}"
+	ProjectSection(SolutionItems) = preProject
+		Dependencies\Code for .NET\Version\CodeForDotNet.Version.txt = Dependencies\Code for .NET\Version\CodeForDotNet.Version.txt
+		Dependencies\Code for .NET\Version\CodeForPowerShell.Version.txt = Dependencies\Code for .NET\Version\CodeForPowerShell.Version.txt
+		Dependencies\Code for .NET\Version\CodeForWindows.Version.txt = Dependencies\Code for .NET\Version\CodeForWindows.Version.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{FCF4B97C-DC10-4ABB-9B84-324459D14E68}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Themes", "Themes", "{F3302CB8-6726-4462-8C32-DF5896FC29AE}"
+	ProjectSection(SolutionItems) = preProject
+		Dependencies\Code for .NET\Components\UI\Themes\Generic.xbf = Dependencies\Code for .NET\Components\UI\Themes\Generic.xbf
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Code for PowerShell", "Code for PowerShell", "{4BDEC677-2C98-4535-AF07-E4324C489B13}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{FCAA85C8-2F76-457B-8191-8D9AB80A100D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CodeForPowerShell.VisualStudio", "CodeForPowerShell.VisualStudio", "{22F93B52-4B8D-4FD4-B542-CD657B01CAF7}"
+	ProjectSection(SolutionItems) = preProject
+		Dependencies\Code for PowerShell\Modules\CodeForPowerShell.VisualStudio\CodeForPowerShell.VisualStudio.psd1 = Dependencies\Code for PowerShell\Modules\CodeForPowerShell.VisualStudio\CodeForPowerShell.VisualStudio.psd1
+		Dependencies\Code for PowerShell\Modules\CodeForPowerShell.VisualStudio\CodeForPowerShell.VisualStudio.Version.psm1 = Dependencies\Code for PowerShell\Modules\CodeForPowerShell.VisualStudio\CodeForPowerShell.VisualStudio.Version.psm1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{DB7FD1E7-9BF9-40E7-9281-314CA4DFB38C}"
+	ProjectSection(SolutionItems) = preProject
+		Dependencies\Code for PowerShell\Documentation\Developer Notes.md = Dependencies\Code for PowerShell\Documentation\Developer Notes.md
+		Dependencies\Code for PowerShell\Documentation\Release Notes.md = Dependencies\Code for PowerShell\Documentation\Release Notes.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Version", "Version", "{EB6FACC8-2A51-4590-AB07-9CC11C0A9C64}"
+	ProjectSection(SolutionItems) = preProject
+		Dependencies\Code for PowerShell\Version\CodeForPowerShell.Version.txt = Dependencies\Code for PowerShell\Version\CodeForPowerShell.Version.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Code for Windows", "Code for Windows", "{A037F1F4-141C-494E-8AA2-92EF20840DB4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{CB07BB90-5E40-4039-9768-098F8EF23CD2}"
+	ProjectSection(SolutionItems) = preProject
+		Dependencies\Code for Windows\Documentation\Release Notes.md = Dependencies\Code for Windows\Documentation\Release Notes.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Version", "Version", "{0255686B-2CC6-47EE-AF59-7656A3BA592E}"
+	ProjectSection(SolutionItems) = preProject
+		Dependencies\Code for Windows\Version\CodeForWindows.Version.txt = Dependencies\Code for Windows\Version\CodeForWindows.Version.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{B52FA86D-A405-4036-8760-052EA42F3140}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Visual Studio", "Visual Studio", "{10CC80F6-B2B5-49E4-8151-590EBA4F3142}"
+	ProjectSection(SolutionItems) = preProject
+		Dependencies\Code for Windows\Scripts\Visual Studio\Variables.cmd = Dependencies\Code for Windows\Scripts\Visual Studio\Variables.cmd
 	EndProjectSection
 EndProject
 Global
@@ -236,10 +309,24 @@ Global
 		{E431A011-C230-4CF5-8321-C47E07AE7683} = {24C4538B-C6A4-4D47-80C9-4249164C222F}
 		{7B09FA7C-9385-4AA0-A659-4A55ACBE3B37} = {C1B9EF36-2E1E-4BCB-A85F-E85DF75F737A}
 		{2C5DF7F8-8E4F-451B-88E2-B9C879C923E6} = {24C4538B-C6A4-4D47-80C9-4249164C222F}
-		{EDD811BD-BF30-447E-8798-97BBA1429BCB} = {CFAF0940-2D3D-4370-8EFD-36E79B7C6565}
-		{47CF7E15-6B87-44A8-A327-CE701D2F29E5} = {EDD811BD-BF30-447E-8798-97BBA1429BCB}
 		{243E8ED0-58CF-4322-BB7D-D52E70352608} = {175F3EA8-E13A-41F9-81E9-EFE31813D8F0}
 		{1F55AFC7-66D6-4F09-946E-27745D0ABC0E} = {CFAF0940-2D3D-4370-8EFD-36E79B7C6565}
+		{E21BCE72-09BB-431A-A6A8-78B35849B772} = {CFAF0940-2D3D-4370-8EFD-36E79B7C6565}
+		{C39A73F7-5858-4CA1-A4A4-EF33978290F1} = {E21BCE72-09BB-431A-A6A8-78B35849B772}
+		{D57B4CC5-160E-480F-ACD2-FE8C163EB3B3} = {E21BCE72-09BB-431A-A6A8-78B35849B772}
+		{801CA432-7292-4040-8E50-D40A683F773F} = {E21BCE72-09BB-431A-A6A8-78B35849B772}
+		{FCF4B97C-DC10-4ABB-9B84-324459D14E68} = {C39A73F7-5858-4CA1-A4A4-EF33978290F1}
+		{F3302CB8-6726-4462-8C32-DF5896FC29AE} = {FCF4B97C-DC10-4ABB-9B84-324459D14E68}
+		{4BDEC677-2C98-4535-AF07-E4324C489B13} = {CFAF0940-2D3D-4370-8EFD-36E79B7C6565}
+		{FCAA85C8-2F76-457B-8191-8D9AB80A100D} = {4BDEC677-2C98-4535-AF07-E4324C489B13}
+		{22F93B52-4B8D-4FD4-B542-CD657B01CAF7} = {FCAA85C8-2F76-457B-8191-8D9AB80A100D}
+		{DB7FD1E7-9BF9-40E7-9281-314CA4DFB38C} = {4BDEC677-2C98-4535-AF07-E4324C489B13}
+		{EB6FACC8-2A51-4590-AB07-9CC11C0A9C64} = {4BDEC677-2C98-4535-AF07-E4324C489B13}
+		{A037F1F4-141C-494E-8AA2-92EF20840DB4} = {CFAF0940-2D3D-4370-8EFD-36E79B7C6565}
+		{CB07BB90-5E40-4039-9768-098F8EF23CD2} = {A037F1F4-141C-494E-8AA2-92EF20840DB4}
+		{0255686B-2CC6-47EE-AF59-7656A3BA592E} = {A037F1F4-141C-494E-8AA2-92EF20840DB4}
+		{B52FA86D-A405-4036-8760-052EA42F3140} = {A037F1F4-141C-494E-8AA2-92EF20840DB4}
+		{10CC80F6-B2B5-49E4-8151-590EBA4F3142} = {B52FA86D-A405-4036-8760-052EA42F3140}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5D3C61DC-BF70-44F6-9F9B-7E1A85A720F1}

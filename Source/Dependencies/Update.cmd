@@ -19,6 +19,10 @@ git clone --branch=master git://github.com/WallLabs/CodeForPowerShell "%~dp0Temp
 if %errorlevel% neq 0 goto Error
 git clone --branch=master git://github.com/WallLabs/CodeForWindows "%~dp0Temp\CodeForWindows"
 if %errorlevel% neq 0 goto Error
+git clone --branch=master git://github.com/WallLabs/CodeForDotNet "%~dp0Temp\CodeForDotNet"
+if %errorlevel% neq 0 goto Error
+git clone --branch=master git://github.com/WallLabs/CodeForDevices "%~dp0Temp\CodeForDevices"
+if %errorlevel% neq 0 goto Error
 
 echo.
 echo Downloading latest NuGet CLI...
@@ -27,19 +31,20 @@ if %errorlevel% neq 0 goto Error
 
 echo.
 echo Copying dependencies...
-robocopy "%~dp0Temp\CodeForPowerShell\Build\Modules\CodeForPowerShell.VisualStudio" "%~dp0PowerShell\CodeForPowerShell.VisualStudio" /s /purge
+robocopy "%~dp0Temp\CodeForPowerShell\Build" "%~dp0Code for PowerShell" /s /purge /xd Modules
 if %errorlevel% gtr 7 goto Error
-copy "%~dp0Temp\CodeForPowerShell\Build\Documentation\Release Notes.md" "%~dp0Code for PowerShell Release Notes.md" /y
-if %errorlevel% neq 0 goto Error
-robocopy "%~dp0Temp\CodeForPowerShell\Build\Version" "%~dp0." *.Version.txt
+robocopy "%~dp0Temp\CodeForPowerShell\Build\Modules\CodeForPowerShell.VisualStudio" "%~dp0Code for PowerShell\Modules\CodeForPowerShell.VisualStudio" /s /purge
 if %errorlevel% gtr 7 goto Error
-robocopy "%~dp0Temp\CodeForWindows\Build\Scripts\Visual Studio" "%~dp0." Variables.cmd
+robocopy "%~dp0Temp\CodeForWindows\Build" "%~dp0Code for Windows" /s /purge
 if %errorlevel% gtr 7 goto Error
-copy "%~dp0Temp\CodeForWindows\Build\Documentation\Release Notes.md" "%~dp0Code for Windows Release Notes.md" /y
-if %errorlevel% neq 0 goto Error
-robocopy "%~dp0Temp\CodeForWindows\Build\Version" "%~dp0." *.Version.txt
+robocopy "%~dp0Temp\CodeForDotNet\Build\Release" "%~dp0Code for .NET" /s /purge
 if %errorlevel% gtr 7 goto Error
 attrib "%~dp0*" -r /s
+if %errorlevel% neq 0 goto Error
+
+echo.
+echo Update solution copies of dependencies...
+copy "%~dp0Code for Windows\Scripts\Visual Studio\Variables.cmd" "%~dp0" /y
 if %errorlevel% neq 0 goto Error
 
 echo.

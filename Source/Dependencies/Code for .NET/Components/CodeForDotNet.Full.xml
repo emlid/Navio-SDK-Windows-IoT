@@ -1,0 +1,240 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CodeForDotNet.Full</name>
+    </assembly>
+    <members>
+        <member name="T:CodeForDotNet.Configuration.IApplicationSettingsBase">
+            <summary>
+            Interface representation of the system <see cref="T:System.Configuration.ApplicationSettingsBase"/>.
+            </summary>
+            <remarks>
+            Acts as a base class for deriving concrete wrapper classes to implement the
+            application settings feature in Window Forms applications.
+            </remarks>
+        </member>
+        <member name="P:CodeForDotNet.Configuration.IApplicationSettingsBase.Context">
+            <summary>
+            Gets the application settings context associated with the settings group.
+            </summary>
+            <returns>
+            A System.Configuration.SettingsContext associated with the settings group.
+            </returns>
+        </member>
+        <member name="P:CodeForDotNet.Configuration.IApplicationSettingsBase.Properties">
+            <summary>
+            Gets the collection of settings properties in the wrapper.
+            </summary>
+            <returns>
+            A System.Configuration.SettingsPropertyCollection containing all the System.Configuration.SettingsProperty
+            objects used in the current wrapper.
+            </returns>
+            <exception cref="T:System.Configuration.ConfigurationErrorsException">
+            The associated settings provider could not be found or its instantiation failed.
+            </exception>
+        </member>
+        <member name="P:CodeForDotNet.Configuration.IApplicationSettingsBase.PropertyValues">
+            <summary>
+            Gets a collection of property values.
+            </summary>
+            <returns>
+            A System.Configuration.SettingsPropertyValueCollection of property values.
+            </returns>
+        </member>
+        <member name="P:CodeForDotNet.Configuration.IApplicationSettingsBase.Providers">
+            <summary>
+            Gets the collection of application settings providers used by the wrapper.
+            </summary>
+            <returns>
+            A System.Configuration.SettingsProviderCollection containing all the System.Configuration.SettingsProvider
+            objects used by the settings properties of the current settings wrapper.
+            </returns>
+        </member>
+        <member name="P:CodeForDotNet.Configuration.IApplicationSettingsBase.SettingsKey">
+            <summary>
+            Gets or sets the settings key for the application settings group.
+            </summary>
+            <returns>
+            A System.String containing the settings key for the current settings group.
+            </returns>
+        </member>
+        <member name="P:CodeForDotNet.Configuration.IApplicationSettingsBase.Item(System.String)">
+            <summary>
+            Gets or sets the value of the specified application settings property.
+            </summary>
+            <param name="propertyName">A System.String containing the name of the property to access.</param>
+            <returns>If found, the value of the named settings property; otherwise, null.</returns>
+            <exception cref="T:System.Configuration.SettingsPropertyNotFoundException">
+            There are no properties associated with the current wrapper or the specified
+            property could not be found.
+            </exception>
+            <exception cref="T:System.Configuration.SettingsPropertyIsReadOnlyException">
+            An attempt was made to set a read-only property.
+            </exception>
+            <exception cref="T:System.Configuration.SettingsPropertyWrongTypeException">
+            The value supplied is of a type incompatible with the settings property,
+            during a set operation.
+            </exception>
+        </member>
+        <member name="E:CodeForDotNet.Configuration.IApplicationSettingsBase.SettingChanging">
+            <summary>
+            Occurs before the value of an application settings property is changed.
+            </summary>
+        </member>
+        <member name="E:CodeForDotNet.Configuration.IApplicationSettingsBase.SettingsLoaded">
+            <summary>
+            Occurs after the application settings are retrieved from storage.
+            </summary>
+        </member>
+        <member name="E:CodeForDotNet.Configuration.IApplicationSettingsBase.SettingsSaving">
+            <summary>
+            Occurs before values are saved to the data store.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Configuration.IApplicationSettingsBase.GetPreviousVersion(System.String)">
+            <summary>
+            Returns the value of the named settings property for the previous version
+            of the same application.
+            </summary>
+            <param name="propertyName">
+            A System.String containing the name of the settings property whose value
+            is to be returned.
+            </param>
+            <returns>
+            An System.Object containing the value of the specified System.Configuration.SettingsProperty
+            if found; otherwise, null.
+            </returns>
+            <exception cref="T:System.Configuration.SettingsPropertyNotFoundException">
+            The property does not exist. The property count is zero or the property cannot
+            be found in the data store.
+            </exception>
+        </member>
+        <member name="M:CodeForDotNet.Configuration.IApplicationSettingsBase.Reload">
+            <summary>
+            Refreshes the application settings property values from persistent storage.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Configuration.IApplicationSettingsBase.Reset">
+            <summary>
+            Restores the persisted application settings values to their corresponding
+            default properties.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Configuration.IApplicationSettingsBase.Save">
+            <summary>
+            Stores the current values of the application settings properties.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Configuration.IApplicationSettingsBase.Upgrade">
+            <summary>
+            Updates application settings to reflect a more recent installation of the application.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Configuration.RegistrySettingsProvider">
+            <summary>
+            Settings provider which stores settings in the HKLM or HKCU registry.
+            Builds the registry path based on the SOFTWARE base key then subkeys of AssemblyCompany, AssemblyProduct
+            and optional RegistrySettingsProviderSubkeyAttribute.
+            e.g. HKLM/HKCU then SOFTWARE\Company\Product\[Subkey\]Setting = Value.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Configuration.RegistrySettingsProvider.ApplicationName">
+            <summary>
+            Name of the application. Returns the AssemblyProduct name.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Configuration.RegistrySettingsProvider.Initialize(System.String,System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Initializes the provider with our application name.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Configuration.RegistrySettingsProvider.SetPropertyValues(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyValueCollection)">
+            <summary>
+            SetPropertyValue is invoked when ApplicationSettingsBase.Save is called
+            for only the values marked with this provider attribute.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Configuration.RegistrySettingsProvider.GetPropertyValues(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyCollection)">
+            <summary>
+            Returns the collection of settings property values for the specified application
+            instance and settings property group.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Configuration.RegistrySettingsProvider.GetRegKey(System.Configuration.SettingsProperty)">
+            <summary>
+            Helper method: fetches correct registry subkey.
+            HKLM is used for settings marked as application-scoped.
+            HKLU is used for settings marked as user-scoped. 
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Configuration.RegistrySettingsProvider.IsUserScoped(System.Configuration.SettingsProperty)">
+            <summary>
+            Helper method: walks the "attribute bag" for a given property
+            to determine if it is user-scoped or not.
+            Note that this provider does not enforce other rules, such as 
+               - unknown attributes
+               - improper attribute combinations (e.g. both user and app - this implementation
+                 would say true for user-scoped regardless of existence of app-scoped)
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Configuration.RegistrySettingsProvider.GetSubKeyPath(System.Configuration.SettingsProperty)">
+            <summary>
+            Builds the registry path based on the SOFTWARE base key then subkeys of AssemblyCompany, AssemblyProduct
+            and optional RegistrySettingsProviderSubkeyAttribute. Does not include the HKLM or HKCU hive.
+            e.g. SOFTWARE\Company\Product\[Subkey\]Setting = Value.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Configuration.RegistrySettingsProviderSubkeyAttribute">
+            <summary>
+            Attribute which is applied to settings properties in the settings designer class
+            to allow the sub-key(s) to be specified when using the RegistrySettingsProvider.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Configuration.RegistrySettingsProviderSubkeyAttribute.#ctor(System.String)">
+            <summary>
+            Specified the sub-key(s) in which to store this setting.
+            </summary>
+            <param name="subkey"></param>
+        </member>
+        <member name="P:CodeForDotNet.Configuration.RegistrySettingsProviderSubkeyAttribute.Subkey">
+            <summary>
+            Sub-Key path in which to store the setting. e.g. "Preferences\Display".
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Properties.Resources.PropertyRequired">
+            <summary>
+              Looks up a localized string similar to The property &quot;{0}&quot; is required..
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Reflection.AppDomainExtensions">
+            <summary>
+            Contains extensions for working with <see cref="T:System.AppDomain"/>s.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Reflection.AppDomainExtensions.Run(System.AppDomain,System.Reflection.MethodBase,System.Object[])">
+            <summary>
+            Creates an instance then executes a method in a separate application domain,
+            using the configuration and working directory of the caller's application domain.
+            </summary>
+            <remarks>
+            Disposes the instance upon completion if it implements <see cref="T:System.IDisposable"/>.
+            </remarks>
+        </member>
+    </members>
+</doc>
