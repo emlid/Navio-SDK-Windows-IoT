@@ -49,7 +49,7 @@ if %errorlevel% neq 0 goto Error
 
 echo.
 echo Calling version script to update references...
-echo..
+echo.
 call "%~dp0..\Version.cmd"
 if %errorlevel% neq 0 goto Error
 
