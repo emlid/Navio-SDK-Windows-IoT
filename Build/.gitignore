@@ -1,4 +1,0 @@
-## Include builds.
-!/Debug/
-!/Release/
-!**/Packages/**

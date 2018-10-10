@@ -1,8 +1,8 @@
 @echo off
 rem ==========================================================================
-rem Visual Studio Envrionment Variables
+rem Visual Studio Environment Variables
 rem --------------------------------------------------------------------------
-rem Initializes Visual Studio command line environment variables, to use 
+rem Initializes Visual Studio command line environment variables, to use
 rem the most recent version of Visual Studio installed. Since 2017 the VSWhere
 rem tool and VSDevCmd.bat replace the VS#COMNTOOLS environment variable and
 rem VSVars32.bat. The location of Visual Studio is no longer fixed, due to
@@ -16,7 +16,7 @@ rem Use the new VSWhere when present.
 if not exist "%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\VSWhere.exe" goto OldMethod
 
 rem * Call VSWhere to locate Visual Studio.
-for /f "usebackq tokens=1* delims=" %%i in (`"%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\VSWhere.exe" -version 15.0^ -property installationPath`) do set VSInstallDir=%%i
+for /f "usebackq tokens=1* delims=" %%i in (`"%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\VSWhere.exe" -version 15.0^ -property installationPath`) do set VSInstallDir=%%~i\
 if %errorlevel% neq 0 goto Error
 
 rem Use old method when no 2017 or later installations found.
@@ -43,10 +43,10 @@ echo * Calling VSDevCmd.bat to initialize environment...
 rem * Fix current directory lost after running VSDevCmd.bat (fixed in latest builds of VS 2017 15.6)
 set VSCMD_START_DIR=%CD%
 rem * Fix DevEnvDir not always set.
-set DevEnvDir=%VSInstallDir%\Common7\IDE\
+set DevEnvDir=%VSInstallDir%Common7\IDE\
 
 rem * Call VSDevCmd.bat from detected VS location
-call "%VSInstallDir%\Common7\Tools\VSDevCmd.bat"
+call "%VSInstallDir%Common7\Tools\VSDevCmd.bat"
 if %errorlevel% neq 0 goto Error
 
 rem ---------------------------------------------------------------------------

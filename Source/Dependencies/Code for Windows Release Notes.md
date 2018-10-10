@@ -1,5 +1,8 @@
 # Code for Windows - Release Notes
 
+## Version 1.0.1809.13### (2018.09.13)
+* Fix error with Visual Studio environment initialization, missing trailing backslash on %VSInstallDir%.
+
 ## Version 1.0.1807.21### (2018.07.21)
 * PowerShell project moved to own GitHub repository.
 * Removed version/current subdirectory from source and build to conform to Git branch model.

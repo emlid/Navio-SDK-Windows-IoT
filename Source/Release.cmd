@@ -18,17 +18,6 @@ if exist "%~dp0Temp\Build" rmdir "%~dp0Temp\Build" /s /q
 if %errorlevel% neq 0 goto Error
 
 echo.
-echo Update source (and delete extra files)...
-git reset "%~dp0" -- "..\Build"
-if %errorlevel% gtr 1 goto Error
-git clean -d -f -x "%~dp0" -- "..\Build"
-if %errorlevel% gtr 1 goto Error
-git pull -f "%~dp0..\..\"
-if %errorlevel% gtr 1 goto Error
-git clean -d -f -x "%~dp0"
-if %errorlevel% gtr 1 goto Error
-
-echo.
 echo Versioning...
 call "%~dp0Version.cmd"
 if %errorlevel% neq 0 goto Error
@@ -42,15 +31,18 @@ if %errorlevel% neq 0 goto Error
 
 echo.
 echo Delete old build directory contents so that old or renamed items are cleaned...
-if exist "%~dp0..\Build\Debug" rmdir "%~dp0..\Build\Debug" /s /q
-if %errorlevel% neq 0 goto Error
-if exist "%~dp0..\Build\Release" rmdir "%~dp0..\Build\Release" /s /q
+if exist "%~dp0..\Build" rmdir "%~dp0..\Build" /s /q
 if %errorlevel% neq 0 goto Error
 
 echo.
 echo Copying output to build directory...
 robocopy "%~dp0Temp\Build" "%~dp0..\Build" /s
 if %errorlevel% gtr 7 goto Error
+
+echo.
+echo Clean temporary files...
+rmdir "%~dp0Temp" /s /q
+if %errorlevel% neq 0 goto Error
 
 echo.
 echo Build all successful.
