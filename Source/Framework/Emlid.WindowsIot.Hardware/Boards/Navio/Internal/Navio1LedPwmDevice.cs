@@ -1,4 +1,4 @@
-﻿using Emlid.UniversalWindows;
+﻿using CodeForDotNet;
 using Emlid.WindowsIot.Hardware.Components.Pca9685;
 using Emlid.WindowsIot.Hardware.Protocols.Pwm;
 using Emlid.WindowsIot.HardwarePlus.Buses;
@@ -72,7 +72,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         /// </summary>
         public const int PwmChannelCount = 13;
 
-        #endregion
+        #endregion Constants
 
         #region Lifetime
 
@@ -141,9 +141,9 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
             _enablePin?.Dispose();
         }
 
-        #endregion
+        #endregion IDisposable
 
-        #endregion
+        #endregion Lifetime
 
         #region Private Fields
 
@@ -162,7 +162,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         /// </summary>
         private readonly GpioPin _enablePin;
 
-        #endregion
+        #endregion Private Fields
 
         #region Common Properties
 
@@ -230,7 +230,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
             }
         }
 
-        #endregion
+        #endregion Common Properties
 
         #region Common Methods
 
@@ -284,7 +284,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
             }
         }
 
-        #endregion
+        #endregion Common Methods
 
         #region LED Interface Specific
 
@@ -332,6 +332,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
                 }
             }
         }
+
         private int _ledRed;
 
         /// <summary>
@@ -368,6 +369,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
                 }
             }
         }
+
         private int _ledGreen;
 
         /// <summary>
@@ -404,9 +406,10 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
                 }
             }
         }
+
         private int _ledBlue;
 
-        #endregion
+        #endregion Properties
 
         #region Methods
 
@@ -482,9 +485,9 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
             }
         }
 
-        #endregion
+        #endregion Methods
 
-        #endregion
+        #endregion LED Interface Specific
 
         #region PWM Interface Specific
 
@@ -585,10 +588,11 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         /// support independent frequencies per channel.
         /// </remarks>
         ReadOnlyCollection<PwmPulse> INavioPwmDevice.Channels => _pwmChannelsReadOnly;
+
         private ReadOnlyCollection<PwmPulse> _pwmChannelsReadOnly;
         private PwmPulse[] _pwmChannels;
 
-        #endregion
+        #endregion Properties
 
         #region Methods
 
@@ -708,8 +712,8 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
             }
         }
 
-        #endregion
+        #endregion Methods
 
-        #endregion
+        #endregion PWM Interface Specific
     }
 }

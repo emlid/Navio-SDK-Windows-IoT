@@ -1,4 +1,4 @@
-﻿using Emlid.UniversalWindows.UI.Models;
+﻿using CodeForDotNet.UI.Models;
 
 namespace Emlid.WindowsIot.Tools.Navio2RcioTerminal.Models
 {
@@ -20,6 +20,6 @@ namespace Emlid.WindowsIot.Tools.Navio2RcioTerminal.Models
         {
         }
 
-        #endregion
+        #endregion Lifetime
     }
 }

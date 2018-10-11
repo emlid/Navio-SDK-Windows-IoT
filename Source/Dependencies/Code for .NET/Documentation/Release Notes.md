@@ -1,5 +1,11 @@
 # Code for .NET - Release Notes
 
+## Version 4.72.1810.11### (2018.10.10)
+* Added UI library and components.
+* Updated extensions.
+* Updated dependencies.
+* Updated unit test project references.
+
 ## Version 4.72.1809.13### (2018.09.13)
 * Fixed Variables.cmd script dependency to ensure dependency update and build scripts initialize from any command prompt.
 * KeyboardShortcut enumeration added, a platform independent copy of System.Windows.Forms.Shortcut.

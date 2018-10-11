@@ -1,4 +1,4 @@
-﻿using Emlid.UniversalWindows.UI.Models;
+﻿using CodeForDotNet.UI.Models;
 using System;
 using System.Diagnostics;
 using System.Globalization;
@@ -24,7 +24,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models.Tests
             _output = new StringBuilder();
         }
 
-        #endregion
+        #endregion Lifetime
 
         #region Properties
 
@@ -36,10 +36,11 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models.Tests
         /// <summary>
         /// Output text.
         /// </summary>
-        public string Output { get { lock(_output) { return _output.ToString(); } } }
+        public string Output { get { lock (_output) { return _output.ToString(); } } }
+
         private StringBuilder _output;
 
-        #endregion
+        #endregion Properties
 
         #region Public Methods
 
@@ -54,7 +55,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models.Tests
             ClearOutput();
         }
 
-        #endregion
+        #endregion Public Methods
 
         #region Protected Methods
 
@@ -64,8 +65,8 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models.Tests
         protected void ClearOutput()
         {
             // Clear content
-            lock(_output)
-               _output.Length = 0;
+            lock (_output)
+                _output.Length = 0;
 
             // Update view
             DoPropertyChanged(nameof(Output));
@@ -141,6 +142,6 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models.Tests
             });
         }
 
-        #endregion
+        #endregion Protected Methods
     }
 }

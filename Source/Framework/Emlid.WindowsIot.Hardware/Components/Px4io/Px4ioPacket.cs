@@ -1,6 +1,5 @@
-﻿using Emlid.UniversalWindows.Collections;
+﻿using CodeForDotNet.Collections;
 using System;
-using System.Runtime.InteropServices;
 
 namespace Emlid.WindowsIot.Hardware.Components.Px4io
 {
@@ -90,7 +89,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io
         /// </summary>
         public const byte CountMask = 0x3f;
 
-        #endregion
+        #endregion Constants
 
         #region Lifetime
 
@@ -148,7 +147,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io
                 Registers[index] = BitConverter.ToUInt16(buffer, offset);
         }
 
-        #endregion
+        #endregion Lifetime
 
         #region Operators
 
@@ -214,7 +213,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io
                 ArrayExtensions.GetHashCode(Registers);
         }
 
-        #endregion
+        #endregion Operators
 
         #region Public Properties
 
@@ -254,7 +253,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io
         [CLSCompliant(false)]
         public readonly ushort[] Registers;
 
-        #endregion
+        #endregion Public Properties
 
         #region Private Fields
 
@@ -297,7 +296,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io
             0xE6, 0xE1, 0xE8, 0xEF, 0xFA, 0xFD, 0xF4, 0xF3
         };
 
-        #endregion
+        #endregion Private Fields
 
         #region Public Methods
 
@@ -382,6 +381,6 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io
             return buffer;
         }
 
-        #endregion
+        #endregion Public Methods
     }
 }

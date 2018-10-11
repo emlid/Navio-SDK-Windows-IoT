@@ -1,4 +1,4 @@
-﻿using Emlid.UniversalWindows;
+﻿using CodeForDotNet;
 using System;
 
 namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
@@ -60,33 +60,33 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
             _rcInputDevice?.Dispose();
         }
 
-        #endregion
+        #endregion IDisposable
 
-        #endregion
+        #endregion Lifetime
 
         #region Private Fields
 
         /// <summary>
         /// Model specific MS5611 chip which provides <see cref="Barometer"/> functionality.
         /// </summary>
-        NavioBarometerDevice _barometerDevice;
+        private NavioBarometerDevice _barometerDevice;
 
         /// <summary>
         /// Model specific MB85RC04V chip which provides <see cref="Fram"/> functionality.
         /// </summary>
-        Navio1FramDevice _framDevice;
+        private Navio1FramDevice _framDevice;
 
         /// <summary>
         /// Model specific PCA9685 chip which provides <see cref="Led"/> and <see cref="Pwm"/> functionality.
         /// </summary>
-        Navio1LedPwmDevice _ledPwmDevice;
+        private Navio1LedPwmDevice _ledPwmDevice;
 
         /// <summary>
         /// Model specific GPIO software PWM decoding, providing the <see cref="RCInput"/> functionality.
         /// </summary>
-        Navio1RCInputDevice _rcInputDevice;
+        private Navio1RCInputDevice _rcInputDevice;
 
-        #endregion
+        #endregion Private Fields
 
         #region Public Properties
 
@@ -144,6 +144,6 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         /// </remarks>
         public INavioRCInputDevice RCInput { get { return _rcInputDevice; } }
 
-        #endregion
+        #endregion Public Properties
     }
 }

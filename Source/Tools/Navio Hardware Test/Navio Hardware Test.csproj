@@ -196,10 +196,6 @@
       <Project>{e431a011-c230-4cf5-8321-c47e07ae7683}</Project>
       <Name>Emlid.UniversalWindows.UI</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Framework\Emlid.UniversalWindows\Emlid.UniversalWindows.csproj">
-      <Project>{d8f241c6-29cb-4aa6-ad34-398cba6d1c16}</Project>
-      <Name>Emlid.UniversalWindows</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Framework\Emlid.WindowsIot.HardwarePlus\Emlid.WindowsIot.HardwarePlus.vcxproj">
       <Project>{2c5df7f8-8e4f-451b-88e2-b9c879c923e6}</Project>
       <Name>Emlid.WindowsIot.HardwarePlus</Name>
@@ -229,6 +225,17 @@
     <SDKReference Include="WindowsIoT, Version=10.0.17134.0">
       <Name>Windows IoT Extensions for the UWP</Name>
     </SDKReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="CodeForDotNet">
+      <HintPath>..\..\Dependencies\Code for .NET\Components\CodeForDotNet.dll</HintPath>
+    </Reference>
+    <Reference Include="CodeForDotNet.UI">
+      <HintPath>..\..\Dependencies\Code for .NET\Components\CodeForDotNet.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="CodeForDotNet.WindowsUniversal">
+      <HintPath>..\..\Dependencies\Code for .NET\Components\CodeForDotNet.WindowsUniversal.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '15.0' ">
     <VisualStudioVersion>15.0</VisualStudioVersion>

@@ -1,4 +1,4 @@
-﻿using Emlid.UniversalWindows.UI.Models;
+﻿using CodeForDotNet.UI.Models;
 using Emlid.WindowsIot.Hardware.Boards.Navio;
 using System.ComponentModel;
 using System.Threading.Tasks;
@@ -25,7 +25,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models
             Application.PropertyChanged += OnApplicationPropertyChanged;
         }
 
-        #endregion
+        #endregion Lifetime
 
         #region Public Properties
 
@@ -79,7 +79,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models
         /// </summary>
         public bool RCInputAvailable => Application.Board?.RCInput != null;
 
-        #endregion
+        #endregion Public Properties
 
         #region Public Methods
 
@@ -92,7 +92,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models
             Task.Run(() => Application.Detect());
         }
 
-        #endregion
+        #endregion Public Methods
 
         #region Events
 
@@ -112,6 +112,6 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models
             }
         }
 
-        #endregion
+        #endregion Events
     }
 }

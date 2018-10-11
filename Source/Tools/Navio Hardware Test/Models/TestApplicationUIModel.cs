@@ -1,4 +1,4 @@
-﻿using Emlid.UniversalWindows.UI.Models;
+﻿using CodeForDotNet.UI.Models;
 using Emlid.WindowsIot.Hardware.Boards.Navio;
 using System;
 using System.Threading.Tasks;
@@ -43,9 +43,9 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models
             }
         }
 
-        #endregion
+        #endregion IDisposable
 
-        #endregion
+        #endregion Lifetime
 
         #region Properties
 
@@ -54,7 +54,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models
         /// </summary>
         public INavioBoard Board { get; private set; }
 
-        #endregion
+        #endregion Properties
 
         #region Public Methods
 
@@ -75,6 +75,6 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models
             }
         }
 
-        #endregion
+        #endregion Public Methods
     }
 }

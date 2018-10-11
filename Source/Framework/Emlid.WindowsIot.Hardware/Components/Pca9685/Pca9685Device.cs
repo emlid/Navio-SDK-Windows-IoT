@@ -1,4 +1,4 @@
-﻿using Emlid.UniversalWindows;
+﻿using CodeForDotNet;
 using Emlid.WindowsIot.HardwarePlus.Buses;
 using System;
 using System.Collections.Generic;
@@ -84,7 +84,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Pca9685
         /// </summary>
         public const int ModeSwitchDelay = 1;
 
-        #endregion
+        #endregion Constants
 
         #region Lifetime
 
@@ -155,9 +155,9 @@ namespace Emlid.WindowsIot.Hardware.Components.Pca9685
             _hardware?.Dispose();
         }
 
-        #endregion
+        #endregion IDisposable
 
-        #endregion
+        #endregion Lifetime
 
         #region Private Fields
 
@@ -166,7 +166,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Pca9685
         /// </summary>
         private I2cDevice _hardware;
 
-        #endregion
+        #endregion Private Fields
 
         #region Public Properties
 
@@ -174,6 +174,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Pca9685
         /// Channels and their values (also settable).
         /// </summary>
         public ReadOnlyCollection<Pca9685ChannelValue> Channels { get; private set; }
+
         private readonly Collection<Pca9685ChannelValue> _channels;
 
         /// <summary>
@@ -226,7 +227,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Pca9685
         /// </summary>
         public decimal PwmMsMaximum { get; private set; }
 
-        #endregion
+        #endregion Public Properties
 
         #region Public Methods
 
@@ -260,7 +261,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Pca9685
             ReadAllChannels();
         }
 
-        #endregion
+        #endregion General
 
         #region Mode
 
@@ -296,7 +297,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Pca9685
             return value;
         }
 
-        #endregion
+        #endregion Mode
 
         #region Sleep
 
@@ -360,7 +361,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Pca9685
             return true;
         }
 
-        #endregion
+        #endregion Sleep
 
         #region Restart
 
@@ -419,7 +420,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Pca9685
             ReadAll();
         }
 
-        #endregion
+        #endregion Restart
 
         #region Frequency
 
@@ -548,7 +549,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Pca9685
             return actual;
         }
 
-        #endregion
+        #endregion Frequency
 
         #region Channels
 
@@ -764,7 +765,6 @@ namespace Emlid.WindowsIot.Hardware.Components.Pca9685
             return null;
         }
 
-
         /// <summary>
         /// Writes multiple channels together (both "on" and "off" values), and updates it in <see cref="Channels"/>.
         /// </summary>
@@ -853,8 +853,8 @@ namespace Emlid.WindowsIot.Hardware.Components.Pca9685
                 _channels[index] = Pca9685ChannelValue.FromByteArray(data, ChannelSize * index);
         }
 
-        #endregion
+        #endregion Channels
 
-        #endregion
+        #endregion Public Methods
     }
 }

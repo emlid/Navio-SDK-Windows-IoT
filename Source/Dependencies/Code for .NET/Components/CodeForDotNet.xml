@@ -78,14 +78,9 @@
             <param name="comparisonType">Comparison options, e.g. set to <see cref="F:System.StringComparison.OrdinalIgnoreCase"/> for a case insensitive comparison.</param>
             <returns>True when found.</returns>
         </member>
-        <member name="M:CodeForDotNet.Collections.ArrayExtensions.GetHashCodeOfItems(System.Collections.IList)">
+        <member name="M:CodeForDotNet.Collections.ArrayExtensions.GetHashCode(System.Collections.IList)">
             <summary>
             Gets the hash code of all items in the array.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Collections.ArrayExtensions.GetHashCodeOfItemsIfExists(System.Collections.IList)">
-            <summary>
-            Gets the hash code of all items in the array, or zero when null.
             </summary>
         </member>
         <member name="M:CodeForDotNet.Collections.ArrayExtensions.Dispose(System.Collections.IList)">
@@ -2970,6 +2965,26 @@
             in which case the <see cref="P:CodeForDotNet.Diagnostics.ProcessResult.ReturnCode"/> is null.
             </summary>
         </member>
+        <member name="T:CodeForDotNet.Diagnostics.StopwatchExtensions">
+            <summary>
+            Extensions to the <see cref="T:System.Diagnostics.Stopwatch"/> class.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Diagnostics.StopwatchExtensions.TicksPerMicrosecond">
+            <summary>
+            Number of <see cref="P:System.Diagnostics.Stopwatch.ElapsedTicks"/> in a microsecond.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Diagnostics.StopwatchExtensions.ElapsedMicroseconds(System.Diagnostics.Stopwatch)">
+            <summary>
+            Gets the total elapsed time in microseconds.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Diagnostics.StopwatchExtensions.GetTimestampInMicroseconds">
+            <summary>
+            Gets the total elapsed time in microseconds.
+            </summary>
+        </member>
         <member name="T:CodeForDotNet.DisposableObject">
             <summary>
             Provides a base object which provides greater control over object lifetime and memory management.
@@ -5793,6 +5808,16 @@
             Extensions for working with the <see cref="T:System.String"/> type.
             </summary>
         </member>
+        <member name="F:CodeForDotNet.StringExtensions.AsciiMinimumPrintable">
+            <summary>
+            Minimum ASCII character value which is printable (not a special character).
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.StringExtensions.AsciiMaximumPrintable">
+            <summary>
+            Minimum ASCII character value which is printable (not a special character).
+            </summary>
+        </member>
         <member name="F:CodeForDotNet.StringExtensions.Truncatellipsis">
             <summary>
             Ellipsis used to end a string which has been truncated.
@@ -5873,6 +5898,14 @@
             </summary>
             <param name="value">Input value.</param>
             <returns>String with no white space at the beginning or end of every line.</returns>
+        </member>
+        <member name="M:CodeForDotNet.StringExtensions.FilterSpecial(System.String,System.Nullable{System.Char})">
+            <summary>
+            Filters a string down to printable characters.
+            </summary>
+            <param name="value">Raw string to filter.</param>
+            <param name="placeholder">Optional place-holder to replace filtered characters with.</param>
+            <returns>Filtered string.</returns>
         </member>
         <member name="T:CodeForDotNet.Threading.AsyncResult">
             <summary>
@@ -6009,6 +6042,26 @@
             e.g. during data load or save operations.
             </remarks>
         </member>
+        <member name="T:CodeForDotNet.TimeSpanExtensions">
+            <summary>
+            Extensions to the <see cref="T:System.TimeSpan"/> class.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.TimeSpanExtensions.TicksPerMicrosecond">
+            <summary>
+            Number of <see cref="P:System.TimeSpan.Ticks"/> in a microsecond.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.TimeSpanExtensions.FromMicroseconds(System.Int64)">
+            <summary>
+            Creates a <see cref="T:System.TimeSpan"/> from an interval specified in microseconds.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.TimeSpanExtensions.TotalMicroseconds(System.TimeSpan)">
+            <summary>
+            Gets the total elapsed time in microseconds.
+            </summary>
+        </member>
         <member name="T:CodeForDotNet.TypeExtensions">
             <summary>
             Extensions for working with type information.
@@ -6029,6 +6082,28 @@
             <returns>
             Typed attribute else null when not declared.
             </returns>
+        </member>
+        <member name="T:CodeForDotNet.ValueChangedEventArgs`1">
+            <summary>
+            Event arguments for a changed value.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.ValueChangedEventArgs`1.#ctor(`0,`0)">
+            <summary>
+            Creates an instance with the specified values.
+            </summary>
+            <param name="oldValue">Old value.</param>
+            <param name="newValue">New value.</param>
+        </member>
+        <member name="P:CodeForDotNet.ValueChangedEventArgs`1.OldValue">
+            <summary>
+            Old value.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.ValueChangedEventArgs`1.NewValue">
+            <summary>
+            New value.
+            </summary>
         </member>
         <member name="T:CodeForDotNet.ValueEventArgs`1">
             <summary>

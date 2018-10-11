@@ -66,6 +66,12 @@ echo.
 echo Copying documentation...
 robocopy "%~dp0Documentation" "%~dp0Temp\Build\%ConfigurationName%\Documentation" /s
 if %errorlevel% gtr 7 goto Error
+copy "%~dp0Dependencies\Code for .NET\Documentation\Release Notes.md" "%~dp0Temp\Build\%ConfigurationName%\Documentation\Dependencies\Code for .NET Release Notes.md"
+if %errorlevel% neq 0 goto Error
+copy "%~dp0Dependencies\Code for PowerShell\Documentation\Release Notes.md" "%~dp0Temp\Build\%ConfigurationName%\Documentation\Dependencies\Code for PowerShell Release Notes.md"
+if %errorlevel% neq 0 goto Error
+copy "%~dp0Dependencies\Code for Windows\Documentation\Release Notes.md" "%~dp0Temp\Build\%ConfigurationName%\Documentation\Dependencies\Code for Windows Release Notes.md"
+if %errorlevel% neq 0 goto Error
 
 echo.
 echo Copying version references...
@@ -73,7 +79,11 @@ md "%~dp0Temp\Build\%ConfigurationName%\Version"
 if %errorlevel% neq 0 goto Error
 copy "%~dp0Version.txt" "%~dp0Temp\Build\%ConfigurationName%\Version\Emlid.WindowsIot.Version.txt"
 if %errorlevel% neq 0 goto Error
-robocopy "%~dp0Dependencies" "%~dp0Temp\Build\%ConfigurationName%\Version" *Version.txt
+robocopy "%~dp0Dependencies\Code for .NET\Version" "%~dp0Temp\Build\%ConfigurationName%\Version" *Version.txt /xn
+if %errorlevel% gtr 7 goto Error
+robocopy "%~dp0Dependencies\Code for PowerShell\Version" "%~dp0Temp\Build\%ConfigurationName%\Version" *Version.txt /xn
+if %errorlevel% gtr 7 goto Error
+robocopy "%~dp0Dependencies\Code for Windows\Version" "%~dp0Temp\Build\%ConfigurationName%\Version" *Version.txt /xn
 if %errorlevel% gtr 7 goto Error
 
 echo.

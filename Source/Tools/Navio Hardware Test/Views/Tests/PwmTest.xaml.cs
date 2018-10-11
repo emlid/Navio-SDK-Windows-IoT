@@ -1,4 +1,4 @@
-﻿using Emlid.UniversalWindows;
+﻿using CodeForDotNet;
 using Emlid.UniversalWindows.UI.Views;
 using Emlid.WindowsIot.Hardware.Protocols.Pwm;
 using Emlid.WindowsIot.Tools.NavioHardwareTest.Models;
@@ -29,7 +29,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Views.Tests
             InitializeComponent();
         }
 
-        #endregion
+        #endregion Lifetime
 
         #region Protected Methods
 
@@ -41,7 +41,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Views.Tests
             return new PwmTestUIModel(application);
         }
 
-        #endregion
+        #endregion Protected Methods
 
         #region Events
 
@@ -81,6 +81,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Views.Tests
                     break;
             }
         }
+
         /// <summary>
         /// Executes the <see cref="PwmTestUIModel.Reset"/> action when the related button is clicked.
         /// </summary>
@@ -139,7 +140,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Views.Tests
             Model.Device.SetChannel(slider.Number, value.NewValue);
         }
 
-        #endregion
+        #endregion Events
 
         #region Private Methods
 
@@ -171,6 +172,6 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Views.Tests
             Bindings.Update();
         }
 
-        #endregion
+        #endregion Private Methods
     }
 }

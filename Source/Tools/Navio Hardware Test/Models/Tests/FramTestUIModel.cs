@@ -1,4 +1,4 @@
-﻿using Emlid.UniversalWindows;
+﻿using CodeForDotNet;
 using Emlid.WindowsIot.Hardware.Boards.Navio;
 using System;
 using System.Globalization;
@@ -18,7 +18,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models.Tests
         /// </summary>
         public const int ContentBytesPerLine = 32;
 
-        #endregion
+        #endregion Constants
 
         #region Lifetime
 
@@ -35,7 +35,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models.Tests
             Device = application.Board.Fram;
         }
 
-        #endregion
+        #endregion Lifetime
 
         #region Properties
 
@@ -54,7 +54,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models.Tests
         /// </summary>
         public byte FillByte { get; set; }
 
-        #endregion
+        #endregion Properties
 
         #region Public Methods
 
@@ -183,7 +183,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models.Tests
             DoPropertyChanged(nameof(Contents));
         }
 
-        #endregion
+        #endregion Public Methods
 
         #region Non-Public Methods
 
@@ -229,6 +229,6 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models.Tests
             DoPropertyChanged(nameof(Contents));
         }
 
-        #endregion
+        #endregion Non-Public Methods
     }
 }

@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CodeForDotNet.UI</name>
+    </assembly>
+    <members>
+        <member name="T:CodeForDotNet.UI.Models.ApplicationUIModel">
+            <summary>
+            Application UI model.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.UI.Models.ApplicationUIModel.#ctor(System.Threading.Tasks.TaskFactory)">
+            <summary>
+            Creates an instance.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.UI.Models.PageUIModel`1">
+            <summary>
+            Base class for all page UI models
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.UI.Models.PageUIModel`1.#ctor(`0)">
+            <summary>
+            Creates an instance.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.UI.Models.PageUIModel`1.Application">
+            <summary>
+            Application model.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.UI.Models.UIModel">
+            <summary>
+            Base class for all UI models
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Models.UIModel.UpdateTimeout">
+            <summary>
+            Maximum time (in milliseconds) allowed for the UI to process updates before continuing with other updates.
+            </summary>
+            <remarks>
+            When too short and events are generated too quickly, the UI has no chance to refresh.
+            When too long and processor intensive operations are triggered, the UI could appear to hang.
+            Deadlocks could occur when background threads with call <see cref="M:CodeForDotNet.UI.Models.UIModel.DoPropertyChanged(System.String)"/>
+            to update the UI thread and another UI action has been performed which also requires the same lock.
+            </remarks>
+        </member>
+        <member name="M:CodeForDotNet.UI.Models.UIModel.#ctor(System.Threading.Tasks.TaskFactory)">
+            <summary>
+            Creates an instance.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.UI.Models.UIModel.Dispose(System.Boolean)">
+            <summary>
+            Frees resources owned by this instance.
+            </summary>
+            <param name="disposing">
+            True when called via <see cref="M:System.IDisposable.Dispose"/>, false when called during finalization.
+            </param>
+        </member>
+        <member name="P:CodeForDotNet.UI.Models.UIModel.UITaskFactory">
+            <summary>
+            Task factory for the UI thread.
+            </summary>
+        </member>
+        <member name="E:CodeForDotNet.UI.Models.UIModel.PropertyChanged">
+            <summary>
+            Fired when the model data has changed and the view should be refreshed.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.UI.Models.UIModel.DoPropertyChanged(System.String)">
+            <summary>
+            Fires the <see cref="E:CodeForDotNet.UI.Models.UIModel.PropertyChanged"/> event.
+            </summary>
+            <param name="name">Name of the property which changed.</param>
+        </member>
+    </members>
+</doc>

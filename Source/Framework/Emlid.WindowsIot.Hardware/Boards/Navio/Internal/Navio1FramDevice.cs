@@ -1,4 +1,4 @@
-﻿using Emlid.UniversalWindows;
+﻿using CodeForDotNet;
 using Emlid.WindowsIot.Hardware.Components.Mb85rcv;
 using System;
 
@@ -31,7 +31,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         /// </summary>
         public static readonly Mb85rcvDeviceId Navio1PlusDeviceId = new Mb85rcvDeviceId(Mb85rcvDeviceId.FujitsuManufacturerId, Mb85rc256vDevice.Density, 0x10);
 
-        #endregion
+        #endregion Constants
 
         #region Lifetime
 
@@ -78,9 +78,9 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
             _device?.Dispose();
         }
 
-        #endregion
+        #endregion IDisposable
 
-        #endregion
+        #endregion Lifetime
 
         #region Private Fields
 
@@ -94,7 +94,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         /// </summary>
         private Mb85rcvDevice _device;
 
-        #endregion
+        #endregion Private Fields
 
         #region Public Properties
 
@@ -103,7 +103,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         /// </summary>
         public int Size { get { return _device.Size; } }
 
-        #endregion
+        #endregion Public Properties
 
         #region Public Methods
 
@@ -210,6 +210,6 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
             }
         }
 
-        #endregion
+        #endregion Public Methods
     }
 }

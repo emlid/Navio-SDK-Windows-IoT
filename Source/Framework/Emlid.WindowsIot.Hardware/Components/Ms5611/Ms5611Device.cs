@@ -1,4 +1,4 @@
-﻿using Emlid.UniversalWindows;
+﻿using CodeForDotNet;
 using Emlid.WindowsIot.HardwarePlus.Buses;
 using System;
 using System.Threading.Tasks;
@@ -81,7 +81,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Ms5611
         /// </summary>
         public const double Accuracy = 0.01;
 
-        #endregion
+        #endregion Constants
 
         #region Lifetime
 
@@ -126,7 +126,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Ms5611
             _hardware?.Dispose();
         }
 
-        #endregion
+        #endregion Lifetime
 
         #region Private Fields
 
@@ -135,7 +135,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Ms5611
         /// </summary>
         private I2cDevice _hardware;
 
-        #endregion
+        #endregion Private Fields
 
         #region Public Properties
 
@@ -183,8 +183,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Ms5611
         /// </remarks>
         public double Temperature { get; private set; }
 
-
-        #endregion
+        #endregion Public Properties
 
         #region Public Methods
 
@@ -230,7 +229,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Ms5611
             Calculate(rawPressure, rawTemperature);
         }
 
-        #endregion
+        #endregion Public Methods
 
         #region Private Methods
 
@@ -414,6 +413,6 @@ namespace Emlid.WindowsIot.Hardware.Components.Ms5611
             Temperature = temperature / 100;
         }
 
-        #endregion
+        #endregion Private Methods
     }
 }

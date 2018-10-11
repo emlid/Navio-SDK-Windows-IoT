@@ -1,4 +1,4 @@
-﻿using Emlid.UniversalWindows;
+﻿using CodeForDotNet;
 using Emlid.WindowsIot.Hardware.Components.Px4io;
 using Emlid.WindowsIot.Hardware.Protocols.Ppm;
 using Emlid.WindowsIot.HardwarePlus.Buses;
@@ -9,7 +9,6 @@ using Windows.Devices.Spi;
 
 namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
 {
-
     /// <summary>
     /// Navio 2 Remote Control Input Output (RCIO) hardware device.
     /// </summary>
@@ -72,7 +71,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         /// </summary>
         public const int GpioSwdIoPinNumber = 13;
 
-        #endregion
+        #endregion Constants
 
         #region Lifetime
 
@@ -129,9 +128,9 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
             _chip?.Dispose();
         }
 
-        #endregion
+        #endregion IDisposable
 
-        #endregion
+        #endregion Lifetime
 
         #region Private Fields
 
@@ -150,7 +149,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         /// </summary>
         private GpioSwdPort _swdPort;
 
-        #endregion
+        #endregion Private Fields
 
         #region INavioRCInputDevice
 
@@ -160,6 +159,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         /// Channel values in microseconds.
         /// </summary>
         ReadOnlyCollection<int> INavioRCInputDevice.Channels => _channelsReadOnly;
+
         private ReadOnlyCollection<int> _channelsReadOnly;
         private int[] _channels;
 
@@ -168,7 +168,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         /// </summary>
         bool INavioRCInputDevice.Multiprotocol { get { return true; } }
 
-        #endregion
+        #endregion Properties
 
         #region Events
 
@@ -189,10 +189,11 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
             add { _channelsChanged += value; }
             remove { _channelsChanged -= value; }
         }
+
         private EventHandler<PpmFrame> _channelsChanged;
 
-        #endregion
+        #endregion Events
 
-        #endregion
+        #endregion INavioRCInputDevice
     }
 }

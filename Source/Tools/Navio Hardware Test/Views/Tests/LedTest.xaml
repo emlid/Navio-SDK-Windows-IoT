@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:converters="using:Emlid.UniversalWindows.UI.Converters"
+    xmlns:converters="using:CodeForDotNet.WindowsUniversal.UI.Converters"
     xmlns:views="using:Emlid.WindowsIot.Tools.NavioHardwareTest.Views.Tests"
     mc:Ignorable="d">
     <Page.Resources>
@@ -53,15 +53,14 @@
                     Value="{x:Bind Path=Model.Device.Red, Mode=TwoWay, Converter={StaticResource ConvertibleValueConverter}}" />
 
             <!-- LED Green -->
-            <TextBlock Grid.Row="1" Grid.Column="0" Text="Green:" Style="{StaticResource LabelTextTop}"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Green:" Style="{StaticResource LabelTextTop}" />
             <Slider x:Name="LedGreenSlider" Grid.Row="1" Grid.Column="1" Style="{StaticResource ChannelSlider}"
                     Value="{x:Bind Path=Model.Device.Green, Mode=TwoWay, Converter={StaticResource ConvertibleValueConverter}}" />
 
             <!-- LED Blue -->
-            <TextBlock Grid.Row="2" Grid.Column="0" Text="Blue:" Style="{StaticResource LabelTextTop}"/>
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Blue:" Style="{StaticResource LabelTextTop}" />
             <Slider x:Name="LedBlueSlider" Grid.Row="2" Grid.Column="1" Style="{StaticResource ChannelSlider}"
                     Value="{x:Bind Path=Model.Device.Blue, Mode=TwoWay, Converter={StaticResource ConvertibleValueConverter}}" />
-
         </Grid>
 
         <!-- Bottom Row -->
@@ -96,12 +95,10 @@
                               IsEnabled="{x:Bind Path=Model.InputEnabled, Mode=OneWay}"
                               IsOn="{x:Bind Path=Model.Device.Enabled, Mode=TwoWay}" />
 
-
                 <!-- Cycle -->
                 <TextBlock Grid.Row="2" Grid.Column="0" Text="Cycle:" Style="{StaticResource LabelText}" />
                 <ToggleSwitch Grid.Row="2" Grid.Column="1" Name="CycleSwitch" IsEnabled="{x:Bind Path=Model.InputEnabled, Mode=OneWay}"
                               IsOn="{x:Bind Path=Model.Cycle, Mode=TwoWay}" />
-
             </Grid>
 
             <!-- Output -->
@@ -111,13 +108,12 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" Text="Output" Style="{StaticResource PanelTitleText}"/>
+                <TextBlock Grid.Row="0" Text="Output" Style="{StaticResource PanelTitleText}" />
                 <ScrollViewer Name="OutputScroller" Grid.Row="1" Margin="5"
                               IsDeferredScrollingEnabled="False" BorderThickness="1" BorderBrush="Black">
                     <TextBlock Name="ResultTextBox" Text="{x:Bind Path=Model.Output, Mode=OneWay}"
                            ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" />
                 </ScrollViewer>
-
             </Grid>
 
             <!-- Commands -->
@@ -133,11 +129,7 @@
                         IsEnabled="{x:Bind Path=Model.InputEnabled, Mode=OneWay}" Click="OnClearButtonClick" />
                 <Button x:Name="CloseButton" Content="Close" Margin="5" HorizontalAlignment="Stretch"
                         IsEnabled="{x:Bind Path=Model.InputEnabled, Mode=OneWay}" Click="OnCloseButtonClick" />
-
             </StackPanel>
-
         </Grid>
-
     </Grid>
-
 </views:LedTestPageBase>

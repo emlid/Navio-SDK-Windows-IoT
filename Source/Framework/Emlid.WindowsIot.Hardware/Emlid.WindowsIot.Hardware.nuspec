@@ -33,18 +33,16 @@
   <files>
 
     <!-- WinMd and IntelliSense -->
-    <file src="Emlid.UniversalWindows.xml" target="lib\uap10.0" />
+    <file src="CodeForDotNet.xml" target="lib\uap10.0" />
     <file src="Emlid.WindowsIot.Hardware.xml" target="lib\uap10.0" />
     <file src="Emlid.WindowsIot.HardwarePlus.winmd" target="lib\uap10.0" />
     <file src="Emlid.WindowsIot.HardwarePlus.xml" target="lib\uap10.0" />
 
     <!-- DLLs and resources -->
-    <file src="Emlid.UniversalWindows.dll" target="runtimes\win10-arm\native" />
-    <file src="Emlid.UniversalWindows.pri" target="runtimes\win10-arm\native" />
+    <file src="CodeForDotNet.dll" target="runtimes\win10-arm\native" />
     <file src="Emlid.WindowsIot.Hardware.dll" target="runtimes\win10-arm\native" />
     <file src="Emlid.WindowsIot.Hardware.pri" target="runtimes\win10-arm\native" />
     <file src="Emlid.WindowsIot.HardwarePlus.winmd" target="runtimes\win10-arm\native" />
     <file src="Emlid.WindowsIot.HardwarePlus.pri" target="runtimes\win10-arm\native" />
-
   </files>
 </package>

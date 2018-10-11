@@ -1,4 +1,4 @@
-﻿using Emlid.UniversalWindows.Collections;
+﻿using CodeForDotNet.Collections;
 using System;
 using System.Globalization;
 using System.Text;
@@ -34,7 +34,7 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Ppm
             Channels = channels ?? throw new ArgumentNullException(nameof(channels));
         }
 
-        #endregion
+        #endregion Lifetime
 
         #region Operators
 
@@ -85,7 +85,7 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Ppm
                 ArrayExtensions.GetHashCode(Channels);
         }
 
-        #endregion
+        #endregion Operators
 
         #region Properties
 
@@ -104,7 +104,7 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Ppm
         /// </summary>
         public int[] Channels { get; private set; }
 
-        #endregion
+        #endregion Properties
 
         #region Methods
 
@@ -128,6 +128,6 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Ppm
             return result.ToString();
         }
 
-        #endregion
+        #endregion Methods
     }
 }

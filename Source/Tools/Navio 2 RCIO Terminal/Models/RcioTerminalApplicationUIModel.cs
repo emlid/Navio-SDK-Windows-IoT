@@ -1,4 +1,4 @@
-﻿using Emlid.UniversalWindows.UI.Models;
+﻿using CodeForDotNet.UI.Models;
 using Emlid.WindowsIot.Hardware.Boards.Navio;
 using Emlid.WindowsIot.Hardware.Boards.Navio.Internal;
 using Emlid.WindowsIot.Tools.Navio2RcioTerminal.Resources;
@@ -21,7 +21,7 @@ namespace Emlid.WindowsIot.Tools.Navio2RcioTerminal.Models
             : base(uiTaskFactory)
         {
             // Run on background thread (necessary for C++/WinRT hardware access)
-            Task.Run(() => 
+            Task.Run(() =>
             {
                 // Ensure we are running on a Navio 2
                 if (NavioDeviceProvider.Detect() != NavioHardwareModel.Navio2)
@@ -56,9 +56,9 @@ namespace Emlid.WindowsIot.Tools.Navio2RcioTerminal.Models
             }
         }
 
-        #endregion
+        #endregion IDisposable
 
-        #endregion
+        #endregion Lifetime
 
         #region Properties
 
@@ -67,6 +67,6 @@ namespace Emlid.WindowsIot.Tools.Navio2RcioTerminal.Models
         /// </summary>
         public Navio2RcioDevice Rcio { get; private set; }
 
-        #endregion
+        #endregion Properties
     }
 }

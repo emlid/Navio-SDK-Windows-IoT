@@ -1,4 +1,4 @@
-﻿using Emlid.UniversalWindows;
+﻿using CodeForDotNet;
 using Emlid.WindowsIot.Hardware.Components.Ms5611;
 using Emlid.WindowsIot.Hardware.Protocols.Barometer;
 using System;
@@ -27,7 +27,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         /// </summary>
         public const Ms5611Osr DefaultOsr = Ms5611Osr.Osr4096;
 
-        #endregion
+        #endregion Constants
 
         #region Lifetime
 
@@ -63,9 +63,9 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
             _device?.Dispose();
         }
 
-        #endregion
+        #endregion IDisposable
 
-        #endregion
+        #endregion Lifetime
 
         #region Private Fields
 
@@ -79,7 +79,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         /// </summary>
         private Ms5611Device _device;
 
-        #endregion
+        #endregion Private Fields
 
         #region Public Properties
 
@@ -88,9 +88,10 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         /// </summary>
         public BarometerMeasurement Measurement { get; private set; }
 
-        #endregion
+        #endregion Public Properties
 
         #region Public Methods
+
         /// <summary>
         /// Resets the device and clears current measurements.
         /// </summary>
@@ -130,7 +131,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
             }
         }
 
-        #endregion
+        #endregion Public Methods
 
         #region Events
 
@@ -139,6 +140,6 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         /// </summary>
         public event EventHandler<BarometerMeasurement> MeasurementUpdated;
 
-        #endregion
+        #endregion Events
     }
 }

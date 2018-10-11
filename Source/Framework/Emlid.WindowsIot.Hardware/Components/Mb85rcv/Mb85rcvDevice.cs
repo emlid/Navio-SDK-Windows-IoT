@@ -1,4 +1,4 @@
-﻿using Emlid.UniversalWindows;
+﻿using CodeForDotNet;
 using Emlid.WindowsIot.HardwarePlus.Buses;
 using System;
 using Windows.Devices.I2c;
@@ -72,7 +72,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
         /// </remarks>
         public const byte DeviceIdI2cAddress = 0xf8 >> 1;
 
-        #endregion
+        #endregion Constants
 
         #region Lifetime
 
@@ -112,9 +112,9 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
             Hardware?.Dispose();
         }
 
-        #endregion
+        #endregion IDisposable
 
-        #endregion
+        #endregion Lifetime
 
         #region Public Properties
 
@@ -128,7 +128,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
         /// </summary>
         public int Size { get; private set; }
 
-        #endregion
+        #endregion Public Properties
 
         #region Protected Properties
 
@@ -141,7 +141,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
         [CLSCompliant(false)]
         protected I2cDevice Hardware { get; set; }
 
-        #endregion
+        #endregion Protected Properties
 
         #region Public Methods
 
@@ -372,7 +372,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
             while (remaining > 0);
         }
 
-        #endregion
+        #endregion Public Methods
 
         #region Protected Methods
 
@@ -412,6 +412,6 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
         /// </remarks>
         public abstract byte[] GetMemoryAddressBytes(int address);
 
-        #endregion
+        #endregion Protected Methods
     }
 }

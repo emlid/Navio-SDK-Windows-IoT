@@ -1,4 +1,4 @@
-﻿using Emlid.UniversalWindows;
+﻿using CodeForDotNet;
 using System;
 
 namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
@@ -57,9 +57,9 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
             _rcioDevice?.Dispose();
         }
 
-        #endregion
+        #endregion IDisposable
 
-        #endregion
+        #endregion Lifetime
 
         #region Private Fields
 
@@ -78,7 +78,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         /// </summary>
         private Navio2RcioDevice _rcioDevice;
 
-        #endregion
+        #endregion Private Fields
 
         #region Public Properties
 
@@ -135,6 +135,6 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         /// </summary>
         public INavioRCInputDevice RCInput => _rcioDevice;
 
-        #endregion
+        #endregion Public Properties
     }
 }

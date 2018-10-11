@@ -1,4 +1,4 @@
-﻿using Emlid.UniversalWindows.UI.Views;
+﻿using CodeForDotNet.WindowsUniversal.UI.Models;
 using Emlid.WindowsIot.Tools.NavioHardwareTest.Models;
 using Emlid.WindowsIot.Tools.NavioHardwareTest.Models.Tests;
 
@@ -19,6 +19,6 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Views.Tests
         {
         }
 
-        #endregion
+        #endregion Lifetime
     }
 }

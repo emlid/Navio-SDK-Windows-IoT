@@ -1,4 +1,4 @@
-﻿using Emlid.UniversalWindows;
+﻿using CodeForDotNet;
 using Emlid.WindowsIot.Hardware.Components.Px4io.Data;
 using Emlid.WindowsIot.HardwarePlus.Buses;
 using System;
@@ -25,7 +25,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io
         /// </summary>
         public static readonly TimeSpan TransferPacingDelay = TimeSpanExtensions.FromMicroseconds(150);
 
-        #endregion
+        #endregion Constants
 
         #region Lifetime
 
@@ -71,9 +71,9 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io
             _hardware?.Dispose();
         }
 
-        #endregion
+        #endregion IDisposable
 
-        #endregion
+        #endregion Lifetime
 
         #region Private Fields
 
@@ -82,7 +82,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io
         /// </summary>
         private SpiDevice _hardware;
 
-        #endregion
+        #endregion Private Fields
 
         #region Public Properties
 
@@ -109,7 +109,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io
         ///// </summary>
         //public Px4ioTestRegisters Test { get; private set; }
 
-        #endregion
+        #endregion General
 
         #region RC Input
 
@@ -128,7 +128,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io
         /// </summary>
         public Px4ioRCInputRegisters RCInput { get; private set; }
 
-        #endregion
+        #endregion RC Input
 
         #region RC Output
 
@@ -144,7 +144,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io
         //public ReadOnlyCollection<ushort> MixerLoad { get; private set; }
         //private ushort[] _mixerLoad;
 
-        #endregion
+        #endregion RC Output
 
         #region ADC
 
@@ -152,9 +152,10 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io
         /// <see cref="Px4ioPage.AdcInputRaw"/> registers.
         /// </summary>
         public ReadOnlyCollection<ushort> AdcInputRaw { get; private set; }
+
         private ushort[] _adcInputRaw;
 
-        #endregion
+        #endregion ADC
 
         #region PWM
 
@@ -162,39 +163,45 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io
         /// <see cref="Px4ioPage.Pwm"/> registers.
         /// </summary>
         public ReadOnlyCollection<ushort> Pwm { get; private set; }
+
         private ushort[] _pwm;
 
         /// <summary>
         /// <see cref="Px4ioPage.PwmDirect"/> registers.
         /// </summary>
         public ReadOnlyCollection<ushort> PwmDirect { get; private set; }
+
         private ushort[] _pwmDirect;
 
         /// <summary>
         /// <see cref="Px4ioPage.PwmFailsafe"/> registers.
         /// </summary>
         public ReadOnlyCollection<ushort> PwmFailsafe { get; private set; }
+
         private ushort[] _pwmFailsafe;
 
         /// <summary>
         /// <see cref="Px4ioPage.PwmMinimum"/> registers.
         /// </summary>
         public ReadOnlyCollection<ushort> PwmMinimum { get; private set; }
+
         private ushort[] _pwmMinimum;
 
         /// <summary>
         /// <see cref="Px4ioPage.PwmMaximum"/> registers.
         /// </summary>
         public ReadOnlyCollection<ushort> PwmMaximum { get; private set; }
+
         private ushort[] _pwmMaximum;
 
         /// <summary>
         /// <see cref="Px4ioPage.PwmDisarmed"/> registers.
         /// </summary>
         public ReadOnlyCollection<ushort> PwmDisarmed { get; private set; }
+
         private ushort[] _pwmDisarmed;
 
-        #endregion
+        #endregion PWM
 
         #region Actuators
 
@@ -202,15 +209,17 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io
         /// <see cref="Px4ioPage.Actuators"/> registers.
         /// </summary>
         public ReadOnlyCollection<ushort> Actuators { get; private set; }
+
         private ushort[] _actuators;
 
         /// <summary>
         /// <see cref="Px4ioPage.Servos"/> registers.
         /// </summary>
         public ReadOnlyCollection<ushort> Servos { get; private set; }
+
         private ushort[] _servos;
 
-        #endregion
+        #endregion Actuators
 
         #region Sensors
 
@@ -220,9 +229,9 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io
         ///// </summary>
         //public Px4ioSensorRegisters Sensors { get; private set; }
 
-        #endregion
+        #endregion Sensors
 
-        #endregion
+        #endregion Public Properties
 
         #region Public Methods
 
@@ -447,6 +456,6 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io
             }
         }
 
-        #endregion
+        #endregion Public Methods
     }
 }

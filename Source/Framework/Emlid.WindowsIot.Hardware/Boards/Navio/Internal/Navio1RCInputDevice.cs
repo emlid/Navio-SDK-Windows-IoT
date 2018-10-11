@@ -1,4 +1,5 @@
-﻿using Emlid.UniversalWindows;
+﻿using CodeForDotNet;
+using CodeForDotNet.Diagnostics;
 using Emlid.WindowsIot.Hardware.Protocols.Ppm;
 using Emlid.WindowsIot.HardwarePlus.Buses;
 using System;
@@ -12,7 +13,6 @@ using Windows.Devices.Gpio;
 
 namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
 {
-
     /// <summary>
     /// Navio Remote Control input hardware device.
     /// </summary>
@@ -36,7 +36,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         /// </summary>
         public const int GpioInputPinNumber = 4;
 
-        #endregion
+        #endregion Constants
 
         #region Lifetime
 
@@ -130,9 +130,9 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
             _inputPin?.Dispose();
         }
 
-        #endregion
+        #endregion IDisposable
 
-        #endregion
+        #endregion Lifetime
 
         #region Private Fields
 
@@ -181,7 +181,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         /// </summary>
         private readonly AutoResetEvent _frameTrigger;
 
-        #endregion
+        #endregion Private Fields
 
         #region Properties
 
@@ -189,6 +189,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         /// Channel values in microseconds.
         /// </summary>
         public ReadOnlyCollection<int> Channels { get; private set; }
+
         private int[] _channels;
 
         /// <summary>
@@ -196,7 +197,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         /// </summary>
         public bool Multiprotocol { get { return false; } }
 
-        #endregion
+        #endregion Properties
 
         #region Events
 
@@ -226,7 +227,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         /// </summary>
         public event EventHandler<PpmFrame> ChannelsChanged;
 
-        #endregion
+        #endregion Events
 
         #region Private Methods
 
@@ -263,6 +264,6 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
             }
         }
 
-        #endregion
+        #endregion Private Methods
     }
 }

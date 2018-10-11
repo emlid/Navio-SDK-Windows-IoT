@@ -1,4 +1,5 @@
-﻿using Emlid.WindowsIot.Hardware.Protocols.Pwm;
+﻿using CodeForDotNet;
+using Emlid.WindowsIot.Hardware.Protocols.Pwm;
 using System;
 using Windows.UI.Xaml.Controls;
 
@@ -20,7 +21,7 @@ namespace Emlid.UniversalWindows.UI.Views
             InitializeComponent();
         }
 
-        #endregion
+        #endregion Lifetime
 
         #region Properties
 
@@ -56,7 +57,8 @@ namespace Emlid.UniversalWindows.UI.Views
                 PulseChanged?.Invoke(this, new ValueChangedEventArgs<PwmPulse>(oldValue, value));
             }
         }
-        PwmPulse _pulse;
+
+        private PwmPulse _pulse;
 
         /// <summary>
         /// Gets or sets the <see cref="PwmPulse"/>.<see cref="PwmPulse.Width"/>.
@@ -76,7 +78,7 @@ namespace Emlid.UniversalWindows.UI.Views
             }
         }
 
-        #endregion
+        #endregion Properties
 
         #region Private Methods
 
@@ -94,7 +96,7 @@ namespace Emlid.UniversalWindows.UI.Views
             WidthSlider.TickFrequency = range / 10d;
         }
 
-        #endregion
+        #endregion Private Methods
 
         #region Events
 
@@ -103,6 +105,6 @@ namespace Emlid.UniversalWindows.UI.Views
         /// </summary>
         public event EventHandler<ValueChangedEventArgs<PwmPulse>> PulseChanged;
 
-        #endregion
+        #endregion Events
     }
 }

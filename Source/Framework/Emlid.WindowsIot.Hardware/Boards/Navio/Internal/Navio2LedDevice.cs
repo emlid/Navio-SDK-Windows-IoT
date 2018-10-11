@@ -1,4 +1,4 @@
-﻿using Emlid.UniversalWindows;
+﻿using CodeForDotNet;
 using Emlid.WindowsIot.HardwarePlus.Buses;
 using System;
 using Windows.Devices.Gpio;
@@ -32,7 +32,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         /// </summary>
         public const int BlueGpioPin = 6;
 
-        #endregion
+        #endregion Constants
 
         #region Lifetime
 
@@ -83,9 +83,9 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
             _bluePin?.Dispose();
         }
 
-        #endregion
+        #endregion IDisposable
 
-        #endregion
+        #endregion Lifetime
 
         #region Private Fields
 
@@ -97,19 +97,19 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         /// <summary>
         /// LED red component GPIO pin.
         /// </summary>
-        GpioPin _redPin;
+        private GpioPin _redPin;
 
         /// <summary>
         /// LED green component GPIO pin.
         /// </summary>
-        GpioPin _greenPin;
+        private GpioPin _greenPin;
 
         /// <summary>
         /// LED blue component GPIO pin.
         /// </summary>
-        GpioPin _bluePin;
+        private GpioPin _bluePin;
 
-        #endregion
+        #endregion Private Fields
 
         #region Public Properties
 
@@ -153,6 +153,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
                 }
             }
         }
+
         private bool _enabled;
 
         /// <summary>
@@ -184,6 +185,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
                 }
             }
         }
+
         private int _red;
 
         /// <summary>
@@ -209,6 +211,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
                 }
             }
         }
+
         private int _green;
 
         /// <summary>
@@ -234,9 +237,10 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
                 }
             }
         }
+
         private int _blue;
 
-        #endregion
+        #endregion Public Properties
 
         #region Public Methods
 
@@ -275,7 +279,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
             return value == GpioPinValue.High ? 0 : 1;
         }
 
-        #endregion
+        #endregion Conversion
 
         #region LED Interface
 
@@ -324,8 +328,8 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
             }
         }
 
-        #endregion
+        #endregion LED Interface
 
-        #endregion
+        #endregion Public Methods
     }
 }
