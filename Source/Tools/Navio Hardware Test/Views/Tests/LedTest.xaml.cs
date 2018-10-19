@@ -3,6 +3,7 @@ using Emlid.WindowsIot.Tools.NavioHardwareTest.Models;
 using Emlid.WindowsIot.Tools.NavioHardwareTest.Models.Tests;
 using System;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -25,7 +26,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Views.Tests
             InitializeComponent();
         }
 
-        #endregion
+        #endregion Lifetime
 
         #region Protected Methods
 
@@ -37,7 +38,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Views.Tests
             return new LedTestUIModel(application);
         }
 
-        #endregion
+        #endregion Protected Methods
 
         #region Events
 
@@ -86,6 +87,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Views.Tests
         /// <summary>
         /// Executes the <see cref="LedTestUIModel.Reset"/> action when the related button is clicked.
         /// </summary>
+        [SuppressMessage("Microsoft.Usage", "CA1801", Justification = "Event handlers must not use all parameters.")]
         private void OnResetButtonClick(object sender, RoutedEventArgs arguments)
         {
             Model.Reset();
@@ -94,6 +96,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Views.Tests
         /// <summary>
         /// Executes the <see cref="LedTestUIModel.Read"/> action when the related button is clicked.
         /// </summary>
+        [SuppressMessage("Microsoft.Usage", "CA1801", Justification = "Event handlers must not use all parameters.")]
         private void OnReadButtonClick(object sender, RoutedEventArgs arguments)
         {
             Model.Read();
@@ -102,6 +105,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Views.Tests
         /// <summary>
         /// Executes the <see cref="TestUIModel.Clear"/> action when the related button is clicked.
         /// </summary>
+        [SuppressMessage("Microsoft.Usage", "CA1801", Justification = "Event handlers must not use all parameters.")]
         private void OnClearButtonClick(object sender, RoutedEventArgs arguments)
         {
             Model.Clear();
@@ -110,12 +114,13 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Views.Tests
         /// <summary>
         /// Returns to the previous page when the close button is clicked.
         /// </summary>
+        [SuppressMessage("Microsoft.Usage", "CA1801", Justification = "Event handlers must not use all parameters.")]
         private void OnCloseButtonClick(object sender, RoutedEventArgs arguments)
         {
             Frame.GoBack();
         }
 
-        #endregion
+        #endregion Events
 
         #region Private Methods
 
@@ -141,6 +146,6 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Views.Tests
             slider.TickFrequency = large;
         }
 
-        #endregion
+        #endregion Private Methods
     }
 }

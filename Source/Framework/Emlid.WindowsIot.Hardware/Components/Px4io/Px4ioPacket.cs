@@ -1,5 +1,6 @@
 ﻿using CodeForDotNet.Collections;
 using System;
+using System.Collections.ObjectModel;
 
 namespace Emlid.WindowsIot.Hardware.Components.Px4io
 {
@@ -107,7 +108,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io
             Page = page;
             Offset = offset;
             Crc = 0;
-            Registers = new ushort[count];
+            Registers = new Collection<ushort>(new ushort[count]);
         }
 
         /// <summary>
@@ -120,7 +121,8 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io
             if (values == null) throw new ArgumentNullException(nameof(values));
 
             // Copy register values
-            Array.Copy(values, Registers, values.Length);
+            for (var index = 0; index < values.Length; index++)
+                Registers[index] = values[index];
         }
 
         /// <summary>
@@ -140,7 +142,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io
             Crc = buffer[offset++];
             Page = buffer[offset++];
             Offset = buffer[offset++];
-            Registers = new ushort[count];
+            Registers = new Collection<ushort>(new ushort[count]);
 
             // Copy register values
             for (int index = 0; index < count; index++, offset += 2)
@@ -156,9 +158,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io
         /// </summary>
         public static bool operator ==(Px4ioPacket left, Px4ioPacket right)
         {
-            return !ReferenceEquals(left, null)
-                ? left.Equals(right)
-                : ReferenceEquals(right, null);
+            return left?.Equals(right) ?? right is null;
         }
 
         /// <summary>
@@ -166,9 +166,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io
         /// </summary>
         public static bool operator !=(Px4ioPacket left, Px4ioPacket right)
         {
-            return !ReferenceEquals(left, null)
-                ? !left.Equals(right)
-                : !ReferenceEquals(right, null);
+            return !(left?.Equals(right) ?? right is null);
         }
 
         /// <summary>
@@ -188,7 +186,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io
         public bool Equals(Px4ioPacket value)
         {
             // Check null
-            if (ReferenceEquals(value, null))
+            if (value is null)
                 return false;
 
             // Compare values
@@ -220,7 +218,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io
         /// <summary>
         /// Count and code.
         /// </summary>
-        public byte CountCode;
+        public byte CountCode { get; set; }
 
         /// <summary>
         /// Code from the <see cref="CountCode"/> (masked with <see cref="CodeMask"/>).
@@ -235,23 +233,23 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io
         /// <summary>
         /// CRC checksum.
         /// </summary>
-        public byte Crc;
+        public byte Crc { get; set; }
 
         /// <summary>
         /// Page number.
         /// </summary>
-        public byte Page;
+        public byte Page { get; set; }
 
         /// <summary>
         /// Register offset.
         /// </summary>
-        public byte Offset;
+        public byte Offset { get; set; }
 
         /// <summary>
         /// Register values.
         /// </summary>
         [CLSCompliant(false)]
-        public readonly ushort[] Registers;
+        public Collection<ushort> Registers { get; private set; }
 
         #endregion Public Properties
 

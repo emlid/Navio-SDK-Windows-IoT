@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 
 namespace Emlid.WindowsIot.Hardware.Components.Px4io.Data
 {
@@ -16,7 +17,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io.Data
         /// </summary>
         public const byte RegisterCount = 7;
 
-        #endregion
+        #endregion Constants
 
         #region Lifetime
 
@@ -40,23 +41,24 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io.Data
             Data = data[3];
             FrameCounter = data[4];
             FrameLostCounter = data[5];
-            Channels = new ushort[count];
-            Array.ConstrainedCopy(data, (int)Px4ioRCInputRawRegisterOffset.ChannelsStart, Channels, 0, count);
+            var channels = new ushort[ChannelCount];
+            Array.ConstrainedCopy(data, (int)Px4ioRCInputRawRegisterOffset.ChannelsStart, channels, 0, count);
+            Channels = new Collection<ushort>(channels);
         }
 
-        #endregion
+        #endregion Lifetime
 
         #region Public Fields
 
         /// <summary>
         /// Number of valid channels.
         /// </summary>
-        public ushort ChannelCount;
+        public ushort ChannelCount { get; set; }
 
         /// <summary>
         /// RC detail status flags.
         /// </summary>
-        public Px4ioRCInputRawStatusFlags Status;
+        public Px4ioRCInputRawStatusFlags Status { get; set; }
 
         /// <summary>
         /// Normalized RSSI value, 0: no reception, 255: perfect reception.
@@ -64,7 +66,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io.Data
         /// <remarks>
         /// Hardware version 2 only.
         /// </remarks>
-        public ushort RssiNormal;
+        public ushort RssiNormal { get; set; }
 
         /// <summary>
         /// Details about the RC source (PPM frame length, Spektrum protocol type).
@@ -72,23 +74,23 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io.Data
         /// <remarks>
         /// Hardware versions 1 and 2.
         /// </remarks>
-        public ushort Data;
+        public ushort Data { get; set; }
 
         /// <summary>
         /// Number of total received frames (wrapping counter).
         /// </summary>
-        public ushort FrameCounter;
+        public ushort FrameCounter { get; set; }
 
         /// <summary>
         /// Number of total dropped frames (wrapping counter).
         /// </summary>
-        public ushort FrameLostCounter;
+        public ushort FrameLostCounter { get; set; }
 
         /// <summary>
         /// Channel data from here.
         /// </summary>
-        public ushort[] Channels;
+        public Collection<ushort> Channels { get; private set; }
 
-        #endregion
+        #endregion Public Fields
     }
 }

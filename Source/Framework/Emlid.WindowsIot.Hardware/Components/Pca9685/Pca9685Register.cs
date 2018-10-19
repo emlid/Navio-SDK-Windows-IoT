@@ -1,4 +1,6 @@
-﻿namespace Emlid.WindowsIot.Hardware.Components.Pca9685
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Emlid.WindowsIot.Hardware.Components.Pca9685
 {
     /// <summary>
     /// Defines the I2C registers of the <see cref="Pca9685Device"/>.
@@ -7,6 +9,7 @@
     /// Auto Increment past register 69 will point to mode 1 register (register 0).
     /// Auto Increment also works from register 250 to register 254, then rolls over to register 0.
     /// </remarks>
+    [SuppressMessage("Microsoft.Design", "CA1028", Justification = "Non-integer enumeration better suited to match the hardware specification in a hardware library.")]
     public enum Pca9685Register : byte
     {
         #region Control
@@ -58,7 +61,7 @@
         /// </remarks>
         ModeTest = 0xff,
 
-        #endregion
+        #endregion Control
 
         #region LED Channels
 
@@ -84,7 +87,7 @@
         /// </summary>
         Channel0OffHigh = 0x09,
 
-        #endregion
+        #endregion LED Channel 0
 
         #region LED Channel 1
 
@@ -108,7 +111,7 @@
         /// </summary>
         Channel1OffHigh = 0x0d,
 
-        #endregion
+        #endregion LED Channel 1
 
         #region LED Channel 2
 
@@ -132,7 +135,7 @@
         /// </summary>
         Channel2OffHigh = 0x11,
 
-        #endregion
+        #endregion LED Channel 2
 
         #region LED Channel 3
 
@@ -156,7 +159,7 @@
         /// </summary>
         Channel3OffHigh = 0x15,
 
-        #endregion
+        #endregion LED Channel 3
 
         #region LED Channel 4
 
@@ -180,7 +183,7 @@
         /// </summary>
         Channel4OffHigh = 0x19,
 
-        #endregion
+        #endregion LED Channel 4
 
         #region LED Channel 5
 
@@ -204,7 +207,7 @@
         /// </summary>
         Channel5OffHigh = 0x1d,
 
-        #endregion
+        #endregion LED Channel 5
 
         #region LED Channel 6
 
@@ -228,7 +231,7 @@
         /// </summary>
         Channel6OffHigh = 0x21,
 
-        #endregion
+        #endregion LED Channel 6
 
         #region LED Channel 7
 
@@ -252,7 +255,7 @@
         /// </summary>
         Channel7OffHigh = 0x25,
 
-        #endregion
+        #endregion LED Channel 7
 
         #region LED Channel 8
 
@@ -276,7 +279,7 @@
         /// </summary>
         Channel8OffHigh = 0x29,
 
-        #endregion
+        #endregion LED Channel 8
 
         #region LED Channel 9
 
@@ -300,7 +303,7 @@
         /// </summary>
         Channel9OffHigh = 0x2d,
 
-        #endregion
+        #endregion LED Channel 9
 
         #region LED Channel 10
 
@@ -324,7 +327,7 @@
         /// </summary>
         Channel10OffHigh = 0x31,
 
-        #endregion
+        #endregion LED Channel 10
 
         #region LED Channel 11
 
@@ -348,7 +351,7 @@
         /// </summary>
         Channel11OffHigh = 0x35,
 
-        #endregion
+        #endregion LED Channel 11
 
         #region LED Channel 12
 
@@ -372,7 +375,7 @@
         /// </summary>
         Channel12OffHigh = 0x39,
 
-        #endregion
+        #endregion LED Channel 12
 
         #region LED Channel 13
 
@@ -396,7 +399,7 @@
         /// </summary>
         Channel13OffHigh = 0x3d,
 
-        #endregion
+        #endregion LED Channel 13
 
         #region LED Channel 14
 
@@ -420,7 +423,7 @@
         /// </summary>
         Channel14OffHigh = 0x41,
 
-        #endregion
+        #endregion LED Channel 14
 
         #region LED Channel 15
 
@@ -444,7 +447,7 @@
         /// </summary>
         Channel15OffHigh = 0x45,
 
-        #endregion
+        #endregion LED Channel 15
 
         #region All LED Channels
 
@@ -468,8 +471,8 @@
         /// </summary>
         AllChannelsOffHigh = 0xfd
 
-        #endregion
+        #endregion All LED Channels
 
-        #endregion
+        #endregion LED Channels
     }
 }

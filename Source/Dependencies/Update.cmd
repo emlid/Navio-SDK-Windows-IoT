@@ -7,6 +7,10 @@ echo Updates dependencies with the current checked-in build version.
 echo.
 
 echo.
+echo Close Visual Studio now to avoid errors with locked files.
+pause.
+
+echo.
 echo Initializing Visual Studio environment...
 call "%~dp0Variables.cmd"
 if %errorlevel% neq 0 goto Error

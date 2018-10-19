@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 
 namespace Emlid.WindowsIot.Hardware.Components.Px4io.Data
 {
@@ -16,7 +17,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io.Data
         /// </summary>
         public const byte RegisterCount = 2;
 
-        #endregion
+        #endregion Constants
 
         #region Lifetime
 
@@ -35,24 +36,25 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io.Data
             // Set properties from data
             Valid = data[0];
             var count = data.Length - 1;
-            Controls = new ushort[count];
-            Array.ConstrainedCopy(data, (int)Px4ioRCInputRegisterOffset.ControlsStart, Controls, 0, count);
+            var controls = new ushort[count];
+            Array.ConstrainedCopy(data, (int)Px4ioRCInputRegisterOffset.ControlsStart, controls, 0, count);
+            Controls = new Collection<ushort>(controls);
         }
 
-        #endregion
+        #endregion Lifetime
 
         #region Public Fields
 
         /// <summary>
         /// Bitmask of valid controls.
         /// </summary>
-        public ushort Valid;
+        public ushort Valid { get; set; }
 
         /// <summary>
         /// <see cref="Px4ioConfigRegisters.RCInputCount"/> controls from here.
         /// </summary>
-        public ushort[] Controls;
+        public Collection<ushort> Controls { get; private set; }
 
-        #endregion
+        #endregion Public Fields
     }
 }

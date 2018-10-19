@@ -17,7 +17,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models.Tests
         /// </summary>
         public const int LedCycleStep = 100;
 
-        #endregion
+        #endregion Constants
 
         #region Lifetime
 
@@ -60,16 +60,16 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models.Tests
             }
         }
 
-        #endregion
+        #endregion IDisposable
 
-        #endregion
+        #endregion Lifetime
 
         #region Fields
 
         /// <summary>
         /// LED cycle background task.
         /// </summary>
-        Task _cycleTask;
+        private Task _cycleTask;
 
         /// <summary>
         /// Cancellation source for the <see cref="_cycleTask"/>;
@@ -77,13 +77,9 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models.Tests
         /// <remarks>
         /// Used to stop the task.
         /// </remarks>
-        CancellationTokenSource _cycleCancel;
+        private CancellationTokenSource _cycleCancel;
 
-        #endregion
-
-        #region Private Fields
-
-        #endregion
+        #endregion Fields
 
         #region Public Properties
 
@@ -115,7 +111,8 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models.Tests
                     {
                         // Create new task
                         _cycleCancel = new CancellationTokenSource();
-                        _cycleTask = Task.Factory.StartNew(() => CycleTask(_cycleCancel.Token));
+                        _cycleTask = Task.Factory.StartNew(() => CycleTask(_cycleCancel.Token),
+                            CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default);
                     }
                     else if (!value && running)
                     {
@@ -129,7 +126,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models.Tests
             }
         }
 
-        #endregion
+        #endregion Public Properties
 
         #region Public Methods
 
@@ -163,7 +160,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models.Tests
             }
         }
 
-        #endregion
+        #endregion Public Methods
 
         #region Non-Public Methods
 
@@ -185,8 +182,8 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models.Tests
                 // Break LED range into steps
                 var step = (int)Math.Round((float)maximum / LedCycleStep);
                 if (step < 1) step = 1;
-                Func<int, int> increment = (int value) => { value += LedCycleStep; return value < maximum ? value : maximum; };
-                Func<int, int> decrement = (int value) => { value -= LedCycleStep; return value > 0 ? value : 0; };
+                int increment(int value) { value += LedCycleStep; return value < maximum ? value : maximum; }
+                int decrement(int value) { value -= LedCycleStep; return value > 0 ? value : 0; }
 
                 // Ensure output is enabled
                 if (!Device.Enabled)
@@ -328,7 +325,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models.Tests
         /// </summary>
         private void StopCycleTask()
         {
-            lock(Device)
+            lock (Device)
             {
                 if (_cycleCancel != null)
                 {
@@ -349,6 +346,6 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models.Tests
             }
         }
 
-        #endregion
+        #endregion Non-Public Methods
     }
 }

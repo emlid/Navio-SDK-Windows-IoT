@@ -60,16 +60,16 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models.Tests
             }
         }
 
-        #endregion
+        #endregion IDisposable
 
-        #endregion
+        #endregion Lifetime
 
         #region Fields
 
         /// <summary>
         /// Auto-update background task.
         /// </summary>
-        Task _autoUpdateTask;
+        private Task _autoUpdateTask;
 
         /// <summary>
         /// Cancellation source for the <see cref="_autoUpdateTask"/>;
@@ -77,9 +77,9 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models.Tests
         /// <remarks>
         /// Used to stop the task.
         /// </remarks>
-        CancellationTokenSource _autoUpdateCancel;
+        private CancellationTokenSource _autoUpdateCancel;
 
-        #endregion
+        #endregion Fields
 
         #region Properties
 
@@ -120,7 +120,8 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models.Tests
                     {
                         // Create new task
                         _autoUpdateCancel = new CancellationTokenSource();
-                        _autoUpdateTask = Task.Factory.StartNew(() => AutoUpdateTask(_autoUpdateCancel.Token));
+                        _autoUpdateTask = Task.Factory.StartNew(() => AutoUpdateTask(_autoUpdateCancel.Token),
+                            CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default);
                     }
                     else if (!value && running)
                     {
@@ -134,7 +135,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models.Tests
             }
         }
 
-        #endregion
+        #endregion Properties
 
         #region Public Methods
 
@@ -177,7 +178,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models.Tests
             DoPropertyChanged(nameof(Graph));
         }
 
-        #endregion
+        #endregion Public Methods
 
         #region Events
 
@@ -197,7 +198,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models.Tests
             DoPropertyChanged(nameof(Graph));
         }
 
-        #endregion
+        #endregion Events
 
         #region Non-Public Methods
 
@@ -252,6 +253,6 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models.Tests
             }
         }
 
-        #endregion
+        #endregion Non-Public Methods
     }
 }

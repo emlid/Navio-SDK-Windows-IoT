@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 
 namespace Emlid.WindowsIot.Hardware.Protocols.Ppm
 {
@@ -6,7 +7,7 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Ppm
     /// Contains information about a PPM (Pulse Position Modulation) pulse (time and logic level).
     /// </summary>
     /// <see href="https://en.wikipedia.org/wiki/Pulse-position_modulation"/>
-    public struct PpmPulse
+    public struct PpmPulse : IEquatable<PpmPulse>
     {
         #region Lifetime
 
@@ -15,18 +16,18 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Ppm
         /// </summary>
         public PpmPulse(long time, bool state)
         {
-           Time = time;
-           Level = state;
+            Time = time;
+            Level = state;
         }
 
-        #endregion
+        #endregion Lifetime
 
         #region Operators
 
         /// <summary>
         /// Tests two objects of this type for equality by value.
         /// </summary>
-        public static bool operator ==(PpmPulse  left, PpmPulse  right)
+        public static bool operator ==(PpmPulse left, PpmPulse right)
         {
             return left.Equals(right);
         }
@@ -34,7 +35,7 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Ppm
         /// <summary>
         /// Tests two objects of this type for inequality by value.
         /// </summary>
-        public static bool operator !=(PpmPulse  left, PpmPulse  right)
+        public static bool operator !=(PpmPulse left, PpmPulse right)
         {
             return !left.Equals(right);
         }
@@ -42,15 +43,18 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Ppm
         /// <summary>
         /// Compares this object with another by value.
         /// </summary>
-        /// <param name="value">Object with which to compare by value.</param>
-        public override bool Equals(object value)
+        /// <param name="something">Object with which to compare by value.</param>
+        public override bool Equals(object something)
         {
-            // Compare type
-            if (!(value is PpmPulse))
-                return false;
-            var other = (PpmPulse)value;
+            return something is PpmPulse other && Equals(other);
+        }
 
-            // Compare values
+        /// <summary>
+        /// Compares this object with another of the same type by value.
+        /// </summary>
+        /// <param name="other">Object with which to compare by value.</param>
+        public bool Equals(PpmPulse other)
+        {
             return
                 other.Time == Time &&
                 other.Level == Level;
@@ -66,7 +70,7 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Ppm
                 Level.GetHashCode();
         }
 
-        #endregion
+        #endregion Operators
 
         #region Properties
 
@@ -80,7 +84,7 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Ppm
         /// </summary>
         public bool Level { get; set; }
 
-        #endregion
+        #endregion Properties
 
         #region Methods
 
@@ -93,6 +97,6 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Ppm
                 Resources.Strings.PpmPulseFormat, Level ? 1 : 0, Time);
         }
 
-        #endregion
+        #endregion Methods
     }
 }

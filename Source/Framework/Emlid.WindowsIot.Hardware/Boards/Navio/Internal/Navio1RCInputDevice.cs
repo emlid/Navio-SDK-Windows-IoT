@@ -69,10 +69,12 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
                 _stop = new CancellationTokenSource();
                 _channels = new int[_decoder.MaximumChannels];
                 Channels = new ReadOnlyCollection<int>(_channels);
-                _decoderTask = Task.Factory.StartNew(() => { _decoder.DecodePulse(_pulseBuffer, _pulseTrigger, _frameBuffer, _frameTrigger, _stop.Token); });
+                _decoderTask = Task.Factory.StartNew(() => { _decoder.DecodePulse(_pulseBuffer, _pulseTrigger, _frameBuffer, _frameTrigger, _stop.Token); },
+                    CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default);
 
                 // Create receiver thread
-                _receiverTask = Task.Factory.StartNew(() => { Receiver(); });
+                _receiverTask = Task.Factory.StartNew(() => { Receiver(); },
+                    CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default);
 
                 // Hook events
                 _inputPin.ValueChanged += OnInputPinValueChanged;
@@ -248,7 +250,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
                 }
 
                 // Validate
-                var channelCount = frame.Channels.Length;
+                var channelCount = frame.Channels.Count;
                 if (channelCount > _channels.Length)
                 {
                     // Too many channels
@@ -257,7 +259,8 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
                 }
 
                 // Copy new channel data
-                Array.Copy(frame.Channels, _channels, channelCount);
+                for (var index = 0; index < channelCount; index++)
+                    _channels[index] = frame.Channels[index];
 
                 // Fire event
                 ChannelsChanged?.Invoke(this, frame);

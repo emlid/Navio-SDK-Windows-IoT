@@ -24,39 +24,6 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
-    <PlatformTarget>ARM</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\ARM\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;WINDOWS_UAP;NETFX_CORE;WINDOWS_APP</DefineConstants>
-    <NoWarn>2008</NoWarn>
-    <DebugType>full</DebugType>
-    <PlatformTarget>ARM</PlatformTarget>
-    <UseVSHostingProcess>false</UseVSHostingProcess>
-    <ErrorReport>prompt</ErrorReport>
-    <Prefer32Bit>true</Prefer32Bit>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <DocumentationFile>bin\ARM\Debug\Emlid.WindowsIot.Hardware.xml</DocumentationFile>
-    <RunCodeAnalysis>false</RunCodeAnalysis>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <GenerateLibraryLayout>false</GenerateLibraryLayout>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
-    <PlatformTarget>ARM</PlatformTarget>
-    <OutputPath>bin\ARM\Release\</OutputPath>
-    <DefineConstants>TRACE;WINDOWS_UAP;NETFX_CORE;WINDOWS_APP</DefineConstants>
-    <Optimize>true</Optimize>
-    <NoWarn>2008</NoWarn>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>ARM</PlatformTarget>
-    <UseVSHostingProcess>false</UseVSHostingProcess>
-    <ErrorReport>prompt</ErrorReport>
-    <Prefer32Bit>true</Prefer32Bit>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <DocumentationFile>bin\ARM\Release\Emlid.WindowsIot.Hardware.xml</DocumentationFile>
-    <RunCodeAnalysis>false</RunCodeAnalysis>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <None Include="..\..\Common\Temporary Key.snk">
@@ -133,7 +100,6 @@
     <Compile Include="Protocols\Ppm\PpmPulse.cs" />
     <Compile Include="Protocols\Ppm\PpmCycle.cs" />
     <Compile Include="Protocols\Ppm\PpmFrame.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Boards\Navio\Internal\Navio1LedPwmDevice.cs" />
     <Compile Include="Protocols\Ppm\IPpmDecoder.cs" />
     <Compile Include="Boards\Navio\Internal\Navio1RCInputDevice.cs" />
@@ -176,6 +142,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers">
+      <Version>2.6.2</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.1.9</Version>
     </PackageReference>
@@ -202,23 +173,83 @@
   <PropertyGroup>
     <StartupObject />
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;WINDOWS_UAP;NETFX_CORE;WINDOWS_APP</DefineConstants>
+    <DocumentationFile>bin\ARM\Debug\Emlid.WindowsIot.Hardware.xml</DocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <NoWarn>2008</NoWarn>
+    <NoStdLib>true</NoStdLib>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <OutputPath>bin\ARM\Release\</OutputPath>
+    <DefineConstants>TRACE;WINDOWS_UAP;NETFX_CORE;WINDOWS_APP</DefineConstants>
+    <DocumentationFile>bin\ARM\Release\Emlid.WindowsIot.Hardware.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <NoWarn>2008</NoWarn>
+    <NoStdLib>true</NoStdLib>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;WINDOWS_UAP;NETFX_CORE;WINDOWS_APP</DefineConstants>
+    <DocumentationFile>bin\ARM\Debug\Emlid.WindowsIot.Hardware.xml</DocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <NoWarn>2008</NoWarn>
+    <NoStdLib>true</NoStdLib>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM64'">
+    <OutputPath>bin\ARM64\Release\</OutputPath>
+    <DefineConstants>TRACE;WINDOWS_UAP;NETFX_CORE;WINDOWS_APP</DefineConstants>
+    <DocumentationFile>bin\ARM\Release\Emlid.WindowsIot.Hardware.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <NoWarn>2008</NoWarn>
+    <NoStdLib>true</NoStdLib>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>@echo off
+    <PostBuildEvent>
+      @echo off
 
-echo Creating NuGet package...
-"$(SolutionDir)Dependencies\NuGet\nuget.exe" pack "$(ProjectDir)Emlid.WindowsIot.Hardware.nuspec" -Properties Configuration=$(ConfigurationName);Platform=$(PlatformName) -BasePath "$(TargetDir)." -OutputDirectory "$(TargetDir)NuGet"
-if %25errorlevel%25 neq 0 exit /b 1
+      echo Creating NuGet package...
+      "$(SolutionDir)Dependencies\NuGet\nuget.exe" pack "$(ProjectDir)Emlid.WindowsIot.Hardware.nuspec" -Properties Configuration=$(ConfigurationName);Platform=$(PlatformName) -BasePath "$(TargetDir)." -OutputDirectory "$(TargetDir)NuGet"
+      if %25errorlevel%25 neq 0 exit /b 1
 
-exit /b 0</PostBuildEvent>
+      exit /b 0
+    </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PreBuildEvent>@echo off
+    <PreBuildEvent>
+      @echo off
 
-echo Cleaning NuGet package...
-if exist "$(TargetDir)NuGet" rmdir "$(TargetDir)NuGet" /s /q
-if %25errorlevel%25 neq 0 exit /b 1
+      echo Cleaning NuGet package...
+      if exist "$(TargetDir)NuGet" rmdir "$(TargetDir)NuGet" /s /q
+      if %25errorlevel%25 neq 0 exit /b 1
 
-exit /b 0</PreBuildEvent>
+      exit /b 0
+    </PreBuildEvent>
   </PropertyGroup>
 </Project>

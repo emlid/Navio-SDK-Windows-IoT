@@ -238,119 +238,10 @@
         </member>
         <member name="M:CodeForDotNet.Collections.DisposableCollection`1.Finalize">
             <summary>
-            Calls <see cref="M:CodeForDotNet.Collections.DisposableCollection`1.Dispose(System.Boolean)"/> during finalization to free resources in case it was forgotten.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Collections.DisposableCollection`1.Dispose">
-            <summary>
-            Proactively frees resources.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Collections.DisposableCollection`1.Dispose(System.Boolean)">
-            <summary>
-            Frees resources owned by this object.
-            </summary>
-            <param name="disposing">
-            True when called proactively by <see cref="M:CodeForDotNet.Collections.DisposableCollection`1.Dispose"/>.
-            False when called during finalization.
-            </param>
-        </member>
-        <member name="M:CodeForDotNet.Collections.DisposableCollection`1.ClearItems">
-            <summary>
-            Clears and disposes items.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Collections.DisposableCollection`1.RemoveItem(System.Int32)">
-            <summary>
-            Removes and disposes an item.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Collections.DisposableCollection`1.SetItem(System.Int32,`0)">
-            <summary>
-            Disposes the replaces an item.
-            </summary>
-        </member>
-        <member name="T:CodeForDotNet.Collections.EventedCollection`1">
-            <summary>
-            Generic List which fires change notification events.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Collections.EventedCollection`1.#ctor">
-            <summary>
-            Creates an empty instance.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Collections.EventedCollection`1.#ctor(System.Collections.Generic.IList{`0})">
-            <summary>
-            Creates an instance based on an existing collection.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Collections.EventedCollection`1.Add(`0)">
-            <summary>
-            Replaces the Add method in order to fire the Added and Changed events.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Collections.EventedCollection`1.Remove(`0)">
-            <summary>
-            Replaces the Remove method in order to fire the Removed and Changed events.
-            </summary>
-        </member>
-        <member name="E:CodeForDotNet.Collections.EventedCollection`1.Added">
-            <summary>
-            Fired when an item is added to the list.
-            </summary>
-        </member>
-        <member name="E:CodeForDotNet.Collections.EventedCollection`1.Changed">
-            <summary>
-            Fired when the list is changed (an item is added or removed).
-            </summary>
-        </member>
-        <member name="E:CodeForDotNet.Collections.EventedCollection`1.Removed">
-            <summary>
-            Fired when an item is removed from the list.
-            </summary>
-        </member>
-        <member name="T:CodeForDotNet.Collections.EventedDictionary`2">
-            <summary>
-            Generic dictionary which fires change notification events.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Collections.EventedDictionary`2.#ctor">
-            <summary>
-            Creates an empty instance.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Collections.EventedDictionary`2.#ctor(System.Int32)">
-            <summary>
-            Creates an instance with the specified capacity.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Collections.EventedDictionary`2.#ctor(System.Collections.Generic.IEqualityComparer{`0})">
-            <summary>
-            Creates an instance with the specified comparer.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Collections.EventedDictionary`2.#ctor(System.Collections.Generic.IDictionary{`0,`1})">
-            <summary>
-            Creates an instance based on an existing dictionary.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Collections.EventedDictionary`2.#ctor(System.Int32,System.Collections.Generic.IEqualityComparer{`0})">
-            <summary>
-            Creates an instance with the specified capacity and comparer.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Collections.EventedDictionary`2.#ctor(System.Collections.Generic.IDictionary{`0,`1},System.Collections.Generic.IEqualityComparer{`0})">
-            <summary>
-            Creates an instance based on an existing dictionary.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Collections.EventedDictionary`2.Finalize">
-            <summary>
             Overrides the finalizer to ensure any available dispose logic is called.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Collections.EventedDictionary`2.Dispose">
+        <member name="M:CodeForDotNet.Collections.DisposableCollection`1.Dispose">
             <summary>
             Frees all resources held by this object, immediately (rather than waiting for Garbage Collection).
             This can provide a performance increase and avoid memory congestion on objects that hold
@@ -358,58 +249,63 @@
             </summary>
             <remarks>
             First fires the Disposing event, which could cancel this operation.
-            When not cancelled, calls the Dispose(bool notFinalized) method, which should overrided in inheriting
-            classes to release their local resources.
+            When not canceled, calls the <see cref="M:CodeForDotNet.Collections.DisposableCollection`1.Dispose(System.Boolean)"/> method,
+            which should be overridden in inheriting classes to release
+            their local resources.
             Finally fires the Disposed event.
-            Use the IsDisposing and IsDisposed properties to avoid using objects that are about to or have been disposed.
+            Use the IsDisposing and IsDisposed properties to avoid using objects
+            that are about to or have been disposed.
             </remarks>
         </member>
-        <member name="M:CodeForDotNet.Collections.EventedDictionary`2.Dispose(System.Boolean)">
+        <member name="M:CodeForDotNet.Collections.DisposableCollection`1.Dispose(System.Boolean)">
             <summary>
-            Inheritors implement the Dipose(bool) method to dispose resources accordingly,
+            Inheritors implement the <see cref="M:CodeForDotNet.Collections.DisposableCollection`1.Dispose(System.Boolean)"/> method to dispose resources accordingly,
             depending on whether they have been called proactively or automatically via
             the finalizer.
             </summary>
             <param name="disposing">
             True when called proactively, i.e. Not during garbage collection.
             Managed resources should not be accessed when this is False,
-            just references and unmangaed resources released.</param>
+            just references and unmanaged resources released.
+            </param>
         </member>
-        <member name="P:CodeForDotNet.Collections.EventedDictionary`2.IsDisposing">
+        <member name="P:CodeForDotNet.Collections.DisposableCollection`1.IsDisposing">
             <summary>
             Indicates that this object is committed to the process of Disposing.
-            When this flag is TRUE, do not pass any references or queue it for processing.
+            When this flag is true, do not pass any references or queue it for processing.
             </summary>
         </member>
-        <member name="P:CodeForDotNet.Collections.EventedDictionary`2.IsDisposed">
+        <member name="P:CodeForDotNet.Collections.DisposableCollection`1.IsDisposed">
             <summary>
             Indicated that this object has been Disposed.
-            When this flag is TRUE, do not use this object in any way.
+            When this flag is true, do not use this object in any way.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Collections.EventedDictionary`2.Add(`0,`1)">
+        <member name="E:CodeForDotNet.Collections.DisposableCollection`1.Disposing">
             <summary>
-            Replaces the Add method in order to fire the Added and Changed events.
+            Fires when the Dispose method is called on this object (except when garbage collected).
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Collections.EventedDictionary`2.Remove(`0)">
+        <member name="E:CodeForDotNet.Collections.DisposableCollection`1.Disposed">
             <summary>
-            Replaces the Remove method in order to fire the Remove and Changed events.
+            Fires after this object has been Disposed.
+            Use this event to ensure all references are invalidated and any dependent objects are also Disposed
+            or released.
             </summary>
         </member>
-        <member name="E:CodeForDotNet.Collections.EventedDictionary`2.Added">
+        <member name="M:CodeForDotNet.Collections.DisposableCollection`1.ClearItems">
             <summary>
-            Fired when an item is added.
+            Disposes then clears all items.
             </summary>
         </member>
-        <member name="E:CodeForDotNet.Collections.EventedDictionary`2.Changed">
+        <member name="M:CodeForDotNet.Collections.DisposableCollection`1.RemoveItem(System.Int32)">
             <summary>
-            Fired when the dictionary is changed (added or removed).
+            Disposes then removes an item.
             </summary>
         </member>
-        <member name="E:CodeForDotNet.Collections.EventedDictionary`2.Removed">
+        <member name="M:CodeForDotNet.Collections.DisposableCollection`1.SetItem(System.Int32,`0)">
             <summary>
-            Fired when an item is removed.
+            Disposes then replaces an item.
             </summary>
         </member>
         <member name="T:CodeForDotNet.Collections.IObservableCollection`1">
@@ -893,7 +789,7 @@
             <summary>
             Provides methods and events to implement suspend/resume and caching of events.
             Events are cached when they are not relevant until an atomic operation has completed.
-            This can give great performance gains, especially on graphics related applications.
+            This can give great performance gains, especially in graphics related applications.
             </summary>
         </member>
         <member name="M:CodeForDotNet.ComponentModel.EventObject.#ctor">
@@ -1342,32 +1238,35 @@
             </summary>
             <remarks>
             First fires the Disposing event, which could cancel this operation.
-            When not cancelled, calls the Dispose(bool notFinalized) method, which should overrided in inheriting
-            classes to release their local resources.
+            When not canceled, calls the <see cref="M:CodeForDotNet.ComponentModel.PropertyObject.Dispose(System.Boolean)"/> method,
+            which should be overridden in inheriting classes to release
+            their local resources.
             Finally fires the Disposed event.
-            Use the IsDisposing and IsDisposed properties to avoid using objects that are about to or have been disposed.
+            Use the IsDisposing and IsDisposed properties to avoid using objects
+            that are about to or have been disposed.
             </remarks>
         </member>
         <member name="M:CodeForDotNet.ComponentModel.PropertyObject.Dispose(System.Boolean)">
             <summary>
-            Inheritors implement the Dipose(bool) method to dispose resources accordingly,
+            Inheritors implement the <see cref="M:CodeForDotNet.ComponentModel.PropertyObject.Dispose(System.Boolean)"/> method to dispose resources accordingly,
             depending on whether they have been called proactively or automatically via
             the finalizer.
             </summary>
             <param name="disposing">
             True when called proactively, i.e. Not during garbage collection.
             Managed resources should not be accessed when this is False,
-            just references and unmangaed resources released.</param>
+            just references and unmanaged resources released.
+            </param>
         </member>
         <member name="P:CodeForDotNet.ComponentModel.PropertyObject.IsDisposing">
             <summary>
-            Indicates that this object is committed to the process of Disposing.
+            Indicates that this object is committed to the process of disposing.
             When this flag is TRUE, do not pass any references or queue it for processing.
             </summary>
         </member>
         <member name="P:CodeForDotNet.ComponentModel.PropertyObject.IsDisposed">
             <summary>
-            Indicated that this object has been Disposed.
+            Indicated that this object has been disposed.
             When this flag is TRUE, do not use this object in any way.
             </summary>
         </member>
@@ -3025,13 +2924,13 @@
         </member>
         <member name="P:CodeForDotNet.DisposableObject.IsDisposing">
             <summary>
-            Indicates that this object is committed to the process of Disposing.
+            Indicates that this object is committed to the process of disposing.
             When this flag is true, do not pass any references or queue it for processing.
             </summary>
         </member>
         <member name="P:CodeForDotNet.DisposableObject.IsDisposed">
             <summary>
-            Indicated that this object has been Disposed.
+            Indicated that this object has been disposed.
             When this flag is true, do not use this object in any way.
             </summary>
         </member>
@@ -3465,779 +3364,779 @@
             <param name="contentType">MIME content type.</param>
             <returns>Image format or null when unsupported.</returns>
         </member>
-        <member name="T:CodeForDotNet.Drawing.KeyboardShortcut">
+        <member name="T:CodeForDotNet.Drawing.KeyboardShortcuts">
             <summary>
             Keyboard shortcut data, disconnected from any API dependencies, useful for
             future proof serialization and cross-platform. A copy of System.Windows.Forms.Shortcut.
             Specifies shortcut keys that can be used by menu items.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.None">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.None">
             <summary>
             No shortcut key is associated with the menu item.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.Ins">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.Ins">
             <summary>
             The shortcut key INSERT.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.Del">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.Del">
             <summary>
             The shortcut key DELETE.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.F1">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.F1">
             <summary>
             The shortcut key F1.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.F2">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.F2">
             <summary>
             The shortcut key F2.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.F3">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.F3">
             <summary>
             The shortcut key F3.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.F4">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.F4">
             <summary>
             The shortcut key F4.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.F5">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.F5">
             <summary>
             The shortcut key F5.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.F6">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.F6">
             <summary>
             The shortcut key F6.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.F7">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.F7">
             <summary>
             The shortcut key F7.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.F8">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.F8">
             <summary>
             The shortcut key F8.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.F9">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.F9">
             <summary>
             The shortcut key F9.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.F10">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.F10">
             <summary>
             The shortcut key F10.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.F11">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.F11">
             <summary>
             The shortcut key F11.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.F12">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.F12">
             <summary>
             The shortcut key F12.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.ShiftIns">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.ShiftIns">
             <summary>
             The shortcut keys SHIFT+INSERT.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.ShiftDel">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.ShiftDel">
             <summary>
             The shortcut keys SHIFT+DELETE.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.ShiftF1">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.ShiftF1">
             <summary>
             The shortcut keys SHIFT+F1.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.ShiftF2">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.ShiftF2">
             <summary>
             The shortcut keys SHIFT+F2.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.ShiftF3">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.ShiftF3">
             <summary>
             The shortcut keys SHIFT+F3.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.ShiftF4">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.ShiftF4">
             <summary>
             The shortcut keys SHIFT+F4.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.ShiftF5">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.ShiftF5">
             <summary>
             The shortcut keys SHIFT+F5.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.ShiftF6">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.ShiftF6">
             <summary>
             The shortcut keys SHIFT+F6.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.ShiftF7">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.ShiftF7">
             <summary>
             The shortcut keys SHIFT+F7.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.ShiftF8">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.ShiftF8">
             <summary>
             The shortcut keys SHIFT+F8.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.ShiftF9">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.ShiftF9">
             <summary>
             The shortcut keys SHIFT+F9.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.ShiftF10">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.ShiftF10">
             <summary>
             The shortcut keys SHIFT+F10.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.ShiftF11">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.ShiftF11">
             <summary>
             The shortcut keys SHIFT+F11.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.ShiftF12">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.ShiftF12">
             <summary>
             The shortcut keys SHIFT+F12.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlIns">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlIns">
             <summary>
             The shortcut keys CTRL+INSERT.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlDel">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlDel">
             <summary>
             The shortcut keys CTRL+DELETE.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.Ctrl0">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.Ctrl0">
             <summary>
             The shortcut keys CTRL+0.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.Ctrl1">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.Ctrl1">
             <summary>
             The shortcut keys CTRL+1.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.Ctrl2">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.Ctrl2">
             <summary>
             The shortcut keys CTRL+2.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.Ctrl3">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.Ctrl3">
             <summary>
             The shortcut keys CTRL+3.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.Ctrl4">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.Ctrl4">
             <summary>
             The shortcut keys CTRL+4.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.Ctrl5">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.Ctrl5">
             <summary>
             The shortcut keys CTRL+5.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.Ctrl6">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.Ctrl6">
             <summary>
             The shortcut keys CTRL+6.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.Ctrl7">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.Ctrl7">
             <summary>
             The shortcut keys CTRL+7.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.Ctrl8">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.Ctrl8">
             <summary>
             The shortcut keys CTRL+8.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.Ctrl9">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.Ctrl9">
             <summary>
             The shortcut keys CTRL+9.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlA">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlA">
             <summary>
             The shortcut keys CTRL+A.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlB">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlB">
             <summary>
             The shortcut keys CTRL+B.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlC">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlC">
             <summary>
             The shortcut keys CTRL+C.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlD">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlD">
             <summary>
             The shortcut keys CTRL+D.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlE">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlE">
             <summary>
             The shortcut keys CTRL+E.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlF">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlF">
             <summary>
             The shortcut keys CTRL+F.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlG">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlG">
             <summary>
             The shortcut keys CTRL+G.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlH">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlH">
             <summary>
             The shortcut keys CTRL+H.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlI">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlI">
             <summary>
             The shortcut keys CTRL+I.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlJ">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlJ">
             <summary>
             The shortcut keys CTRL+J.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlK">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlK">
             <summary>
             The shortcut keys CTRL+K.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlL">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlL">
             <summary>
             The shortcut keys CTRL+L.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlM">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlM">
             <summary>
             The shortcut keys CTRL+M.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlN">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlN">
             <summary>
             The shortcut keys CTRL+N.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlO">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlO">
             <summary>
             The shortcut keys CTRL+O.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlP">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlP">
             <summary>
             The shortcut keys CTRL+P.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlQ">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlQ">
             <summary>
             The shortcut keys CTRL+Q.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlR">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlR">
             <summary>
             The shortcut keys CTRL+R.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlS">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlS">
             <summary>
             The shortcut keys CTRL+S.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlT">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlT">
             <summary>
             The shortcut keys CTRL+T.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlU">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlU">
             <summary>
             The shortcut keys CTRL+U.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlV">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlV">
             <summary>
             The shortcut keys CTRL+V.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlW">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlW">
             <summary>
             The shortcut keys CTRL+W.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlX">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlX">
             <summary>
             The shortcut keys CTRL+X.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlY">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlY">
             <summary>
             The shortcut keys CTRL+Y.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlZ">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlZ">
             <summary>
             The shortcut keys CTRL+Z.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlF1">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlF1">
             <summary>
             The shortcut keys CTRL+F1.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlF2">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlF2">
             <summary>
             The shortcut keys CTRL+F2.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlF3">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlF3">
             <summary>
             The shortcut keys CTRL+F3.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlF4">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlF4">
             <summary>
             The shortcut keys CTRL+F4.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlF5">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlF5">
             <summary>
             The shortcut keys CTRL+F5.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlF6">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlF6">
             <summary>
             The shortcut keys CTRL+F6.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlF7">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlF7">
             <summary>
             The shortcut keys CTRL+F7.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlF8">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlF8">
             <summary>
             The shortcut keys CTRL+F8.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlF9">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlF9">
             <summary>
             The shortcut keys CTRL+F9.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlF10">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlF10">
             <summary>
             The shortcut keys CTRL+F10.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlF11">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlF11">
             <summary>
             The shortcut keys CTRL+F11.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlF12">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlF12">
             <summary>
             The shortcut keys CTRL+F12.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShift0">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShift0">
             <summary>
             The shortcut keys CTRL+SHIFT+0.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShift1">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShift1">
             <summary>
             The shortcut keys CTRL+SHIFT+1.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShift2">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShift2">
             <summary>
             The shortcut keys CTRL+SHIFT+2.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShift3">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShift3">
             <summary>
             The shortcut keys CTRL+SHIFT+3.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShift4">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShift4">
             <summary>
             The shortcut keys CTRL+SHIFT+4.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShift5">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShift5">
             <summary>
             The shortcut keys CTRL+SHIFT+5.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShift6">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShift6">
             <summary>
             The shortcut keys CTRL+SHIFT+6.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShift7">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShift7">
             <summary>
             The shortcut keys CTRL+SHIFT+7.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShift8">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShift8">
             <summary>
             The shortcut keys CTRL+SHIFT+8.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShift9">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShift9">
             <summary>
             The shortcut keys CTRL+SHIFT+9.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftA">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftA">
             <summary>
             The shortcut keys CTRL+SHIFT+A.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftB">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftB">
             <summary>
             The shortcut keys CTRL+SHIFT+B.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftC">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftC">
             <summary>
             The shortcut keys CTRL+SHIFT+C.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftD">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftD">
             <summary>
             The shortcut keys CTRL+SHIFT+D.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftE">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftE">
             <summary>
             The shortcut keys CTRL+SHIFT+E.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftF">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftF">
             <summary>
             The shortcut keys CTRL+SHIFT+F.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftG">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftG">
             <summary>
             The shortcut keys CTRL+SHIFT+G.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftH">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftH">
             <summary>
             The shortcut keys CTRL+SHIFT+H.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftI">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftI">
             <summary>
             The shortcut keys CTRL+SHIFT+I.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftJ">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftJ">
             <summary>
             The shortcut keys CTRL+SHIFT+J.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftK">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftK">
             <summary>
             The shortcut keys CTRL+SHIFT+K.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftL">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftL">
             <summary>
             The shortcut keys CTRL+SHIFT+L.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftM">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftM">
             <summary>
             The shortcut keys CTRL+SHIFT+M.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftN">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftN">
             <summary>
             The shortcut keys CTRL+SHIFT+N.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftO">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftO">
             <summary>
             The shortcut keys CTRL+SHIFT+O.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftP">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftP">
             <summary>
             The shortcut keys CTRL+SHIFT+P.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftQ">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftQ">
             <summary>
             The shortcut keys CTRL+SHIFT+Q.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftR">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftR">
             <summary>
             The shortcut keys CTRL+SHIFT+R.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftS">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftS">
             <summary>
             The shortcut keys CTRL+SHIFT+S.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftT">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftT">
             <summary>
             The shortcut keys CTRL+SHIFT+T.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftU">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftU">
             <summary>
             The shortcut keys CTRL+SHIFT+U.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftV">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftV">
             <summary>
             The shortcut keys CTRL+SHIFT+V.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftW">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftW">
             <summary>
             The shortcut keys CTRL+SHIFT+W.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftX">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftX">
             <summary>
             The shortcut keys CTRL+SHIFT+X.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftY">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftY">
             <summary>
             The shortcut keys CTRL+SHIFT+Y.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftZ">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftZ">
             <summary>
             The shortcut keys CTRL+SHIFT+Z.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftF1">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftF1">
             <summary>
             The shortcut keys CTRL+SHIFT+F1.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftF2">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftF2">
             <summary>
             The shortcut keys CTRL+SHIFT+F2.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftF3">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftF3">
             <summary>
             The shortcut keys CTRL+SHIFT+F3.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftF4">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftF4">
             <summary>
             The shortcut keys CTRL+SHIFT+F4.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftF5">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftF5">
             <summary>
             The shortcut keys CTRL+SHIFT+F5.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftF6">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftF6">
             <summary>
             The shortcut keys CTRL+SHIFT+F6.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftF7">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftF7">
             <summary>
             The shortcut keys CTRL+SHIFT+F7.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftF8">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftF8">
             <summary>
             The shortcut keys CTRL+SHIFT+F8.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftF9">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftF9">
             <summary>
             The shortcut keys CTRL+SHIFT+F9.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftF10">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftF10">
             <summary>
             The shortcut keys CTRL+SHIFT+F10.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftF11">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftF11">
             <summary>
             The shortcut keys CTRL+SHIFT+F11.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftF12">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftF12">
             <summary>
             The shortcut keys CTRL+SHIFT+F12.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.AltBksp">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.AltBksp">
             <summary>
             The shortcut keys ALT+BACKSPACE.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.AltLeftArrow">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.AltLeftArrow">
             <summary>
             The shortcut keys ALT+LEFTARROW.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.AltUpArrow">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.AltUpArrow">
             <summary>
             The shortcut keys ALT+UPARROW.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.AltRightArrow">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.AltRightArrow">
             <summary>
             The shortcut keys ALT+RIGHTARROW.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.AltDownArrow">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.AltDownArrow">
             <summary>
             The shortcut keys ALT+DOWNARROW.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.Alt0">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.Alt0">
             <summary>
             The shortcut keys ALT+0.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.Alt1">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.Alt1">
             <summary>
             The shortcut keys ALT+1.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.Alt2">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.Alt2">
             <summary>
             The shortcut keys ALT+2.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.Alt3">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.Alt3">
             <summary>
             The shortcut keys ALT+3.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.Alt4">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.Alt4">
             <summary>
             The shortcut keys ALT+4.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.Alt5">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.Alt5">
             <summary>
             The shortcut keys ALT+5.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.Alt6">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.Alt6">
             <summary>
             The shortcut keys ALT+6.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.Alt7">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.Alt7">
             <summary>
             The shortcut keys ALT+7.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.Alt8">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.Alt8">
             <summary>
             The shortcut keys ALT+8.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.Alt9">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.Alt9">
             <summary>
             The shortcut keys ALT+9.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.AltF1">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.AltF1">
             <summary>
             The shortcut keys ALT+F1.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.AltF2">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.AltF2">
             <summary>
             The shortcut keys ALT+F2.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.AltF3">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.AltF3">
             <summary>
             The shortcut keys ALT+F3.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.AltF4">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.AltF4">
             <summary>
             The shortcut keys ALT+F4.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.AltF5">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.AltF5">
             <summary>
             The shortcut keys ALT+F5.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.AltF6">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.AltF6">
             <summary>
             The shortcut keys ALT+F6.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.AltF7">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.AltF7">
             <summary>
             The shortcut keys ALT+F7.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.AltF8">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.AltF8">
             <summary>
             The shortcut keys ALT+F8.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.AltF9">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.AltF9">
             <summary>
             The shortcut keys ALT+F9.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.AltF10">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.AltF10">
             <summary>
             The shortcut keys ALT+F10.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.AltF11">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.AltF11">
             <summary>
             The shortcut keys ALT+F11.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.AltF12">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.AltF12">
             <summary>
             The shortcut keys ALT+F12.
             </summary>
@@ -4552,7 +4451,12 @@
         </member>
         <member name="M:CodeForDotNet.Drawing.Vector2.Equals(System.Object)">
             <summary>
-            Compares two this object against the other by value.
+            Compares this object with another.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.Vector2.Equals(CodeForDotNet.Drawing.Vector2)">
+            <summary>
+            Compares this object with another of the same type.
             </summary>
         </member>
         <member name="M:CodeForDotNet.Drawing.Vector2.GetHashCode">
@@ -5094,12 +4998,12 @@
         </member>
         <member name="M:CodeForDotNet.Numerics.Number.Equals(System.Object)">
             <summary>
-            Compares this object with another for equality.
+            Compares this object with another.
             </summary>
         </member>
         <member name="M:CodeForDotNet.Numerics.Number.Equals(CodeForDotNet.Numerics.Number)">
             <summary>
-            Compares this object with another <see cref="T:CodeForDotNet.Numerics.Number"/> for equality.
+            Compares this object with another of the same type.
             </summary>
         </member>
         <member name="M:CodeForDotNet.Numerics.Number.op_LessThan(CodeForDotNet.Numerics.Number,CodeForDotNet.Numerics.Number)">
@@ -5460,6 +5364,106 @@
         <member name="M:CodeForDotNet.Numerics.Number.TryParse(System.String,System.Int32,CodeForDotNet.Numerics.Number@,System.Boolean)">
             <summary>
             Attempts conversion of a string to a signed or unsigned <see cref="T:CodeForDotNet.Numerics.Number"/> of the specified base.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.FromByte(System.Byte)">
+            <summary>
+            Converts an (unsigned) <see cref="T:System.Byte"/> to a <see cref="T:CodeForDotNet.Numerics.Number"/>.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.FromSByte(System.SByte)">
+            <summary>
+            Converts an (signed) <see cref="T:System.SByte"/> to a <see cref="T:CodeForDotNet.Numerics.Number"/>.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.FromUInt16(System.UInt16)">
+            <summary>
+            Converts an (unsigned) <see cref="T:System.UInt16"/> to a <see cref="T:CodeForDotNet.Numerics.Number"/>.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.FromInt16(System.Int16)">
+            <summary>
+            Converts an (signed) <see cref="T:System.Int16"/> to a <see cref="T:CodeForDotNet.Numerics.Number"/>.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.FromUInt32(System.UInt32)">
+            <summary>
+            Converts an (unsigned) <see cref="T:System.UInt32"/> to a <see cref="T:CodeForDotNet.Numerics.Number"/>.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.FromInt32(System.Int32)">
+            <summary>
+            Converts an (signed) <see cref="T:System.Int32"/> to a <see cref="T:CodeForDotNet.Numerics.Number"/>.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.FromUInt64(System.UInt64)">
+            <summary>
+            Converts an (unsigned) <see cref="T:System.UInt64"/> to a <see cref="T:CodeForDotNet.Numerics.Number"/>.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.FromInt64(System.Int64)">
+            <summary>
+            Converts an (signed) <see cref="T:System.Int64"/> to a <see cref="T:CodeForDotNet.Numerics.Number"/>.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.FromSingle(System.Single)">
+            <summary>
+            Converts an (signed) <see cref="T:System.Single"/> to a <see cref="T:CodeForDotNet.Numerics.Number"/>.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.FromDouble(System.Double)">
+            <summary>
+            Converts an (signed) <see cref="T:System.Double"/> to a <see cref="T:CodeForDotNet.Numerics.Number"/>.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.FromDecimal(System.Decimal)">
+            <summary>
+            Converts an (signed) <see cref="T:System.Decimal"/> to a <see cref="T:CodeForDotNet.Numerics.Number"/>.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.ToByte">
+            <summary>
+            Converts the current value to a <see cref="T:System.Byte"/> (unsigned).
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.ToSByte">
+            <summary>
+            Converts the current value to a <see cref="T:System.SByte"/> (signed).
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.ToInt16">
+            <summary>
+            Converts the current value to a <see cref="T:System.Int16"/> (signed).
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.ToUInt16">
+            <summary>
+            Converts the current value to a <see cref="T:System.UInt16"/> (unsigned).
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.ToInt32">
+            <summary>
+            Converts the current value to a <see cref="T:System.Int32"/> (signed).
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.ToUInt32">
+            <summary>
+            Converts the current value to a <see cref="T:System.UInt32"/> (unsigned).
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.ToInt64">
+            <summary>
+            Converts the current value to a <see cref="T:System.Int64"/> (signed).
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.ToUInt64">
+            <summary>
+            Converts the current value to a <see cref="T:System.UInt64"/> (unsigned).
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.ToDecimal">
+            <summary>
+            Converts the current value to a <see cref="T:System.Decimal"/> (signed).
             </summary>
         </member>
         <member name="M:CodeForDotNet.Numerics.Number.Absolute(CodeForDotNet.Numerics.Number)">

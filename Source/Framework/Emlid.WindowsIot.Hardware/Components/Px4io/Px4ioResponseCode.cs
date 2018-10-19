@@ -1,8 +1,11 @@
-﻿namespace Emlid.WindowsIot.Hardware.Components.Px4io
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Emlid.WindowsIot.Hardware.Components.Px4io
 {
     /// <summary>
     /// PX4IO response packet code.
     /// </summary>
+    [SuppressMessage("Microsoft.Design", "CA1028", Justification = "Non-integer enumeration better suited to match the hardware specification in a hardware library.")]
     public enum Px4ioResponseCode : byte
     {
         /// <summary>

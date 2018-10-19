@@ -16,7 +16,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io.Data
         /// </summary>
         public const byte RegisterCount = 9;
 
-        #endregion
+        #endregion Constants
 
         #region Lifetime
 
@@ -42,7 +42,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io.Data
             RelayAndControlGroupCount = data[8];
         }
 
-        #endregion
+        #endregion Lifetime
 
         #region Public Fields
 
@@ -50,48 +50,48 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io.Data
         /// Protocol version.
         /// </summary>
         /// <see cref="Px4ioPacket.Version"/>
-        public ushort ProtocolVersion;
+        public ushort ProtocolVersion { get; set; }
 
         /// <summary>
         /// Hardware version.
         /// </summary>
-        public ushort HardwareVersion;
+        public ushort HardwareVersion { get; set; }
 
         /// <summary>
         /// Boot loader version.
         /// </summary>
-        public ushort BootLoaderVersion;
+        public ushort BootLoaderVersion { get; set; }
 
         /// <summary>
         /// Maximum I2C transfer size.
         /// </summary>
-        public ushort TransferLimit;
+        public ushort TransferLimit { get; set; }
 
         /// <summary>
         /// Maximum control count supported.
         /// </summary>
-        public ushort ControlCount;
+        public ushort ControlCount { get; set; }
 
         /// <summary>
         /// Maximum actuator count supported.
         /// </summary>
-        public ushort ActuatorCount;
+        public ushort ActuatorCount { get; set; }
 
         /// <summary>
         /// Maximum RC input count supported.
         /// </summary>
-        public ushort RCInputCount;
+        public ushort RCInputCount { get; set; }
 
         /// <summary>
         /// Maximum ADC input count supported.
         /// </summary>
-        public ushort AdcInputCount;
+        public ushort AdcInputCount { get; set; }
 
         /// <summary>
         /// number of relay outputs or control groups.
         /// </summary>
-        public ushort RelayAndControlGroupCount;
+        public ushort RelayAndControlGroupCount { get; set; }
 
-        #endregion
+        #endregion Public Fields
     }
 }

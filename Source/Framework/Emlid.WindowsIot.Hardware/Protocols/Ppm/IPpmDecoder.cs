@@ -20,8 +20,8 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Ppm
         /// <param name="inputTrigger">Trigger which is fired by the caller when new data arrives.</param>
         /// <param name="outputBuffer">Buffer into which decoded PPM frames are written.</param>
         /// <param name="outputTrigger">Trigger which is fired by this decoder when new data has been decoded.</param>
-        /// <param name="stop">Signals when the decoder should stop.</param>
+        /// <param name="stopNotification">Signals when the decoder should stop.</param>
         void DecodePulse(ConcurrentQueue<PpmPulse> inputBuffer, AutoResetEvent inputTrigger,
-            ConcurrentQueue<PpmFrame> outputBuffer, AutoResetEvent outputTrigger, CancellationToken stop);
+            ConcurrentQueue<PpmFrame> outputBuffer, AutoResetEvent outputTrigger, CancellationToken stopNotification);
     }
 }

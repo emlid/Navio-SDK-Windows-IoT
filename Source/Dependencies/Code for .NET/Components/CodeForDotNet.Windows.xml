@@ -4,6 +4,1334 @@
         <name>CodeForDotNet.Windows</name>
     </assembly>
     <members>
+        <member name="T:CodeForDotNet.Windows.Imaging.WiaVectorEnumerator">
+            <summary>
+            Managed enumerator for <see cref="T:Interop.Wia.Vector" /> items.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaVectorEnumerator.#ctor(System.Collections.IEnumerator)">
+            <summary>
+            Creates the object.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaVectorEnumerator.Dispose(System.Boolean)">
+            <summary>
+            Frees resources owned by this instance.
+            </summary>
+            <param name="disposing">
+            True when called from <see cref="M:System.IDisposable.Dispose"/>,
+            false when called during finalization.
+            </param>
+        </member>
+        <member name="F:CodeForDotNet.Windows.Imaging.WiaVectorEnumerator._wiaVectorEnumerator">
+            <summary>
+            WIA vector enumerator.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaVectorEnumerator.System#Collections#IEnumerator#Current">
+            <summary>
+            Item at the current position.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaVectorEnumerator.Current">
+            <summary>
+            Item at the current position.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaVectorEnumerator.MoveNext">
+            <summary>
+            Moves to the next item if available.
+            </summary>
+            <returns>True when moved, false when no more items exist.</returns>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaVectorEnumerator.Reset">
+            <summary>
+            Moves to the beginning of the collection.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Windows.Imaging.WiaCommonDialog">
+            <summary>
+            Encapsulates a <see cref="T:Interop.Wia.CommonDialog"/> in managed code.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaCommonDialog.#ctor">
+            <summary>
+            Creates an instance to wrap the specified unmanaged object.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaCommonDialog.Dispose(System.Boolean)">
+            <summary>
+            Frees resources owned by this instance.
+            </summary>
+            <param name="disposing">
+            True when called from <see cref="M:System.IDisposable.Dispose"/>,
+            false when called during finalization.
+            </param>
+        </member>
+        <member name="F:CodeForDotNet.Windows.Imaging.WiaCommonDialog._wiaCommonDialog">
+            <summary>
+            Unmanaged <see cref="T:Interop.Wia.CommonDialog"/>.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaCommonDialog.ShowAcquireImage">
+            <summary>
+            Shows the common "Acquire Image" dialog to acquire an image.
+            </summary>
+            <returns>Image file or null when canceled.</returns>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaCommonDialog.ShowAcquireImage(CodeForDotNet.Windows.Imaging.WiaDeviceType,CodeForDotNet.Windows.Imaging.WiaImageIntent,CodeForDotNet.Windows.Imaging.WiaImageBias,System.String,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            Shows the common "Acquire Image" dialog to acquire an image.
+            </summary>
+            <param name="deviceType">Device type.</param>
+            <param name="intent">Image intent.</param>
+            <param name="bias">Image bias.</param>
+            <param name="formatId">Image format ID.</param>
+            <param name="alwaysSelectDevice">Always prompt to select device.</param>
+            <param name="useCommonUI">Use common UI.</param>
+            <param name="cancelError">Generate error if canceled.</param>
+            <returns>Image file or null when canceled.</returns>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaCommonDialog.ShowSelectDevice(CodeForDotNet.Windows.Imaging.WiaDeviceType,System.Boolean,System.Boolean)">
+            <summary>
+            Displays a dialog box that enables the user to select a hardware device for image acquisition.
+            </summary>
+            <param name="deviceType">Device type.</param>
+            <param name="alwaysSelect">Option to always show the select device dialog box</param>
+            <param name="required">Option to generate an error if the user cancels the dialog box.</param>
+            <returns>Selected <see cref="T:CodeForDotNet.Windows.Imaging.WiaDevice"/> or null when no selection made.</returns>
+        </member>
+        <member name="T:CodeForDotNet.Windows.Imaging.WiaConstants">
+            <summary>
+            WIA constant definitions.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Windows.Imaging.WiaConstants.DefaultFormatId">
+            <summary>
+            Default format ID.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Windows.Imaging.WiaDevice">
+            <summary>
+            Encapsulates a <see cref="T:Interop.Wia.Device"/> in managed code.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaDevice.#ctor(Interop.Wia.Device)">
+            <summary>
+            Creates an instance to wrap the specified unmanaged object.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaDevice.Dispose(System.Boolean)">
+            <summary>
+            Frees resources owned by this instance.
+            </summary>
+            <param name="disposing">
+            True when called from <see cref="M:System.IDisposable.Dispose"/>,
+            false when called during finalization.
+            </param>
+        </member>
+        <member name="F:CodeForDotNet.Windows.Imaging.WiaDevice._wiaDevice">
+            <summary>
+            Unmanaged <see cref="T:Interop.Wia.Device"/>.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaDevice.SyncRoot">
+            <summary>
+            Thread synchronization object.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaDevice.Id">
+            <summary>
+            Device identifier.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaDevice.DeviceType">
+            <summary>
+            Device type.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaDevice.Properties">
+            <summary>
+            Properties.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaDevice.Commands">
+            <summary>
+            Commands.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaDevice.Events">
+            <summary>
+            Events.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaDevice.Items">
+            <summary>
+            Items.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaDevice.Item">
+            <summary>
+            Item.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaDevice.ExecuteCommand(System.String)">
+            <summary>
+            Executes a command.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaDevice.GetItemById(System.String)">
+            <summary>
+            Gets the item with the specified ID.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Windows.Imaging.WiaDeviceCommand">
+            <summary>
+            Managed <see cref="T:Interop.Wia.DeviceCommand"/>.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaDeviceCommand.#ctor(Interop.Wia.DeviceCommand)">
+            <summary>
+            Creates an instance to wrap the specified unmanaged object.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaDeviceCommand.Dispose(System.Boolean)">
+            <summary>
+            Frees resources owned by this instance.
+            </summary>
+            <param name="disposing">
+            True when called from <see cref="M:System.IDisposable.Dispose"/>,
+            false when called during finalization.
+            </param>
+        </member>
+        <member name="F:CodeForDotNet.Windows.Imaging.WiaDeviceCommand._wiaDeviceCommand">
+            <summary>
+            Unmanaged <see cref="T:Interop.Wia.DeviceCommand"/>.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaDeviceCommand.Id">
+            <summary>
+            ID.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaDeviceCommand.Name">
+            <summary>
+            Name.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaDeviceCommand.Description">
+            <summary>
+            Description.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Windows.Imaging.WiaDeviceCommandCollection">
+            <summary>
+            Managed <see cref="T:Interop.Wia.DeviceCommands"/>.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaDeviceCommandCollection.#ctor">
+            <summary>
+            Creates an empty instance.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaDeviceCommandCollection.#ctor(Interop.Wia.DeviceCommands)">
+            <summary>
+            Creates an instance to wrap the specified unmanaged object.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Windows.Imaging.WiaDeviceEvent">
+            <summary>
+            Managed <see cref="T:Interop.Wia.DeviceEvent"/>.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaDeviceEvent.#ctor(Interop.Wia.DeviceEvent)">
+            <summary>
+            Creates an instance to wrap the specified unmanaged object.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaDeviceEvent.Dispose(System.Boolean)">
+            <summary>
+            Frees resources owned by this instance.
+            </summary>
+            <param name="disposing">
+            True when called from <see cref="M:System.IDisposable.Dispose"/>,
+            false when called during finalization.
+            </param>
+        </member>
+        <member name="F:CodeForDotNet.Windows.Imaging.WiaDeviceEvent._wiaDeviceEvent">
+            <summary>
+            Unmanaged <see cref="T:Interop.Wia.DeviceEvent"/>.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaDeviceEvent.Id">
+            <summary>
+            ID.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaDeviceEvent.Name">
+            <summary>
+            Name.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaDeviceEvent.EventType">
+            <summary>
+            Event type.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaDeviceEvent.Description">
+            <summary>
+            Description.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Windows.Imaging.WiaDeviceEventCollection">
+            <summary>
+            Managed <see cref="T:Interop.Wia.DeviceEvents"/>.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaDeviceEventCollection.#ctor">
+            <summary>
+            Creates an empty instance.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaDeviceEventCollection.#ctor(Interop.Wia.DeviceEvents)">
+            <summary>
+            Creates an instance to wrap the specified unmanaged object.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Windows.Imaging.WiaDeviceEventType">
+            <summary>
+            Managed <see cref="T:Interop.Wia.WiaEventFlag"/>.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Windows.Imaging.WiaDeviceEventType.Notification">
+            <summary>
+            Notification event.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Windows.Imaging.WiaDeviceEventType.ActionEvent">
+            <summary>
+            Action event.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Windows.Imaging.WiaDeviceInfo">
+            <summary>
+            Encapsulates a <see cref="T:Interop.Wia.DeviceInfo"/> in managed code.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaDeviceInfo.#ctor(Interop.Wia.DeviceInfo)">
+            <summary>
+            Creates an instance to wrap the specified unmanaged object.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaDeviceInfo.Dispose(System.Boolean)">
+            <summary>
+            Frees resources owned by this instance.
+            </summary>
+            <param name="disposing">
+            True when called from <see cref="M:System.IDisposable.Dispose"/>,
+            false when called during finalization.
+            </param>
+        </member>
+        <member name="F:CodeForDotNet.Windows.Imaging.WiaDeviceInfo._wiaDeviceInfo">
+            <summary>
+            Unmanaged <see cref="T:Interop.Wia.DeviceInfo"/>.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaDeviceInfo.SyncRoot">
+            <summary>
+            Thread synchronization object.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaDeviceInfo.Id">
+            <summary>
+            Device identifier.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaDeviceInfo.Name">
+            <summary>
+            Name.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaDeviceInfo.Description">
+            <summary>
+            Description.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaDeviceInfo.DeviceType">
+            <summary>
+            Device type.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaDeviceInfo.Properties">
+            <summary>
+            Properties.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaDeviceInfo.Connect">
+            <summary>
+            Creates a connection to this device.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Windows.Imaging.WiaDeviceInfoCollection">
+            <summary>
+            Managed <see cref="T:Interop.Wia.DeviceInfos"/>.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaDeviceInfoCollection.#ctor">
+            <summary>
+            Creates an empty instance.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaDeviceInfoCollection.#ctor(Interop.Wia.DeviceInfos)">
+            <summary>
+            Creates an instance to wrap the specified unmanaged object.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Windows.Imaging.WiaDeviceType">
+            <summary>
+            Managed <see cref="T:CodeForDotNet.Windows.Imaging.WiaDeviceType"/>
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Windows.Imaging.WiaDeviceType.Unspecified">
+            <summary>
+            Unspecified.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Windows.Imaging.WiaDeviceType.Scanner">
+            <summary>
+            Scanner.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Windows.Imaging.WiaDeviceType.Camera">
+            <summary>
+            Camera
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Windows.Imaging.WiaDeviceType.Video">
+            <summary>
+            Video camera or capture device.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Windows.Imaging.WiaFormatCollection">
+            <summary>
+            Managed <see cref="T:Interop.Wia.Formats"/>.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaFormatCollection.#ctor">
+            <summary>
+            Creates an empty instance.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaFormatCollection.#ctor(Interop.Wia.Formats)">
+            <summary>
+            Creates an instance to wrap the specified unmanaged object.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Windows.Imaging.WiaImageBias">
+            <summary>
+            Managed <see cref="T:Interop.Wia.WiaImageBias"/>.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Windows.Imaging.WiaImageBias.MinimizeSize">
+            <summary>
+            Minimize size.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Windows.Imaging.WiaImageBias.MaximizeQuality">
+            <summary>
+            Maximize quality.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Windows.Imaging.WiaImageFile">
+            <summary>
+            Managed <see cref="T:CodeForDotNet.Windows.Imaging.WiaImageFile"/>.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaImageFile.#ctor(Interop.Wia.ImageFile)">
+            <summary>
+            Creates an instance to wrap the specified unmanaged object.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaImageFile.Dispose(System.Boolean)">
+            <summary>
+            Frees resources owned by this instance.
+            </summary>
+            <param name="disposing">
+            True when called from <see cref="M:System.IDisposable.Dispose"/>,
+            false when called during finalization.
+            </param>
+        </member>
+        <member name="F:CodeForDotNet.Windows.Imaging.WiaImageFile._wiaImageFile">
+            <summary>
+            Unmanaged <see cref="T:Interop.Wia.ImageFile"/>.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaImageFile.SyncRoot">
+            <summary>
+            Thread synchronization object.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaImageFile.ActiveFrame">
+            <summary>
+            Active frame.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaImageFile.ArgbData">
+            <summary>
+            Color palette.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaImageFile.FileData">
+            <summary>
+            File data.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaImageFile.FileExtension">
+            <summary>
+            File extension.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaImageFile.FormatId">
+            <summary>
+            Image format ID.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaImageFile.FrameCount">
+            <summary>
+            Frame count.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaImageFile.Width">
+            <summary>
+            Width in pixels.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaImageFile.Height">
+            <summary>
+            Height in pixels.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaImageFile.HorizontalResolution">
+            <summary>
+            Horizontal resolution.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaImageFile.VerticalResolution">
+            <summary>
+            Vertical resolution.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaImageFile.IsAlphaPixelFormat">
+            <summary>
+            Indicates pixel alpha component (transparency) is used.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaImageFile.IsAnimated">
+            <summary>
+            Indicates the picture is animated (contains multiple frames).
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaImageFile.IsExtendedPixelFormat">
+            <summary>
+            Indicates the pixel extended format.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaImageFile.IsIndexedPixelFormat">
+            <summary>
+            Indicates the pixel indexed (color palette) format.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaImageFile.PixelDepth">
+            <summary>
+            Pixel color depth.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaImageFile.Properties">
+            <summary>
+            Properties.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaImageFile.LoadFile(System.String)">
+            <summary>
+            Loads the image from a file.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaImageFile.SaveFile(System.String)">
+            <summary>
+            Saves the image to a file.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Windows.Imaging.WiaImageIntent">
+            <summary>
+            Managed <see cref="T:CodeForDotNet.Windows.Imaging.WiaImageIntent"/>.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Windows.Imaging.WiaImageIntent.Unspecified">
+            <summary>
+            Unspecified.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Windows.Imaging.WiaImageIntent.Color">
+            <summary>
+            Color.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Windows.Imaging.WiaImageIntent.Grayscale">
+            <summary>
+            Grayscale.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Windows.Imaging.WiaImageIntent.Text">
+            <summary>
+            Text.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Windows.Imaging.WiaItem">
+            <summary>
+            Encapsulates a <see cref="P:CodeForDotNet.Windows.Imaging.WiaItem.Item"/> in managed code.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaItem.#ctor(Interop.Wia.Item)">
+            <summary>
+            Creates an instance to wrap the specified unmanaged object.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaItem.Dispose(System.Boolean)">
+            <summary>
+            Frees resources owned by this instance.
+            </summary>
+            <param name="disposing">
+            True when called from <see cref="M:System.IDisposable.Dispose"/>,
+            false when called during finalization.
+            </param>
+        </member>
+        <member name="F:CodeForDotNet.Windows.Imaging.WiaItem._wiaItem">
+            <summary>
+            Unmanaged <see cref="T:Interop.Wia.Item"/>.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaItem.SyncRoot">
+            <summary>
+            Thread synchronization object.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaItem.Id">
+            <summary>
+            Item identifier.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaItem.Commands">
+            <summary>
+            Commands.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaItem.Properties">
+            <summary>
+            Properties.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaItem.Formats">
+            <summary>
+            Formats.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaItem.Item">
+            <summary>
+            Item.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaItem.ExecuteCommand(System.String)">
+            <summary>
+            Executes a command.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaItem.Transfer">
+            <summary>
+            Transfers using the default format ID.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaItem.Transfer(System.String)">
+            <summary>
+            Transfers using a specific format ID.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Windows.Imaging.WiaItemCollection">
+            <summary>
+            Managed <see cref="T:Interop.Wia.Items"/>.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaItemCollection.#ctor">
+            <summary>
+            Creates an empty instance.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaItemCollection.#ctor(Interop.Wia.Items)">
+            <summary>
+            Creates an instance to wrap the specified unmanaged object.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Windows.Imaging.WiaManager">
+            <summary>
+            Encapsulates a WIA source, e.g. scanner or camera.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaManager.#ctor">
+            <summary>
+            Creates the object.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaManager.Dispose(System.Boolean)">
+            <summary>
+            Frees resources owned by this instance.
+            </summary>
+            <param name="disposing">
+            True when called from <see cref="M:System.IDisposable.Dispose"/>,
+            false when called during finalization.
+            </param>
+        </member>
+        <member name="F:CodeForDotNet.Windows.Imaging.WiaManager._wiaManager">
+            <summary>
+            WIA device manager.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaManager.GetDevices">
+            <summary>
+            Gets information about currently available devices.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Windows.Imaging.WiaProperty">
+            <summary>
+            Managed <see cref="T:Interop.Wia.Property"/>.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaProperty.#ctor(Interop.Wia.Property)">
+            <summary>
+            Creates an instance to wrap the specified unmanaged object.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaProperty.Dispose(System.Boolean)">
+            <summary>
+            Frees resources owned by this instance.
+            </summary>
+            <param name="disposing">
+            True when called from <see cref="M:System.IDisposable.Dispose"/>,
+            false when called during finalization.
+            </param>
+        </member>
+        <member name="F:CodeForDotNet.Windows.Imaging.WiaProperty._wiaProperty">
+            <summary>
+            Unmanaged <see cref="T:Interop.Wia.Property"/>.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaProperty.SyncRoot">
+            <summary>
+            Thread synchronization object.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaProperty.IsReadOnly">
+            <summary>
+            Indicates the property is read-only.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaProperty.IsVector">
+            <summary>
+            Indicates the property is a vector.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaProperty.Name">
+            <summary>
+            Name.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaProperty.Id">
+            <summary>
+            ID.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaProperty.Subtype">
+            <summary>
+            WIA sub-type.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaProperty.SubtypeDefault">
+            <summary>
+            WIA sub-type default value.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaProperty.SubtypeMax">
+            <summary>
+            WIA sub-type maximum value.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaProperty.SubtypeMin">
+            <summary>
+            WIA sub-type minimum.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaProperty.SubtypeStep">
+            <summary>
+            WIA sub-type increment or decrement step.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaProperty.WiaSubtypeValues">
+            <summary>
+            WIA sub-type array values.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaProperty.PropertyType">
+            <summary>
+            Property type.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaProperty.Value">
+            <summary>
+            Property value.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Windows.Imaging.WiaPropertyCollection">
+            <summary>
+            Managed <see cref="N:CodeForDotNet.Windows.Properties"/>.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaPropertyCollection.#ctor">
+            <summary>
+            Creates an empty instance.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaPropertyCollection.#ctor(Interop.Wia.Properties)">
+            <summary>
+            Creates an instance to wrap the specified unmanaged object.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Windows.Imaging.WiaSubtype">
+            <summary>
+            Managed <see cref="T:Interop.Wia.WiaSubType"/>.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Windows.Imaging.WiaSubtype.Unspecified">
+            <summary>
+            Unspecified.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Windows.Imaging.WiaSubtype.Range">
+            <summary>
+            Range.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Windows.Imaging.WiaSubtype.List">
+            <summary>
+            List.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Windows.Imaging.WiaSubtype.Flag">
+            <summary>
+            Flag.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Windows.Imaging.WiaVector">
+            <summary>
+            Managed <see cref="T:Interop.Wia.Vector"/>.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaVector.#ctor(Interop.Wia.Vector)">
+            <summary>
+            Creates an instance to wrap the specified unmanaged object.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Windows.Imaging.WiaVector._wiaVector">
+            <summary>
+            Unmanaged <see cref="T:Interop.Wia.Vector"/>.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaVector.Date">
+            <summary>
+            Date.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaVector.GetBinary">
+            <summary>
+            Gets the binary data.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaVector.SetBinary(System.Object@)">
+            <summary>
+            Sets the binary data.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaVector.GetImageFile">
+            <summary>
+            Gets the data as an <see cref="T:CodeForDotNet.Windows.Imaging.WiaImageFile"/> with default width and height.
+            </summary>
+            <returns>WIA image file.</returns>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaVector.GetImageFile(System.Int32,System.Int32)">
+            <summary>
+            Gets the data as an <see cref="T:CodeForDotNet.Windows.Imaging.WiaImageFile"/>.
+            </summary>
+            <param name="width">Image width or zero for default.</param>
+            <param name="height">Image height or zero for default.</param>
+            <returns>WIA image file.</returns>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaVector.GetPicture">
+            <summary>
+            Gets the data as a picture with default width and height.
+            </summary>
+            <returns>Picture.</returns>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaVector.GetPicture(System.Int32,System.Int32)">
+            <summary>
+            Gets the data as a picture.
+            </summary>
+            <param name="width">Image width or zero for default.</param>
+            <param name="height">Image height or zero for default.</param>
+            <returns>Picture.</returns>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaVector.GetString">
+            <summary>
+            Gets the data as Unicode string.
+            </summary>
+            <returns>String value.</returns>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaVector.GetString(System.Boolean)">
+            <summary>
+            Gets the data as string.
+            </summary>
+            <param name="unicode">True when the string bytes are Unicode.</param>
+            <returns>String value.</returns>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaVector.SetString(System.String)">
+            <summary>
+            Sets the data from a string as re-sizable Unicode.
+            </summary>
+            <param name="value">String value.</param>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaVector.SetString(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Sets the data from a string.
+            </summary>
+            <param name="value">String value.</param>
+            <param name="resizable">True if the string buffer can be re-sized.</param>
+            <param name="unicode">True when the string requires Unicode.</param>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaVector.Add(System.Object)">
+            <summary>
+            Adds an item to the end of the vector data.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaVector.Clear">
+            <summary>
+            Clears all data.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaVector.Contains(System.Object)">
+            <summary>
+            Checks if the member exists.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaVector.IndexOf(System.Object)">
+            <summary>
+            Gets the zero-based index of a member.
+            </summary>
+            <param name="value">Value to find.</param>
+            <returns>Index or -1 when it doesn't exist.</returns>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaVector.Insert(System.Int32,System.Object)">
+            <summary>
+            Inserts a value at the specified index.
+            </summary>
+            <param name="index">Index to insert at, zero based.</param>
+            <param name="value">Value to insert.</param>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaVector.IsFixedSize">
+            <summary>
+            Indicates whether this list is a fixed size.
+            Returns false because WIA vectors are variable.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaVector.IsReadOnly">
+            <summary>
+            Indicates whether this list is read-only.
+            Returns false because WIA vectors are writable.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaVector.Remove(System.Object)">
+            <summary>
+            Removes an item.
+            </summary>
+            <param name="value">Item to remove.</param>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaVector.RemoveAt(System.Int32)">
+            <summary>
+            Removes an item at the specified index.
+            </summary>
+            <param name="index">Zero based index of the item to remove.</param>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaVector.Item(System.Int32)">
+            <summary>
+            Gets or sets an item at the specified index.
+            </summary>
+            <param name="index">Zero based index</param>
+            <returns>Item value at the specified index.</returns>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaVector.CopyTo(CodeForDotNet.Windows.Imaging.WiaVector,System.Int32)">
+            <summary>
+            Copies items from this collection to an array.
+            </summary>
+            <param name="array">Target array.</param>
+            <param name="index">Target zero based index.</param>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaVector.CopyTo(System.Array,System.Int32)">
+            <summary>
+            Copies items from this collection to an array.
+            </summary>
+            <param name="array">Target array.</param>
+            <param name="index">Target zero based index.</param>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaVector.Count">
+            <summary>
+            Number of items in the collection.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaVector.IsSynchronized">
+            <summary>
+            Indicates that the collection is synchronized (thread safe).
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Imaging.WiaVector.SyncRoot">
+            <summary>
+            Thread synchronization object.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaVector.GetEnumerator">
+            <summary>
+            Gets an enumerator for this collection.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Windows.Native.ClipboardHelper">
+            <summary>
+            Provides helper functions for the Windows clipboard.
+            For metafile functions, see source article: http://www.dotnet247.com/247reference/msgs/23/118514.aspx
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.ClipboardHelper.GetMetafileFromClipboard(System.IntPtr)">
+            <summary>
+            Retrieves a .NET <see cref="T:System.Drawing.Imaging.Metafile"/> from the clipboard correctly.
+            </summary>
+            <returns>.NET <see cref="T:System.Drawing.Imaging.Metafile"/> or null when no EMF is on the clipboard.</returns>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.ClipboardHelper.PutMetafileOnClipboard(System.IntPtr,System.Drawing.Imaging.Metafile)">
+            <summary>
+            Places a .NET <see cref="T:System.Drawing.Imaging.Metafile"/> onto the clipboard correctly, otherwise it is not visible by other applications
+            due to the new format used in .NET.
+            </summary>
+            <param name="windowHandle">Form.Handle used as owner of Clipboard data.</param>
+            <param name="metafile">.NET <see cref="T:System.Drawing.Imaging.Metafile"/> to copy to clipboard.</param>
+            <returns>TRUE when successful.</returns>
+        </member>
+        <member name="T:CodeForDotNet.Windows.Native.NativeCodeGenerator">
+            <summary>
+            Helper class that executes NGEN on target assemblies.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.NativeCodeGenerator.GetNgenPath">
+            <summary>
+            Gets the path to the .Net Framework.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.NativeCodeGenerator.Install(System.String,System.String@,System.String@)">
+            <summary>
+            Installs the specified assembly into the native image cache, including all dependencies.
+            </summary>
+            <param name="assemblyPath">Fully qualified local file system path to the target assembly.</param>
+            <param name="consoleOutput">Any console output. Use to obtain error text.</param>
+            <param name="assemblyFullName">Assembly FullName which was queued for install into the cache.</param>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.NativeCodeGenerator.Remove(System.String,System.String@)">
+            <summary>
+            Removes an assembly from the cache.
+            </summary>
+            <param name="assemblyName">Assembly name, partial or fully qualified.</param>
+            <param name="consoleOutput">Console output (if any) during execution.</param>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.NativeCodeGenerator.ExecuteProgram(System.String,System.String,System.String,System.Int32,System.String@)">
+            <summary>
+            Executes a program with the specified parameters and working directory, waits for exit and
+            </summary>
+            <param name="programPath">Path of the program to execute.</param>
+            <param name="parameters">Parameters to pass to the program.</param>
+            <param name="workingDirectory">Working directory in which to execute.</param>
+            <param name="timeout">Maximum time to allow the program to execute, before terminating with -1 return code.</param>
+            <param name="consoleOutput">Console output (if any) during execution.</param>
+            <returns>Return code, 0 = success, -1 = timeout or other error, other values are program specific.</returns>
+        </member>
+        <member name="T:CodeForDotNet.Windows.Native.SafeNativeMethods">
+            <summary>
+            Native method calls which are safe to call without a stack walk.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA">
+            <summary>
+            Managed interface to the Windows shell IShellLink COM interface.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.GetPath(System.Text.StringBuilder,System.Int32,CodeForDotNet.Windows.Native.SafeNativeMethods._WIN32_FIND_DATAW@,System.UInt32)">
+            <summary>
+            Retrieves the path and filename of a shell link object.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.GetIDList(System.IntPtr@)">
+            <summary>
+            Retrieves the list of shell link item identifiers.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.SetIDList(System.IntPtr)">
+            <summary>
+            Sets the list of shell link item identifiers.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.GetDescription(System.Text.StringBuilder,System.Int32)">
+            <summary>
+            Retrieves the shell link description string.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.SetDescription(System.String)">
+            <summary>
+            Sets the shell link description string.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.GetWorkingDirectory(System.Text.StringBuilder,System.Int32)">
+            <summary>
+            Retrieves the name of the shell link working directory.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.SetWorkingDirectory(System.String)">
+            <summary>
+            Sets the name of the shell link working directory.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.GetArguments(System.Text.StringBuilder,System.Int32)">
+            <summary>
+            Retrieves the shell link command-line arguments.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.SetArguments(System.String)">
+            <summary>
+            Sets the shell link command-line arguments.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.GetHotkey(System.Int16@)">
+            <summary>
+            Retrieves the shell link hot key.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.SetHotkey(System.Int16)">
+            <summary>
+            Sets the shell link hot key.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.GetShowCmd(System.UInt32@)">
+            <summary>
+            Retrieves the shell link show command.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.SetShowCmd(System.UInt32)">
+            <summary>
+            Sets the shell link show command.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.GetIconLocation(System.Text.StringBuilder,System.Int32,System.Int32@)">
+            <summary>
+            Retrieves the location (path and index) of the shell link icon.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.SetIconLocation(System.String,System.Int32)">
+            <summary>
+            Sets the location (path and index) of the shell link icon.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.SetRelativePath(System.String,System.UInt32)">
+            <summary>
+            Sets the shell link relative path.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.Resolve(System.IntPtr,System.UInt32)">
+            <summary>
+            Resolves a shell link. The system searches for the shell link object and updates the shell link path and its list of identifiers (if necessary).
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.SetPath(System.String)">
+            <summary>
+            Sets the shell link path and filename.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Windows.Native.SafeNativeMethods.Shortcut">
+            <summary>
+            Managed class to the Windows shell ShellLink COM object class.
+            Provided by: http://www.vbaccelerator.com/home/NET/Code/Libraries/Shell_Projects/Creating_and_Modifying_Shortcuts/article.asp
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Windows.Native.SafeNativeMethods.IPersistFile">
+            <summary>
+            Managed interface to the Windows shell IPersistFile COM interface.
+            Provided by: http://www.vbaccelerator.com/home/NET/Code/Libraries/Shell_Projects/Creating_and_Modifying_Shortcuts/article.asp
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IPersistFile.GetClassID(System.Guid@)">
+            <summary>
+            Can't get this to go if I extend IPersist, so put it here.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IPersistFile.IsDirty">
+            <summary>
+            Checks for changes since last file write.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IPersistFile.Load(System.String,System.UInt32)">
+            <summary>
+            Opens the specified file and initializes the object from its contents.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IPersistFile.Save(System.String,System.Boolean)">
+            <summary>
+            Saves the object into the specified file.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IPersistFile.SaveCompleted(System.String)">
+            <summary>
+            Notifies the object that save is completed.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IPersistFile.GetCurFile(System.String@)">
+            <summary>
+            Gets the current name of the file associated with the object.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.Shell32.SHGetSpecialFolderPath(System.IntPtr,System.Text.StringBuilder,System.Int32,System.Boolean)">
+            <summary>
+            BOOL SHGetSpecialFolderPath(          HWND hwndOwner,
+            	LPTSTR lpszPath,
+            	int nFolder,
+            	BOOL fCreate
+            );
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Windows.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.ErrorComPlusApplicationNameUnconfirmed">
+            <summary>
+              Looks up a localized string similar to COM Application Name {0} was not found after installation..
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.ErrorMissingConditionProperty">
+            <summary>
+              Looks up a localized string similar to Please specify a unique {0}.ConditionArgument, it is required to store uninstall information in the saved state..
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusCommtitingChanges">
+            <summary>
+              Looks up a localized string similar to Committing changes....
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusConfigureComPlusApplication">
+            <summary>
+              Looks up a localized string similar to Configuring COM+ application {0}....
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusDeletedService">
+            <summary>
+              Looks up a localized string similar to Deleted service..
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusDeletingFile">
+            <summary>
+              Looks up a localized string similar to Deleting file {0}.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusGacInstallComponent">
+            <summary>
+              Looks up a localized string similar to lnstalling component {0} into the GAC....
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusGaclnstallDependency">
+            <summary>
+              Looks up a localized string similar to lnstalling dependency {0} into the GAC....
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusGacRemoveComponent">
+            <summary>
+              Looks up a localized string similar to Removing component {0} from the GAC....
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusGacRemoveDependency">
+            <summary>
+              Looks up a localized string similar to Removing dependency {0} from the GAC....
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusInstall">
+            <summary>
+              Looks up a localized string similar to {0} installer performing install action for condition {1}....
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusLoadingFile">
+            <summary>
+              Looks up a localized string similar to Loading file {0}.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusMigratingDotNetConfigToLocalManifest">
+            <summary>
+              Looks up a localized string similar to Migrating local .NET application config to COM manifest (application.manifest and application.config)....
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusRegisterComPlusComponent">
+            <summary>
+              Looks up a localized string similar to Registering COM+ component {0}....
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusRemovingComPlusApplication">
+            <summary>
+              Looks up a localized string similar to Removing COM+application {0}....
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusRemovingComPlusApplicationInstance">
+            <summary>
+              Looks up a localized string similar to Removing COM+ application {0} instance {1}....
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusShutdownServices">
+            <summary>
+              Looks up a localized string similar to Shutting down services....
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusSkippingMissingFile">
+            <summary>
+              Looks up a localized string similar to Skipping missing file {0}.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusUninstall">
+            <summary>
+              Looks up a localized string similar to {0} installer performing uninstall action for condition {1}....
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusUnregisterComPlusComponent">
+            <summary>
+              Looks up a localized string similar to Unregistering COM+ component {0}....
+            </summary>
+        </member>
         <member name="T:CodeForDotNet.Install.ConfigurationFileInstaller">
             <summary>
             Processes configuration files upon installation.
@@ -268,1526 +1596,6 @@
         <member name="M:CodeForDotNet.Install.NativeCodeGeneratorInstaller.Uninstall(System.Collections.IDictionary)">
             <summary>
             Uninstalls the component.
-            </summary>
-        </member>
-        <member name="T:CodeForDotNet.Windows.Native.ClipboardHelper">
-            <summary>
-            Provides helper functions for the Windows clipboard.
-            For metafile functions, see source article: http://www.dotnet247.com/247reference/msgs/23/118514.aspx
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Native.ClipboardHelper.GetMetafileFromClipboard(System.IntPtr)">
-            <summary>
-            Retrieves a .NET <see cref="T:System.Drawing.Imaging.Metafile"/> from the clipboard correctly.
-            </summary>
-            <returns>.NET <see cref="T:System.Drawing.Imaging.Metafile"/> or null when no EMF is on the clipboard.</returns>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Native.ClipboardHelper.PutMetafileOnClipboard(System.IntPtr,System.Drawing.Imaging.Metafile)">
-            <summary>
-            Places a .NET <see cref="T:System.Drawing.Imaging.Metafile"/> onto the clipboard correctly, otherwise it is not visible by other applications
-            due to the new format used in .NET.
-            </summary>
-            <param name="windowHandle">Form.Handle used as owner of Clipboard data.</param>
-            <param name="metafile">.NET <see cref="T:System.Drawing.Imaging.Metafile"/> to copy to clipboard.</param>
-            <returns>TRUE when successful.</returns>
-        </member>
-        <member name="T:CodeForDotNet.Windows.Native.NativeCodeGenerator">
-            <summary>
-            Helper class that executes NGEN on target assemblies.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Native.NativeCodeGenerator.GetNgenPath">
-            <summary>
-            Gets the path to the .Net Framework.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Native.NativeCodeGenerator.Install(System.String,System.String@,System.String@)">
-            <summary>
-            Installs the specified assembly into the native image cache, including all dependencies.
-            </summary>
-            <param name="assemblyPath">Fully qualified local file system path to the target assembly.</param>
-            <param name="consoleOutput">Any console output. Use to obtain error text.</param>
-            <param name="assemblyFullName">Assembly FullName which was queued for install into the cache.</param>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Native.NativeCodeGenerator.Remove(System.String,System.String@)">
-            <summary>
-            Removes an assembly from the cache.
-            </summary>
-            <param name="assemblyName">Assembly name, partial or fully qualified.</param>
-            <param name="consoleOutput">Console output (if any) during execution.</param>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Native.NativeCodeGenerator.ExecuteProgram(System.String,System.String,System.String,System.Int32,System.String@)">
-            <summary>
-            Executes a program with the specified parameters and working directory, waits for exit and
-            </summary>
-            <param name="programPath">Path of the program to execute.</param>
-            <param name="parameters">Parameters to pass to the program.</param>
-            <param name="workingDirectory">Working directory in which to execute.</param>
-            <param name="timeout">Maximum time to allow the program to execute, before terminating with -1 return code.</param>
-            <param name="consoleOutput">Console output (if any) during execution.</param>
-            <returns>Return code, 0 = success, -1 = timeout or other error, other values are program specific.</returns>
-        </member>
-        <member name="T:CodeForDotNet.Windows.Native.SafeNativeMethods">
-            <summary>
-            Native method calls which are safe to call without a stack walk.
-            </summary>
-        </member>
-        <member name="T:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA">
-            <summary>
-            Managed interface to the Windows shell IShellLink COM interface.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.GetPath(System.Text.StringBuilder,System.Int32,CodeForDotNet.Windows.Native.SafeNativeMethods._WIN32_FIND_DATAW@,System.UInt32)">
-            <summary>
-            Retrieves the path and filename of a shell link object.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.GetIDList(System.IntPtr@)">
-            <summary>
-            Retrieves the list of shell link item identifiers.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.SetIDList(System.IntPtr)">
-            <summary>
-            Sets the list of shell link item identifiers.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.GetDescription(System.Text.StringBuilder,System.Int32)">
-            <summary>
-            Retrieves the shell link description string.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.SetDescription(System.String)">
-            <summary>
-            Sets the shell link description string.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.GetWorkingDirectory(System.Text.StringBuilder,System.Int32)">
-            <summary>
-            Retrieves the name of the shell link working directory.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.SetWorkingDirectory(System.String)">
-            <summary>
-            Sets the name of the shell link working directory.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.GetArguments(System.Text.StringBuilder,System.Int32)">
-            <summary>
-            Retrieves the shell link command-line arguments.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.SetArguments(System.String)">
-            <summary>
-            Sets the shell link command-line arguments.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.GetHotkey(System.Int16@)">
-            <summary>
-            Retrieves the shell link hot key.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.SetHotkey(System.Int16)">
-            <summary>
-            Sets the shell link hot key.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.GetShowCmd(System.UInt32@)">
-            <summary>
-            Retrieves the shell link show command.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.SetShowCmd(System.UInt32)">
-            <summary>
-            Sets the shell link show command.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.GetIconLocation(System.Text.StringBuilder,System.Int32,System.Int32@)">
-            <summary>
-            Retrieves the location (path and index) of the shell link icon.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.SetIconLocation(System.String,System.Int32)">
-            <summary>
-            Sets the location (path and index) of the shell link icon.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.SetRelativePath(System.String,System.UInt32)">
-            <summary>
-            Sets the shell link relative path.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.Resolve(System.IntPtr,System.UInt32)">
-            <summary>
-            Resolves a shell link. The system searches for the shell link object and updates the shell link path and its list of identifiers (if necessary).
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.SetPath(System.String)">
-            <summary>
-            Sets the shell link path and filename.
-            </summary>
-        </member>
-        <member name="T:CodeForDotNet.Windows.Native.SafeNativeMethods.Shortcut">
-            <summary>
-            Managed class to the Windows shell ShellLink COM object class.
-            Provided by: http://www.vbaccelerator.com/home/NET/Code/Libraries/Shell_Projects/Creating_and_Modifying_Shortcuts/article.asp
-            </summary>
-        </member>
-        <member name="T:CodeForDotNet.Windows.Native.SafeNativeMethods.IPersistFile">
-            <summary>
-            Managed interface to the Windows shell IPersistFile COM interface.
-            Provided by: http://www.vbaccelerator.com/home/NET/Code/Libraries/Shell_Projects/Creating_and_Modifying_Shortcuts/article.asp
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IPersistFile.GetClassID(System.Guid@)">
-            <summary>
-            Can't get this to go if I extend IPersist, so put it here.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IPersistFile.IsDirty">
-            <summary>
-            Checks for changes since last file write.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IPersistFile.Load(System.String,System.UInt32)">
-            <summary>
-            Opens the specified file and initializes the object from its contents.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IPersistFile.Save(System.String,System.Boolean)">
-            <summary>
-            Saves the object into the specified file.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IPersistFile.SaveCompleted(System.String)">
-            <summary>
-            Notifies the object that save is completed.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IPersistFile.GetCurFile(System.String@)">
-            <summary>
-            Gets the current name of the file associated with the object.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.Shell32.SHGetSpecialFolderPath(System.IntPtr,System.Text.StringBuilder,System.Int32,System.Boolean)">
-            <summary>
-            BOOL SHGetSpecialFolderPath(          HWND hwndOwner,
-            	LPTSTR lpszPath,
-            	int nFolder,
-            	BOOL fCreate
-            );
-            </summary>
-        </member>
-        <member name="T:CodeForDotNet.Windows.Imaging.WiaCommonDialog">
-            <summary>
-            Encapsulates a <see cref="T:Interop.Wia.CommonDialog"/> in managed code.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaCommonDialog.#ctor">
-            <summary>
-            Creates an instance to wrap the specified unmanaged object.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaCommonDialog.Finalize">
-            <summary>
-            Calls dispose during finalization (if it has not been called already).
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaCommonDialog.Dispose">
-            <summary>
-            Proactively frees resources.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaCommonDialog.Dispose(System.Boolean)">
-            <summary>
-            Frees resources.
-            </summary>
-            <param name="disposing">
-            True when called from <see cref="M:CodeForDotNet.Windows.Imaging.WiaCommonDialog.Dispose"/>,
-            false when called during finalization.</param>
-        </member>
-        <member name="F:CodeForDotNet.Windows.Imaging.WiaCommonDialog._wiaCommonDialog">
-            <summary>
-            Unmanaged <see cref="T:Interop.Wia.CommonDialog"/>.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaCommonDialog.ShowAcquireImage">
-            <summary>
-            Shows the common "Acquire Image" dialog to acquire an image.
-            </summary>
-            <returns>Image file or null when canceled.</returns>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaCommonDialog.ShowAcquireImage(CodeForDotNet.Windows.Imaging.WiaDeviceType,CodeForDotNet.Windows.Imaging.WiaImageIntent,CodeForDotNet.Windows.Imaging.WiaImageBias,System.String,System.Boolean,System.Boolean,System.Boolean)">
-            <summary>
-            Shows the common "Acquire Image" dialog to acquire an image.
-            </summary>
-            <param name="deviceType">Device type.</param>
-            <param name="intent">Image intent.</param>
-            <param name="bias">Image bias.</param>
-            <param name="formatId">Image format ID.</param>
-            <param name="alwaysSelectDevice">Always prompt to select device.</param>
-            <param name="useCommonUI">Use common UI.</param>
-            <param name="cancelError">Generate error if canceled.</param>
-            <returns>Image file or null when canceled.</returns>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaCommonDialog.ShowSelectDevice(CodeForDotNet.Windows.Imaging.WiaDeviceType,System.Boolean,System.Boolean)">
-            <summary>
-            Displays a dialog box that enables the user to select a hardware device for image acquisition.
-            </summary>
-            <param name="deviceType">Device type.</param>
-            <param name="alwaysSelect">Option to always show the select device dialog box</param>
-            <param name="required">Option to generate an error if the user cancels the dialog box.</param>
-            <returns>Selected <see cref="T:CodeForDotNet.Windows.Imaging.WiaDevice"/> or null when no selection made.</returns>
-        </member>
-        <member name="T:CodeForDotNet.Windows.Imaging.WiaConstants">
-            <summary>
-            WIA constant definitions.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Windows.Imaging.WiaConstants.DefaultFormatId">
-            <summary>
-            Default format ID.
-            </summary>
-        </member>
-        <member name="T:CodeForDotNet.Windows.Imaging.WiaDevice">
-            <summary>
-            Encapsulates a <see cref="T:Interop.Wia.Device"/> in managed code.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaDevice.#ctor(Interop.Wia.Device)">
-            <summary>
-            Creates an instance to wrap the specified unmanaged object.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaDevice.Finalize">
-            <summary>
-            Calls dispose during finalization (if it has not been called already).
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaDevice.Dispose">
-            <summary>
-            Proactively frees resources.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaDevice.Dispose(System.Boolean)">
-            <summary>
-            Frees resources.
-            </summary>
-            <param name="disposing">
-            True when called from <see cref="M:CodeForDotNet.Windows.Imaging.WiaDevice.Dispose"/>,
-            false when called during finalization.</param>
-        </member>
-        <member name="F:CodeForDotNet.Windows.Imaging.WiaDevice._wiaDevice">
-            <summary>
-            Unmanaged <see cref="T:Interop.Wia.Device"/>.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaDevice.SyncRoot">
-            <summary>
-            Thread synchronization object.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaDevice.Id">
-            <summary>
-            Device identifier.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaDevice.DeviceType">
-            <summary>
-            Device type.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaDevice.Properties">
-            <summary>
-            Properties.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaDevice.Commands">
-            <summary>
-            Commands.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaDevice.Events">
-            <summary>
-            Events.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaDevice.Items">
-            <summary>
-            Items.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaDevice.Item">
-            <summary>
-            Item.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaDevice.ExecuteCommand(System.String)">
-            <summary>
-            Executes a command.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaDevice.GetItemById(System.String)">
-            <summary>
-            Gets the item with the specified ID.
-            </summary>
-        </member>
-        <member name="T:CodeForDotNet.Windows.Imaging.WiaDeviceCommand">
-            <summary>
-            Managed <see cref="T:Interop.Wia.DeviceCommand"/>.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaDeviceCommand.#ctor(Interop.Wia.DeviceCommand)">
-            <summary>
-            Creates an instance to wrap the specified unmanaged object.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaDeviceCommand.Finalize">
-            <summary>
-            Calls dispose during finalization (if it has not been called already).
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaDeviceCommand.Dispose">
-            <summary>
-            Proactively frees resources.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaDeviceCommand.Dispose(System.Boolean)">
-            <summary>
-            Frees resources.
-            </summary>
-            <param name="disposing">
-            True when called from <see cref="M:CodeForDotNet.Windows.Imaging.WiaDeviceCommand.Dispose"/>,
-            false when called during finalization.</param>
-        </member>
-        <member name="F:CodeForDotNet.Windows.Imaging.WiaDeviceCommand._wiaDeviceCommand">
-            <summary>
-            Unmanaged <see cref="T:Interop.Wia.DeviceCommand"/>.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaDeviceCommand.Id">
-            <summary>
-            ID.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaDeviceCommand.Name">
-            <summary>
-            Name.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaDeviceCommand.Description">
-            <summary>
-            Description.
-            </summary>
-        </member>
-        <member name="T:CodeForDotNet.Windows.Imaging.WiaDeviceCommandCollection">
-            <summary>
-            Managed <see cref="T:Interop.Wia.DeviceCommands"/>.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaDeviceCommandCollection.#ctor">
-            <summary>
-            Creates an empty instance.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaDeviceCommandCollection.#ctor(Interop.Wia.DeviceCommands)">
-            <summary>
-            Creates an instance to wrap the specified unmanaged object.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaDeviceCommandCollection.Finalize">
-            <summary>
-            Calls dispose during finalization (if it has not been called already).
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaDeviceCommandCollection.Dispose">
-            <summary>
-            Proactively frees resources.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaDeviceCommandCollection.Dispose(System.Boolean)">
-            <summary>
-            Frees resources.
-            </summary>
-            <param name="disposing">
-            True when called from <see cref="M:CodeForDotNet.Windows.Imaging.WiaDeviceCommandCollection.Dispose"/>,
-            false when called during finalization.</param>
-        </member>
-        <member name="T:CodeForDotNet.Windows.Imaging.WiaDeviceEvent">
-            <summary>
-            Managed <see cref="T:Interop.Wia.DeviceEvent"/>.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaDeviceEvent.#ctor(Interop.Wia.DeviceEvent)">
-            <summary>
-            Creates an instance to wrap the specified unmanaged object.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaDeviceEvent.Finalize">
-            <summary>
-            Calls dispose during finalization (if it has not been called already).
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaDeviceEvent.Dispose">
-            <summary>
-            Proactively frees resources.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaDeviceEvent.Dispose(System.Boolean)">
-            <summary>
-            Frees resources.
-            </summary>
-            <param name="disposing">
-            True when called from <see cref="M:CodeForDotNet.Windows.Imaging.WiaDeviceEvent.Dispose"/>,
-            false when called during finalization.</param>
-        </member>
-        <member name="F:CodeForDotNet.Windows.Imaging.WiaDeviceEvent._wiaDeviceEvent">
-            <summary>
-            Unmanaged <see cref="T:Interop.Wia.DeviceEvent"/>.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaDeviceEvent.Id">
-            <summary>
-            ID.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaDeviceEvent.Name">
-            <summary>
-            Name.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaDeviceEvent.EventType">
-            <summary>
-            Event type.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaDeviceEvent.Description">
-            <summary>
-            Description.
-            </summary>
-        </member>
-        <member name="T:CodeForDotNet.Windows.Imaging.WiaDeviceEventCollection">
-            <summary>
-            Managed <see cref="T:Interop.Wia.DeviceEvents"/>.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaDeviceEventCollection.#ctor">
-            <summary>
-            Creates an empty instance.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaDeviceEventCollection.#ctor(Interop.Wia.DeviceEvents)">
-            <summary>
-            Creates an instance to wrap the specified unmanaged object.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaDeviceEventCollection.Finalize">
-            <summary>
-            Calls dispose during finalization (if it has not been called already).
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaDeviceEventCollection.Dispose">
-            <summary>
-            Proactively frees resources.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaDeviceEventCollection.Dispose(System.Boolean)">
-            <summary>
-            Frees resources.
-            </summary>
-            <param name="disposing">
-            True when called from <see cref="M:CodeForDotNet.Windows.Imaging.WiaDeviceEventCollection.Dispose"/>,
-            false when called during finalization.</param>
-        </member>
-        <member name="T:CodeForDotNet.Windows.Imaging.WiaDeviceEventType">
-            <summary>
-            Managed <see cref="T:Interop.Wia.WiaEventFlag"/>.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Windows.Imaging.WiaDeviceEventType.Notification">
-            <summary>
-            Notification event.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Windows.Imaging.WiaDeviceEventType.ActionEvent">
-            <summary>
-            Action event.
-            </summary>
-        </member>
-        <member name="T:CodeForDotNet.Windows.Imaging.WiaDeviceInfo">
-            <summary>
-            Encapsulates a <see cref="T:Interop.Wia.DeviceInfo"/> in managed code.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaDeviceInfo.#ctor(Interop.Wia.DeviceInfo)">
-            <summary>
-            Creates an instance to wrap the specified unmanaged object.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaDeviceInfo.Finalize">
-            <summary>
-            Calls dispose during finalization (if it has not been called already).
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaDeviceInfo.Dispose">
-            <summary>
-            Proactively frees resources.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaDeviceInfo.Dispose(System.Boolean)">
-            <summary>
-            Frees resources.
-            </summary>
-            <param name="disposing">
-            True when called from <see cref="M:CodeForDotNet.Windows.Imaging.WiaDeviceInfo.Dispose"/>,
-            false when called during finalization.</param>
-        </member>
-        <member name="F:CodeForDotNet.Windows.Imaging.WiaDeviceInfo._wiaDeviceInfo">
-            <summary>
-            Unmanaged <see cref="T:Interop.Wia.DeviceInfo"/>.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaDeviceInfo.SyncRoot">
-            <summary>
-            Thread synchronization object.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaDeviceInfo.Id">
-            <summary>
-            Device identifier.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaDeviceInfo.Name">
-            <summary>
-            Name.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaDeviceInfo.Description">
-            <summary>
-            Description.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaDeviceInfo.DeviceType">
-            <summary>
-            Device type.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaDeviceInfo.Properties">
-            <summary>
-            Properties.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaDeviceInfo.Connect">
-            <summary>
-            Creates a connection to this device.
-            </summary>
-        </member>
-        <member name="T:CodeForDotNet.Windows.Imaging.WiaDeviceInfoCollection">
-            <summary>
-            Managed <see cref="T:Interop.Wia.DeviceInfos"/>.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaDeviceInfoCollection.#ctor">
-            <summary>
-            Creates an empty instance.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaDeviceInfoCollection.#ctor(Interop.Wia.DeviceInfos)">
-            <summary>
-            Creates an instance to wrap the specified unmanaged object.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaDeviceInfoCollection.Finalize">
-            <summary>
-            Calls dispose during finalization (if it has not been called already).
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaDeviceInfoCollection.Dispose">
-            <summary>
-            Proactively frees resources.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaDeviceInfoCollection.Dispose(System.Boolean)">
-            <summary>
-            Frees resources.
-            </summary>
-            <param name="disposing">
-            True when called from <see cref="M:CodeForDotNet.Windows.Imaging.WiaDeviceInfoCollection.Dispose"/>,
-            false when called during finalization.</param>
-        </member>
-        <member name="T:CodeForDotNet.Windows.Imaging.WiaDeviceType">
-            <summary>
-            Managed <see cref="T:CodeForDotNet.Windows.Imaging.WiaDeviceType"/>
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Windows.Imaging.WiaDeviceType.Unspecified">
-            <summary>
-            Unspecified.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Windows.Imaging.WiaDeviceType.Scanner">
-            <summary>
-            Scanner.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Windows.Imaging.WiaDeviceType.Camera">
-            <summary>
-            Camera
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Windows.Imaging.WiaDeviceType.Video">
-            <summary>
-            Video camera or capture device.
-            </summary>
-        </member>
-        <member name="T:CodeForDotNet.Windows.Imaging.WiaFormatCollection">
-            <summary>
-            Managed <see cref="T:Interop.Wia.Formats"/>.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaFormatCollection.#ctor">
-            <summary>
-            Creates an empty instance.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaFormatCollection.#ctor(Interop.Wia.Formats)">
-            <summary>
-            Creates an instance to wrap the specified unmanaged object.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaFormatCollection.Finalize">
-            <summary>
-            Calls dispose during finalization (if it has not been called already).
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaFormatCollection.Dispose">
-            <summary>
-            Proactively frees resources.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaFormatCollection.Dispose(System.Boolean)">
-            <summary>
-            Frees resources.
-            </summary>
-            <param name="disposing">
-            True when called from <see cref="M:CodeForDotNet.Windows.Imaging.WiaFormatCollection.Dispose"/>,
-            false when called during finalization.</param>
-        </member>
-        <member name="T:CodeForDotNet.Windows.Imaging.WiaImageBias">
-            <summary>
-            Managed <see cref="T:Interop.Wia.WiaImageBias"/>.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Windows.Imaging.WiaImageBias.MinimizeSize">
-            <summary>
-            Minimize size.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Windows.Imaging.WiaImageBias.MaximizeQuality">
-            <summary>
-            Maximize quality.
-            </summary>
-        </member>
-        <member name="T:CodeForDotNet.Windows.Imaging.WiaImageFile">
-            <summary>
-            Managed <see cref="T:CodeForDotNet.Windows.Imaging.WiaImageFile"/>.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaImageFile.#ctor(Interop.Wia.ImageFile)">
-            <summary>
-            Creates an instance to wrap the specified unmanaged object.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaImageFile.Finalize">
-            <summary>
-            Disposes unmanaged resources during finalization.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaImageFile.Dispose">
-            <summary>
-            Proactively frees resources owned by this object.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaImageFile.Dispose(System.Boolean)">
-            <summary>
-            Frees resources owned by this object.
-            </summary>
-            <param name="disposing">True when called via <see cref="M:CodeForDotNet.Windows.Imaging.WiaImageFile.Dispose"/>.</param>
-        </member>
-        <member name="F:CodeForDotNet.Windows.Imaging.WiaImageFile._wiaImageFile">
-            <summary>
-            Unmanaged <see cref="T:Interop.Wia.ImageFile"/>.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaImageFile.SyncRoot">
-            <summary>
-            Thread synchronization object.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaImageFile.ActiveFrame">
-            <summary>
-            Active frame.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaImageFile.ArgbData">
-            <summary>
-            Color palette.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaImageFile.FileData">
-            <summary>
-            File data.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaImageFile.FileExtension">
-            <summary>
-            File extension.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaImageFile.FormatId">
-            <summary>
-            Image format ID.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaImageFile.FrameCount">
-            <summary>
-            Frame count.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaImageFile.Width">
-            <summary>
-            Width in pixels.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaImageFile.Height">
-            <summary>
-            Height in pixels.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaImageFile.HorizontalResolution">
-            <summary>
-            Horizontal resolution.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaImageFile.VerticalResolution">
-            <summary>
-            Vertical resolution.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaImageFile.IsAlphaPixelFormat">
-            <summary>
-            Indicates pixel alpha component (transparency) is used.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaImageFile.IsAnimated">
-            <summary>
-            Indicates the picture is animated (contains multiple frames).
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaImageFile.IsExtendedPixelFormat">
-            <summary>
-            Indicates the pixel extended format.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaImageFile.IsIndexedPixelFormat">
-            <summary>
-            Indicates the pixel indexed (color palette) format.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaImageFile.PixelDepth">
-            <summary>
-            Pixel color depth.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaImageFile.Properties">
-            <summary>
-            Properties.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaImageFile.LoadFile(System.String)">
-            <summary>
-            Loads the image from a file.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaImageFile.SaveFile(System.String)">
-            <summary>
-            Saves the image to a file.
-            </summary>
-        </member>
-        <member name="T:CodeForDotNet.Windows.Imaging.WiaImageIntent">
-            <summary>
-            Managed <see cref="T:CodeForDotNet.Windows.Imaging.WiaImageIntent"/>.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Windows.Imaging.WiaImageIntent.Unspecified">
-            <summary>
-            Unspecified.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Windows.Imaging.WiaImageIntent.Color">
-            <summary>
-            Color.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Windows.Imaging.WiaImageIntent.Grayscale">
-            <summary>
-            Grayscale.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Windows.Imaging.WiaImageIntent.Text">
-            <summary>
-            Text.
-            </summary>
-        </member>
-        <member name="T:CodeForDotNet.Windows.Imaging.WiaItem">
-            <summary>
-            Encapsulates a <see cref="P:CodeForDotNet.Windows.Imaging.WiaItem.Item"/> in managed code.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaItem.#ctor(Interop.Wia.Item)">
-            <summary>
-            Creates an instance to wrap the specified unmanaged object.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaItem.Finalize">
-            <summary>
-            Calls dispose during finalization (if it has not been called already).
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaItem.Dispose">
-            <summary>
-            Proactively frees resources.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaItem.Dispose(System.Boolean)">
-            <summary>
-            Frees resources.
-            </summary>
-            <param name="disposing">
-            True when called from <see cref="M:CodeForDotNet.Windows.Imaging.WiaItem.Dispose"/>,
-            false when called during finalization.</param>
-        </member>
-        <member name="F:CodeForDotNet.Windows.Imaging.WiaItem._wiaItem">
-            <summary>
-            Unmanaged <see cref="T:Interop.Wia.Item"/>.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaItem.SyncRoot">
-            <summary>
-            Thread synchronization object.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaItem.Id">
-            <summary>
-            Item identifier.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaItem.Commands">
-            <summary>
-            Commands.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaItem.Properties">
-            <summary>
-            Properties.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaItem.Formats">
-            <summary>
-            Formats.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaItem.Item">
-            <summary>
-            Item.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaItem.ExecuteCommand(System.String)">
-            <summary>
-            Executes a command.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaItem.Transfer">
-            <summary>
-            Transfers using the default format ID.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaItem.Transfer(System.String)">
-            <summary>
-            Transfers using a specific format ID.
-            </summary>
-        </member>
-        <member name="T:CodeForDotNet.Windows.Imaging.WiaItemCollection">
-            <summary>
-            Managed <see cref="T:Interop.Wia.Items"/>.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaItemCollection.#ctor">
-            <summary>
-            Creates an empty instance.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaItemCollection.#ctor(Interop.Wia.Items)">
-            <summary>
-            Creates an instance to wrap the specified unmanaged object.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaItemCollection.Finalize">
-            <summary>
-            Calls dispose during finalization (if it has not been called already).
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaItemCollection.Dispose">
-            <summary>
-            Proactively frees resources.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaItemCollection.Dispose(System.Boolean)">
-            <summary>
-            Frees resources.
-            </summary>
-            <param name="disposing">
-            True when called from <see cref="M:CodeForDotNet.Windows.Imaging.WiaItemCollection.Dispose"/>,
-            false when called during finalization.</param>
-        </member>
-        <member name="T:CodeForDotNet.Windows.Imaging.WiaManager">
-            <summary>
-            Encapsulates a WIA source, e.g. scanner or camera.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaManager.#ctor">
-            <summary>
-            Creates the object.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaManager.Finalize">
-            <summary>
-            Disposes unmanaged resources during finalization.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaManager.Dispose">
-            <summary>
-            Proactively frees resources owned by this object.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaManager.Dispose(System.Boolean)">
-            <summary>
-            Frees resources owned by this object.
-            </summary>
-            <param name="disposing">True when called via <see cref="M:CodeForDotNet.Windows.Imaging.WiaManager.Dispose"/>.</param>
-        </member>
-        <member name="F:CodeForDotNet.Windows.Imaging.WiaManager._wiaManager">
-            <summary>
-            WIA device manager.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaManager.GetDevices">
-            <summary>
-            Gets information about currently available devices.
-            </summary>
-        </member>
-        <member name="T:CodeForDotNet.Windows.Imaging.WiaProperty">
-            <summary>
-            Managed <see cref="T:Interop.Wia.Property"/>.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaProperty.#ctor(Interop.Wia.Property)">
-            <summary>
-            Creates an instance to wrap the specified unmanaged object.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaProperty.Finalize">
-            <summary>
-            Calls dispose during finalization (if it has not been called already).
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaProperty.Dispose">
-            <summary>
-            Proactively frees resources.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaProperty.Dispose(System.Boolean)">
-            <summary>
-            Frees resources.
-            </summary>
-            <param name="disposing">
-            True when called from <see cref="M:CodeForDotNet.Windows.Imaging.WiaProperty.Dispose"/>,
-            false when called during finalization.</param>
-        </member>
-        <member name="F:CodeForDotNet.Windows.Imaging.WiaProperty._wiaProperty">
-            <summary>
-            Unmanaged <see cref="T:Interop.Wia.Property"/>.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaProperty.SyncRoot">
-            <summary>
-            Thread synchronization object.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaProperty.IsReadOnly">
-            <summary>
-            Indicates the property is read-only.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaProperty.IsVector">
-            <summary>
-            Indicates the property is a vector.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaProperty.Name">
-            <summary>
-            Name.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaProperty.Id">
-            <summary>
-            ID.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaProperty.Subtype">
-            <summary>
-            WIA sub-type.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaProperty.SubtypeDefault">
-            <summary>
-            WIA sub-type default value.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaProperty.SubtypeMax">
-            <summary>
-            WIA sub-type maximum value.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaProperty.SubtypeMin">
-            <summary>
-            WIA sub-type minimum.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaProperty.SubtypeStep">
-            <summary>
-            WIA sub-type increment or decrement step.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaProperty.WiaSubtypeValues">
-            <summary>
-            WIA sub-type array values.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaProperty.PropertyType">
-            <summary>
-            Property type.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaProperty.Value">
-            <summary>
-            Property value.
-            </summary>
-        </member>
-        <member name="T:CodeForDotNet.Windows.Imaging.WiaPropertyCollection">
-            <summary>
-            Managed <see cref="N:CodeForDotNet.Windows.Properties"/>.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaPropertyCollection.#ctor">
-            <summary>
-            Creates an empty instance.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaPropertyCollection.#ctor(Interop.Wia.Properties)">
-            <summary>
-            Creates an instance to wrap the specified unmanaged object.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaPropertyCollection.Finalize">
-            <summary>
-            Calls dispose during finalization (if it has not been called already).
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaPropertyCollection.Dispose">
-            <summary>
-            Proactively frees resources.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaPropertyCollection.Dispose(System.Boolean)">
-            <summary>
-            Frees resources.
-            </summary>
-            <param name="disposing">
-            True when called from <see cref="M:CodeForDotNet.Windows.Imaging.WiaPropertyCollection.Dispose"/>,
-            false when called during finalization.</param>
-        </member>
-        <member name="T:CodeForDotNet.Windows.Imaging.WiaSubtype">
-            <summary>
-            Managed <see cref="T:Interop.Wia.WiaSubType"/>.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Windows.Imaging.WiaSubtype.Unspecified">
-            <summary>
-            Unspecified.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Windows.Imaging.WiaSubtype.Range">
-            <summary>
-            Range.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Windows.Imaging.WiaSubtype.List">
-            <summary>
-            List.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Windows.Imaging.WiaSubtype.Flag">
-            <summary>
-            Flag.
-            </summary>
-        </member>
-        <member name="T:CodeForDotNet.Windows.Imaging.WiaVector">
-            <summary>
-            Managed <see cref="T:Interop.Wia.Vector"/>.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaVector.#ctor(Interop.Wia.Vector)">
-            <summary>
-            Creates an instance to wrap the specified unmanaged object.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Windows.Imaging.WiaVector._wiaVector">
-            <summary>
-            Unmanaged <see cref="T:Interop.Wia.Vector"/>.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaVector.Date">
-            <summary>
-            Date.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaVector.GetBinary">
-            <summary>
-            Gets the binary data.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaVector.SetBinary(System.Object@)">
-            <summary>
-            Sets the binary data.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaVector.GetImageFile">
-            <summary>
-            Gets the data as an <see cref="T:CodeForDotNet.Windows.Imaging.WiaImageFile"/> with default width and height.
-            </summary>
-            <returns>WIA image file.</returns>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaVector.GetImageFile(System.Int32,System.Int32)">
-            <summary>
-            Gets the data as an <see cref="T:CodeForDotNet.Windows.Imaging.WiaImageFile"/>.
-            </summary>
-            <param name="width">Image width or zero for default.</param>
-            <param name="height">Image height or zero for default.</param>
-            <returns>WIA image file.</returns>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaVector.GetPicture">
-            <summary>
-            Gets the data as a picture with default width and height.
-            </summary>
-            <returns>Picture.</returns>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaVector.GetPicture(System.Int32,System.Int32)">
-            <summary>
-            Gets the data as a picture.
-            </summary>
-            <param name="width">Image width or zero for default.</param>
-            <param name="height">Image height or zero for default.</param>
-            <returns>Picture.</returns>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaVector.GetString">
-            <summary>
-            Gets the data as Unicode string.
-            </summary>
-            <returns>String value.</returns>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaVector.GetString(System.Boolean)">
-            <summary>
-            Gets the data as string.
-            </summary>
-            <param name="unicode">True when the string bytes are Unicode.</param>
-            <returns>String value.</returns>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaVector.SetString(System.String)">
-            <summary>
-            Sets the data from a string as re-sizable Unicode.
-            </summary>
-            <param name="value">String value.</param>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaVector.SetString(System.String,System.Boolean,System.Boolean)">
-            <summary>
-            Sets the data from a string.
-            </summary>
-            <param name="value">String value.</param>
-            <param name="resizable">True if the string buffer can be re-sized.</param>
-            <param name="unicode">True when the string requires Unicode.</param>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaVector.Add(System.Object)">
-            <summary>
-            Adds an item to the end of the vector data.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaVector.Clear">
-            <summary>
-            Clears all data.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaVector.Contains(System.Object)">
-            <summary>
-            Checks if the member exists.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaVector.IndexOf(System.Object)">
-            <summary>
-            Gets the zero-based index of a member.
-            </summary>
-            <param name="value">Value to find.</param>
-            <returns>Index or -1 when it doesn't exist.</returns>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaVector.Insert(System.Int32,System.Object)">
-            <summary>
-            Inserts a value at the specified index.
-            </summary>
-            <param name="index">Index to insert at, zero based.</param>
-            <param name="value">Value to insert.</param>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaVector.IsFixedSize">
-            <summary>
-            Indicates whether this list is a fixed size.
-            Returns false because WIA vectors are variable.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaVector.IsReadOnly">
-            <summary>
-            Indicates whether this list is read-only.
-            Returns false because WIA vectors are writable.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaVector.Remove(System.Object)">
-            <summary>
-            Removes an item.
-            </summary>
-            <param name="value">Item to remove.</param>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaVector.RemoveAt(System.Int32)">
-            <summary>
-            Removes an item at the specified index.
-            </summary>
-            <param name="index">Zero based index of the item to remove.</param>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaVector.Item(System.Int32)">
-            <summary>
-            Gets or sets an item at the specified index.
-            </summary>
-            <param name="index">Zero based index</param>
-            <returns>Item value at the specified index.</returns>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaVector.CopyTo(CodeForDotNet.Windows.Imaging.WiaVector,System.Int32)">
-            <summary>
-            Copies items from this collection to an array.
-            </summary>
-            <param name="array">Target array.</param>
-            <param name="index">Target zero based index.</param>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaVector.CopyTo(System.Array,System.Int32)">
-            <summary>
-            Copies items from this collection to an array.
-            </summary>
-            <param name="array">Target array.</param>
-            <param name="index">Target zero based index.</param>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaVector.Count">
-            <summary>
-            Number of items in the collection.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaVector.IsSynchronized">
-            <summary>
-            Indicates that the collection is synchronized (thread safe).
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaVector.SyncRoot">
-            <summary>
-            Thread synchronization object.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaVector.GetEnumerator">
-            <summary>
-            Gets an enumerator for this collection.
-            </summary>
-        </member>
-        <member name="T:CodeForDotNet.Windows.Imaging.WiaVectorEnumerator">
-            <summary>
-            Managed enumerator for <see cref="T:Interop.Wia.Vector" /> items.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaVectorEnumerator.#ctor(System.Collections.IEnumerator)">
-            <summary>
-            Creates the object.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaVectorEnumerator.Finalize">
-            <summary>
-            Disposes unmanaged resources during finalization.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaVectorEnumerator.Dispose">
-            <summary>
-            Proactively frees resources owned by this object.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaVectorEnumerator.Dispose(System.Boolean)">
-            <summary>
-            Frees resources owned by this object.
-            </summary>
-            <param name="disposing">True when called via <see cref="M:CodeForDotNet.Windows.Imaging.WiaVectorEnumerator.Dispose"/>.</param>
-        </member>
-        <member name="F:CodeForDotNet.Windows.Imaging.WiaVectorEnumerator._wiaVectorEnumerator">
-            <summary>
-            WIA vector enumerator.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaVectorEnumerator.System#Collections#IEnumerator#Current">
-            <summary>
-            Item at the current position.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Imaging.WiaVectorEnumerator.Current">
-            <summary>
-            Item at the current position.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaVectorEnumerator.MoveNext">
-            <summary>
-            Moves to the next item if available.
-            </summary>
-            <returns>True when moved, false when no more items exist.</returns>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaVectorEnumerator.Reset">
-            <summary>
-            Moves to the beginning of the collection.
-            </summary>
-        </member>
-        <member name="T:CodeForDotNet.Windows.Properties.Resources">
-            <summary>
-              A strongly-typed resource class, for looking up localized strings, etc.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Properties.Resources.ResourceManager">
-            <summary>
-              Returns the cached ResourceManager instance used by this class.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Properties.Resources.Culture">
-            <summary>
-              Overrides the current thread's CurrentUICulture property for all
-              resource lookups using this strongly typed resource class.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Properties.Resources.ErrorComPlusApplicationNameUnconfirmed">
-            <summary>
-              Looks up a localized string similar to COM Application Name {0} was not found after installation..
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Properties.Resources.ErrorMissingConditionProperty">
-            <summary>
-              Looks up a localized string similar to Please specify a unique {0}.ConditionArgument, it is required to store uninstall information in the saved state..
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusCommtitingChanges">
-            <summary>
-              Looks up a localized string similar to Committing changes....
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusConfigureComPlusApplication">
-            <summary>
-              Looks up a localized string similar to Configuring COM+ application {0}....
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusDeletedService">
-            <summary>
-              Looks up a localized string similar to Deleted service..
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusDeletingFile">
-            <summary>
-              Looks up a localized string similar to Deleting file {0}.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusGacInstallComponent">
-            <summary>
-              Looks up a localized string similar to lnstalling component {0} into the GAC....
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusGaclnstallDependency">
-            <summary>
-              Looks up a localized string similar to lnstalling dependency {0} into the GAC....
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusGacRemoveComponent">
-            <summary>
-              Looks up a localized string similar to Removing component {0} from the GAC....
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusGacRemoveDependency">
-            <summary>
-              Looks up a localized string similar to Removing dependency {0} from the GAC....
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusInstall">
-            <summary>
-              Looks up a localized string similar to {0} installer performing install action for condition {1}....
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusLoadingFile">
-            <summary>
-              Looks up a localized string similar to Loading file {0}.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusMigratingDotNetConfigToLocalManifest">
-            <summary>
-              Looks up a localized string similar to Migrating local .NET application config to COM manifest (application.manifest and application.config)....
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusRegisterComPlusComponent">
-            <summary>
-              Looks up a localized string similar to Registering COM+ component {0}....
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusRemovingComPlusApplication">
-            <summary>
-              Looks up a localized string similar to Removing COM+application {0}....
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusRemovingComPlusApplicationInstance">
-            <summary>
-              Looks up a localized string similar to Removing COM+ application {0} instance {1}....
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusShutdownServices">
-            <summary>
-              Looks up a localized string similar to Shutting down services....
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusSkippingMissingFile">
-            <summary>
-              Looks up a localized string similar to Skipping missing file {0}.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusUninstall">
-            <summary>
-              Looks up a localized string similar to {0} installer performing uninstall action for condition {1}....
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusUnregisterComPlusComponent">
-            <summary>
-              Looks up a localized string similar to Unregistering COM+ component {0}....
             </summary>
         </member>
     </members>

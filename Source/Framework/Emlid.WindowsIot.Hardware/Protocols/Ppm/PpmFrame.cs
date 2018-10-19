@@ -1,5 +1,6 @@
 ﻿using CodeForDotNet.Collections;
 using System;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Text;
 
@@ -30,8 +31,12 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Ppm
         /// </summary>
         public PpmFrame(long sequence, int[] channels)
         {
+            // Validate.
+            if (channels is null) throw new ArgumentNullException(nameof(channels));
+
+            // Initialize.
             Time = sequence;
-            Channels = channels ?? throw new ArgumentNullException(nameof(channels));
+            Channels = new Collection<int>(channels);
         }
 
         #endregion Lifetime
@@ -43,9 +48,7 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Ppm
         /// </summary>
         public static bool operator ==(PpmFrame left, PpmFrame right)
         {
-            return !ReferenceEquals(left, null)
-                ? left.Equals(right)
-                : ReferenceEquals(right, null);
+            return left?.Equals(right) ?? right is null;
         }
 
         /// <summary>
@@ -53,9 +56,7 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Ppm
         /// </summary>
         public static bool operator !=(PpmFrame left, PpmFrame right)
         {
-            return !ReferenceEquals(left, null)
-                ? !left.Equals(right)
-                : !ReferenceEquals(right, null);
+            return !(left?.Equals(right) ?? right is null);
         }
 
         /// <summary>
@@ -65,8 +66,7 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Ppm
         public override bool Equals(object value)
         {
             // Compare type
-            var other = value as PpmFrame;
-            if (ReferenceEquals(other, null))
+            if (!(value is PpmFrame other) || other is null)
                 return false;
 
             // Compare values
@@ -102,7 +102,7 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Ppm
         /// <summary>
         /// Channel values in microseconds.
         /// </summary>
-        public int[] Channels { get; private set; }
+        public Collection<int> Channels { get; private set; }
 
         #endregion Properties
 
@@ -118,7 +118,7 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Ppm
             result.AppendFormat(CultureInfo.CurrentCulture, Resources.Strings.PpmFrameFormatStart, Time);
 
             // Add each channel value
-            for (var index = 0; index < Channels.Length; index++)
+            for (var index = 0; index < Channels.Count; index++)
             {
                 result.AppendFormat(CultureInfo.CurrentCulture,
                     Resources.Strings.PpmFrameFormatChannel, index + 1, Channels[index]);

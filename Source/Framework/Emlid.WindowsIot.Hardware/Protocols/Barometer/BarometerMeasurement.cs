@@ -1,11 +1,12 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 
 namespace Emlid.WindowsIot.Hardware.Protocols.Barometer
 {
     /// <summary>
     /// Contains a (pressure and temperature) measurement of a barometer.
     /// </summary>
-    public struct BarometerMeasurement
+    public struct BarometerMeasurement : IEquatable<BarometerMeasurement>
     {
         #region Lifetime
 
@@ -39,26 +40,21 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Barometer
         /// <summary>
         /// Compares this object with another by value.
         /// </summary>
-        /// <param name="value">Object with which to compare by value.</param>
-        public override bool Equals(object value)
+        /// <param name="something">Object with which to compare by value.</param>
+        public override bool Equals(object something)
         {
-            // Compare type
-            if (!(value is BarometerMeasurement))
-                return false;
-
-            // Compare values
-            return Equals((BarometerMeasurement)value);
+            return (something is BarometerMeasurement other) && Equals(other);
         }
 
         /// <summary>
         /// Compares this object with another of the same type by value.
         /// </summary>
-        /// <param name="value">Object with which to compare by value.</param>
-        public bool Equals(BarometerMeasurement value)
+        /// <param name="other">Object with which to compare by value.</param>
+        public bool Equals(BarometerMeasurement other)
         {
             return
-                value.Pressure == Pressure &&
-                value.Temperature == Temperature;
+                other.Pressure == Pressure &&
+                other.Temperature == Temperature;
         }
 
         /// <summary>
@@ -71,9 +67,9 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Barometer
                 Temperature.GetHashCode();
         }
 
-        #endregion
+        #endregion Operators
 
-        #endregion
+        #endregion Lifetime
 
         #region Public Properties
 
@@ -91,7 +87,7 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Barometer
         /// </remarks>
         public double Temperature { get; set; }
 
-        #endregion
+        #endregion Public Properties
 
         #region Public Methods
 
@@ -105,6 +101,6 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Barometer
                 Resources.Strings.BarometerMeasurementStringFormat, Pressure, Temperature);
         }
 
-        #endregion
+        #endregion Public Methods
     }
 }

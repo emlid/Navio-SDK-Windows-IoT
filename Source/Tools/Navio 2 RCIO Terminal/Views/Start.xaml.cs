@@ -1,5 +1,6 @@
 ﻿using Emlid.WindowsIot.Tools.Navio2RcioTerminal.Models;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Navigation;
 
@@ -21,7 +22,7 @@ namespace Emlid.WindowsIot.Tools.Navio2RcioTerminal.Views
             InitializeComponent();
         }
 
-        #endregion
+        #endregion Lifetime
 
         #region Protected Methods
 
@@ -33,13 +34,14 @@ namespace Emlid.WindowsIot.Tools.Navio2RcioTerminal.Views
             return new StartUIModel(application);
         }
 
-        #endregion
+        #endregion Protected Methods
 
         #region Events
 
         /// <summary>
         /// Initializes the page when it is loaded.
         /// </summary>
+        [SuppressMessage("Microsoft.Usage", "CA1801", Justification = "Event handlers must not use all parameters.")]
         protected override void OnNavigatedTo(NavigationEventArgs arguments)
         {
             // Call base class method
@@ -59,6 +61,7 @@ namespace Emlid.WindowsIot.Tools.Navio2RcioTerminal.Views
         /// Updates view elements when the model changes and no automatic
         /// method is currently available.
         /// </summary>
+        [SuppressMessage("Microsoft.Usage", "CA1801", Justification = "Event handlers must not use all parameters.")]
         private void OnModelChanged(object sender, PropertyChangedEventArgs arguments)
         {
             switch (arguments.PropertyName)
@@ -72,11 +75,12 @@ namespace Emlid.WindowsIot.Tools.Navio2RcioTerminal.Views
         /// <summary>
         /// Exits the application when the corresponding button is clicked.
         /// </summary>
+        [SuppressMessage("Microsoft.Usage", "CA1801", Justification = "Event handlers must not use all parameters.")]
         private void OnExitButtonClick(object sender, RoutedEventArgs arguments)
         {
             Application.Current.Exit();
         }
 
-        #endregion
+        #endregion Events
     }
 }

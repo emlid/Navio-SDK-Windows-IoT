@@ -4,6 +4,8 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models.Tests
 {
@@ -139,7 +141,8 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Models.Tests
                     InputEnabled = true;
                     DoPropertyChanged(nameof(InputEnabled));
                 }
-            });
+            },
+            CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default);
         }
 
         #endregion Protected Methods

@@ -26,8 +26,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io.Data
         /// </summary>
         public const ushort ForceSafetyOnMagic = 22027;	/* required argument for force safety (random) */
 
-
-        #endregion
+        #endregion Constants
 
         #region Lifetime
 
@@ -57,34 +56,34 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io.Data
             ForceSafetyOn = data[13];
         }
 
-        #endregion
+        #endregion Lifetime
 
         #region Public Fields
 
         /// <summary>
         /// Features.
         /// </summary>
-        public Px4ioSetupFeatureFlags Features;
+        public Px4ioSetupFeatureFlags Features { get; set; }
 
         /// <summary>
         /// Arming controls.
         /// </summary>
-        public Px4ioSetupArmingFlags Arming;
+        public Px4ioSetupArmingFlags Arming { get; set; }
 
         /// <summary>
         /// Bitmask, 0 = low rate, 1 = high rate.
         /// </summary>
-        public ushort PwmRates;
+        public ushort PwmRates { get; set; }
 
         /// <summary>
         /// Low PWM frame output rate in Hz.
         /// </summary>
-        public ushort PwmDefaultRate;
+        public ushort PwmDefaultRate { get; set; }
 
         /// <summary>
         /// High PWM frame output rate in Hz.
         /// </summary>
-        public ushort PwmAlternateRate;
+        public ushort PwmAlternateRate { get; set; }
 
         /// <summary>
         /// Bitmask of relay/switch outputs, 0 = off, 1 = on.
@@ -100,7 +99,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io.Data
         /// <remarks>
         /// Hardware version 2 only.
         /// </remarks>
-        public ushort RelaysPad;
+        public ushort RelaysPad { get; set; }
 
         /// <summary>
         /// Servo or battery voltage correction factor (float).
@@ -109,35 +108,35 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io.Data
         /// Hardware version 1 = Battery voltage scale.
         /// Hardware version 2 = Servo voltage scale.
         /// </remarks>
-        public ushort VoltageScale;
+        public ushort VoltageScale { get; set; }
 
         /// <summary>
         /// DSM bind state.
         /// </summary>
-        public Px4ioSetupDsmBindState DsmBindState;
+        public Px4ioSetupDsmBindState DsmBindState { get; set; }
 
         /// <summary>
         /// Debug level for IO board.
         /// </summary>
-        public ushort Debug;
+        public ushort Debug { get; set; }
 
         /// <summary>
         /// Reboot IO into boot-loader.
         /// </summary>
         /// <remarks>
-        /// Set to the the <see cref="RebootBootLoaderMagic"/> value to initiate.
+        /// Set to the <see cref="RebootBootLoaderMagic"/> value to initiate.
         /// </remarks>
-        public ushort RebootBootLoader;
+        public ushort RebootBootLoader { get; set; }
 
         /// <summary>
         /// Get CRC of IO firmware.
         /// </summary>
-        public uint Crc;
+        public uint Crc { get; set; }
 
         /// <summary>
         /// Throttle failsafe pulse length in microseconds.
         /// </summary>
-        public ushort RCThrottleFailsafe;
+        public ushort RCThrottleFailsafe { get; set; }
 
         /// <summary>
         /// Force safety switch into 'disarmed' (PWM disabled state).
@@ -145,8 +144,8 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io.Data
         /// <remarks>
         /// Set to the <see cref="ForceSafetyOnMagic"/> value to initiate.
         /// </remarks>
-        public ushort ForceSafetyOn;
+        public ushort ForceSafetyOn { get; set; }
 
-        #endregion
+        #endregion Public Fields
     }
 }

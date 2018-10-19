@@ -4,43 +4,6 @@
         <name>CodeForDotNet.WindowsUniversal</name>
     </assembly>
     <members>
-        <member name="T:CodeForDotNet.WindowsUniversal.Collections.MapChangedEventArgs`1">
-            <summary>
-            Change event handler for the <see cref="T:CodeForDotNet.WindowsUniversal.Collections.ObservableMap`2"/>.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.WindowsUniversal.Collections.MapChangedEventArgs`1.#ctor(Windows.Foundation.Collections.CollectionChange,`0)">
-            <summary>
-            Creates an instance with the specified key and change.
-            </summary>
-            <param name="change">Change type.</param>
-            <param name="key">Key of the changed entry, when relevant.</param>
-        </member>
-        <member name="P:CodeForDotNet.WindowsUniversal.Collections.MapChangedEventArgs`1.CollectionChange">
-            <summary>
-            Type of change which occurred.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.WindowsUniversal.Collections.MapChangedEventArgs`1.Key">
-            <summary>
-            Key of the changed item, when relevant.
-            </summary>
-        </member>
-        <member name="T:CodeForDotNet.WindowsUniversal.Collections.ObservableMap`2">
-            <summary>
-            Implementation of IObservableMap that supports re-entrance for use as a default view model.
-            </summary>
-        </member>
-        <member name="E:CodeForDotNet.WindowsUniversal.Collections.ObservableMap`2.MapChanged">
-            <summary>
-            Fired when the dictionary changes.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.WindowsUniversal.Collections.ObservableMap`2.OnDictionaryChanged(CodeForDotNet.Collections.CollectionChange,`0,`1)">
-            <summary>
-            Fires the <see cref="E:CodeForDotNet.Collections.ObservableDictionary`2.DictionaryChanged"/> and <see cref="E:CodeForDotNet.WindowsUniversal.Collections.ObservableMap`2.MapChanged"/> events when a change occurs.
-            </summary>
-        </member>
         <member name="T:CodeForDotNet.WindowsUniversal.UI.Converters.BooleanNegationConverter">
             <summary>
             Value converter that translates true to false and vice versa.

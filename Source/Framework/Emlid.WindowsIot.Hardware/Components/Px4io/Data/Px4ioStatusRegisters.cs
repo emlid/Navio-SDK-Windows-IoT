@@ -16,7 +16,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io.Data
         /// </summary>
         public const byte RegisterCount = 10;
 
-        #endregion
+        #endregion Constants
 
         #region Lifetime
 
@@ -43,24 +43,24 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io.Data
             Mixer = (Px4ioStatusMixerFlags)data[9];
         }
 
-        #endregion
+        #endregion Lifetime
 
         #region Public Fields
 
         /// <summary>
         /// Free memory.
         /// </summary>
-        public ushort FreeMemory;
+        public ushort FreeMemory { get; set; }
 
         /// <summary>
         /// CPU load.
         /// </summary>
-        public ushort CpuLoad;
+        public ushort CpuLoad { get; set; }
 
         /// <summary>
         /// Monitoring flags.
         /// </summary>
-        public Px4ioStatusMonitoringFlags Monitoring;
+        public Px4ioStatusMonitoringFlags Monitoring { get; set; }
 
         /// <summary>
         /// Alarm flags.
@@ -68,7 +68,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io.Data
         /// <remarks>
         /// Alarms latch, write 1 to a bit to clear it.
         /// </remarks>
-        public Px4ioStatusAlarmFlags Alarms;
+        public Px4ioStatusAlarmFlags Alarms { get; set; }
 
         /// <summary>
         /// Battery voltage in mV.
@@ -76,7 +76,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io.Data
         /// <remarks>
         /// Hardware version 1 only.
         /// </remarks>
-        public ushort BatteryVoltage;
+        public ushort BatteryVoltage { get; set; }
 
         /// <summary>
         /// Battery current (raw ADC).
@@ -84,7 +84,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io.Data
         /// <remarks>
         /// Hardware version 1 only.
         /// </remarks>
-        public ushort BatteryCurrent;
+        public ushort BatteryCurrent { get; set; }
 
         /// <summary>
         /// Servo rail voltage in mV.
@@ -92,7 +92,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io.Data
         /// <remarks>
         /// Hardware version 2 only.
         /// </remarks>
-        public ushort ServoVoltage;
+        public ushort ServoVoltage { get; set; }
 
         /// <summary>
         /// RSSI voltage.
@@ -100,7 +100,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io.Data
         /// <remarks>
         /// Hardware version 2 only.
         /// </remarks>
-        public ushort RssiVoltage;
+        public ushort RssiVoltage { get; set; }
 
         /// <summary>
         /// RSSI PWM value.
@@ -108,13 +108,13 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io.Data
         /// <remarks>
         /// Hardware version 2 only.
         /// </remarks>
-        public ushort RssiPwm;
+        public ushort RssiPwm { get; set; }
 
         /// <summary>
         /// Mixer actuator limit flags.
         /// </summary>
-        public Px4ioStatusMixerFlags Mixer;
+        public Px4ioStatusMixerFlags Mixer { get; set; }
 
-        #endregion
+        #endregion Public Fields
     }
 }

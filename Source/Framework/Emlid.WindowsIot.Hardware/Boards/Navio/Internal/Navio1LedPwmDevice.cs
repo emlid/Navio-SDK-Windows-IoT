@@ -5,6 +5,7 @@ using Emlid.WindowsIot.HardwarePlus.Buses;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
 using Windows.Devices.Gpio;
 
 namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
@@ -18,6 +19,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
     /// See http://docs.emlid.com/Navio-dev/servo-and-rgb-led/ for more information.
     /// <seealso cref="Pca9685Device"/>
     /// </remarks>
+    [SuppressMessage("Microsoft.Usage", "CA2208", Justification = "Exception member names should be named like the property to better describe the fault.")]
     public sealed class Navio1LedPwmDevice : DisposableObject, INavioLedDevice, INavioPwmDevice
     {
         #region Constants
@@ -150,7 +152,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         /// <summary>
         /// Thread synchronization.
         /// </summary>
-        private static object _lock = new object();
+        private static readonly object _lock = new object();
 
         /// <summary>
         /// LED/PWM device.
@@ -589,8 +591,8 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         /// </remarks>
         ReadOnlyCollection<PwmPulse> INavioPwmDevice.Channels => _pwmChannelsReadOnly;
 
-        private ReadOnlyCollection<PwmPulse> _pwmChannelsReadOnly;
-        private PwmPulse[] _pwmChannels;
+        private readonly ReadOnlyCollection<PwmPulse> _pwmChannelsReadOnly;
+        private readonly PwmPulse[] _pwmChannels;
 
         #endregion Properties
 

@@ -164,14 +164,14 @@
             <summary>
             Helper method: fetches correct registry subkey.
             HKLM is used for settings marked as application-scoped.
-            HKLU is used for settings marked as user-scoped. 
+            HKLU is used for settings marked as user-scoped.
             </summary>
         </member>
         <member name="M:CodeForDotNet.Configuration.RegistrySettingsProvider.IsUserScoped(System.Configuration.SettingsProperty)">
             <summary>
             Helper method: walks the "attribute bag" for a given property
             to determine if it is user-scoped or not.
-            Note that this provider does not enforce other rules, such as 
+            Note that this provider does not enforce other rules, such as
                - unknown attributes
                - improper attribute combinations (e.g. both user and app - this implementation
                  would say true for user-scoped regardless of existence of app-scoped)

@@ -1,6 +1,7 @@
 ﻿using Emlid.WindowsIot.Tools.NavioHardwareTest.Models;
 using Emlid.WindowsIot.Tools.NavioHardwareTest.Views.Tests;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -23,7 +24,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Views
             InitializeComponent();
         }
 
-        #endregion
+        #endregion Lifetime
 
         #region Protected Methods
 
@@ -35,7 +36,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Views
             return new StartUIModel(application);
         }
 
-        #endregion
+        #endregion Protected Methods
 
         #region Events
 
@@ -74,6 +75,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Views
         /// <summary>
         /// Calls the model <see cref="StartUIModel.Detect"/> method when the detect button is clicked.
         /// </summary>
+        [SuppressMessage("Microsoft.Usage", "CA1801", Justification = "Event handlers must not use all parameters.")]
         private void OnDetectButtonClick(object sender, RoutedEventArgs e)
         {
             Model?.Detect();
@@ -82,6 +84,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Views
         /// <summary>
         /// Navigates to the <see cref="LedTestPage"/> when the corresponding button is clicked.
         /// </summary>
+        [SuppressMessage("Microsoft.Usage", "CA1801", Justification = "Event handlers must not use all parameters.")]
         private void OnLedTestButtonClick(object sender, RoutedEventArgs arguments)
         {
             Frame.Navigate(typeof(LedTestPage));
@@ -90,6 +93,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Views
         /// <summary>
         /// Navigates to the <see cref="PwmTestPage"/> when the corresponding button is clicked.
         /// </summary>
+        [SuppressMessage("Microsoft.Usage", "CA1801", Justification = "Event handlers must not use all parameters.")]
         private void OnPwmTestButtonClick(object sender, RoutedEventArgs arguments)
         {
             Frame.Navigate(typeof(PwmTestPage));
@@ -98,6 +102,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Views
         /// <summary>
         /// Navigates to the <see cref="RCInputTestPage"/> when the corresponding button is clicked.
         /// </summary>
+        [SuppressMessage("Microsoft.Usage", "CA1801", Justification = "Event handlers must not use all parameters.")]
         private void OnRCInputTestButtonClick(object sender, RoutedEventArgs arguments)
         {
             Frame.Navigate(typeof(RCInputTestPage));
@@ -106,6 +111,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Views
         /// <summary>
         /// Navigates to the <see cref="BarometerTestPage"/> when the corresponding button is clicked.
         /// </summary>
+        [SuppressMessage("Microsoft.Usage", "CA1801", Justification = "Event handlers must not use all parameters.")]
         private void OnBarometerTestButtonClick(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(BarometerTestPage));
@@ -114,6 +120,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Views
         /// <summary>
         /// Navigates to the <see cref="FramTestPage"/> when the corresponding button is clicked.
         /// </summary>
+        [SuppressMessage("Microsoft.Usage", "CA1801", Justification = "Event handlers must not use all parameters.")]
         private void OnFramTestButtonClick(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(FramTestPage));
@@ -122,11 +129,12 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Views
         /// <summary>
         /// Exits the application when the corresponding button is clicked.
         /// </summary>
+        [SuppressMessage("Microsoft.Usage", "CA1801", Justification = "Event handlers must not use all parameters.")]
         private void OnExitButtonClick(object sender, RoutedEventArgs arguments)
         {
             Application.Current.Exit();
         }
 
-        #endregion
+        #endregion Events
     }
 }

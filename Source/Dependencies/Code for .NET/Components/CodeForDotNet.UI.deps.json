@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETStandard,Version=v2.0/",
-    "signature": "55d57c7b68038646652e7ad2cf24c2286033c34f"
+    "signature": "3e26f20f815f74a7cc0b098c7783fee46affe2ee"
   },
   "compilationOptions": {},
   "targets": {
@@ -9,15 +9,27 @@
     ".NETStandard,Version=v2.0/": {
       "CodeForDotNet.UI/1.0.0": {
         "dependencies": {
-          "CodeForDotNet": "4.72.1810.11001",
+          "CodeForDotNet": "4.72.1810.16001",
+          "Microsoft.CodeAnalysis.FxCopAnalyzers": "2.6.2",
           "NETStandard.Library": "2.0.3"
         },
         "runtime": {
           "CodeForDotNet.UI.dll": {}
         }
       },
+      "Microsoft.CodeAnalysis.FxCopAnalyzers/2.6.2": {
+        "dependencies": {
+          "Microsoft.CodeQuality.Analyzers": "2.6.2",
+          "Microsoft.NetCore.Analyzers": "2.6.2",
+          "Microsoft.NetFramework.Analyzers": "2.6.2",
+          "Text.Analyzers": "2.6.2"
+        }
+      },
+      "Microsoft.CodeQuality.Analyzers/2.6.2": {},
+      "Microsoft.NetCore.Analyzers/2.6.2": {},
       "Microsoft.NETCore.Platforms/1.1.0": {},
       "Microsoft.NETCore.Targets/1.1.0": {},
+      "Microsoft.NetFramework.Analyzers/2.6.2": {},
       "NETStandard.Library/2.0.3": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.1.0"
@@ -108,7 +120,8 @@
           "System.Runtime": "4.3.0"
         }
       },
-      "CodeForDotNet/4.72.1810.11001": {
+      "Text.Analyzers/2.6.2": {},
+      "CodeForDotNet/4.72.1810.16001": {
         "dependencies": {
           "System.Drawing.Common": "4.5.1",
           "System.Drawing.Primitives": "4.3.0",
@@ -128,6 +141,27 @@
       "serviceable": false,
       "sha512": ""
     },
+    "Microsoft.CodeAnalysis.FxCopAnalyzers/2.6.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ZbEtS7b884u20I1wOjhjG2M1dMf4hC1M2wZS4ovGTzhgz14lvRG7DUnuqrXWJGJDl3jVVPVeKAKBA68vIUuH6Q==",
+      "path": "microsoft.codeanalysis.fxcopanalyzers/2.6.2",
+      "hashPath": "microsoft.codeanalysis.fxcopanalyzers.2.6.2.nupkg.sha512"
+    },
+    "Microsoft.CodeQuality.Analyzers/2.6.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-3NkjweORWpe6ByfVtrPnQBerTfq2b7BJIAAbjS3yw2r8ldxLaV4gpJ3aMQsiVco1TlqVd1TdGiDZPJvBpVOyBQ==",
+      "path": "microsoft.codequality.analyzers/2.6.2",
+      "hashPath": "microsoft.codequality.analyzers.2.6.2.nupkg.sha512"
+    },
+    "Microsoft.NetCore.Analyzers/2.6.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-IHvymQJEYXhuavP0Z5iKXWlTOJw/8LWx/qWB32oJ3doVP+AEowjFe8NUfuNeELRARP0CXBnAgaa40lJB/FSBPA==",
+      "path": "microsoft.netcore.analyzers/2.6.2",
+      "hashPath": "microsoft.netcore.analyzers.2.6.2.nupkg.sha512"
+    },
     "Microsoft.NETCore.Platforms/1.1.0": {
       "type": "package",
       "serviceable": true,
@@ -141,6 +175,13 @@
       "sha512": "sha512-aOZA3BWfz9RXjpzt0sRJJMjAscAUm3Hoa4UWAfceV9UTYxgwZ1lZt5nO2myFf+/jetYQo4uTP7zS8sJY67BBxg==",
       "path": "microsoft.netcore.targets/1.1.0",
       "hashPath": "microsoft.netcore.targets.1.1.0.nupkg.sha512"
+    },
+    "Microsoft.NetFramework.Analyzers/2.6.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ys6owm7wVw/fSPKrFnX47inHZWIRdK/6GIb2lnS/mw4pgh5kiCQcDaQWKh92DM41YbSx2LA/i/VGiGCN7iUEPQ==",
+      "path": "microsoft.netframework.analyzers/2.6.2",
+      "hashPath": "microsoft.netframework.analyzers.2.6.2.nupkg.sha512"
     },
     "NETStandard.Library/2.0.3": {
       "type": "package",
@@ -219,7 +260,14 @@
       "path": "system.threading.tasks/4.3.0",
       "hashPath": "system.threading.tasks.4.3.0.nupkg.sha512"
     },
-    "CodeForDotNet/4.72.1810.11001": {
+    "Text.Analyzers/2.6.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-3r0CramOpPpKXTzWCWQHQmE7hOmUC1+swEy6Mtj5ceP0atyYj+CqDCqb2xqNB0UPD/dO2ULWYdYl69gSxoxscw==",
+      "path": "text.analyzers/2.6.2",
+      "hashPath": "text.analyzers.2.6.2.nupkg.sha512"
+    },
+    "CodeForDotNet/4.72.1810.16001": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

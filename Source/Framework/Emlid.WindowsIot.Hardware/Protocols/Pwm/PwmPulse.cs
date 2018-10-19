@@ -8,7 +8,7 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Pwm
     /// </summary>
     /// <see href="https://en.wikipedia.org/wiki/Pulse-width_modulation"/>
     /// <see href="https://www.oscium.com/sites/default/files/wipry-combo/Final,%2520Tutorial%2520on%2520Pulse%2520Width%2520and%2520Duty%2520Cycle.pdf"/>
-    public struct PwmPulse
+    public struct PwmPulse : IEquatable<PwmPulse>
     {
         #region Constants
 
@@ -24,11 +24,7 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Pwm
         /// <see href="http://pcbheaven.com/wikipages/How_RC_Servos_Works/"/>
         public const int ServoSafeFrequency = 50;
 
-        #endregion
-
-        #region Lifetime
-
-        #endregion
+        #endregion Constants
 
         #region Operators
 
@@ -51,15 +47,18 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Pwm
         /// <summary>
         /// Compares this object with another by value.
         /// </summary>
-        /// <param name="value">Object with which to compare by value.</param>
-        public override bool Equals(object value)
+        /// <param name="something">Object with which to compare by value.</param>
+        public override bool Equals(object something)
         {
-            // Compare type
-            if (!(value is PwmPulse))
-                return false;
-            var other = (PwmPulse)value;
+            return something is PwmPulse other && Equals(other);
+        }
 
-            // Compare values
+        /// <summary>
+        /// Compares this object with another of the same type by value.
+        /// </summary>
+        /// <param name="other">Object with which to compare by value.</param>
+        public bool Equals(PwmPulse other)
+        {
             return
                 other.Width == Width &&
                 other.Frequency == Frequency;
@@ -75,7 +74,7 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Pwm
                 Frequency.GetHashCode();
         }
 
-        #endregion
+        #endregion Operators
 
         #region Properties
 
@@ -119,7 +118,7 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Pwm
         /// </remarks>
         public decimal DutyCycle { get; set; }
 
-        #endregion
+        #endregion Properties
 
         #region Methods
 
@@ -178,6 +177,6 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Pwm
                 Resources.Strings.PwmPulseFormat, Width, Frequency, DutyCycle);
         }
 
-        #endregion
+        #endregion Methods
     }
 }

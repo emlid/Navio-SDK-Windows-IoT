@@ -6,7 +6,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
     /// Encapsulates MB85RC#V device identifier data (3 bytes), allowing the
     /// individual parts to be easily accessed and validated.
     /// </summary>
-    public struct Mb85rcvDeviceId
+    public struct Mb85rcvDeviceId : IEquatable<Mb85rcvDeviceId>
     {
         #region Constants
 
@@ -35,7 +35,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
         /// </summary>
         public const int ProductDensityMask = 0x0f;
 
-        #endregion
+        #endregion Constants
 
         #region Lifetime
 
@@ -90,7 +90,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
             Data3 = (byte)productId;
         }
 
-        #endregion
+        #endregion Lifetime
 
         #region Operators
 
@@ -113,15 +113,18 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
         /// <summary>
         /// Compares this object with another by value.
         /// </summary>
-        /// <param name="value">Object with which to compare by value.</param>
-        public override bool Equals(object value)
+        /// <param name="something">Object with which to compare by value.</param>
+        public override bool Equals(object something)
         {
-            // Compare type
-            if (!(value is Mb85rcvDeviceId))
-                return false;
-            var other = (Mb85rcvDeviceId)value;
+            return (something is Mb85rcvDeviceId other) && Equals(other);
+        }
 
-            // Compare values
+        /// <summary>
+        /// Compares this object with another of the same type by value.
+        /// </summary>
+        /// <param name="other">Object with which to compare by value.</param>
+        public bool Equals(Mb85rcvDeviceId other)
+        {
             return
                 other.Data1 == Data1 &&
                 other.Data2 == Data2 &&
@@ -139,7 +142,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
                 Data3.GetHashCode();
         }
 
-        #endregion
+        #endregion Operators
 
         #region Properties
 
@@ -160,7 +163,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
         /// </summary>
         public byte Data3 { get; set; }
 
-        #endregion
+        #endregion Raw Data
 
         #region Contents
 
@@ -203,8 +206,8 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
             set { Data3 = value; }
         }
 
-        #endregion
+        #endregion Contents
 
-        #endregion
+        #endregion Properties
     }
 }

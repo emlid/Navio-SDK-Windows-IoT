@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Emlid.WindowsIot.Hardware.Components.Px4io.Data
 {
@@ -10,6 +11,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io.Data
     /// Offset 8 is undefined.
     /// </remarks>
     [CLSCompliant(false)]
+    [SuppressMessage("Microsoft.Design", "CA1028", Justification = "Non-integer enumeration better suited to match the hardware specification in a hardware library.")]
     public enum Px4ioSetupRegisterOffset : byte
     {
         /// <summary>

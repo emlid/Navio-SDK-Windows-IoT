@@ -16,7 +16,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io.Data
         /// </summary>
         public const byte RegisterCount = 1;
 
-        #endregion
+        #endregion Constants
 
         #region Lifetime
 
@@ -36,15 +36,15 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io.Data
             Altitude = data[0];
         }
 
-        #endregion
+        #endregion Lifetime
 
         #region Public Fields
 
         /// <summary>
         /// Altitude of an external sensor (HoTT or SBUS2).
         /// </summary>
-        public ushort Altitude;
+        public ushort Altitude { get; set; }
 
-        #endregion
+        #endregion Public Fields
     }
 }

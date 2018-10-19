@@ -4,6 +4,7 @@ using Emlid.WindowsIot.Hardware.Protocols.Pwm;
 using Emlid.WindowsIot.Tools.NavioHardwareTest.Models;
 using Emlid.WindowsIot.Tools.NavioHardwareTest.Models.Tests;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using Windows.System;
 using Windows.UI.Xaml;
@@ -85,6 +86,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Views.Tests
         /// <summary>
         /// Executes the <see cref="PwmTestUIModel.Reset"/> action when the related button is clicked.
         /// </summary>
+        [SuppressMessage("Microsoft.Usage", "CA1801", Justification = "Event handlers must not use all parameters.")]
         private void OnResetButtonClick(object sender, RoutedEventArgs arguments)
         {
             Model.Reset();
@@ -93,6 +95,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Views.Tests
         /// <summary>
         /// Executes the <see cref="PwmTestUIModel.Read"/> action when the related button is clicked.
         /// </summary>
+        [SuppressMessage("Microsoft.Usage", "CA1801", Justification = "Event handlers must not use all parameters.")]
         private void OnReadButtonClick(object sender, RoutedEventArgs arguments)
         {
             Model.Read();
@@ -101,6 +104,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Views.Tests
         /// <summary>
         /// Executes the <see cref="TestUIModel.Clear"/> action when the related button is clicked.
         /// </summary>
+        [SuppressMessage("Microsoft.Usage", "CA1801", Justification = "Event handlers must not use all parameters.")]
         private void OnClearButtonClick(object sender, RoutedEventArgs arguments)
         {
             Model.Clear();
@@ -109,6 +113,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Views.Tests
         /// <summary>
         /// Returns to the previous page when the close button is clicked.
         /// </summary>
+        [SuppressMessage("Microsoft.Usage", "CA1801", Justification = "Event handlers must not use all parameters.")]
         private void OnCloseButtonClick(object sender, RoutedEventArgs arguments)
         {
             Frame.GoBack();
@@ -117,6 +122,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Views.Tests
         /// <summary>
         /// Changes the frequency when the user presses enter and the value has changed.
         /// </summary>
+        [SuppressMessage("Microsoft.Usage", "CA1801", Justification = "Event handlers must not use all parameters.")]
         private void OnFrequencyKeyUp(object sender, KeyRoutedEventArgs arguments)
         {
             if (arguments.Key == VirtualKey.Enter)
@@ -126,6 +132,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Views.Tests
         /// <summary>
         /// Changes the frequency when the user moves out of the text box and the value has changed.
         /// </summary>
+        [SuppressMessage("Microsoft.Usage", "CA1801", Justification = "Event handlers must not use all parameters.")]
         private void OnFrequencyLostFocus(object sender, RoutedEventArgs arguments)
         {
             SetFrequency();
@@ -134,6 +141,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Views.Tests
         /// <summary>
         /// Changes the channel value when it's value is changed in the UI.
         /// </summary>
+        [SuppressMessage("Microsoft.Usage", "CA1801", Justification = "Event handlers must not use all parameters.")]
         private void OnChannelChanged(object sender, ValueChangedEventArgs<PwmPulse> value)
         {
             var slider = (PwmChannelSlider)sender;

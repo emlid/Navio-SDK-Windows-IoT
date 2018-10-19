@@ -16,7 +16,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io.Data
         /// </summary>
         public const byte RegisterCount = 1;
 
-        #endregion
+        #endregion Constants
 
         #region Lifetime
 
@@ -36,15 +36,15 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io.Data
             Led = data[0];
         }
 
-        #endregion
+        #endregion Lifetime
 
         #region Public Fields
 
         /// <summary>
         /// Sets the amber LED on/off.
         /// </summary>
-        public ushort Led;
+        public ushort Led { get; set; }
 
-        #endregion
+        #endregion Public Fields
     }
 }

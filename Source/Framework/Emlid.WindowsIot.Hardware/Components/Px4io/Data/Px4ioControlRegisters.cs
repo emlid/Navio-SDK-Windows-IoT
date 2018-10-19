@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 
 namespace Emlid.WindowsIot.Hardware.Components.Px4io.Data
 {
@@ -21,7 +22,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io.Data
         /// </summary>
         public const int ControlsMaximum = 8;
 
-        #endregion
+        #endregion Constants
 
         #region Lifetime
 
@@ -37,50 +38,50 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io.Data
 
             // Set properties from data
             var offset = 0;
-            Group0 = new byte[ControlsMaximum];
+            Group0 = new Collection<byte>();
             for (var index = 0; index < ControlsMaximum; index++, offset++)
-                Group0[index] = (byte)data[offset];
-            Group1 = new byte[ControlsMaximum];
+                Group0.Add((byte)data[offset]);
+            Group1 = new Collection<byte>();
             for (var index = 0; index < ControlsMaximum; index++, offset++)
-                Group1[index] = (byte)data[offset];
-            Group2 = new byte[ControlsMaximum];
+                Group1.Add((byte)data[offset]);
+            Group2 = new Collection<byte>();
             for (var index = 0; index < ControlsMaximum; index++, offset++)
-                Group2[index] = (byte)data[offset];
-            Group3 = new byte[ControlsMaximum];
+                Group2.Add((byte)data[offset]);
+            Group3 = new Collection<byte>();
             for (var index = 0; index < ControlsMaximum; index++, offset++)
-                Group3[index] = (byte)data[offset];
-            //GroupsValid = (Px4ioControlGroupsValidFlags)data[(int)Px4ioControlRegisterOffsets.GroupsValid];
+                Group3.Add((byte)data[offset]);
+            GroupsValid = (Px4ioControlGroupsValidFlags)data[(int)Px4ioControlRegisterOffset.GroupsValid];
         }
 
-        #endregion
+        #endregion Lifetime
 
         #region Public Fields
 
         /// <summary>
         /// Control group 0.
         /// </summary>
-        public byte[] Group0;
+        public Collection<byte> Group0 { get; private set; }
 
         /// <summary>
         /// Control group 1.
         /// </summary>
-        public byte[] Group1;
+        public Collection<byte> Group1 { get; private set; }
 
         /// <summary>
         /// Control group 2.
         /// </summary>
-        public byte[] Group2;
+        public Collection<byte> Group2 { get; private set; }
 
         /// <summary>
         /// Control group 3.
         /// </summary>
-        public byte[] Group3;
+        public Collection<byte> Group3 { get; private set; }
 
         /// <summary>
         /// Group validation flags.
         /// </summary>
-        public Px4ioControlGroupsValidFlags GroupsValid;
+        public Px4ioControlGroupsValidFlags GroupsValid { get; set; }
 
-        #endregion
+        #endregion Public Fields
     }
 }

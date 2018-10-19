@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Emlid.WindowsIot.Hardware.Components.Pca9685
 {
@@ -6,6 +7,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Pca9685
     /// Bitmask for the <see cref="Pca9685Register.Mode1"/> register.
     /// </summary>
     [Flags]
+    [SuppressMessage("Microsoft.Design", "CA1028", Justification = "Non-integer enumeration better suited to match the hardware specification in a hardware library.")]
     public enum Pca9685Mode2Bits : byte
     {
         /// <summary>

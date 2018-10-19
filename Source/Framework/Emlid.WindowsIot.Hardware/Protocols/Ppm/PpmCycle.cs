@@ -1,11 +1,12 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 
 namespace Emlid.WindowsIot.Hardware.Protocols.Ppm
 {
     /// <summary>
     /// Contains information about a PPM cycle (low-high pulse cycle)
     /// </summary>
-    public struct PpmCycle
+    public struct PpmCycle : IEquatable<PpmCycle>
     {
         #region Lifetime
 
@@ -34,7 +35,7 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Ppm
             HighLength = highLength;
         }
 
-        #endregion
+        #endregion Lifetime
 
         #region Operators
 
@@ -43,9 +44,7 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Ppm
         /// </summary>
         public static bool operator ==(PpmCycle left, PpmCycle right)
         {
-            return !ReferenceEquals(left, null)
-                ? left.Equals(right)
-                : ReferenceEquals(right, null);
+            return left.Equals(right);
         }
 
         /// <summary>
@@ -53,22 +52,30 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Ppm
         /// </summary>
         public static bool operator !=(PpmCycle left, PpmCycle right)
         {
-            return !ReferenceEquals(left, null)
-                ? !left.Equals(right)
-                : !ReferenceEquals(right, null);
+            return !left.Equals(right);
         }
 
         /// <summary>
         /// Compares this object with another by value.
         /// </summary>
-        /// <param name="value">Object with which to compare by value.</param>
-        public override bool Equals(object value)
+        /// <param name="something">Object with which to compare by value.</param>
+        public override bool Equals(object something)
         {
             // Compare type
-            if (!(value is PpmCycle))
+            if (!(something is PpmCycle))
                 return false;
-            var other = (PpmCycle)value;
+            var other = (PpmCycle)something;
 
+            // Compare values
+            return Equals(other);
+        }
+
+        /// <summary>
+        /// Compares this object with another of the same type by value.
+        /// </summary>
+        /// <param name="other">Object with which to compare by value.</param>
+        public bool Equals(PpmCycle other)
+        {
             // Compare values
             return
                 other.LowTime == LowTime &&
@@ -89,7 +96,7 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Ppm
                 HighLength.GetHashCode();
         }
 
-        #endregion
+        #endregion Operators
 
         #region Properties
 
@@ -116,9 +123,9 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Ppm
         /// <summary>
         /// Total length of the cycle in microseconds.
         /// </summary>
-        public long Length {  get { return LowLength + HighLength; } }
+        public long Length { get { return LowLength + HighLength; } }
 
-        #endregion
+        #endregion Properties
 
         #region Methods
 
@@ -155,6 +162,6 @@ namespace Emlid.WindowsIot.Hardware.Protocols.Ppm
                 LowTime, LowLength, HighTime, HighLength, Length);
         }
 
-        #endregion
+        #endregion Methods
     }
 }

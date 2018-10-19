@@ -1,7 +1,12 @@
 # Code for .NET - Release Notes
 
+## Version 4.72.1810.16### (2018.10.16)
+* Remove all global code analysis suppressions, re-evaluate all CA errors and correct or suppress with attribute on the class or member affected.
+* Avoid overflow exceptions in Number casting down to byte during internal manipulation (not a bug but an un-necessary error when compiling with check for overflow, now set as standard in this solution for debug builds).
+
 ## Version 4.72.1810.11### (2018.10.10)
 * Added UI library and components.
+* Switch to new Code Analysis analyzers (NuGet package based).
 * Updated extensions.
 * Updated dependencies.
 * Updated unit test project references.

@@ -1,11 +1,13 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Emlid.WindowsIot.Hardware.Components.Pca9685
 {
     /// <summary>
     /// <see cref="Pca9685Device"/> channel value.
     /// </summary>
-    public struct Pca9685ChannelValue
+    [SuppressMessage("Microsoft.Usage", "CA2208", Justification = "Exception member names should be named like the property to better describe the fault.")]
+    public struct Pca9685ChannelValue : IEquatable<Pca9685ChannelValue>
     {
         #region Constants
 
@@ -23,7 +25,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Pca9685
         /// </remarks>
         public const int Always = 0x1000;
 
-        #endregion
+        #endregion Constants
 
         #region Lifetime
 
@@ -45,7 +47,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Pca9685
         /// <summary>
         /// Creates an instance with the values from a byte array.
         /// </summary>
-        public Pca9685ChannelValue(byte[] data, int offset = 0)  : this()
+        public Pca9685ChannelValue(byte[] data, int offset = 0) : this()
         {
             // Validate
             if (data == null) throw new ArgumentNullException(nameof(data));
@@ -58,7 +60,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Pca9685
             _width = CalculateWidth(on, off);
         }
 
-        #endregion
+        #endregion Lifetime
 
         #region Operators
 
@@ -81,15 +83,18 @@ namespace Emlid.WindowsIot.Hardware.Components.Pca9685
         /// <summary>
         /// Compares this object with another by value.
         /// </summary>
-        /// <param name="value">Object with which to compare by value.</param>
-        public override bool Equals(object value)
+        /// <param name="something">Object with which to compare by value.</param>
+        public override bool Equals(object something)
         {
-            // Compare nullability and type
-            if (!(value is Pca9685ChannelValue))
-                return false;
-            var other = (Pca9685ChannelValue)value;
+            return something is Pca9685ChannelValue other && Equals(other);
+        }
 
-            // Compare values
+        /// <summary>
+        /// Compares this object with another by value.
+        /// </summary>
+        /// <param name="other">Object with which to compare by value.</param>
+        public bool Equals(Pca9685ChannelValue other)
+        {
             return
                 other._on == _on &&
                 other._off == _off &&
@@ -107,7 +112,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Pca9685
                 _width.GetHashCode();
         }
 
-        #endregion
+        #endregion Operators
 
         #region Public Properties
 
@@ -136,6 +141,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Pca9685
                 _on = value;
             }
         }
+
         private int _on;
 
         /// <summary>
@@ -163,6 +169,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Pca9685
                 _off = value;
             }
         }
+
         private int _off;
 
         /// <summary>
@@ -211,9 +218,10 @@ namespace Emlid.WindowsIot.Hardware.Components.Pca9685
                 _off = offValue;
             }
         }
+
         private int _width;
 
-        #endregion
+        #endregion Public Properties
 
         #region Public Methods
 
@@ -348,6 +356,6 @@ namespace Emlid.WindowsIot.Hardware.Components.Pca9685
             return FromWidth(widthTicks, delayTicks);
         }
 
-        #endregion
+        #endregion Public Methods
     }
 }

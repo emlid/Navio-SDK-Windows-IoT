@@ -21,7 +21,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io.Data
         /// </summary>
         public const ushort AssignmentModeSwitchValue = 100;
 
-        #endregion
+        #endregion Constants
 
         #region Lifetime
 
@@ -46,45 +46,45 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io.Data
             Stride = data[offset++];
         }
 
-        #endregion
+        #endregion Lifetime
 
         #region Public Fields
 
         /// <summary>
         /// Lowest input value.
         /// </summary>
-        public ushort Minimum;
+        public ushort Minimum { get; set; }
 
         /// <summary>
         /// Center input value.
         /// </summary>
-        public ushort Center;
+        public ushort Center { get; set; }
 
         /// <summary>
         /// Highest input value.
         /// </summary>
-        public ushort Maximum;
+        public ushort Maximum { get; set; }
 
         /// <summary>
         /// Band around center that is ignored.
         /// </summary>
-        public ushort DeadZone;
+        public ushort DeadZone { get; set; }
 
         /// <summary>
         /// Mapped input value.
         /// </summary>
-        public ushort Assignment;
+        public ushort Assignment { get; set; }
 
         /// <summary>
         /// Channel options bitmask.
         /// </summary>
-        public Px4ioRCConfigOptions Options;
+        public Px4ioRCConfigOptions Options { get; set; }
 
         /// <summary>
         /// Spacing between channel configuration data.
         /// </summary>
-        public ushort Stride;
+        public ushort Stride { get; set; }
 
-        #endregion
+        #endregion Public Fields
     }
 }

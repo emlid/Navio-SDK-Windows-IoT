@@ -11,8 +11,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCulture("")]
 
 // Version
-[assembly: AssemblyVersion("4.72.1810.11000")]
-[assembly: AssemblyFileVersion("4.72.1810.11000")]
+[assembly: AssemblyVersion("4.72.1810.16001")]
+[assembly: AssemblyFileVersion("4.72.1810.16001")]
 
 // COM Interop
 [assembly: ComVisible(false)]

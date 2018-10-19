@@ -1,4 +1,6 @@
-﻿namespace Emlid.WindowsIot.Hardware.Components.Ms5611
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Emlid.WindowsIot.Hardware.Components.Ms5611
 {
     /// <summary>
     /// Defines the I2C commands of the <see cref="Ms5611Device"/>.
@@ -8,6 +10,7 @@
     /// then reading a variable number of data bytes returned by that command.
     /// Some commands must be executed in sequence.
     /// </remarks>
+    [SuppressMessage("Microsoft.Design", "CA1028", Justification = "Non-integer enumeration better suited to match the hardware specification in a hardware library.")]
     public enum Ms5611Command : byte
     {
         #region Commands
@@ -57,7 +60,7 @@
         /// </remarks>
         ConvertD2Temperature = 0x50,
 
-        #endregion
+        #endregion Commands
 
         #region Offsets
 
@@ -86,6 +89,6 @@
         /// </summary>
         ConvertOsr4096Offset = 8
 
-        #endregion
+        #endregion Offsets
     }
 }

@@ -32,6 +32,7 @@
       <Word>RGB</Word>
       <Word>RSSI</Word>
       <Word>SBUS</Word>
+      <Word>Spektrum</Word>
       <Word>SPI</Word>
       <Word>SUMD</Word>
       <Word>SWD</Word>

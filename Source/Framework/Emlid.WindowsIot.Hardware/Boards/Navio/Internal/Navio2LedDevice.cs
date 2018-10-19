@@ -1,6 +1,7 @@
 ﻿using CodeForDotNet;
 using Emlid.WindowsIot.HardwarePlus.Buses;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Windows.Devices.Gpio;
 
 namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
@@ -8,6 +9,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
     /// <summary>
     /// Navio 2 LED device, three GPIO pins for RGB components of an LED.
     /// </summary>
+    [SuppressMessage("Microsoft.Usage", "CA2208", Justification = "Exception member names should be named like the property to better describe the fault.")]
     public sealed class Navio2LedDevice : DisposableObject, INavioLedDevice
     {
         #region Constants
@@ -92,7 +94,7 @@ namespace Emlid.WindowsIot.Hardware.Boards.Navio.Internal
         /// <summary>
         /// Thread synchronization.
         /// </summary>
-        private static object _lock = new object();
+        private static readonly object _lock = new object();
 
         /// <summary>
         /// LED red component GPIO pin.

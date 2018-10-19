@@ -2,6 +2,7 @@
 using Emlid.WindowsIot.Tools.NavioHardwareTest.Models.Tests;
 using System;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using Windows.Foundation;
 using Windows.UI.Xaml;
@@ -29,7 +30,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Views.Tests
         /// </summary>
         public const int GraphPadding = 8;
 
-        #endregion
+        #endregion Constants
 
         #region Lifetime
 
@@ -42,7 +43,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Views.Tests
             InitializeComponent();
         }
 
-        #endregion
+        #endregion Lifetime
 
         #region Protected Methods
 
@@ -54,7 +55,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Views.Tests
             return new BarometerTestUIModel(application);
         }
 
-        #endregion
+        #endregion Protected Methods
 
         #region Events
 
@@ -98,6 +99,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Views.Tests
         /// <summary>
         /// Executes the <see cref="BarometerTestUIModel.Reset"/> action when the related button is clicked.
         /// </summary>
+        [SuppressMessage("Microsoft.Usage", "CA1801", Justification = "Event handlers must not use all parameters.")]
         private void OnResetButtonClick(object sender, RoutedEventArgs arguments)
         {
             Model.Reset();
@@ -106,6 +108,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Views.Tests
         /// <summary>
         /// Executes the <see cref="BarometerTestUIModel.Update"/> when the related button is clicked.
         /// </summary>
+        [SuppressMessage("Microsoft.Usage", "CA1801", Justification = "Event handlers must not use all parameters.")]
         private void OnUpdateButtonClick(object sender, RoutedEventArgs arguments)
         {
             Model.Update();
@@ -114,6 +117,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Views.Tests
         /// <summary>
         /// Executes the <see cref="TestUIModel.Clear"/> when the related button is clicked.
         /// </summary>
+        [SuppressMessage("Microsoft.Usage", "CA1801", Justification = "Event handlers must not use all parameters.")]
         private void OnClearButtonClick(object sender, RoutedEventArgs arguments)
         {
             Model.Clear();
@@ -122,12 +126,13 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Views.Tests
         /// <summary>
         /// Returns to the previous page when the close button is clicked.
         /// </summary>
+        [SuppressMessage("Microsoft.Usage", "CA1801", Justification = "Event handlers must not use all parameters.")]
         private void OnCloseButtonClick(object sender, RoutedEventArgs arguments)
         {
             Frame.GoBack();
         }
 
-        #endregion
+        #endregion Events
 
         #region Private Methods
 
@@ -177,7 +182,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Views.Tests
             var width = Graph.ActualWidth;
             var drawWidth = width - (GraphPadding * 2);
             var graphYMax = GraphPadding + drawHeight;
-            Func<double, double, double, double> calculateGraphY = (double value, double minimum, double range) =>
+            double calculateGraphY(double value, double minimum, double range)
             {
                 if (range > 0)
                 {
@@ -189,7 +194,7 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Views.Tests
                     // Middle when flat line
                     return graphYMax - (drawHeight / 2);
                 }
-            };
+            }
 
             // Get resources
             var pressureBrush = (SolidColorBrush)Resources["GraphPressureBrush"];
@@ -289,6 +294,6 @@ namespace Emlid.WindowsIot.Tools.NavioHardwareTest.Views.Tests
                 - temperatureAverageText.ActualWidth - GraphPadding);
         }
 
-        #endregion
+        #endregion Private Methods
     }
 }

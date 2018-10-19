@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Emlid.WindowsIot.Hardware.Components.Px4io.Data
 {
@@ -8,6 +9,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io.Data
     /// <see href="https://github.com/emlid/navio-rcio-linux-driver/blob/master/protocol.h"/>
     [Flags]
     [CLSCompliant(false)]
+    [SuppressMessage("Microsoft.Design", "CA1028", Justification = "Non-integer enumeration better suited to match the hardware specification in a hardware library.")]
     public enum Px4ioSetupRelayFlags : ushort
     {
         /// <summary>
@@ -24,7 +26,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io.Data
         /// <remarks>
         /// Hardware version 1 only.
         /// </remarks>
-        Power2 =  (1 << 1),
+        Power2 = (1 << 1),
 
         /// <summary>
         /// Accessory relay 1.
