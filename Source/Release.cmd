@@ -9,7 +9,7 @@ echo components or release.
 
 echo.
 echo Close Visual Studio now to avoid errors with locked files.
-pause.
+pause
 
 echo.
 echo Initializing Visual Studio environment...

@@ -7,7 +7,7 @@
   "targets": {
     ".NETStandard,Version=v2.0": {},
     ".NETStandard,Version=v2.0/": {
-      "CodeForDotNet/4.72.1810.16001": {
+      "CodeForDotNet/4.72.1811.25001": {
         "dependencies": {
           "Microsoft.CodeAnalysis.FxCopAnalyzers": "2.6.2",
           "NETStandard.Library": "2.0.3",
@@ -128,7 +128,7 @@
     }
   },
   "libraries": {
-    "CodeForDotNet/4.72.1810.16001": {
+    "CodeForDotNet/4.72.1811.25001": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -136,21 +136,21 @@
     "Microsoft.CodeAnalysis.FxCopAnalyzers/2.6.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-ZbEtS7b884u20I1wOjhjG2M1dMf4hC1M2wZS4ovGTzhgz14lvRG7DUnuqrXWJGJDl3jVVPVeKAKBA68vIUuH6Q==",
+      "sha512": "sha512-fub9nWKI08wCmC9hnARCCYDLEd+aAs/aqhAQ27BmaP2fq3Jh8WSgNFLNInic+9lXQmibU6r7SSKbMroh3aM3ig==",
       "path": "microsoft.codeanalysis.fxcopanalyzers/2.6.2",
       "hashPath": "microsoft.codeanalysis.fxcopanalyzers.2.6.2.nupkg.sha512"
     },
     "Microsoft.CodeQuality.Analyzers/2.6.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-3NkjweORWpe6ByfVtrPnQBerTfq2b7BJIAAbjS3yw2r8ldxLaV4gpJ3aMQsiVco1TlqVd1TdGiDZPJvBpVOyBQ==",
+      "sha512": "sha512-HEH7nPissPcvMhx0MOXXaARkmzkEP7hDFBz3o06ZDj3rpE+F0e5hVoGJDr+qPsbJaeDoAlbArzTYfGsbZPSlPA==",
       "path": "microsoft.codequality.analyzers/2.6.2",
       "hashPath": "microsoft.codequality.analyzers.2.6.2.nupkg.sha512"
     },
     "Microsoft.NetCore.Analyzers/2.6.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-IHvymQJEYXhuavP0Z5iKXWlTOJw/8LWx/qWB32oJ3doVP+AEowjFe8NUfuNeELRARP0CXBnAgaa40lJB/FSBPA==",
+      "sha512": "sha512-HUfJMvzy4xJ6b4X99NGer2Pxn5On/WU/JscTzxKODg9srhJdtlWNhdorbejl2igrBi7RX6ufBhfvp8aBAEMy1A==",
       "path": "microsoft.netcore.analyzers/2.6.2",
       "hashPath": "microsoft.netcore.analyzers.2.6.2.nupkg.sha512"
     },
@@ -171,7 +171,7 @@
     "Microsoft.NetFramework.Analyzers/2.6.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-ys6owm7wVw/fSPKrFnX47inHZWIRdK/6GIb2lnS/mw4pgh5kiCQcDaQWKh92DM41YbSx2LA/i/VGiGCN7iUEPQ==",
+      "sha512": "sha512-HdNe8zptYp3bl7VDPTXDzeKMqkQva8m9mUI0C1HFN2iiMsMGnV3gqOeDQenH6NCTgSwYRnokHFsvcOeEODMd0g==",
       "path": "microsoft.netframework.analyzers/2.6.2",
       "hashPath": "microsoft.netframework.analyzers.2.6.2.nupkg.sha512"
     },
@@ -185,7 +185,7 @@
     "System.Drawing.Common/4.5.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-RR9zs3qhIemEToSoCGZk8p/eox3NIYFrVSuIFJUUVr469+0f5zHJbGsZrzZSq6J1qmXnkaVv9d9t+05TGY9BHw==",
+      "sha512": "sha512-GiyeGi/v4xYDz1vCNFwFvhz9k1XddOG7VD3jxRqzRBCbTHji+s3HxxbxtoymuK4OadEpgotI8zQ5+GEEH9sUEQ==",
       "path": "system.drawing.common/4.5.1",
       "hashPath": "system.drawing.common.4.5.1.nupkg.sha512"
     },
@@ -255,7 +255,7 @@
     "Text.Analyzers/2.6.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-3r0CramOpPpKXTzWCWQHQmE7hOmUC1+swEy6Mtj5ceP0atyYj+CqDCqb2xqNB0UPD/dO2ULWYdYl69gSxoxscw==",
+      "sha512": "sha512-UcSpZtr7TXPWj59F9WGZd7Edcm+ppBW4OeA/VuqX0RUJ6t/qgCqPfbRAJ/WbT5hcMHaI2pOn7kMbG5gOayravQ==",
       "path": "text.analyzers/2.6.2",
       "hashPath": "text.analyzers.2.6.2.nupkg.sha512"
     }
