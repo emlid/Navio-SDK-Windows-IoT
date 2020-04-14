@@ -1,6 +1,6 @@
-﻿using CodeForDotNet;
+using CodeForDevices.WindowsUniversal.Hardware.Buses;
+using CodeForDotNet;
 using Emlid.WindowsIot.Hardware.Components.Px4io.Data;
-using Emlid.WindowsIot.HardwarePlus.Buses;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -425,34 +425,34 @@ namespace Emlid.WindowsIot.Hardware.Components.Px4io
             switch ((Px4ioResponseCode)response.Code)
             {
                 case Px4ioResponseCode.Corrupt:
-                    {
-                        // Rejected by RCIO as corrupt (CRC mismatch)
-                        throw new FormatException(Resources.Strings.Px4ioPacketCorruptTransmit);
-                    }
+                {
+                    // Rejected by RCIO as corrupt (CRC mismatch)
+                    throw new FormatException(Resources.Strings.Px4ioPacketCorruptTransmit);
+                }
 
                 case Px4ioResponseCode.Error:
-                    {
-                        // Rejected by RCIO as error (request specific)
-                        throw new InvalidOperationException(Resources.Strings.Px4ioPacketError);
-                    }
+                {
+                    // Rejected by RCIO as error (request specific)
+                    throw new InvalidOperationException(Resources.Strings.Px4ioPacketError);
+                }
 
                 case Px4ioResponseCode.Success:
-                    {
-                        // Successful response
+                {
+                    // Successful response
 
-                        // Check CRC
-                        if (!response.ValidateCrc())
-                            throw new FormatException(Resources.Strings.Px4ioPacketCorruptReceive);
+                    // Check CRC
+                    if (!response.ValidateCrc())
+                        throw new FormatException(Resources.Strings.Px4ioPacketCorruptReceive);
 
-                        // Return valid data
-                        return response;
-                    }
+                    // Return valid data
+                    return response;
+                }
 
                 default:
-                    {
-                        // Corrupt or unsupported response code
-                        throw new FormatException(Resources.Strings.Px4ioPacketCorruptReceive);
-                    }
+                {
+                    // Corrupt or unsupported response code
+                    throw new FormatException(Resources.Strings.Px4ioPacketCorruptReceive);
+                }
             }
         }
 

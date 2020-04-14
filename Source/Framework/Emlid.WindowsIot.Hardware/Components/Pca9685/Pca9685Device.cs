@@ -1,5 +1,5 @@
-﻿using CodeForDotNet;
-using Emlid.WindowsIot.HardwarePlus.Buses;
+using CodeForDevices.WindowsUniversal.Hardware.Buses;
+using CodeForDotNet;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -100,7 +100,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Pca9685
         /// <param name="speed">Bus speed.</param>
         /// <param name="sharingMode">Sharing mode.</param>
         [CLSCompliant(false)]
-        public Pca9685Device(int busNumber, byte chipNumber, int? clockSpeed,
+        public Pca9685Device(uint busNumber, byte chipNumber, int? clockSpeed,
             I2cBusSpeed speed = I2cBusSpeed.FastMode, I2cSharingMode sharingMode = I2cSharingMode.Exclusive)
         {
             // Validate

@@ -1,4 +1,4 @@
-﻿using Emlid.WindowsIot.HardwarePlus.Buses;
+using CodeForDevices.WindowsUniversal.Hardware.Buses;
 using System;
 using Windows.Devices.I2c;
 
@@ -80,7 +80,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
         /// <param name="speed">Bus speed.</param>
         /// <param name="sharingMode">Sharing mode.</param>
         [CLSCompliant(false)]
-        public Mb85rc256vDevice(int busNumber, byte chipNumber,
+        public Mb85rc256vDevice(uint busNumber, byte chipNumber,
             I2cBusSpeed speed = I2cBusSpeed.FastMode, I2cSharingMode sharingMode = I2cSharingMode.Exclusive)
             : base(chipNumber, MemorySize)
         {
@@ -107,7 +107,7 @@ namespace Emlid.WindowsIot.Hardware.Components.Mb85rcv
         /// <param name="sharingMode">Sharing mode.</param>
         /// <returns>Device ID or null when no chip exists at the address.</returns>
         [CLSCompliant(false)]
-        public static Mb85rcvDeviceId? GetDeviceId(int busNumber, byte chipNumber,
+        public static Mb85rcvDeviceId? GetDeviceId(uint busNumber, byte chipNumber,
             I2cBusSpeed speed = I2cBusSpeed.FastMode, I2cSharingMode sharingMode = I2cSharingMode.Exclusive)
         {
             // Validate

@@ -8,7 +8,7 @@ echo Remember to update the version number and release notes in the "nuspec" fil
 echo.
 
 echo Initializing environment...
-call "%~dp0..\Dependencies\Variables.cmd"
+call "%~dp0..\..\Dependencies\Variables.cmd"
 if %errorlevel% neq 0 goto error
 
 rem echo.

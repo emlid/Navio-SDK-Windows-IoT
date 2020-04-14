@@ -1,7 +1,7 @@
-﻿using CodeForDotNet;
+using CodeForDevices.WindowsUniversal.Hardware.Buses;
+using CodeForDotNet;
 using CodeForDotNet.Diagnostics;
 using Emlid.WindowsIot.Hardware.Protocols.Ppm;
-using Emlid.WindowsIot.HardwarePlus.Buses;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.ObjectModel;

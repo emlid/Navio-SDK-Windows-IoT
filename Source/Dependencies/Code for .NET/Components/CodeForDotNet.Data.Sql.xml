@@ -46,32 +46,29 @@
         </member>
         <member name="T:CodeForDotNet.Data.Sql.SqlDataAccessLayer">
             <summary>
-            Disposable base class for a SQL Data Access Layer which holds connection
-            information and helper methods.
+            Disposable base class for a SQL Data Access Layer which holds connection information and helper methods.
             </summary>
         </member>
         <member name="M:CodeForDotNet.Data.Sql.SqlDataAccessLayer.#ctor(System.String)">
             <summary>
-            Initializes the database connection (but does not open it).
-            Ensure this object is disposed to close the connection if it was opened.
+            Initializes the database connection (but does not open it). Ensure this object is disposed to close the connection if it was opened.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Data.Sql.SqlDataAccessLayer.Dispose(System.Boolean)">
+        <member name="P:CodeForDotNet.Data.Sql.SqlDataAccessLayer.Connection">
             <summary>
-            Diposes resources either proactively via Dipose() or during finalization.
+            Current connection, for the lifetime of this object. Opened on the first call to OpenConnection(), closed during Dispose.
             </summary>
-            <param name="disposing">True when disposing, false when finalizing.</param>
         </member>
         <member name="P:CodeForDotNet.Data.Sql.SqlDataAccessLayer.ConnectionString">
             <summary>
             Connection string for this instance.
             </summary>
         </member>
-        <member name="P:CodeForDotNet.Data.Sql.SqlDataAccessLayer.Connection">
+        <member name="M:CodeForDotNet.Data.Sql.SqlDataAccessLayer.Dispose(System.Boolean)">
             <summary>
-            Current connection, for the lifetime of this object.
-            Opened on the first call to OpenConnection(), closed during Dispose.
+            Disposes resources either proactively via <see cref="M:CodeForDotNet.Data.Sql.SqlDataAccessLayer.Dispose(System.Boolean)"/> or during finalization.
             </summary>
+            <param name="disposing">True when disposing, false when finalizing.</param>
         </member>
         <member name="M:CodeForDotNet.Data.Sql.SqlDataAccessLayer.OpenConnection">
             <summary>
@@ -90,8 +87,7 @@
         </member>
         <member name="M:CodeForDotNet.Data.Sql.SqlExtensions.BuildConnectionString(System.String,System.String,System.String,System.String)">
             <summary>
-            Creates an SQL Server connection string from common pieces,
-            e.g. server name, database, user &amp; password (if not integrated security).
+            Creates an SQL Server connection string from common pieces, e.g. server name, database, user &amp; password (if not integrated security).
             </summary>
             <param name="serverName">Database server name or (local) for shared memory local access.</param>
             <param name="databaseName">Default database name.</param>
@@ -101,8 +97,7 @@
         </member>
         <member name="M:CodeForDotNet.Data.Sql.SqlExtensions.CreateCommandWithParameters(System.Data.SqlClient.SqlConnection,System.String)">
             <summary>
-            Creates a command object for the specified stored procedure, automatically
-            populating the parameters. Parameter sets are cached for performance.
+            Creates a command object for the specified stored procedure, automatically populating the parameters. Parameter sets are cached for performance.
             </summary>
             <param name="connection">Connection used to derive parameters (first time only) or create the command.</param>
             <param name="procedureName">Name of the stored procedure for which to create the command and parameters.</param>

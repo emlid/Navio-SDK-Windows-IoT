@@ -1,7 +1,7 @@
-﻿using CodeForDotNet;
+using CodeForDevices.WindowsUniversal.Hardware.Buses;
+using CodeForDotNet;
 using Emlid.WindowsIot.Hardware.Components.Pca9685;
 using Emlid.WindowsIot.Hardware.Protocols.Pwm;
-using Emlid.WindowsIot.HardwarePlus.Buses;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

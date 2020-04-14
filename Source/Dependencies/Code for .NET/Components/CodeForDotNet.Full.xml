@@ -201,40 +201,38 @@
             Sub-Key path in which to store the setting. e.g. "Preferences\Display".
             </summary>
         </member>
-        <member name="T:CodeForDotNet.Properties.Resources">
+        <member name="T:CodeForDotNet.Full.Properties.Resources">
             <summary>
               A strongly-typed resource class, for looking up localized strings, etc.
             </summary>
         </member>
-        <member name="P:CodeForDotNet.Properties.Resources.ResourceManager">
+        <member name="P:CodeForDotNet.Full.Properties.Resources.ResourceManager">
             <summary>
               Returns the cached ResourceManager instance used by this class.
             </summary>
         </member>
-        <member name="P:CodeForDotNet.Properties.Resources.Culture">
+        <member name="P:CodeForDotNet.Full.Properties.Resources.Culture">
             <summary>
               Overrides the current thread's CurrentUICulture property for all
               resource lookups using this strongly typed resource class.
             </summary>
         </member>
-        <member name="P:CodeForDotNet.Properties.Resources.PropertyRequired">
+        <member name="P:CodeForDotNet.Full.Properties.Resources.PropertyRequired">
             <summary>
               Looks up a localized string similar to The property &quot;{0}&quot; is required..
             </summary>
         </member>
         <member name="T:CodeForDotNet.Reflection.AppDomainExtensions">
             <summary>
-            Contains extensions for working with <see cref="T:System.AppDomain"/>s.
+            Contains extensions for working with <see cref="T:System.AppDomain"/> s.
             </summary>
         </member>
         <member name="M:CodeForDotNet.Reflection.AppDomainExtensions.Run(System.AppDomain,System.Reflection.MethodBase,System.Object[])">
             <summary>
-            Creates an instance then executes a method in a separate application domain,
-            using the configuration and working directory of the caller's application domain.
+            Creates an instance then executes a method in a separate application domain, using the configuration and working directory of the caller's
+            application domain.
             </summary>
-            <remarks>
-            Disposes the instance upon completion if it implements <see cref="T:System.IDisposable"/>.
-            </remarks>
+            <remarks>Disposes the instance upon completion if it implements <see cref="T:System.IDisposable"/>.</remarks>
         </member>
     </members>
 </doc>

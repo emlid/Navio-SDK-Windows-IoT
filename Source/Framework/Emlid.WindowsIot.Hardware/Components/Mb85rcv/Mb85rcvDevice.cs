@@ -1,5 +1,5 @@
-﻿using CodeForDotNet;
-using Emlid.WindowsIot.HardwarePlus.Buses;
+using CodeForDevices.WindowsUniversal.Hardware.Buses;
+using CodeForDotNet;
 using System;
 using Windows.Devices.I2c;
 

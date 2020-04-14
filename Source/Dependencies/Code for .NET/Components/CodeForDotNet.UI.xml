@@ -4,6 +4,1838 @@
         <name>CodeForDotNet.UI</name>
     </assembly>
     <members>
+        <member name="T:CodeForDotNet.UI.Drawing.PaintEventArgs">
+            <summary>
+            UI graphics paint event arguments.
+            </summary>
+            <remarks>
+            Portable version of the "System.Windows.Forms.PaintEventArgs" class. To be replaced when
+            available in the .NET Standard framework.
+            </remarks>
+        </member>
+        <member name="M:CodeForDotNet.UI.Drawing.PaintEventArgs.#ctor(System.Drawing.Graphics,System.Drawing.Rectangle)">
+            <summary>
+            Creates an instance with the specified values.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.UI.Drawing.PaintEventArgs.Graphics">
+            <summary>
+            Graphics interface to be used for drawing.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.UI.Drawing.PaintEventArgs.Region">
+            <summary>
+            Region which has been invalidated and should be re-drawn.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.UI.Input.DelegateCommand">
+            <summary>
+            Generic command which calls delegate function(s) to execute or get the status.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.DelegateCommand.DefaultId">
+            <summary>
+            Used to identify the status of the command when it has no parameter.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.UI.Input.DelegateCommand.#ctor(System.Action{System.Object})">
+            <summary>
+            Creates an instance which calls the specified <see cref="M:CodeForDotNet.UI.Input.DelegateCommand.Execute(System.Object)"/> delegate when executed.
+            </summary>
+            <param name="executeMethod">Method invoked by <see cref="M:CodeForDotNet.UI.Input.DelegateCommand.Execute(System.Object)"/> to perform the command action.</param>
+        </member>
+        <member name="M:CodeForDotNet.UI.Input.DelegateCommand.#ctor(System.Action{System.Object},System.Func{System.Object,System.Boolean})">
+            <summary>
+            Creates an instance which calls the specified <see cref="M:CodeForDotNet.UI.Input.DelegateCommand.Execute(System.Object)"/> and <see cref="M:CodeForDotNet.UI.Input.DelegateCommand.CanExecute(System.Object)"/> delegates when executed.
+            </summary>
+            <param name="executeMethod">Method invoked by <see cref="M:CodeForDotNet.UI.Input.DelegateCommand.Execute(System.Object)"/> to perform the command action.</param>
+            <param name="canExecuteMethod">Optional method invoked by <see cref="M:CodeForDotNet.UI.Input.DelegateCommand.CanExecute(System.Object)"/> to test whether the command is currently available for execution.</param>
+        </member>
+        <member name="E:CodeForDotNet.UI.Input.DelegateCommand.CanExecuteChanged">
+            <summary>
+            Fired when the execution status has changed.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.UI.Input.DelegateCommand.CanExecute(System.Object)">
+            <summary>
+            Checks whether this command is currently available for execution.
+            </summary>
+            <param name="parameter">Optional command specific parameter.</param>
+            <returns>True when can execute.</returns>
+        </member>
+        <member name="M:CodeForDotNet.UI.Input.DelegateCommand.Execute(System.Object)">
+            <summary>
+            Executes the command.
+            </summary>
+            <param name="parameter">Optional command specific parameter.</param>
+        </member>
+        <member name="M:CodeForDotNet.UI.Input.DelegateCommand.InvokeCanExecuteChanged">
+            <summary>
+            Fires the <see cref="E:CodeForDotNet.UI.Input.DelegateCommand.CanExecuteChanged"/> event, causing consumers of this command to update their status.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.UI.Input.KeyboardKey">
+            <summary>
+            Complete set of keyboard virtual key definitions, an expanded version of the XAML
+            "Windows.System.VirtualKey" like the Windows Forms "Keys" enumeration, which is not currently
+            available in WinRT.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.None">
+            <summary>
+            No key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.MouseLeft">
+            <summary>
+            Left mouse button.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.MouseRight">
+            <summary>
+            Right mouse button.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Cancel">
+            <summary>
+            Control-break processing.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.MouseMiddle">
+            <summary>
+            Middle mouse button (three-button mouse).
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.MouseX1">
+            <summary>
+            X1 mouse button.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.MouseX2">
+            <summary>
+            X2 mouse button.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Backspace">
+            <summary>
+            BACKSPACE key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Tab">
+            <summary>
+            TAB key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Clear">
+            <summary>
+            CLEAR key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Enter">
+            <summary>
+            ENTER key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Shift">
+            <summary>
+            SHIFT key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Control">
+            <summary>
+            CTRL key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Alt">
+            <summary>
+            ALT key.
+            </summary>
+            <remarks>
+            Originally named "MENU" in header file but "Alt" name taken for more intuitive use.
+            </remarks>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Pause">
+            <summary>
+            PAUSE key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.CapsLock">
+            <summary>
+            CAPS LOCK key.
+            </summary>
+            <remarks>
+            Originally named "CAPITAL" in header file but "CapsLock" name taken for more intuitive use.
+            </remarks>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.ImeKana">
+            <summary>
+            IME Kana mode.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.ImeHanguel">
+            <summary>
+            IME Hanguel mode (maintained for compatibility; use <see cref="F:CodeForDotNet.UI.Input.KeyboardKey.ImeHangul"/>).
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.ImeHangul">
+            <summary>
+            IME Hangul mode.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.ImeJunja">
+            <summary>
+            IME Junja mode.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.ImeFinal">
+            <summary>
+            IME final mode.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.ImeHanja">
+            <summary>
+            IME Hanja mode.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.ImeKanji">
+            <summary>
+            IME Kanji mode.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Escape">
+            <summary>
+            ESC key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.ImeConvert">
+            <summary>
+            IME convert.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.ImeNonConvert">
+            <summary>
+            IME nonconvert.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.ImeAccept">
+            <summary>
+            IME accept.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.ImeModeChange">
+            <summary>
+            IME mode change request.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Space">
+            <summary>
+            SPACEBAR.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.PageUp">
+            <summary>
+            PAGE UP key.
+            </summary>
+            <remarks>
+            Originally named "PRIOR" in header file but "PageUp" name taken for more intuitive use.
+            </remarks>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.PageDown">
+            <summary>
+            PAGE DOWN key.
+            </summary>
+            <remarks>
+            Originally named "NEXT" in header file but "PageDown" name taken for more intuitive use.
+            </remarks>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.End">
+            <summary>
+            END key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Home">
+            <summary>
+            HOME key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Left">
+            <summary>
+            LEFT ARROW key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Up">
+            <summary>
+            UP ARROW key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Right">
+            <summary>
+            RIGHT ARROW key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Down">
+            <summary>
+            DOWN ARROW key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Select">
+            <summary>
+            SELECT key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Print">
+            <summary>
+            PRINT key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Execute">
+            <summary>
+            EXECUTE key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Snapshot">
+            <summary>
+            PRINT SCREEN key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Insert">
+            <summary>
+            INS key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Delete">
+            <summary>
+            DEL key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Help">
+            <summary>
+            HELP key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Number0">
+            <summary>
+            0 key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Number1">
+            <summary>
+            1 key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Number2">
+            <summary>
+            2 key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Number3">
+            <summary>
+            3 key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Number4">
+            <summary>
+            4 key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Number5">
+            <summary>
+            5 key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Number6">
+            <summary>
+            6 key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Number7">
+            <summary>
+            7 key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Number8">
+            <summary>
+            8 key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Number9">
+            <summary>
+            9 key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.A">
+            <summary>
+            A key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.B">
+            <summary>
+            B key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.C">
+            <summary>
+            C key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.D">
+            <summary>
+            D key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.E">
+            <summary>
+            E key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.F">
+            <summary>
+            F key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.G">
+            <summary>
+            G key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.H">
+            <summary>
+            H key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.I">
+            <summary>
+            I key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.J">
+            <summary>
+            J key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.K">
+            <summary>
+            K key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.L">
+            <summary>
+            L key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.M">
+            <summary>
+            M key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.N">
+            <summary>
+            N key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.O">
+            <summary>
+            O key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.P">
+            <summary>
+            P key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Q">
+            <summary>
+            Q key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.R">
+            <summary>
+            R key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.S">
+            <summary>
+            S key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.T">
+            <summary>
+            T key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.U">
+            <summary>
+            U key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.V">
+            <summary>
+            V key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.W">
+            <summary>
+            W key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.X">
+            <summary>
+            X key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Y">
+            <summary>
+            Y key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Z">
+            <summary>
+            Z key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.WindowsLeft">
+            <summary>
+            Left Windows key (Natural keyboard) .
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.WindowsRight">
+            <summary>
+            Right Windows key (Natural keyboard).
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Apps">
+            <summary>
+            Applications key (Natural keyboard).
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Sleep">
+            <summary>
+            Computer Sleep key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.NumberPad0">
+            <summary>
+            Numeric keypad 0 key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.NumberPad1">
+            <summary>
+            Numeric keypad 1 key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.NumberPad2">
+            <summary>
+            Numeric keypad 2 key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.NumberPad3">
+            <summary>
+            Numeric keypad 3 key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.NumberPad4">
+            <summary>
+            Numeric keypad 4 key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.NumberPad5">
+            <summary>
+            Numeric keypad 5 key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.NumberPad6">
+            <summary>
+            Numeric keypad 6 key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.NumberPad7">
+            <summary>
+            Numeric keypad 7 key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.NumberPad8">
+            <summary>
+            Numeric keypad 8 key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.NumberPad9">
+            <summary>
+            Numeric keypad 9 key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.NumberPadMultiply">
+            <summary>
+            Multiply key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.NumberPadAdd">
+            <summary>
+            Add key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.NumberPadSeparator">
+            <summary>
+            Separator key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.NumberPadSubtract">
+            <summary>
+            Subtract key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.NumberPadDecimal">
+            <summary>
+            Decimal key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.NumberPadDivide">
+            <summary>
+            Divide key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.F1">
+            <summary>
+            F1 key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.F2">
+            <summary>
+            F2 key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.F3">
+            <summary>
+            F3 key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.F4">
+            <summary>
+            F4 key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.F5">
+            <summary>
+            F5 key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.F6">
+            <summary>
+            F6 key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.F7">
+            <summary>
+            F7 key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.F8">
+            <summary>
+            F8 key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.F9">
+            <summary>
+            F9 key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.F10">
+            <summary>
+            F10 key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.F11">
+            <summary>
+            F11 key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.F12">
+            <summary>
+            F12 key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.F13">
+            <summary>
+            F13 key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.F14">
+            <summary>
+            F14 key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.F15">
+            <summary>
+            F15 key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.F16">
+            <summary>
+            F16 key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.F17">
+            <summary>
+            F17 key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.F18">
+            <summary>
+            F18 key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.F19">
+            <summary>
+            F19 key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.F20">
+            <summary>
+            F20 key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.F21">
+            <summary>
+            F21 key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.F22">
+            <summary>
+            F22 key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.F23">
+            <summary>
+            F23 key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.F24">
+            <summary>
+            F24 key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.NumberLock">
+            <summary>
+            NUM LOCK key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.ScrollLock">
+            <summary>
+            SCROLL LOCK key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.ShiftLeft">
+            <summary>
+            Left SHIFT key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.ShiftRight">
+            <summary>
+            Right SHIFT key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.ControlLeft">
+            <summary>
+            Left CONTROL key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.ControlRight">
+            <summary>
+            Right CONTROL key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.MenuLeft">
+            <summary>
+            Left MENU key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.MenuRight">
+            <summary>
+            Right MENU key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.BrowserBack">
+            <summary>
+            Browser Back key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.BrowserForward">
+            <summary>
+            Browser Forward key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.BrowserRefresh">
+            <summary>
+            Browser Refresh key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.BrowserStop">
+            <summary>
+            Browser Stop key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.BrowserSearch">
+            <summary>
+            Browser Search key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.BrowserFavorites">
+            <summary>
+            Browser Favorites key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.BrowserHome">
+            <summary>
+            Browser Start and Home key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.VolumeMute">
+            <summary>
+            Volume Mute key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.VolumeDown">
+            <summary>
+            Volume Down key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.VolumeUp">
+            <summary>
+            Volume Up key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.MediaNextTrack">
+            <summary>
+            Next Track key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.MediaPreviousTrack">
+            <summary>
+            Previous Track key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.MediaStop">
+            <summary>
+            Stop Media key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.MediaPlayPause">
+            <summary>
+            Play/Pause Media key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.LaunchMail">
+            <summary>
+            Start Mail key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.LaunchMediaSelect">
+            <summary>
+            Select Media key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.LaunchApp1">
+            <summary>
+            Start Application 1 key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.LaunchApp2">
+            <summary>
+            Start Application 2 key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Oem1">
+            <summary>
+            Used for miscellaneous characters; it can vary by keyboard. For the US standard keyboard,
+            the ';:' key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Plus">
+            <summary>
+            For any country/region, the '+' key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Comma">
+            <summary>
+            For any country/region, the ',' key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Minus">
+            <summary>
+            For any country/region, the '-' key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Period">
+            <summary>
+            For any country/region, the '.' key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Oem2">
+            <summary>
+            Used for miscellaneous characters; it can vary by keyboard. For the US standard keyboard,
+            the '/?' key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Oem3">
+            <summary>
+            Used for miscellaneous characters; it can vary by keyboard. For the US standard keyboard,
+            the '`~' key
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Oem4">
+            <summary>
+            Used for miscellaneous characters; it can vary by keyboard. For the US standard keyboard,
+            the '[{' key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Oem5">
+            <summary>
+            Used for miscellaneous characters; it can vary by keyboard. For the US standard keyboard,
+            the '\|' key
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Oem6">
+            <summary>
+            Used for miscellaneous characters; it can vary by keyboard. For the US standard keyboard,
+            the ']}' key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Oem7">
+            <summary>
+            Used for miscellaneous characters; it can vary by keyboard. For the US standard keyboard,
+            the 'single-quote/double-quote' key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Oem8">
+            <summary>
+            Used for miscellaneous characters; it can vary by keyboard.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Oem102">
+            <summary>
+            Either the angle bracket key or the backslash key on the RT 102-key keyboard.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.ImeProcess">
+            <summary>
+            IME PROCESS key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Packet">
+            <summary>
+            Used to pass Unicode characters as if they were keystrokes. The VK_PACKET key is the low
+            word of a 32-bit Virtual Key value used for non-keyboard input methods. For more
+            information, see Remark in KEYBDINPUT, SendInput, WM_KEYDOWN, and WM_KEYUP.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Attention">
+            <summary>
+            Attn key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.CursorSelect">
+            <summary>
+            CrSel key. Defined by IBM as cursor select.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.ExtendedKeySelect">
+            <summary>
+            ExSel key. Defined by IBM as extended key function select (pressed before the key with an
+            extended function).
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.EraseEof">
+            <summary>
+            Erase EOF key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Play">
+            <summary>
+            Play key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.Zoom">
+            <summary>
+            Zoom key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.PA1">
+            <summary>
+            PA1 key. Defined by IBM as the "WINDOW POP WM" key.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardKey.PA2Clear">
+            <summary>
+            OEM Clear. Defined by IBM as the "PA2 CLEAR WM" key.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.UI.Input.KeyboardKeyConverter">
+            <summary>
+            Converts virtual keys to strings.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.UI.Input.KeyboardKeyConverter.ConvertToString(CodeForDotNet.UI.Input.KeyboardKey)">
+            <summary>
+            Translates a virtual key to an input character when relevant.
+            </summary>
+            <param name="key">Key to convert.</param>
+            <returns>String (normally one character) or null when no mapping, e.g. function key.</returns>
+        </member>
+        <member name="M:CodeForDotNet.UI.Input.KeyboardKeyConverter.ConvertToString(CodeForDotNet.UI.Input.KeyboardKey,System.Boolean)">
+            <summary>
+            Translates a virtual key to an input character when relevant.
+            </summary>
+            <param name="key">Key to convert.</param>
+            <param name="uppercase">True to return uppercase characters, e.g. when shift is also pressed.</param>
+            <returns>String (normally one character) or null when no mapping, e.g. function key.</returns>
+        </member>
+        <member name="M:CodeForDotNet.UI.Input.KeyboardKeyConverter.ConvertToString(CodeForDotNet.UI.Input.KeyboardKey,System.Boolean,System.Globalization.CultureInfo)">
+            <summary>
+            Translates a virtual key to an input character when relevant.
+            </summary>
+            <param name="key">Key to convert.</param>
+            <param name="uppercase">True to return uppercase characters, e.g. when shift is also pressed.</param>
+            <param name="culture">Culture used for the <see cref="F:CodeForDotNet.UI.Input.KeyboardKey.NumberPadDecimal"/>.</param>
+            <returns>String (normally one character) or null when no mapping, e.g. function key.</returns>
+        </member>
+        <member name="T:CodeForDotNet.UI.Input.KeyboardShortcuts">
+            <summary>
+            Keyboard shortcut data, disconnected from any API dependencies, useful for future proof serialization and cross-platform. A copy of
+            System.Windows.Forms.Shortcut. Specifies shortcut keys that can be used by menu items.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.None">
+            <summary>
+            No shortcut key is associated with the menu item.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.Ins">
+            <summary>
+            The shortcut key INSERT.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.Del">
+            <summary>
+            The shortcut key DELETE.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.F1">
+            <summary>
+            The shortcut key F1.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.F2">
+            <summary>
+            The shortcut key F2.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.F3">
+            <summary>
+            The shortcut key F3.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.F4">
+            <summary>
+            The shortcut key F4.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.F5">
+            <summary>
+            The shortcut key F5.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.F6">
+            <summary>
+            The shortcut key F6.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.F7">
+            <summary>
+            The shortcut key F7.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.F8">
+            <summary>
+            The shortcut key F8.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.F9">
+            <summary>
+            The shortcut key F9.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.F10">
+            <summary>
+            The shortcut key F10.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.F11">
+            <summary>
+            The shortcut key F11.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.F12">
+            <summary>
+            The shortcut key F12.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.ShiftIns">
+            <summary>
+            The shortcut keys SHIFT+INSERT.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.ShiftDel">
+            <summary>
+            The shortcut keys SHIFT+DELETE.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.ShiftF1">
+            <summary>
+            The shortcut keys SHIFT+F1.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.ShiftF2">
+            <summary>
+            The shortcut keys SHIFT+F2.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.ShiftF3">
+            <summary>
+            The shortcut keys SHIFT+F3.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.ShiftF4">
+            <summary>
+            The shortcut keys SHIFT+F4.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.ShiftF5">
+            <summary>
+            The shortcut keys SHIFT+F5.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.ShiftF6">
+            <summary>
+            The shortcut keys SHIFT+F6.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.ShiftF7">
+            <summary>
+            The shortcut keys SHIFT+F7.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.ShiftF8">
+            <summary>
+            The shortcut keys SHIFT+F8.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.ShiftF9">
+            <summary>
+            The shortcut keys SHIFT+F9.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.ShiftF10">
+            <summary>
+            The shortcut keys SHIFT+F10.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.ShiftF11">
+            <summary>
+            The shortcut keys SHIFT+F11.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.ShiftF12">
+            <summary>
+            The shortcut keys SHIFT+F12.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlIns">
+            <summary>
+            The shortcut keys CTRL+INSERT.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlDel">
+            <summary>
+            The shortcut keys CTRL+DELETE.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.Ctrl0">
+            <summary>
+            The shortcut keys CTRL+0.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.Ctrl1">
+            <summary>
+            The shortcut keys CTRL+1.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.Ctrl2">
+            <summary>
+            The shortcut keys CTRL+2.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.Ctrl3">
+            <summary>
+            The shortcut keys CTRL+3.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.Ctrl4">
+            <summary>
+            The shortcut keys CTRL+4.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.Ctrl5">
+            <summary>
+            The shortcut keys CTRL+5.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.Ctrl6">
+            <summary>
+            The shortcut keys CTRL+6.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.Ctrl7">
+            <summary>
+            The shortcut keys CTRL+7.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.Ctrl8">
+            <summary>
+            The shortcut keys CTRL+8.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.Ctrl9">
+            <summary>
+            The shortcut keys CTRL+9.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlA">
+            <summary>
+            The shortcut keys CTRL+A.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlB">
+            <summary>
+            The shortcut keys CTRL+B.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlC">
+            <summary>
+            The shortcut keys CTRL+C.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlD">
+            <summary>
+            The shortcut keys CTRL+D.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlE">
+            <summary>
+            The shortcut keys CTRL+E.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlF">
+            <summary>
+            The shortcut keys CTRL+F.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlG">
+            <summary>
+            The shortcut keys CTRL+G.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlH">
+            <summary>
+            The shortcut keys CTRL+H.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlI">
+            <summary>
+            The shortcut keys CTRL+I.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlJ">
+            <summary>
+            The shortcut keys CTRL+J.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlK">
+            <summary>
+            The shortcut keys CTRL+K.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlL">
+            <summary>
+            The shortcut keys CTRL+L.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlM">
+            <summary>
+            The shortcut keys CTRL+M.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlN">
+            <summary>
+            The shortcut keys CTRL+N.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlO">
+            <summary>
+            The shortcut keys CTRL+O.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlP">
+            <summary>
+            The shortcut keys CTRL+P.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlQ">
+            <summary>
+            The shortcut keys CTRL+Q.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlR">
+            <summary>
+            The shortcut keys CTRL+R.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlS">
+            <summary>
+            The shortcut keys CTRL+S.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlT">
+            <summary>
+            The shortcut keys CTRL+T.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlU">
+            <summary>
+            The shortcut keys CTRL+U.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlV">
+            <summary>
+            The shortcut keys CTRL+V.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlW">
+            <summary>
+            The shortcut keys CTRL+W.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlX">
+            <summary>
+            The shortcut keys CTRL+X.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlY">
+            <summary>
+            The shortcut keys CTRL+Y.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlZ">
+            <summary>
+            The shortcut keys CTRL+Z.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlF1">
+            <summary>
+            The shortcut keys CTRL+F1.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlF2">
+            <summary>
+            The shortcut keys CTRL+F2.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlF3">
+            <summary>
+            The shortcut keys CTRL+F3.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlF4">
+            <summary>
+            The shortcut keys CTRL+F4.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlF5">
+            <summary>
+            The shortcut keys CTRL+F5.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlF6">
+            <summary>
+            The shortcut keys CTRL+F6.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlF7">
+            <summary>
+            The shortcut keys CTRL+F7.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlF8">
+            <summary>
+            The shortcut keys CTRL+F8.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlF9">
+            <summary>
+            The shortcut keys CTRL+F9.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlF10">
+            <summary>
+            The shortcut keys CTRL+F10.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlF11">
+            <summary>
+            The shortcut keys CTRL+F11.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlF12">
+            <summary>
+            The shortcut keys CTRL+F12.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlShift0">
+            <summary>
+            The shortcut keys CTRL+SHIFT+0.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlShift1">
+            <summary>
+            The shortcut keys CTRL+SHIFT+1.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlShift2">
+            <summary>
+            The shortcut keys CTRL+SHIFT+2.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlShift3">
+            <summary>
+            The shortcut keys CTRL+SHIFT+3.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlShift4">
+            <summary>
+            The shortcut keys CTRL+SHIFT+4.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlShift5">
+            <summary>
+            The shortcut keys CTRL+SHIFT+5.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlShift6">
+            <summary>
+            The shortcut keys CTRL+SHIFT+6.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlShift7">
+            <summary>
+            The shortcut keys CTRL+SHIFT+7.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlShift8">
+            <summary>
+            The shortcut keys CTRL+SHIFT+8.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlShift9">
+            <summary>
+            The shortcut keys CTRL+SHIFT+9.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlShiftA">
+            <summary>
+            The shortcut keys CTRL+SHIFT+A.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlShiftB">
+            <summary>
+            The shortcut keys CTRL+SHIFT+B.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlShiftC">
+            <summary>
+            The shortcut keys CTRL+SHIFT+C.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlShiftD">
+            <summary>
+            The shortcut keys CTRL+SHIFT+D.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlShiftE">
+            <summary>
+            The shortcut keys CTRL+SHIFT+E.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlShiftF">
+            <summary>
+            The shortcut keys CTRL+SHIFT+F.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlShiftG">
+            <summary>
+            The shortcut keys CTRL+SHIFT+G.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlShiftH">
+            <summary>
+            The shortcut keys CTRL+SHIFT+H.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlShiftI">
+            <summary>
+            The shortcut keys CTRL+SHIFT+I.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlShiftJ">
+            <summary>
+            The shortcut keys CTRL+SHIFT+J.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlShiftK">
+            <summary>
+            The shortcut keys CTRL+SHIFT+K.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlShiftL">
+            <summary>
+            The shortcut keys CTRL+SHIFT+L.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlShiftM">
+            <summary>
+            The shortcut keys CTRL+SHIFT+M.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlShiftN">
+            <summary>
+            The shortcut keys CTRL+SHIFT+N.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlShiftO">
+            <summary>
+            The shortcut keys CTRL+SHIFT+O.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlShiftP">
+            <summary>
+            The shortcut keys CTRL+SHIFT+P.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlShiftQ">
+            <summary>
+            The shortcut keys CTRL+SHIFT+Q.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlShiftR">
+            <summary>
+            The shortcut keys CTRL+SHIFT+R.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlShiftS">
+            <summary>
+            The shortcut keys CTRL+SHIFT+S.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlShiftT">
+            <summary>
+            The shortcut keys CTRL+SHIFT+T.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlShiftU">
+            <summary>
+            The shortcut keys CTRL+SHIFT+U.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlShiftV">
+            <summary>
+            The shortcut keys CTRL+SHIFT+V.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlShiftW">
+            <summary>
+            The shortcut keys CTRL+SHIFT+W.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlShiftX">
+            <summary>
+            The shortcut keys CTRL+SHIFT+X.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlShiftY">
+            <summary>
+            The shortcut keys CTRL+SHIFT+Y.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlShiftZ">
+            <summary>
+            The shortcut keys CTRL+SHIFT+Z.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlShiftF1">
+            <summary>
+            The shortcut keys CTRL+SHIFT+F1.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlShiftF2">
+            <summary>
+            The shortcut keys CTRL+SHIFT+F2.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlShiftF3">
+            <summary>
+            The shortcut keys CTRL+SHIFT+F3.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlShiftF4">
+            <summary>
+            The shortcut keys CTRL+SHIFT+F4.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlShiftF5">
+            <summary>
+            The shortcut keys CTRL+SHIFT+F5.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlShiftF6">
+            <summary>
+            The shortcut keys CTRL+SHIFT+F6.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlShiftF7">
+            <summary>
+            The shortcut keys CTRL+SHIFT+F7.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlShiftF8">
+            <summary>
+            The shortcut keys CTRL+SHIFT+F8.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlShiftF9">
+            <summary>
+            The shortcut keys CTRL+SHIFT+F9.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlShiftF10">
+            <summary>
+            The shortcut keys CTRL+SHIFT+F10.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlShiftF11">
+            <summary>
+            The shortcut keys CTRL+SHIFT+F11.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.CtrlShiftF12">
+            <summary>
+            The shortcut keys CTRL+SHIFT+F12.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.AltBksp">
+            <summary>
+            The shortcut keys ALT+BACKSPACE.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.AltLeftArrow">
+            <summary>
+            The shortcut keys ALT+LEFTARROW.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.AltUpArrow">
+            <summary>
+            The shortcut keys ALT+UPARROW.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.AltRightArrow">
+            <summary>
+            The shortcut keys ALT+RIGHTARROW.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.AltDownArrow">
+            <summary>
+            The shortcut keys ALT+DOWNARROW.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.Alt0">
+            <summary>
+            The shortcut keys ALT+0.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.Alt1">
+            <summary>
+            The shortcut keys ALT+1.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.Alt2">
+            <summary>
+            The shortcut keys ALT+2.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.Alt3">
+            <summary>
+            The shortcut keys ALT+3.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.Alt4">
+            <summary>
+            The shortcut keys ALT+4.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.Alt5">
+            <summary>
+            The shortcut keys ALT+5.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.Alt6">
+            <summary>
+            The shortcut keys ALT+6.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.Alt7">
+            <summary>
+            The shortcut keys ALT+7.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.Alt8">
+            <summary>
+            The shortcut keys ALT+8.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.Alt9">
+            <summary>
+            The shortcut keys ALT+9.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.AltF1">
+            <summary>
+            The shortcut keys ALT+F1.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.AltF2">
+            <summary>
+            The shortcut keys ALT+F2.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.AltF3">
+            <summary>
+            The shortcut keys ALT+F3.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.AltF4">
+            <summary>
+            The shortcut keys ALT+F4.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.AltF5">
+            <summary>
+            The shortcut keys ALT+F5.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.AltF6">
+            <summary>
+            The shortcut keys ALT+F6.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.AltF7">
+            <summary>
+            The shortcut keys ALT+F7.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.AltF8">
+            <summary>
+            The shortcut keys ALT+F8.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.AltF9">
+            <summary>
+            The shortcut keys ALT+F9.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.AltF10">
+            <summary>
+            The shortcut keys ALT+F10.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.AltF11">
+            <summary>
+            The shortcut keys ALT+F11.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.AltF12">
+            <summary>
+            The shortcut keys ALT+F12.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.UI.Input.MouseButtons">
+            <summary>
+            Specifies constants that define which mouse button was pressed.
+            </summary>
+            <remarks>
+            Portable version of the "System.Windows.Forms.MouseButtons" class. To be replaced when
+            available in the .NET Standard framework.
+            </remarks>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.MouseButtons.None">
+            <summary>
+            No mouse button was pressed.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.MouseButtons.Left">
+            <summary>
+            The left mouse button was pressed.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.MouseButtons.Right">
+            <summary>
+            The right mouse button was pressed.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.MouseButtons.Middle">
+            <summary>
+            The middle mouse button was pressed.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.MouseButtons.XButton1">
+            <summary>
+            The first XButton was pressed.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.MouseButtons.XButton2">
+            <summary>
+            The second XButton was pressed.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.UI.Input.MouseEventArgs">
+            <summary>
+            UI mouse input event arguments.
+            </summary>
+            <remarks>
+            Portable version of the "System.Windows.Forms.MouseEventArgs" class. To be replaced when
+            available in the .NET Standard framework.
+            </remarks>
+        </member>
+        <member name="M:CodeForDotNet.UI.Input.MouseEventArgs.#ctor(System.Drawing.Point,CodeForDotNet.UI.Input.MouseButtons)">
+            <summary>
+            Creates an instance with the specified value.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.UI.Input.MouseEventArgs.Buttons">
+            <summary>
+            Mouse buttons.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.UI.Input.MouseEventArgs.Location">
+            <summary>
+            Mouse location.
+            </summary>
+        </member>
         <member name="T:CodeForDotNet.UI.Models.ApplicationUIModel">
             <summary>
             Application UI model.
@@ -39,10 +1871,9 @@
             Maximum time (in milliseconds) allowed for the UI to process updates before continuing with other updates.
             </summary>
             <remarks>
-            When too short and events are generated too quickly, the UI has no chance to refresh.
-            When too long and processor intensive operations are triggered, the UI could appear to hang.
-            Deadlocks could occur when background threads with call <see cref="M:CodeForDotNet.UI.Models.UIModel.DoPropertyChanged(System.String)"/>
-            to update the UI thread and another UI action has been performed which also requires the same lock.
+            When too short and events are generated too quickly, the UI has no chance to refresh. When too long and processor intensive operations are triggered,
+            the UI could appear to hang. Deadlocks could occur when background threads with call <see cref="M:CodeForDotNet.UI.Models.UIModel.DoPropertyChanged(System.String)"/> to update the UI thread
+            and another UI action has been performed which also requires the same lock.
             </remarks>
         </member>
         <member name="M:CodeForDotNet.UI.Models.UIModel.#ctor(System.Threading.Tasks.TaskFactory)">
@@ -50,23 +1881,21 @@
             Creates an instance.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.UI.Models.UIModel.Dispose(System.Boolean)">
+        <member name="E:CodeForDotNet.UI.Models.UIModel.PropertyChanged">
             <summary>
-            Frees resources owned by this instance.
+            Fired when the model data has changed and the view should be refreshed.
             </summary>
-            <param name="disposing">
-            True when called via <see cref="M:System.IDisposable.Dispose"/>, false when called during finalization.
-            </param>
         </member>
         <member name="P:CodeForDotNet.UI.Models.UIModel.UITaskFactory">
             <summary>
             Task factory for the UI thread.
             </summary>
         </member>
-        <member name="E:CodeForDotNet.UI.Models.UIModel.PropertyChanged">
+        <member name="M:CodeForDotNet.UI.Models.UIModel.Dispose(System.Boolean)">
             <summary>
-            Fired when the model data has changed and the view should be refreshed.
+            Frees resources owned by this instance.
             </summary>
+            <param name="disposing">True when called via <see cref="M:System.IDisposable.Dispose"/>, false when called during finalization.</param>
         </member>
         <member name="M:CodeForDotNet.UI.Models.UIModel.DoPropertyChanged(System.String)">
             <summary>
